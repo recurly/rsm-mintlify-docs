@@ -1,0 +1,201 @@
+---
+title: Transactions dashboard
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The transaction dashboard is your central hub for every financial exchange processed through Recurly. Search across all transactions, understand their types and statuses, manage refunds and voids, and investigate fraud — all from one place.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>An active Recurly account with administrative access</li>
+  <li>A basic understanding of transaction processes and payment gateway functions</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Voided transactions cannot be reactivated</li>
+  <li>Partial refunds cannot be issued on unsettled transactions</li>
+  <li>Transaction settlement times and fraud checks depend on your third-party payment gateway</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The transaction dashboard in Recurly provides a comprehensive overview of all financial transactions processed through the platform. It includes tools for searching transactions, understanding transaction types and statuses, managing refunds and voids, and performing fraud checks — all designed to streamline the financial management of your customer accounts.</div>
+
+
+<Image src="https://files.readme.io/1e75403-image.png" align="center" width="75%" border={true} />
+
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div>
+    <strong>Comprehensive transaction search</strong>
+    <span>Find any transaction quickly using a wide range of criteria — from customer details to transaction IDs — so you always have full visibility into your payment activity.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-rotate-left" aria-hidden="true"></i></div>
+    <strong>Streamlined refunds and voids</strong>
+    <span>Handle unsettled and settled transactions with ease, with intuitive options for voids, full refunds, and partial refunds.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Enhanced fraud management</strong>
+    <span>Run built-in fraud checks and complement them with third-party fraud prevention integrations to keep your transactions secure.</span>
+  </div>
+</div>
+
+# Key details
+
+The transaction dashboard gives you a full view of your transaction activity. You can search for transactions using criteria such as UUID, customer name, account code, card digits, card type, gateway reference ID, transaction amount, or currency. Filters let you organize results by transaction type and response, and you can narrow searches further by payment gateway and currency.
+
+## Transaction types
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Type</td><td>Description</td></tr>
+  <tr><td>Verification</td><td>Transactions — usually $0 or $1 — used to verify billing information. These are immediately voided after verification.</td></tr>
+  <tr><td>Payment</td><td>Standard purchases made through Recurly.</td></tr>
+  <tr><td>Authorization</td><td>An Auth-Only purchase made through Recurly using the <code>/purchases/authorize</code> endpoint.</td></tr>
+  <tr><td>Capture</td><td>A referenced transaction used to complete an Authorization. Only Authorizations can be captured.</td></tr>
+  <tr><td>Refund</td><td>Transactions where funds were returned following a successful Recurly transaction. Refunds typically occur post-settlement with your gateway.</td></tr>
+  <tr><td>Void</td><td>Transactions where funds were returned following a successful Payment or Authorization prior to settlement (same day). If settlement has already occurred, a Refund is submitted instead.</td></tr>
+</table>
+
+## Transaction statuses
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Status</td><td>Description</td></tr>
+  <tr><td>Successful</td><td>The transaction was approved by the payment gateway.</td></tr>
+  <tr><td>Declined</td><td>The transaction was not approved by the payment gateway.</td></tr>
+  <tr><td>Voided</td><td>The transaction was canceled before any exchange of funds.</td></tr>
+  <tr><td>Fraudulent</td><td>The transaction was identified as fraudulent.</td></tr>
+  <tr><td>Pending</td><td>The transaction is awaiting completion or further action.</td></tr>
+  <tr><td>Scheduled</td><td>The transaction is set to be processed at a future date.</td></tr>
+  <tr><td>Processing</td><td>The transaction is currently being processed by the payment gateway.</td></tr>
+  <tr><td>Chargeback</td><td>Represents a chargeback on a card or bank/direct debit payment.</td></tr>
+</table>
+
+## Transaction search
+
+You can search for transactions using any of the following fields:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Search field</td><td>Description</td></tr>
+  <tr><td>Account code</td><td>Locate transactions tied to a specific Recurly account code.</td></tr>
+  <tr><td>Company name</td><td>Find transactions associated with a company name.</td></tr>
+  <tr><td>First name</td><td>Search transactions by the customer's first name.</td></tr>
+  <tr><td>Last name</td><td>Search transactions by the customer's last name.</td></tr>
+  <tr><td>Email address</td><td>Locate transactions linked to a specific email address.</td></tr>
+  <tr><td>Username</td><td>Find transactions by the username on the customer's account.</td></tr>
+  <tr><td>Amount</td><td>Search for transactions by their amount.</td></tr>
+  <tr><td>First six digits of the credit card</td><td>Locate transactions using the first six digits of a card — useful for identifying the card issuer and type.</td></tr>
+  <tr><td>Last four digits of the credit card</td><td>Narrow down transactions using the last four card digits.</td></tr>
+  <tr><td>Transaction reference ID</td><td>Search using the payment gateway's reference ID.</td></tr>
+  <tr><td>Transaction UUID</td><td>Locate a specific transaction by its unique identifier — the most direct search method available.</td></tr>
+</table>
+
+## Transaction creation
+
+Transactions in Recurly are automatically created when an invoice is processed — triggered by subscription activity (creation, renewal, or modification) or from charges invoiced on an account. To minimize per-transaction gateway fees and reduce the number of separate bank charges for your subscribers, use the <a href="https://dev.recurly.com/docs/create-purchase" target="_blank">Purchase</a> endpoint for both subscription and one-time charge billing. This endpoint consolidates any combination of subscriptions and one-time charges into a single gateway transaction.
+
+## Minimum purchase amount
+
+To optimize merchant fees, Recurly doesn't send transactions below $0.03 to your payment gateway. Instead, those invoices are immediately marked as paid. Some payment gateways also enforce their own minimums, typically ranging from $0.30 to $0.50.
+
+## Transaction details
+
+Clicking a transaction surfaces its full detail view, organized into two sections.
+
+### Transaction details
+
+This section shows the transaction type (payment, refund, authorization, etc.), status (successful, declined, voided), amount, and the customer's billing information, including card type and address details when collected.
+
+#### Reviewing status details
+
+If a transaction is declined or in an error state, you can investigate further using gateway and internal error codes.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Select the transaction</h4><p>Open the transaction in question to view its full details.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Review the error codes</h4><p>Look for gateway error codes or internal error codes in the status details. For a full explanation of each code, see the <a href="https://recurly.com/developers/pages/api-transaction-errors.html" target="_blank">Recurly API Transaction Errors</a> reference.</p></div>
+  </div>
+</div>
+
+### Fraud details
+
+This section shows the results of address and CVV verification checks, as well as 3DS Authentication status where performed by the payment gateway. For Fraud Velocity Checks and additional fraud prevention, Recurly recommends partnering with a third-party fraud provider. Contact your Account Executive or Account Manager for more information.
+
+**AVS/CVV codes** are normalized in Recurly to display both the raw code and a plain-language explanation of the issuer's response. For example, a gateway returning the letter "A" is shown as "Address matches, but the postal code does not match." These codes originate from the card-issuing bank — not from Recurly.
+
+**3DS status** messages are also normalized to display the final authentication result and applicable metadata. Recurly will always display the final result, even when only partial data is received from the gateway:
+
+- **Authenticated** — the customer successfully verified their identity through 3DS
+- **Attempted** — the customer attempted authentication, but the upstream 3DS provider was unavailable or unsupported for the card; the attempt neither failed nor succeeded
+- **Failed** — the customer completed authentication but their input was rejected, typically indicating the person attempting the transaction is not the cardholder
+- **Exempted** — the customer qualified for Frictionless flow (no challenge) or another exemption, such as a low-value transaction, a low-fraud-rate merchant (TRA), or a trusted merchant listed in the customer's banking app
+- **Error** — the 3DS server or provider experienced a hard error and authentication could not continue
+
+## Settlement
+
+When a purchase is made, your payment gateway verifies billing information and confirms fund availability through the card processor. On a successful response, funds are reserved and the transaction amount is deducted from the customer's account balance. Transactions are finalized at the end of the day when the gateway processes them for settlement, releasing funds to you as the merchant. A transaction's settlement status determines how voids, refunds, and partial refunds are handled.
+
+## Verification
+
+When billing information is added or updated on an account, Recurly issues a $1.00 authorization charge — or a $0.00 verification for gateways that support Zero Dollar Authorizations — to confirm the billing details. This charge is voided once a success or decline response is received from the gateway. Subscription plans with trial periods also process a verification charge at signup to confirm the customer's billing data.
+
+## Refunds and voids
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Refunding Direct Debit transactions</strong>Wait at least one week from the original authorization date before refunding a Direct Debit transaction. Bank transactions are not immediately authorized and can take several days to return as insufficient funds or otherwise unsuccessful. Direct Debit chargebacks are typically non-defensible and can occur well after the initial payment. Only issue refunds to KYC'd customers, and make sure subscribers are aware of bank refund timeframes — otherwise they may also initiate a chargeback, resulting in financial losses.</div>
+</div>
+
+An unsettled transaction can be voided, which stops it from settling and removes it from the customer's bank statement (timing depends on the individual bank). Once a transaction has settled, it can only be refunded. Because payment gateways have varying settlement processing times, Recurly automatically attempts a void before processing a refund.
+
+Partial refunds can only be issued on settled transactions, so it's advisable to wait 24 hours after an initial transaction before attempting a partial refund. A voided transaction typically disappears from a customer's statement within 24 hours; a refund may take 3–5 business days to appear.
+
+Refunds are always returned to the original payment method — either the credit card or the bank account for ACH payments.
+
+To refund or void a transaction or invoice:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the transaction or invoice</h4><p>Go to the customer's account and select the transaction in the Transactions section, or the invoice in the Invoices section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Initiate the refund</h4><p>On the Transaction Details page, select Refund Transaction. On the Invoice Details page, select Refund Invoice.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Select the items to refund</h4><p>Choose the specific charge line items, with options to prorate subscription charges or select specific quantities. For a custom amount, select "Refund a partial item or specific amount?" — the amount cannot exceed the original transaction value. Unsettled transactions can only be fully refunded (voided).</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Set the credit return order (partial refunds only)</h4><p>If the invoice includes credit line items and you're issuing a partial refund, choose whether to return credit to the account first or issue money back to the customer first. By default, Recurly returns credit to the account first. Adjust this using the radio buttons at the top of the page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Preview the refund</h4><p>Select Preview Refund to review the refund details, including any discounts, taxes, and credit being returned.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">6</div>
+    <div><h4>Complete the refund</h4><p>Select Refund Charges to finalize. Recurly generates a refund invoice and transaction. Learn more in the <a href="/guides/recurring-billing/invoices-1/invoices" target="_blank">Invoices</a> section.</p></div>
+  </div>
+</div>
+
+<br />

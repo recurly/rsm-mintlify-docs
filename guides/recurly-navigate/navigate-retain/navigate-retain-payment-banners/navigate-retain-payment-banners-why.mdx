@@ -1,0 +1,443 @@
+---
+title: 'Payment banners: Why it matters & when to use it'
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* HOST-THEME BACKGROUND OVERRIDE */
+body { background: #ffffff !important; }
+
+/* ── GLOBAL CSS IMMUNITY BLOCK ── */
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+/* FA6 font restore — (0,0,2,0) beats wildcard (0,0,1,0) */
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+.rc-guide {
+  --yellow:     #FFD706;
+  --orange:     #FF8200;
+  --offblack:   #0D0D0B;
+  --darkgray:   #32312D;
+  --gray:       #807D73;
+  --lightgray:  #D1CFC4;
+  --brightgray: #F2F1EA;
+  --offwhite:   #FCFBF7;
+  --retain:     #2DCECE;
+  font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+  color: #0D0D0B !important;
+  background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+
+/* ── NAVIGATE MASTER ARMOR — (0,0,7,1) beats global section 1.1 rule (0,0,6,2) ── */
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a,
+.rc-guide a:link,
+.rc-guide a:visited,
+.rc-guide a:hover,
+.rc-guide a:active {
+  color: #008CFF !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: unset !important;
+  border-bottom: 0 !important;
+}
+.rc-guide a:hover {
+  color: #0067BE !important;
+  text-decoration: underline !important;
+  text-decoration-color: #008CFF !important;
+  text-underline-offset: 2px !important;
+}
+
+/* ── FONT AWESOME ICON HELPERS ── */
+.rc-fa-dark  { color: #FFD706 !important; font-size: 1.3rem; display: block; margin-bottom: 10px; }
+.rc-fa-light { color: var(--offblack); font-size: 1.3rem; display: block; margin-bottom: 10px; }
+.rc-fa-section { color: var(--offblack); font-size: 1rem; }
+
+/* ── LAYOUT ── */
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* Back link — (0,0,8,1) */
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link { color: #807D73 !important; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 6px; transition: color .2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; text-decoration: none !important; }
+
+/* ── ANNOUNCEMENT BAR (hidden by default) ── */
+.rc-announce-bar { display: none; background: var(--offblack); padding: 10px 40px; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-bar p { color: var(--lightgray); font-size: .85rem; margin: 0; line-height: 1.5; }
+.rc-announce-bar p strong { color: var(--yellow); }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link { color: #0D0D0B !important; background: var(--yellow); padding: 5px 14px; border-radius: 6px; font-size: .82rem; font-weight: 700; border-bottom: 0 !important; transition: opacity .2s; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { opacity: .85; text-decoration: none !important; }
+
+/* ── HERO ── */
+.rc-hero {
+  background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)),
+              url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center;
+  background-color: var(--offblack); background-size: cover;
+  color: #fff; padding: 56px 40px 48px; text-align: center; border-radius: 16px;
+}
+.rc-lp-pillar-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(45,206,206,0.20); border: 1px solid rgba(45,206,206,0.45);
+  color: #2DCECE; font-size: .75rem; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: var(--offwhite); margin: 0; }
+.rc-hero > p { font-size: 1rem; opacity: .85; max-width: 640px; margin: 0 auto; color: var(--lightgray); line-height: 1.6; }
+
+/* ── NAV — non-sticky, open ── */
+details.rc-sticky-nav-wrap {
+  position: relative; z-index: 1; background-color: var(--retain);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin: 24px 0 48px; border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08); overflow: hidden;
+}
+details.rc-sticky-nav-wrap > summary { list-style: none; display: flex; align-items: center; padding: 15px 24px; cursor: pointer; user-select: none; }
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+.rc-nav-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .88rem; letter-spacing: 0.6px; text-transform: uppercase; color: var(--offblack); }
+.rc-nav-chevron { font-size: .72rem; color: var(--offblack); opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+
+/* Nav links — (0,0,8,1) */
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link {
+  color: #0D0D0B !important; font-weight: 700; font-size: .83rem; letter-spacing: 0.4px;
+  text-transform: uppercase; padding: 7px 14px; border-radius: 7px; transition: all .18s;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; text-decoration: none !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--offblack); color: var(--yellow); font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; text-decoration: none !important; }
+
+/* ── CONTENT SECTIONS ── */
+.rc-lp-section { margin-bottom: 52px; }
+.rc-lp-section h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 20px; color: var(--offblack); display: flex; align-items: center; gap: 12px; }
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: var(--lightgray); }
+.rc-lp-section > p { font-size: .97rem; line-height: 1.7; color: var(--darkgray); margin: 0 0 24px; }
+
+/* ── STAT STRIP ── */
+.rc-stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; overflow: hidden; margin: 0 0 36px; }
+.rc-stat-tile { padding: 24px 20px; text-align: center; }
+.rc-stat-tile + .rc-stat-tile { border-left: 1px solid var(--lightgray); }
+.rc-stat-tile-num { font-size: 2rem; font-weight: 800; color: var(--retain); line-height: 1; margin-bottom: 4px; }
+.rc-stat-tile-label { font-size: .7rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; }
+.rc-stat-tile-context { font-size: .8rem; color: var(--darkgray); line-height: 1.5; padding-top: 10px; border-top: 1px solid var(--brightgray); }
+
+/* ── NUMBERED STEPS ── */
+.rc-steps { display: flex; flex-direction: column; }
+.rc-step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid var(--brightgray); }
+.rc-step:last-child { border-bottom: none; }
+.rc-step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--offblack); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+.rc-step-content h4 { font-size: 1.02rem; font-weight: 800; color: var(--offblack); margin: 0 0 4px; line-height: 1.3; }
+.rc-step-content p { font-size: .92rem; color: var(--gray); line-height: 1.65; margin: 0; }
+.rc-step-content strong { color: var(--darkgray); }
+
+/* ── FEATURE CARDS ── */
+.rc-card-grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0 0; }
+.rc-feature-card { background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 8px; transition: all .2s ease; }
+.rc-feature-card:hover { border-color: var(--retain); box-shadow: 0 4px 16px rgba(45,206,206,0.15); transform: translateY(-2px); }
+.rc-feature-icon { font-size: 1.3rem; color: var(--offblack); }
+.rc-feature-card h4 { font-size: .95rem; font-weight: 800; color: var(--offblack); margin: 0; }
+.rc-feature-card p { font-size: .85rem; color: var(--gray); line-height: 1.55; margin: 0; flex-grow: 1; }
+.rc-feature-tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .7rem; font-weight: 700; letter-spacing: .5px; background: var(--offblack); color: var(--yellow); width: fit-content; margin-top: 4px; }
+
+/* ── CALLOUTS ── */
+.rc-callout { border-radius: 10px; padding: 16px 20px; margin: 24px 0; display: flex; gap: 14px; align-items: flex-start; }
+.rc-callout-icon { font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; }
+.rc-callout-body { flex: 1; }
+.rc-callout-body > strong { font-size: .88rem; font-weight: 800; display: block; margin-bottom: 4px; }
+.rc-callout-body p { font-size: .9rem; line-height: 1.55; margin: 0; color: var(--darkgray); }
+.rc-callout-tip { background: var(--brightgray); border-left: 4px solid var(--offblack); }
+.rc-callout-tip .rc-callout-body > strong { color: var(--offblack); }
+/* Inline links within callout body — double-prefix + :not() pattern */
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide .rc-callout-body a { color: #008CFF !important; font-weight: 600; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide .rc-callout-body a:hover { text-decoration: underline !important; text-decoration-color: #008CFF !important; text-underline-offset: 2px !important; }
+
+/* ── PATH NAV BUTTONS ── */
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 44px 0 16px; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: var(--lightgray); letter-spacing: .5px; text-align: center; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-prev {
+  background: transparent; color: #0D0D0B !important; text-decoration: none !important;
+  padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: .9rem;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 2px solid #D1CFC4 !important; border-bottom: 2px solid #D1CFC4 !important; transition: all .2s;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-prev:hover { border: 2px solid #0D0D0B !important; border-bottom: 2px solid #0D0D0B !important; text-decoration: none !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path {
+  background: #FFD706; color: #0D0D0B !important; text-decoration: none !important;
+  padding: 13px 28px; border-radius: 10px; font-weight: 800; font-size: .95rem;
+  display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover {
+  background: transparent !important; color: #0D0D0B !important;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+  text-decoration: none !important;
+}
+
+/* ── RESOURCES ── */
+.rc-resources { background: var(--brightgray); border-left: 4px solid var(--retain); border-radius: 10px; padding: 20px 24px; margin: 40px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--gray); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link {
+  color: #807D73 !important; text-decoration: underline !important; text-underline-offset: 3px;
+  text-decoration-color: #D1CFC4 !important; font-weight: 500; font-size: .88rem;
+  transition: all .18s; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover { color: #0D0D0B !important; text-decoration-color: #2DCECE !important; }
+
+/* ── FOOTER NAV ── */
+.rc-footer-nav { border-top: 1px solid var(--lightgray); padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: var(--darkgray); background: var(--brightgray); padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link { color: #807D73 !important; text-decoration: none !important; font-weight: 600; font-size: .88rem; transition: color .2s ease; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; text-decoration: none !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--brightgray); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .rc-content-wrap { padding: 0 20px; }
+  .rc-top-nav { padding: 16px 20px; }
+  .rc-hero { padding: 36px 20px 36px; }
+  .rc-lp-hero-title h1 { font-size: 1.8rem; }
+  .rc-stat-strip { grid-template-columns: 1fr; }
+  .rc-card-grid-3col { grid-template-columns: 1fr; }
+  .rc-lp-nav { flex-wrap: wrap; justify-content: center; }
+  .rc-lp-nav-indicator { width: 100%; text-align: center; }
+}
+</style>
+
+<div class="rc-guide">
+
+  <div class="rc-announce-bar"></div>
+
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain" class="rc-back-link">← Back to Retain</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/4307b701706e500c878481348869b422f7b4632dc98773184d97596d2d977f87-Retain-icon-white.png" alt="Retain">
+        Retain • Payment banners
+      </div>
+      <div class="rc-lp-hero-title">
+        <h1>Why it matters &amp; when to use it</h1>
+      </div>
+      <p>Over half of all subscriber losses are preventable. Here's what payment banners fix — and the eight moments where they work.</p>
+    </div>
+
+    <!-- Nav: non-sticky, open. Active: page 1 -->
+    <details class="rc-sticky-nav-wrap" open>
+      <summary>
+        <span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span>
+      </summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners" class="rc-sticky-link">Path Overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-why" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> Why it matters &amp; when to use it
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-implementation" class="rc-sticky-link"><span class="rc-step-badge">2</span> Choosing your implementation path</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-strategy" class="rc-sticky-link"><span class="rc-step-badge">3</span> Strategy &amp; best practices</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-tracking" class="rc-sticky-link"><span class="rc-step-badge">4</span> Tracking your impact</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-review" class="rc-sticky-link"><span class="rc-step-badge">5</span> Review &amp; resources</a>
+         
+      </div></div></div>
+    </details>
+
+    <!-- Section 1: The problem -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-chart-line rc-fa-section"></i> The problem payment banners solve</h2>
+
+      <p>Most subscription churn isn't deliberate. Subscribers don't cancel — their cards expire, payments fail, and they never find out until their access is gone. Dunning emails help, but only if subscribers check their inbox and act before the grace period closes. Many don't. Payment banners reach subscribers where they're already paying attention: inside your product, mid-session, with a single clear action in front of them.</p>
+
+      <div class="rc-stat-strip">
+        <div class="rc-stat-tile">
+          <div class="rc-stat-tile-num">53%</div>
+          <div class="rc-stat-tile-label">Of subscriber losses are involuntary</div>
+          <div class="rc-stat-tile-context">More than half of all churn is involuntary — payment failures, not intentional cancellations.</div>
+        </div>
+        <div class="rc-stat-tile">
+          <div class="rc-stat-tile-num">7.2%</div>
+          <div class="rc-stat-tile-label">Are at risk each billing cycle</div>
+          <div class="rc-stat-tile-context">At any given moment, roughly 1 in 14 subscribers has a payment issue waiting to surface.</div>
+        </div>
+        <div class="rc-stat-tile">
+          <div class="rc-stat-tile-num">23.3%</div>
+          <div class="rc-stat-tile-label">Annual renewal recovery rate</div>
+          <div class="rc-stat-tile-context">Only 23.3% of failed annual renewals are ever recovered — making prevention the only reliable strategy for annual plans.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Payment recovery scenarios -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-credit-card rc-fa-section"></i> Payment recovery scenarios</h2>
+
+      <p>Five moments in a subscriber's payment lifecycle where a banner can prevent a loss from becoming permanent. The right trigger for your business depends on where your churn is concentrated — monthly vs. annual, active failures vs. upcoming risk.</p>
+
+      <div class="rc-steps">
+        <div class="rc-step">
+          <div class="rc-step-num">1</div>
+          <div class="rc-step-content">
+            <h4>Expiring card</h4>
+            <p>The card on file is approaching its expiration date. Deploy 30 days before expiry, repeat at 14 days if not updated. <strong>Highest volume scenario, easiest win</strong> — the subscriber has time to act and hasn't experienced any disruption yet.</p>
+          </div>
+        </div>
+        <div class="rc-step">
+          <div class="rc-step-num">2</div>
+          <div class="rc-step-content">
+            <h4>Failed payment</h4>
+            <p>A renewal attempt has been declined. Fire on the subscriber's next login — every day without action increases disengagement. <strong>Highest urgency</strong>: one clear CTA to update billing info.</p>
+          </div>
+        </div>
+        <div class="rc-step">
+          <div class="rc-step-num">3</div>
+          <div class="rc-step-content">
+            <h4>Annual plan pre-renewal</h4>
+            <p>A high-value subscriber is approaching their annual renewal. Only 23.3% of failed annual renewals are ever recovered — <strong>prevention is worth far more than recovery</strong> here. Surface a banner 30 days before the charge as a courtesy check.</p>
+          </div>
+        </div>
+        <div class="rc-step">
+          <div class="rc-step-num">4</div>
+          <div class="rc-step-content">
+            <h4>In-dunning recovery</h4>
+            <p>The subscriber has received dunning emails but hasn't acted. When they log back in, a banner reinforces the email in-session — some subscribers ignore transactional email entirely but respond to an in-session prompt.</p>
+          </div>
+        </div>
+        <div class="rc-step">
+          <div class="rc-step-num">5</div>
+          <div class="rc-step-content">
+            <h4>Account Updater escalation</h4>
+            <p>Account Updater attempted to silently update the subscriber's card but returned a non-updatable result — either a <strong>closed account</strong> or <strong>contact cardholder</strong> status. Only the subscriber can resolve this; the banner is the only path forward.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Cancellation save scenarios -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-life-ring rc-fa-section"></i> Cancellation save scenarios</h2>
+
+      <p>When a subscriber moves toward cancellation, a well-timed prompt can offer an alternative. These three scenarios cover the full cancellation lifecycle — before, during, and immediately after the decision.</p>
+
+      <div class="rc-card-grid-3col">
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-hand"></i></div>
+          <h4>Cancel intent intercepted</h4>
+          <p>Subscriber clicks "cancel" — a prompt appears before the cancellation is confirmed, offering a pause, a plan downgrade, or access to support.</p>
+          <span class="rc-feature-tag">Pre-cancellation</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h4>At-risk proactive engagement</h4>
+          <p>Subscriber shows early churn signals — declining logins or support contacts about pricing. A proactive banner surfaces before they ever reach the cancel button.</p>
+          <span class="rc-feature-tag">Proactive</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-rotate-left"></i></div>
+          <h4>Post-cancellation win-back</h4>
+          <p>Subscriber has just confirmed a cancellation. A grace-period prompt offers one final alternative — a discount, an extended pause, or a plan they didn't know existed.</p>
+          <span class="rc-feature-tag">Post-cancellation</span>
+        </div>
+      </div>
+
+      <div class="rc-callout rc-callout-tip" style="margin-top: 28px;">
+        <div class="rc-callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="rc-callout-body">
+          <strong>Start with one scenario</strong>
+          <p>You don't need to implement all eight at once. Pick the scenario that matches your highest-volume churn driver, deploy it well, and measure at 90 days before adding more. If most of your churn is involuntary, the expiring card and failed payment triggers give you the fastest return with the least setup.</p>
+        </div>
+      </div>
+    </div>
+
+     
+    <!-- Path navigation -->
+    <div class="rc-lp-nav">
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners" class="rc-btn-prev">← Path overview</a>
+      <span class="rc-lp-nav-indicator">1 of 5</span>
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-implementation" class="rc-btn-path">Next: Choosing your implementation path →</a>
+    </div>
+
+    <!-- Resources -->
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://recurly.com/research/subscriber-retention-benchmarks/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Subscriber retention benchmarks</a>
+        <a href="https://support.recurly.com/hc/en-us/articles/44224955931924" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Best practices for payment failure recovery</a>
+        <a href="https://recurly.com/blog/cancellation-flow-examples-to-improve-subscriber-retention/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Cancellation flow examples</a>
+        <a href="mailto:support@recurly.com" class="rc-resource-link"><i class="fa-solid fa-headset"></i> Contact Recurly Support</a>
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-solid fa-globe"></i> Join Global Office Hours</a>
+      </div>
+    </div>
+
+    <!-- Footer nav -->
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+        <div class="rc-footer-section">
+          <span class="rc-footer-label">Payment banners</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners" class="rc-footer-link">Path overview</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-why" class="rc-footer-link">1. Why it matters &amp; when to use it</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-implementation" class="rc-footer-link">2. Choosing your implementation path</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-strategy" class="rc-footer-link">3. Strategy &amp; best practices</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-tracking" class="rc-footer-link">4. Tracking your impact</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-payment-banners-review" class="rc-footer-link">5. Review &amp; resources</a>
+        </div>
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt="Home"> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+
+<br />
+```

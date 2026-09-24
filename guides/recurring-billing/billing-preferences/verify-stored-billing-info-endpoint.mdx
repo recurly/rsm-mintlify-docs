@@ -1,0 +1,107 @@
+---
+title: Verify billing info
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Verify Billing Info lets you validate the credit card details stored in Recurly's secure vault — confirming that a customer's payment information is accurate and current before a transaction is attempted. Verification is triggered via API and returns a success or decline response based on your gateway configuration.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#verify-billing-info-via-api"><span className="rp-toc-num">4</span>Verify billing info via API</a>
+  </div>
+</div>
+
+<div className="rp-card">
+
+### Prerequisites
+
+- API v3 or v2 integration
+- Credit card gateway (non-credit card payment methods are not supported)
+
+</div>
+
+<div className="rp-card">
+
+### Limitations
+
+- Only accessible via API — no Admin Console functionality is currently available
+- Verification uses either a $1 authorization or zero-dollar authorization (ZDA), based on your gateway configuration
+- CVV is not included in verification due to PCI compliance regulations. To run a verification with CVV, use the billing info verification endpoint that supports CVVs — your customer must be in session to provide the value
+- Verifications count as transactions and may incur transaction fees from both Recurly and your gateway
+
+</div>
+
+# Definition
+
+<div className="rp-definition">Verify Billing Info lets merchants validate the credit card details stored in Recurly's secure vault. By confirming that stored payment information is accurate and current, merchants can reduce payment failures, identify accounts with outdated billing details, and maintain confidence in their stored data regardless of how long it's been on file.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Proactive verification</strong>
+    <span>Confirm the validity of stored billing information before transactions are attempted, reducing preventable payment failures.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-bullseye" aria-hidden="true"></i></div>
+    <strong>Enhanced customer targeting</strong>
+    <span>Identify customers with outdated billing details and trigger targeted campaigns or communications to get them updated.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Merchant confidence</strong>
+    <span>Know that stored billing information remains accurate over time — whether it was added last week or last year.</span>
+  </div>
+</div>
+
+# Key details
+
+## Supported gateways
+
+Verify Billing Info is compatible with all Recurly credit card gateway integrations. Non-credit card payment methods — including PayPal Business, Adyen HPP, Adyen ACH, and GoCardless — are not supported.
+
+## How verification works
+
+When you initiate a verification, Recurly routes the stored billing information for the provided account to the default gateway that supports the card type. Recurly transmits all stored fields associated with the default billing info, which may include the PAN, expiration date, cardholder name, and cardholder billing address.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> PCI compliance note</strong>CVV is never transmitted during verification due to PCI compliance regulations. To include CVV in a verification, use the billing info verification endpoint that supports CVVs — your customer must be in session to provide the value.</div>
+</div>
+
+## Verification type
+
+The verification runs as either a $1 authorization or a zero-dollar authorization (ZDA), depending on your gateway configuration settings. Both count as transactions and may incur transaction fees.
+
+## 3DS handling
+
+Billing info verification is counted as a customer-initiated transaction and may trigger 3D Secure (3DS) authentication requests. If your customer might be required to complete authentication, have them in session before initiating the verification. Handle 3DS response and request flows through Recurly.js as usual.
+
+## Gateway routing
+
+By default, Recurly routes verifications to the default gateway that supports the card type associated with the account. You can optionally specify a `gateway_code` to direct the verification through a particular gateway. If the specified gateway doesn't support the card type, Recurly returns an error.
+
+If a `gateway_code` is already set on the subscription or billing info, the verification will be directed to that gateway automatically.
+
+# Verify billing info via API
+
+Send a `POST` request to `/accounts/:account/billing_info/verify`, where `:account` is the account code.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Send the verification request</h4><p>Using API v3 or v2, send a <code>POST</code> request to <code>/accounts/:account/billing_info/verify</code> with the <code>account_code</code> included in the call.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Specify a gateway (optional)</h4><p>Include a <code>gateway_code</code> in the request body to route the verification through a specific gateway. If the specified gateway doesn't support the card type, an error is returned.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Handle the response</h4><p>Review the API response to determine whether the verification was successful or declined. If 3DS is triggered, handle the authentication flow through Recurly.js as usual.</p></div>
+  </div>
+</div>
+
+<br />

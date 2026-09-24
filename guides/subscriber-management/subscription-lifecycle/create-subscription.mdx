@@ -1,0 +1,191 @@
+---
+title: Create subscription
+---
+
+<div className="rp-page">
+  <div className="rp-overview">A subscription ties a customer to a plan and automates recurring billing. You can create subscriptions through the Admin UI, Checkout, Hosted Payment Pages, or the API — with full control over pricing, timing, add-ons, coupons, and invoicing behavior at the point of creation.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">A subscription gives a customer access to your products or services for a recurring billing period. Recurly automates the billing cycle, supports trials and future start dates, and lets you override plan defaults — price, term length, add-ons, and more — on a per-subscription basis.</div>
+
+# Key details
+
+## Creation methods
+
+<div className="rp-nav-grid">
+
+<CardGroup cols={2}>
+  <Card title="Checkout" href="https://docs.recurly.com/docs/checkout" target="_blank">A customizable buying experience for customers that handles account creation, subscription setup, and billing details automatically.</Card>
+  <Card title="Hosted Payment Pages" href="/guides/hosted-pages/hosted-payment-pages" target="_blank">A dedicated checkout page per plan — Recurly creates the customer account and subscription on successful purchase.</Card>
+  <Card title="Admin UI" href="#create-a-subscription-in-the-admin-ui" target="_blank">Create subscriptions manually against a new or existing customer account from the Admin UI.</Card>
+  <Card title="API" href="/guides/security-compliance/implementation-guide" target="_blank">Integrate subscription creation directly into your product using Recurly's API — supports combining subscriptions, one-time charges, and other components into a single invoice.</Card>
+</CardGroup>
+
+</div>
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Admin UI and 3DS</strong> If you're outside the US or required to use 3DS for new subscriptions, avoid creating subscriptions through the Admin UI — this can cause SCA declines and other issues associated with merchant-initiated subscription creation.</div>
+</div>
+
+## Create a subscription in the Admin UI
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Navigate to the customer account</h4><p>Go to Customers → Accounts and select the account.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/286d380-image.png" align="center" width="50%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Add a subscription</h4><p>Open the Account Actions dropdown and select Add subscription.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/930c6d6-image.png" align="center" width="50%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Fill in subscription details</h4><p>Complete the fields across each section — described below.</p></div>
+  </div>
+</div>
+
+### Subscription details
+
+
+<Image src="https://files.readme.io/0abf905-image.png" align="center" width="50%" border={true} />
+
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Field</td><td>Description</td></tr>
+  <tr><td>Plan</td><td>The subscription model the customer is purchasing. Required — determines the features and services the subscriber can access.</td></tr>
+  <tr><td>Currency</td><td>The currency in which the customer is billed. Required for businesses operating across regions.</td></tr>
+  <tr><td>Price per billing period</td><td>The amount charged each cycle. Can be set per subscription or auto-populated from the plan configuration.</td></tr>
+  <tr><td>Quantity</td><td>The number of units — users, licenses, or any other measurable metric — the subscriber is purchasing.</td></tr>
+  <tr><td>Description, billing period, setup fee, trial length</td><td>Auto-populated from the plan's default settings. Shows the billing frequency, any initial fees, and trial period details.</td></tr>
+</table>
+
+### Add-ons
+
+
+<Image src="https://files.readme.io/4a5ace5-image.png" align="center" width="50%" border={true} />
+
+
+Add supplementary features, tools, or extended capacity to the core plan subscription.
+
+### Timing
+
+
+<Image src="https://files.readme.io/cdb8cbc7e651652fc28050c1ac4998fdc88c16cdb52b6e8db4f3a3cc98ab5304-StartSubPastDate.png" align="center" width="50%" border={true} />
+
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Field</td><td>Description</td></tr>
+  <tr><td>Start subscription</td><td>Begin immediately, set a future date, or backdate up to ten years in the past to align with contract dates.</td></tr>
+  <tr><td>Subscription term</td><td>The length of the initial subscription in billing periods — for example, 12 monthly periods equals a one-year term.</td></tr>
+  <tr><td>At end of subscription term</td><td>Choose whether the subscription automatically renews or expires at the end of the initial term.</td></tr>
+  <tr><td>Renewal subscription term</td><td>If auto-renewing, specify the length of each renewal term in billing periods.</td></tr>
+</table>
+
+### Shipping
+
+For subscriptions that include physical delivery, check Include Shipping and enter a shipping address.
+
+
+<Image src="https://files.readme.io/bf72b16-image.png" align="center" width="50%" border={true} />
+
+
+
+<Image src="https://files.readme.io/1e44366-image.png" align="center" width="50%" border={true} />
+
+
+### Coupons and gift cards
+
+
+<Image src="https://files.readme.io/9b65d37-image.png" align="center" width="50%" border={true} />
+
+
+Apply promotional codes for percentage or fixed-amount discounts, or redeem a gift card that covers the full or partial subscription cost.
+
+### Invoicing
+
+
+<Image src="https://files.readme.io/0f3e081-image.png" align="center" width="50%" border={true} />
+
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Field</td><td>Description</td></tr>
+  <tr><td>Collection method</td><td>Automatic — Recurly attempts payment using the account's billing info on invoice generation. Manual — payment is collected outside Recurly and the invoice is marked paid manually.</td></tr>
+  <tr><td>PO number</td><td>Purchase Order number for the transaction, if applicable.</td></tr>
+  <tr><td>Note to customer</td><td>A message or instructions included on the invoice for the subscriber.</td></tr>
+  <tr><td>Terms and conditions</td><td>Legal clauses and policies the subscriber agrees to at the time of purchase.</td></tr>
+</table>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Preview the invoice and confirm</h4><p>Review the invoice preview before finalizing to verify all details are correct. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> if you need assistance.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/2ddc27f-image.png" align="center" width="50%" border={true} />
+
+
+## Additional options
+
+### Purchase API
+
+When using the Purchase API, you can combine subscriptions, one-time charges, and other purchase components into a single invoice — useful for complex sales cycles. See the <a href="https://recurly.com/developers/api/" target="_blank">Purchase API reference</a> for details.
+
+### Custom fields
+
+Define custom fields at the subscription level to track additional data — for example, an internal user ID or a code specific to the subscription. See <a href="https://docs.recurly.com/docs/custom-fields" target="_blank">custom fields</a> for details.
+
+### Net terms
+
+Set a number of days after the invoice date before payment is considered past due. Net terms can be configured at the subscription level.
+
+### Backup payment method
+
+If the primary payment method fails, Recurly attempts collection using a backup payment method. See <a href="/guides/churn-management/involuntary-churn/backup-payment-method" target="_blank">backup payment method</a> for setup details.
+
+### Subscription notes
+
+Add internal notes visible only in the Admin UI — useful for team communication or reminders about a specific subscription.
+
+## Billing information requirement
+
+Automatic collection requires valid billing details on the account. Manual collection does not. To start an automatic subscription without billing information, you can:
+
+<ul className="rp-list">
+  <li>Use a <a href="/guides/plans-pricing-promotions/plan-structure/plans#section-free-trials-without-billing-information" target="_blank">cardless free trial</a></li>
+  <li>Apply a <a href="/guides/plans-pricing-promotions/promotions/gift-cards#section-billing-information" target="_blank">gift card</a> to cover the subscription cost</li>
+</ul>
+
+## Multiple subscriptions
+
+An account can hold multiple subscriptions — to the same plan or different plans. Options include:
+
+<ul className="rp-list">
+  <li>Adjusting the Quantity field to increase the number of subscriptions to a plan</li>
+  <li>Creating multiple subscriptions to the same plan with different renewal periods</li>
+  <li>Using the Purchase API endpoint to create multiple subscriptions in a single consolidated invoice</li>
+</ul>
+
+For full details, see <a href="/guides/subscriber-management/subscription-lifecycle/multiple-subscriptions" target="_blank">multiple subscriptions</a>.

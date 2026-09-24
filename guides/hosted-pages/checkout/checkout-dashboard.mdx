@@ -1,0 +1,128 @@
+---
+title: Checkout analytics dashboard
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Checkout analytics dashboard gives you a clear view of how your checkout configurations are performing — from how many visitors are entering the flow to how many are completing a purchase. Use it to identify which configurations are driving revenue, which need attention, and where customers are hitting friction.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have the Analytics user role permission</li>
+  <li>At least one Checkout configuration must be created before data appears in the dashboard</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>When no Checkout configurations exist, the dashboard displays a prompt to create one rather than any chart data. The dashboard becomes visible once at least one configuration has been created and checkout sessions have occurred</li>
+</ul>
+
+
+<Image src="https://files.readme.io/ddd08d8bf1f006c36d863cbe381557e0d4cdc2d20de08fe8c386bf11637cef0c-No_Checkout_Configurations.png" align="center" width="75%" border={true} />
+
+
+# Definition
+
+<div className="rp-definition">The Checkout analytics dashboard shows how your Checkout configurations are performing across the full checkout funnel. Track conversion rates by configuration, monitor which products customers are purchasing, and identify patterns in order value, session duration, and errors — so you can make informed decisions about which experiences to prioritize and which to improve.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+    <strong>Checkout flow insights</strong>
+    <span>See how many visitors are entering your checkout process and track conversion rates across configurations to identify where your funnel is working — and where it isn't.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-check" aria-hidden="true"></i></div>
+    <strong>Subscriber conversion analysis</strong>
+    <span>Identify which product configurations are converting best, so you can focus on the experiences that are driving the most subscriber and revenue growth.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
+    <strong>User behavior tracking</strong>
+    <span>Understand how long customers spend in the checkout flow and what errors they encounter, so you can reduce friction and improve the overall experience.</span>
+  </div>
+</div>
+
+# Key details
+
+## Filters
+
+Two filters at the top left of the dashboard control the data shown across all charts:
+
+- **Date range** — Select a specific start and end date for the data displayed.
+- **Timeframe** — Adjust the granularity of the view for a more detailed or broader overview.
+
+## Checkout visits
+
+The Checkout visits chart shows how many customers are visiting your checkout pages during the selected period, with a month-over-month comparison.
+
+
+<Image src="https://files.readme.io/45484ed4695939c7da54f4b6c684008ca203cbedb94ffd336ebed98d4b7272a0-image.png" align="center" width="75%" border={true} />
+
+
+The bar chart breaks visits into three groups: customers who landed on the page without interacting, customers who engaged with at least one element (such as entering payment information or modifying the cart), and customers who completed a purchase.
+
+## Checkout conversion
+
+The Checkout conversion chart answers the core question: of all the customers visiting your checkout pages, how many are completing a purchase?
+
+
+<Image src="https://files.readme.io/fa1e0bda9c51ba5572fad5a2b791b3d5b8e6f0daa377d8c6f4806e7bd528bed5-image.png" align="center" width="75%" border={true} />
+
+
+View overall conversion across all configurations, or drill down into individual configurations to compare performance. The chart also shows which products customers purchased per configuration — useful for understanding which offerings resonate most with your audience. Use this data to prioritize high-performing configurations and deprioritize underperforming ones.
+
+## Payment method conversion
+
+The Payment method conversion chart shows how conversion rates vary by payment method across your checkout configurations.
+
+
+<Image src="https://files.readme.io/7930434a19652494d51e8dd5fe9bc164484aff5f9f9450c8f4f314be9f497833-image.png" align="center" width="75%" border={true} />
+
+
+Compare performance across credit card, digital wallet, and alternative payment methods to see which option is most often shown, attempted, and successfully charged — with two key metrics:
+
+- **Checkout Rate** — how often customers choose this method when they see it.
+- **Auth Rate** — how often the payment succeeds once chosen.
+
+Use this data to decide which payment methods to prioritize or promote within a given configuration, and to spot methods that may be causing unnecessary drop-off.
+
+## Checkout average order size
+
+The average order size chart shows how much customers are spending per order, trended over time with a prior-month comparison.
+
+
+<Image src="https://files.readme.io/17d540cbad84a52df987cef0e84440e2c69b4dccf2ba1555e4a41a5bcd6de3c8-image.png" align="center" width="75%" border={true} />
+
+
+Monitoring this metric alongside conversion rates helps you identify which configurations are generating the most revenue — not just the most purchases.
+
+## Time to checkout
+
+The time to checkout chart shows how long customers are spending in the checkout flow for each configuration.
+
+
+<Image src="https://files.readme.io/58e50e2dd687c29afee6bc2030aafdfe62c312e9aa31cca540f22e2addec4ef4-image.png" align="center" width="75%" border={true} />
+
+
+Configurations with shorter completion times may indicate a simpler, more optimized flow. Compare time to checkout against conversion rates and average order value to understand the trade-offs each configuration is making.
+
+## Checkout errors
+
+The Checkout errors chart shows what errors customers are encountering during the checkout process.
+
+
+<Image src="https://files.readme.io/f8f072a1afd3a3eb8f96bde1da7a0f413eb96574b5bc9b24dcca3f68410c55fe-image.png" align="center" width="75%" border={true} />
+
+
+Review this chart regularly to surface recurring issues. Spikes in errors may point to gateway configuration problems that can be adjusted to reduce failed transactions and checkout abandonment.

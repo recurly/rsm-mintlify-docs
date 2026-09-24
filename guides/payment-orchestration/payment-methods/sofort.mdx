@@ -1,0 +1,61 @@
+---
+title: Klarna Debit Risk (formerly Sofort)
+---
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Sofort has been deprecated</strong> Sofort migrated to Klarna Debit Risk on September 30, 2024. Ensure you are passing the customer's country in your Recurly.js integration — no other changes are required. Only merchants with existing Sofort accounts on Adyen can continue to use this product. New merchant sign-ups are not supported.</div>
+</div>
+
+<div className="rp-page">
+  <div className="rp-overview">Klarna Debit Risk (formerly Sofort) is a bank-based payment method for Germany, Austria, Switzerland, and Belgium, supporting EUR, CHF, and GBP transactions. It handles initial subscription payments while recurring renewals are managed through SEPA Direct Debit. Available to existing Sofort merchants on Adyen only.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#checkout-flow"><span className="rp-toc-num">3</span>Checkout flow</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">4</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>An existing Sofort account on <a href="/guides/payment-orchestration/payment-gateways-1/adyen" target="_blank">Adyen</a> — new merchant sign-ups are not supported.</li>
+  <li>SEPA Direct Debit configured for recurring payments, with the necessary currencies enabled in both Recurly and Adyen.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>No free trials</strong> — Klarna Debit Risk cannot be used for free trials. Use SEPA Direct Debit for trial scenarios instead.</li>
+  <li><strong>Not available on Recurly Checkout or Hosted Payment Pages</strong>.</li>
+  <li>See the <a href="/guides/payment-orchestration/payment-gateways-1/adyen#limitations" target="_blank">Adyen gateway limitations</a> for additional restrictions.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Klarna Debit Risk (formerly Sofort) is a bank-based online payment method available in Germany, Austria, Switzerland, and Belgium, supporting EUR, CHF, and GBP. Customers select their country, enter their bank details, and complete the payment on their bank's platform. While Klarna Debit Risk facilitates the initial payment, recurring transactions are managed through SEPA Direct Debit — Klarna Debit Risk itself does not support recurring billing. See <a href="https://www.klarna.com/sofort/" target="_blank">Klarna's Sofort page</a> for a demo of the payment flow.</div>
+
+# Key details
+
+<div className="rp-card">
+
+### Use cases
+
+**Initial subscription payments** — Klarna Debit Risk is suited for collecting the first payment of a subscription before handing recurring renewals to SEPA Direct Debit.
+
+**European market** — Reach customers in Germany, Austria, Switzerland, and Belgium with a familiar bank-based payment method.
+
+</div>
+
+# Checkout flow
+
+Add Klarna Debit Risk as a payment option in your checkout and prompt customers to select their country and enter their bank details. Customers complete the payment directly on their bank's platform and are then returned to your site.
+
+# FAQs
+
+<Accordion title="Which gateways support Klarna Debit Risk (Sofort)?">
+  Klarna Debit Risk is supported through <a href="/guides/payment-orchestration/payment-gateways-1/adyen" target="_blank">Adyen</a> only. See the Adyen documentation for setup instructions.
+</Accordion>
+
+<br />

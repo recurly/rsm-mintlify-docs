@@ -1,0 +1,172 @@
+---
+title: Zendesk integration
+---
+
+# Overview
+
+
+<div></div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/u1miAEuadXI" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+
+
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Prerequisites
+
+* An active Recurly and Zendesk paid account.
+* Administrator access to your Zendesk instance.
+* A Base64 encoded Recurly API Key.
+
+### Limitations
+
+* The Recurly for Zendesk Sell integration is read-only.
+* Refunds cannot be issued from Zendesk if your Recurly site does not have Credit Invoices enabled.
+
+# Definition
+
+The Recurly for Zendesk integration allows businesses to seamlessly combine the power of Recurly's subscription management with Zendesk's customer service platform. This integration offers functionalities across Zendesk Chat, Support, and Sell, enabling support agents to manage customer subscriptions without leaving the Zendesk interface.
+
+# Key benefits
+
+* **Easy access to Recurly data in Zendesk**: Streamline your operations by directly integrating Recurly information within the Zendesk interface.
+* **Immediate subscription details for better service**: Enhance customer support with instant access to clients' subscription information, improving response time and efficiency.
+* **Versatile subscription management**: Manage subscriptions efficiently with straightforward options to pause, cancel, or issue refunds, all within a single platform.
+
+# Key details
+
+Enhance customer service efficiency by accessing Recurly subscription details directly within Zendesk.
+
+<Image title="Screen Recording 2019-11-20 at 02.54 PM.gif" alt={350} align="center" width="smart" border={true} src="https://files.readme.io/54bd0ab-Screen_Recording_2019-11-20_at_02.54_PM.gif">
+  Example of looking up a customer, viewing their subscription, and initiating a refund.
+</Image>
+
+Recurly is excited to provide our merchants with three integrations for Zendesk: Recurly for Zendesk Chat,  Recurly for Zendesk Support, and Recurly for Zendesk Sell. 
+
+Recurly offers three integrations for Zendesk: Chat, Support, and Sell. Initially, support agents could view customer account details within Zendesk. The subsequent release expanded this to include the ability to Pause, Cancel, and Refund subscriptions. Recognizing the concurrent use of both platforms by many support agents, this integration aims to simplify operations. All Recurly plans support these integrations.
+
+The Zendesk Sell integration is read-only. However, sales agents can directly access the Recurly account for actions like upgrades, downgrades, and one-time purchases.
+
+<Image title="Image 2019-11-20 at 2.51.44 PM.png" alt={3356} align="center" width="60% " border={true} src="https://files.readme.io/26cde47-Image_2019-11-20_at_2.51.44_PM.png">
+  Interact with Recurly data directly in Zendesk and view the information your customers expect you to know
+</Image>
+
+### Installation
+
+To install, you'll need administrator access to Zendesk and a Base64 encoded Recurly API Key. Download the necessary integration from Zendesk's marketplace and follow the setup instructions. Note that specific Zendesk plans might be required for marketplace access.
+
+<Image align="center" className="border" border={true} src="https://files.readme.io/8cee7e7-Auth.png" />
+
+### Customer lookup
+
+Search for customers using their Recurly-associated email. IfZendesk recognizes the email, it will auto-display the results.
+
+<Image align="center" className="border" width="40% " border={true} src="https://files.readme.io/7ed6a9e-search.png" />
+
+### Account
+
+View customer account details within Zendesk, including billing information. Agents can also direct customers to relevant Recurly pages or access the Recurly account directly.
+
+<Image align="center" className="border" width="40% " border={true} src="https://files.readme.io/5cfdfde-Account.png" />
+
+### Subscriptions
+
+Access comprehensive subscription details without leaving Zendesk. This ensures a smooth customer experience by providing agents with all necessary information.
+
+<Image align="center" className="border" width="40% " border={true} src="https://files.readme.io/4953a98-Subs.png" />
+
+### Pause, cancel, and refund
+
+Manage subscriptions effectively with options to pause, cancel, or refund directly from Zendesk. Note that specific permissions are required for these actions.
+
+<Image align="center" className="border" width="40% " border={true} src="https://files.readme.io/e112448-Pause.png" />
+
+<Image align="center" className="border" width="40% " border={true} src="https://files.readme.io/d25e44a-Cancel.png" />
+
+<Image align="center" className="border" width="40% " border={true} src="https://files.readme.io/2a9f979-Refund.png" />
+
+### Permissions
+
+Set permissions based on roles or groups in Zendesk. Ensure that agents have the necessary access levels to perform specific actions.
+
+![Set permissions based on agent roles.](https://files.readme.io/2b45377-Permissions.png)
+
+# Implementation guide
+
+### 1. Installing Recurly for Zendesk
+
+1. **Access Zendesk Marketplace**: Log into your Zendesk account. Navigate to the marketplace or app directory.
+2. **Search for Recurly**: In the search bar, type "Recurly" to find the available integrations.
+3. **Choose the Desired Integration**: Depending on your needs, select either Recurly for Zendesk Support, Chat, or Sell.
+4. **Download and Install**: Click on the desired integration and follow the prompts to download and install.
+5. **Enter Recurly Details**: Once installed, you'll need to configure the integration. Input your Recurly subdomain and the Base64 encoded API key. This can be found under your Recurly Account→Integrations→API Credentials.
+6. **Finalize Installation**: Follow any additional prompts and complete the installation process.
+
+### 2. Using the customer lookup feature
+
+1. **Open the Recurly Integration**: Within Zendesk, navigate to the Recurly integration section or widget.
+2. **Enter Customer Email**: In the search bar, type in the customer's email address associated with their Recurly account.
+3. **View Results**: Zendesk will automatically display the customer's Recurly account and subscription details if the email is recognized.
+
+### 3. Accessing and managing customer accounts
+
+1. **Navigate to the Account Section**: Within the Recurly integration in Zendesk, click on the 'Account' tab or section.
+2. **View Account Details**: Here, you'll see high-level account information such as the customer's name, credit card brand, and the last four digits of their credit card number.
+3. **Direct Customers**: If customers wish to change their information, you can send them Checkout pages, Hosted Payment Payment page or the Hosted Account Management URLs directly.
+4. **Access Recurly Directly**: For more complex tasks, click on “View in Recurly” to be taken directly to the customer’s account in Recurly.
+
+### 4. Managing subscriptions
+
+1. **Navigate to the Subscriptions Section**: Within the Recurly integration in Zendesk, click on the 'Subscriptions' tab or section.
+2. **View Subscription Details**: Here, you can see all relevant details about the customer's subscription.
+3. **Take Actions**: Depending on your permissions, you can pause, cancel, or refund subscriptions directly from this interface.
+
+### 5. Setting permissions
+
+1. **Access Permissions**: If you're a Zendesk administrator, navigate to the permissions section within the Recurly integration.
+2. **Set Permissions**: Assign 'Read', 'Edit', or 'Admin' permissions to specific roles or groups in your Zendesk instance.
+3. **Save Changes**: Ensure you save any changes made to permissions to ensure they take effect.\
+   Remember, always refer to the official documentation and ensure you have the necessary permissions and access rights before making changes or performing actions.
+
+# FAQs
+
+Q: What is the Recurly for Zendesk integration?\*\*\
+**A**: The Recurly for Zendesk integration allows support agents to access and manage customer account and subscription details directly within the Zendesk interface. This streamlines operations and enhances the customer support experience.
+
+**Q**: Which Zendesk products does Recurly integrate with?\
+**A**: Recurly provides integrations for Zendesk Chat, Zendesk Support, and Zendesk Sell.
+
+**Q**: Are there any prerequisites for using this integration?\
+**A**: Yes, you'll need an administrator account for your Zendesk instance and access to a Base64 encoded Recurly API Key. Additionally, the integration is available on all Recurly plans.
+
+**Q**: Can I refund a customer directly from the Zendesk interface?\
+**A**: Yes, if you have the necessary permissions (Edit or Admin), you can issue a refund for any amount up to the last invoice directly from the Zendesk interface.
+
+**Q**: How do I find my Base64 encoded Recurly API Key?\
+**A**: You can locate this key under your Recurly Account→Integrations→API Credentials. The Base64 encoded API key is the characters after “Authorization Basic”.
+
+**Q**: What if I only want certain agents to have access to specific features?\
+**A**: Zendesk administrators can set permissions within the application for specific roles/groups in your Zendesk instance. You can assign 'Read', 'Edit', or 'Admin' permissions as needed.
+
+**Q**: Can I pause a subscription using the Recurly for Zendesk integration?\
+**A**: Yes, you can pause a subscription between 1-12 billing cycles directly from the Zendesk interface, provided you have the necessary permissions.
+
+**Q**: What happens if I use a read-only API key for the integration?\
+**A**: If you set up a read-only API key, the edit functionality will not work within the integration. You'll only be able to view details without making changes.
+
+**Q**: I'm on the Essential Zendesk Plan. Can I use this integration?\
+**A**: No, if your company uses the Essential Zendesk Plan, you won't have access to the Zendesk Marketplace. You'll need to upgrade your plan to install this Marketplace app.
+
+**Q**: How do I cancel a subscription using the integration?\
+**A**: Support agents can cancel a subscription at three different time frames: Now, Next Bill Date, or End of Term. The exact steps and options available depend on your permissions and plan settings.
+
+**Q** Your integrations display two links that agents can send to customers: Account Management URL and Update Billing URL. Can we adjust the integration to use our own links and if not, can we hide these two links?\
+**A** Currently, the integration does not support customization of these links.
+
+**Q** When setting up the integration permissions, does Recurly validate the Agent’s user role inside Recurly when attempting to perform operations?\
+**A** At present, the integration does not validate the agent’s user role in Recurly while performing operations. The actions will be displayed as performed “by Zendesk using the API”.
+
+**Q**Does using the ZenDesk app mean I lose track of the actual employee that performed the actions?\
+**A** Yes. The actions will be logged as performed by “Zendesk using the API”, hence the individual employee's identity will not be reflected in the action logs.

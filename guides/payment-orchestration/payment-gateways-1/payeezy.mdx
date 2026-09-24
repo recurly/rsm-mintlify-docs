@@ -1,0 +1,97 @@
+---
+title: Payeezy
+---
+
+> ❗️ Deprecated. Do not use.
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Prerequisites
+
+To initiate the connection to your Payeezy account through Recurly, you will need to have:
+
+* A Payeezy account
+* API Key
+* API Secret
+* Merchant Token
+
+# Definition
+
+Payeezy is a dynamic payment gateway integrated into the Recurly platform, leveraging First Data's payment gateway service to enable secure and reliable transaction processing for businesses. To use this feature, it is imperative to connect to your Payeezy account via Recurly using certain required credentials.
+
+> **Note**: Visit our guide on testing your gateway configurations in Recurly to ensure your payment processes are set up correctly.
+
+## Connection to Payeezy
+
+Recurly extends support for First Data’s reputable Payeezy gateway, paving the path for secure and seamless transaction processing. To connect to your Payeezy account via Recurly, it is requisite to have your API Key, API Secret, and Merchant Token at hand.  
+Upon setting up your Payeezy credentials accurately, Recurly takes the onus of verifying the details to ensure a smooth integration.
+
+<Image align="center" border={true} src="https://files.readme.io/c79e595-payeezy-api-credentials.png" className="border" />
+
+<Image align="center" border={true} src="https://files.readme.io/fec7532-payeezy-credentials2.png" className="border" />
+
+#### CVV Settings
+
+In the bid to curtail fraudulent transactions, utilizing CVV settings stands paramount. Recurly showcases the competency to distinctly identify a subscription signup from a renewal transaction, hence it is advised to disable the CVV checks in Payeezy while enabling them in Recurly for enhanced security.  
+By setting up the CVV preferences judiciously, one can foster a secure transaction environment, shielding your business from potential frauds.
+
+# Key Details
+
+| Feature                         | Description                                                                                                                     |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Services that work with Recurly | Payment Processing, Subscriptions, [MOTO](/guides/subscriber-management/transactions/moto-transactions#/)   Processing |
+| Supported operations            | Transaction Processing (Verify, Purchase, Separate Authorize and Capture, Void, Refund)                                         |
+| Supported payment types         | Credit Card                                                                                                                     |
+| Supported card brands           | Visa, MasterCard, Amex, Discover, JCB, Diners Club                                                                              |
+| Gateway Specific 3DS2 Supported | No                                                                                                                              |
+| Card on File Supported          | Yes                                                                                                                             |
+| Regions                         | United States                                                                                                                   |
+| Currencies                      | USD                                                                                                                             |
+
+### Step-by-Step Process to Enable Gateway
+
+In order to seamlessly set up and enable the Payeezy gateway through Recurly, follow this detailed step-by-step process:
+
+1. **Create a Payeezy Account**: If you haven't already, sign up for a Payeezy account by visiting the [Payeezy website](https://www.payeezy.com/).
+
+2. **Gather Necessary Credentials**: After setting up your Payeezy account, note down your API Key, API Secret, and Merchant Token. These are essential credentials required for integration.
+
+3. **Login to Your Recurly Account**: Access your Recurly account by inputting your login details on the [Recurly login page](https://www.recurly.com/login/).
+
+4. **Navigate to Payment Gateways**: Once logged in, go to the “Configuration” menu in your Recurly dashboard and select "Payment Gateways" from the dropdown list.
+
+5. **Select Payeezy Gateway**: Find and select the “Payeezy” gateway from the available list of payment gateways.
+
+6. **Enter Payeezy Credentials**: In the designated fields, input your Payeezy API Key, API Secret, and Merchant Token.
+
+7. **Save Changes**: After inputting all necessary details, click “Save Changes” to preserve the settings.
+
+8. **Verification by Recurly**: Recurly will automatically verify the credentials you have entered to confirm the integration is successful.
+
+9. **Confirmation**: Once the credentials are verified, a confirmation message will be displayed, indicating that the Payeezy gateway has been successfully enabled.
+
+10. **Test the Setup**: To ensure everything is working perfectly, perform some test transactions to confirm the functionality of the payment gateway.
+
+### Settings on the Gateway Side
+
+To ensure seamless operations and security, it is crucial to properly configure the settings on the Payeezy gateway side. Here is how you can go about it:
+
+1. **Login to Your Payeezy Account**: Access your Payeezy account by inputting your login details on the Payeezy login page.
+
+2. **Navigate to Security Settings**: Once logged in, head over to the security settings section to manage the transaction settings.
+
+3. **CVV Settings**: It is recommended to disable the CVV checks on the Payeezy side. To do this, find the CVV settings and select the disable option.
+
+4. **3D Secure Settings**: If Payeezy offers 3D Secure settings, you might consider configuring these according to your preferences for added security (Note: The provision of 3D secure settings is speculative as it is not mentioned in the provided information).
+
+5. **Transaction Settings**: Configure other transaction settings such as payment methods, card brands, and currencies to align with your business needs.
+
+6. **API Settings**: Ensure that the API settings are correctly configured to facilitate seamless integration with Recurly.
+
+7. **Save Changes**: After making all necessary adjustments, save the changes to apply the new settings.
+
+8. **Consult Payeezy Support**: If you encounter any issues or have queries during the setup process, don’t hesitate to reach out to [Payeezy support](https://support.payeezy.com/hc/en-us) for assistance.

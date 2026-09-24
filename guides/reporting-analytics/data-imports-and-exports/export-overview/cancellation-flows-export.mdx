@@ -1,0 +1,26 @@
+---
+title: Cancellation flows - export
+---
+
+A Cancellation Flows export is available for configuration as a manual and automated export. The export provides data to enable you to gain an understanding as to why your customers are canceling, monitor trends such as if the position of the response makes a difference, and provides insights into cancel behavior. 
+
+An entry is created each time the *Create a new survey session* API call is made. When using the *Update a survey session* API to record the customer's response the response\_text, response\_number, and position fields are updated.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Column Name        | Example                                | Description                                                                                                                                                                                                                                                  |
+| :----------------- | :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| session\_id        | 3767797751318006536                    | The customer's session ID.                                                                                                                                                                                                                                   |
+| session\_date      | 02/10/2023 15:25 UTC                   | The date and time the new session was generated (aka the time customer began the cancellation workflow).                                                                                                                                                     |
+| subscription\_uuid | 654705570182ff58cd8fb949b6b6f957       | Unique internal identifier for the subscription. Even if a subscription is modified, this identifier is maintained.                                                                                                                                          |
+| account\_code      | 10142022                               | Account\_code uniquely identifies your customers inside of Recurly. This field defaults to email address, if no specific value is provided. Account\_code cannot be modified. This is the main Recurly identifier, and can be used to join multiple exports. |
+| plan\_code         | eph57                                  | The code associated with the Plan the customer is thinking of canceling.                                                                                                                                                                                     |
+| response\_text     | My free trial or special offer expired | The text of the response presented to the customer.                                                                                                                                                                                                          |
+| response\_number   | 004                                    | The auto-generated, friendly ID, associated with the response. For Recurly provided default responses the value is 001-016.                                                                                                                                  |
+| position           | 2                                      | Where, in the order of the responses presented, this specific response was located.                                                                                                                                                                          |

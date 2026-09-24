@@ -1,0 +1,144 @@
+---
+title: Using App Management
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Once App Management is connected, Recurly gives you a complete picture of your mobile app subscriptions — drill into any customer account or subscription, compare performance across the app stores with analytics dashboards, and export the underlying data for deeper analysis. This page covers how to view subscriptions, use the dashboards and exports, and put App Management to work day to day.</div>
+  <div className="rp-cost">
+    <strong>Additional cost</strong><br/>
+    This feature requires an additional cost. Contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> for pricing details.
+  </div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#viewing-app-subscriptions"><span className="rp-toc-num">1</span>Viewing app subscriptions</a>
+    <a className="rp-toc-pill" href="#dashboards"><span className="rp-toc-num">2</span>Dashboards</a>
+    <a className="rp-toc-pill" href="#exports"><span className="rp-toc-num">3</span>Exports</a>
+    <a className="rp-toc-pill" href="#additional-features"><span className="rp-toc-num">4</span>Additional features</a>
+    <a className="rp-toc-pill" href="#troubleshooting"><span className="rp-toc-num">5</span>Troubleshooting</a>
+  </div>
+</div>
+
+# Viewing app subscriptions
+
+Recurly makes it easy to see a complete picture of all your mobile app subscriptions and drill into any customer account or subscription for more detail. In the example below, Brady has subscribed to the "US 1 Month Pro" plan through the Apple app.
+
+
+<Image src="https://files.readme.io/be753a6-subDetails.png" align="center" width="75%" border={true} />
+
+
+For more detail about the associated subscription activity, look at the list right below the customer account details. In the example below, a customer subscribed in April and their monthly subscription renewed twice.
+
+
+<Image src="https://files.readme.io/1c32a02-activities.png" align="center" width="75%" border={true} />
+
+
+To understand the revenue tied to a customer account — or to all your customers — view the corresponding invoices. The example below shows a snippet from a list of all Google and Apple invoices. When viewing a specific customer account, you'll only see invoices for that account.
+
+
+<Image src="https://files.readme.io/892704d-invoices.png" align="center" width="75%" border={true} />
+
+
+Those are a few of the ways to find more information about your customer subscriptions. For more metrics and data on your overall subscription health, read on about the available dashboards, exports, and additional features.
+
+# Dashboards
+
+Analytics dashboards give you insight into and comparison of your business performance across the app stores. You can also extract your app store data from Recurly for further transformation and analysis using <a href="#exports">Exports</a> or the <a href="/guides/app-management/app-management/api-support-and-webhooks#rest-api-endpoints" target="_blank">REST APIs</a>. Every dashboard can be viewed as a visual chart or in tabular format, and metrics are grouped into the categories below.
+
+## Subscriptions
+
+The Subscriptions dashboards provide insight into your active and churned subscriptions across each app store, or broken down by each subscription offering.
+
+
+<Image src="https://files.readme.io/085b9a00afbc0b53bf58563de99f7268271ede2e34332ce4e0a2b90bdd0ffbcf-image.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/7beb46c6c32f389d1fc57663ff3f95dd978bf22fe64cffdabcb832e068a27801-image.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/8a88134d0692c155495036284d7709147965b659db11b32d3aeb2d37ce008762-image.png" align="center" width="75%" border={true} />
+
+
+## Subscriber retention
+
+The Subscriber Retention dashboard uses cohort analysis to evaluate paid subscriber retention and churn rates over a specified timeframe for each cohort. As shown below, you gain insight into how many months your customers stay subscribed, and whether that duration is affected by the month they became a subscriber.
+
+
+<Image src="https://files.readme.io/6469c57ac9e35e311d2359063e894fe4387220fcbfbf03d32c3c3a7001ed2996-image.png" align="center" width="75%" border={true} />
+
+
+## Billings
+
+The Billings dashboard shows total gross revenue processed in the app stores over a selected time period. Billings can be broken down by the app store they originated from, and by new revenue (successful first-time payments) versus renewing revenue.
+
+
+<Image src="https://files.readme.io/5f15a6ae9a4b9bf6c3d804bf74fd68a082d688c7850b296352045f852f598ed9-image.png" align="center" width="75%" border={true} />
+
+
+## Monthly recurring revenue
+
+The Monthly Recurring Revenue (MRR) dashboard shows total gross revenue processed in the app stores, minus the app store commission (10–30%), over a selected time period.
+
+
+<Image src="https://files.readme.io/53cd74c847bf04ce900ab42ea53575ff8bfa499f7798ede3490837e906dd58df-image.png" align="center" width="75%" border={true} />
+
+
+# Exports
+
+If you'd rather work with Recurly data in a tabular format — in another application or a spreadsheet editor — you can export it for any time range you specify. These App Management exports are always available under Analytics → Exports:
+
+<ul className="rp-list">
+  <li><a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/subscriptions-external" target="_blank">Subscriptions - External</a> — detailed information about all your mobile app subscriptions.</li>
+  <li><a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/invoices-external" target="_blank">Invoices - External</a> — detailed information for all invoices related to your mobile app subscriptions, such as $1.99 for a new subscription.</li>
+</ul>
+
+You can download these exports manually as a CSV file, or through the <a href="https://docs.recurly.com/docs/export-overview#automated-exports" target="_blank">Automated Export system</a>.
+
+# Additional features
+
+## Business process automation
+
+Recurly can act as a hub for identifying and acting on subscription lifecycle events using <a href="/guides/app-management/app-management/api-support-and-webhooks#webhooks" target="_blank">webhooks</a> and the <a href="/guides/app-management/app-management/api-support-and-webhooks#rest-api-endpoints" target="_blank">REST API</a>. For example, to check whether a customer is entitled to a set of features within your mobile app, you have a couple of options:
+
+<ul className="rp-list">
+  <li>Use the <a href="/guides/app-management/app-management/api-support-and-webhooks#external-subscriptions" target="_blank">External Subscription endpoints</a> to determine whether the customer has an active subscription.</li>
+  <li>Use <a href="/guides/app-management/app-management/step-by-step-process#entitlements" target="_blank">Entitlements</a> and their associated <a href="/guides/app-management/app-management/api-support-and-webhooks#entitlements" target="_blank">REST API endpoints</a>.</li>
+</ul>
+
+## Unassigned purchases
+
+If Recurly is notified of a purchase by Apple or Google for a subscription you haven't yet defined as an external product, that purchase is designated as an Unassigned Purchase. To make sure your new subscriber is entitled to what they bought, review the list of unassigned purchases and resolve the issue by assigning them to a new or existing external product.
+
+# Troubleshooting
+
+<Accordion title="Why is 'Last Notification Received' blank or showing an old date for my Apple or Google connection?">
+  If the value is blank, Recurly has never received a real-time notification from Apple or Google. In most cases, this means Apple or Google isn't configured to send notifications to the Recurly URL provided in App Management. To verify, follow the Apple or Google setup instructions in the <a href="/guides/app-management/app-management/step-by-step-process" target="_blank">step-by-step process</a>.
+
+  If the value isn't current — say, five days old — Recurly hasn't received recent subscription activity from Apple or Google. This could simply mean you've had no new subscribers or subscription activity (like a renewal) since that date. If that's not the case, it's likely the same configuration issue described above.
+
+  Test server notifications (Request a Test Notification) don't affect Last Notification Received, since that activity doesn't confirm Recurly is correctly receiving subscription lifecycle notifications.
+</Accordion>
+
+<Accordion title="Why do I receive an error when trying to connect Apple or Google?">
+  To make sure App Management can successfully track all subscription lifecycle events, Recurly validates the information you provide during configuration and gives immediate feedback if something's incorrect. Two common causes:
+
+  - The entire contents of the API key file weren't pasted into the field. Be sure to copy the full contents of the file and paste them into the configuration page.
+  - The API key was entered correctly, but the required permissions weren't applied correctly within Apple or Google. To verify, review the steps under Prerequisites for the appropriate app store.
+</Accordion>
+
+<Accordion title="How can I uniquely identify a subscription when troubleshooting with Apple or Google?">
+  There are a couple of ways to get this identifier. Apple uses `originalTransactionId` and Google uses `purchaseToken`. You'll find it as External ID when viewing the table of external subscriptions at Customers → Subscriptions → External, or when viewing the details of an external subscription.
+</Accordion>
+
+<Accordion title="How do I make sure occasional testing doesn't interfere with our real (Production) subscriptions?">
+  Recurly makes it easy to filter out test activity:
+
+  - In the table of external subscriptions or external invoices, an Environment column shows either Test or Production. You can also use the filters on the left to show Production only.
+  - When viewing the details of an external subscription, you'll see a Test tag in the upper left, plus Test on any related invoices and activity.
+</Accordion>
+
+<Accordion title="Do we have to use Apple StoreKit 2 for the integration and subscription lifecycle events?">
+  No. Apple StoreKit 2 isn't required, and Recurly doesn't require you to implement a Recurly SDK to power the subscription purchasing experience.
+</Accordion>
+
+<br />

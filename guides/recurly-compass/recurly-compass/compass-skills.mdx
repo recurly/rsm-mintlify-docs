@@ -1,0 +1,104 @@
+---
+title: Compass skills
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Compass Skills page is your starting point for getting things done with Compass Assistant. Each card opens a guided workflow that walks you through a specific outcome — with progress tracking, so you can stop and pick up right where you left off. As Recurly's agents gain new skills, they show up here automatically.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#skills-page"><span className="rp-toc-num">3</span>Skills page</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>All users must have permissions within a site that has the Compass Assistant Chat feature flag enabled</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Compass Skills page is a subpage under Compass in the left navigation bar. It displays cards for the various skills Recurly's agents can perform, and because skills and agents evolve over time, the page is built to surface new ones as they roll out.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Guided, step-by-step workflows</strong>
+    <span>Reach specific outcomes through Compass Assistant workflows that walk you through each configuration step.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Progress that saves itself</strong>
+    <span>Leave a guided skill partway through and pick up from your last step; finished skills show a Completed badge.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Skills that grow over time</strong>
+    <span>New skills and agents appear on the page as they roll out, so the outcomes you can reach keep expanding.</span>
+  </div>
+</div>
+
+# Skills page
+
+The Compass Skills page displays cards that connect you with Compass Assistant to accomplish specific outcomes. Guided workflows with progress tracking support configuration changes and activation.
+
+
+<Image src="https://files.readme.io/8e4372fd8310590d2bc436abc0369ad000239e41c19ecef6151e59de957c212d-image.png" align="center" width="75%" border={true} />
+
+
+Click a skill card to begin the workflow. Each guided workflow includes steps that lead you to your outcome, and a Completed badge appears in the upper-right corner of any card whose skill is done.
+
+Skills that introduce you to an agent you can query can be repeated as often as you need. Use the filters at the top of the page to narrow skills by agent type.
+
+## Guided skills
+
+Several skills guide you through configuration steps.
+
+<ul className="rp-list">
+  <li>If you leave a skill before finishing, clicking the card again picks up from your last step.</li>
+  <li>Guided skills are generally completed once — afterward, the card gives you the option to view the details.</li>
+  <li>Guided skills configure settings for the whole site, so once one user completes a skill, everyone else sees it marked as completed.</li>
+</ul>
+
+
+<Image src="https://files.readme.io/e39f9a648562d515dd4d1b88e1e5dfbd301a232c40d5dc0a91b3187123b5412e-image.png" align="center" width="75%" border={true} />
+
+
+## Involuntary churn remediation skill
+
+This skill prompts subscribers to update failed payment methods using in-app messages, engaging them to update their payment information proactively. It enables a small campaign targeted to subscribers with failed payment methods.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong>Need more than a single prompt? <a href="https://recurly.com/product/engage/" target="_blank">Recurly Engage</a> offers more customizable campaigns and in-app messages.</div>
+</div>
+
+### Customizing your prompt
+
+Compass Assistant guides you through customizing an involuntary churn prompt. You can configure the background and button colors, the title, the message, and the button text to match your brand.
+
+The assistant also asks for your site's domain. For the call-to-action (CTA) button, it needs to know where to send subscribers when they click to update their payment method — provide the exact URL of the page where users update their payment information. Once you've reviewed the details, Compass Assistant saves the prompt.
+
+### Next steps outside Compass Assistant
+
+There are two quick technical steps to complete before your customers can see the prompt. Each adds a small code snippet to your site — you'll only do this once, and your campaign goes live as soon as both are in place.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Identify your logged-in users</h4><p>This snippet tells Recurly Engage who's using your app so it can match them against your subscriber list and show the overlay to the right people. Add it to every page of your app, replacing the account-code placeholder with the subscriber's Recurly account code — typically available in your session or user context once someone is logged in.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Load the Recurly Engage script via your tag manager</h4><p>This snippet loads the Recurly Engage library on your site through your tag manager. The involuntary churn prompt fires on every page the script runs on, so add it to all pages to give subscribers more chances to update their payment method.</p></div>
+  </div>
+</div>
+
+<a href="https://docs.recurly.com/recurly-engage/docs/add-the-redfast-tag" target="_blank">Learn more about adding Recurly Engage to your site via your tag manager</a>
+
+## Optimize default dunning skill
+
+This skill creates an additional email that's sent before the final Expired for Non-Payment email, extending your total dunning length to 27 days. It changes only the default dunning campaign for your site.

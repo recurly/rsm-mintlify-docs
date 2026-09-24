@@ -1,0 +1,164 @@
+---
+title: Expire/cancel subscription
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Managing the end of a subscription shouldn't be complicated. Recurly gives you precise control over how and when subscriptions conclude — whether a customer is canceling at their next bill date, you're terminating a subscription mid-cycle, or billing failures are driving an automatic expiration. This page covers every path to expiry and what each one means for the subscription lifecycle.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#cancel-a-subscription"><span className="rp-toc-num">3</span>Cancel a subscription</a>
+    <a className="rp-toc-pill" href="#auto-cancellation"><span className="rp-toc-num">4</span>Auto-cancellation</a>
+    <a className="rp-toc-pill" href="#reactivate-a-subscription"><span className="rp-toc-num">5</span>Reactivate a subscription</a>
+    <a className="rp-toc-pill" href="#terminate-a-subscription"><span className="rp-toc-num">6</span>Terminate a subscription</a>
+    <a className="rp-toc-pill" href="#dunning"><span className="rp-toc-num">7</span>Dunning</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">When a customer ends their subscription at the next bill date or term end, that's a <strong>cancellation</strong>. If you end it early, mid-cycle, that's a <strong>termination</strong>. Both outcomes result in the subscription reaching an <strong>expired</strong> state. A canceled subscription can be reactivated before the expiry date if the customer changes their mind — but once a subscription is expired, it cannot be reactivated. A new subscription must be created instead.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-check" aria-hidden="true"></i></div>
+    <strong>Customer autonomy</strong>
+    <span>Give customers the ability to cancel on their own terms — at the next bill date or term end — building trust and a positive brand experience.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-calendar-xmark" aria-hidden="true"></i></div>
+    <strong>Flexible expiry options</strong>
+    <span>Choose from immediate, next bill date, or term-end expiration to match the right outcome to each situation.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-rotate-right" aria-hidden="true"></i></div>
+    <strong>Recoverable cancellations</strong>
+    <span>Canceled subscriptions stay active until the expiry date, giving customers a window to reconsider and reactivate without losing their subscription history.</span>
+  </div>
+</div>
+
+# Cancel a subscription
+
+When a subscription is canceled, it enters a pre-expiry state and remains active until the selected end date. The customer retains access to the service and can reactivate the subscription at any time before it expires.
+
+
+<Image src="https://files.readme.io/9ebba7b-2019-09-04_0922.png" align="center" width="75%" border={true} />
+
+
+## Admin Console
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the account</h4><p>Navigate to the desired customer account in the Admin Console.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select the subscription</h4><p>Click on the subscription name.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Cancel the subscription</h4><p>From the <strong>Subscription Actions</strong> dropdown, choose <strong>Cancel Subscription</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Choose the cancellation timing</h4><p>Select whether to cancel immediately, at the next billing cycle, or at the end of the term.</p></div>
+  </div>
+</div>
+
+## Hosted Account Management
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Enable the cancellation option</h4><p>In the Admin Console, go to <strong>Configuration → Hosted Page Settings</strong> and enable <strong>Cancel subscriptions</strong> under Customer Options.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Customer self-cancels</h4><p>Once enabled, customers can cancel their subscription directly from their Hosted Account page.</p></div>
+  </div>
+</div>
+
+# Auto-cancellation
+
+Recurly can automatically cancel a subscription when it receives a webhook signal from a payment gateway indicating that a payment method or mandate is no longer valid. The cancellation applies to any subscription using the affected token or mandate.
+
+**Supported gateways:**
+
+- <a href="/guides/payment-orchestration/payment-gateways-1/paypal-complete" target="_blank">PayPal Complete</a>
+- <a href="/guides/payment-orchestration/payment-gateways-1/ebanx-gateway#/" target="_blank">Ebanx</a> (using <a href="/guides/payment-orchestration/payment-methods/upi-autopay#/" target="_blank">UPI AutoPay</a>)
+
+# Reactivate a subscription
+
+A canceled subscription can be reactivated at any time before it expires — useful when a customer changes their mind. Once a subscription has expired, reactivation isn't possible and a new subscription must be created.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> SCA / PSD2 compliance</strong>If your account is subject to SCA or PSD2 mandates, the customer must reauthenticate their stored billing information before reactivation. See <a href="https://docs.recurly.com/v1.1/docs/using-3d-secure-with-stored-billing-information#/" target="_blank">3D Secure with stored billing information</a> for details.</div>
+</div>
+
+## Admin Console
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the account</h4><p>Navigate to the desired customer account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select the canceled subscription</h4><p>Click on the canceled subscription's name.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Reactivate</h4><p>From the <strong>Subscription Actions</strong> dropdown, choose <strong>Reactivate Subscription</strong>.</p></div>
+  </div>
+</div>
+
+## Hosted Account Management
+
+If the cancellation option was provided to the customer, they'll see a reactivation option in their Hosted Account until the subscription expires.
+
+# Terminate a subscription
+
+Termination ends a subscription immediately, mid-cycle. Unlike cancellation, there's no pre-expiry window — the subscription moves directly to expired. Use termination when you need to end a subscription right away rather than at a future date.
+
+## Admin Console
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the account</h4><p>Navigate to the desired customer account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select the subscription</h4><p>Click on the subscription name.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Open Cancel Subscription</h4><p>From the <strong>Subscription Actions</strong> dropdown, choose <strong>Cancel Subscription</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Select Terminate</h4><p>On the following page, choose <strong>Terminate Subscription</strong> to end the subscription immediately.</p></div>
+  </div>
+</div>
+
+## API
+
+Termination can also be triggered via API. See the API reference for the required parameters and endpoints.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong>If you want to end billing for a set number of cycles without permanently expiring the subscription, consider using <strong>Pause subscription</strong> instead.</div>
+</div>
+
+# Dunning
+
+Within <a href="/guides/churn-management/involuntary-churn/dunning-management" target="_blank">Dunning Management</a>, you can configure Recurly to automatically expire a subscription when its invoice reaches the end of the dunning cycle without a successful payment.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Past-due invoices aren't auto-failed on expiry</strong>If a subscription expires outside of dunning — through cancellation, termination, or natural term end — any past-due invoices currently in dunning will not be automatically failed. They'll remain open and in dunning until paid or until the dunning cycle ends. If your dunning settings are configured to leave invoices past due at the end of the cycle, those invoices will never automatically fail. To stop collection, you'll need to manually mark them as failed.</div>
+</div>
+
+<br />

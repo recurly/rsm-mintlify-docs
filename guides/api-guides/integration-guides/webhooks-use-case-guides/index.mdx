@@ -1,0 +1,37 @@
+---
+title: Webhooks Use Case guides
+---
+
+# Overview
+
+This Quick Start Guide walks you through different use cases you may encounter with Webhooks on Recurly.
+
+<CardGroup cols={2}>
+  <Card title="Synchrous Payments and Transactions" icon="fa-key">
+    Payment Methods such as Credit Cards and Instant payments such as Cash App, PayPal, and Venmo will return an immediate authorization response, providing a clear indication of approval or decline in real time. 
+  </Card>
+
+  <Card title="Asynchronous Payments and Transactions" icon="fa-code">
+    Many payment methods supported by Recurly have asynchronous approval and decline flows, requiring you to listen for status updates when the payment and invoice status is updated.
+  </Card>
+
+  <Card title="Subscription lifecycle events" icon="fa-cog">
+    Subscriptions can experience mid-cycle events depending on the payment method, consumer interaction, and other events such as dunning and chargebacks.
+  </Card>
+
+  <Card title="Invoice and Transaction lifecycle events" icon="fa-file-alt">
+    Invoices and Transactions are tightly coupled in Recurly's system, and their status will have an effect on one another. Some events, associated with post-authorization events (voids, refunds, etc.) can affect transactions and invoices and will emit events.
+  </Card>
+</CardGroup>
+
+### Prerequisites & limitations
+
+* A valid Recurly account with API access
+* Basic familiarity with RESTful APIs and JSON, 
+* Familiarity with the [Webhooks Overview guide](/guides/webhooks/overview-webhooks#/), [Best Practices guide](https://docs.recurly.com/recurly-subscriptions/docs/best-practices#/) and [Webhook basic details](https://docs.recurly.com/recurly-subscriptions/docs/webhook-details#/).
+* Additional documentation includes: 
+  * [Security and configuration](https://docs.recurly.com/recurly-subscriptions/docs/configuration-and-security#/)
+  * [Automatic](https://docs.recurly.com/recurly-subscriptions/docs/automatic-retries#/) and [Manual](https://docs.recurly.com/recurly-subscriptions/docs/manual-retries#/) Retries 
+  * [Event Customizations](https://docs.recurly.com/recurly-subscriptions/docs/lifecycle-events#/)
+
+You will find all webhook documentation under the main **Webhooks** section under **Notifications**.

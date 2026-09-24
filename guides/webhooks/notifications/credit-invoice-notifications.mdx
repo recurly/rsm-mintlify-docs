@@ -1,0 +1,84 @@
+---
+title: Credit invoice notifications
+---
+
+Credit invoices represent one-off credits, refunds, subscription downgrades, refunds at subscription termination, write-offs, or gift card redemptions. When the Credit Invoices feature is enabled, Recurly will emit webhooks for each stage of a credit invoice’s lifecycle to keep your systems and workflows in sync.
+
+### Prerequisites and limitations
+
+* **Credit Invoices feature** must be enabled on your Recurly site.
+* Sites created after **May 8, 2018 UTC** (May 7, 2018 5 pm PT) automatically have this feature.
+* If the feature is not enabled, no credit invoice webhooks will be sent.
+* [Learn more](/guides/recurring-billing/invoices-1/credit-invoices-release)
+
+# Key details
+
+Only sent once the Credit Invoices feature is enabled on your Recurly site. Recurly sites created after May 8, 2018 UTC (May 7, 2018 5 pm PT) automatically have the Credit Invoices feature. <a href="/guides/recurring-billing/invoices-1/credit-invoices-release">Learn more</a>
+
+| JSON                        | XML                                      | Description                                                                                                                                                                                             |
+| --------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `credit_invoice.created`    | `new_credit_invoice_notification`        | Sent when a credit invoice is created. This could be a one-off custom credit, refund, subscription downgrade, refund at subscription termination, write-off, or gift card redemption.                   |
+| `credit_invoice.processing` | `processing_credit_invoice_notification` | Sent when a refund credit invoice enters a processing state due to a processing bank account (ACH) refund. Only appears if a refund credit invoice is later retried or refunded after initial creation. |
+| `credit_invoice.closed`     | `closed_credit_invoice_notification`     | Sent when a credit invoice’s balance decreases to zero—whether via credit payments on charge invoices, refunds out to transactions, or voided balance credit payments.                                  |
+| `credit_invoice.voided`     | `voided_credit_invoice_notification`     | Sent when a credit invoice moves to a voided state because its full balance has been removed.                                                                                                           |
+| `credit_invoice.reopened`   | `reopened_credit_invoice_notification`   | Sent when a closed credit invoice is reopened—typically when a previously applied credit payment is voided and its amount is added back to the credit invoice’s balance.                                |
+| `credit_invoice.opened`     | `open_credit_invoice_notification`       | Sent when a credit invoice is first issued in an open state, or moves back to open after a declined processing refund.                                                                                  |
+| `credit_invoice.updated`    | `updated_credit_invoice_notification`    | Sent when a credit [invoice is edited](/guides/recurring-billing/invoices-1/edit-invoice).                                                                                                                     |
+
+## Credit invoice schema
+
+```json
+{
+  "id": "ra94dgn9ul70",
+  "object_type": "credit_invoice",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "created",
+  "event_time": "2022-07-27T00:20:19Z",
+  "invoice_number": 1034
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_credit_invoice_notification>
+  <account>
+    <account_code>1234</account_code>
+    <username></username>
+    <email></email>
+    <first_name></first_name>
+    <last_name></last_name>
+    <company_name></company_name>
+    <phone></phone>
+  </account>
+  <invoice>
+    <uuid>42fb74de65e9395eb004614144a7b91f</uuid>
+    <state>closed</state>
+    <origin>write_off</origin>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">2404</invoice_number>
+    <address>
+      <address1>123 Main St.</address1>
+      <address2></address2>
+      <city>San Francisco</city>
+      <state>CA</state>
+      <zip>94110</zip>
+      <country>US</country>
+      <phone></phone>
+    </address>
+    <vat_number></vat_number>
+    <currency>USD</currency>
+    <balance_in_cents type="integer">0</balance_in_cents>
+    <total_in_cents type="integer">-4882</total_in_cents>
+    <tax_in_cents type="integer">-382</tax_in_cents>
+    <subtotal_in_cents type="integer">-4500</subtotal_in_cents>
+    <subtotal_before_discount_in_cents type="integer">-5000</subtotal_before_discount_in_cents>
+    <discount_in_cents type="integer">-500</discount_in_cents>
+    <subscription_ids type="array">
+      <subscription_id>42fb74ba9efe4c6981c2064436a4e9cd</subscription_id>
+    </subscription_ids>
+    <customer_notes nil="true"></customer_notes>
+    <created_at type="datetime">2018-02-13T00:56:22Z</created_at>
+    <updated_at type="datetime">2018-02-13T00:56:22Z</updated_at>
+    <closed_at type="datetime">2018-02-13T00:56:21Z</closed_at>
+  </invoice>
+</new_credit_invoice_notification>
+```

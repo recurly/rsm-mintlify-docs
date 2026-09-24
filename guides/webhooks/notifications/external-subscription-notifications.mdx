@@ -1,0 +1,773 @@
+---
+title: External subscription notifications
+---
+
+External Subscription Notifications fire whenever an external subscription is created, renewed, canceled, upgraded, downgraded, expired, extended, or otherwise modified. Each notification includes the `external_subscription` ID, associated `external_resource`, and `external_product_reference` payloads so you can reconcile external billing systems with Recurly.
+
+### Prerequisites and limitations
+
+* **External Subscriptions feature** must be enabled on your site.
+* Notifications reflect only actions on external subscriptions, not native Recurly subscriptions.
+* Retries occur automatically on failure, but ensure idempotent handling of duplicate or out-of-order events.
+
+# External subscription notifications
+
+## New external subscription
+
+Sent when an external subscription is created.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "created",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</new_external_subscription_notification>
+```
+
+## Renewed external subscription
+
+Sent when an external subscription is renewed.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "renewed",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<renewed_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</renewed_external_subscription_notification>
+```
+
+## Canceled external subscription
+
+Sent when an external subscription is canceled.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "canceled",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<canceled_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</canceled_external_subscription_notification>
+```
+
+## Downgraded external subscription
+
+Sent when an external subscription is downgraded.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "downgraded",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<downgraded_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</downgraded_external_subscription_notification>
+```
+
+## Upgraded external subscription
+
+Sent when an external subscription is upgraded.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "upgraded",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<upgraded_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</upgraded_external_subscription_notification>
+```
+
+## Expired external subscription
+
+Sent when an external subscription is expired.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "expired",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<expired_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</expired_external_subscription_notification>
+```
+
+## Extended Renewal for external subscription
+
+Sent when an external subscription's renewal has been extended.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "extended_renewal",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<extended_renewal_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</extended_renewal_external_subscription_notification>
+```
+
+## Failed Renewal for external subscription
+
+Sent when an external subscription's renewal has failed.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "failed_renewal",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<renewal_failure_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</renewal_failure_external_subscription_notification>
+```
+
+## Failed Renewal with Grace Period for external subscription
+
+Sent when an external subscription's renewal has failed with a grace period.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "failed_renewal_with_grace_period",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<renewal_failure_with_grace_period_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</renewal_failure_with_grace_period_external_subscription_notification>
+```
+
+## Reactivated external subscription
+
+Sent when an external subscription is reactivated.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "reactivated",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<reactivated_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</reactivated_external_subscription_notification>
+```
+
+## Resubscribed external subscription
+
+Sent when an external subscription is resubscribed.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "resubscribed",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resubscribed_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</resubscribed_external_subscription_notification>
+```
+
+## Refunded external subscription
+
+Sent when an external subscription is refunded.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "refunded",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<refunded_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</refunded_external_subscription_notification>
+```
+
+## Refund Declined for external subscription
+
+Sent when an external subscription's refund is declined.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "refund_declined",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<refund_declined_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</refund_declined_external_subscription_notification>
+```
+
+## Refund Reversed for external subscription
+
+Sent when an external subscription's refund is reversed.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "refund_reversed",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<refund_reversed_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</refund_reversed_external_subscription_notification>
+```
+
+## Paused external subscription
+
+Sent when an external subscription is paused.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "paused",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<paused_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</paused_external_subscription_notification>
+```
+
+## Revoked external subscription
+
+Sent when an external subscription is revoked.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "revoked",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<revoked_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</revoked_external_subscription_notification>
+```
+
+## Recovered external subscription
+
+Sent when an external subscription is recovered.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "recovered",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<recovered_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</recovered_external_subscription_notification>
+```
+
+## Price change confirmed for external subscription
+
+Sent when an external subscription's price change is confirmed.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "price_change_confirmed",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<price_change_confirmed_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</price_change_confirmed_external_subscription_notification>
+```
+
+## Pause schedule changed for external subscription
+
+Sent when an external subscription's pause schedule is changed.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "pause_schedule_changed",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<pause_schedule_changed_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</pause_schedule_changed_external_subscription_notification>
+```
+
+## Voided for external subscription
+
+Sent when an external subscription is voided.
+
+```json
+{
+  "id": "s0lo0hdfmauc",
+  "object_type": "external_subscription",
+  "site_id": "qpem7fkwr763",
+  "event_type": "voided",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<voided_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</voided_external_subscription_notification>
+```
+
+## Plan changed for external subscription
+
+Sent when an external subscription plan is changed.
+
+```json
+{
+  "id": "urae11jjlnj2",
+  "object_type": "external_subscription",
+  "site_id": "t4z6yzanoe7b",
+  "event_type": "plan_changed",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<plan_changed_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</plan_changed_external_subscription_notification>
+```
+
+## Downgrade canceled for external subscription
+
+Sent when an external subscription downgrade is canceled.
+
+```json
+{
+  "id": "urae11jjlnj2",
+  "object_type": "external_subscription",
+  "site_id": "t4z6yzanoe7b",
+  "event_type": "downgrade_canceled",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<downgrade_canceled_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</downgrade_canceled_external_subscription_notification>
+```
+
+## Consumption requested for external subscription
+
+Sent when there is a consumption request for an external subscription.
+
+```json
+{
+  "id": "urae11jjlnj2",
+  "object_type": "external_subscription",
+  "site_id": "t4z6yzanoe7b",
+  "event_type": "consumption_requested",
+  "event_time": "2022-12-06T22:19:15Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<consumption_requested_external_subscription_notification>
+  <external_subscription>
+    <id>uuid</>
+  </external_subscription>
+  <external_resource>
+    <id></id>
+    <external_object_reference></external_object_reference>
+  </external_resource>
+  <external_product_reference>
+    <id></id>
+    <reference_code></reference_code>
+    <created_at></created_at>
+    <updated_at></updated_at>
+  </external_product_reference>
+</consumption_requested_external_subscription_notification>
+```
+
+## Resubscribed incorrect account for external subscription
+
+Sent when an external subscription receives a resubscribe event and the account code does not match the account associated with the subscription.
+
+```json
+{
+  "external_subscription_id": "urae11jjlnj2",
+  "object_type": "incorrect_account_notice",
+  "site_id": "t4z6yzanoe7b",
+  "event_type": "resubscribed_incorrect_account",
+  "event_time": "2022-12-06T22:19:15Z",
+  "incorrect_account_code": "areo12jmlnj2"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<resubscribed_incorrect_account_incorrect_account_notice_notification>
+  <external_subscription>
+    <id></>
+    <incorrect_account_code></incorrect_account_code>
+  </external_subscription>
+</resubscribed_incorrect_account_incorrect_account_notice_notification>
+```

@@ -1,0 +1,67 @@
+---
+title: Deprecated gateway specific information for invoice numbers
+---
+
+# Overview
+
+### Prerequisites
+
+* Access to one or more supported payment gateways.
+
+### Limitations
+
+* Gateways each have their own character limit for gateway attributes.
+
+# Invoice numbers character limits
+
+Invoice numbers that exceed the character limit for a gateway will be left truncated to meet the maximum character requirement for that gateway.
+
+The following table displays the gateway and the maximum character requirement for that gateway:
+
+| Gateway                        | Max Number of Characters |
+| ------------------------------ | ------------------------ |
+| Mes                            | 17                       |
+| First Data                     | 20                       |
+| Beanstream (Bambora Worldline) | 30                       |
+| SagePay (Opayo/Elavon)         | 40                       |
+| Jack Henry                     | 50                       |
+| Roku                           | 255                      |
+
+Invoice numbers that exceed the character limit for a gateway will be left truncated to meet the maximum character requirement for that gateway.  Some gateways have additional attributes that are set that may use invoice numbers.
+
+The following table displays the gateway and the maximum character requirement for that gateway and the special considerations for gateway attributes:
+
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Gateway
+      </th>
+
+      <th>
+        Max Number of Characters
+      </th>
+
+      <th>
+        Special Considerations
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        Payeezy
+      </td>
+
+      <td>
+        17/50
+      </td>
+
+      <td>
+        Merchant reference will be truncated if over 50 characters.
+        Customer reference set to invoice number, will be left truncated if over 17 characters.
+      </td>
+    </tr>
+  </tbody>
+</Table>

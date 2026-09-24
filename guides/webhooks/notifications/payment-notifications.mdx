@@ -1,0 +1,501 @@
+---
+title: Payment notifications
+---
+
+Payment notifications inform you of transaction lifecycle events—ACH schedules, captures, failures, voids, refunds, and status updates. XML payloads include the full `<transaction>` element; JSON payloads focus on event metadata. Most integrations can ignore these legacy webhooks and rely on subscription- and invoice-level notifications or query transactions via the API.
+
+## Prerequisites and limitations
+
+* XML webhooks embed complete `<transaction>` and `<account>` data; JSON payloads provide only metadata.
+* These are legacy notifications; for account state changes, use subscription or invoice webhooks.
+* Newer integrations should use Recurly’s API to fetch transaction histories rather than process these events.
+* ACH and PayPal eCheck have distinct “scheduled” and “processing” events; they do not apply to card payments.
+
+# Payment Notifications
+
+## Scheduled payment (For Asynchronous Payment Methods)
+
+Sent when Recurly initiates an Asynchronous payment (ACH, SEPA, etc.) from a customer entering payment or the renewal process.
+
+```json
+{
+  "id": "rafhdbbf41mc",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "scheduled",
+  "event_time": "2022-07-27T21:43:53Z",
+  "uuid": "63b068f7d409d4b4478dea4e6aba58ae"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<scheduled_payment_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true">verena</username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true">Company, Inc.</company_name>
+  </account>
+  <transaction>
+    <id>a5143c1d3a6f4a8287d0e2cc1d4c0427</id>
+    <invoice_id>1974a09kj90s0789dsf099798326881c</invoice_id>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2009-11-22T13:10:38Z</date>
+    <amount_in_cents type="integer">1000</amount_in_cents>
+    <status>scheduled</status>
+    <message>Bogus Gateway: Forced success</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code=""></cvv_result>
+    <avs_result code=""></avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">true</voidable>
+    <refundable type="boolean">true</refundable>
+  </transaction>
+</scheduled_payment_notification>
+```
+
+## Processing payment (Only for ACH and PayPal eCheck payments)
+
+Sent when an ACH or PayPal eCheck payment moves from the scheduled state to the processing state. An ACH payment enters a processing state when it has been submitted to the ACH bank network by Check Gateway. A PayPal eCheck payment moves to processing state when PayPal has confirmed that the transaction is "pending".
+
+```json
+{
+  "id": "rafhdbbf41mc",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "processing",
+  "event_time": "2022-07-27T21:43:53Z",
+  "uuid": "63b068f7d409d4b4478dea4e6aba58ae"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<processing_payment_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true">verena</username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true">Company, Inc.</company_name>
+  </account>
+  <transaction>
+    <id>a5143c1d3a6f4a8287d0e2cc1d4c0427</id>
+    <invoice_id>1974a09kj90s0789dsf099798326881c</invoice_id>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2009-11-22T13:10:38Z</date>
+    <amount_in_cents type="integer">1000</amount_in_cents>
+    <status>processing</status>
+    <message>Bogus Gateway: Forced success</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code=""></cvv_result>
+    <avs_result code=""></avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">true</voidable>
+    <refundable type="boolean">true</refundable>
+  </transaction>
+</processing_payment_notification>
+```
+
+## Successful payment
+
+Sent when a payment is successfully approved, or updated in certain cases (GoCardless and Ebanx).
+
+```json
+{
+  "id": "rafhdbbf41mc",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "succeeded",
+  "event_time": "2022-07-27T21:43:53Z",
+  "uuid": "63b068f7d409d4b4478dea4e6aba58ae"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<successful_payment_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true">verena</username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true">Company, Inc.</company_name>
+  </account>
+  <transaction>
+    <id>a5143c1d3a6f4a8287d0e2cc1d4c0427</id>
+    <invoice_id>1974a09kj90s0789dsf099798326881c</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2009-11-22T13:10:38Z</date>
+    <amount_in_cents type="integer">1000</amount_in_cents>
+    <status>success</status>
+    <message>Bogus Gateway: Forced success</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code=""></cvv_result>
+    <avs_result code=""></avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">true</voidable>
+    <refundable type="boolean">true</refundable>
+  </transaction>
+</successful_payment_notification>
+```
+
+## Manual payment
+
+Sent when a manual offline payment is recorded.
+
+```json
+{
+  "id": "rafhdbbf41mc",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "succeeded",
+  "event_time": "2022-07-27T21:43:53Z",
+  "uuid": "63b068f7d409d4b4478dea4e6aba58ae"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<successful_payment_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true">verena</username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true">Company, Inc.</company_name>
+  </account>
+  <transaction>
+    <id>a5143c1d3a6f4a8287d0e2cc1d4c0427</id>
+    <invoice_id>1974a09kj90s0789dsf099798326881c</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2009-11-22T13:10:38Z</date>
+    <amount_in_cents type="integer">1000</amount_in_cents>
+    <status>success</status>
+    <message>Bogus Gateway: Forced success</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code=""></cvv_result>
+    <avs_result code=""></avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">true</voidable>
+    <refundable type="boolean">true</refundable>
+    <manually_entered type="boolean">true</manually_entered>
+    <payment_method>credit_card</payment_method>
+  </transaction>
+</successful_payment_notification>
+```
+
+## Failed payment
+
+Sent when a payment attempt is declined by the payment gateway.
+
+```json
+{
+  "id": "ra93x2i8g69t",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "failed",
+  "event_time": "2022-07-27T00:17:45Z",
+  "uuid": "63abcf806e29cbfb3ec9c84e658777be"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<failed_payment_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true">verena</username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true">Company, Inc.</company_name>
+  </account>
+  <transaction>
+    <id>a5143c1d3a6f4a8287d0e2cc1d4c0427</id>
+    <invoice_id>8fjk3sd7j90s0789dsf099798jkliy65</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2009-11-22T13:10:38Z</date>
+    <gateway>cybersource</gateway>
+    <amount_in_cents type="integer">1000</amount_in_cents>
+    <status>Declined</status>
+    <message>This transaction has been declined</message>
+    <gateway_error_codes nil="true"></gateway_error_codes>
+    <failure_type>Declined by the gateway</failure_type>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code=""></cvv_result>
+    <avs_result code=""></avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">false</voidable>
+    <refundable type="boolean">false</refundable>
+  </transaction>
+</failed_payment_notification>
+```
+
+## Successful refund
+
+Sent when you refund an amount through the API or admin interface. Failed refund attempts do not generate a notification.
+
+```json
+{
+  "id": "rafhoo0hbzff",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "refunded",
+  "event_time": "2022-07-27T21:45:37Z",
+  "uuid": "63b06a9098839d7b45a18443b6b395a0"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<successful_refund_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <transaction>
+    <id>2c7a2e30547e49869efd4e8a44b2be34</id>
+    <invoice_id>ffc64d71d4b5404e93f13aac9c63b007</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>credit</action>
+    <date type="datetime">2010-10-06T20:37:55Z</date>
+    <amount_in_cents type="integer">235</amount_in_cents>
+    <status>success</status>
+    <message>Bogus Gateway: Forced success</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code=""></cvv_result>
+    <avs_result code=""></avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">true</voidable>
+    <refundable type="boolean">false</refundable>
+  </transaction>
+</successful_refund_notification>
+```
+
+## Void payment
+
+Sent when you void a successfully captured payment before it settles. Payments can only be voided before the funds settle into your merchant account.
+
+```json
+{
+  "id": "radnhmaoszxc",
+  "object_type": "payment",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "voided",
+  "event_time": "2022-07-27T15:39:17Z",
+  "uuid": "63af16e06d659f949c37cc4f8cb2c5d0"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<void_payment_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <transaction>
+    <id>4997ace0f57341adb3e857f9f7d15de8</id>
+    <invoice_id>ffc64d71d4b5404e93f13aac9c63b007</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2010-10-05T23:00:50Z</date>
+    <amount_in_cents type="integer">235</amount_in_cents>
+    <status>void</status>
+    <message>Test Gateway: Successful test transaction</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code="M">Match</cvv_result>
+    <avs_result code="D">Street address and postal code match.</avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">false</voidable>
+    <refundable type="boolean">false</refundable>
+  </transaction>
+</void_payment_notification>
+```
+
+## Fraud info updated
+
+If you are using Kount Direct and manually reviewing transactions for fraud, a `fraud_info_updated_notification` is sent. This notification is sent when we receive an ENS from Kount. More information on Kount ENS is available [here](/guides/partner-integrations/accounting-fraud-and-taxes/kount). This notification is only used for XML webhooks.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<fraud_info_updated_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true">verena</username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true">Company, Inc.</company_name>
+  </account>
+  <transaction>
+    <id>a5143c1d3a6f4a8287d0e2cc1d4c0427</id>
+    <invoice_id>8fjk3sd7j90s0789dsf099798jkliy65</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>41e4e03e10be199252613d424290c5c6</subscription_id>
+    <subscription_ids type="array">
+      <subscription_id>41e4e03e10be199252613d424290c5c6</subscription_id>
+    </subscription_ids>
+    <action>purchase</action>
+    <date type="datetime">2017-10-20T22:39:35Z</date>
+    <gateway>authorize</gateway>
+    <payment_method>credit_card</payment_method>
+    <amount_in_cents type="integer">1000</amount_in_cents>
+    <status>success</status>
+    <message>This transaction has been approved.</message>
+    <gateway_error_codes>1</gateway_error_codes>
+    <failure_type nil="true"></failure_type>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code=""></cvv_result>
+    <avs_result code=""></avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <billing_phone nil="true"></billing_phone>
+    <billing_postal></billing_postal>
+    <billing_country></billing_country>
+    <test type="boolean">true</test>
+    <voidable type="boolean">true</voidable>
+    <refundable type="boolean">true</refundable>
+  </transaction>
+</fraud_info_updated_notification>
+```
+
+## Transaction status updated
+
+Transactions will occasionally receive status updates from the payment gateway due to reasons such as gateway timeouts or asynchronous status updates. For these cases, this notification will be sent to provide the updated transaction status.
+
+```json
+{
+  "id": "rafhdbbf41mc",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "transaction_status_updated",
+  "event_time": "2022-07-27T21:43:53Z",
+  "uuid": "63b068f7d409d4b4478dea4e6aba58ae"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction_status_updated_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <transaction>
+    <id>4997ace0f57341adb3e857f9f7d15de8</id>
+    <invoice_id>ffc64d71d4b5404e93f13aac9c63b007</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2010-10-05T23:00:50Z</date>
+    <amount_in_cents type="integer">235</amount_in_cents>
+    <status>void</status>
+    <message>Test Gateway: Successful test transaction</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code="M">Match</cvv_result>
+    <avs_result code="D">Street address and postal code match.</avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">false</voidable>
+    <refundable type="boolean">false</refundable>
+  </transaction>
+</transaction_status_updated_notification>
+```
+
+## Transaction authorized
+
+Sent when you successfully authorize (when performing separate authorize and capture payments) a payment. Payments that are successfully authorized must be captured in order to settle at the gateway. Uncaptured authorizations will expire within 7-30 days depending on the brand and cannot be captured.
+
+```json
+{
+  "id": "rafhdbbf41mc",
+  "object_type": "payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "authorized",
+  "event_time": "2022-07-27T21:43:53Z",
+  "uuid": "63b068f7d409d4b4478dea4e6aba58ae"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction_authorized_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <transaction>
+    <id>4997ace0f57341adb3e857f9f7d15de8</id>
+    <invoice_id>ffc64d71d4b5404e93f13aac9c63b007</invoice_id>
+    <invoice_number type="integer">2059</invoice_number>
+    <subscription_id>1974a098jhlkjasdfljkha898326881c</subscription_id>
+    <action>purchase</action>
+    <date type="datetime">2010-10-05T23:00:50Z</date>
+    <amount_in_cents type="integer">235</amount_in_cents>
+    <status>void</status>
+    <message>Test Gateway: Successful test transaction</message>
+    <reference></reference>
+    <source>subscription</source>
+    <cvv_result code="M">Match</cvv_result>
+    <avs_result code="D">Street address and postal code match.</avs_result>
+    <avs_result_street></avs_result_street>
+    <avs_result_postal></avs_result_postal>
+    <test type="boolean">true</test>
+    <voidable type="boolean">false</voidable>
+    <refundable type="boolean">false</refundable>
+  </transaction>
+</transaction_authorized_notification>
+```

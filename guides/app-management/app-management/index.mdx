@@ -1,0 +1,125 @@
+---
+title: App Management
+---
+
+<div className="rp-page">
+  <div className="rp-overview">App Management gives you a complete picture of your subscription business by combining analytics across the app stores and the web through a simple, automated data sync. It also streamlines entitlement checking and centralizes all of your subscription lifecycle notifications — so you can see and act on every event, wherever the subscription lives.</div>
+  <div className="rp-cost">
+    <strong>Additional cost</strong><br/>
+    This feature requires an additional cost. Contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> for pricing details.
+  </div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#how-app-management-works"><span className="rp-toc-num">3</span>How App Management works</a>
+    <a className="rp-toc-pill" href="#helpful-resources"><span className="rp-toc-num">4</span>Helpful resources</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">App Management combines analytics across the Apple App Store, Google Play Store, and web through an automated data sync — giving you one view of your subscription business. It also streamlines entitlement checking and centralizes your subscription lifecycle notifications, so you're not stitching together app store integrations yourself.</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-thumbs-up" aria-hidden="true"></i> Sell and manage Apple subscriptions through Recurly</strong>You can also sell and manage Apple App Store subscriptions directly through Recurly. <a href="/guides/app-management/sell-and-manage-apple-subscriptions-through-recurly" target="_blank">Learn more here</a>.</div>
+</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+    <strong>Grow subscription revenue</strong>
+    <span>Uncover new acquisition and retention insights and opportunities through cross-platform analytics.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-users" aria-hidden="true"></i></div>
+    <strong>Enhance the subscriber experience</strong>
+    <span>Gain a holistic, cross-platform view of subscribers and build an optimal communication and engagement strategy.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-gears" aria-hidden="true"></i></div>
+    <strong>Increase operational efficiency</strong>
+    <span>Develop new cross-platform subscription processes and workflows through robust APIs and webhooks.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-clock" aria-hidden="true"></i></div>
+    <strong>Save development time</strong>
+    <span>Eliminate the need to build and maintain app store data integrations, freeing up scarce web and mobile engineering resources.</span>
+  </div>
+</div>
+
+# How App Management works
+
+At a high level, Recurly listens to real-time notifications from the Apple App Store and Google Play Store, processes subscription-related events, and gives you a clear view into the lifecycle of every mobile app subscription. The walkthrough below covers how it works and the key technical requirements.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Recurly does not require you to implement an SDK within your mobile app.</div>
+</div>
+
+## 1. Uniquely identifying your customers
+
+For Recurly to properly associate a subscription event from Apple or Google, it needs a unique ID for each customer. Recurly looks for that ID in the notification from Apple or Google, so it's important that these unique IDs are built into the subscription purchasing workflows in your mobile apps.
+
+<ul className="rp-list">
+  <li>For Apple subscriptions, <a href="https://developer.apple.com/documentation/appstoreserverapi/appaccounttoken" target="_blank">appAccountToken</a> is the unique ID. To learn how to set this UUID, see Apple's <a href="https://developer.apple.com/documentation/storekit/product/purchaseoption/3749440-appaccounttoken" target="_blank">appAccountToken</a> documentation.</li>
+  <li>For Google subscriptions, <a href="https://developers.google.com/android-publisher/api-ref/rest/v3/purchases.subscriptionsv2#externalaccountidentifiers" target="_blank">obfuscatedExternalAccountId</a> is the unique ID. To set it within your billing flow, see Google's <a href="https://developer.android.com/reference/com/android/billingclient/api/BillingFlowParams.Builder#setObfuscatedAccountId(java.lang.String)" target="_blank">setObfuscatedAccountId method</a> and the <a href="https://developers.google.com/android-publisher/api-ref/rest/v3/purchases.subscriptionsv2#externalaccountidentifiers" target="_blank">ExternalAccountIdentifiers</a> reference.</li>
+  <li>To conform with Recurly accounts, the unique ID must be 50 characters or less.</li>
+  <li>Once established for a customer, the unique ID should not change.</li>
+</ul>
+
+To help you decipher that unique ID in Recurly and see details like name and email, Recurly needs you to share that contact information once per customer. There are a few ways to do this, depending on your preferred workflow.
+
+### Scenario 1: A brand new customer subscribes through your mobile app
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Most common</strong>This is the most common scenario.</div>
+</div>
+
+Recurly isn't yet aware of the new customer and doesn't have an account for them, so you have two options — pick whichever fits your workflow best.
+
+<div className="rp-card">
+
+#### Option 1: Create the account before purchase
+
+Before the customer purchases, POST to <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_account" target="_blank">Create an account</a> using the unique ID as the `code`, and share details like name and email. When Recurly receives a notification for that unique ID, the subscription activity is automatically associated with the correct account and customer details are immediately available.
+
+If a requirement prevents you from using the unique ID (`appAccountToken` for Apple, `obfuscatedExternalAccountId` for Google) as the `code`, you can still use your own naming convention (for example, `acme|UUID`) for the `code`. In that case, you must provide the unique ID as `external_account_code` within `external_accounts` when you POST — this step ensures Recurly can match incoming notifications to the correct account.
+
+</div>
+
+<div className="rp-card">
+
+#### Option 2: Update the account after purchase
+
+After the customer purchases, PUT to <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/update_account" target="_blank">Update an account</a> using the unique ID as the account code for `account_id`, and share details like name and email — for example, `PUT /accounts/code-UNIQUE_ID` with those details. The outcome is the same as Option 1, because Recurly automatically creates a customer account when the first subscription purchase occurs.
+
+This option assumes the unique ID (`appAccountToken` for Apple, `obfuscatedExternalAccountId` for Google) is the `account_id`. It doesn't work if you use a different convention for your Recurly account.
+
+</div>
+
+### Scenario 2: An existing web customer purchases a mobile app subscription
+
+This is typically a temporary scenario as a customer transitions from a web subscription to a mobile app subscription. Recurly already has an account for this customer, so to connect their mobile app subscription to it, POST to <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_account_external_account" target="_blank">Create an external account</a> to associate their unique ID with the existing account. Otherwise, the customer may appear in Recurly under two different accounts.
+
+Assuming the customer shouldn't end up with two subscriptions, you'll likely want to cancel the web-based subscription with a PUT to <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/cancel_subscription" target="_blank">Cancel a subscription</a>.
+
+Recurly is flexible and offers several API endpoints to support your workflow.
+
+## 2. Receiving real-time notifications
+
+After you complete the <a href="/guides/app-management/app-management/step-by-step-process" target="_blank">step-by-step process</a> to connect and configure App Management, Recurly begins receiving real-time notifications about subscription activity in your mobile apps. This keeps Recurly aware of important events — like a new subscription purchase or a failed renewal. Depending on the notification, Recurly uses the provided API key to pull additional information for a complete picture of the event.
+
+## 3. Updating Recurly with subscription lifecycle activity
+
+For each event, Recurly maps the subscription to the corresponding customer account. For example, when a paid renewal event arrives, Recurly records that renewal for the correct account and associates a paid invoice showing the amount.
+
+## 4. Notifying you for subsequent actions
+
+Immediately after processing the notification, Recurly triggers the respective webhook to your endpoint. This lets you take any follow-up action — such as emailing your customer — based on that webhook notification.
+
+Continue through the subpages to see how to set up App Management and learn how to use it day to day.
+
+# Helpful resources
+
+To hear more about App Management and see a walkthrough, watch these <a href="https://recurly.com/resources/webinar/app-management-webinar-series/" target="_blank">two on-demand webinars</a>.

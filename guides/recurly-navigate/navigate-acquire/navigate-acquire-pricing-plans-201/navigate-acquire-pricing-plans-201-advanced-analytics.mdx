@@ -1,0 +1,514 @@
+---
+title: 'Pricing & plans 201: Advanced analytics'
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* HOST-THEME BACKGROUND OVERRIDE */
+body { background: #ffffff !important; }
+
+/* ── GLOBAL CSS IMMUNITY BLOCK ── */
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+/* FA6 font restore — (0,0,2,0) beats wildcard (0,0,1,0) */
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+
+/* ── NAVIGATE MASTER ARMOR ── */
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a,
+.rc-guide a:link,
+.rc-guide a:visited,
+.rc-guide a:active {
+  color: #008CFF !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: unset !important;
+  border-bottom: 0 !important;
+}
+.rc-guide a:hover {
+  color: #0067BE !important;
+  text-decoration: underline !important;
+  text-decoration-color: #008CFF !important;
+  text-underline-offset: 2px !important;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+.rc-guide {
+  --yellow:     #FFD706;
+  --blue:       #008CFF;
+  --blue-tint1: #D5EAFF;
+  --blue-tint2: #96C8FF;
+  --offblack:   #0D0D0B;
+  --darkgray:   #32312D;
+  --gray:       #807D75;
+  --lightgray:  #D1CFC4;
+  --brightgray: #F2F1EA;
+  --offwhite:   #FCFBF7;
+  --warning-fg: #FFD706;
+  --warning-bg: #FFFECB;
+  --error-fg:   #FF5126;
+  --error-bg:   #FFEEE9;
+  --success-fg: #5DC32E;
+  --success-bg: #EFFAEA;
+  --info-fg:    #008CFF;
+  --info-bg:    #E5F3FF;
+  font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+  color: #32312D !important;
+  background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+
+/* FA icon helpers */
+.rc-fa-section { color: var(--offblack); font-size: 1rem; }
+.rc-fa-announce { color: var(--offblack); font-size: 1rem; flex-shrink: 0; }
+.rc-fa-dark { color: #FFD706 !important; font-size: 1.3rem; display: block; margin-bottom: 10px; }
+
+/* Layout */
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* Inline Body Links */
+.rm-Markdown.markdown-body .rc-guide a.rc-inline-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-inline-link {
+  color: #008CFF !important; font-weight: 600; border-bottom: 0 !important; text-decoration: none !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-inline-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-inline-link:hover {
+  color: #0067BE !important; text-decoration: underline !important; text-decoration-color: #008CFF !important; text-underline-offset: 2px !important;
+}
+
+/* Back link */
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link {
+  color: #807D75 !important; font-weight: 700; font-size: .9rem;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: color .2s; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; text-decoration: none !important; }
+
+/* Announcement bar */
+.rc-announce-bar {
+  display: none; background: var(--yellow); color: var(--offblack);
+  align-items: center; justify-content: space-between;
+  padding: 10px 20px; font-size: .88rem; font-weight: 600;
+  border-radius: 10px; margin-bottom: 16px; gap: 12px; line-height: 1.4;
+}
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-inner { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link {
+  color: #0D0D0B !important; font-weight: 800; white-space: nowrap;
+  padding: 4px 12px; background: rgba(0,0,0,0.10); border-radius: 6px;
+  transition: background 0.2s; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { background: rgba(0,0,0,0.20); color: #0D0D0B !important; text-decoration: none !important; }
+
+/* Hero */
+.rc-hero {
+  background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)),
+    url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center;
+  background-color: var(--offblack); background-size: cover;
+  color: #fff; padding: 52px 40px 48px; text-align: center;
+  border-radius: 16px; margin-bottom: 0;
+}
+.rc-lp-pillar-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,215,6,0.20); border: 1px solid rgba(255,215,6,0.45);
+  color: #FFD706; font-size: .75rem; font-weight: 800;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: #FCFBF7; margin: 0; }
+.rc-hero > p { font-size: 1rem; max-width: 640px; margin: 0 auto; color: #D1CFC4; line-height: 1.6; }
+
+/* Nav */
+details.rc-sticky-nav-wrap {
+  position: relative; background-color: var(--yellow);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 24px 0 48px 0; border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08); overflow: hidden;
+}
+details.rc-sticky-nav-wrap > summary {
+  list-style: none; display: flex; align-items: center;
+  padding: 15px 24px; cursor: pointer; user-select: none;
+}
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+.rc-nav-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .88rem; letter-spacing: 0.6px; text-transform: uppercase; color: var(--offblack); }
+.rc-nav-chevron { font-size: .72rem; color: var(--offblack); opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link {
+  color: #0D0D0B !important; font-weight: 700; font-size: .83rem; letter-spacing: 0.4px;
+  text-transform: uppercase; padding: 7px 14px; border-radius: 7px; transition: all .18s;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; text-decoration: none !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--offblack); color: var(--yellow); font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; text-decoration: none !important; }
+
+/* Sections */
+.rc-lp-section { margin-bottom: 48px; }
+.rc-lp-section h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 20px; color: var(--offblack); display: flex; align-items: center; gap: 12px; }
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: var(--lightgray); }
+.rc-lp-section p { font-size: .95rem; line-height: 1.65; color: var(--darkgray); margin: 0 0 16px; }
+.rc-lp-section p:last-child { margin-bottom: 0; }
+
+/* Callouts */
+.rc-callout { border-radius: 10px; padding: 16px 20px; margin: 20px 0; display: flex; gap: 14px; align-items: flex-start; }
+.rc-callout + .rc-callout { margin-top: 12px; }
+.rc-callout-icon { font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; }
+.rc-callout-body { flex: 1; }
+.rc-callout-body > strong { font-size: .88rem; font-weight: 800; display: block; margin-bottom: 4px; }
+.rc-callout-body p { font-size: .9rem; line-height: 1.55; margin: 0; color: var(--darkgray); }
+.rc-callout-tip { background: var(--brightgray); border-left: 4px solid var(--offblack); }
+.rc-callout-tip .rc-callout-body > strong { color: var(--offblack); }
+.rc-callout-warning { background: var(--warning-bg); border-left: 4px solid var(--warning-fg); }
+.rc-callout-warning .rc-callout-body > strong { color: var(--darkgray); }
+.rc-callout-caution { background: var(--error-bg); border-left: 4px solid var(--error-fg); }
+.rc-callout-caution .rc-callout-body > strong { color: var(--darkgray); }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide .rc-callout-body a { color: #008CFF !important; font-weight: 600; border-bottom: 0 !important; text-decoration: none !important; }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide .rc-callout-body a:hover { color: #0067BE !important; text-decoration: underline !important; text-decoration-color: #008CFF !important; text-underline-offset: 2px !important; }
+
+/* Export table */
+.rc-field-table { width: 100%; border-collapse: collapse; margin: 20px 0 32px; font-size: .88rem; }
+.rc-field-table th { background: var(--offblack); color: var(--yellow); font-size: .72rem; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+.rc-field-table td { padding: 12px 14px; border-bottom: 1px solid var(--brightgray); color: var(--darkgray); vertical-align: top; line-height: 1.5; }
+.rc-field-table tr:last-child td { border-bottom: none; }
+.rc-field-table tr:nth-child(even) td { background: var(--offwhite); }
+.rc-field-table td:first-child { font-weight: 700; color: var(--offblack); white-space: nowrap; }
+.rc-field-table td code { background: var(--brightgray); color: var(--offblack); padding: 1px 6px; border-radius: 4px; font-size: .8rem; font-family: monospace; }
+
+/* Card grid */
+.rc-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 32px; }
+.rc-feature-card { background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 8px; transition: all .2s ease; }
+.rc-feature-card:hover { border-color: #FFD706; box-shadow: 0 4px 16px rgba(255,215,6,0.15); transform: translateY(-2px); }
+.rc-feature-icon { font-size: 1.4rem; line-height: 1; color: var(--offblack); }
+.rc-feature-card h4 { font-size: .98rem; font-weight: 800; color: var(--offblack); margin: 0; }
+.rc-feature-card p { font-size: .88rem; color: var(--gray); line-height: 1.55; margin: 0; flex-grow: 1; }
+.rc-feature-tag { display: inline-block; margin-top: 4px; padding: 3px 10px; border-radius: 20px; font-size: .7rem; font-weight: 700; letter-spacing: .5px; background: var(--offblack); color: var(--yellow); width: fit-content; }
+
+/* Path nav */
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 16px; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: var(--lightgray); letter-spacing: .5px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-prev { background: transparent; color: #0D0D0B !important; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; border: 2px solid #D1CFC4 !important; border-bottom: 2px solid #D1CFC4 !important; transition: all .2s; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-prev:hover { border: 2px solid #0D0D0B !important; border-bottom: 2px solid #0D0D0B !important; text-decoration: none !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path { background: var(--yellow); color: #0D0D0B !important; padding: 13px 28px; border-radius: 10px; font-weight: 800; font-size: .95rem; display: inline-flex; align-items: center; gap: 8px; transition: all .2s; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover { background: transparent !important; color: #0D0D0B !important; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; text-decoration: none !important; }
+
+/* OH CTA */
+.rc-oh-cta { background: #0D0D0B !important; border: 2px solid #FFD706 !important; border-radius: 14px; padding: 32px 36px; margin: 32px 0; }
+.rc-oh-cta h4 { color: #FFD706 !important; font-size: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px; display: block; }
+.rc-oh-cta p { color: #D1CFC4 !important; font-size: .95rem; line-height: 1.6; margin: 0 0 20px; }
+.rc-oh-cta p strong { color: #FFFDF2 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-oh-btn { background: #FFD706 !important; color: #0D0D0B !important; padding: 12px 24px; border-radius: 10px; font-weight: 800; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; transition: all .2s; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-oh-btn:hover { background: transparent !important; color: #FFD706 !important; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; text-decoration: none !important; }
+
+/* Resources */
+.rc-resources { background: var(--brightgray); border-left: 4px solid var(--yellow); border-radius: 10px; padding: 20px 24px; margin: 32px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--gray); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link { color: #807D75 !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: #D1CFC4 !important; font-weight: 500; font-size: .88rem; transition: all .18s; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover { color: #0D0D0B !important; text-decoration-color: #FFD706 !important; }
+
+/* Footer */
+.rc-footer-nav { border-top: 1px solid var(--lightgray); padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: var(--darkgray); background: var(--brightgray); padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link { color: #807D75 !important; font-weight: 600; font-size: .88rem; transition: color .2s ease; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; text-decoration: none !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--brightgray); }
+
+/* Responsive */
+@media(max-width:1300px) {
+  .rc-lp-nav { justify-content: center !important; gap: 12px; }
+  .rc-lp-nav-indicator { width: 100% !important; text-align: center; }
+}
+@media(max-width:768px){
+  .rc-content-wrap { padding: 0 20px; }
+  .rc-top-nav { padding: 16px 20px; }
+  .rc-hero { padding: 36px 20px 36px; }
+  .rc-lp-hero-title h1 { font-size: 1.8rem; }
+  .rc-field-table { font-size: .8rem; }
+  .rc-card-grid { grid-template-columns: 1fr; }
+  .rc-oh-cta { padding: 24px 20px; }
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-prev,
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-path {
+    padding: 10px 16px !important;
+    font-size: 0.82rem !important;
+  }
+}
+</style>
+
+<div class="rc-guide">
+
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire" class="rc-back-link">← Back to Acquire</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <!-- Announcement bar (hidden) -->
+    <div class="rc-announce-bar" id="rcAnnounce">
+      <div class="rc-announce-inner">
+        <i class="fa-regular fa-calendar-days rc-fa-announce"></i>
+        <strong>Upcoming:</strong> Join our CSMs for a live pricing Q&amp;A — bring your advanced billing questions.
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-announce-link">Register now →</a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/d92be816a9e838fb46356e2547d5f8bb663dddb7b4a77cac37434efbd825e216-Acquire-icon-white.png" alt="Acquire"> Acquire · Pricing &amp; Plans 201
+      </div>
+      <div class="rc-lp-hero-title">
+        <h1>Advanced analytics</h1>
+      </div>
+      <p>Recurly's built-in dashboards give you a solid operational picture. Advanced analytics is about getting your data out of Recurly and into the systems where you can ask harder questions — by segment, by cohort, by pricing architecture.</p>
+    </div>
+
+    <!-- Nav — Page 6 active -->
+    <details class="rc-sticky-nav-wrap" open>
+      <summary>
+        <span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span>
+      </summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201" class="rc-sticky-link">Path Overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-segmentation" class="rc-sticky-link"><span class="rc-step-badge">1</span> Price segmentation</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-hierarchy" class="rc-sticky-link"><span class="rc-step-badge">2</span> Account hierarchy</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-usage-billing" class="rc-sticky-link"><span class="rc-step-badge">3</span> Usage billing</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-models" class="rc-sticky-link"><span class="rc-step-badge">4</span> Advanced pricing models</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-currency" class="rc-sticky-link"><span class="rc-step-badge">5</span> Advanced currency</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-analytics" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> Advanced analytics
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-review" class="rc-sticky-link"><span class="rc-step-badge">7</span> Review &amp; resources</a>
+        
+      </div></div></div>
+    </details>
+
+    <!-- What the built-in dashboards cover -->
+    <div class="rc-lp-section" id="built-in">
+      <h2><i class="fa-solid fa-gauge rc-fa-section"></i> What the built-in analytics cover</h2>
+      <p>Recurly's analytics dashboards are available on all plans and provide a solid operational view of your subscription business — MRR, churn, active subscribers, billings, recovered revenue, and more. The built-in benchmark reports let you compare your key metrics against industry peers.</p>
+      <p>These dashboards answer the day-to-day operational questions well. Where they have limits is in custom segmentation: you can't filter by price segment code, break down churn by account hierarchy level, or slice retention by usage billing tier from the standard dashboards alone. That's where exports and Explore come in.</p>
+    </div>
+
+    <!-- Data exports -->
+    <div class="rc-lp-section" id="exports">
+      <h2><i class="fa-solid fa-file-arrow-down rc-fa-section"></i> Data exports</h2>
+      <p>Recurly's data exports are available on all plans and are the primary mechanism for getting your billing data into an external BI tool, data warehouse, or spreadsheet. Manual exports are accessible from <strong>Analytics → Exports</strong> in the admin console. Automated export configurations are managed in the Integrations section (requires Integrations role).</p>
+      <p><strong>Note</strong>: Recurly has a native Snowflake integration that pushes data directly into a Snowflake account with hourly or daily refresh — which eliminates the need for custom API pipelines for Snowflake users. Learn more here: <a href="https://docs.recurly.com/recurly-subscriptions/docs/snowflake-integration" target="_blank" rel="noopener noreferrer" class="rc-inline-link rp-anchor">Recurly Docs: Snowflake integration</a>.</p>
+
+      <p>The exports most relevant to the features covered in this course:</p>
+
+      <table class="rc-field-table">
+        <thead>
+          <tr>
+            <th>Export</th>
+            <th>Key fields for advanced use cases</th>
+            <th>Most useful for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Subscriptions</td>
+            <td><code>price_segment_code</code>, <code>price_segment_id</code>, <code>plan_code</code>, <code>account_code</code></td>
+            <td>Segment performance analysis, A/B price test measurement, cohort tracking</td>
+          </tr>
+          <tr>
+            <td>Invoices</td>
+            <td>Line item detail, billing account vs. originating account for hierarchy setups</td>
+            <td>Revenue reconciliation, account hierarchy billing audit</td>
+          </tr>
+          <tr>
+            <td>Transactions</td>
+            <td>Gateway code, currency, card type, decline codes</td>
+            <td>Per-gateway performance by currency, decline pattern analysis by region</td>
+          </tr>
+          <tr>
+            <td>Accounts</td>
+            <td>Parent account code, bill-to configuration</td>
+            <td>Account hierarchy mapping, enterprise account reporting</td>
+          </tr>
+          <tr>
+            <td>Adjustments</td>
+            <td>Usage charges, one-time charges, credits</td>
+            <td>Usage billing audit, hybrid pricing reconciliation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="rc-callout rc-callout-tip">
+        <div class="rc-callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="rc-callout-body">
+          <strong>Automate exports via the API</strong>
+          <p>All exports available in the admin console are also accessible via the Recurly API, making it straightforward to schedule regular pulls into your data warehouse. See the Automated Exports documentation for the API endpoint and available filters.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Explore -->
+    <div class="rc-lp-section" id="explore">
+      <h2><i class="fa-solid fa-magnifying-glass-chart rc-fa-section"></i> Analytics Explore</h2>
+      <p>Explore is Recurly's in-platform custom report builder — available on the Elite plan only. It lets you combine dimensions and measures across your Recurly data to build reports that the standard dashboards don't surface. Explore now also includes a Workbook Agent — an AI-assisted feature where users can ask plain-language questions to build queries.</p>
+
+      <div class="rc-callout rc-callout-warning">
+        <div class="rc-callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="rc-callout-body">
+          <strong>Elite plan only — requires Analytics user role</strong>
+          <p>Explore is not available on Starter or Pro plans. Access also requires the Analytics user role permission on your Recurly account. If you're on a lower plan and want access, contact your Recurly account manager about upgrade options.</p>
+        </div>
+      </div>
+
+      <div class="rc-card-grid">
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-table-cells-large"></i></div>
+          <h4>Custom dimensions and measures</h4>
+          <p>Select any combination of dimensions (plan code, segment code, account type, currency, geography) and measures (MRR, transaction count, churn rate) to build a report specific to your question. Explore offers predefined data views to accelerate common report types.</p>
+          <span class="rc-feature-tag">Report builder</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-tag"></i></div>
+          <h4>Price segment reporting</h4>
+          <p>The <code>price_segment_code</code> field is available as a dimension in Explore, enabling you to filter and compare subscription performance by segment directly in the platform. This is the primary in-Recurly mechanism for measuring segment-level results without exporting to an external tool.</p>
+          <span class="rc-feature-tag">Segment analysis</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-credit-card"></i></div>
+          <h4>Transaction and credit card detail</h4>
+          <p>Explore includes transaction and credit card data views not available in the standard dashboards — useful for analyzing gateway performance by currency, decline patterns, and payment method mix across your subscriber base.</p>
+          <span class="rc-feature-tag">Payment analytics</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-file-export"></i></div>
+          <h4>Export Explore results</h4>
+          <p>Any Explore report can be exported as a CSV for use in external BI tools. For recurring needs, combine the Explore report design with automated exports via the API to keep your BI pipeline current without manual steps.</p>
+          <span class="rc-feature-tag">BI integration</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- External BI -->
+    <div class="rc-lp-section" id="external-bi">
+      <h2><i class="fa-solid fa-database rc-fa-section"></i> Connecting Recurly data to external BI</h2>
+      <p>For most mature subscription businesses, Recurly is one data source among several — alongside product analytics, CRM, and customer support data. The standard pattern for external BI integration is to pull Recurly export data into a data warehouse (Snowflake, BigQuery, Redshift) via scheduled API exports or a data integration tool, then join it with other data sources for cross-functional analysis.</p>
+
+      <div class="rc-callout rc-callout-tip">
+        <div class="rc-callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="rc-callout-body">
+          <strong>Key join fields for cross-source analysis</strong>
+          <p>When joining Recurly export data to external sources, the most reliable join keys are <code>account_code</code> (Recurly's primary customer identifier), <code>uuid</code> (the subscription identifier in the Subscriptions export — also referred to as <code>subscription_uuid</code> in related exports like Subscription Add-ons and Subscription History), and <code>plan_code</code>. For price segment analysis, <code>price_segment_code</code> is the field to carry into your warehouse — it's present in the Subscriptions export and is available in Explore (Invoices and Transactions views).</p>
+        </div>
+      </div>
+
+      <div class="rc-callout rc-callout-warning">
+        <div class="rc-callout-icon"><i class="fa-solid fa-circle-info"></i></div>
+        <div class="rc-callout-body">
+          <strong>Recurly exports use site timezone, not UTC</strong>
+          <p>Export data uses the timezone configured in your Recurly site settings — not UTC. If your data warehouse stores timestamps in UTC (as most do), account for the timezone offset when loading Recurly export data to avoid date-boundary discrepancies in your reports.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OH CTA -->
+    <div class="rc-oh-cta">
+      <h4><i class="fa-regular fa-calendar-days rc-fa-dark"></i> Want to go deeper on analytics?</h4>
+      <p>Whether you're setting up your first export pipeline, exploring what Explore can answer, or trying to measure the impact of a pricing change — bring specific questions to <strong>Global Office Hours</strong>. Our CSMs can help you identify the right data and the right approach for your situation.</p>
+      <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-oh-btn">Register for Office Hours →</a>
+    </div>
+
+    <!-- Path nav -->
+    <div class="rc-lp-nav">
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-currency" class="rc-btn-prev">← Advanced currency</a>
+      <span class="rc-lp-nav-indicator">6 of 7</span>
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-review" class="rc-btn-path">Next: Review &amp; resources →</a>
+    </div>
+
+    <!-- Resources -->
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/recurly-analytics-overview" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Analytics overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/recurly-builder" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Explore overview (Elite)</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/export-overview" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Data exports overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/subscriptions-exports" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Subscriptions export</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/automated-exports" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Automated exports</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/snowflake-integration" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Snowflake integrations</a>
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-solid fa-globe"></i> Global Office Hours</a>
+        <a href="mailto:support@recurly.com" class="rc-resource-link"><i class="fa-solid fa-headset"></i> Contact Recurly Support</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+        <div class="rc-footer-section">
+          <span class="rc-footer-label">Pricing &amp; Plans 201</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201" class="rc-footer-link">Path overview</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-segmentation" class="rc-footer-link">1. Price segmentation</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-hierarchy" class="rc-footer-link">2. Account hierarchy</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-usage-billing" class="rc-footer-link">3. Usage billing</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-models" class="rc-footer-link">4. Advanced pricing models</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-currency" class="rc-footer-link">5. Advanced currency</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-analytics" class="rc-footer-link">6. Advanced analytics</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-review" class="rc-footer-link">7. Review &amp; resources</a>
+        </div>
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+
+<br />
+```

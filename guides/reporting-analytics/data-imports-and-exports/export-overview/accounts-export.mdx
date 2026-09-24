@@ -1,0 +1,125 @@
+---
+title: Accounts - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The "Accounts Export" section in the Recurly user guide helps users grasp comprehensive insights about individual accounts. This data-rich section assists in efficiently managing and understanding account specifics with a myriad of filters and detailed export content.
+
+<Image align="center" width="800px" src="https://files.readme.io/243ba4e6341301742d3d2072043a425daa7750908f66e375b56b68781b60e0f9-image.png" />
+
+<br />
+
+# Filters
+
+### Versions Filter
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Account status filter
+
+* **Open**: Active and operational accounts.
+* **Non-subscribers**: Active accounts that currently hold no active subscriptions.
+* **Active Subscribers**: Active accounts with one or more active subscriptions.
+* **In Trial**: Accounts with at least one subscription undergoing a trial period.
+* **Past Due**: Subscribers having at least one invoice past its due date.
+* **Non-Renewing**: Subscribers not renewing after the ongoing term concludes.
+* **Future**: Accounts holding a subscription set to activate in the future.
+* **Closed**: Accounts that are not active.
+
+### Export on filters
+
+* **Created**: Filter accounts based on their creation date within a selected range.
+* **Modified**: Filter accounts based on the modification date within the specified range.
+
+### Time range filters
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Id                                                                                | Example                                                                                                      | Description                                                                                                                                                                       | Data type (max size) |
+| :-------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------- |
+| <span id="account_code">account_code</span>                                       | 123456789, [janedoe@gmail.com](mailto:janedoe@gmail.com)                                                     | Unique identifier for your customers in Recurly, defaulting to the email address if unspecified. Unmodifiable and central to linking multiple exports.                            | varchar(50)          |
+| <span id="account_email">account_email</span>                                     | [test@example.com](mailto:test@example.com)                                                                  | The email given by the customer at signup, utilized for all customer communications.                                                                                              | varchar(255)         |
+| <span id="account_username">account_username</span>                               | jjsmith                                                                                                      | Optional field for importing usernames associated with your product.                                                                                                              | varchar(255)         |
+| <span id="account_company_name">account_company_name</span>                       | Bluth Industries, Inc.                                                                                       | Optional field for recording the company name provided.                                                                                                                           | varchar(255)         |
+| <span id="account_first_name">account_first_name</span>                           | JJ                                                                                                           | The first name of the customer.                                                                                                                                                   | varchar(255)         |
+| <span id="account_last_name">account_last_name</span>                             | Smith                                                                                                        | The last name of the customer.                                                                                                                                                    | varchar(255)         |
+| <span id="account_has_billing_info">account_has_billing_info</span>               | TRUE, FALSE                                                                                                  | Denotes the existence of billing information on the account.                                                                                                                      | boolean              |
+| <span id="account_created_at">account_created_at</span>                           | 2012-06-27 03:47:28 PDT                                                                                      | Date and time when the account was created, used in "created" date range filter.                                                                                                  | timestamp            |
+| <span id="account_address1">account_address1</span>                               | 1234 Main St                                                                                                 | The primary address line for the account.                                                                                                                                         | string               |
+| <span id="account_address2">account_address2</span>                               | Suite #123                                                                                                   | The secondary address line for the account.                                                                                                                                       | string               |
+| <span id="account_city">account_city</span>                                       | San Francisco                                                                                                | The city related to the account's address.                                                                                                                                        | string               |
+| <span id="account_state">account_state</span>                                     | CA                                                                                                           | The state pertaining to the account's address.                                                                                                                                    | string               |
+| <span id="account_postal_code">account_postal_code</span>                         | 94105                                                                                                        | The postal code of the account's address.                                                                                                                                         | string               |
+| <span id="account_country">account_country</span>                                 | US                                                                                                           | The country associated with the account's address.                                                                                                                                | string               |
+| <span id="account_phone">account_phone</span>                                     | 4155559876                                                                                                   | The phone number associated with the account.                                                                                                                                     | string               |
+| <span id="account_vat_number">account_vat_number</span>                           | US1234567890                                                                                                 | The account's verified VAT number (applicable in production sites).                                                                                                               | varchar(20)          |
+| <span id="account_tax_exempt">account_tax_exempt</span>                           | TRUE, FALSE                                                                                                  | Indicates whether the account is exempt from tax collection.                                                                                                                      | boolean              |
+| <span id="modified_at">modified_at</span>                                         | 2014-01-01 10:00:00 PST                                                                                      | The date and time the account was last modified, utilized in "modified" date range filter.                                                                                        | timestamp            |
+| <span id="closed_at">closed_at</span>                                             | 2014-01-01 10:00:00 PST                                                                                      | Indicates the most recent closure date for the account.                                                                                                                           | timestamp            |
+| <span id="account_acquisition_cost">account_acquisition_cost</span>               | 360                                                                                                          | Captures the cost to acquire a customer, can be fed data from marketing or CRM systems.                                                                                           | numeric              |
+| <span id="account_acquisition_currency">account_acquisition_currency</span>       | USD                                                                                                          | Records the currency used for noting down Customer Acquisition Cost.                                                                                                              | varchar(3)           |
+| <span id="account_acquisition_channel">account_acquisition_channel</span>         | Referral                                                                                                     | Denotes the marketing channel that facilitated customer acquisition.                                                                                                              | numeric              |
+| <span id="account_acquisition_subchannel">account_acquisition_subchannel</span>   | Facebook                                                                                                     | A field noting the detailed acquisition channel.                                                                                                                                  | varchar(50)          |
+| <span id="account_acquisition_campaign">account_acquisition_campaign</span>       | 12345                                                                                                        | Tracks the specific marketing campaign ID from your tools.                                                                                                                        | varchar(50)          |
+| <span id="account_acquisition_created_at">account_acquisition_created_at</span>   | 2014-01-01 10:00:00 PST                                                                                      | Marks when the acquisition data was first added to the account.                                                                                                                   | timestamp            |
+| <span id="account_acquisition_modified_at">account_acquisition_modified_at</span> | 2014-01-01 10:00:00 PST                                                                                      | Notes the last update timestamp for acquisition data on the account.                                                                                                              | timestamp            |
+| <span id="location_validation_tax_type">location_validation_tax_type</span>       | eu, nz                                                                                                       | Identifies the region for tax location validation run on the account, visible based on specific enabled regional settings.                                                        | varchar(2)           |
+| <span id="account_geo_code">account_geo_code</span>                               | 123456789                                                                                                    | Identifies account geo code.                                                                                                                                                      | numeric              |
+| <span id="parent_account_code">parent_account_code</span>                         | 123456789                                                                                                    | Identifies parent account code.                                                                                                                                                   | varchar(50)          |
+| <span id="primary_payment_method">primary_payment_method</span>                   | TRUE/FALSE                                                                                                   | Identifies whether the billing info is either primary payment method or not.                                                                                                      | boolean              |
+| <span id="billing_info_id">billing_info_id</span>                                 | 1234                                                                                                         | Unique identifier for billing info.                                                                                                                                               | string               |
+| <span id="dunning_campaign_code">dunning_campaign_code</span>                     | 123456                                                                                                       | Identifies dunning campaign code.                                                                                                                                                 | varchar(50)          |
+| <span id="dunning_campaign_id">dunning_campaign_id</span>                         | 1234567                                                                                                      | Identifies dunning campaign id.                                                                                                                                                   | string               |
+| <span id="preferred_locale">preferred_locale</span>                               | en-US                                                                                                        | Identifies account's preferred locale.                                                                                                                                            | varchar(50)          |
+| account_api_id                                                                    | e28zov4fw0v2                                                                                                 | Account API ID                                                                                                                                                                    | string               |
+| cc_emails                                                                         | [cc_email1@recurly.com](mailto:cc_email1@recurly.com) ,[cc_email2@recurly.com](mailto:cc_email2@recurly.com) | Additional email address that should receive account correspondence. These should be separated only by commas.                                                                    | string               |
+| user-defined custom field label                                                   | account custom field                                                                                         | Appears only if a custom field is configured and enabled to be visible in the export. The column name in the export reflects the label defined in the custom field configuration. | string               |
+
+# Version changelog
+
+#### Version 8 - 08/05/2025
+
+Addition of cc_emails
+
+#### Version 7 - 2/5/2025
+
+Addition of `account_api_id`
+
+#### Version 6 - 06/14/23
+
+Added account’s preferred locale column  
+`preferred_locale`
+
+#### Version 5 - 07/23/21
+
+Added Dunning campaign columns  
+`dunning_campaign_code` `dunning_campaign_id`
+
+#### Version 4 - 12/10/20
+
+* The `tax_location_valid` column now relates to the specific billing info in each row.
+* Introduced `primary_payment_method` column displaying TRUE or FALSE based on the primary payment method status of the billing info.
+* New `billing_info_id` column showcasing the ID of the particular billing info.
+
+#### Version 3 - 9/13/18
+
+* Added `parent_account_code` column for the Account Hierarchy feature, helping in identifying an account's parent if applicable, though it will only hold a value if the feature is active.
+
+#### Version 2 - 9/6/18
+
+* Introduction of columns for custom fields, placed at the end of the export.

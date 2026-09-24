@@ -1,0 +1,196 @@
+---
+title: Recurly for Salesforce release notes
+---
+
+## Intro
+
+This page contains release notes for the [Recurly for Salesforce integration](https://docs.recurly.com/docs/salesforce).
+
+**Current Version**: 2.60.1
+
+## Release Notes
+
+### Version 2.63 - June 28th, 2023
+
+* Updates to the account sync for more improved efficiency
+
+### Version 2.61 - April 17th, 2023
+
+* Fixed an issue where duplicate account creation was occurring due to the active subscriber flag
+* Updated the product sync class to allow tier pricing for add-ons linked to products
+* Added the ability to do a manual sync of one Recurly account to SFDC using developer console without having to sync all previous records.
+
+### Version 2.60.1 - March 7th, 2023
+
+* Fixed an issue where, when using Tiered pricing you were unable to create a subscription after putting an opportunity into closed won
+
+### Version 2.60 - February 27th, 2023
+
+* Added a setting in the admin page that will allow a manual sync to check for any new mapping done for Recurly accounts. This will help in the case where an update is done to the salesforce to recurly mapping and there is a need to reconcile the accounts.
+
+### Version 2.59 - February 8th, 2023
+
+* Allow the ability to add coupons when utilizing the automatic subscription creation by adding a coupon to the opportunity before closing it.
+
+### Version 2.58.4 - February 1st, 2023
+
+* Applied a fix for the the automation subscription creation feature as it is updating the opportunity line items and removing the fields when it should be keeping the values there.
+
+### Version 2.58.3 - January 30th, 2023
+
+* Fixed an Automation Error that displayed "Unable to create the subscription for the Opportunity. An Error Occurred in Subscription Creation: Error: validation - 1st subscription: Unit amount not permitted when the base plan includes ramp pricing."
+
+### Version 2.58.2 - January 24th, 2023
+
+* Fixed error message on the opportunity page. “System.LimitException: DML currently not allowed" due to incorrect values.
+
+### Version 2.58.1 - December 7th, 2022
+
+* Fixed sync error that would sometimes occur causing the "Some errors were encountered when trying to Resync the Account. Please check if the account exists in Recurly." error
+
+### Version 2.58 - November 21, 2022
+
+* Fixed a bug where you could not update a plan on initial plan creation on an opportunity 
+* Fixed some lingering sync issues causing extended sync times
+* Fixed an issue where when a plan was changed and currency was not updating to reflect the new plan
+* Fixed an issue where you could not edit a field that should be editable
+* Moved the timing card on our VF page to improve process flow
+* Added a separate section for shipping address in cases of where billing information isnt the same as the shipping address.
+* Updated verbiage for last sync detail to provide a clearer understanding of the functionality
+
+### Version 2.57.3 - November 20, 2022
+
+* Fixed a bug that was incorrectly showing a trial length when the plan selected did not include a trial.
+
+### Version 2.57 - October 17, 2022
+
+* Updated payment collection method on VF page for better visual UX
+
+### Version 2.56.2 - October 5, 2022
+
+* Fixed a bug where incorrect fields were updating and being overwritten by the sync, causing an error
+
+### Version 2.56.1 - August 26, 2022
+
+* Fixed a bug with Recurly accounts not linking automatically on subscriptions
+
+### Version 2.56 - August 09, 2022
+
+* Fixed an issue causing a null exception error on subscription creation
+
+Fixed Issue with null exception error
+
+### Version 2.55.2 - Aug 03, 2022
+
+* Fixed issue where Admin portal was not loading due to restrictions on email templates
+
+### Version 2.55.1 - July 27, 2022
+
+* Released fix for issue causing Recurly Accounts to not sync, along with invoices/Line Items/subscriptions
+
+### Version 2.55 - July 18, 2022
+
+* Enabled ability to collect billing information directly from the customer utilizing Recurly HPP.
+* Added option to create subscriptions in Recurly automatically when an opportunity is set to closed won.
+
+### Version 2.54 - May 9, 2022
+
+* Fixed issues related to account rollup sync
+* Improved error messaging across the integration to provide more self help when errors are presented
+
+### Version 2.52 - March 22, 2022
+
+* Enabled ability to create multiple subscriptions from an opportunity
+* Enabled EU merchants to select EU as data host/region
+* Fixes issue related to calculations of invoices and invoice rollup delay
+
+### Version 2.50 - January 28, 2022
+
+* Enabled the ability to edit a subscription from an opportunity
+* Enabled editing of a subscription via order review page
+* Enabled sidebar order preview during order review page
+* Added new relationship between subscriptions and opportunities for easier selection
+* Updated sync for invoice rollup to only identify any changes in data vs updating all the records regardless of changes made or not
+
+### Version 2.44.5 - December 17, 2021
+
+* Fixed issue for too many SOQL queries
+
+### Version 2.44.4 - December 10, 2021
+
+* Fixed issue for future dated subscriptions not saving correctly
+
+### Version 2.44.2 - November 19, 2021
+
+* Fixed issue around Admin page loading
+* Fixed permissions issue for subscription page loading
+
+### Version 2.44 - November 8, 2021
+
+* Product and Subscription Sync works with any currency along with USD
+* All of the Subscription Term fields available for viewing on the Recurly Subscription Object
+* Updated VF page architecture to LWC and current best practices
+
+### Version 2.43.2 - September 29, 2021
+
+* Fixed issue around subscription creation via the subscription object
+
+### Version 2.43.1 - September 2, 2021
+
+* Fixed issue around error when attempting to edit expired or cancelled subscriptions
+
+### Version 2.43 - August 31, 2021
+
+* Enabled the ability to edit the start date of future dated subscriptions via the Manage Subscription Plan page
+* Enabled the ability to set up field mappings for custom fields on Items, Subscriptions, and Accounts from Recurly which would then sync over to Salesforce
+* Added the capability to create one-time charges via closed-won opportunities
+
+### Version 2.42.3 - August 5, 2021
+
+* Fixed issue around pricing sync and additional logging during resync for further debugging capabilities
+
+### Version 2.42.2 - July 9, 2021
+
+* Fixed issue for manual invoicing being blocked when requiring billing information (which is not required anymore).
+
+### Version 2.42 - June 3, 2021
+
+* Enabled syncing of Recurly plans, add-ons, and items with Salesforce products and Standard Price Book entries
+* Enabled the creation of subscriptions and accounts in Recurly from closed-won opportunities in Salesforce.
+
+### Version 2.41.3 - May 17, 2021
+
+* Increased efficiency of daily account rollup process to reduce process time
+* Fixed issue related to syncing "End of Subscription Term" fields from subscription creation in Salesforce to the Recurly subscription
+
+### Version 2.41 - January 29, 2021
+
+* Fixed issue related to syncing “Recurly In Trial” checkbox for the Salesforce Standard Account to "In Trial" status in the Recurly Account object
+
+### Version 2.40 - January 13, 2021
+
+* Increased character limit for Company Name from 50 to 100
+* Fixed a bug within managing subscriptions
+
+### Version 2.39.3 - October 12, 2020
+
+* Fixed a bug for Subscription Cancellation
+
+### Version 2.39 - September 2020
+
+* Added Recurly Logs which track how many of each record typed synced successfully or errored each sync
+* Added logic to automatically delete Recurly Log records once they reach 5,000 maximum. The oldest records will be deleted first.
+
+### Version 2.38 - August 2020
+
+* Support to selectively sync objects when re-syncing a single Recurly account from Recurly to Salesforce, which enables missing data to be repaired
+
+### Version 2.37
+
+* Support to delete a subdomain from your org
+
+### Version 2.36
+
+* Support for [quantity-based pricing](https://blog.recurly.com/recurly-announces-three-new-quantity-based-pricing-models) on creating and editing Recurly Subscriptions
+* Better currency support on creating and editing Recurly Subscriptions
+* Bug fixes

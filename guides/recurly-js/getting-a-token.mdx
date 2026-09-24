@@ -1,0 +1,90 @@
+---
+title: Getting a token
+---
+
+This guide explains how to intercept your payment form submission, send billing information to Recurly for secure tokenization, and then use the returned token to complete the purchase process via our API.
+
+### Prerequisites & limitations
+
+* You must include Recurly.js on your page.
+* Your payment form must have the necessary `data-recurly` fields, including a hidden field for the token.
+* Ensure your integration follows best practices for handling sensitive payment data.
+* This guide assumes you have a working Recurly.js setup.
+
+***
+
+## How it works
+
+When a customer submits your billing form, Recurly.js intercepts the submission and sends the payment information to Recurly. The payment data is encrypted and stored securely on our servers, and an authorization key (or _token_) is returned. You then include this token in your API request to complete the subscription process. Since your server never handles sensitive payment details directly, your PCI scope is significantly reduced.
+
+***
+
+## Retrieving a token
+
+Below is an example illustrating how to listen for a form submission, request a token, and then submit the form to your server:
+
+```javascript
+const elements = recurly.Elements();
+
+// (Construct and attach your Elements as needed)
+
+document.querySelector('#my-form').addEventListener('submit', function (event) {
+  const form = this;
+  event.preventDefault();
+  recurly.token(elements, form, function (err, token) {
+    if (err) {
+      // Handle error using err.code and err.fields
+    } else {
+      // Recurly.js populates the hidden 'token' field automatically
+      // Now you can submit the form to your server
+      form.submit();
+    }
+  });
+});
+```
+
+<br />
+
+***
+
+## Reference: `recurly.token`
+
+You must call`recurly.token`with your`Elements`instance and a reference to your`<form>`. For example:
+
+```javascript
+recurly.token(elements, document.querySelector('form'), tokenHandler);
+```
+
+Where `tokenHandler` is defined as:
+
+```javascript
+function tokenHandler(err, token) {
+  if (err) {
+    // handle error using err.code and err.fields
+  } else {
+    // handle success using token.id
+  }
+}
+```
+
+This function sends the billing information to Recurly, which returns a token id.
+
+### Token callback arguments
+
+| **Param**                    | **Type**                 | **Description**                                                   |
+| ---------------------------- | ------------------------ | ----------------------------------------------------------------- |
+| `err`                        | `RecurlyError` or `null` | Returns a `RecurlyError` if there was an error, otherwise `null`. |
+| `token`                      | `Object`                 | An object containing the token details.                           |
+| `token.type`                 | `String`                 | The type of token, e.g., `'credit_card'`.                         |
+| `token.id`                   | `String`                 | The unique token identifier.                                      |
+| `token.card.brand`           | `String`                 | Card brand, such as `master`, `visa`, `american_express`, etc.    |
+| `token.card.first_six`       | `String`                 | The first 6 digits of the card (BIN).                             |
+| `token.card.last_four`       | `String`                 | The last 4 digits of the card.                                    |
+| `token.card.exp_month`       | `Integer`                | Card expiration month.                                            |
+| `token.card.exp_year`        | `Integer`                | Card expiration year.                                             |
+| `token.card.issuing_country` | `String`                 | The issuing country (or `ZZ` if unknown).                         |
+| `token.card.funding_source`  | `String`                 | The funding source: e.g., `credit`, `debit`, `prepaid`, etc.      |
+
+### Returns
+
+The `recurly.token` function does not return a value directly. Instead, it uses the provided callback to return either an error or a token object.

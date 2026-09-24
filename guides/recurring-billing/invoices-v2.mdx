@@ -1,0 +1,312 @@
+---
+title: Invoices v2
+---
+
+> 👍 New Feature: Credit Invoices
+>
+> * Align with accounting best practices by creating separate invoices for credits
+> * Benefit from new refund and invoice options to execute your business’ specific processes
+> * Streamline your customers’ experience by providing them easy-to-understand invoices
+> * Rely on a clear audit trail with updated Invoices Summary and Adjustments exports as well as a new Credit Payments export
+>
+> Recurly sites created after May 8, 2018 UTC (May 7, 2018 5pm PT) automatically have the Credit Invoices feature. 
+>
+> <a href="/guides/recurring-billing/invoices-1/credit-invoices-release">Learn more about Credit Invoices and how to enable Credit Invoices on your existing Recurly site.</a>
+
+## View Invoices
+
+All of your customer invoices can be viewed in the Recurly Admin Console under Customers→Invoices. 
+
+### Search
+
+The list of invoices is searchable by:
+
+* Account code
+* Account username
+* Account email address
+* Account first and last name
+* Account company name
+* Invoice number
+* Invoice PO number
+* Invoice Bill To address
+* Invoice VAT number
+* Invoice total
+* Invoice discount amount
+* Invoice tax amount
+* Invoice recovery reason
+
+### Filter
+
+The list of invoices can be filtered by:
+
+* Invoice posted date
+* Type
+* Note that legacy invoices where the origin was purchase are included in the **Charge** filter and legacy invoices where the origin was refund are included in the **Credit** filter.
+* Status
+* Collection Method
+* Origin
+
+### Sort
+
+The list of invoices can be sorted by the following:
+
+* Invoice number
+* Account display name
+* Invoice posted date
+* Invoice status
+* Invoice total
+
+To sort the list, click on the column header name.
+
+## Types
+
+Invoices have a type of either charge or credit. 
+
+* Charge invoices are regular invoices that only issued charges to the customer, for example in a purchase or renewal.
+* Credit invoices are credit memos, also referred to as credit notes, that only issued credits to the customer, for example in a downgrade or refund.
+
+Invoices created before the Credit Invoices feature was enabled on a Recurly site will have a type of legacy.
+
+## Statuses
+
+### Charge Invoice Statuses
+
+Notes that legacy invoices have the same statuses as charge invoices.
+
+#### Pending
+
+When an invoice is posted, it is initially in a Pending state. Pending means the invoice has not been paid and is not yet past due. Invoices that attempt collection with the account's billing information will immediately move the invoice to a Paid or Past Due state, depending on the transaction result. Invoices with manual collection that have not yet received payment will stay in a Pending state until the net-terms are reached, at which time they will move to a Past Due state.
+
+#### Past Due
+
+The invoice is past due when the net-terms have been reached and the invoice has not been fully paid. Automatic collection invoices will move to Past Due immediately if the initial resulting transaction is declined. Manual collection invoices will move to Past Due 24 hours after the due date.
+
+#### Processing
+
+The invoice is in a processing state when a payment transaction has been initiated, but has not come back as either successful or declined. This is common with ACH bank payments. After the transaction returns a response, the invoice will move to Paid if successful, or Past Due or Failed if declined (depending on your Dunning settings).
+
+#### Paid
+
+The invoice is paid once the customer has fulfilled the outstanding balance. The invoice will move to a Paid state immediately after post if the invoice had a zero balance due to zero amount charge adjustments, a full discount, or full payment by credit payments. Manual collection invoices with partial payments will not move to a Paid state until the full balance is paid.
+
+#### Failed
+
+The invoice is failed when it is considered uncollectable. Failing the invoice writes the invoice off as bad debt and will create a corresponding write-off credit invoice, bringing the failed charge invoice's balance to zero.
+
+### Credit Invoice Statuses
+
+#### Open
+
+A credit invoice is open when it has an outstanding credit balance. Every credit invoice starts in an Open state.
+
+#### Processing
+
+The credit invoice is in a processing state when a refund transaction has been initiated, but has not come back as either successful or declined. This is common with ACH bank payments. After the transaction returns a response, the invoice will move to Closed if successful and no balance remaining, or Open if declined.
+
+Note that a processing invoice will remove from the balance the amount covered by the processing transaction. Processing is not a closed state. If the transaction declines, the credit invoice balance will increase. If there is a credit balance not covered by the processing transaction (original invoice was partially paid with credit payment), new charge invoices on the account during the processing period can use the additional balance as payment.
+
+#### Closed
+
+The credit invoice is closed when there is no outstanding credit balance. A credit invoice is only reopened if a credit payment from it is voided, which only happens if the charge invoice it is applied to is failed.
+
+Note that a Closed credit invoice could have had all of it's balance used as credit payments, or a mix of credit payments and voided balance.
+
+#### Voided
+
+The credit invoice is voided when the credit invoice is deemed to be a mistake. Voiding the credit invoice means that none of the credit balance was used as payment or was refunded out as a transaction.
+
+## Numbering
+
+All invoices on your Recurly site, both charge and credit, pull from the same invoice number sequence starting at 1000 and incrementing by 1. Please see below for additional options.
+
+### Customize Initial Number
+
+If you would like your invoice numbering to start at a different number, contact <a href="https://support.recurly.com/" target="_blank">Recurly Support</a>.
+
+### Add Prefix
+
+Recurly does not allow you to add a visible prefix to your invoice numbering, but you can add a hidden prefix to segment your Recurly transactions within your payment gateway. This is helpful if you are using your payment gateway for multiple billing systems. To add a hidden prefix, go to Configuration→Site Settings and enter the prefix value under "Invoice Prefixing".
+
+### European Union Numbering
+
+If you would like to have a separate invoice sequence for each European Union country, you can enable our Country Invoice Sequencing feature. Go to Configuration→Taxes→Tax Settings in top right corner→enabled "Country Invoice Sequencing" under "European Union VAT Settings". <a href="/guides/recurring-billing/taxes/eu-vat-2015#section-country-specific-invoice-sequences">Learn more</a>
+
+## Display
+
+The invoice display via the Admin Console, Hosted Invoice, or PDF will have the following elements:
+
+### Number and Collection
+
+All invoices will have an invoice number and the date the invoice was posted. 
+
+* Charge invoices will also have net-terms and due date.
+* Credit invoices issued against a charge invoice will show the reference.
+
+### From Address
+
+The top left of the invoice will list your company information. The following fields will show, if filled out on Site Sittings under Configuration in the Admin Console.
+
+* Company name
+* Address 1
+* Address 2
+* City
+* State/province
+* Zip/postal code
+* Country
+* Phone number
+* Billing contact email
+* VAT number
+* Registration number
+
+### Bill To
+
+All invoices will at least have a Bill To for the customer. This defaults to the Billing Information address if the collection method is automatic, and the Account Information address if the collection method is manual. You can force the Bill To to always use the Account Information address and only fallback to the Billing Information address when one doesn't exist in the Account Information. To do this, go to Configuration→Taxes→Tax Settings and enable "Use Account Information Address for all Invoices" and save the page.
+
+The following fields will show for the Bill To:
+
+* First and last name
+* Company name (will always come from the Account Information address)
+* Address 1
+* Address 2
+* City
+* State/province
+* Zip/postal code
+* Country
+* VAT number
+
+### Ship To
+
+An invoice will have a Ship To address if you associated a shipping address with the subscription on the invoice or gave a specific line item a Ship To when issuing the invoice.
+
+The following fields will show for the Ship To:
+
+* First and last name
+* Address 1
+* Address 2
+* City
+* State/province
+* Zip/postal code
+* Country
+* VAT number
+
+<a href="/guides/subscriber-management/accounts-1/shipping-addresses">Learn more about Shipping Addresses.</a>
+
+### Line Items
+
+Each invoice will contain a table of line items with the following columns:
+
+* Date
+* Description
+* Quantity
+* Price
+* Discount (column only shows if discounts on the invoice)
+* Subtotal
+* Tax (column only shows if tax on the invoice and shows the rate only)
+* Total (column only shows if tax on the invoice)
+
+### Total and Balance
+
+The bottom right of the invoice will show the following invoice level values:
+
+* Subtotal
+* Tax (only shows if tax is on the invoice)
+* Total
+* Balance
+
+Between the Total and Balance you will see these balance changing entries:
+
+* **Paid** - Total of all payment transactions
+* **Credit Applied/Redeemed** - Total of all credit payments
+* **Payment Refund** - Total of all refund transactions
+* **Credit Voided** - Portion of the credit balance that was removed
+* **Write-Off** - Write-off amount
+
+### Payment History
+
+The invoice display includes a "Payments" section with all transactions and credit payments that reduced the invoice's balance, including the date of the event and the amount.
+
+### Notes
+
+Invoices have three notes sections. These notes only show up on invoices if there is text in those sections. Notes can be configured to have site level defaults for all invoices, as well as be customized for specific invoices through the Admin Console or API. Site level defaults can be configured on the [Invoice Settings](https://app.recurly.com/go/configuration/invoice_settings/edit) page. Invoice specific notes are made when generating an invoice or creating/editing a subscription.
+
+#### Customer Notes
+
+An extra notes section for customer notes. This could be special details about the invoice, a note to say "thanks for your business", or whatever you like! The title of this notes section will not show on the invoice.
+
+#### Terms and Conditions
+
+An extra notes section for payment terms, payment details, legal notes, or whatever you like! The title of this notes section will show on the invoice and cannot be changed.
+
+#### VAT Reverse Charge Notes
+
+VAT Reverse Charge Notes are configured on the Tax Settings page and are used for European Union reverse charge tax scenarios.
+
+<a href="/guides/recurring-billing/taxes/eu-vat-2015#section-eu-vat-registered-customers">Learn more about VAT Reverse Charge Notes. </a>
+
+## PDFs
+
+You can choose to include a PDF of the invoice in any email sent about an invoice. To enable PDF attachments for your site, go to Configuration→Invoice Settings→Emails Settings and select "Attach PDF" and save the page.
+
+Additionally, you or your customers can download a PDF of any invoice by viewing the invoice in the Admin Console or the Hosted Pages.
+
+PDF invoices are not customizable at this time.
+
+## Emails
+
+When a customer subscribes, their first invoice is automatically included in the New Subscription email template. Subsequent invoices are sent using the Payment Confirmation email template. Recurring invoices are not sent to customers when the total amount owed is $0.00. Note that manual collection invoices will always send out the New Invoice email template.
+
+An invoice email can be resent by clicking the **Resend Last Email** button on a specific invoice. You can attach a PDF of the invoice to all of your invoice related emails by enabling this feature on the [Invoice Settings](https://app.recurly.com/go/configuration/invoice_settings/edit) page.
+
+## Proration
+
+The line items Recurly creates on the invoice will be prorated in an immediate subscription change and include the option to prorate in an invoice refund. All proration is down to the second, even though the line item dates at to the day.
+
+<a href="/guides/subscriber-management/subscription-lifecycle/change-subscription#section-time-based-proration">Learn more about immediate subscription change proration.</a>
+
+## Collection
+
+Charge invoices have a collection method that tells Recurly whether to process payment immediately with the billing information on file or only issue the invoice for now. Collection method can be set at the invoice level or the subscription level.
+
+### Automatic Collection
+
+Posting an invoice with automatic collection will tell Recurly to immediately attempt to pay the invoice with the billing information on the account (e.g. - credit card, bank account, PayPal, Amazon). With automatic collection, new subscriptions and use of the Purchases API endpoint will require a successful transaction in order for the invoice to post. Renewals and the Post Invoice API endpoint will post the invoice and process the automatic payment after the fact, sending the invoice into Past Due and the dunning cycle if a declined is returned.
+
+### Manual Collection
+
+Posting an invoice with manual collection will tell Recurly to issue the invoice, but not attempt any payment. You can manually enter an external payment later, or have the customer pay the invoice with an automatic method via our Make a Payment button on the hosted invoice. 
+
+Note that once an invoice is paid, or attempted to be paid, with the billing information on the account, the invoice converts to automatic collection. At this time it is not possible to record a manual payment on an automatic charge invoice or convert a charge invoice from automatic to manual collection.
+
+<a href="/guides/hosted-pages/hosted-account-management#section-online-payments">Learn more about our Make a Payment option.</a>
+
+To manually record an external payment, view the invoice in the Admin Console and enter the payment details in the left sidebar. A manually paid invoice can be reopened.
+
+### Modify Subscription's Collection Method
+
+Changing the subscription's collection method will affect the collection method of the next charge invoice for the subscription. It will not change the collection method of any already issued invoices for the subscription.
+
+To change the collection method of the subscription, go to the page of the specific subscription and select "Edit Subscription" in the Subscription Actions dropdown at the top right. Scroll down to the "Invoicing" section of the Edit Subscription page and select the new value in the Collection Method dropdown. Save the page. Changing the collection method will always apply immediately, even if "On next renewal" is selected under Plan Effected Date on the page.
+
+### Dunning
+
+When an invoice moves to a Past Due state, it starts the dunning cycle. For automatic collection invoices, this is after the first transaction decline for the invoice. For manual collection invoices, this is 24 hours after the due date of the invoice. Automatic and manual collection invoices have separate dunning cycles and separate dunning emails. Automatic collection invoices use the "Payment Declined" email template and manual collection invoices use the "Invoice Past Due" email template. Within your dunning settings, you can choose to fail the invoice at the end of the cycle, or leave it past due.
+
+<a href="/guides/churn-management/involuntary-churn/dunning-management">Learn more about Dunning Management.</a>\ <a href="/guides/churn-management/involuntary-churn/retry-logic">Learn more about Automated Transaction Retry Logic.</a>
+
+### Stop Collection
+
+If a customer is not going to pay an invoice and it needs to be written off, you can **Stop Collection** from the Invoice Actions dropdown at the top right of the invoice details page. This action will move the invoice to a Failed state and removes the amount from the customer's account balance. Note that failing an invoice will create a corresponding write-off credit invoice, bringing the failed invoice's balance to zero. Stopping collection will also stop the dunning cycle, stopping all automated dunning emails and automated payment retries (automatic collection only).
+
+Once an invoice is failed, it cannot be reopened. This is also the case for manual collection invoices, due to the fact that the write-off credit invoice exists.
+
+Please Note: Stopping collection (failing) on an invoice *will not* automatically cancel the related subscription. The subscription needs to be canceled separately in order to stop the subscription from renewing again.
+
+## Refunds
+
+Refunds are issued at the invoice level. To refund a customer, you can immediately change their subscription, refund a specific invoice, or choose to refund the last invoice while terminating their subscription. All of these events will create a refund credit invoice, which includes credit line items against previously paid for charge line items. Refunding will never reopen the original charge invoice. When refunding an invoice directly, you can choose to distribute the resulting credit balance as a payment refund (cash back on the customer's payment method), or leave it as a credit balance to be used as payment on future invoices.
+
+To refund an invoice, go to the invoice in the Admin Console and select "Refund Invoice" in the Invoice Actions dropdown at the top right of the page.
+
+## Testing
+
+Invoices created while in sandbox will include a "TEST INVOICE" watermark. The watermark is only relevant to sandbox invoices -- after moving to production, production invoices will not include the watermark.

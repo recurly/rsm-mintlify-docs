@@ -1,0 +1,218 @@
+---
+title: Profile
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Your Recurly profile is where you manage your personal information and account security settings — update your name, email, time zone, and appearance preferences, change your password, and configure Two-Factor Authentication (2FA). To access it, click your name in the upper right corner of the Recurly app.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">1</span>Key details</a>
+    <a className="rp-toc-pill" href="#two-factor-authentication"><span className="rp-toc-num">2</span>Two-factor authentication</a>
+    <a className="rp-toc-pill" href="#upgrade-authenticator-app-to-the-new-totp-service"><span className="rp-toc-num">3</span>Upgrade to new TOTP service</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Deprecation notice</strong>SMS 2FA is disabled for users on new sandbox sites. Users currently using an Authenticator App for 2FA must upgrade to Recurly's new TOTP service. See <a href="#upgrade-authenticator-app-to-the-new-totp-service">Upgrade to new TOTP service</a> below for instructions.</div>
+</div>
+
+
+<Image src="https://files.readme.io/603dfb8111eb04f99eaae81f470d820208532d8cf8c9ae9c4c9fe0c3d4bcc840-Screenshot_2026-04-08_at_8.48.26_AM.png" align="center" width="75%" border={true} />
+
+
+# Key details
+
+## Personal information
+
+Update your full name, email, job function, and time zone at any time by clicking **Edit Personal Info**.
+
+
+<Image src="https://files.readme.io/130ca17bc8b119f1342f3a35c8a201f16b2958eb366767545061e1489ae551b7-Screenshot_2026-04-08_at_8.57.47_AM.png" align="center" width="75%" border={true} />
+
+
+You can also set your appearance preference — choose **Auto** (matches your operating system theme), **Light**, or **Dark**.
+
+
+<Image src="https://files.readme.io/f2fbb79f20e236dee34d8b62efc8f5148a1a99dfd444ff0c8fce836c8134ba78-Screenshot_2026-04-08_at_9.08.03_AM.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Password management
+
+To change your password, click **Change Password** and enter the required details.
+
+Password requirements:
+
+- At least 12 characters
+- Must include at least one numeric character
+- Passwords older than 90 days trigger a forced change at next login
+
+***
+
+## Session timeout
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Session inactivity timeout</strong>Sessions time out after <strong>20 minutes</strong> of inactivity, after which you'll need to log in again.</div>
+</div>
+
+# Two-factor authentication
+
+Two-Factor Authentication (2FA) adds an extra layer of security by requiring a verification code in addition to your password. 2FA applies across all Recurly sites associated with your email address — enabling or disabling it affects all connected sites.
+
+### Limitations
+
+<ul className="rp-list">
+  <li>2FA doesn't replace the need for a strong, unique password and secure account practices</li>
+  <li>You're responsible for maintaining access to your chosen verification method (Authenticator App, SMS, or Email)</li>
+  <li>If you lose access to your verification method, you may be unable to log in until access is restored</li>
+  <li>Disabling 2FA removes it from all Recurly sites connected to your account</li>
+</ul>
+
+Recurly supports three 2FA methods — you can enable multiple at once for flexibility during login. The Authenticator App and Email are recommended over SMS due to known SMS security weaknesses.
+
+## Enable 2FA
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open your profile</h4><p>Navigate to your user profile in Recurly.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable a 2FA method</h4><p>Click the <strong>Enable</strong> link next to the 2FA method you want to activate — Authenticator App, SMS, or Email. Multiple methods can be configured.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/f61d06dd20926dce6b575d10ef55673f41dca07489497fa36921ea4c06dbf865-Screenshot_2026-04-08_at_9.00.33_AM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Verify your password</h4><p>Enter your password when prompted.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Complete the method-specific setup</h4><p>Follow the steps for your chosen method below.</p></div>
+  </div>
+</div>
+
+### Authenticator App
+
+Recurly supports Twilio Authy, Okta Verify, Google Authenticator, Microsoft Authenticator, LastPass Authenticator, and other TOTP-compatible apps.
+
+
+<Image src="https://files.readme.io/ef006ee81e9ad3112d8ba94826bbd9883a3ee369f6574f6169d2895926fd619e-image.png" align="center" width="40%" border={true} />
+
+
+Scan the QR code with your authenticator app, or enter the provided code manually. The app generates a one-time code — enter it in Recurly to complete setup.
+
+### SMS
+
+Enter a mobile phone number capable of receiving SMS messages. A verification code is sent to that number — enter it in the verification field to complete setup.
+
+### Email
+
+A verification code is sent to the email address on your Recurly account. Enter it in the verification field to complete setup.
+
+***
+
+## Set a default 2FA method
+
+If you have multiple 2FA methods configured, you can choose which one is selected by default at login.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the method menu</h4><p>Click the ellipsis (…) to the right of the 2FA method you want to set as default.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Set as default</h4><p>Select <strong>Set as Default</strong>, enter your password, then click <strong>Set as Default</strong> to confirm.</p></div>
+  </div>
+</div>
+
+***
+
+## Disable 2FA
+
+### Disable a single method
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the method menu</h4><p>Click the ellipsis (…) to the right of the 2FA method and select <strong>Disable</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Confirm</h4><p>Enter your password and click <strong>Disable</strong>.</p></div>
+  </div>
+</div>
+
+### Disable all 2FA methods
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Click Disable Two-Factor Auth</h4><p>Select <strong>Disable Two-Factor Auth</strong> on your profile page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Confirm</h4><p>Enter your password and click <strong>Disable</strong>. All 2FA methods on your account will be disabled.</p></div>
+  </div>
+</div>
+
+### Disable 2FA for a user (Site Admin)
+
+Site Admins can disable 2FA for individual users:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the user's profile</h4><p>Go to the <strong>Users</strong> section in Recurly and click to edit the user's profile.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Set to password only</h4><p>Select <strong>Password</strong> and click <strong>Save Changes</strong>.</p></div>
+  </div>
+</div>
+
+***
+
+## Troubleshooting 2FA
+
+### Lost mobile device
+
+If you can't access the device that receives your authentication codes:
+
+- **Enable multiple 2FA methods** before this happens — if you have both Authenticator App and Email configured, you can still log in via Email, then reconfigure the Authenticator App for a new device.
+- **Check your authenticator app's documentation** — many apps provide account restoration options or support alternative devices.
+- **Contact your site administrator** — they can disable 2FA on your account, allowing login with just your password.
+- **Contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a>** — Recurly Support can also disable 2FA on your account.
+
+### General tips
+
+- If authentication fails repeatedly, try syncing your phone's clock with your mobile provider.
+- If you're not receiving SMS codes, double-check that your phone number was entered correctly.
+- When entering a code, don't include spaces between the digits.
+
+# Upgrade authenticator app to the new TOTP service
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Disable the existing Authenticator App configuration</h4><p>Log into Recurly and navigate to your profile. Click the ellipsis (…) to the right of <strong>Authenticator App</strong> in the Two-Factor Authentication section and select <strong>Disable</strong>. Follow the prompts to confirm.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Remove Recurly from your authenticator app</h4><p>Open your authenticator app on your phone and delete the configured Recurly account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Re-enable the Authenticator App</h4><p>Follow the <a href="#authenticator-app">Authenticator App setup steps</a> above to configure 2FA on the new TOTP service.</p></div>
+  </div>
+</div>
+
+<br />

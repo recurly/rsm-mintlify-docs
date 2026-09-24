@@ -1,0 +1,38 @@
+---
+title: How to test your gateway
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Before going live, run a test transaction to confirm your payment gateway is communicating correctly with Recurly. Testing is available in development mode and production mode — sandbox mode is not supported.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#test-your-gateway-configuration"><span className="rp-toc-num">2</span>Test your gateway configuration</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>A Recurly account set to development or production mode.</li>
+  <li>A payment gateway configured in Recurly.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Recurly's gateway test configuration tool lets merchants verify that their payment gateway is correctly integrated and able to process transactions before going live. Testing requires your site to be in development or production mode — it is not available in sandbox mode.</div>
+
+# Test your gateway configuration
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Test Configuration</h4><p>In Recurly, navigate to <strong>Configuration → Payment Gateways</strong>. Locate your gateway, click <strong>Options</strong> in the upper right, and select <strong>Test Configuration</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Review the results</h4><p>A successful test confirms that Recurly can communicate with your payment gateway and is ready to process transactions. If the test fails, check your gateway credentials and configuration settings.</p></div>
+  </div>
+</div>
+
+<br />

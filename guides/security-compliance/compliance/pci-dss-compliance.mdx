@@ -1,0 +1,84 @@
+---
+title: PCI-DSS compliance
+---
+
+# Overview
+
+> **Note:** Please note that the information provided below is intended as a general guide, and may not apply to all specific business circumstances. The exact Self-Assessment Questionnaire (SAQ) that you will need to fill out is dependent on the specifics of your business operations as a whole, not just with Recurly, and the requirements of your merchant bank. For a definitive determination, we strongly recommend consulting directly with your merchant bank and/or a qualified PCI-DSS assessor.
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+PCI-DSS provides a security framework to protect credit card transactions and consumer data. Complying with this standard is mandatory for any business that handles payment card information.
+
+# Recurly benefits
+
+* **Simplified compliance process:** With Recurly, achieving PCI-DSS compliance can be quite straightforward. Use Checkout, hosted payment pages or Recurly.js to remove card data from your own systems and accept credit card payments securely. Using these methods of payment acceptance can greatly assist in reducing your business's PCI scope and adhering to compliance requirements with more ease.
+* **Enhanced security:** We prioritize security. Recurly maintains PCI-DSS Level 1 compliance, we meet and exceed industry-standard payment security practices, providing you with a safe environment for your transactions. Keep in mind, all businesses who accept card data must maintain PCI compliance; Recurly's PCI compliance only assists you in yours, it does not take the place of security measures and compliance for your business.
+* **Flexible solutions:** Whether you opt for Checkout, hosted payment pages, use the Recurly.js library, or use our API, we offer solutions tailored to your business's needs, facilitating your path to PCI compliance. Using our hosted or Recurly.js options can help you reduce your scope, though for merchants who need to manage card data directly, working with a qualified QSA is recommended as you will have greater PCI scope.
+
+# Key details
+
+# PCI compliance for merchants
+
+If you accept online credit card payment, you must ensure your business operations are PCI-DSS compliant. If you are using Recurly.js V4 or later, Checkout, or Recurly Hosted Pages, these options can help you qualify for a greatly reduced PCI scope, such as Self-Assessment Questionnaire A (SAQ-A). If card data passes through your servers, Self-Assessment Questionnaires C or D (SAQ-C, SAQ-D) are more likely, though will depend on your unique mix of payments accepted for your business.
+
+## Hosted pages
+
+Our hosted pages - Checkout, Hosted Account Management pages and Hosted Payment Pages (legacy) - offer merchants the ability to accept subscriptions while reducing their PCI compliance scope. Since customers' cardholder data is sent directly to Recurly and never passes through the merchant's environment, this checkout feature can help, but does not guarantee, merchants qualify for the simplest PCI compliance level - SAQ-A. 
+
+## Recurly.js
+
+This is Recurly's open-source Javascript library designed to create secure, customizable order forms. Using Recurly.js ensures that cardholder data goes directly from the customer's browser to Recurly, without passing through your servers, which limits your PCI scope similarly to hosted pages.
+
+## API
+
+Merchants using Recurly's API to submit cardholder data will not qualify for a reduced PCI scope like SAQ-A and are more likely SAQ-C or D (or higher, depending on your business). A higher level of PCI scope applies when cardholder data (card numbers) passes through your own server environment, which places your systems within expanded PCI compliance scope.
+
+# PCI Compliance Best Practices
+
+Ensuring secure transactions isn't just about compliance with industry standards; it's about the responsibility towards your customers and their sensitive data. When it comes to PCI-DSS compliance, here are some best practices that every merchant should follow:
+
+1. **Secure transmission:** Always host web pages that receive credit card information over TLS (Transport Layer Security). This provides a secure channel for data transmission, ensuring that cardholder data is not exposed during transmission. It's important to note that not your entire application needs to be served over TLS - only the pages that handle credit card data.
+2. **Don't log sensitive data:** Avoid logging any sensitive credit card data, including the full credit card number or the verification value (CVV/CVC). Many web applications inadvertently expose credit card data through their log files rather than the database.
+3. **Don't store unnecessary data:** Never store sensitive credit card data such as the full credit card number (if you can avoid it) or the verification value (CVV/CVC). While you are permitted to store and display the first six and last four digits of the credit card number, any unnecessary cardholder data (like billing address, expiration date, etc.) should not be stored if it's not required. It is against PCI compliance to store the CVV code.
+4. **Guard against cross-site scripting attacks:** Protecting your customers also means keeping your site safe from cross-site scripting (XSS) attacks. XSS attacks inject malicious scripts into trusted websites and can be used by attackers to bypass access controls or defraud your users.
+
+By following these best practices, you're not only complying with PCI-DSS standards but also creating a secure environment that builds trust with your customers. Remember that compliance is not a one-time activity, but a continuous effort to protect your customers' data.
+
+# FAQs
+
+**Q: Where can I find more information about PCI-DSS Compliance?**
+
+**A:** For a detailed guide, you can visit the [PCI Security Standards site](https://www.pcisecuritystandards.org/). The newest [PCI DSS v4.x Hub ](https://blog.pcisecuritystandards.org/pci-dss-v4-0-resource-hub)available on the site can be particularly helpful.
+
+**Q: What is Recurly's PCI-DSS compliance level?**
+
+**A:** Recurly is a PCI-DSS Level 1 compliant merchant service provider. Security is a top priority for Recurly, and we strive to meet and exceed all industry-standard payment security practices to protect our customers
+
+**Q: Can Recurly provide qualified security assessment (QSA)?**
+
+**A:** Although Recurly is PCI-DSS Level 1 compliant, we are not a qualified security assessor (QSA). The information we provide is intended to be helpful but comes without warranty. If you have specific questions about PCI Compliance, we recommend contacting a QSA. You can find a QSA on the [PCI Security Council's website](https://listings.pcisecuritystandards.org/assessors_and_solutions/qualified_security_assessors).
+
+**Q: How does Recurly help with PCI Compliance?**
+
+**A:** Recurly helps merchant reduce scope and maintain PCI compliance by providing secure processing methods like Recurly.js, Checkout and hosted payment pages. This ensures that sensitive cardholder data never passes through your servers, thus reducing your PCI scope. Remember that your merchant bank account provider will require you to be PCI compliant, regardless of the integration method you choose with Recurly.
+
+**Q: How can I ensure the best practices for PCI Compliance for my business?**
+
+**A:** To adhere to PCI Compliance best practices, you should take the advice of a qualified security advisor. In general though these high level steps are a good start: 
+
+* Hosting any webpages that handle the submission of card data should use SSL / TLS and encrypt cardholder data in motion.
+* Never log or store any sensitive credit card data without proper encryption as well as masking sensitive values in all communications (UIs, logs, emails, etc.). Never store card data in clear-text format.
+* Protect your site from cross-site scripting attacks.
+* Ensure default passwords are not in use, passwords are changed at appropriate intervals and are complex versus simple, and ensure MFA/2FA is employed.
+* Utilize and regularly update antivirus software and firewalls.
+* If necessary, regularly schedule penetration tests and scans of your environment.
+* Do not share login / users amongst multiple people - everyone should have their own login to systems that touch payment information, including Recurly. Regularly review these users and remove those that no longer need access.
+
+ These steps help to create a more secure environment for transactions and limit the risk of data breaches but are only scratching the surface. 
+
+You can find additional information and assistance at [https://www.pcisecuritystandards.org](https://www.pcisecuritystandards.org).

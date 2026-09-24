@@ -1,0 +1,63 @@
+---
+title: 'Overview: App Management'
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly App Management brings your Apple App Store and Google Play subscription data into one place. Connect your stores, automate subscription lifecycle tracking, and get a unified view of your mobile subscribers alongside your other Recurly data — without requiring an SDK in your mobile app.</div>
+  <div style={{position: "relative", paddingTop: "56.25%", marginBottom: "28px", borderRadius: "10px", overflow: "hidden"}}>
+    <iframe src="https://fast.wistia.net/embed/iframe/k1vgnmix5h"
+      title="App Management product tour"
+      allow="autoplay; fullscreen"
+      allowTransparency="true"
+      frameBorder="0"
+      scrolling="no"
+      allowFullScreen
+      style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none"}}></iframe>
+  </div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">1</span>Key details</a>
+  </div>
+</div>
+
+<div className="rp-cost">
+  <strong>Additional cost</strong><br/>
+  App Management requires an additional cost. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> or your Recurly account manager for pricing details.
+</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Sell Apple subscriptions through Recurly</strong>You can also sell and manage Apple App Store subscriptions directly through Recurly. <a href="/guides/app-management/sell-and-manage-apple-subscriptions-through-recurly#/" target="_blank">Learn more</a>.</div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>App Management is only available to Recurly customers</li>
+  <li>Recurly does <strong>not</strong> require you to implement an SDK within your mobile app</li>
+  <li><strong>Configuration access permissions</strong> are required within Recurly. To confirm or set permissions, see the <a href="/guides/site-management/site-settings/user-roles-and-permissions" target="_blank">user roles and permissions guide</a></li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Recurly currently supports auto-renewing subscriptions only. For Apple: non-renewing subscriptions, consumable in-app purchases, and non-consumable in-app purchases are not supported. For Google: one-time products (managed products) are not supported</li>
+  <li>Recurly processes all real-time notifications from Apple and Google for full subscriber lifecycle visibility. Apple's optional <a href="https://developer.apple.com/documentation/appstoreserverapi/send_consumption_information/" target="_blank">consumption request</a> is not currently processed — it requires building a custom workflow to submit data back to Apple and managing subscriber consent</li>
+  <li>To get visibility into mobile app subscriptions created before connecting Recurly, a historical event migration must be initiated. See the <a href="/guides/app-management/app-management/step-by-step-process#migration" target="_blank">migration guide</a> for details</li>
+  <li>Recurly currently offers pre-built integrations for the Apple App Store and Google Play</li>
+</ul>
+
+# Key details
+
+<div className="rp-nav-grid">
+
+<CardGroup cols={2}>
+  <Card title="Apple App Store integration" href="/guides/app-management/sell-and-manage-apple-subscriptions-through-recurly#/" target="_blank">
+    Connect your Apple App Store to sync subscription events, manage subscriber lifecycle, and view Apple subscription data alongside your Recurly metrics.
+  </Card>
+  <Card title="Google Play integration">
+    Connect Google Play to bring auto-renewing subscription metrics and real-time notifications into Recurly for a unified view of your mobile subscribers.
+  </Card>
+</CardGroup>
+</div>
+
+<br />

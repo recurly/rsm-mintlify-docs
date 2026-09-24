@@ -1,0 +1,202 @@
+---
+title: Hosted account management
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Hosted Account Management gives your subscribers a consistent, branded portal to manage their subscriptions without leaving your website. Use Recurly's pre-built hosted pages for a fast setup, or build a fully custom experience using the Recurly API — both options give customers the self-service tools they need.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Hosted Account Management gives subscribers a consistent subscription experience on your website. Choose between Recurly's pre-built hosted pages or a custom-built experience using the Recurly API — either way, customers can view their account status, modify billing details, retrieve past invoices, and manage their subscriptions.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-gear" aria-hidden="true"></i></div>
+    <strong>Streamlined customer experience</strong>
+    <span>Let subscribers manage, update, or cancel their subscriptions without leaving your website — reducing support burden and keeping customers in your ecosystem.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Flexible implementation</strong>
+    <span>Use Recurly's hosted pages for a fast, no-code setup, or build a fully custom experience via the Recurly API — your call based on what your team needs.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Secure access control</strong>
+    <span>Unique secret tokens ensure only authorized customers can access their own account information — with configurable access levels to match your security requirements.</span>
+  </div>
+</div>
+
+# Key details
+
+## Access
+
+Customers use pre-defined URLs to access their account management portal. To find and share those URLs:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the customer account</h4><p>Navigate to Customers → Accounts and select the account.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/162e97316690eaf43d395e6b3525620a1d8c90911d985ec61b54bf19f9518a06-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Locate the hosted page URLs</h4><p>On the right side of the screen, under Hosted Pages, you'll find two options: Account Management URL and Edit Billing Information URL.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/c6e9fd55c77f2e7f0198bc1a199dfee3ae282e1590334649796df8fbd3a2af2b-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>What customers can do depends on their access level. You can configure access as either Account Login or Guest View Only — see <a href="#customer-access">Customer access</a> below.</div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Share the URLs with your customer</h4><p>Share either or both URLs depending on what the customer needs access to.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Security alert</strong>Safeguard these URLs and tokens. Anyone with the link can access the account as the actual customer.</div>
+</div>
+
+### Account Management URL
+
+The Account Management URL automatically authenticates the customer, giving them access to all their invoices and subscriptions. From this page, customers can:
+
+- Change their payment method
+- Cancel subscriptions
+- Edit their billing information
+- Redeem gift cards
+
+
+<Image src="https://files.readme.io/f7ac0d55789a6315f80bb5344b81ef612b61775cb088805e049d7b1cbb081329-image.png" align="center" width="75%" border={true} />
+
+
+Customers can also update their email and password by selecting their name and choosing an option from the dropdown menu.
+
+
+<Image src="https://files.readme.io/db99fa9a3dbb472288b2e164c09f82d6017e007e0a0ed6fd9aa5e499fee89439-image.png" align="center" width="75%" border={true} />
+
+
+### Edit Billing Information URL
+
+This URL takes the customer directly to a page where they can update their billing details.
+
+
+<Image src="https://files.readme.io/066cb8da6a7e2b7308d16d5546db252dd7f31900f727488f0506be43040f847b-image.png" align="center" width="75%" border={true} />
+
+
+## Customer access
+
+Two settings control how customers access Hosted Account Management. The default is **Guest View Only**.
+
+### Account Login
+
+Account Login unlocks the full Hosted Account Management portal. Once configured:
+
+- Customers land on a login page (with a sign-up section) accessible through your unique vanity URL
+- Customers can create an account and log in using the email address stored as their Account Info email in your Recurly admin
+- Each customer gets a distinct Hosted Account Management Login Token URL under Edit Account in the Recurly admin — handle this link with care, as it provides direct account access
+
+To send customers directly to their account from Recurly emails, include the `account_hosted_maintenance_url` parameter in your email templates. See the <a href="/guides/subscriber-management/lifecycle-communications/email-templates/index" target="_blank">Email templates documentation</a> for details.
+
+### Guest View Only
+
+Guest View Only displays limited customer details without requiring account registration. It's primarily used for hosted invoice pages and the billing info page.
+
+### Configure customer access
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Hosted Pages Settings</h4><p>Navigate to Configuration → Hosted Pages Settings, then scroll to Account Management Pages.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable Hosted Account Management</h4><p>Select Enabled to activate the feature.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose your access mode</h4><p>Select either Account Login or Guest View Only.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Set customer permissions</h4><p>Under Account Management Pages, select what customers can view or edit in the portal.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/916a6727a581f61f59ccc2790f816dcff9e2b068275a72f84d089ca5ea696594-image.png" align="center" width="75%" border={true} />
+
+
+## Online Payments
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Plan requirement</strong>Online Payments is available on the Professional or Elite plan.</div>
+</div>
+
+Online Payments lets customers pay manual invoices via credit card, PayPal, Amazon, or ACH directly from the hosted invoice page. When enabled, a **Make a Payment** button appears on the hosted invoice page. If an invoice includes a recurring subscription, customers are shown an opt-in checkbox to use the selected payment method for future automatic renewal payments — if they don't opt in, the next invoice remains manual.
+
+To enable Online Payments, go to **Hosted Pages Settings** and under **Customer Options**, select the **Pay invoices online** checkbox. If the Make a Payment button doesn't appear, confirm that your gateways are configured correctly.
+
+### Test the hosted invoice experience
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Issue a manual invoice</h4><p>Create a manual invoice on the customer's account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Open the invoice in the admin</h4><p>In your Recurly admin, navigate to the invoice.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Select Hosted Invoice</h4><p>Select the Hosted Invoice button. The unique link that opens shows the Guest View version of the customer's hosted invoice, including the Make a Payment option.</p></div>
+  </div>
+</div>
+
+## Customization
+
+Hosted Account Management and Hosted Payment Pages share the same branding configuration. Changes made here apply to both — adjust with both in mind.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Adjust branding</h4><p>In Hosted Pages Settings, under Display Options, update your branding preferences.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Connect Google Analytics</h4><p>Under Google Analytics, enter your tracking code so hosted pages report to your Google Analytics property.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Save your settings</h4><p>Select Save. Remember to protect unique token links and review your settings periodically to maintain a secure experience for your customers.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/83f7bfe9a947a7d30eb2e888f1fc8ae57007a47e72219ae128845de425b14132-image.png" align="center" width="75%" border={true} />
+
+
+<br />

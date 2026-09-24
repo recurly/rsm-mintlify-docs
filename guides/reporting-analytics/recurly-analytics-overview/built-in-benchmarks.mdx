@@ -1,0 +1,138 @@
+---
+title: Built-in benchmarks
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly's built-in benchmarks show how your subscription metrics stack up against similar companies in your industry. All Recurly merchants are included in benchmarking — no setup required. Use the reports to understand where you stand competitively and prioritize improvements to key business metrics.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">4</span>FAQs</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Permissions</strong>Users must have the Analytics user role permission to access built-in benchmarks.</div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Built-in benchmarks provide a detailed view of your key performance metrics and how they compare against similar companies in your industry over time. Metrics are displayed as percentiles — showing your position relative to the industry median and the top and bottom quartiles of merchants in your vertical.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-chart-bar" aria-hidden="true"></i></div>
+    <strong>Industry comparison</strong>
+    <span>Compare your subscription metrics against industry benchmarks to understand strengths and weaknesses relative to your peers.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-crosshairs" aria-hidden="true"></i></div>
+    <strong>Competitive insights</strong>
+    <span>See how others in your vertical are performing and identify opportunities to differentiate and improve your competitive position.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Data-driven decisions</strong>
+    <span>Set realistic goals and expectations for subscription growth and customer retention backed by real-world industry data.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-calendar-days" aria-hidden="true"></i></div>
+    <strong>Forecasting and planning</strong>
+    <span>Enable more accurate long-term planning and resource allocation by grounding growth targets in benchmarked performance data.</span>
+  </div>
+</div>
+
+# Key details
+
+## How benchmarks work
+
+Benchmark reports display metrics as percentiles, showing your site's performance relative to a broad set of industry comparators. Reports include the industry median and the top and bottom quartiles of merchants in your selected industry.
+
+- The displayed time range is based on invoice creation date and can be adjusted for temporal analysis.
+- You can change your default industry on the <a href="/guides/reporting-analytics/recurly-analytics-overview/analytics-settings" target="_blank">Analytics Settings</a> page. Note that percentile changes take effect one day after the request; quartile changes take effect immediately.
+
+***
+
+## Available benchmarks
+
+### Acquisition rate
+
+The percentage of new subscribers gained during a period relative to the subscriber count at the start of that period. <a href="/guides/reporting-analytics/subscriber-management-analytics/subscriber-benchmarks" target="_blank">Learn more</a>.
+
+### Sign-up decline rate
+
+The percentage of unsuccessful initial transaction attempts on an account out of all initial transaction attempts. <a href="/guides/reporting-analytics/subscriber-management-analytics/subscriber-benchmarks" target="_blank">Learn more</a>.
+
+### Churn rate
+
+The proportion of subscribers lost during a period relative to the total subscriber count at the start. Three churn benchmarks are available: <a href="/guides/reporting-analytics/churn-management-analytics/subscriber-churn-benchmarks" target="_blank">Learn more</a>.
+
+- **Overall churn** — Aggregates involuntary and voluntary churn for a complete view of subscriber loss.
+- **Involuntary churn** — Subscribers lost due to payment failures — useful for evaluating payment recovery effectiveness.
+- **Voluntary churn** — Subscribers who cancel of their own accord — a signal of perceived value and satisfaction.
+
+### Renewal invoice paid rate
+
+The percentage of renewal invoices created in a period that are successfully paid. <a href="/guides/reporting-analytics/churn-management-analytics/renewal-benchmarks" target="_blank">Learn more</a>.
+
+### Renewal decline rate
+
+The percentage of renewal invoices that are not successfully paid on the first attempt. <a href="/guides/reporting-analytics/churn-management-analytics/renewal-benchmarks" target="_blank">Learn more</a>.
+
+### Dunning recovery rate
+
+The percentage of invoices successfully recovered after entering the dunning process — a measure of how effective your dunning configuration is. <a href="/guides/reporting-analytics/dunning-campaigns-overview/dunning-benchmarks" target="_blank">Learn more</a>.
+
+# FAQs
+
+<Accordion title="What is a 'paid subscriber'?">
+  A paid subscriber is a subscriber who has paid for at least one invoice associated with their subscription. Subscribers currently in a trial period or in dunning following a trial are excluded.
+</Accordion>
+
+<Accordion title="How should I interpret a low benchmark ranking?">
+  A low benchmark ranking doesn't necessarily indicate a problem — many businesses have legitimate reasons for lower scores in certain metrics. Your percentile is a comparative measure against peers in your industry, not an absolute judgment.
+
+  Things to consider:
+
+  - A ranking drop (e.g., from the 85th to the 65th percentile) over time should prompt an analysis of changes in your business relative to your peers.
+  - Customer demographics — a key driver of benchmark metrics — tend to be stable. For example, serving lower-income consumers often correlates with higher decline rates and lower paid rates.
+  - Review your dunning settings and their impact on paid rates. Use the Compare Dunning Campaigns and Recovered Revenue dashboards for insight.
+  - For businesses with fewer than 100 subscribers, significant fluctuations are more common — analyze trends over several months before drawing conclusions.
+  - Enabling Account Updater for all card types can help improve renewal paid rates and industry percentile.
+</Accordion>
+
+<Accordion title="Which companies am I benchmarked against?">
+  Benchmarks compare your business against other companies in the same vertical. Recurly's built-in benchmarks draw from over 58 million unique subscribers and 2,200 global brands — including merchants with varying subscriber volumes and order sizes.
+</Accordion>
+
+<Accordion title="How do I change the industry I'm benchmarked against?">
+  Navigate to the [Analytics Settings](/guides/reporting-analytics/recurly-analytics-overview/analytics-settings) page and request the industry change. Your percentile rankings will update to reflect the new industry. The change takes effect one day after the request.
+</Accordion>
+
+<Accordion title="Why do my historical benchmarks change over time?">
+  Historical benchmark values can shift for several reasons:
+
+  - **Invoices processed after month end** — Paid rates are based on invoice creation date, but invoices in dunning continue to be collected after month end, affecting benchmarks retroactively.
+  - **Merchants leaving Recurly** — Recurly is required to delete site data when merchants leave, which affects historical benchmark calculations.
+  - **New merchants joining** — New merchants entering the platform alter percentile rankings for existing merchants.
+  - **Industry reclassification** — Recurly occasionally reclassifies merchants into different industries, which can shift benchmark values.
+</Accordion>
+
+<Accordion title="What defines a 'renewal' invoice?">
+  A renewal invoice is created as part of an ongoing subscription. Key characteristics:
+
+  - Excludes the initial sign-up invoice and the first invoice following a trial period.
+  - Renewal invoices are a subset of recurring invoices — all renewal invoices are recurring, but not all recurring invoices are renewals.
+  - Not all invoices in a subscription are recurring — credits and subscription change invoices are not recurring.
+  - This categorization applies consistently across transactions, aligning renewal decline rates (transaction-based) with renewal recovery rates (invoice-based).
+</Accordion>
+
+<Accordion title="I have a sandbox with transactions — why can't I see benchmark data?">
+  Benchmarks use live transaction data only. Sandbox data is excluded from benchmarking. To preview what benchmark data looks like, enable the sample data toggle at the top of the benchmarks page.
+</Accordion>
+
+<br />

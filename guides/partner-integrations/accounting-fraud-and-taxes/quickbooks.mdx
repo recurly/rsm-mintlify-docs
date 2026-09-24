@@ -1,0 +1,334 @@
+---
+title: QuickBooks Online integration
+---
+
+# Overview
+
+### Video
+
+<Embed url="https://www.youtube.com/watch?v=rHQCNbOIXiI" href="https://www.youtube.com/watch?v=rHQCNbOIXiI" typeOfEmbed="youtube" html="%3Ciframe%20class%3D%22embedly-embed%22%20src%3D%22%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Fsrc%3Dhttps%253A%252F%252Fwww.youtube.com%252Fembed%252FrHQCNbOIXiI%253Ffeature%253Doembed%26display_name%3DYouTube%26url%3Dhttps%253A%252F%252Fwww.youtube.com%252Fwatch%253Fv%253DrHQCNbOIXiI%26image%3Dhttps%253A%252F%252Fi.ytimg.com%252Fvi%252FrHQCNbOIXiI%252Fhqdefault.jpg%26key%3D7788cb384c9f4d5dbbdbeffd9fe4b92f%26type%3Dtext%252Fhtml%26schema%3Dyoutube%22%20width%3D%22854%22%20height%3D%22480%22%20scrolling%3D%22no%22%20title%3D%22YouTube%20embed%22%20frameborder%3D%220%22%20allow%3D%22autoplay%3B%20fullscreen%3B%20encrypted-media%3B%20picture-in-picture%3B%22%20allowfullscreen%3D%22true%22%3E%3C%2Fiframe%3E" />
+
+### Limitations
+
+* QuickBooks Online and Recurly have different definitions of customers, especially concerning multicurrency sites.
+* Not all data fields in Recurly have corresponding fields in QuickBooks Online.
+* The integration does not support revenue recognition functionality natively in QuickBooks Online.
+* Always initiate the integration with a fresh QuickBooks instance, especially when integrating with an existing Recurly production site. This approach minimizes the risk of duplication errors.
+
+# Definition
+
+QuickBooks Online integration allows Recurly users to effortlessly sync their subscription billing data with QuickBooks, a leading accounting software. This integration ensures that all financial data, from invoices to transactions, is accurately reflected in both platforms, streamlining accounting processes and enhancing financial accuracy.
+
+# Key benefits
+
+* **Automated syncing**: Eliminate manual data entry with automatic syncing of subscription billing data from Recurly to QuickBooks Online.
+* **Enhanced accuracy**: Ensure consistent data across both platforms to reduce errors in financial reporting.
+* **Time efficiency**: Save valuable time on accounting tasks, redirecting focus to core business operations.
+* **Comprehensive reporting**: Leverage the strengths of both Recurly and QuickBooks Online for detailed financial reporting.
+* **Streamlined operations**: Manage an integrated ecosystem of customer data, invoices, transactions, and more.
+
+# Recommendations
+
+For optimal results:
+
+* Test the integration by connecting your QuickBooks Online trial account to a Recurly sandbox before linking your QuickBooks Online production account to your Recurly Production site.
+* Always initiate the integration with a fresh QuickBooks instance, especially when integrating with an existing Recurly production site. This approach minimizes the risk of duplication errors.
+* In case of accidental deletions of plans or add-ons, contact our Technical Support team immediately. Avoid recreating them with the same codes to prevent duplicate object errors.
+
+# Key integration considerations
+
+Before setting up the integration, consider the following:
+
+* The integration is compatible with QuickBooks Online, not QuickBooks Desktop.
+* Currently, only the U.S. version of QuickBooks Online is supported.
+* Both sandbox and production modes of Recurly sites are supported.
+* For non-production QuickBooks Online accounts, consider signing up for a separate trial account.
+* The integration is available for Professional and Elite Recurly plans.
+* Multicurrency sites might face challenges due to different customer definitions in QuickBooks Online and Recurly.
+* A Recurly site can be connected to only one QuickBooks instance, but multiple Recurly sites can be synced to a single QuickBooks site.
+* Disabling the "Custom Transaction Numbers" function within QuickBooks is recommended to prevent invoice syncing errors.
+* Avoid deleting open credit balances on Recurly customer accounts to prevent unresolved orphaned credit memos in QuickBooks.
+* Note that gift card accounting information may not be fully transferred between Recurly and QuickBooks.
+
+### Recommendations
+
+We recommend connecting your QuickBooks Online trial account to a Recurly sandbox for testing prior to connecting your QuickBooks Online production account to your Recurly Production site.
+
+You should always start with a fresh instance of QuickBooks Online when launching with Recurly or when adding QuickBooks Online to an existing Recurly production site. Connecting Recurly to an instance of QuickBooks Online that contains historical data introduces the risk of duplication errors since objects like accounts, items, plans, and add-ons can never be reused.
+
+Contact our Technical Support team right away in the case of an accidental plan or add-on deletion and do not attempt to recreate using the same plan or add-on code as this will generate duplicate object errors.
+
+# Integration overview
+
+![](https://files.readme.io/0267b20-Standard_Objects_Mapping_Quickbooks.png "Standard Objects Mapping_Quickbooks.png")\
+The integration ensures a one-way sync from Recurly to QuickBooks across six integration points, syncing records in the following sequence:
+
+1. Recurly Items, Plans, Setup Fees, and Fixed Priced Add-Ons with QuickBooks Items
+2. Recurly Accounts with QuickBooks Customers
+3. Recurly Invoices with QuickBooks Invoices
+4. Recurly Payments with QuickBooks Payments and Refunds
+5. Recurly Credits with QuickBooks Credit Memos
+
+### General sync behavior
+
+Upon setting up the integration, a start date will be specified. Records created or updated post this date will be synced with QuickBooks Online. The integration runs hourly, syncing all records created or updated since the last run. It's a one-way sync, meaning updates in QuickBooks post-integration won't reflect back in Recurly.
+
+# Plans and items
+
+Recurly items, plans, fixed-priced add-ons, and setup fees are synced as Items in QuickBooks Online by default. Once stored, their type can be edited in QuickBooks Online. QuickBooks Online requires unique Item Names.
+
+> 🚧 Note: Only Recurly Fixed-Price Add-Ons can be synced to QuickBooks Items. Tiered, Volume, or Stairstep Add-Ons are not supported.
+>
+> For accurate syncing, ensure Recurly plan names, item names, and add-on names are unique. QuickBooks Online uses these as unique identifiers. Also, QuickBooks Online has a 100-character limit for Item names. Longer Recurly object names will be truncated, potentially causing uniqueness errors.
+>
+> During setup, you can specify an account for item records in QuickBooks, either an **Income** or a **Liability** account. It's recommended to choose a Liability account, like Deferred Revenue.
+
+## Resolving duplicate plan errors
+
+Duplicate customer records are a common error. If you encounter a duplicate product error, click the "Resolve Error" button to view a list of matching items or plans in QuickBooks.
+
+<Image align="center" className="border" border={true} src="https://files.readme.io/e3a7ae6-Screen_Shot_2018-12-03_at_4.49.57_PM.png" />
+
+Selecting "Link to Plan" resolves the error, ensuring all invoices using this plan reference the corresponding item in QuickBooks.
+
+# Customers
+
+Recurly's integration ensures that customer data from Recurly's account record type is synchronized with QuickBooks Online's customer record type.
+
+<Image align="center" width="smart" src="https://files.readme.io/4a0ebd4-Screen_Shot_2017-01-20_at_4.23.48_PM.png" />
+
+<Image align="center" className="border" border={true} width="smart" src="https://files.readme.io/6d00ebc-Screen_Shot_2017-01-20_at_4.23.24_PM.png" />
+
+The integration covers the following fields from Recurly to QuickBooks:
+
+* Display Name
+* First and Last Name
+* Company Name
+* Phone Number
+* Email
+* Billing Address
+* Notes
+
+All Recurly accounts will be synchronized, irrespective of the chosen Start Date. Accounts marked as inactive in Recurly before the first sync will not be transferred to QuickBooks. If an account becomes inactive in Recurly post-sync, the inactive tag will not be applied in QuickBooks to ensure future data synchronization.
+
+It's essential to note that while both Recurly and QuickBooks allow for email communication with customers, it's advisable to use only one platform to avoid redundancy.
+
+The integration will only synchronize the billing address and not multiple shipping addresses or the account address. Additionally, due to differences in customer definitions between Recurly and QuickBooks, multicurrency sites may face challenges. For instance, while a Recurly customer can have multiple currencies, a QuickBooks Online customer can only have one. The solution is to synchronize all transactions from Recurly to QuickBooks that match the base currency in Recurly.
+
+### Customer naming
+
+QuickBooks requires uniqueness for the "Display Name" field. During the Recurly-QuickBooks setup, users can choose from:
+
+* First Name + Last Name (e.g., Jeffrey Smith)
+* Account Code (Recurly's unique ID)
+* Company Name
+* Email address
+
+![](https://files.readme.io/b78ddd5-Screen_Shot_2017-04-17_at_2.08.12_PM.png "Screen Shot 2017-04-17 at 2.08.12 PM.png")\
+The chosen field will be used as the Display Name in QuickBooks. For B2C companies, it's recommended to use the Account Code or First + Last Name, while B2B companies might prefer the Company Name.
+
+> 🚧 Important:
+>
+> Only the Account Code is mandatory in Recurly. If a non-mandatory field is chosen and an account in Recurly lacks that field, synchronization to QuickBooks will fail.
+
+### Resolving duplicate customer errors
+
+Duplicate customer records are a common issue. This typically arises due to a clash in the Display Name in QuickBooks. For instance, if two accounts with the name "Jane Doe" exist in Recurly, one of them will fail to synchronize.\
+To resolve, click the "Resolve Error" button. The subsequent screen will display similar customers in QuickBooks. Once a customer is selected, the Recurly customer account will be linked, and all related transactions will be sent to QuickBooks using this customer record.
+
+### Merging customers
+
+QuickBooks provides a feature to merge accounts, which can be useful for managing duplicate customer accounts. Before integrating with Recurly, it's recommended to audit QuickBooks customers to ensure no duplicates exist. If merging is required, follow the guidelines provided [here](https://community.intuit.com/articles/1145424-merging-accounts-vendors-suppliers-or-customers).
+
+## Invoices
+
+Invoices in QuickBooks will reference the associated customer accounts and items/plans. Each Recurly invoice line item will be synchronized to QuickBooks.
+
+<Image align="center" className="border" border={true} width="75% " src="https://files.readme.io/b6e8b2a-Screen_Shot_2017-01-20_at_4.00.46_PM.png" />
+
+The journal entry for the invoice will appear as:
+
+<Image align="center" className="border" border={true} width="75% " src="https://files.readme.io/f8310bd-Screen_Shot_2017-01-20_at_4.00.08_PM.png" />
+
+> 📘 Recommended settings for invoice functionality:
+>
+> * Disable "Automatically apply credits" by navigating to: Gear icon→Account and Settings→Advanced→Automation.
+> * Disable the "Custom Transaction Numbers" function to prevent invoice synchronization errors.\
+>   The integration covers the following invoice fields:
+
+* Customer reference
+* Invoice Number
+* Billing Address
+* Terms
+* Invoice Date
+* Due Date
+* Line item data (product, description, quantity, rate, amount)
+* Coupon information
+* Tax information
+
+### Taxes
+
+The integration supports tax information from Recurly but not using QuickBooks' functionality. Taxed invoices will display tax as a separate line item named "Recurly Sales Tax".
+
+<Image align="center" className="border" border={true} src="https://files.readme.io/7328364-Screen_Shot_2017-01-20_at_4.19.08_PM.png" />
+
+<Image align="center" className="border" border={true} src="https://files.readme.io/a55c50a-Screen_Shot_2017-01-20_at_4.18.58_PM.png" />
+
+### Discounts & coupons
+
+Invoices with coupons will display the discount value separately. Both fixed-amount and percentage-based coupons are supported. However, a list of coupon redemption records will not be synchronized. More details on coupons can be found on the [Recurly Coupons documentation page](https://docs.recurly.com/docs/coupons).
+
+<Image align="center" className="border" border={true} width="75% " src="https://files.readme.io/3bb9a5a-Screen_Shot_2017-01-20_at_4.16.06_PM.png" />
+
+<Image align="center" className="border" border={true} width="75% " src="https://files.readme.io/86ba741-Screen_Shot_2017-01-20_at_4.15.44_PM.png" />
+
+### One-time charges and credits
+
+Recurly allows for charges and credits outside of a subscription. These will be synchronized to QuickBooks once invoiced. All one-time charges and credits will be mapped to the default account set up in Recurly.
+
+### Failed invoices
+
+If an invoice fails in Recurly, no changes will be made in QuickBooks. It's recommended to write off such invoices in QuickBooks at the end of an accounting period if they remain uncollected.
+
+# Transactions
+
+Recurly's integration ensures that transactions are mapped to the appropriate payment or refund receipt object within QuickBooks. Depending on the nature of the transaction:
+
+* **Payments** (positive amounts) are mapped to the payment object in QuickBooks, which is then associated with the corresponding invoice.
+* **Refunds** (negative amounts) result in the creation of a refund receipt in QuickBooks. These receipts don't reference other records but are associated with the relevant customer record in QuickBooks.
+
+**Key points to note:**
+
+* Payments are directed to the "Undeposited Funds" account instead of a direct bank account.
+* Payments in QuickBooks will reference the specific invoice the transaction covers.
+* Transactions that are Auth and Void won't be synced to QuickBooks since they don't have a financial impact.
+* Refunds are synced with QuickBooks' refund object.
+* Refunds, like payments, are directed to the "Undeposited Funds" account.
+* The transaction number is recorded in the "Customer Memo" field of the transaction record.
+
+**Fields from Recurly that sync with QuickBooks' payment record include:**
+
+* Invoice associated with the payment
+* Amount
+* Payment Date
+* Gateway Reference code (recorded in the Memo field)
+* Payment account (determined during integration configuration)
+
+## Credits
+
+Credits in Recurly are synchronized with QuickBooks' Credit Memo object. Notably:
+
+* Account-level credits aren't synced until they're invoiced.
+* When an invoice with a credit line item is present, it results in the creation of an invoice record, a Credit Memo (CM) record, and a payment record in QuickBooks Online to associate them.
+* Credits that include tax deductions will be factored in, reducing the "Recurly Sales Tax Payable Register."
+
+Fields from Recurly's invoice that sync with QuickBooks' invoice record include:
+
+* Customer reference
+* Invoice Number
+* Billing Address
+* Terms
+* Invoice Date
+* Due Date
+* Line item data (product, description, quantity, rate, amount)
+* Coupon details
+* Tax details
+* Invoice total
+* Payment status (if paid, the payment transaction is linked)
+
+> 🚧 Take into account:
+>
+> Carryforward credits, like credits from downgrades that remain uninvoiced in Recurly, will sync to QuickBooks. Deleting this credit in Recurly won't reflect in QuickBooks, necessitating manual deletion within QuickBooks.
+
+## Revenue Recognition with QuickBooks Online
+
+QuickBooks doesn't inherently support revenue recognition. Thus, for those using QuickBooks Online, it's recommended to leverage [Recurly's Revenue Recognition](https://docs.recurly.com/docs/revenue-recognition).\
+For those practicing accrual-based accounting, it's advised to set up Recurly products to sync to QuickBooks using a deferred revenue account. At each month's end, a journal entry should be made to recognize revenue.
+
+## Managing sync errors
+
+Recurly provides visibility into sync errors between itself and QuickBooks Online, ensuring users are aware of any discrepancies.
+
+<Image align="center" className="border" border={true} width="75% " src="https://files.readme.io/9b28539-Ignore_Error.png" />
+
+However, it's not always feasible to expect flawless synchronization between the two systems due to various potential issues. Therefore, Recurly allows users to ignore sync errors for Invoice and Transaction objects. If an error arises that isn't easily resolvable, it's recommended to manually recreate the invoice or transaction in QuickBooks and then "Ignore" the error in Recurly.
+
+## QuickBooks Online in Recurly's sandbox
+
+### Clearing test data
+
+In a Recurly sandbox, the "Clear Test Data" button (found in Site Settings) will remove your QuickBooks configuration.
+
+### Transitioning to production
+
+When transitioning from a sandbox to production in Recurly, always connect to a fresh instance of QuickBooks. Recurly will automatically remove QuickBooks from your integrations during this transition.
+
+# Integrating Recurly with QuickBooks Online
+
+### Step 1: Preparation
+
+Ensure you have an active account with both **Recurly** and **QuickBooks Online**. Backup your QuickBooks Online data to ensure you can restore your data in case of any discrepancies during the integration. Audit your customers in QuickBooks to ensure there are no duplicate customer accounts. If duplicates are found, consider merging them in QuickBooks before proceeding.
+
+### Step 2: Access Recurly's integration settings
+
+Log in to your Recurly account. Navigate to the **Integrations** section. Look for the **QuickBooks Online** integration option.
+
+### Step 3: Connect to QuickBooks Online
+
+Click on the **Connect** or **Setup** button next to the QuickBooks Online integration option. You'll be redirected to a QuickBooks Online login page. Enter your QuickBooks credentials and log in. Grant the necessary permissions to allow Recurly to access your QuickBooks data.
+
+### Step 4: Configuration
+
+Once connected, you'll be redirected back to Recurly to configure the integration settings. Set up the mapping between Recurly and QuickBooks Online fields. Determine how you want to handle taxes, discounts, and other specific transaction types. Choose the default revenue account in QuickBooks where Recurly transactions will be recorded.
+
+### Step 5: Testing the integration (Optional but recommended)
+
+If you have a sandbox or test environment for both Recurly and QuickBooks Online, use this environment first to test the integration. Create a few test transactions in Recurly and ensure they sync correctly to QuickBooks Online. Check for any errors or discrepancies and adjust the configuration settings if needed.
+
+### Step 6: Finalize the integration
+
+Once you're satisfied with the test results, finalize the integration settings in Recurly. If you used a sandbox for testing, repeat the integration process in your production environment.
+
+### Step 7: Monitor the integration
+
+Regularly check the sync status in Recurly to ensure data is being transferred to QuickBooks Online without errors. Address any sync errors promptly.
+
+### Step 8: Ongoing management
+
+Periodically review the integration settings to ensure they still align with your business processes and accounting needs. Stay updated with any changes or updates from both Recurly and QuickBooks Online that might affect the integration.\
+By following these steps, you should have a seamless integration between Recurly and QuickBooks Online, ensuring accurate and efficient financial data management.
+
+# FAQs
+
+**Q:** Do you send subscription information to QuickBooks?
+
+**A:** No, we only send Invoices, Credit Memos, Payments, and Refunds.
+
+**Q:** What are the accounting entries made by the integration?
+
+**A:** By default:
+
+* Invoices debit accounts receivable and credit an account that you select under "Income Account" in the integration setup.
+* Payments debit Undeposited Funds and credit accounts receivable.
+* Credit Memos (negative invoices) debit an account that you select under "Income Account" in the integration setup and credit Accounts Receivable.
+* Refunds debit Accounts Receivable and Credit Undeposited Funds.
+
+**Q:** How do I manage my revenue with this integration?
+
+**A:** While we are not accountants and cannot advise you on exactly how to handle your accounting to become compliant with GAAP or IFRS, we can suggest a process to handle revenue. We recommend that you set up the integration with a deferred revenue account. When invoices are posted to Recurly, they will transfer to QuickBooks using this deferred revenue account. You can then use Recurly Revenue Recognition (see above) or another process to calculate the amount of deferred revenue which should be recognized each month, and prepare a journal entry. This is how most of our merchants handle rev rec in QuickBooks. Again, this is not a hard and fast accounting rule, but a suggestion on process.
+
+**Q:** Why are payments applied to Undeposited Funds instead of a cash account?
+
+**A:** This is done because most of our merchants have expressed that they do not want each and every payment to affect their cash account. We recommend that merchants use the "Make Deposits" functionality within QuickBooks to transfer one journal entry of payments from Undeposited Funds to Cash at the end of each month.
+
+**Q:** Am I able to alter the Income accounts on a product-by-product basis?
+
+**A:** Yes! All items, plans, fixed priced add-ons, and setup fees are transferred to QuickBooks as non-inventory items, and by default are applied to the Income account you set up in the integration setup. However, you can change these accounts on an item-by-item basis.
+
+**Q:** Am I able to trigger an on-demand sync?
+
+**A:** Yes! Use the Queue sync button on the QuickBooks Online Integration screen to trigger a sync process automatically. Otherwise, the sync will run once every hour.
+
+**Q:** I use Stripe as my gateway, and I see transactions marked with a pi\_ value, why is that?
+
+**A:** Stripe's newest [API version](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-charges) uses Payment Intents, which Recurly migrated all merchants over to March 25th, 2021 or earlier. The new PI integration updated the transaction value that maps back to a Stripe transaction using a pi value. The old charges endpoint is not their supported API version, and may be deprecated at some point. Previous transactions will still be marked with the previous ch ID in Recurly, which would be reflected in Xero.

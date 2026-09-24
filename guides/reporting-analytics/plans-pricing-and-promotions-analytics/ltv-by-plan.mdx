@@ -1,0 +1,112 @@
+---
+title: LTV by plan
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Plan Performance LTV shows you the lifetime value of your customers, broken down by plan. See both the average projected revenue per subscription and the total lifetime value across your top plans, so you can see which relationships are worth the most over time.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have Analytics user role permission.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Plan Performance LTV gives you an in-depth look at the Lifetime Value (LTV) of your customers — the average projected revenue a customer is expected to contribute over their relationship with your business. Two sections, Subscription Lifetime Value and Average LTV, give you both a holistic and a granular view of that value.</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>It's important to understand the difference between a subscriber and a subscription. A single subscriber might hold multiple active subscriptions, but this dashboard counts each individual subscriber — not the number of subscriptions they hold. Data only includes plans that have had at least one subscriber.</div>
+</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong>For more on navigating and using the filter tools, see our <a href="https://docs.recurly.com/docs/recurly-analytics-overview#navigation-features" target="_blank">analytics overview documentation</a>.</div>
+</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Strategic revenue projection</strong>
+    <span>Use the Average LTV formula to get a clearer picture of the potential revenue each plan can generate.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Complete customer valuation</strong>
+    <span>See both a detailed breakdown and an overall view of lifetime value by plan, highlighting which plans perform best over the long term.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Informed business decisions</strong>
+    <span>Identify your highest-performing plans and understand true customer value to refine your pricing, acquisition, and retention strategies.</span>
+  </div>
+</div>
+
+# Key details
+
+## Average LTV
+
+Average LTV reflects the average projected revenue of subscriptions in the selected plans. It's calculated using the formula:
+
+**Average Subscription LTV = ARPS (1 + d) / (d + subscription churn rate)**
+
+Where:
+
+<ul className="rp-list">
+  <li><strong>ARPS</strong> is the Average Revenue Per Subscription — the MRR contributed by all subscriptions active at the end of the month, divided by the number of active subscriptions at the end of the month.</li>
+  <li><strong>Subscription churn rate</strong> is the number of churned subscriptions divided by the number of subscriptions active at any point during that month.</li>
+  <li><strong>d</strong> is the discount rate — a consistent value used in revenue projection that factors in market, financial, and other risks, along with the time value of money. Recurly sets this at 1% by default, but you can adjust it using the Monthly Discount Rate dropdown.</li>
+</ul>
+
+## Subscription lifetime value
+
+This section visualizes the lifetime values of your subscriptions for selected plans, using a detail chart and a total line chart.
+
+#### Lifetime value
+
+The line chart shows the calculated lifetime value of subscriptions for your selected plans, giving you a picture of the fiscal value of long-term customer relationships.
+
+
+<Image src="https://files.readme.io/e7b5b44af7271b28bc5a561c403f612c74a2e219455ee2ca3516537ac779505f-image.png" align="center" width="75%" border={true} />
+
+
+#### Subscription lifetime values
+
+This detailed chart breaks down lifetime value for the top 5 plans by your selected timeframe, helping you understand the long-term financial performance of each one.
+
+
+<Image src="https://files.readme.io/0c426c7757bc49e9f5b316df96ff266b5d46bb0f61e4e080e8adb91b652e2e69-image.png" align="center" width="75%" border={true} />
+
+
+### How to use the Average LTV feature
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Access the LTV view</h4><p>On your Plan Performance dashboard, navigate to the LTV view.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Explore the Subscription Lifetime Value section</h4><p>Review the Lifetime Value and Subscription Lifetime Values charts to understand the LTV of different plans.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Use the Average LTV formula</h4><p>Calculate Average Subscription LTV using ARPS, churn rate, and discount rate for a deeper read on your LTV.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Identify high-performing plans</h4><p>Use these charts to find which plans have the highest LTV, and consider focusing marketing and retention efforts there.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Apply these insights to strategy</h4><p>Use what you find to inform decisions about pricing, customer acquisition, and retention.</p></div>
+  </div>
+</div>

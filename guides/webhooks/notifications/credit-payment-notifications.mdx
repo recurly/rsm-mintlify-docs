@@ -1,0 +1,58 @@
+---
+title: Credit payment notifications
+---
+
+Credit Payment Notifications inform you when an open credit balance is applied to an invoice or when a credit payment is voided due to a failed charge invoice. These events help you keep your records in sync with credit invoice activity.
+
+### Prerequisites and limitations
+
+* **Credit Invoices feature** must be enabled on your site (auto-enabled for sites created after May 8, 2018 UTC).
+* Only two events are emitted: `credit_payment.created` and `credit_payment.voided`.
+* JSON payloads contain metadata; XML payloads include full `<credit_payment>` and `<account>` details.
+
+# Key details
+
+| JSON                     | XML                                    | Description                                                                                                                                                            |
+| ------------------------ | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `credit_payment.created` | `<new_credit_payment_notification>`    | Sent when a credit payment is created (applying credit balance in a billing event, removing a credit invoice balance, or refunding a credit payment as a transaction). |
+| `credit_payment.voided`  | `<voided_credit_payment_notification>` | Sent when a credit payment is voided because the charge invoice it was applied to has failed.                                                                          |
+
+## Credit payment schema
+
+```json
+{
+  "id": "rafj5gtxla1h",
+  "object_type": "credit_payment",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "created",
+  "event_time": "2022-07-27T21:53:49Z",
+  "uuid": "63b0721217fbbd9bda968544aa920cf3"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_credit_payment_notification>
+  <account>
+    <account_code>1234</account_code>
+    <username></username>
+    <email></email>
+    <first_name></first_name>
+    <last_name></last_name>
+    <company_name></company_name>
+    <phone></phone>
+  </account>
+  <credit_payment>
+    <uuid>42fa2a56dfeca2ace39b0e4a9198f835</uuid>
+    <action type="symbol">payment</action>
+    <currency>USD</currency>
+    <amount_in_cents type="integer">3579</amount_in_cents>
+    <original_invoice_number type="integer">2389</original_invoice_number>
+    <applied_to_invoice_number type="integer">2390</applied_to_invoice_number>
+    <original_credit_payment_uuid nil="true"></original_credit_payment_uuid>
+    <refund_transaction_uuid nil="true"></refund_transaction_uuid>
+    <created_at type="datetime">2018-02-12T18:55:20Z</created_at>
+    <updated_at type="datetime">2018-02-12T18:55:20Z</updated_at>
+    <voided_at type="datetime" nil="true"></voided_at>
+  </credit_payment>
+</new_credit_payment_notification>
+```

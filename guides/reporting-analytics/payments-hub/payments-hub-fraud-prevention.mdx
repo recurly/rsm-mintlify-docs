@@ -1,0 +1,126 @@
+---
+title: Fraud prevention
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Fraud Prevention dashboard gives you a comprehensive view of your Kount integration's performance, tracking key metrics such as blocked transactions, risk scores, and fraud patterns across payment methods and gateways. Together, these charts let your fraud and operations teams monitor threats in real time, catch emerging risk trends early, and focus prevention efforts where they'll have the greatest impact.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>You must have the Analytics user role permission.</li>
+  <li>You must have Kount enabled on your Recurly site.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Fraud Prevention dashboard gives you a comprehensive view of your Kount integration's performance, tracking key metrics such as blocked transactions, risk scores, and fraud patterns across payment methods and gateways.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Quantify fraud prevention at a glance</strong>
+    <span>The Transactions Blocked KPI immediately shows how actively the system is protecting your Recurly site. The period-over-period comparison lets stakeholders quickly assess whether fraud pressure is increasing or decreasing without a deep data dive.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Detect and respond to fraud attacks in real time</strong>
+    <span>The Blocked Transactions Over Time chart makes sudden fraud spikes immediately visible, so fraud and ops teams can investigate and respond quickly rather than discovering an attack after significant damage has occurred.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Understand escalating risk before it becomes a problem</strong>
+    <span>The Average Risk Score and its trend over time work together as an early warning system. A rising risk score often precedes a spike in blocked transactions, giving teams a window to tighten rules or thresholds proactively rather than reactively.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Target fraud prevention efforts where they matter most</strong>
+    <span>The Fraud by Payment Method breakdown shows that card-based payments (credit and debit combined) account for nearly 80% of fraud attempts, helping teams prioritize where to add friction, strengthen authentication, or adjust risk rules for maximum impact.</span>
+  </div>
+</div>
+
+# Key details
+
+## General filters (top left corner)
+
+<ul className="rp-list">
+  <li><strong>Date range</strong> — Adjust the time interval for your data to track and analyze long-term trends. The default view is 30 days.</li>
+  <li><strong>Country</strong> — Filter data to one or more countries.</li>
+  <li><strong>Gateway</strong> — Isolate individual payment gateways.</li>
+  <li><strong>Payment method</strong> — Drill down into fraud for a specific payment method.</li>
+  <li><strong>Currency</strong> — Filter by the various currencies available for your site's geo-location.</li>
+</ul>
+
+## Transactions blocked (fraud)
+
+The total number of transactions flagged and blocked as fraudulent in the selected period.
+
+If this number is higher than you'd expect, or has spiked, here are a couple of things to consider:
+
+<ul className="rp-list">
+  <li>Your site may be under attack from a fraudster, and Kount is working properly.</li>
+  <li>You've recently updated a fraud rule in Kount that may be misbehaving. Talk to your Kount representative to review rules on blocked transactions you believe are false positives.</li>
+</ul>
+
+
+<Image src="https://files.readme.io/b5fff756ef3175909531dfc747c58471a1837253a0b15604962ce1792ceca132-image.png" align="center" width="40%" border={true} />
+
+
+## Blocked transactions over time
+
+This line chart tracks the daily count of fraud-blocked transactions in the time period.
+
+
+<Image src="https://files.readme.io/f680c12887edb3f40f467bf19548b4ca3d655731ee1d93fe0003abe0e482880b-image.png" align="center" width="75%" border={true} />
+
+
+## Average risk score
+
+The mean Kount risk score assigned to transactions in the selected period, along with a comparison to the previous time period.
+
+
+<Image src="https://files.readme.io/8c0173d36cf361d293b7c93b4fcb4e0254974106a97f735c1b445e1bd73650ab-image.png" align="center" width="40%" border={true} />
+
+
+## Average risk score over time
+
+This line chart tracks the daily average Kount risk score in the time period. Use it to identify when risk levels start rising so you can act before blocked transaction volume surges.
+
+
+<Image src="https://files.readme.io/bb4fa2907dee107ab721ce5670bba48681c1c7d6dbdcdf7a84e2d8d4e2e1fb3a-image.png" align="center" width="75%" border={true} />
+
+
+## Fraud by payment method
+
+This pie chart breaks down blocked fraud transactions by payment method.
+
+
+<Image src="https://files.readme.io/209e7687a5c62bdb347d4293fe68568eef1344f3f562cf7e9367b7ba8b3820c0-image.png" align="center" width="75%" border={true} />
+
+
+## Blocked transactions by gateway
+
+This bar chart shows the volume of fraud-blocked transactions by payment gateway.
+
+
+<Image src="https://files.readme.io/e3edc529acadd48b9440084b0a9be5bc6b6167c4b89428766ba3c7e4766cbbbd-image.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/6447de1fd5e69285189708a13155df282cb500ff2c57bdb22d044769b65f43a0-image.png" align="center" width="75%" border={true} />
+
+
+***
+
+<br />
+
+<br />

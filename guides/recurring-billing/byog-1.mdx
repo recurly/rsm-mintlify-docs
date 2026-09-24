@@ -1,0 +1,120 @@
+---
+title: BYOG
+---
+
+[https://docs.recurly.com/docs/beta-program-docs](https://docs.recurly.com/docs/beta-program-docs)
+
+* In your Recurly site, **navigate** to SSO Settings under the Admin section.
+* **Select** Enable under SCIM Provisioning.
+* **Select** an initial provisioning role for new users.
+  * This role will be used for initial user provisioning. The role for the user can be updated later.
+  * By default, new sites have only a `site admin` role. It is recommended to create a new user role under the Role section with the desired permissions.
+* **Click** Save Changes to save the configuration and generate an API Token.
+* **Click** on the icon at the end of the API Token field to display the API Token. Copy the API Token to your clipboard.
+* In the Okta portal, **navigate** to the Recurly SAML App.
+* **Click** on the Provisioning tab.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/a584551-image.png" />
+
+* **Click** on Configure API Integration.
+* **Click** on Enable API Integration.
+* **Paste** the Recurly API Token copied from the Recurly SSO Settings page to the API Token field.
+* **Click** Test API Credentials.
+* After a successful test of the API Integration, **click** "Save".
+* Under To App, **Click** "Edit".
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/f4e4d9f-image.png" />
+
+* **Enable** Create Users and Deactivate Users and Click Save.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/563ef76-image.png" />
+
+* As users are Assigned the Recurly app in Okta, the users will receive an invite to the Recurly site that was configured for SCIM Provisioning.
+* When users are unassigned the Recurly app in Okta, the user will be removed from the site configured for SCIM Provisioning.
+
+# SCIM group support instructions
+
+## SCIM group configuration in Okta
+
+* **Open** the Okta Admin portal. Expand Directory and click on Groups.
+
+* **Create** a Group in Okta. 
+
+* **Expand** Applications and click on Applications.
+
+* **Select** Recurly app.
+
+* **Click** on Push Groups then Find Groups by Name.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/25c8ae2-image.png" />
+
+* For each group created in Okta for this Recurly site, type in the name of the group then select it.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/66d3f59-image.png" />
+
+* **Click** save.
+
+> **Note:** The group pushed under Push Groups should also not be assigned to the application per Okta Documentation on limitations of Group Push. [https://help.okta.com/oie/en-us/content/topics/users-groups-profiles/usgp-about-group-push.htm](https://help.okta.com/oie/en-us/content/topics/users-groups-profiles/usgp-about-group-push.htm)
+
+* The group should appear in Recurly app prefixed with SCIM\_
+
+> **Note:** When a group is first pushed to the Recurly app, the corresponding role in the Recurly app will be created with the default permissions of Customer Read Only. The permissions for the role will need to be updated in the Recurly app.
+
+## Set group permissions in the Recurly app
+
+* In the Recurly app, navigate to Roles under the Admin section.
+
+* Select the role pushed to the Recurly app from Okta.
+
+* Click on Edit.
+
+* Assign appropriate permissions to the role.
+
+> **Notes:**
+>
+> * Groups created from Okta can only be renamed and deleted from Okta when SCIM provisioning is enabled for the site.
+> * Users should only be assigned to one Group in Okta. Users assigned to multiple groups in Okta will only inherit the permissions of the last group assignment.
+
+## Assigning users through Okta SCIM integration
+
+* User(s) can be individually assigned to the Recurly Okta App.
+
+* User(s) can be assigned through a group to the Recurly Okta App.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/13d8b40-image.png" />
+
+* User(s) will be assigned the default SCIM role configured in the Recurly app for the site.
+  * If not using Group Push, the user can be assigned a different role in the Recurly app.
+
+## Removing users through Okta SCIM integration
+
+* If the user is individually assigned to the Recurly Okta App, unassign the user from the Recurly Okta App. This will result in the user being removed from the Recurly app.
+* If the user is assigned through a group assigned to the Recurly Okta App, remove the user from the group. This will result in the user being removed from the Recurly app.
+  * Unassigning the group from the Recurly Okta App will remove all users belonging to the group from the Recurly app.
+
+## Using Okta groups to assign the Recurly app roles to users provisioned via SCIM
+
+* After the user is assigned to the Recurly Okta Application and groups are pushed to the Recurly app via Group Push and permissions updated, assign the user to a group in Okta. The user in the Recurly app will be assigned the corresponding role.
+  * It is recommended to only assign a user to a single pushed group in Okta. Assigning a user to multiple pushed groups will result in the user being assigned to the corresponding role of the last pushed group the user was assigned to.
+
+## Changing a user’s role through Okta groups
+
+* If the user is already assigned to an Okta group pushed to the Recurly app, remove the user from the pushed Okta group. The user’s role in the Recurly app will be updated to the default SCIM role configured in the Recurly app for the site.
+* Assign the user to a pushed Okta group corresponding to the role the user should be assigned in the Recurly app. The user’s role in the Recurly app will be updated to the corresponding role.
+
+## Migrating to using Okta group push for user role management in the Recurly app
+
+* Ensure existing users are assigned the Recurly Okta Application individually or via a group that is not pushed to the Recurly app.
+* Push Okta groups to Recurly apps via Group Push described above and configure permissions for the created role(s) in Recurly app.
+* Assigning a user to a pushed group in Okta will assign the user to the corresponding role in the Recurly app.
+* In order for user(s) to not lose their existing permissions, ensure the user is assigned to a group where the corresponding Recurly app role has the same permissions.
+
+## Removing users through Okta SCIM integration
+
+* If the user is individually assigned to the Recurly Okta App, unassign the user from the Recurly Okta App. This will result in the user being removed from the Recurly app.
+* If the user is assigned through a group assigned to the Recurly Okta App, remove the user from the group. This will result in the user being removed from the Recurly app.
+
+## Removing pushed Okta groups
+
+* Unlinking and deleting the Okta group pushed to the Recurly app will delete the corresponding Recurly app role. Any users assigned this role will be updated with the default SCIM role assigned in the Recurly app for the site. This is the recommended way of unlinking a pushed Okta group.
+* Unlinking and leaving the Okta group pushed to the Recurly app will leave the corresponding Recurly app role. Any users assigned this role will continue to access the Recurly app with the permissions assigned to this role.

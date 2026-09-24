@@ -1,0 +1,223 @@
+---
+title: Apple Pay on the Web
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly supports Apple Pay on the Web via Recurly.js v4 and Checkout across multiple gateways. Setup requires coordinating with Recurly Support to enable feature flags and generate Certificate Signing Requests (CSRs), which are then used to create certificates in the Apple Developer portal.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#checkout-flow"><span className="rp-toc-num">3</span>Checkout flow</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">4</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>An Apple Developer account and a verified domain where your checkout page will reside.</li>
+  <li>Recurly.js v4 or <a href="https://docs.recurly.com/docs/checkout" target="_blank">Checkout</a>.</li>
+  <li>A supported Apple Pay gateway: <a href="/guides/payment-orchestration/payment-gateways-1/adyen" target="_blank">Adyen</a>, <a href="/guides/payment-orchestration/payment-gateways-1/stripe" target="_blank">Stripe</a>, <a href="https://docs.recurly.com/docs/braintree" target="_blank">Braintree</a>, <a href="/guides/payment-orchestration/payment-gateways-1/vantiv" target="_blank">Vantiv</a>, <a href="/guides/payment-orchestration/payment-gateways-1/worldpaydlocal-latam-support" target="_blank">Worldpay</a>, <a href="/guides/payment-orchestration/payment-gateways-1/commerce-hub" target="_blank">Commerce Hub</a>, <a href="/guides/payment-orchestration/payment-gateways-1/checkoutcom" target="_blank">Checkout.com</a>, <a href="/guides/payment-orchestration/payment-gateways-1/chase-paymentech-orbital" target="_blank">Chase Orbital</a>, <a href="/guides/payment-orchestration/payment-gateways-1/nuvei" target="_blank">Nuvei</a>, or <a href="/guides/payment-orchestration/payment-gateways-1/cybersource" target="_blank">CyberSource</a>.</li>
+  <li><a href="/guides/payment-orchestration/gateway-configuration-and-features/payment-gateways#/zero-dollar-authorizations-zda" target="_blank">Zero Dollar Authorizations</a> are supported with this payment method.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Apple Pay on the Web is not available on Recurly <a href="/guides/hosted-pages/hosted-payment-pages" target="_blank">Hosted Payment Pages (HPP)</a>. It is supported on Recurly Checkout.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Apple Pay on the Web lets customers make fast, secure payments on your website using Apple Pay, without entering card details manually. Recurly supports this through Recurly.js v4 and Checkout. Before starting integration, review Apple's <a href="https://developer.apple.com/apple-pay/get-started/" target="_blank">getting started guide</a>.</div>
+
+
+<Image src="https://files.readme.io/3a0f547-ApplePay-Docs2x.png" align="center" width="75%" border={true} />
+
+
+# Key details
+
+<div className="rp-card">
+
+### Use cases
+
+**Ecommerce checkout** — Offer a fast, low-friction payment option for customers on your web pages using Apple Pay.
+
+**Subscription billing** — Simplify recurring payment setup for customers with Apple Pay stored in their device wallet.
+
+**Multi-domain support** — Contact Recurly Support about enabling the Merchant Registration API capability if you need Apple Pay across multiple domains.
+
+**Apple Pay in Chrome** — Apple Pay is not natively supported in Recurly.js on Chrome, but you can <a href="https://developer.apple.com/documentation/applepayontheweb/loading-the-latest-version-of-apple-pay-js#Load-the-auto-updating-version-of-the-SDK" target="_blank">load the latest version of Apple Pay JS</a> in your environment to enable it. See the <a href="/guides/recurly-js/apple-pay#non-safari-browsers" target="_blank">ApplePay Recurly.js documentation</a> for details. Not supported in Recurly Checkout UI.
+
+</div>
+
+## Token types
+
+Understanding the token types used in Apple Pay helps you configure the correct behavior for subscriptions.
+
+<Accordion title="FPAN — Funding Primary Account Number">
+  The actual credit card number physically printed on the card. Also referred to as PAN.
+</Accordion>
+
+<Accordion title="DPAN — Device Primary Account Number">
+  A tokenized card number created when a consumer adds a card to a device wallet (e.g., iPhone Apple Wallet). DPANs are sent to gateways in place of the actual FPAN.
+
+  - Tied to a specific device (e.g., a specific iPhone or iPad) and typically accompanied by a Cryptogram when the customer is in session.
+  - DPANs are full card numbers with different digits from the FPAN, and can appear on receipts and other UI elements.
+  - DPANs are invalidated when a consumer removes the card from their device. If they re-add the same card or add a new one, a new DPAN is created. Subscriptions using a DPAN can fail due to this consumer-driven behavior and are non-recoverable.
+</Accordion>
+
+<Accordion title="MPAN — Merchant-Level Token">
+  A merchant-level token used for Apple Pay that is associated with the merchant rather than a specific device. MPANs are not transferable between merchants and are not suitable for M\&A-related data migrations.
+
+  - MPANs are not invalidated when a consumer removes their card from a device, making them subscription-friendly.
+  - MPANs benefit from expiry date forwarding, but card number changes are not received via Account Updater. Apple may receive new FPAN details, but the MPAN in Recurly remains unchanged.
+  - MPANs are full card numbers with different digits from the FPAN, and can appear on receipts and other UI elements.
+</Accordion>
+
+<Accordion title="Cryptogram">
+  A one-time authentication value generated during an Apple Pay transaction. Cryptograms are not stored and must be sent on all customer-initiated transactions.
+</Accordion>
+
+## Best practices and compliance
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> DPAN to MPAN migration required</strong> Apple requires merchants to migrate from DPANs to MPANs for recurring subscriptions. This is a Visa requirement for recurring payments. Update your Recurly.js integration to request MPANs. After July 2025, merchants must request MPANs to avoid declines. DPANs are grandfathered in but are not guaranteed to work indefinitely.</div>
+</div>
+
+- **Return customers** — Use Recurly.js even when an existing account code or billing info is on file. Recurly.js collects device-related cryptogram data required for customer-initiated Apple Pay transactions. See <a href="/guides/recurly-js/3d-secure#re-authenticating-existing-billing-information" target="_blank">re-authenticating existing billing information</a>.
+- **Always request MPANs** — Set your integration to request Merchant-level tokens. Token type is exposed on the payment method as `apple_pay` (DPAN) or `apple_pay_merchant_token` (MPAN). Note: not all issuers support returning MPANs — this is not always an integration issue.
+
+## Using Apple Recurring Requests (MPAN)
+
+To request MPANs for renewals, use Simple or Advanced Labeling in your Recurly.js integration.
+
+- **Simple Labeling** — Add the recurring flag to the Apple Pay constructor. See the <a href="/guides/recurly-js/apple-pay" target="_blank">Recurly.js Apple Pay documentation</a>.
+- **Advanced Labeling** — Configure the `RecurringPaymentRequest`. See <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/applepayrecurringpaymentrequest" target="_blank">Apple's RecurringPaymentRequest documentation</a>.
+
+For full context, see Apple's documentation on <a href="https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest/3955946-recurringpaymentrequest" target="_blank">specifying the recurring payment request</a>.
+
+<Callout icon="📘" theme="info">
+  ### **MPAN or DPAN Return Behavior**
+
+  **Keep in mind&#x20;**&#x74;hat MPANs are not guaranteed even if you are integrated properly. MPANs are returned based on a combination of decisions beyond Recurly's control. Parties involved are: Apple, Card Networks, Issuing Bank - -between these three entities, a decision is made to return a DPAN or an MPAN based on Issuer support, card network and/or bank policies, your merchant risk profile, and other indicators.
+
+  If you are not receiving MPANs consistently, or at all, and your integration looks accurate, it is likely due to this decisioning process.
+</Callout>
+
+# Checkout flow
+
+## Step 1: Request keys and CSRs from Recurly Support
+
+Contact **Recurly Support** to initiate the following:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Enable the Apple Pay Web Payments feature flag</h4><p>Once enabled, a new <strong>Apple Pay</strong> checkbox will appear in your Gateway Settings. Check this box, then navigate to <strong>Configuration → Apple Pay</strong> to upload keys and certificates.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Obtain your Merchant ID and Payment Processing Keys</h4><p>Recurly Support will provide the keys needed for Apple Pay integration.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Receive your Certificate Signing Requests (CSRs)</h4><p>CSRs are required to create the Apple Pay Payment and Merchant Identity certificates. Each CSR is unique to your merchant account — allow several business days for generation. You must use the Recurly-provided CSRs to ensure the integration works correctly.</p></div>
+  </div>
+</div>
+
+## Step 2: Create certificates in the Apple Developer portal
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Request an Apple Pay Certificate</h4><p>In the Apple Developer portal, request an <strong>Apple Pay Certificate</strong>, select the correct Merchant ID, and upload the <code>payment.csr</code> file.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Request a Merchant Identity Certificate</h4><p>Repeat the process, this time selecting <strong>Merchant Identity Certificate</strong> and uploading the <code>merchant_id.csr</code> file.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Certificate reference</strong><br /><strong>Merchant Identity Certificate</strong> — authenticates your merchant sessions with Apple Pay servers.<br /><strong>Apple Pay Certificate (Payment Processing Certificate)</strong> — used to process transactions through Apple Pay.</div>
+</div>
+
+## Step 3: Upload certificates and finalize setup in Recurly
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Apple Pay configuration</h4><p>In Recurly, navigate to <strong>Configuration → Apple Pay</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter your verified domain</h4><p>Enter your domain in the format <code>www.DOMAIN.com</code>. Do not use the domain listed under the <code>cert_UID</code> field — always use your actual store domain.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Enter your store name and billing update URL</h4><p>Input your store name as it should appear to customers during checkout. Provide a URL where customers can update billing information (e.g., <code>https://www.DOMAIN.com/login</code>). If you use Hosted Pages Account Login, Recurly determines this URL automatically.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Upload keys and certificates</h4><p>Map each file to the correct field:<br /><strong>Payment Processing Key</strong> → Payment Processing Private Key<br /><strong>Merchant ID Key</strong> → Merchant ID Private Key<br /><strong>Merchant Identity Certificate</strong> → Merchant ID Certificate<br /><strong>Apple Pay Certificate</strong> → Payment Processing Certificate</p></div>
+  </div>
+</div>
+
+## Braintree setup
+
+Setting up Apple Pay with Braintree differs from other gateways and requires coordination between Recurly and Braintree.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Enable Apple Pay on Braintree</h4><p>Follow <a href="https://developer.paypal.com/braintree/docs/guides/apple-pay/configuration/javascript/v3#domain-registration" target="_blank">Braintree's Apple Pay documentation</a>, then update your Recurly.js v4 checkout page to incorporate Apple Pay with Braintree client authorization per Recurly's developer documentation.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable Apple Pay in Recurly</h4><p>Contact Recurly to activate the <strong>Enable Apple Pay Web Payments</strong> feature flag, then select <strong>Enable Apple Pay</strong> on the Braintree Gateway Configuration page in Recurly.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> When using Apple Pay with Braintree, no additional certificate configuration is needed under <strong>Configuration → Apple Pay</strong> in Recurly.</div>
+</div>
+
+# FAQs
+
+<Accordion title="What is Apple Pay on the Web?">
+  Apple Pay on the Web lets customers make secure, fast payments on websites using Apple Pay. It integrates into your web pages via Recurly.js v4 for a streamlined checkout experience.
+</Accordion>
+
+<Accordion title="What are the prerequisites for integrating Apple Pay on the Web?">
+  You need an Apple Developer account, a verified checkout domain, Recurly.js v4, and a supported Apple Pay gateway added to your Recurly site.
+</Accordion>
+
+<Accordion title="How do I enable Apple Pay on the Web?">
+  Follow the checkout flow in this guide — it covers setting up your Apple Developer account, configuring settings in both Apple and Recurly, and working with Recurly Support to enable the feature flag and obtain CSR files.
+</Accordion>
+
+<Accordion title="What are Apple Pay Certificates and why are they needed?">
+  The Merchant Identity Certificate authenticates your merchant sessions with Apple Pay servers. The Apple Pay (Payment Processing) Certificate processes transactions on your behalf. Both are required for the integration to function.
+</Accordion>
+
+<Accordion title="How do I set up Apple Pay with Braintree?">
+  Braintree setup uses a different process. Follow Braintree's Apple Pay documentation to enable it on the Braintree side, then enable the feature flag in Recurly. No additional configuration under Configuration → Apple Pay is needed for Braintree.
+</Accordion>
+
+<Accordion title="Can I use Apple Pay on the Web with Recurly Hosted Payment Pages?">
+  No — Apple Pay on the Web is not supported on Hosted Payment Pages. It works on your own web pages via Recurly.js v4 and on Recurly Checkout pages. See the <a href="https://docs.recurly.com/docs/checkout" target="_blank">Checkout documentation</a> for more.
+</Accordion>
+
+<Accordion title="How do I contact Recurly Support?">
+  Reach out via the <a href="https://support.recurly.com/" target="_blank">Recurly Support page</a>.
+</Accordion>
+
+<Accordion title="Where can I find detailed integration documentation?">
+  See the <a href="https://developers.recurly.com/reference/recurly-js/#apple-pay" target="_blank">Recurly.js Apple Pay documentation</a> for full integration details.
+</Accordion>
+
+<Accordion title="What do I do when my CSRs are about to expire?">
+  Contact Recurly Support to generate new CSRs. Once you have the new files, delete and re-upload all files yourself to control timing and minimize any downtime for customers using Apple Pay.
+</Accordion>

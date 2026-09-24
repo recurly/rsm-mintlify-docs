@@ -1,0 +1,385 @@
+---
+title: Compass agents and skills
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+/* ── HOST-THEME BACKGROUND OVERRIDE — must be first ── */
+body { background: #ffffff !important; }
+
+/* ── GLOBAL CSS IMMUNITY BLOCK ── */
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+/* FA6 font restore — (0,0,2,0) beats wildcard (0,0,1,0); must follow wildcard */
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+
+/* ── NAVIGATE MASTER ARMOR — (0,0,7,1) beats global section 1.1 rule (0,0,6,2) ── */
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a,
+.rc-guide a:link,
+.rc-guide a:visited,
+.rc-guide a:active {
+  color: #008CFF !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: unset !important;
+  border-bottom: 0 !important;
+}
+.rc-guide a:hover {
+  color: #0067BE !important;
+  text-decoration: underline !important;
+  text-decoration-color: #008CFF !important;
+  text-underline-offset: 2px !important;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+/* ── TOKEN BLOCK ── */
+.rc-guide {
+  --yellow:     #FFD706;
+  --blue:       #008CFF;
+  --blue-tint1: #D5EAFF;
+  --blue-tint2: #96C8FF;
+  --scale:      #008CFF;   /* Scale pillar color = blue */
+  --offblack:   #0D0D0B;
+  --darkgray:   #32312D;
+  --gray:       #807D75;
+  --lightgray:  #D1CFC4;
+  --brightgray: #F2F1EA;
+  --offwhite:   #FCFBF7;
+  --warning-fg: #FFD706;
+  --warning-bg: #FFFECB;
+  --error-fg:   #FF5126;
+  --error-bg:   #FFEEE9;
+  --success-fg: #5DC32E;
+  --success-bg: #EFFAEA;
+  --info-fg:    #008CFF;
+  --info-bg:    #E5F3FF;
+  color: #32312D !important;
+  background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+
+/* ── FA ICON HELPERS ── */
+.rc-fa-announce { color: #0D0D0B; font-size: 1rem; flex-shrink: 0; }
+.rc-fa-section { color: #0D0D0B; font-size: 1rem; }
+
+/* ── TOP NAV / BACK LINK ── */
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link { color: #807D75 !important; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 6px; transition: color .2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; }
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* ── ANNOUNCEMENT BAR (hidden until rc-active added) ── */
+.rc-announce-bar { display: none; background: #FFD706; color: #0D0D0B; align-items: center; justify-content: space-between; padding: 10px 20px; font-size: .88rem; font-weight: 600; border-radius: 10px; margin-bottom: 16px; gap: 12px; line-height: 1.4; }
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-inner { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link { color: #0D0D0B !important; font-weight: 800; white-space: nowrap; padding: 4px 12px; background: rgba(0,0,0,0.10); border-radius: 6px; transition: background 0.2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { background: rgba(0,0,0,0.20); color: #0D0D0B !important; }
+
+/* ── HERO (learning path — pillar pill, no stats) ── */
+.rc-hero { background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)), url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center; background-color: #0D0D0B; background-size: cover; color: #fff; padding: 48px 40px 44px; text-align: center; border-radius: 16px; margin-bottom: 0; }
+.rc-lp-pillar-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(0,140,255,0.20); border: 1px solid rgba(0,140,255,0.45); color: #008CFF; font-size: .75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: #FCFBF7; margin: 0; }
+.rc-hero > p { font-size: 1rem; opacity: .85; max-width: 660px; margin: 0 auto 8px; color: #D1CFC4; line-height: 1.6; }
+
+/* ── NAVIGATION MENU (non-sticky, expanded — Scale) ── */
+details.rc-sticky-nav-wrap { position: relative; z-index: 1; background-color: #008CFF; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin: 24px 0 48px 0; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; }
+details.rc-sticky-nav-wrap > summary { list-style: none; display: flex; align-items: center; padding: 15px 24px; cursor: pointer; user-select: none; }
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+.rc-nav-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .88rem; letter-spacing: 0.6px; text-transform: uppercase; color: #0D0D0B; }
+.rc-nav-chevron { font-size: .72rem; color: #0D0D0B; opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link { color: #0D0D0B !important; font-weight: 700; font-size: .83rem; letter-spacing: 0.4px; text-transform: uppercase; padding: 7px 14px; border-radius: 7px; transition: all .18s; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: #0D0D0B; color: #FFD706; font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; }
+
+/* ── CONTENT SECTION HEADING ── */
+.rc-lp-section { margin-bottom: 48px; }
+.rc-lp-section h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 20px; color: #0D0D0B; display: flex; align-items: center; gap: 12px; }
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: #D1CFC4; }
+.rc-lp-section p { font-size: .95rem; line-height: 1.65; color: #32312D; margin: 0 0 16px; }
+
+/* ── SPLIT ROW (intro text + GIF) ── */
+.rc-split { display: grid; grid-template-columns: 1fr 340px; gap: 44px; align-items: start; margin: 0 0 28px; }
+.rc-split-text p { font-size: .98rem; line-height: 1.7; color: #32312D; margin: 0 0 16px; }
+.rc-split-text p:first-child { margin-top: 0; }
+.rc-split-text p:last-child { margin-bottom: 0; }
+.rc-split-media img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid #D1CFC4; }
+
+/* ── ACCENT CARD (Scale) ── */
+.rc-accent-card { background: #FCFBF7; border: 1px solid #D1CFC4; border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+.rc-accent-card.rc-accent-scale { border-left: 4px solid #008CFF; }
+.rc-accent-card h4 { font-size: 1rem; font-weight: 800; color: #0D0D0B; margin: 0 0 12px; }
+.rc-accent-card p { font-size: .92rem; color: #32312D; line-height: 1.65; margin: 0 0 10px; }
+.rc-accent-card ul { font-size: .92rem; color: #807D75; line-height: 1.75; padding-left: 20px; margin: 6px 0 0; }
+.rc-accent-card ul li { margin-bottom: 8px; }
+.rc-accent-card ul li strong { color: #32312D; }
+
+/* ── TABLE OF CONTENTS CARDS ── */
+.rc-toc-list { display: flex; flex-direction: column; gap: 10px; margin: 0 0 40px; }
+.rc-toc-card { display: grid; grid-template-columns: 44px 1fr 32px; align-items: center; gap: 16px; background: #FCFBF7; border: 1px solid #D1CFC4; border-radius: 12px; padding: 18px 22px; transition: all .2s ease; }
+.rm-Markdown.markdown-body .rc-guide a.rc-toc-card:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-toc-card { border-bottom: 1px solid #D1CFC4 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-toc-card:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-toc-card:hover { border-color: #008CFF; border-bottom: 1px solid #008CFF !important; box-shadow: 0 4px 14px rgba(0,140,255,0.12); transform: translateX(3px); }
+.rc-toc-num { width: 36px; height: 36px; border-radius: 50%; background: #0D0D0B; color: #FFD706; display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 800; flex-shrink: 0; }
+.rc-toc-body h4 { font-size: .98rem; font-weight: 800; color: #0D0D0B; margin: 0 0 4px; }
+.rc-toc-body p { font-size: .88rem; color: #807D75; line-height: 1.5; margin: 0; }
+.rc-toc-arrow { font-size: 1.1rem; color: #D1CFC4; text-align: right; transition: color .2s; }
+.rc-guide a.rc-toc-card:hover .rc-toc-arrow { color: #008CFF; }
+
+/* ── PATH NAV BUTTONS ── */
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 16px; flex-wrap: wrap; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: #D1CFC4; letter-spacing: .5px; white-space: nowrap !important; flex-shrink: 0; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path { background: #FFD706; color: #0D0D0B !important; text-decoration: none !important; padding: 13px 28px; border-radius: 10px; font-weight: 800; font-size: .95rem; display: inline-flex; align-items: center; gap: 8px; transition: all .2s; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover { background: transparent !important; color: #0D0D0B !important; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; }
+.rc-btn-start { background: #F2F1EA; color: #807D75; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: .9rem; border: 2px solid #D1CFC4; cursor: default; display: inline-flex; align-items: center; white-space: nowrap !important; }
+
+/* ── RESOURCES ── */
+.rc-resources { background: #F2F1EA; border-left: 4px solid #008CFF; border-radius: 10px; padding: 20px 24px; margin: 32px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: #807D75; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link { color: #807D75 !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: #D1CFC4 !important; font-weight: 500; font-size: .88rem; transition: all .18s; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover { color: #0D0D0B !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: #008CFF !important; }
+
+/* ── FOOTER NAV ── */
+.rc-footer-nav { border-top: 1px solid #D1CFC4; padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: #32312D; background: #F2F1EA; padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link { color: #807D75 !important; font-weight: 600; font-size: .82rem; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid #F2F1EA; }
+
+/* ── CONSOLIDATED RESPONSIVE ── */
+@media(max-width:1300px){
+  .rc-lp-nav { justify-content: center !important; gap: 12px; }
+  .rc-lp-nav-indicator { width: 100% !important; text-align: center; }
+}
+@media(max-width:768px){
+  .rc-content-wrap { padding: 0 20px; }
+  .rc-split { grid-template-columns: 1fr; gap: 24px; }
+  .rc-split-media img { max-width: 340px; margin: 0 auto; }
+  .rc-top-nav { padding: 16px 20px; }
+  .rc-hero { padding: 36px 20px 36px; }
+  .rc-lp-hero-title h1 { font-size: 1.8rem; }
+  .rc-toc-card { grid-template-columns: 36px 1fr 24px; padding: 14px 16px; }
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-path,
+  .rc-btn-start { padding: 10px 16px !important; font-size: 0.82rem !important; }
+}
+</style>
+
+<div class="rc-guide">
+
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale" class="rc-back-link">← Back to Scale</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <!-- ANNOUNCEMENT BAR — hidden by default. Add class "rc-active" to show before the webinar. -->
+    <div class="rc-announce-bar rc-active">
+      <div class="rc-announce-inner">
+        <i class="fa-regular fa-bell rc-fa-announce"></i>
+        <strong>Customer training:</strong> Prefer to watch it on-demand? Get the full discussion, skill demos, and audience Q&A here.
+        <a href="https://navigate.recurly.com/compass-assistant/" target="_blank" rel="noopener noreferrer" class="rc-announce-link">Watch it now →</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/7038a0b3a299cfe800553d4c8a6721f92b1fc7e031ef697861d3603fb1bb5a05-Scale-icon-white.png" alt="Scale"> Scale · Compass agents &amp; skills
+      </div>
+      <div class="rc-lp-hero-title"><h1>Compass agents &amp; skills</h1></div>
+      <p>Recurly Compass puts a team of AI agents inside your Recurly account — to answer questions, configure billing, pull data, write code, and protect revenue. This path introduces each agent, the skills it runs, and the Compass Assistant that brings them together.</p>
+    </div>
+
+    <!-- NAV -->
+    <details class="rc-sticky-nav-wrap" open>
+      <summary><span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span></summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> Path overview
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-knowledge" class="rc-sticky-link"><span class="rc-step-badge">1</span> Knowledge Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-code" class="rc-sticky-link"><span class="rc-step-badge">2</span> Code Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-configuration" class="rc-sticky-link"><span class="rc-step-badge">3</span> Configuration Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-data" class="rc-sticky-link"><span class="rc-step-badge">4</span> Data Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-retention" class="rc-sticky-link"><span class="rc-step-badge">5</span> Retention Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-assistant" class="rc-sticky-link"><span class="rc-step-badge">6</span> Compass Assistant</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-review" class="rc-sticky-link"><span class="rc-step-badge">7</span> Review &amp; resources</a>
+      </div></div></div>
+    </details>
+
+    <!-- SECTION: AGENTS, SKILLS, ASSISTANT -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-sitemap rc-fa-section"></i> Agents, skills, and the Assistant</h2>
+      <div class="rc-split">
+        <div class="rc-split-text">
+          <p>Recurly Compass is the AI built into your Recurly account, and it's organized into three simple parts. Once you see how they fit together, the rest of this path is easy to follow.</p>
+          <p>Each part plays a distinct role — a specialist to ask, a task it runs for you, and a chat that puts them to work.</p>
+        </div>
+        <div class="rc-split-media">
+          <img src="https://files.readme.io/2cdfa816939c824af8e30d8e12df8e9c8323b11dfa1b1e2fbd5e979a57c17d45-Compass_Skills_and_Agents-v3.gif" alt="Recurly Compass agents and skills">
+        </div>
+      </div>
+      <div class="rc-accent-card rc-accent-scale">
+        <h4>The three pieces</h4>
+        <ul>
+          <li><strong>Agent — the specialist (the "who").</strong> Each agent is an expert in one area of your subscription business. You have five: Knowledge, Code, Configuration, Data, and Retention.</li>
+          <li><strong>Skill — the job it does (the "what").</strong> A skill is a specific, guided workflow an agent runs for you — like Create a Plan or Generate an Export. An agent can have more than one skill, and Recurly adds new skills over time.</li>
+          <li><strong>Compass Assistant — the chat that runs them (the "how").</strong> The sparkles panel in the bottom-right corner of Recurly, where you can trigger any agent's skill in plain language and ask for best-practice guidance.</li>
+        </ul>
+      </div>
+      <p>In short: agents are the <em>who</em>, skills are the <em>what</em>, and the Compass Assistant is <em>how</em> you put them to work. This path introduces each agent and the skills it runs, then finishes with the Assistant that ties everything together.</p>
+    </div>
+
+    <!-- SECTION: WHAT'S INSIDE (TOC) -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-list-ul rc-fa-section"></i> What's inside</h2>
+      <div class="rc-toc-list">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-knowledge" class="rc-toc-card">
+          <div class="rc-toc-num">1</div>
+          <div class="rc-toc-body">
+            <h4>Knowledge agent</h4>
+            <p>Get clear, Recurly-specific answers on demand with the <strong>documentation search</strong> skill.</p>
+          </div>
+          <div class="rc-toc-arrow">→</div>
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-code" class="rc-toc-card">
+          <div class="rc-toc-num">2</div>
+          <div class="rc-toc-body">
+            <h4>Code agent</h4>
+            <p>Skip the API docs and get straight to integration code with the <strong>write code</strong> skill.</p>
+          </div>
+          <div class="rc-toc-arrow">→</div>
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-configuration" class="rc-toc-card">
+          <div class="rc-toc-num">3</div>
+          <div class="rc-toc-body">
+            <h4>Configuration agent</h4>
+            <p>Build a subscription plan just by describing it, with the <strong>create a plan</strong> skill.</p>
+          </div>
+          <div class="rc-toc-arrow">→</div>
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-data" class="rc-toc-card">
+          <div class="rc-toc-num">4</div>
+          <div class="rc-toc-body">
+            <h4>Data agent</h4>
+            <p>Pull the data you need and run exports in plain language with the <strong>generate an export</strong> skill.</p>
+          </div>
+          <div class="rc-toc-arrow">→</div>
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-retention" class="rc-toc-card">
+          <div class="rc-toc-num">5</div>
+          <div class="rc-toc-body">
+            <h4>Retention agent</h4>
+            <p>Protect revenue with two skills: <strong>optimize default Dunning</strong> and <strong>involuntary churn remediation</strong>.</p>
+          </div>
+          <div class="rc-toc-arrow">→</div>
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-assistant" class="rc-toc-card">
+          <div class="rc-toc-num">6</div>
+          <div class="rc-toc-body">
+            <h4>Compass Assistant</h4>
+            <p>See how the Assistant runs any agent's skill and answers best-practice questions by chat.</p>
+          </div>
+          <div class="rc-toc-arrow">→</div>
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-review" class="rc-toc-card">
+          <div class="rc-toc-num">7</div>
+          <div class="rc-toc-body">
+            <h4>Review &amp; resources</h4>
+            <p>Recap what you learned, create your own prompts, and find every resource in one place.</p>
+          </div>
+          <div class="rc-toc-arrow">→</div>
+        </a>
+      </div>
+
+      <p>Work through the agents in order, or jump straight to the one you need from the menu above. Each page explains what the agent does, how to run its skills, and gives you a prompt to try in your own account.</p>
+
+      <!-- PATH NAV — Start state -->
+      <div class="rc-lp-nav">
+        <span class="rc-btn-start">← Start</span>
+        <span class="rc-lp-nav-indicator">Overview</span>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-knowledge" class="rc-btn-path">1. Knowledge agent →</a>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/recurly-compass" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Recurly Compass</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/compass-skills" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Compass Skills</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/compass-assistant" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Compass Assistant</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+               <div class="rc-footer-section">
+          <span class="rc-footer-label">Compass agents &amp; skills</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents" class="rc-footer-link">Path overview</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-knowledge" class="rc-footer-link">1. Knowledge agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-code" class="rc-footer-link">2. Code agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-configuration" class="rc-footer-link">3. Configuration agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-data" class="rc-footer-link">4. Data agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-retention" class="rc-footer-link">5. Retention agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-assistant" class="rc-footer-link">6. Compass Assistant</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-review" class="rc-footer-link">7. Review &amp; resources</a>
+        </div>
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+```

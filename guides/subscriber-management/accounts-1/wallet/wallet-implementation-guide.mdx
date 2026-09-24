@@ -1,0 +1,138 @@
+---
+title: Subscriber wallet implementation guide
+---
+
+<div className="rp-page">
+  <div className="rp-overview">This guide walks through the core implementation tasks for Subscriber Wallet: setting a primary payment method, storing additional payment methods, assigning billing info to subscriptions and purchases, and managing payment method changes over time. All steps are available through the Recurly API.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-concepts"><span className="rp-toc-num">2</span>Key concepts</a>
+    <a className="rp-toc-pill" href="#integration-guide"><span className="rp-toc-num">3</span>Integration guide</a>
+    <a className="rp-toc-pill" href="#best-practices"><span className="rp-toc-num">4</span>Best practices</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Subscriber Wallet is the Recurly feature that allows a single account to store multiple payment methods, each with a unique <code>billing_info_id</code>. One payment method is designated as primary and used as the default for all transactions. Individual subscriptions and purchases can be pinned to a specific payment method by passing its <code>billing_info_id</code> at the time of creation or update.</div>
+
+# Key concepts
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Concept</td><td>Description</td></tr>
+  <tr><td>Billing info</td><td>The full set of details associated with a payment method — card number, address, IP address, etc. Each billing info entry has a unique <code>billing_info_id</code>.</td></tr>
+  <tr><td>Payment method</td><td>The funding source for a transaction. Supported types include credit/debit cards, bank accounts, PayPal, and other Recurly-supported methods.</td></tr>
+  <tr><td>Primary payment method</td><td>The default billing info used for any transaction where no specific <code>billing_info_id</code> is provided. Every account has exactly one primary payment method at any given time.</td></tr>
+  <tr><td><code>billing_info_id</code></td><td>A unique identifier assigned to each billing info entry. Used to reference a specific payment method when creating or updating subscriptions and purchases.</td></tr>
+</table>
+
+# Integration guide
+
+## Setting a primary payment method
+
+The first payment method added to an account automatically becomes the primary. Only one payment method can be primary at a time.
+
+To designate a different existing payment method as primary, send a `PUT` request to:
+
+```
+PUT /accounts/{account_code}/billing_infos/{billing_info_id}
+```
+
+Include `primary_payment_method: true` in the request body. The previously primary method is automatically demoted to non-primary.
+
+When the primary payment method changes:
+
+<ul className="rp-list">
+  <li>Subscriptions with no <code>billing_info_id</code> set switch to the new primary</li>
+  <li>Subscriptions pinned to a specific <code>billing_info_id</code> are unaffected</li>
+  <li>Updating billing info triggers a collection attempt on all unpaid invoices associated with that billing info</li>
+</ul>
+
+## Adding additional payment methods
+
+An account can store up to 20 billing infos. Each new entry receives a unique `billing_info_id` that can be referenced in future subscription or purchase requests.
+
+To add a payment method, send a `POST` request to:
+
+```
+POST /accounts/{account_code}/billing_infos
+```
+
+Provide the payment details in the request body (card data, bank account details, or digital wallet specifics). When updating billing info during a transaction via the `/purchases` or `/subscriptions` endpoints, the following rules apply:
+
+<ul className="rp-list">
+  <li>If <code>primary_payment_method: true</code> — the existing primary billing info is updated</li>
+  <li>If <code>primary_payment_method: false</code> — a new non-primary billing info is created</li>
+  <li>If <code>primary_payment_method</code> is omitted — the existing primary billing info is updated</li>
+</ul>
+
+## Assigning a payment method to a subscription or purchase
+
+When creating or updating a subscription or purchase, pass the `billing_info_id` of the desired payment method to pin it to that specific method.
+
+**On subscription creation or update:**
+
+```
+POST /subscriptions
+PUT  /subscriptions/{subscription_id}
+```
+
+**On purchase:**
+
+```
+POST /purchases
+```
+
+Include `billing_info_id` at the subscription or line-item level. If no `billing_info_id` is provided, the account's current primary payment method is used.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> A subscription pinned to a specific <code>billing_info_id</code> retains that assignment even if the account's primary payment method later changes. If the assigned billing info is deleted, the subscription falls back to the primary.</div>
+</div>
+
+## Updating a subscription's payment method
+
+To change the payment method on an existing subscription, send a `PUT` request to the subscription with the new `billing_info_id`:
+
+```
+PUT /subscriptions/{subscription_id}
+```
+
+To reassign a subscription back to the primary payment method without specifying an ID, omit `billing_info_id` from the request — the subscription will default to whatever is currently primary.
+
+## List and manage payment methods
+
+To retrieve all payment methods stored on an account:
+
+```
+GET /accounts/{account_code}/billing_infos
+```
+
+Each entry in the response includes its `billing_info_id` and a `primary_payment_method` flag.
+
+To update the details of an existing payment method (for example, a new card number or updated billing address):
+
+```
+PUT /accounts/{account_code}/billing_infos/{billing_info_id}
+```
+
+To delete a non-primary payment method:
+
+```
+DELETE /accounts/{account_code}/billing_infos/{billing_info_id}
+```
+
+To delete the primary payment method when multiple are present, first promote a different method to primary using the `PUT` endpoint above, then delete the former primary.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Deleting the only payment method</strong> Deleting all payment methods on an account with active subscriptions may cause those subscriptions to expire unless a new payment method is added. Subscriptions or invoices linked to a deleted billing info automatically fall back to the primary — or expire if no primary exists.</div>
+</div>
+
+# Best practices
+
+<ul className="rp-list">
+  <li>Avoid submitting identical billing info multiple times for the same account. Recurly's <a href="/guides/payment-orchestration/payment-settings#duplicate-billing-infos-prevention" target="_blank">duplicate billing info prevention</a> feature can help block accidental duplicates, but the account will error once the 20-method limit is reached</li>
+  <li>Reference existing payment methods by <code>billing_info_id</code> rather than re-submitting the same card or account details on each purchase or subscription</li>
+  <li>To change the payment method used for the next recurring charge, update the subscription's <code>billing_info_id</code> before the charge date</li>
+  <li>For immediate subscription changes, update the billing info before initiating the change to ensure the correct method is charged</li>
+</ul>

@@ -1,0 +1,142 @@
+---
+title: Custom fields
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Custom fields let you capture and store additional information on Recurly objects — accounts, charges, items, plans, and subscriptions. Define fields in the Admin Console and set or query their values through the UI or API to enrich your data with business-specific context.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Plan availability varies — see details below</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#plan-availability"><span className="rp-toc-num">2</span>Plan availability</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+<div className="rp-card">
+
+### Prerequisites
+
+<ul>
+<li>Users must have the Configuration permission within their role to create and edit custom field definitions.</li>
+</ul>
+
+</div>
+
+# Definition
+
+<div className="rp-definition">Custom fields in Recurly are user-defined attributes you can add to accounts, charges, items, plans, and subscriptions to capture information that isn't part of Recurly's standard data model. You define custom fields in the Admin Console, then assign, edit, or query their values through the UI or the API. Use them to track subscriber IDs from external systems, sales rep names, acquisition channels, partner IDs, or any other data that helps you understand and operate your business.</div>
+
+# Plan availability
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Plan</td><td>Custom field limit</td></tr>
+  <tr><td>Sandbox and Developer modes</td><td>Up to 5 custom fields — for testing custom field behavior and verifying integrations.</td></tr>
+  <tr><td>Starter</td><td>Not supported. If you enabled custom fields in Sandbox mode, you must remove them before transitioning to the Starter plan.</td></tr>
+  <tr><td>Pro</td><td>Up to 5 custom fields.</td></tr>
+  <tr><td>Elite</td><td>Up to 10 custom fields.</td></tr>
+</table>
+
+# Key details
+
+## Creating and editing custom field definitions
+
+To create a custom field definition, navigate to **Configuration → Custom Fields → Create Custom Field**.
+
+
+<Image src="https://files.readme.io/c6597a7785a4c50599e49efdcd8c7d0913b628cc5450dae8a8d17d7c05ec2b0e-Screenshot_2026-04-06_at_12.48.11_PM.png" align="center" width="75%" border={true} />
+
+
+The following fields are available when creating a custom field definition:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Field</td><td>Description</td></tr>
+  <tr><td>API field name</td><td>The ID used in the API to reference the custom field. No spaces — numbers, letters, dashes, and underscores only.</td></tr>
+  <tr><td>Recurly object</td><td>The object the custom field is created on: account, charge, item, plan, or subscription.</td></tr>
+  <tr><td>Allow this field to show up on invoices</td><td>When enabled, the field appears in the invoice template editor's variable picker. The field name and value will display on invoices.</td></tr>
+  <tr><td>Allow this field to show up in exports</td><td>When enabled, the field is included in exports associated with its Recurly object.</td></tr>
+  <tr><td>Admin Console Access</td><td>Controls field visibility and editability in the UI: <strong>Hidden</strong> (API only), <strong>Read-only</strong> (viewable in UI, editable via API), or <strong>Editable</strong> (viewable and editable in both UI and API).</td></tr>
+  <tr><td>Admin Console field name</td><td>Required when the field is set to visible or editable in the Admin Console. This name also appears on invoices when <strong>Allow this field to show up on invoices</strong> is enabled.</td></tr>
+  <tr><td>Tooltip description</td><td>When populated, a question mark icon appears next to the Admin Console field name, providing additional context for users.</td></tr>
+</table>
+
+### Custom field data types
+
+All custom fields are text fields with a 255-character limit. You can populate them with any combination of letters and numbers — for example, `xyz123`, `John Smith`, or `こんにちは`.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Custom fields do not currently support picklist, boolean, true/false, or radio button data types.</div>
+</div>
+
+### Deleting custom field definitions
+
+To delete a custom field definition, navigate to **Configuration → Custom Fields**.
+
+<div className="rp-callout rp-callout-danger">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Permanent data loss</strong>Deleting a custom field definition permanently removes all associated data on every object where it has been populated. For example, deleting a "Sales Rep" custom field will erase that data from every account where it was set. This action is irreversible and takes effect immediately when you click <strong>Confirm</strong>.</div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Note the API field name</h4><p>In the Custom Fields table, copy the value in the <strong>Field Name (API)</strong> column for the field you want to delete.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Delete</h4><p>Hover over the row of the custom field and click <strong>Delete</strong> on the right side of the table.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Confirm the deletion</h4><p>Enter the API field name value you noted in step 1. The <strong>Confirm</strong> button becomes enabled once the value matches. Review the consequences, then click <strong>Confirm</strong> to permanently delete the field and all associated data.</p></div>
+  </div>
+</div>
+
+## Custom fields on an account
+
+Account custom fields let you capture subscriber-specific data alongside the Account object — such as subscriber IDs from external systems, sales representative names, channel partner names, subscriber segments, or regions.
+
+When an account custom field is set to **Editable in the Admin Console**, you can set its value when creating or editing an account. The field and its value appear within Account Information once the account is saved.
+
+## Custom fields on charges
+
+Charge custom fields let you attach custom values to non-subscription line item charges or credits. This adds context to individual charges and enables conditional customization of email communications based on those values.
+
+When a charge custom field is set to **Able to be set in the Admin Console**, you can populate it from the **Add Charge** page. The field and its value can be queried via the API.
+
+## Custom fields on a subscription
+
+Subscription custom fields let you capture subscription-level data such as customer device ID, acquisition channel, customer segment, subscription ID from an external system, or partner ID.
+
+When a subscription custom field is set to **Editable in the Admin Console**, you can set its value when creating or editing a subscription from the subscription details page.
+
+## Custom fields on a plan
+
+Plan custom fields let you attach metadata to plans for integration rules, grouping, or display purposes — for example, flagging available upgrade or downgrade paths, defining rules for external systems such as NetSuite, grouping plans, or surfacing exclusive offers like professional support.
+
+When a plan custom field is set to **Editable in the Admin Console**, you can set its value when creating or editing a plan.
+
+## Custom fields on invoices
+
+Any custom field can be made available on invoices by enabling **Allow this field to show up on invoices** when creating the field definition. Once enabled, the field becomes selectable in the invoice template editor.
+
+
+<Image src="https://files.readme.io/64ccacfcded34a3016dff483661510043cfe6c12df124ada9561176ef8978687-Screenshot_2026-04-28_at_1.30.42_PM.png" align="center" width="75%" border={true} />
+
+
+After the field is added to an invoice template, it will appear on any invoice where that custom field is populated:
+
+<ul>
+<li><strong>Account custom fields</strong> display at the bottom of the "Bill to" section.</li>
+<li><strong>All other custom field types</strong> (plan, subscription, item, and charge) display within the invoice line item they're associated with.</li>
+</ul>
+
+
+<Image src="https://files.readme.io/590d88b26f7efc292f35b3b9c2e4c1da8ea7de7747bacccf78b367eb6797dc87-Screenshot_2026-04-28_at_2.49.36_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Removing a field from a template</strong>When a custom field is removed from an invoice template, it won't appear on any new invoices going forward — but existing invoices will continue to display it.</div>
+</div>
+
+When <a href="/guides/subscriber-management/accounts-1/account-hierarchy-1" target="_blank">account hierarchy</a> is enabled and both the parent and child accounts have custom fields, the child account's custom fields are displayed on the invoice.
+
+Custom fields are also returned through the <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/get_invoice" target="_blank">invoices API</a> (`GET /invoices/{invoice_number}`).

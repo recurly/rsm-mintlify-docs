@@ -1,0 +1,975 @@
+---
+title: Usage-based pricing guide
+---
+
+# Overview
+
+Usage-based billing lets you charge customers according to their consumption or usage of a particular resource (e.g., data usage, transaction volume). This guide shows how to:
+
+1. Create plans with usage add-ons,
+2. Subscribe customers to those plans, and
+3. Log or update usage records.
+
+Before you begin, read the [Quickstart Guide](https://docs.recurly.com/v1.1/docs/quick-start-guide#/) and [Subscription Management Guide](https://docs.recurly.com/v1.1/docs/managing-subscription-methods-guides#/) for foundational knowledge.
+
+### Prerequisites & limitations
+
+* A Recurly account with API credentials
+* Understanding of Recurly billing concepts (plans, add-ons, subscriptions)
+* Familiarity with usage-based billing basics (price-based or percentage-based charges)
+* Some knowledge of JSON and RESTful API interactions
+
+***
+
+## Step 1: Creating a plan with usage plan add-ons
+
+In this guide, we’ll create a plan add-on that supports subscriptions and usage logging. To set this up, we’ll use the [Create an add-on](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_plan_add_on) endpoint. When creating a usage plan add-on, you can choose to charge by a percentage of usage logged, a unit amount per usage logged, or a [quantity based pricing model](https://docs.recurly.com/docs/billing-models#section-quantity-based). In this guide, we’ll create two plans, each with its own usage add-on—one using usage percentage and another with quantity based pricing.\
+There are three quantity based pricing models available: `tiered`, `volume`, and `stairstep`. In this guide, we’ll use the `tiered` model. For more information, please see our [quantity based pricing models](https://recurly.com/billing-models#quantity-based) documentation.
+
+To illustrate this, we’ll imagine scenarios for each usage add-on. In the quantity based pricing example, we’ll create a usage add-on for a video streaming platform that includes 100 GB of data for free, with charges applied to any overage using a `tiered` pricing model.
+
+In the tiered pricing model, each unit is charged based on its tier. For the example above, we’ll define two tiers: one for quantities up to 100 GB, priced at $0/GB, and a second tier for any usage beyond 100 GB, priced at $10/GB. For example, if a user exceeds the first tier by 5 GB (e.g., uses 105 GB total), the excess 5 GB will be billed at the second-tier rate.
+
+For the percentage usage example, we’ll create a usage add-on for a payments company that charges 1% of each merchant's monthly Total Payment Volume.
+
+Each usage plan add-on will use a different [measured unit](/guides/plans-pricing-promotions/billing-models/usage-based-billing#section-measured-units), created via the admin console or API using the [Create a measured unit](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_measured_unit) endpoint. In our examples, the tiered pricing add-on will use GB as the measured unit, while the percentage add-on will use Total Payment Volume. We can create a plan with these add-ons as follows:
+
+```ruby
+streaming_plan_create = {
+  code: streaming_plan_code,
+  name: "Tiered Streaming Data Plan",
+  currencies: [
+    {
+      currency: "USD",
+      unit_amount: 100
+    }
+  ],
+  add_ons: [
+    {
+      name: "streaming data",
+      code: "streaming_data",
+      display_quantity: true,
+      tier_type: "tiered",
+      add_on_type: "usage",
+      usage_type: "price",
+      measured_unit_name: gigabytes_unit_name,
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 0
+            }
+          ],
+          ending_quantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 10
+            }
+          ],
+          # This last tier"s ending_quantity can be set to the maximum
+          # value of `999999999`.
+          # If omitted, ending_quantity will default to `999999999`.
+          ending_quantity: 999999999
+        }
+      ]
+    }
+  ]
+}
+
+payments_plan_create = {
+  code: payments_plan_code,
+  name: "Payments Plan",
+  currencies: [
+    {
+      currency: "USD",
+      unit_amount: 100
+    }
+  ],
+  add_ons: [
+    {
+      name: "Payments",
+      code: "payments",
+      display_quantity: true,
+      add_on_type: "usage",
+      measured_unit_name: total_payment_volume_name,
+      usage_type: "percentage",
+      usage_percentage: 1
+    }
+  ]
+}
+streaming_plan = @client.create_plan(body: streaming_plan_create)
+puts "Created Streaming Plan #{streaming_plan}"
+
+payments_plan = @client.create_plan(body: payments_plan_create)
+puts "Created Payments Plan #{payments_plan}"
+```
+```python
+streaming_plan_create = {
+  "code": streaming_plan_code,
+  "name": "Tiered Streaming Data Plan",
+  "currencies": [ { "currency": "USD", "unit_amount": 100 } ],
+  "add_ons": [
+    {
+      "name": "streaming data",
+      "code": "streaming_data",
+      "display_quantity": True,
+      "tier_type": "tiered",
+      "add_on_type": "usage",
+      "usage_type": "price",
+      "measured_unit_name": gigabytes_unit_name,
+      "tiers": [
+        {
+          "currencies": [
+            { "currency": "USD", "unit_amount": 0 } ,
+          ],
+          "ending_quantity" : 100
+        },
+        {
+          "currencies": [
+            { "currency": "USD", "unit_amount": 10 }
+          ],
+          # This last tier's ending_quantity can be set to the maximum
+          # value of `999999999`. 
+          # If omitted, ending_quantity will default to `999999999`.
+          "ending_quantity": 999999999
+        }
+      ]
+    }
+  ]
+}
+
+payments_plan_create = {
+  "code": payments_plan_code,
+  "name": "Payments Plan",
+  "currencies": [ { "currency": "USD", "unit_amount": 100 } ],
+  "add_ons": [
+    {
+      "name": "Payments",
+      "code": "payments",
+      "display_quantity": True,
+      "add_on_type": "usage",
+      "measured_unit_name": total_payment_volume_name,
+      "usage_type": "percentage",
+      "usage_percentage": 1
+    }
+  ]
+}
+
+streaming_plan = client.create_plan(streaming_plan_create)
+print("Created Streaming Plan %s" % streaming_plan)
+
+payments_plan = client.create_plan(payments_plan_create)
+print("Created Payments Plan %s" % payments_plan)
+```
+```csharp
+var streamingPlanCreate = new PlanCreate()
+{
+    Code = streamingPlanCode,
+    Name = "Tiered Streaming Data Plan",
+    Currencies = new List<PlanPricing>()
+    {
+        new PlanPricing() {
+            Currency = "USD",
+            UnitAmount = 100
+        }
+    },
+    AddOns = new List<AddOnCreate>()
+    {
+        new AddOnCreate()
+        {
+            Name = "Streaming Data",
+            Code = "streaming_data",
+            DisplayQuantity = true,
+            TierType = "tiered",
+            AddOnType = "usage",
+            UsageType = "price",
+            MeasuredUnitName = gigabytesUnitName,
+            Tiers = new List<Tier>()
+            {
+                new Tier()
+                {
+                    Currencies = new List<Pricing>()
+                    {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 0
+                        }
+                    },
+                    EndingQuantity = 100
+                },
+                new Tier()
+                {
+                    Currencies = new List<Pricing>()
+                    {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 10
+                        }
+                    },
+                    // This last tier's ending_quantity can be set to the maximum
+                    // value of `999999999`.
+                    // If omitted, ending_quantity will default to `999999999`.
+                    EndingQuantity = 999999999
+                }
+            }
+        }
+    }
+};
+var streamingPlan = client.CreatePlan(streamingPlanCreate);
+System.Console.WriteLine($"Created Streaming Plan {streamingPlan.Code}");
+
+var paymentsPlanCreate = new PlanCreate()
+{
+    Code = paymentsPlanCode,
+    Name = "Payments Plan",
+    Currencies = new List<PlanPricing>()
+    {
+        new PlanPricing() {
+            Currency = "USD",
+            UnitAmount = 100
+        }
+    },
+    AddOns = new List<AddOnCreate>()
+    {
+        new AddOnCreate()
+        {
+            Name = "Payments",
+            Code = "payments",
+            DisplayQuantity = true,
+            AddOnType = "usage",
+            MeasuredUnitName = totalPaymentVolumeUnitName,
+            UsageType = "percentage",
+            UsagePercentage = 1
+        }
+    }
+};
+var paymentsPlan = client.CreatePlan(paymentsPlanCreate);
+System.Console.WriteLine($"Created Payments Plan {paymentsPlan.Code}");
+```
+```php
+$streaming_plan_create = [
+  "code" => $streaming_plan_code,
+  "name" => "Tiered Streaming Data Plan",
+  "currencies" => [
+    [
+      "currency" => "USD",
+      "unit_amount" => 100
+    ]
+  ],
+  "add_ons" => [
+    [
+      "name" => "streaming data",
+      "code" => "streaming_data",
+      "display_quantity" => true,
+      "tier_type" => "tiered",
+      "add_on_type" => "usage",
+      "usage_type" => "price",
+      "measured_unit_name" => $gigabytes_unit_name,
+      "tiers" => [
+        [
+          "currencies" => [
+            [
+              "currency" => "USD",
+              "unit_amount" => 0
+            ]
+          ],
+          "ending_quantity" => 100
+        ],
+        [
+          "currencies" => [
+            [
+              "currency" => "USD",
+              "unit_amount" => 10
+            ]
+          ],
+          // This last tier"s ending_quantity can be set to the maximum
+          // value of `999999999`.
+          // If omitted, ending_quantity will default to `999999999`.
+          "ending_quantity" => 999999999
+        ]
+      ]
+    ]
+  ]
+];
+
+$payments_plan_create = [
+  "code" => $payments_plan_code,
+  "name" => "Payments Plan",
+  "currencies" => [
+    [
+      "currency" => "USD",
+      "unit_amount" => 100
+    ]
+  ],
+  "add_ons" => [
+    [
+      "name" => "Payments",
+      "code" => "payments",
+      "display_quantity" => true,
+      "add_on_type" => "usage",
+      "measured_unit_name" => $total_payment_volume_name,
+      "usage_type" => "percentage",
+      "usage_percentage" => 1
+    ]
+  ]
+];
+$streaming_plan = $client->createPlan($streaming_plan_create);
+echo "Created Streaming Plan {$streaming_plan->getId()}" . PHP_EOL;
+
+$payments_plan = $client->createPlan($payments_plan_create);
+echo "Created Payments Plan {$payments_plan->getId()}" . PHP_EOL;
+```
+```js Node
+const streamingPlanCreate = {
+  code: streamingPlanCode,
+  name: 'Tiered Streaming Data Plan',
+  currencies: [
+    {
+      currency: 'USD',
+      unitAmount: 100
+    }
+  ],
+  addOns: [
+    {
+      name: 'streaming data',
+      code: 'streaming_data',
+      displayQuantity: true,
+      tierType: 'tiered',
+      addOnType: 'usage',
+      usageType: 'price',
+      measuredUnitName: gigabytesUnitName,
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unitAmount: 0
+            }
+          ],
+          endingQuantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unitAmount: 10
+            }
+          ],
+          // This last tier's ending_quantity can be set to the maximum 
+          // value of `999999999`.
+          // If omitted, ending_quantity will default to `999999999`.
+          endingQuantity: 999999999
+        }
+      ]
+    }
+  ],
+}
+
+const paymentsPlanCreate = {
+  code: paymentsPlanCode,
+  name: 'Payments Plan',
+  currencies: [
+    {
+      currency: 'USD',
+      unitAmount: 100
+    }
+  ],
+  addOns: [
+    {
+      name: 'Payments',
+      code: 'payments',
+      displayQuantity: true,
+      addOnType: 'usage',
+      measuredUnitName: totalPaymentVolumeName,
+      usageType: 'percentage',
+      usagePercentage: 1
+    }
+  ]
+}
+
+streamingPlan = await client.createPlan(streamingPlanCreate)
+console.log('Created Streaming Plan ', streamingPlan)
+
+paymentsPlan = await client.createPlan(paymentsPlanCreate)
+console.log('Created Payments Plan ', paymentsPlan)
+
+```
+```java
+PlanCreate streamingPlanCreate = new PlanCreate();
+streamingPlanCreate.setCode(streamingPlanCode);
+streamingPlanCreate.setName("Tiered Streaming Data Plan");
+
+List<PlanPricing> currencies = new ArrayList<PlanPricing>();
+PlanPricing planPrice = new PlanPricing();
+planPrice.setCurrency("USD");
+planPrice.setUnitAmount(100.0f);
+currencies.add(planPrice);
+streamingPlanCreate.setCurrencies(currencies);
+
+List<AddOnCreate> addOns = new ArrayList<AddOnCreate>();
+AddOnCreate addOn = new AddOnCreate();
+addOn.setName("Streaming Data");
+addOn.setCode("streaming_data");
+addOn.setDisplayQuantity(true);
+addOn.setTierType("tiered");
+addOn.setAddOnType("usage");
+addOn.setUsageType("price");
+addOn.setMeasuredUnitName(gigabytesUnitName);
+List<Tier> tiers = new ArrayList<Tier>();
+
+Tier tier1 = new Tier();
+List<Pricing> tier1Currencies = new ArrayList<Pricing>();
+Pricing tier1Price = new Pricing();
+tier1Price.setCurrency("USD");
+tier1Price.setUnitAmount(0.0f);
+tier1Currencies.add(tier1Price);
+tier1.setCurrencies(tier1Currencies);
+tier1.setEndingQuantity(100);
+
+Tier tier2 = new Tier();
+List<Pricing> tier2Currencies = new ArrayList<Pricing>();
+Pricing tier2Price = new Pricing();
+tier2Price.setCurrency("USD");
+tier2Price.setUnitAmount(10.0f);
+tier2Currencies.add(tier2Price);
+tier2.setCurrencies(tier2Currencies);
+// This last tier's ending_quantity can be set to the maximum 
+// value of `999999999`.
+// If omitted, ending_quantity will default to `999999999`.
+tier2.setEndingQuantity(999999999);
+
+tiers.add(tier1);
+tiers.add(tier2);
+addOn.setTiers(tiers);
+
+addOns.add(addOn);
+streamingPlanCreate.setAddOns(addOns);
+
+PlanCreate paymentPlanCreate = new PlanCreate();
+paymentPlanCreate.setCode(paymentsPlanCode);
+paymentPlanCreate.setName("Payments Plan");
+
+List<PlanPricing> paymentCurrencies = new ArrayList<PlanPricing>();
+PlanPricing paymentPrice = new PlanPricing();
+paymentPrice.setCurrency("USD");
+paymentPrice.setUnitAmount(100.0f);
+paymentCurrencies.add(paymentPrice);
+paymentPlanCreate.setCurrencies(paymentCurrencies);
+
+List<AddOnCreate> paymentsAddOns = new ArrayList<AddOnCreate>();
+AddOnCreate paymentAddOn = new AddOnCreate();
+paymentAddOn.setName("Payments");
+paymentAddOn.setCode("payments");
+paymentAddOn.setDisplayQuantity(true);
+paymentAddOn.setAddOnType("usage");
+paymentAddOn.setUsageType("percentage");
+paymentAddOn.setMeasuredUnitName(totalPaymentVolumeUnitName);
+paymentAddOn.setUsagePercentage(1.0f);
+
+addOns.add(paymentAddOn);
+paymentPlanCreate.setAddOns(addOns);
+
+Plan streamingPlan = client.createPlan(streamingPlanCreate);
+System.out.println("Created Streaming Plan " + streamingPlan);
+
+Plan paymentsPlan = client.createPlan(paymentPlanCreate);
+System.out.println("Created Payments Plan " + paymentsPlan);
+```
+
+## Step 2: Creating a subscription with the usage plan add-ons
+
+After creating a plan, you can add it to an account as a subscription. For this guide, we assume an account has already been created. However, if needed, you can create an account at this stage as well; see the [Create Subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_subscription) endpoint for details. We’ll now create a subscription that includes both usage add-ons from the previous step.
+
+```ruby
+streaming_subscription_create = {
+  plan_code: streaming_plan.code,
+  currency: "USD",
+  account: {
+    code: account_code,
+  },
+  add_ons: [
+    {
+      code: "streaming_data",
+    }
+  ]
+}
+
+payments_subscription_create = {
+  plan_code: payments_plan.code,
+  currency: "USD",
+  account: {
+    code: account_code,
+  },
+  add_ons: [
+    {
+      code: "payments",
+    }
+  ]
+}
+
+streaming_subscription = @client.create_subscription(
+  body: streaming_subscription_create
+)
+puts "Created Subscription #{streaming_subscription}"
+
+payments_subscription = @client.create_subscription(
+  body: payments_subscription_create
+)
+puts "Created Subscription #{payments_subscription}"
+```
+```python
+streaming_subscription_create = {
+  "plan_code": streaming_plan.code,
+  "currency": "USD",
+  "account": { "code": account_code },
+  "add_ons": [
+    { "code": "streaming_data" }
+  ]
+}
+
+payments_subscription_create = {
+  "plan_code": payments_plan.code,
+  "currency": "USD",
+  "account": { "code": account_code },
+  "add_ons": [
+    { "code": "payments" }
+  ]
+}
+
+streaming_subscription = client.create_subscription(streaming_subscription_create)
+print("Created Subscription %s" % streaming_subscription)
+
+payments_subscription = client.create_subscription(payments_subscription_create)
+print("Created Subscription %s" % payments_subscription)
+```
+```csharp
+var streamingSubscriptionCreate = new SubscriptionCreate()
+{
+    PlanCode = streamingPlan.Code,
+    Currency = "USD",
+    Account = new AccountCreate()
+    {
+        Code = accountCode
+    },
+    AddOns = new List<SubscriptionAddOnCreate>()
+    {
+        new SubscriptionAddOnCreate()
+        {
+            Code = "streaming_data"
+        }
+    }
+};
+
+var streamingSubscription = client.CreateSubscription(streamingSubscriptionCreate);
+System.Console.WriteLine($"Created Subscription {streamingSubscription.Id}");
+
+var paymentsSubscriptionCreate = new SubscriptionCreate()
+{
+    PlanCode = paymentsPlan.Code,
+    Currency = "USD",
+    Account = new AccountCreate()
+    {
+        Code = accountCode
+    },
+    AddOns = new List<SubscriptionAddOnCreate>()
+    {
+        new SubscriptionAddOnCreate()
+        {
+            Code = "payments"
+        }
+    }
+};
+
+var paymentsSubscription = client.CreateSubscription(paymentsSubscriptionCreate);
+System.Console.WriteLine($"Created Subscription {paymentsSubscription.Id}");
+```
+```php
+$streaming_subscription_create = [
+  "plan_code" => $streaming_plan->getCode(),
+  "currency" => "USD",
+  "account" => [
+    "code" => $account_code,
+  ],
+  "add_ons" => [
+    [
+      "code" => "streaming_data",
+    ]
+  ]
+];
+
+$payments_subscription_create = [
+  "plan_code" => $payments_plan->getCode(),
+  "currency" => "USD",
+  "account" => [
+    "code" => $account_code,
+  ],
+  "add_ons" => [
+    [
+      "code" => "payments",
+    ]
+  ]
+];
+
+$streaming_subscription = $client->createSubscription(
+  $streaming_subscription_create
+);
+echo "Created Subscription {$streaming_subscription->getId()}" . PHP_EOL;
+
+$payments_subscription = $client->createSubscription(
+  $payments_subscription_create
+);
+echo "Created Subscription {$payments_subscription->getId()}" . PHP_EOL;
+```
+```js Node
+const streamingSubscriptionCreate = {
+  planCode: streamingPlan.code,
+  currency: 'USD',
+  account: {
+    code: accountCode,
+  },
+  addOns: [
+    {
+      code: 'streaming_data',
+    }
+  ]
+}
+
+const paymentsSubscriptionCreate = {
+  planCode: paymentsPlan.code,
+  currency: 'USD',
+  account: {
+    code: accountCode,
+  },
+  addOns: [
+    {
+      code: 'payments',
+    }
+  ]
+}
+
+const streamingSubscription = await client.createSubscription(
+  streamingSubscriptionCreate
+)
+console.log('Created Subscription ', streamingSubscription)
+
+const paymentsSubscription = await client.createSubscription(
+  paymentsSubscriptionCreate
+)
+console.log('Created Subscription ', paymentsSubscription)
+
+```
+```java
+SubscriptionCreate streamingSubscriptionReq = new SubscriptionCreate();
+streamingSubscriptionReq.setPlanCode(streamingPlan.getCode());
+streamingSubscriptionReq.setCurrency("USD");
+AccountCreate streamingAccount = new AccountCreate();
+streamingAccount.setCode(accountCode);
+streamingSubscriptionReq.setAccount(streamingAccount);
+SubscriptionAddOnCreate streamingSubAddOn = new SubscriptionAddOnCreate();
+streamingSubAddOn.setCode("streaming_data");
+List<SubscriptionAddOnCreate> subAddOns = new ArrayList<SubscriptionAddOnCreate>();
+subAddOns.add(streamingSubAddOn);
+streamingSubscriptionReq.setAddOns(subAddOns);
+
+SubscriptionCreate paymentSubscriptionReq = new SubscriptionCreate();
+paymentSubscriptionReq.setPlanCode(paymentsPlan.getCode());
+paymentSubscriptionReq.setCurrency("USD");
+AccountCreate paymentAccount = new AccountCreate();
+paymentAccount.setCode(accountCode);
+paymentSubscriptionReq.setAccount(paymentAccount);
+SubscriptionAddOnCreate paymentSubAddOn = new SubscriptionAddOnCreate();
+paymentSubAddOn.setCode("payments");
+List<SubscriptionAddOnCreate> paymentAddOns = new ArrayList<SubscriptionAddOnCreate>();
+paymentAddOns.add(paymentSubAddOn);
+paymentSubscriptionReq.setAddOns(paymentAddOns);
+
+Subscription streamingSubscription = client.createSubscription(streamingSubscriptionReq);
+System.out.println("Created Streaming Subscription " + streamingSubscription);
+
+Subscription paymentSubscription = client.createSubscription(paymentSubscriptionReq);
+System.out.println("Created Payment Subscription " + paymentSubscription);
+
+
+```
+
+## Step 3: Logging usage for each usage subscription add-on
+
+After creating a subscription with a usage add-on, you can [log usage](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_usage) endpoint for it. Usage records can be logged in real-time or aggregated into hourly or daily records, depending on what best suits your systems. The closer to real-time you log usage, the cleaner and more accurate your invoices will appear.
+
+The `usage_timestamp` marks when the usage applies, while the `recording_timestamp` reflects when the usage was recorded in your system. For more details, refer to the [endpoint](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_usage). In this example, we’ll omit both the `usage_timestamp` and `recording_timestamp`, which will default to the current time.
+
+> For reference:
+>
+> * The quantity based pricing add-on corresponds to GBs.
+> * The percentage usage add-on represents Total Payment Volume.
+
+```ruby
+streaming_usage_create = {
+  amount: 3,
+  merchant_tag: "Order ID: 6350985309458302",
+}
+
+payments_usage_create = {
+  amount: 54500,
+  merchant_tag: "Order ID: 4939853977878713",
+}
+
+streaming_usage = @client.create_usage(subscription_id: streaming_subscription.id,
+                                       add_on_id: "code-streaming_data",
+                                       body: streaming_usage_create)
+puts "Created Usage #{streaming_usage}"
+
+payments_usage = @client.create_usage(subscription_id: payments_subscription.id,
+                                      add_on_id: "code-payments",
+                                      body: payments_usage_create)
+puts "Created Usage #{payments_usage}"
+```
+```python
+streaming_usage_create = {
+  "amount": 3,
+  "merchant_tag": "Order ID: 6350985309458302"
+}
+
+payments_usage_create = {
+  "amount": 54500,
+  "merchant_tag": "Order ID: 4939853977878713"
+}
+
+streaming_usage = client.create_usage(
+  streaming_subscription.id, 
+  "code-streaming_data",
+  streaming_usage_create
+)
+print("Created Usage %s" % streaming_usage)
+
+payments_usage = client.create_usage(
+  payments_subscription.id,
+  "code-payments",
+  payments_usage_create
+)
+print("Created Usage %s" % payments_usage)
+```
+```csharp
+var streamingUsageCreate = new UsageCreate()
+{
+    Amount = 3,
+    MerchantTag = "Order ID: 6350985309458302"
+};
+
+var streamingUsage = client.CreateUsage(
+    subscriptionId: streamingSubscription.Id,
+    addOnId: "code-streaming_data",
+    body: streamingUsageCreate
+);
+System.Console.WriteLine($"Created Usage {streamingUsage.Id}");
+
+var paymentsUsageCreate = new UsageCreate()
+{
+    Amount = 54500,
+    MerchantTag = "Order ID: 4939853977878713"
+};
+
+var paymentsUsage = client.CreateUsage(
+    subscriptionId: paymentsSubscription.Id,
+    addOnId: "code-payments",
+    body: paymentsUsageCreate
+);
+System.Console.WriteLine($"Created Usage {paymentsUsage.Id}");
+```
+```php
+$streaming_usage_create = [
+  "amount" => 3,
+  "merchant_tag" => "Order ID: 6350985309458302",
+];
+
+$payments_usage_create = [
+  "amount" => 54500,
+  "merchant_tag" => "Order ID: 4939853977878713",
+];
+
+$streaming_usage = $client->createUsage(
+  $streaming_subscription->getId(),
+  "code-streaming_data",
+  $streaming_usage_create
+);
+echo "Created Usage {$streaming_usage->getId()}" . PHP_EOL;
+
+$payments_usage = $client->createUsage(
+  $payments_subscription->getId(),
+  "code-payments",
+  $payments_usage_create
+);
+echo "Created Usage {$payments_usage->getId()}" . PHP_EOL;
+```
+```js Node
+const streamingUsageCreate = {
+  amount: 3,
+  merchantTag: "Order ID: 6350985309458302"
+}
+
+const paymentsUsageCreate = {
+  amount: 5,
+  merchantTag: "Order ID: 4939853977878713"
+}
+
+const streamingUsage = await client.createUsage(
+  streamingSubscription.id,
+  'code-streaming_data',
+  streamingUsageCreate
+)
+console.log('Created Usage ', streamingUsage)
+
+const paymentsUsage = await client.createUsage(
+  paymentsSubscription.id,
+  'code-payments',
+  paymentsUsageCreate
+)
+console.log('Created Usage ', paymentsUsage)
+```
+```java
+UsageCreate streamingUsageReq = new UsageCreate();
+streamingUsageReq.setAmount(3.0f);
+streamingUsageReq.setMerchantTag("Order ID: 6350985309458302");
+
+UsageCreate paymentUsageReq = new UsageCreate();
+paymentUsageReq.setAmount(54500.0f);
+paymentUsageReq.setMerchantTag("Order ID: 4939853977878713");
+
+Usage streamingUsage = client.createUsage(
+  streamingSubscription.getId(),
+  "code-streaming_data",
+  streamingUsageReq
+);
+System.out.println("Created Usage " + streamingUsage);
+
+Usage paymentUsage = client.createUsage(
+  paymentSubscription.getId(),
+  "code-payments",
+  paymentUsageReq
+);
+System.out.println("Created Usage " + paymentUsage);
+```
+
+## Step 4: Updating a usage record for each of the usage susbscription add-ons
+
+> **Note**: You can not edit usage from an item that has been deleted.
+
+Once you have logged a usage record, you can choose to update it later. If it has already been billed, you can only update the `merchant_tag`. Otherwise, you can update any of the fields. In this example, we will assume it has not yet been billed and will only update the `amount`.
+
+```ruby
+streaming_usage_update = {
+  amount: 2
+}
+
+payments_usage_update = {
+  amount: 44500
+}
+
+updated_streaming_usage = @client.update_usage(usage_id: streaming_usage.id,
+                                               body: streaming_usage_update)
+puts "Updated streaming usage #{updated_streaming_usage}"
+
+updated_payments_usage = @client.update_usage(usage_id: payments_usage.id,
+                                              body: payments_usage_update)
+puts "Updated streaming usage #{updated_payments_usage}"
+```
+```python
+streaming_usage_update =  { "amount": 2 }
+payments_usage_update = { "amount": 44500 }
+
+updated_streaming_usage = client.update_usage(
+  streaming_usage.id,
+  streaming_usage_update
+)
+print("Updated streaming usage %s" % updated_streaming_usage)
+
+updated_payments_usage = client.update_usage(
+  payments_usage.id,
+  payments_usage_update
+)
+print("Updated streaming usage %s" % updated_payments_usage)
+```
+```csharp
+var streamingUsageUpdate = new UsageCreate()
+{
+    Amount = 2
+};
+var updatedStreamingUsage = client.UpdateUsage(
+    usageId: streamingUsage.Id,
+    body: streamingUsageUpdate
+);
+System.Console.WriteLine($"Update streaming usage {updatedStreamingUsage.Id}");
+
+var paymentsUsageUpdate = new UsageCreate()
+{
+    Amount = 44500
+};
+var updatedPaymentsUsage = client.UpdateUsage(
+    usageId: paymentsUsage.Id,
+    body: paymentsUsageUpdate
+);
+System.Console.WriteLine($"Update payments usage {updatedPaymentsUsage.Id}");
+```
+```php
+$streaming_usage_update = [
+  "amount" => 2
+];
+
+$payments_usage_update = [
+  "amount" => 44500
+];
+
+$updated_streaming_usage = $client->updateUsage(
+  $streaming_usage->getId(),
+  $streaming_usage_update
+);
+echo "Updated streaming usage {$updated_streaming_usage->getId()}" . PHP_EOL;
+
+$updated_payments_usage = $client->updateUsage(
+  $payments_usage->getId(),
+  $payments_usage_update
+);
+echo "Updated streaming usage {$updated_payments_usage->getId()}" . PHP_EOL;
+```
+```js Node
+const streamingUsageUpdate = {
+  amount: 2
+}
+
+const paymentsUsageUpdate = {
+  amount: 44500
+}
+
+const updatedStreamingUsage = await client.updateUsage(
+  streamingUsage.id, 
+  streamingUsageUpdate
+)
+console.log('Updated streaming usage ', updatedStreamingUsage)
+
+const updatedPaymentsUsage = await client.updateUsage(
+  paymentsUsage.id,
+  paymentsUsageUpdate
+)
+console.log('Updated payments usage ', updatedPaymentsUsage)
+```
+```java
+UsageCreate streamingUsageUpdate = new UsageCreate();
+streamingUsageUpdate.setAmount(2.0f);
+Usage updatedStreamingUsage = client.updateUsage(
+  streamingUsage.getId(),
+  streamingUsageUpdate
+);
+System.out.println("Updated streaming usage " + updatedStreamingUsage);
+
+UsageCreate paymentUsageUpdate = new UsageCreate();
+paymentUsageUpdate.setAmount(44500.0f);
+Usage updatedPaymentUsage = client.updateUsage(
+  paymentUsage.getId(),
+  paymentUsageUpdate
+);
+System.out.println("Updated payment usage " + updatedStreamingUsage);
+```

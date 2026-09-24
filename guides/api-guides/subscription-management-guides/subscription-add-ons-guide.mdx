@@ -1,0 +1,620 @@
+---
+title: ' Subscription add-ons guide'
+---
+
+# Overview
+
+This guide demonstrates how to **manage Subscription Add-Ons** using Recurly’s API. You’ll learn to attach new Add-Ons, modify existing ones, and remove unneeded Add-Ons – all via the [Create Subscription Change](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_subscription_change) endpoint.
+
+These examples build on the [Subscription Management Guide](https://docs.recurly.com/v1.1/docs/managing-subscription-methods-guides#/) and [Purchases Guide](https://docs.recurly.com/v1.1/docs/purchases-guide#/), and it’s recommended to review our product documentation on [Subscription Changes](/guides/subscriber-management/subscription-lifecycle/change-subscription) before proceeding.
+
+### Prerequisites & limitations
+
+* A Recurly subscription already in place (or you can create one as needed).
+* Familiarity with Recurly’s API endpoints for subscriptions and plan add-ons.
+* Understanding of how plan-level Add-Ons differ from Subscription Add-Ons.
+* Knowledge of JSON request/response formats.
+
+## Scenario Setup
+
+Throughout this guide, we will be using a video streaming platform as an example scenario. The business offers a core video streaming plan which provides access for 10 users to each view 100 videos / month on the platform.
+
+There are 4 Add-Ons that can be included with the Plan when creating the Subscription:
+
+* Additional Users
+* Higher Video Quality
+* Additional Videos Per User
+* Premium Content\
+  There is an important distinction between an Add-On that is created with the [Create Plan Add-On](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_plan_add_on)/[Create Plan](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_plan) endpoint (a Plan Add-On) and an Add-On that has been added to a Subscription (a Subscription Add-On). The former can be thought of as a blueprint for creating instances of the latter.
+
+## Managing Subscription Add-Ons
+
+The [Create Subscription Change](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_subscription_change) endpoint can be used to add, remove, and modify the Subscription's Add-Ons. Add-Ons are managed via the `add_ons` section of the request body. Each object defined in the `add_ons` array must include either an `id` or a `code` at the minimum.
+
+> **Note**: Special care should be taken when providing a value for the `add_ons` field. All existing Add-Ons must be included or else they will be removed.
+>
+> Additionally, in Recurly API `v2019-10-10`, exlcuding the `add_ons` section of the request body is equivalent of specifying an empty array. As such, failing to include `add_ons` will remove all Add-Ons from the Subscription.
+
+The attributes of a Subscription Add-On (quantity, unit\_amount, tiers, and revenue\_schedule\_type) can be modified without impacting the original Plan Add-On. Likewise, a Plan Add-On can be updated after the creation of a Subscription Add-On and the existing Subscription Add-On will not be affected.
+
+### Subscription Add-On *id* vs Plan Add-On *code*:
+
+* The Subscription Add-On `id` is used to preserve or modify an existing Subscription Add-On.
+* The Plan Add-On `code` is used to attach a new Subscription Add-On or reset an existing Subscription Add-On.
+
+Supplying both the `id` and `code` in the request will be treated as if only the `id` were passed.
+
+## Attach new add-ons
+
+New Add-Ons can be attached to the Subscription by providing a Plan Add-On `code`. Additional customizations of the Plan Add-On attributes can also be supplied at the same time.
+
+For these examples, we are assuming that we have an existing Subscription. We want to attach four Plan Add-Ons with codes: `additional-users`, `higher-quality`, `additional-videos`, and `premium-content`:
+
+```ruby
+change = @client.create_subscription_change(
+  subscription_id: subscription_id,
+  body: {
+    timeframe: "now",
+    add_ons: [
+      { code: "additional-users" },
+      { code: "higher-quality", quantity: 2 },
+      { code: "additional-videos" },
+      { code: "premium-content" }
+    ]
+  }
+)
+puts "Created subscription change: #{change.id}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'now',
+  add_ons: [
+    { code: "additional-users" },
+    { code: "higher-quality", quantity: 2 },
+    { code: "additional-videos" },
+    { code: "premium-content" }
+  ]
+}
+
+const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+console.log('Created subscription change: ', change.id)
+```
+```python
+sub_change_create = {
+  timeframe: "now",
+  add_ons: [
+    { code: "additional-users" },
+    { code: "higher-quality", quantity: 2 },
+    { code: "additional-videos" },
+    { code: "premium-content" }
+  ]
+}
+change = client.create_subscription_change(subscription_id, sub_change_create)
+print("Created subscription change: %s" % change.id)
+```
+```java
+SubscriptionChangeCreate changeCreate = new SubscriptionChangeCreate();
+
+changeCreate.setTimeframe("now");
+
+List<SubscriptionAddOnUpdate> addOns = new ArrayList<>();
+addOn1 = new SubscriptionAddOnUpdate()
+addOn1.setCode("additional-users")
+addOns.add(addOn1)
+
+addOn2 = new SubscriptionAddOnUpdate()
+addOn2.setCode("higher-quality")
+addOn2.setQuantity(2)
+addOns.add(addOn2)
+
+addOn3 = new SubscriptionAddOnUpdate()
+addOn3.setCode("additional-videos")
+addOns.add(addOn3)
+
+addOn4 = new SubscriptionAddOnUpdate()
+addOn4.setCode("premium-content")
+addOns.add(addOn4)
+
+changeCreate.setAddOns(addOns)
+
+SubscriptionChange change = client.createSubscriptionChange(subscriptionId, changeCreate);
+System.out.println("Created subscription change: " + change.getId());
+```
+```csharp
+var changeReq = new SubscriptionChangeCreate()
+{
+  Timeframe = "now",
+  AddOns = new List<SubscriptionAddOnUpdate>() {
+    new SubscriptionAddOnUpdate() {
+      Code = "additional-users"
+    },
+    new SubscriptionAddOnUpdate() {
+      Code = "higher-quality",
+      Quantity: 2
+    },
+    new SubscriptionAddOnUpdate() {
+      Code = "additional-videos",
+    },
+    new SubscriptionAddOnUpdate() {
+      Code = "premium-content",
+    }
+  }
+};
+SubscriptionChange change = client.CreateSubscriptionChange(subscriptionId, changeReq);
+Console.WriteLine($"Created subscription change: {change.Id}");
+
+```
+```php
+$change_create = array(
+    "timeframe" => "now",
+    "add_ons" => [
+        [ "code" => "additional-users" ],
+        [ "code" => "higher-quality", "quantity" => 2 ],
+        [ "code" => "additional-videos" ],
+        [ "code" => "premium-content" ]
+    ]
+);
+$change = $client->createSubscriptionChange($subscription_id, $change_create);
+echo "Created subscription change: {$change->getId()}" . PHP_EOL;
+```
+
+> **Note**: After the request has completed, there will be four Subscription Add-Ons attached to the Subscription. We will use these as the starting point for the other examples in this section. A simplified representation of these Subscription Add-Ons is below.
+
+```json
+[
+  { "id": "n1d523w2ekth", "quantity": 1, "add_on": { "code": "additional-users" } }, 
+  { "id": "n1cqfmlawfnv", "quantity": 2, "add_on": { "code": "higher-quality" } }, 
+  { "id": "n1f9sicpgyc7", "quantity": 1, "add_on": { "code": "additional-videos" } }, 
+  { "id": "n1e8g6s8d2ep", "quantity": 1, "add_on": { "code": "premium-content" } }
+]
+```
+
+## Modify existing add-ons
+
+There are two strategies that can be employed when updating an existing Subscription Add-On:
+
+### Passing the subscription add-on Id
+
+If the Subscription Add-On's `id` is provided in the request, Recurly API will update the existing Subscription Add-On with the provided updates.
+
+Any changes made to the Plan Add-On since the creation of the Subscription Add-On will **not** be updated.
+
+In the below examples, we will be adjusting the `quantity` of the third Subscription Add-On, `n1f9sicpgyc7`.
+
+```ruby
+change = @client.create_subscription_change(
+  subscription_id: subscription_id,
+  body: {
+    timeframe: "now",
+    add_ons: [
+      { id: "n1d523w2ekth" },
+      { id: "n1cqfmlawfnv" },
+      { id: "n1f9sicpgyc7", quantity: 2 },
+      { id: "n1e8g6s8d2ep" }
+    ]
+  }
+)
+puts "Created subscription change: #{change.id}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'now',
+  add_ons: [
+    { id: "n1d523w2ekth" },
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7", quantity: 2 },
+    { id: "n1e8g6s8d2ep" }
+  ]
+}
+
+const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+console.log('Created subscription change: ', change.id)
+```
+```python
+sub_change_create = {
+  timeframe: "now",
+  add_ons: [
+    { id: "n1d523w2ekth" },
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7", quantity: 2 },
+    { id: "n1e8g6s8d2ep" }
+  ]
+}
+change = client.create_subscription_change(subscription_id, sub_change_create)
+print("Created subscription change: %s" % change.id)
+```
+```java
+SubscriptionChangeCreate changeCreate = new SubscriptionChangeCreate();
+
+changeCreate.setTimeframe("now");
+
+List<SubscriptionAddOnUpdate> addOns = new ArrayList<>();
+SubscriptionAddOnUpdate addOn1 = new SubscriptionAddOnUpdate()
+addOn1.setId("n1d523w2ekth")
+addOns.add(addOn1)
+
+SubscriptionAddOnUpdate addOn2 = new SubscriptionAddOnUpdate()
+addOn2.setId("n1cqfmlawfnv")
+addOns.add(addOn2)
+
+SubscriptionAddOnUpdate addOn3 = new SubscriptionAddOnUpdate()
+addOn3.setId("n1f9sicpgyc7")
+addOn3.setQuantity(2)
+addOns.add(addOn3)
+
+SubscriptionAddOnUpdate addOn4 = new SubscriptionAddOnUpdate()
+addOn4.setId("n1e8g6s8d2ep")
+addOns.add(addOn4)
+
+changeCreate.setAddOns(addOns)
+
+SubscriptionChange change = client.createSubscriptionChange(subscriptionId, changeCreate);
+System.out.println("Created subscription change: " + change.getId());
+```
+```csharp
+var changeReq = new SubscriptionChangeCreate()
+{
+  Timeframe = "now",
+  AddOns = new List<SubscriptionAddOnUpdate>() {
+    new SubscriptionAddOnUpdate() {
+      Id = "n1d523w2ekth"
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1cqfmlawfnv"
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1f9sicpgyc7",
+      Quantity: 2
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1e8g6s8d2ep"
+    }
+  }
+};
+SubscriptionChange change = client.CreateSubscriptionChange(subscriptionId, changeReq);
+Console.WriteLine($"Created subscription change: {change.Id}");
+
+```
+```php
+$change_create = array(
+    "timeframe" => "now",
+    "add_ons" => [
+        [ "id" => "n1d523w2ekth" ],
+        [ "id" => "n1cqfmlawfnv" ],
+        [ "id" => "n1f9sicpgyc7", "quantity" => 2 ],
+        [ "id" => "n1e8g6s8d2ep" ]
+    ]
+);
+$change = $client->createSubscriptionChange($subscription_id, $change_create);
+echo "Created subscription change: {$change->getId()}" . PHP_EOL;
+```
+
+> **Note**: Remember that we **must** include the other three Subscription Add-Ons to avoid deleting them.
+
+### Passing the plan add-on code
+
+If the Plan Add-On's `code` is passed, Recurly API will effectively reset the existing Subscription Add-On's attributes to those of the Plan Add-On. Any additional attributes supplied along with the `code` will be applied to the new Subscription Add-On.
+
+> **Note**: If the Plan Add-On has been updated since the original Subscription Add-On was created, then the Subscription Add-On will be updated to the attributes of the current Plan Add-On.
+>
+> In the below examples, we will be adjusting the `quantity` of the fourth Subscription Add-On which is based on the Plan Add-On with code, `premium-content`.
+
+```ruby
+change = @client.create_subscription_change(
+  subscription_id: subscription_id,
+  body: {
+    timeframe: "now",
+    add_ons: [
+      { id: "n1d523w2ekth" },
+      { id: "n1cqfmlawfnv" },
+      { id: "n1f9sicpgyc7" },
+      { code: "premium-content", quantity: 2 }
+    ]
+  }
+)
+puts "Created subscription change: #{change.id}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'now',
+  add_ons: [
+    { id: "n1d523w2ekth" },
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7" },
+    { code: "premium-content", quantity: 2 }
+  ]
+}
+
+const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+console.log('Created subscription change: ', change.id)
+```
+```python
+sub_change_create = {
+  timeframe: "now",
+  add_ons: [
+    { id: "n1d523w2ekth" },
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7" },
+    { code: "premium-content", quantity: 2 }
+  ]
+}
+change = client.create_subscription_change(subscription_id, sub_change_create)
+print("Created subscription change: %s" % change.id)
+```
+```java
+SubscriptionChangeCreate changeCreate = new SubscriptionChangeCreate();
+
+changeCreate.setTimeframe("now");
+
+List<SubscriptionAddOnUpdate> addOns = new ArrayList<>();
+SubscriptionAddOnUpdate addOn1 = new SubscriptionAddOnUpdate()
+addOn1.setId("n1d523w2ekth")
+addOns.add(addOn1)
+
+SubscriptionAddOnUpdate addOn2 = new SubscriptionAddOnUpdate()
+addOn2.setId("n1cqfmlawfnv")
+addOns.add(addOn2)
+
+SubscriptionAddOnUpdate addOn3 = new SubscriptionAddOnUpdate()
+addOn3.setId("n1f9sicpgyc7")
+addOns.add(addOn3)
+
+SubscriptionAddOnUpdate addOn4 = new SubscriptionAddOnUpdate()
+addOn4.setCode("premium-content")
+addOn4.setQuantity(2)
+addOns.add(addOn4)
+
+changeCreate.setAddOns(addOns)
+
+SubscriptionChange change = client.createSubscriptionChange(subscriptionId, changeCreate);
+System.out.println("Created subscription change: " + change.getId());
+```
+```csharp
+var changeReq = new SubscriptionChangeCreate()
+{
+  Timeframe = "now",
+  AddOns = new List<SubscriptionAddOnUpdate>() {
+    new SubscriptionAddOnUpdate() {
+      Id = "n1d523w2ekth"
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1cqfmlawfnv"
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1f9sicpgyc7"
+    },
+    new SubscriptionAddOnUpdate() {
+      Code = "premium-content",
+      Quantity: 2
+    }
+  }
+};
+SubscriptionChange change = client.CreateSubscriptionChange(subscriptionId, changeReq);
+Console.WriteLine($"Created subscription change: {change.Id}");
+
+```
+```php
+$change_create = array(
+    "timeframe" => "now",
+    "add_ons" => [
+        [ "id" => "n1d523w2ekth" ],
+        [ "id" => "n1cqfmlawfnv" ],
+        [ "id" => "n1f9sicpgyc7" ],
+        [ "code" => "premium-content", "quantity" => 2 ]
+    ]
+);
+$change = $client->createSubscriptionChange($subscription_id, $change_create);
+echo "Created subscription change: {$change->getId()}" . PHP_EOL;
+```
+
+> **Note**: Remember that we **must** include the other three Subscription Add-Ons to avoid deleting them.
+
+## Removing add-ons
+
+An Add-On can be removed from a Subscription by both including the `add_ons` array in the Create Subscription Change request and excluding the Subscription Add-On `id`/Plan Add-On `code`.\
+In the below examples, we will be removing the first Subscription Add-On, `n1d523w2ekth`.
+
+```ruby
+change = @client.create_subscription_change(
+  subscription_id: subscription_id,
+  body: {
+    timeframe: "now",
+    add_ons: [
+      { id: "n1cqfmlawfnv" },
+      { id: "n1f9sicpgyc7" },
+      { id: "n1e8g6s8d2ep" }
+    ]
+  }
+)
+puts "Created subscription change: #{change.id}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'now',
+  add_ons: [
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7" },
+    { id: "n1e8g6s8d2ep" }
+  ]
+}
+
+const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+console.log('Created subscription change: ', change.id)
+```
+```python
+sub_change_create = {
+  timeframe: "now",
+  add_ons: [
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7" },
+    { id: "n1e8g6s8d2ep" }
+  ]
+}
+change = client.create_subscription_change(subscription_id, sub_change_create)
+print("Created subscription change: %s" % change.id)
+```
+```java
+SubscriptionChangeCreate changeCreate = new SubscriptionChangeCreate();
+
+changeCreate.setTimeframe("now");
+
+List<SubscriptionAddOnUpdate> addOns = new ArrayList<>();
+SubscriptionAddOnUpdate addOn2 = new SubscriptionAddOnUpdate()
+addOn2.setId("n1cqfmlawfnv")
+addOns.add(addOn2)
+
+SubscriptionAddOnUpdate addOn3 = new SubscriptionAddOnUpdate()
+addOn3.setId("n1f9sicpgyc7")
+addOns.add(addOn3)
+
+SubscriptionAddOnUpdate addOn4 = new SubscriptionAddOnUpdate()
+addOn4.setId("n1e8g6s8d2ep")
+addOns.add(addOn4)
+
+changeCreate.setAddOns(addOns)
+
+SubscriptionChange change = client.createSubscriptionChange(subscriptionId, changeCreate);
+System.out.println("Created subscription change: " + change.getId());
+```
+```csharp
+var changeReq = new SubscriptionChangeCreate()
+{
+  Timeframe = "now",
+  AddOns = new List<SubscriptionAddOnUpdate>() {
+    new SubscriptionAddOnUpdate() {
+      Id = "n1cqfmlawfnv"
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1f9sicpgyc7"
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1e8g6s8d2ep"
+    }
+  }
+};
+SubscriptionChange change = client.CreateSubscriptionChange(subscriptionId, changeReq);
+Console.WriteLine($"Created subscription change: {change.Id}");
+
+```
+```php
+$change_create = array(
+    "timeframe" => "now",
+    "add_ons" => [
+        [ "id" => "n1cqfmlawfnv" ],
+        [ "id" => "n1f9sicpgyc7" ],
+        [ "id" => "n1e8g6s8d2ep" ]
+    ]
+);
+$change = $client->createSubscriptionChange($subscription_id, $change_create);
+echo "Created subscription change: {$change->getId()}" . PHP_EOL;
+```
+
+> **Note**: Remember that we **must** include the other three Subscription Add-Ons to avoid deleting them.
+
+### Adding, modifying by Id, modifying by code, and removing add-ons
+
+All of the above operations can be consolidated into a single request. There is no restriction that each action be done in it's own request.
+
+In the below examples, we will:
+
+* Remove the first Subscription Add-On, `n1d523w2ekth`, by excluding it from the request.
+* Adjust the `quantity` of the third Subscription Add-On using it's id: `n1f9sicpgyc7`
+* Adjust the `quantity` of the fourth Subscription Add-On using it's Plan Add-On code: `premium-content`.
+
+```ruby
+change = @client.create_subscription_change(
+  subscription_id: subscription_id,
+  body: {
+    timeframe: "now",
+    add_ons: [
+      { id: "n1cqfmlawfnv" },
+      { id: "n1f9sicpgyc7", quantity: 2 },
+      { code: "premium-content", quantity: 2 }
+    ]
+  }
+)
+puts "Created subscription change: #{change.id}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'now',
+  add_ons: [
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7", quantity: 2 },
+    { code: "premium-content", quantity: 2 }
+  ]
+}
+
+const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+console.log('Created subscription change: ', change.id)
+```
+```python
+sub_change_create = {
+  timeframe: "now",
+  add_ons: [
+    { id: "n1cqfmlawfnv" },
+    { id: "n1f9sicpgyc7", quantity: 2 },
+    { code: "premium-content", quantity: 2 }
+  ]
+}
+change = client.create_subscription_change(subscription_id, sub_change_create)
+print("Created subscription change: %s" % change.id)
+```
+```java
+SubscriptionChangeCreate changeCreate = new SubscriptionChangeCreate();
+
+changeCreate.setTimeframe("now");
+
+List<SubscriptionAddOnUpdate> addOns = new ArrayList<>();
+SubscriptionAddOnUpdate addOn2 = new SubscriptionAddOnUpdate()
+addOn2.setId("n1cqfmlawfnv")
+addOns.add(addOn2)
+
+SubscriptionAddOnUpdate addOn3 = new SubscriptionAddOnUpdate()
+addOn3.setId("n1f9sicpgyc7")
+addOn3.setQuantity(2)
+addOns.add(addOn3)
+
+SubscriptionAddOnUpdate addOn4 = new SubscriptionAddOnUpdate()
+addOn4.setCode("premium-content")
+addOn4.setQuantity(2)
+addOns.add(addOn4)
+
+changeCreate.setAddOns(addOns)
+
+SubscriptionChange change = client.createSubscriptionChange(subscriptionId, changeCreate);
+System.out.println("Created subscription change: " + change.getId());
+```
+```csharp
+var changeReq = new SubscriptionChangeCreate()
+{
+  Timeframe = "now",
+  AddOns = new List<SubscriptionAddOnUpdate>() {
+    new SubscriptionAddOnUpdate() {
+      Id = "n1cqfmlawfnv"
+    },
+    new SubscriptionAddOnUpdate() {
+      Id = "n1f9sicpgyc7",
+      Quantity: 2
+    },
+    new SubscriptionAddOnUpdate() {
+      Code = "premium-content",
+      Quantity: 2
+    }
+  }
+};
+SubscriptionChange change = client.CreateSubscriptionChange(subscriptionId, changeReq);
+Console.WriteLine($"Created subscription change: {change.Id}");
+```
+```php
+$change_create = array(
+    "timeframe" => "now",
+    "add_ons" => [
+        [ "id" => "n1cqfmlawfnv" ],
+        [ "id" => "n1f9sicpgyc7", "quantity" => 2 ],
+        [ "code" => "premium-content", "quantity" => 2 ]
+    ]
+);
+$change = $client->createSubscriptionChange($subscription_id, $change_create);
+echo "Created subscription change: {$change->getId()}" . PHP_EOL;
+```

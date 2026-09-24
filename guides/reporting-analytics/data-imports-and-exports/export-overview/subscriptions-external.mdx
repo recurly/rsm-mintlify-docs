@@ -1,0 +1,103 @@
+---
+title: Subscriptions — external - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Prerequisite
+
+You must have enabled connections to app stores to view this export. Please reach out to your Recurly account manager or [support@recurly.com](mailto:support@recurly.com) to have this feature activated in your account.
+
+# Definition
+
+The "Subscriptions - External" export function allows you to identify and gather detailed information on external subscriptions stored on third-party platforms like the Apple App Store or Google Play Store. It aims to provide Recurly users with comprehensive data regarding the statuses and details of external subscriptions tied to different accounts.
+
+![](https://files.readme.io/d5b09af0527f2f611eb8a9f53fa3dfbddb716818f33f2da7725d96cd2b526f79-image.png)
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Export On Filters
+
+* **Activated**: Filters external subscriptions activated within a selected time range, using data from the "activated_at" column in the export.
+* **Modified**: Highlights the subscriptions altered within a chosen timeframe based on the "modified_at" column. Note that only the modified entries will appear, excluding the original data.
+* **Created**: Shows subscriptions created within a selected period, referencing the "created_at" column, including those with a future activation date.
+
+### **Time Range Filter**
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Id                                                                                            | Example                                                | Description                                                                                                                                            | Data Type (Max Size) |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------- |
+| <span id="account_code">account_code</span>                                                   | 123456789, [test@example.com](mailto:test@example.com) | Account associated with the External Subscription.                                                                                                     |                      |
+| <span id="external_product_reference_code">external_product_reference_code</span>             |                                                        | A code linking the external product to a relevant entity in platforms like the Apple App Store or Google Play Store.                                   | string               |
+| <span id="external_product_reference_source">external_product_reference_source</span>         |                                                        | Platform where the external product is sourced (e.g., Apple App Store, Google Play).                                                                   | string               |
+| <span id="app_identifier">app_identifier</span>                                               |                                                        | ID of the app responsible for the external subscription.                                                                                               | string               |
+| <span id="plan_code">plan_code</span>                                                         | basic                                                  | The external subscription’s plan.                                                                                                                      | string               |
+| <span id="state">state</span>                                                                 | active, canceled, expired, or future                   | Current status of the subscription.                                                                                                                    |                      |
+| <span id="auto_renew">auto_renew</span>                                                       | TRUE, FALSE                                            | Indicates if the subscription will auto-renew; defaults to TRUE.                                                                                       |                      |
+| <span id="quantity">quantity</span>                                                           | 1                                                      | The quantity of the subscribed items.                                                                                                                  |                      |
+| <span id="activated_at">activated_at</span>                                                   | 2010-03-24 17:18:46 PDT                                | External platform’s activation date and time for the subscription.                                                                                     | timestamp            |
+| <span id="modified_at">modified_at</span>                                                     | 2010-03-24 17:18:44 PDT                                | The date and time when the subscription was last updated in Recurly.                                                                                   | timestamp            |
+| <span id="created_at">created_at</span>                                                       | 2010-03-24 17:18:44 PDT                                | Recurly’s creation date and time for the subscription.                                                                                                 | timestamp            |
+| <span id="expires_at">expires_at</span>                                                       | 2010-04-23 22:51:53 PDT                                | The expiration date and time for the subscription on the external platform.                                                                            | timestamp            |
+| <span id="last_purchased">last_purchased</span>                                               | 2010-04-23 22:51:53 PDT                                | The most recent billing event’s date and time on the external subscription, corresponding to a new billing period, reactivation, or upgrade/downgrade. | timestamp            |
+| <span id="external_product_reference_deleted_at">external_product_reference_deleted_at</span> | 2010-04-23 22:51:53 PDT                                | The date and time when the external product link was removed from the external subscription.                                                           | timestamp            |
+| <span id="external_product_name">external_product_name</span>                                 | string                                                 | Name of the external product linked to the external subscription.                                                                                      | string               |
+| <span id="external_product_deleted_at">external_product_deleted_at</span>                     | 2010-04-23 22:51:53 PDT                                | When the external product association was removed from the external subscription.                                                                      | timestamp            |
+| <span id="app_identifier">app_identifier</span>                                               | external_app                                           | External application identifier.                                                                                                                       | string               |
+| <span id="auto_renew">auto_renew</span>                                                       | false                                                  | Auto renew flag for external subscription.                                                                                                             | string               |
+| <span id="last_purchased">last_purchased</span>                                               | 2010-04-23 22:51:53 PDT                                | Last purchase timestamp.                                                                                                                               | timestamp            |
+| <span id="external_id">external_id</span>                                                     | my_id_123456                                           | External identifier. For Apple, it is originalTransactionId. For Google, it is purchaseToken.                                                          | string               |
+| <span id="quantity">quantity</span>                                                           | 1                                                      | Quantity.                                                                                                                                              | number               |
+| <span id="in_grace_period">in_grace_period</span>                                             | false                                                  | Flag to indicate whether subscription is in grace period.                                                                                              | string               |
+| <span id="canceled_at">canceled_at</span>                                                     | 2010-04-23 22:51:53 PDT                                | When the external subscription was canceled.                                                                                                           | timestamp            |
+| <span id="trial_ends_at">trial_ends_at</span>                                                 | 2010-04-23 22:51:53 PDT                                | When the external subscription’s trial ended.                                                                                                          | timestamp            |
+| <span id="trial_started_at">trial_started_at</span>                                           | 2010-04-23 22:51:53 PDT                                | When the external subscription’s trial started.                                                                                                        | timestamp            |
+| <span id="state">state</span>                                                                 | active                                                 | Current state of the external subscription.                                                                                                            | string               |
+| external_subscription_api_id                                                                  | e28zov4fw0v2                                           | External Subscription API ID                                                                                                                           | string               |
+| uuid                                                                                          | 72b6ba44eab2a94e8830414d7e8c2747                       | Universally Unique Identifier created automatically.                                                                                                   | string               |
+
+# Version changelog
+
+#### Version 6 - 08/05/2025
+
+Addition of uuid.
+
+#### Version 5 - 2/5/2025
+
+* Addition of `external_subscription_api_id`.
+
+#### Version 4 - 7/6/2023
+
+* Column added for state
+* Column added for trial_started_at
+* Column added for trial_ends_at
+* Column added for canceled_at
+* Column added for in_grace_period
+
+#### Version 3 - 5/19/2023
+
+* Column added for quantity
+* Column added for external_id
+
+#### Version 2 - 9/23/2022
+
+* Column added for last_purchased
+* Column added for auto_renew
+* Column added for app_identifier

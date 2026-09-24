@@ -1,0 +1,65 @@
+---
+title: External recoveries - export
+---
+
+# Overview
+
+### Required plan
+
+This export is only available to merchants that are using Recurly’s <a href="/guides/partner-integrations/sales-marketing-and-services/vindicia-retain-integration" target="_blank">Vindicia Retain integration</a>.
+
+### Prerequisites
+
+To enable and activate the External Recoveries export, your Recurly account must have the <a href="/guides/partner-integrations/sales-marketing-and-services/vindicia-retain-integration" target="_blank">Vindicia Retain integration</a> enabled.
+
+# Key benefits
+
+* **View scheduled invoices**: See which invoices are scheduled to be sent to Vindicia Retain for collection.
+* **Track invoices in collection**: View which invoices are currently with Vindicia Retain for collection.
+* **Check collection outcomes**: Determine which invoices Vindicia Retain was or wasn’t able to collect.
+
+# Definition
+
+The External Recoveries export provides detailed analysis on what is happening or has happened to the past due invoices that will be or have been sent to Vindicia Retain for collection through Recurly’s Vindicia Retain integration.  Click <a href="/guides/partner-integrations/sales-marketing-and-services/vindicia-retain-integration" target="_blank">here</a> to learn more about Recurly’s Vindicia Retain integration.
+
+<Image border={false} src="https://files.readme.io/5faed9447fba40ae11dd4591b3921fabd1a1bc13f6af5c29966b9ae0e963e0a7-image.png" />
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### **Time Range**
+
+Filters for all invoices that are scheduled to be sent to Vindicia (i.e. past due invoices) or invoices that have been sent to Vindicia that have a posted/creation date that match your date criteria
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Table
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Id                         | Example                                  | Description                                                                                                                                                                                                                                                                                               | Data type (max size) |
+| :------------------------- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------- |
+| id                         | vi9j29xspf2x                             | Unique identifier that represents external recovery.                                                                                                                                                                                                                                                      | string               |
+| invoice_number             | 1291                                     | External invoice identifier.                                                                                                                                                                                                                                                                              | string               |
+| invoice_id                 | b964b5439c2548a489b3a136e75aee9f         | Unique internal identifier for the invoice that is scheduled to be sent or has been sent to Vindicia.. This is also called the 'invoice_id' or 'uuid' for the invoice in the API.                                                                                                                         | string               |
+| last_failed_transaction_id | 6c17ba39e8734ebaa5bf98fff6d91bb9         | Unique identifier for the transaction within Recurly. This represents the last failed transaction Recurly received before sending the invoice to Vindicia for collection.                                                                                                                                 | string               |
+| external_reference         | GGGV001234                               | Reference id for this record/invoice in Vindica’s system.  This is only available for invoices that Recurly has attempted to send to Vindicia (i.e. not invoices that are scheduled to be sent).                                                                                                          | string               |
+| external_request_id        | 262446f511143f0cfd761720334c5082044c2519 | Id of the API payload request/response Recurly used to send this invoice to Vindicia’s system. This is only available for invoices that Recurly has attempted to send to Vindicia (i.e. not invoices that are scheduled to be sent).                                                                      | string               |
+| attempts_to_send           | 1                                        | Represents the number of times this invoice was attempted to be sent to Vindicia.  Can be more than once if Recurly encountered a failure during the initial send.  This is only available for invoices that Recurly has attempted to send to Vindicia (i.e. not invoices that are scheduled to be sent). | numeric              |
+| status                     | processing, success, canceled, failed    | Current status of the invoice.                                                                                                                                                                                                                                                                            | string               |
+| collection                 | false                                    | Represents whether it's a collection or refund/cancel.                                                                                                                                                                                                                                                    | bool                 |
+| sent_at                    | 2024-06-27 11:05:07.517401 PDT           | The datetime the invoice was sent to Vindicia for collections.                                                                                                                                                                                                                                            | timestamp            |
+| send_at                    | 2024-06-27 11:05:05.415044 PDT           | The datetime a past due invoice is scheduled to be sent to Vindicia for collections.                                                                                                                                                                                                                      | timestamp            |
+| status_received_at         | 2024-06-27 11:41:42 PDT                  | The datetime the current status was set.                                                                                                                                                                                                                                                                  | timestamp            |
+| created_at                 | 2024-06-27 11:05:05.417824 PDT           | The datetime the invoice was created/posted.                                                                                                                                                                                                                                                              | timestamp            |
+| modified_at                | 2024-06-27 11:05:05.417824 PDT           | The datetime the invoice status was modified.                                                                                                                                                                                                                                                             | timestamp            |
+| external_recovery_api_id   | e28zov4fw0v2                             | External Recovery API ID                                                                                                                                                                                                                                                                                  | string               |
+
+# Changelog
+
+### Version 2 - 02/05/25
+
+* Addition of external_recovery_api_id.

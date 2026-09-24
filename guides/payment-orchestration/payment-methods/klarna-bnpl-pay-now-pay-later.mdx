@@ -1,0 +1,90 @@
+---
+title: Klarna (BNPL, Pay Now, Pay Later)
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Klarna offers three flexible payment options — Pay Now, Pay Later, and Buy Now Pay Later (BNPL) installments — available on Recurly via Stripe Payment Elements (Third Party Checkout). Available for B2C merchants only, with options presented dynamically based on customer location, currency, and subscription interval.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#checkout-flow"><span className="rp-toc-num">2</span>Checkout flow</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Klarna is supported via Stripe Payment Elements (Third Party Checkout). See <a href="/guides/api-guides/integration-guides/popular-use-cases/third-party-checkout/" target="_blank">Third Party Checkout: Stripe Elements</a>, the <a href="/guides/recurly-js/overview-recurlyjs/" target="_blank">Recurly.js overview</a>, and the <a href="https://recurly.com/developers/api/v2021-02-25/index.html" target="_blank">V3 API</a>.</li>
+  <li>Your business must be B2C — Klarna payments require selling goods or services directly to consumers.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Klarna BNPL (Pay in Installments) is not available for monthly subscriptions — it's only supported for subscriptions longer than 2 months (quarterly, annual, etc.). See the payment options table below for availability by option and country.</li>
+  <li>Tokenized Klarna payment details cannot be used when paired with a Trial Plan and a separate add-on line item that is not associated with the plan itself.</li>
+  <li>100% coupons during signup are not supported — credit checks are required for this payment method. Use a free trial instead. Standard coupons are supported.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Klarna is a global payment method offered by Klarna Bank AB, a Swedish bank. It supports flexible payment options including Pay Now (immediate full payment), Pay Later (deferred payment), and Pay in Installments (BNPL — split into 3 or 4 installments). Klarna bears consumer credit risk and may request credit checks for new subscriptions, particularly for installment options.</div>
+
+# Checkout flow
+
+## Consumer authentication
+
+Customers may need to provide details to Klarna and, for installment options like Pay in 4, may undergo a credit check.
+
+## Completing the order
+
+Customers are redirected to Klarna's site to select their preferred payment option, then returned to your website to complete the order. Klarna presents options based on the customer's currency, subscription interval (monthly, weekly, annual, etc.), and transaction amount.
+
+Once approved, Stripe immediately makes the full order amount available in your account (minus fees), and Klarna collects payment from the customer on its own timeline.
+
+# Key details
+
+## Payment options
+
+### Customer-initiated (in-session)
+
+Depending on subscription type and customer location, customers can be presented with up to three options:
+
+- **Pay Now** — Immediate full payment using Klarna as a wallet, with the payment method stored in the customer's Klarna account. Available on all subscription lengths.
+- **Pay Later** — Deferred payment where the customer pays the full order amount on a set day, bundled with other Pay Later purchases. No interest or fees when paid on time. Available on all subscription lengths.
+- **Pay in Installments (Pay in 3 or 4)** — Splits the purchase into 3 or 4 installments; merchants receive full funds upfront. Only available for subscriptions longer than 2 months (quarterly, annual, etc.).
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong> BNPL and Pay Later options only appear on plans with billing intervals of at least 2–3 months. Shorter cycles display Pay Now only.</div>
+</div>
+
+### Merchant-initiated (off-session)
+
+For merchant-initiated payments such as renewals, force collections, or one-time invoices where the customer is not in session, Klarna and Stripe's offerings are region-specific. See <a href="https://docs.stripe.com/payments/klarna#recurring-payment-support" target="_blank">Stripe / Klarna recurring payment support</a> for details.
+
+Stripe and Klarna handle refunds for partially collected BNPL payments.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Subscription recommendation</strong> Since all off-session transactions process as Pay Now, if you're using BNPL for annual plans, set the Plan End of Subscription Term behavior to <strong>Expire subscription</strong>. This brings the customer back in-session at renewal so they can select their preferred payment option (BNPL, Pay Later, etc.) for the next term.</div>
+</div>
+
+## Customer locations and presentment currencies
+
+Stripe Elements dynamically presents Klarna options based on customer location and transaction currency — different regions have different rules around Pay Later and BNPL. For example, Pay Later isn't available in Montana, New Mexico, or Hawaii, and Pay in Installments isn't available in New Mexico or Hawaii.
+
+For the latest regional restrictions, see <a href="https://docs.stripe.com/payments/klarna#payment-options" target="_blank">Klarna payment options — Stripe documentation</a>.
+
+## Prohibited businesses
+
+Klarna maintains a list of prohibited and restricted business categories. Review <a href="https://docs.klarna.com/resources/legal-and-compliance/policies-and-term-of-service/prohibited-and-restricted-businesses/" target="_blank">Klarna's prohibited and restricted businesses</a> before integrating.
+
+## Klarna messaging and advertising
+
+Use Stripe's Messaging Element to show buyers that Klarna is available before they reach checkout — Stripe handles displaying the relevant options in a legally and brand-compliant way. See <a href="https://docs.stripe.com/payments/payment-method-messaging" target="_blank">Payment Method Messaging Element — Stripe documentation</a>.
+
+For advertising guidelines, see <a href="https://docs.klarna.com/resources/legal-and-compliance/more-solutions-guidelines/ad-policies-for-klarna-advertisers/" target="_blank">Klarna ad policies for advertisers</a>.
+
+## Sandbox testing
+
+Test Klarna Recurring through Payment Elements on your Recurly sandbox site before going live to confirm correct functionality.

@@ -1,0 +1,87 @@
+---
+title: Cancellation Flows
+---
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Early Access</strong> Cancellation Flows is under development with an iterative rollout to early access merchants. To participate, contact your Account Manager or Account Executive.</div>
+</div>
+
+<div className="rp-page">
+  <div className="rp-overview">Cancellation Flows lets you present a customizable exit survey to subscribers when they initiate a cancellation — capturing the reasons they're leaving. This data informs retention strategies and, in future phases, will enable linking cancel reasons to retention offers such as discounts, plan changes, or subscription pauses.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Early Access — contact your Account Manager or Account Executive to enable</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#implementation"><span className="rp-toc-num">2</span>Implementation</a>
+    <a className="rp-toc-pill" href="#api-integration"><span className="rp-toc-num">3</span>API integration</a>
+    <a className="rp-toc-pill" href="#analyzing-survey-results"><span className="rp-toc-num">4</span>Analyzing results</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Cancellation Flows is a Recurly feature that displays an exit survey to customers when they initiate a subscription cancellation. Merchants configure the survey responses in the Admin UI and integrate the survey presentation via API. The initial phases focus on data collection to understand why customers leave — future phases will connect cancel reasons to retention offers.</div>
+
+# Implementation
+
+Implementing a cancellation flow is a two-step process: (1) configure the survey responses in the Admin UI, then (2) integrate via API to present the survey and capture customer responses.
+
+## Step 1: Configure the survey
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Cancellation Flow configuration</h4><p>Log in to the Recurly Admin UI with a user that has the <em>Configuration — Allow Access and Editing</em> permission. Navigate to <strong>Configuration → Cancellation Flow</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/ec79936-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Browse available responses</h4><p>In the <strong>Available Responses</strong> section, you can find responses in several ways: click the down caret to see all 16 default responses, type letters to filter by text, or type numbers to filter by reference ID.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Select responses</h4><p>Left-click a response or highlight it and press Enter to move it to <strong>Selected Responses</strong>. Selected responses appear greyed out in the Available Responses dropdown to indicate they've been chosen. To remove a response, single-click it in Selected Responses. To clear all, click <strong>Remove all (#)</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Publish the survey</h4><p>Click <strong>Publish Changes</strong> once you've selected at least one response. The button enables as soon as a response is moved. Re-publish any time you update the selection.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/15f1fa7-image.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/7b0cb93-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Response ordering</strong> On the Cancellation Flow page, responses display in the order you added them initially. After refreshing or returning to the page, they display in numerical order by reference ID (001–016). When presented to customers via API, responses always appear in random order.</div>
+</div>
+
+## Moving to production
+
+When promoting your sandbox to a production environment, all Cancellation Flow configurations and data are cleared. You'll need to reconfigure your survey in production.
+
+# API integration
+
+Once your survey is configured and published, integrate the API to present the survey and capture responses.
+
+- **GET — List the site's published survey** — Returns the survey only after it's in a published state (at least one response selected). Use this to retrieve the current active survey.
+- **POST — Create a new survey session** — Call this endpoint whenever a customer clicks to cancel. The response includes the survey question and responses in random order. The session is also available in the Cancellation Flows export.
+- **POST — Update a survey session** — Updates the session state and records the customer's response and the response position. Use this after the customer makes a selection.
+- **GET — Fetch a survey session** — Retrieves an existing session if something unexpected occurred and session state was lost. For accurate analytics, start a new session if the customer didn't complete their original session (e.g., timed out or navigated away).
+
+Full API details — path parameters, request/response schemas, and samples — are available in the <a href="https://recurly.com/developers/api/v2999-01-01/index.html#operation/list_surveys" target="_blank">v3 API reference</a> and <a href="https://recurly.com/developers/api-v2/v2.99/#operation/list_surveys" target="_blank">v2 API reference</a>.
+
+# Analyzing survey results
+
+A Cancellation Flows export is available as both a manual and automated export. It provides data to understand why customers are cancelling, monitor trends (such as whether response position order affects selection), and gain insight into cancellation behavior.
+
+An entry is created each time a new survey session is created and updated each time the session is updated. See the <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/cancellation-flows-export" target="_blank">Cancellation Flows export documentation</a> for full field details.

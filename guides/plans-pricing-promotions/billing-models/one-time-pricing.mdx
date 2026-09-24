@@ -1,0 +1,125 @@
+---
+title: One-time pricing
+---
+
+<div className="rp-page">
+
+<div className="rp-overview">
+
+One-time pricing gives you the flexibility to charge setup fees, sell standalone products, and add one-time items to any subscription — all managed through Recurly's item catalog.
+
+</div>
+
+<div className="rp-plan">
+  <i className="fa-solid fa-key" aria-hidden="true"></i>&nbsp; Available on all Recurly plans
+</div>
+
+<div className="rp-toc">
+  <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span> Definition</a>
+  <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span> Key benefits</a>
+  <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span> Key details</a>
+  <a className="rp-toc-pill" href="#set-up-one-time-billing"><span className="rp-toc-num">4</span> Set up one-time billing</a>
+</div>
+
+</div>
+
+# Definition
+
+<div className="rp-definition">
+
+Recurly's one-time billing model lets merchants charge a one-time fee — or sell non-recurring items — in addition to their regular subscription charges. It's also designed to support standalone purchases entirely outside of a subscription context. Whether you're a gym charging an equipment fee at signup, an IoT company bundling a device with an annual service plan, a web store selling exclusive items to subscribers, or a SaaS company invoicing flat fees for professional services, one-time pricing handles all of it through a single, consistent billing model.
+
+</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>More revenue streams</strong>
+    <span>Charging a setup fee or selling additional items — physical goods, events, courses — creates new revenue opportunities without rebuilding your billing infrastructure.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+    <strong>Versatile by design</strong>
+    <span>Works across industries — IoT, fitness, web commerce, and SaaS — wherever you need to mix recurring and one-time charges in a single checkout flow.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-box-open" aria-hidden="true"></i></div>
+    <strong>Catalog-driven management</strong>
+    <span>The item catalog centralizes your one-time products with default pricing, SKU, accounting code, and tax configuration — ready to sell via API or UI.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-users" aria-hidden="true"></i></div>
+    <strong>Better customer engagement</strong>
+    <span>Giving subscribers access to exclusive one-time purchases — limited products, events, or services — deepens engagement and increases order value.</span>
+  </div>
+</div>
+
+# Key details
+
+One-time billing in Recurly is built on two capabilities: plan setup fees and the item catalog. Used together or independently, they cover the full range of one-time charge scenarios.
+
+**Setup fees** are configured at the plan level and charged once at the time of subscription creation — ideal for activation fees, onboarding charges, or initial hardware costs.
+
+**Item catalog** handles everything else: standalone products, add-on purchases, and any one-time item you want to sell to subscribers or non-subscribers alike. Each catalog item stores a default price and common attributes (SKU, accounting code, tax category) so you don't have to re-enter them at the point of sale.
+
+## Examples by industry
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row">
+    <td>Industry</td>
+    <td>One-time billing example</td>
+  </tr>
+  <tr>
+    <td>Web store</td>
+    <td>Rocksbox offers members the option to purchase additional jewelry from their web store — billed as a one-time charge alongside their subscription.</td>
+  </tr>
+  <tr>
+    <td>SaaS</td>
+    <td>TheHealthyBack charges a flat fee for professional services or one-time events through a purchase adjustment, not a recurring plan.</td>
+  </tr>
+</table>
+
+# Set up one-time billing
+
+<span id="rp-close"></span>
+
+<div className="rp-steps">
+
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Add a setup fee to your plan</h4>
+      <p>Each plan supports one setup fee, charged once when a customer subscribes. This is the right option for businesses that require an upfront investment at signup — gyms, IoT device activations, or SaaS onboarding charges.</p>
+    </div>
+  </div>
+
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#zoom-d9b94cc"> <img className="rp-zoom-img" src="https://files.readme.io/d9b94cc-image.png" alt="Setup fee configuration in Recurly plan settings" /> </a>
+  <a id="zoom-d9b94cc" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/d9b94cc-image.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Create your items in the catalog</h4>
+      <p>If your business sells one-time items, add them to Recurly's <a href="https://docs.recurly.com/docs/catalog" target="_blank">item catalog</a>. For each item, set a default price and fill in any commonly used attributes — SKU, accounting code, and tax information. This makes it straightforward to sell items through the Recurly API or directly from the UI without re-entering product details each time.</p>
+    </div>
+  </div>
+
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Implement one-time purchases at checkout</h4>
+      <p>In your checkout flow, create an adjustment on the customer's account for the product using the Purchases endpoint. This endpoint supports billing both recurring subscription charges and one-time purchases together in a single transaction — so your customers see one clean invoice.</p>
+    </div>
+  </div>
+
+</div>
+
+<br />

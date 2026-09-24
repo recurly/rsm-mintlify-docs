@@ -1,0 +1,67 @@
+---
+title: MailChimp integration
+---
+
+# Overview
+
+### Required plan
+
+This feature **may not be included** in the Starter or Pro plans. If you are interested, please contact [Recurly Sales](https://recurly.com/demo/contact-sales/) to discuss upgrade options.
+
+# Definition
+
+MailChimp Integration allows Recurly users to effortlessly synchronize their subscriber lists with MailChimp, ensuring that the lists are always current. This integration facilitates targeted email campaigns based on various attributes transferred from Recurly to MailChimp.
+
+# Key benefits
+
+* **Automated synchronization**: Ensure your MailChimp subscriber lists are always updated with the latest data from Recurly.
+* **Enhanced targeting**: Segment your campaigns in MailChimp using a variety of attributes from Recurly.
+* **Efficient configuration**: Easy setup process without the need for continuous manual intervention.
+* **Consistent communication**: Keeps your customers informed with timely and relevant email campaigns.
+* **Flexibility**: Easily disable synchronization whenever needed without any hassle.
+
+# Getting started with MailChimp and Recurly
+
+Recurly's integration with MailChimp ensures that your email subscriber lists are always fresh and up-to-date. By connecting your MailChimp account with Recurly, you can tailor your email campaigns based on various attributes, enhancing the effectiveness of your communication.
+
+### How the integration works
+
+Before diving in, ensure you have both a MailChimp account and a Recurly account.\
+Once you're set up on MailChimp, follow these steps:
+
+1. **Create a New Mailing List**: While Recurly can synchronize with an existing list, starting with a new list is recommended.
+2. **Log into Recurly**: Navigate to the Integrations section and select \[3].
+3. **Connect to MailChimp**: Input your MailChimp API key and establish the connection.
+4. **Select a Mailing List**: Choose the list you created in MailChimp. If you don't see your list, ensure you have a list created in MailChimp or refresh the Recurly page.
+5. **Finalize the Integration**: Click on 'Use MailChimp List' to complete the setup.
+
+### Understanding the synchronization process
+
+Post-integration, Recurly will update changes to your accounts in MailChimp twice daily. This includes new account information and updates to existing accounts. Accounts that are closed in Recurly will be automatically unsubscribed in MailChimp. It's essential to note that changes made directly in MailChimp won't reflect back in Recurly. Hence, always update account details in Recurly.
+
+> ❗️ **About email updates**:
+>
+> Modifying an email address in an existing account will be recognized as a new account in MailChimp, re-triggering any new list entry flows.
+
+### Data parameters in MailChimp
+
+Recurly will auto-create the necessary list fields during the initial synchronization with MailChimp. If you delete a merge tag in MailChimp, Recurly won't recreate it. Here's a list of merge tags that Recurly uses:
+
+* **EMAIL**: Account email address.
+* **ACCOUNT\_ID**: Recurly account\_code.
+* **FNAME**: Account first name.
+* **LNAME**: Account last name.
+* **COMPANY**: Account company name.
+* **PLAN\_CODE**: Subscription plan code (if the account is a subscriber).
+* **PLAN\_NAME**: Subscription plan name (if the account is a subscriber).
+* **IN\_TRIAL**: Indicates if the subscriber is in a trial period.
+* **SUBSCRIBER**: Denotes if the account has a subscription.
+* **SUB\_SINCE**: Date the subscription began.
+
+### Disabling the integration
+
+If you ever need to halt the synchronization, you can easily disable it from \[3] in Recurly. 
+
+* Navigate to the MailChimp Integration page in Recurly.
+* Click 'Disable MailChimp Integration'.
+* Confirm the action to disable synchronization.

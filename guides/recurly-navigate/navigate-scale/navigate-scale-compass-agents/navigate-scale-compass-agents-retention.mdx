@@ -1,0 +1,502 @@
+---
+title: 'Compass agents & skills: Retention agent'
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+/* ── HOST-THEME BACKGROUND OVERRIDE — must be first ── */
+body { background: #ffffff !important; }
+
+/* ── GLOBAL CSS IMMUNITY BLOCK ── */
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+
+/* ── NAVIGATE MASTER ARMOR — (0,0,7,1) beats global section 1.1 rule (0,0,6,2) ── */
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a,
+.rc-guide a:link,
+.rc-guide a:visited,
+.rc-guide a:active {
+  color: #008CFF !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: unset !important;
+  border-bottom: 0 !important;
+}
+.rc-guide a:hover {
+  color: #0067BE !important;
+  text-decoration: underline !important;
+  text-decoration-color: #008CFF !important;
+  text-underline-offset: 2px !important;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+/* ── TOKEN BLOCK ── */
+.rc-guide {
+  --yellow:     #FFD706;
+  --blue:       #008CFF;
+  --blue-tint1: #D5EAFF;
+  --blue-tint2: #96C8FF;
+  --scale:      #008CFF;
+  --offblack:   #0D0D0B;
+  --darkgray:   #32312D;
+  --gray:       #807D75;
+  --lightgray:  #D1CFC4;
+  --brightgray: #F2F1EA;
+  --offwhite:   #FCFBF7;
+  --warning-fg: #FFD706;
+  --warning-bg: #FFFECB;
+  --error-fg:   #FF5126;
+  --error-bg:   #FFEEE9;
+  --success-fg: #5DC32E;
+  --success-bg: #EFFAEA;
+  --info-fg:    #008CFF;
+  --info-bg:    #E5F3FF;
+  color: #32312D !important;
+  background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+
+/* ── FA ICON HELPERS ── */
+.rc-fa-announce { color: #0D0D0B; font-size: 1rem; flex-shrink: 0; }
+.rc-fa-section { color: #0D0D0B; font-size: 1rem; }
+
+/* ── TOP NAV / BACK LINK ── */
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link { color: #807D75 !important; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 6px; transition: color .2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; }
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* ── ANNOUNCEMENT BAR (hidden until rc-active added) ── */
+.rc-announce-bar { display: none; background: #FFD706; color: #0D0D0B; align-items: center; justify-content: space-between; padding: 10px 20px; font-size: .88rem; font-weight: 600; border-radius: 10px; margin-bottom: 16px; gap: 12px; line-height: 1.4; }
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-inner { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link { color: #0D0D0B !important; font-weight: 800; white-space: nowrap; padding: 4px 12px; background: rgba(0,0,0,0.10); border-radius: 6px; transition: background 0.2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { background: rgba(0,0,0,0.20); color: #0D0D0B !important; }
+
+/* ── HERO (learning path — pillar pill, no stats) ── */
+.rc-hero { background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)), url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center; background-color: #0D0D0B; background-size: cover; color: #fff; padding: 48px 40px 44px; text-align: center; border-radius: 16px; margin-bottom: 0; }
+.rc-lp-pillar-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(0,140,255,0.20); border: 1px solid rgba(0,140,255,0.45); color: #008CFF; font-size: .75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: #FCFBF7; margin: 0; }
+.rc-hero > p { font-size: 1rem; opacity: .85; max-width: 660px; margin: 0 auto 8px; color: #D1CFC4; line-height: 1.6; }
+
+/* ── NAVIGATION MENU (non-sticky, expanded — Scale) ── */
+details.rc-sticky-nav-wrap { position: relative; z-index: 1; background-color: #008CFF; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin: 24px 0 48px 0; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; }
+details.rc-sticky-nav-wrap > summary { list-style: none; display: flex; align-items: center; padding: 15px 24px; cursor: pointer; user-select: none; }
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+.rc-nav-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .88rem; letter-spacing: 0.6px; text-transform: uppercase; color: #0D0D0B; }
+.rc-nav-chevron { font-size: .72rem; color: #0D0D0B; opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link { color: #0D0D0B !important; font-weight: 700; font-size: .83rem; letter-spacing: 0.4px; text-transform: uppercase; padding: 7px 14px; border-radius: 7px; transition: all .18s; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: #0D0D0B; color: #FFD706; font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; }
+
+/* ── CONTENT SECTION HEADING ── */
+.rc-lp-section { margin-bottom: 48px; }
+.rc-lp-section h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 20px; color: #0D0D0B; display: flex; align-items: center; gap: 12px; }
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: #D1CFC4; }
+.rc-lp-section p { font-size: .95rem; line-height: 1.65; color: #32312D; margin: 0 0 16px; }
+
+/* ── ACCENT CARD (Scale) + TRY-IT PROMPT ── */
+.rc-accent-card { background: #FCFBF7; border: 1px solid #D1CFC4; border-radius: 12px; padding: 24px 28px; margin: 20px 0 0; }
+.rc-accent-card.rc-accent-scale { border-left: 4px solid #008CFF; }
+.rc-accent-card h4 { font-size: 1rem; font-weight: 800; color: #0D0D0B; margin: 0 0 10px; }
+.rc-accent-card p { font-size: .92rem; color: #32312D; line-height: 1.6; margin: 0; }
+.rc-accent-card p.rc-tryit-note { font-size: .85rem; color: #807D75; margin-top: 14px; }
+.rc-accent-card ul { font-size: .92rem; color: #807D75; line-height: 1.75; padding-left: 20px; margin: 6px 0 0; }
+.rc-accent-card ul li { margin-bottom: 8px; }
+.rc-accent-card ul li:last-child { margin-bottom: 0; }
+.rc-accent-card ul li strong { color: #32312D; }
+.rc-prompt-text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important; font-size: .92rem; color: #0D0D0B; background: #ffffff; border: 1px solid #D1CFC4; border-radius: 8px; padding: 12px 16px; margin: 12px 0 0 !important; line-height: 1.5; }
+
+/* ── VIDEO CARD (featured) + HIDDEN STATE ── */
+.rc-hidden { display: none !important; }
+.rc-video-card { border: 1px solid #D1CFC4; border-radius: 14px; overflow: hidden; margin: 24px 0 20px; }
+.rc-video-header { background: #0D0D0B; padding: 16px 22px; display: flex; align-items: center; gap: 10px; }
+.rc-video-header h4 { font-size: .88rem; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: #FFD706; margin: 0; }
+.rc-video-embed { background: #0D0D0B; }
+.rc-video-embed iframe { display: block; width: 100%; aspect-ratio: 16/9; border: none; }
+.rc-video-caption { padding: 12px 22px; font-size: .83rem; color: #807D75; background: #F2F1EA; border-top: 1px solid #D1CFC4; line-height: 1.5; }
+
+/* ── SKILL ACCORDION (new component) ── */
+.rc-skill-list { display: flex; flex-direction: column; gap: 14px; margin: 8px 0 0; }
+.rc-skill { border: 1px solid #D1CFC4; border-radius: 14px; overflow: hidden; background: #ffffff; }
+.rc-skill > summary { list-style: none; display: flex; align-items: center; gap: 12px; padding: 18px 22px; cursor: pointer; user-select: none; transition: background .18s; }
+.rc-skill > summary::-webkit-details-marker { display: none; }
+.rc-skill > summary::marker { display: none; }
+.rc-skill > summary:hover { background: rgba(0,140,255,0.05); }
+.rc-skill-icon { font-size: 1rem; color: #008CFF; flex-shrink: 0; }
+.rc-skill-name { font-size: 1.05rem; font-weight: 800; color: #0D0D0B; }
+.rc-skill-chevron { font-size: .72rem; color: #807D75; margin-left: auto; transition: transform .25s ease; }
+.rc-skill[open] .rc-skill-chevron { transform: rotate(180deg); }
+.rc-skill-body { padding: 8px 22px 24px; border-top: 1px solid #F2F1EA; }
+.rm-Markdown.markdown-body .rc-guide img.rc-skill-image,
+.rc-guide img.rc-skill-image { display: block; width: 100% !important; max-width: 200px !important; height: auto !important; margin: 0 !important; }
+.rc-skill-intro { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start; margin: 16px 0 0; }
+.rc-skill-intro-text p { font-size: .92rem; line-height: 1.65; color: #32312D; margin: 0 0 12px; }
+.rc-skill-intro-text p:last-child { margin-bottom: 0; }
+.rc-skill-intro-text strong { color: #32312D; }
+.rc-skill-body > p { font-size: .92rem; line-height: 1.65; color: #32312D; margin: 14px 0 0; }
+.rc-skill-body > p:first-child { margin-top: 16px; }
+.rc-skill-body strong { color: #32312D; }
+
+/* ── SKILL NAV ROW (multi-skill pages) ── */
+.rc-skill-nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 22px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-skill-nav-item:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-skill-nav-item { color: #0D0D0B !important; font-weight: 700; font-size: .84rem; background: #F2F1EA; border: 1px solid #D1CFC4; border-bottom: 1px solid #D1CFC4 !important; padding: 9px 16px; border-radius: 22px; transition: all .18s; display: inline-flex; align-items: center; gap: 8px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-skill-nav-item:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-skill-nav-item:hover { color: #008CFF !important; background: #E5F3FF; border-color: #008CFF !important; border-bottom: 1px solid #008CFF !important; }
+.rc-skill-nav-item i { font-size: .78rem; color: #008CFF; }
+
+/* ── SKILL SUBHEAD ── */
+.rc-skill-sub { font-size: 1rem; font-weight: 800; color: #0D0D0B; margin: 26px 0 4px; }
+
+/* ── COPY OPTIONS ── */
+.rc-copy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0 0; }
+.rc-copy-option { background: #FCFBF7; border: 1px solid #D1CFC4; border-radius: 12px; padding: 18px 20px; }
+.rc-copy-label { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; color: #008CFF; margin: 0 0 10px; }
+.rc-copy-option p { font-size: .88rem; line-height: 1.55; color: #32312D; margin: 0 0 8px; }
+.rc-copy-option p:last-child { margin-bottom: 0; }
+.rc-copy-option strong { color: #0D0D0B; }
+
+/* ── NUMBERED STEPS ── */
+.rc-steps { display: flex; flex-direction: column; gap: 18px; margin: 12px 0 0; }
+.rc-step { display: grid; grid-template-columns: 34px 1fr; gap: 16px; align-items: start; }
+.rc-step-num { width: 34px; height: 34px; border-radius: 50%; background: #0D0D0B; color: #FFD706; display: flex; align-items: center; justify-content: center; font-size: .9rem; font-weight: 800; flex-shrink: 0; }
+.rc-step-content p { font-size: .92rem; line-height: 1.65; color: #32312D; margin: 4px 0 0; }
+.rc-step-content strong { color: #0D0D0B; }
+.rm-Markdown.markdown-body .rc-guide img.rc-step-shot,
+.rc-guide img.rc-step-shot { display: block; width: 100% !important; max-width: 540px !important; height: auto !important; margin: 12px 0 2px !important; border-radius: 10px; border: 1px solid #D1CFC4; }
+
+/* ── CALLOUT ── */
+.rc-callout { display: flex; gap: 12px; padding: 16px 18px; border-radius: 10px; margin: 22px 0 0; border: 1px solid #96C8FF; background: #E5F3FF; }
+.rc-callout-icon { font-size: 1rem; color: #008CFF; flex-shrink: 0; margin-top: 2px; }
+.rc-callout-body { font-size: .9rem; line-height: 1.6; color: #32312D; }
+.rc-callout-body > strong { color: #0D0D0B; }
+.rm-Markdown.markdown-body .rc-guide a.rc-callout-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-callout-link { color: #008CFF !important; font-weight: 700; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-callout-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-callout-link:hover { color: #0067BE !important; text-decoration: underline !important; text-decoration-color: #008CFF !important; }
+
+/* ── PATH NAV BUTTONS ── */
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 16px; flex-wrap: wrap; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: #807D75; letter-spacing: .5px; white-space: nowrap !important; flex-shrink: 0; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-prev { background: transparent; color: #0D0D0B !important; text-decoration: none !important; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; border: 2px solid #D1CFC4 !important; border-bottom: 2px solid #D1CFC4 !important; transition: all .2s; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-prev:hover { border: 2px solid #0D0D0B !important; border-bottom: 2px solid #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path { background: #FFD706; color: #0D0D0B !important; text-decoration: none !important; padding: 13px 28px; border-radius: 10px; font-weight: 800; font-size: .95rem; display: inline-flex; align-items: center; gap: 8px; transition: all .2s; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover { background: transparent !important; color: #0D0D0B !important; border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important; }
+
+/* ── RESOURCES ── */
+.rc-resources { background: #F2F1EA; border-left: 4px solid #008CFF; border-radius: 10px; padding: 20px 24px; margin: 32px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: #807D75; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link { color: #807D75 !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: #D1CFC4 !important; font-weight: 500; font-size: .88rem; transition: all .18s; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover { color: #0D0D0B !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: #008CFF !important; }
+
+/* ── FOOTER NAV ── */
+.rc-footer-nav { border-top: 1px solid #D1CFC4; padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: #32312D; background: #F2F1EA; padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link { color: #807D75 !important; font-weight: 600; font-size: .82rem; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid #F2F1EA; }
+
+/* ── CONSOLIDATED RESPONSIVE ── */
+@media(max-width:1300px){
+  .rc-lp-nav { justify-content: center !important; gap: 12px; }
+  .rc-lp-nav-indicator { width: 100% !important; text-align: center; }
+}
+@media(max-width:768px){
+  .rc-content-wrap { padding: 0 20px; }
+  .rc-skill-intro { grid-template-columns: 1fr; gap: 14px; }
+  .rc-copy-grid { grid-template-columns: 1fr; }
+  .rc-top-nav { padding: 16px 20px; }
+  .rc-hero { padding: 36px 20px 36px; }
+  .rc-lp-hero-title h1 { font-size: 1.8rem; }
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-prev,
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-path { padding: 10px 16px !important; font-size: 0.82rem !important; }
+}
+</style>
+
+<div class="rc-guide">
+
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale" class="rc-back-link">← Back to Scale</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <!-- ANNOUNCEMENT BAR — hidden by default. Add class "rc-active" to show before the webinar. -->
+    <div class="rc-announce-bar rc-active">
+      <div class="rc-announce-inner">
+        <i class="fa-regular fa-bell rc-fa-announce"></i>
+        <strong>Customer training:</strong> Want to learn more about the Retention agent from our experts? Get the full webinar, plus audience Q&A, on-demand here.
+        <a href="https://navigate.recurly.com/compass-assistant/" target="_blank" rel="noopener noreferrer" class="rc-announce-link">Watch it now →</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/7038a0b3a299cfe800553d4c8a6721f92b1fc7e031ef697861d3603fb1bb5a05-Scale-icon-white.png" alt="Scale"> Scale · Compass Agents &amp; Skills
+      </div>
+      <div class="rc-lp-hero-title"><h1>Retention agent</h1></div>
+      <p>Keep the revenue you've already earned — optimize your dunning and win back subscribers whose payments quietly fail.</p>
+    </div>
+
+    <!-- NAV (content page — expanded) -->
+    <details class="rc-sticky-nav-wrap" open>
+      <summary><span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span></summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents" class="rc-sticky-link">Path overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-knowledge" class="rc-sticky-link"><span class="rc-step-badge">1</span> Knowledge Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-code" class="rc-sticky-link"><span class="rc-step-badge">2</span> Code Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-configuration" class="rc-sticky-link"><span class="rc-step-badge">3</span> Configuration Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-data" class="rc-sticky-link"><span class="rc-step-badge">4</span> Data Agent</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-retention" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> Retention Agent
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-assistant" class="rc-sticky-link"><span class="rc-step-badge">6</span> Compass Assistant</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-review" class="rc-sticky-link"><span class="rc-step-badge">7</span> Review &amp; resources</a>
+      </div></div></div>
+    </details>
+
+    <!-- SECTION: WHAT IT DOES -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-receipt rc-fa-section"></i> What the retention agent does</h2>
+      <p>The <strong>retention agent</strong> helps you keep revenue you've already earned. It optimizes your dunning — the retry-and-reminder process that recovers failed payments — and helps you remediate involuntary churn with in-app prompts that ask subscribers to fix a past-due payment.</p>
+      <p>Currently, this agent has two skills: <strong>Optimize default dunning</strong> and <strong>involuntary churn remediation</strong>. One tunes your automated recovery settings; the other builds a prompt that appears in your app. Together they target the failed payments that quietly erode subscription revenue.</p>
+    </div>
+
+    <!-- SECTION: SKILLS -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-wand-magic-sparkles rc-fa-section"></i> Retention agent skills</h2>
+      <p>Open a skill below to learn more and try it in your own account. New retention agent skills will be added to this list as they deploy.</p>
+
+  
+      <div class="rc-skill-list">
+
+        <!-- SKILL 1: Involuntary Churn Remediation -->
+        <details class="rc-skill" id="skill-involuntary-churn-remediation">
+          <summary>
+            <i class="fa-solid fa-receipt rc-skill-icon"></i>
+            <span class="rc-skill-name">Involuntary churn remediation</span>
+            <i class="fa-solid fa-chevron-up rc-skill-chevron"></i>
+          </summary>
+          <div class="rc-skill-body">
+
+            <div class="rc-skill-intro">
+              <img src="https://files.readme.io/553a77dfa941120e58abc0e888596950798bb71680d8da8ad088e093dadaf0e4-Involuntary_Churn_Remediation.png" alt="Involuntary Churn Remediation — Retention Agent" class="rc-skill-image">
+              <div class="rc-skill-intro-text">
+                <p><strong>What it does:</strong> Prompt subscribers with a past-due payment to update their billing details through an in-app message that works alongside your dunning campaigns — recovering revenue that would otherwise churn involuntarily, and reducing involuntary churn by up to 14%.</p>
+                <p><strong>How to use it:</strong> Open <strong>Compass → Skills</strong> and choose <strong>involuntary churn remediation</strong>. The Compass Assistant walks you through the prompt — title, message, button, and colors — then hands you a snippet to add to your app.</p>
+              </div>
+            </div>
+
+            <div class="rc-callout rc-callout-info">
+              <i class="fa-solid fa-circle-info rc-callout-icon"></i>
+              <div class="rc-callout-body"><strong>Runs on Recurly Engage.</strong> Two technical steps needed for setup before subscribers see the prompt: install the Recurly Engage script via your tag manager, and add FetchID logic to identify logged-in users. <b>Not on Engage yet? </b>Many Recurly Subscriptions customers add it for richer campaigns and in-app messages — to learn more, <a href="mailto:support@recurly.com" class="rc-callout-link">contact support@recurly.com</a>.</div>
+            </div>
+
+            <!-- HIDDEN DEMO: after the webinar, delete the "rc-hidden" class from the div below to reveal this video. -->
+            <div class="rc-video-card">
+              <div class="rc-video-header">
+                <h4>Compass AI skills: Involuntary churn remediation - Retention agent</h4>
+              </div>
+              <div class="rc-video-embed">
+                <iframe src="https://share.synthesia.io/embeds/videos/048c3139-c84b-46a8-962b-5f58fca53080" loading="lazy" title="Compass AI Skills: Involuntary Churn Remediation - Retention Agent" allowfullscreen allow="encrypted-media; fullscreen; microphone; screen-wake-lock;"></iframe>
+              </div>
+              <div class="rc-video-caption">Watch the <strong>retention agent</strong> build a past-due in-app prompt — message, CTA, and colors — then generate the snippet to embed in your app.</div>
+            </div>
+
+            <div class="rc-skill-sub">Try it yourself</div>
+            <p>Launch the skill from <strong>Compass → Skills</strong>, then use one of these tested message sets as your starting copy:</p>
+            <div class="rc-copy-grid">
+              <div class="rc-copy-option">
+                <div class="rc-copy-label">Option 1 · Friendly &amp; informative</div>
+                <p><strong>Title:</strong> Action Required: Update Your Payment Info</p>
+                <p><strong>Message:</strong> It looks like there was an issue with your payment method. Update your billing details to keep your subscription active and uninterrupted.</p>
+                <p><strong>Button:</strong> Update Payment Method</p>
+              </div>
+              <div class="rc-copy-option">
+                <div class="rc-copy-label">Option 2 · Urgent but empathetic</div>
+                <p><strong>Title:</strong> We Couldn't Process Your Payment</p>
+                <p><strong>Message:</strong> Your recent payment didn't go through. Don't lose access — update your billing information now to stay subscribed.</p>
+                <p><strong>Button:</strong> Fix My Payment</p>
+              </div>
+            </div>
+            <p>You control five things — background color, button color, title, message, and button text. The skill doesn't handle fonts, logos, or imagery.</p>
+
+            <div class="rc-accent-card rc-accent-scale">
+              <h4>Tips for a high-performing prompt</h4>
+              <ul>
+                <li><strong>Keep it brand-consistent</strong> so the message feels native to your app.</li>
+                <li><strong>Be clear, not alarming</strong> — subscribers often don't know their payment failed.</li>
+                <li><strong>Use a strong, specific CTA</strong> — "Update Payment Method" beats "Click Here."</li>
+                <li><strong>Increase urgency gradually</strong> if later dunning touches are also in play.</li>
+                <li><strong>Don't blame the customer</strong> — frame it as a system issue to protect the relationship.</li>
+              </ul>
+            </div>
+
+
+
+          </div>
+        </details>
+
+        <!-- SKILL 2: Optimize Default Dunning (closed) -->
+        <details class="rc-skill" id="skill-optimize-default-dunning">
+          <summary>
+            <i class="fa-solid fa-receipt rc-skill-icon"></i>
+            <span class="rc-skill-name">Optimize default Dunning</span>
+            <i class="fa-solid fa-chevron-up rc-skill-chevron"></i>
+          </summary>
+          <div class="rc-skill-body">
+
+            <div class="rc-skill-intro">
+              <img src="https://files.readme.io/8c47602fe1f4de0b58f5ca8e7a27654539594afec158711ac91429a17a0a2f44-Optimize_Default_Dunning.png" alt="Optimize Default Dunning — Retention Agent" class="rc-skill-image">
+              <div class="rc-skill-intro-text">
+                <p><strong>What it does:</strong> Configure automated payment retry schedules and email sequences to maximize recovery from failed payments — recovering revenue lost by 2.5% or more.</p>
+                <p><strong>How to use it:</strong> Open <strong>Compass → Skills</strong> and choose <strong>"optimize default Dunning."</strong> The Compass Assistant checks your current setup and applies the change for you — no prompt needed.</p>
+              </div>
+            </div>
+
+            <!-- HIDDEN DEMO: after the webinar, delete the "rc-hidden" class from the div below to reveal this video. -->
+            <div class="rc-video-card">
+              <div class="rc-video-header">
+                <h4>Compass AI skills: Optimize default Dunning - Retention agent</h4>
+              </div>
+              <div class="rc-video-embed">
+                <iframe src="https://share.synthesia.io/embeds/videos/d9606887-b52f-4f9b-a4fa-e42d8292669c" loading="lazy" title="Compass AI Skills: Optimize Default Dunning - Retention Agent" allowfullscreen allow="encrypted-media; fullscreen; microphone; screen-wake-lock;"></iframe>
+              </div>
+              <div class="rc-video-caption">Watch the <strong>retention agent</strong> check your default dunning length and extend it to the recommended 27 days.</div>
+            </div>
+
+            <div class="rc-callout rc-callout-info">
+              <i class="fa-solid fa-circle-info rc-callout-icon"></i>
+              <div class="rc-callout-body"><strong>Narrow by design.</strong> This skill adds one email to your default Dunning campaign to reach a 27-day total. It won't create new campaigns or rewrite existing emails — think of it as a single guided configuration action.</div>
+            </div>
+
+            <div class="rc-skill-sub">How the guided workflow goes</div>
+            <div class="rc-steps">
+              <div class="rc-step">
+                <div class="rc-step-num">1</div>
+                <div class="rc-step-content">
+                  <p><strong>Find the skill.</strong> In the left nav, open <strong>Compass → Skills</strong> and locate the <strong>optimize default Dunning</strong> card. You'll need the Compass Assistant Chat feature flag enabled, plus Admin — or both Configuration and Analytics — permissions.</p>
+                </div>
+              </div>
+              <div class="rc-step">
+                <div class="rc-step-num">2</div>
+                <div class="rc-step-content">
+                  <p><strong>Launch it.</strong> Click the card and the Compass Assistant opens and runs the workflow. Progress saves automatically, and because this is a site-wide setting, once anyone completes it the card shows as Complete for everyone.</p>
+                </div>
+              </div>
+              <div class="rc-step">
+                <div class="rc-step-num">3</div>
+                <div class="rc-step-content">
+                  <p><strong>Review your current setup.</strong> The Assistant checks your default Dunning and shows your existing length, then explains it will add one email before the final "Expired for Non-Payment" notice to reach 27 days.</p>
+                  <img src="https://files.readme.io/e9d7cff9b00612bd69cafc9644701029ca4dbe62e6b42325cf1f5b3856dc8338-Screenshot_2026-09-04_at_4.32.47_PM.png" alt="Compass Assistant checking the existing default dunning length" class="rc-step-shot">
+                  <img src="https://files.readme.io/ac28571648522201f5d346991e6596a9b667f2337c68efbfebfd35f209658780-Screenshot_2026-09-04_at_4.34.07_PM.png" alt="Compass Assistant reviewing the proposed dunning changes" class="rc-step-shot">
+                </div>
+              </div>
+              <div class="rc-step">
+                <div class="rc-step-num">4</div>
+                <div class="rc-step-content">
+                  <p><strong>Confirm the change.</strong> Approve it and Compass Assistant applies the update. You'll then be pointed to your Dunning emails to write the new copy yourself — the skill surfaces a "Manage your Dunning campaigns" link, but doesn't edit copy for you.</p>
+                  <img src="https://files.readme.io/a963312aae1646a2c7eac23cad34d3072bff8c4bc3c0ab5a4e5b5c0e51d8bfdc-Screenshot_2026-09-04_at_4.34.32_PM.png" alt="Default dunning length updated, with a link to manage dunning campaigns" class="rc-step-shot">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+    <!-- PATH NAV -->
+    <div class="rc-lp-nav">
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-data" class="rc-btn-prev">← Data agent</a>
+      <span class="rc-lp-nav-indicator">5 of 7</span>
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-assistant" class="rc-btn-path">Next: Compass Assistant →</a>
+    </div>
+
+    <!-- RESOURCES -->
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/compass-skills" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Compass Skills</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/compass-assistant" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Compass Assistant</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+               <div class="rc-footer-section">
+          <span class="rc-footer-label">Compass agents &amp; skills</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents" class="rc-footer-link">Path overview</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-knowledge" class="rc-footer-link">1. Knowledge agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-code" class="rc-footer-link">2. Code agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-configuration" class="rc-footer-link">3. Configuration agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-data" class="rc-footer-link">4. Data agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-retention" class="rc-footer-link">5. Retention agent</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-assistant" class="rc-footer-link">6. Compass Assistant</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-compass-agents-review" class="rc-footer-link">7. Review &amp; resources</a>
+        </div>
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+```

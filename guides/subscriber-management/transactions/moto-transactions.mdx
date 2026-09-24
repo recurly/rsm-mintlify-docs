@@ -1,0 +1,137 @@
+---
+title: MOTO transactions
+---
+
+<div className="rp-page">
+  <div className="rp-overview">MOTO (Mail Order / Telephone Order) transactions let you or your agents accept and process payments on behalf of customers — without the customer being present at a digital checkout. This page covers what MOTO is, when to use it, how to configure it, and the compliance boundaries you need to stay inside.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#configure-moto-transactions"><span className="rp-toc-num">4</span>Configure MOTO transactions</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">5</span>FAQs</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">MOTO (Mail Order / Telephone Order) transactions allow businesses or agents to accept billing information and process payments on behalf of customers in a card-not-present scenario. MOTO applies when you or your agents are entering billing details directly — for example, through the Recurly Admin UI, or via the API for transactions processed through a custom-built internal checkout page — once the feature is enabled on your account.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-headset" aria-hidden="true"></i></div>
+    <strong>Better experience for more customers</strong>
+    <span>Support customers who prefer to place orders by phone or mail, meeting them where they are and reducing friction in the payment process.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-credit-card" aria-hidden="true"></i></div>
+    <strong>Broader payment channel coverage</strong>
+    <span>Expand beyond standard digital checkouts to reach customer segments who aren't transacting online, without adding a separate payment stack.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-plug" aria-hidden="true"></i></div>
+    <strong>Wide gateway support</strong>
+    <span>MOTO is supported by a broad range of prominent gateways, making it straightforward to enable within your existing payment setup.</span>
+  </div>
+</div>
+
+# Key details
+
+MOTO indicators are reserved for specific use cases: one-time, customer-initiated transactions using fresh billing details entered by the merchant into a system the customer typically doesn't access — such as a back-office system or virtual terminal.
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> PSD2 and SCA compliance</strong>MOTO indicators must not be used improperly in regions where PSD2 and Strong Customer Authentication (SCA) are compliance requirements. Recurring transactions are never classified as MOTO — they follow their regular processing course.</div>
+</div>
+
+## Supported gateways
+
+Many gateways support MOTO transactions, including Adyen, Braintree, Chase Orbital, Cybersource, Stripe, and WorldPay. Before enabling MOTO, confirm your gateway supports it for your specific use case.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Adyen note</strong>Adyen supports MOTO transactions, but may require you to complete additional documentation before enabling the feature. Check with your Adyen account contact to confirm any requirements before proceeding.</div>
+</div>
+
+# Configure MOTO transactions
+
+## Gateway configuration
+
+Before enabling MOTO in Recurly, confirm that your gateway has MOTO transactions enabled on your account.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Contact your gateway</h4><p>Reach out to your gateway provider and confirm that MOTO transactions are enabled for your account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Complete any required documentation</h4><p>Some gateways require additional paperwork before MOTO can be activated. Complete this step before proceeding to avoid processing errors.</p></div>
+  </div>
+</div>
+
+## Recurly configuration
+
+Once your gateway is configured, enable MOTO in Recurly from the Payment Gateways settings. This step applies to supported gateways only.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Navigate to Payment Gateways</h4><p>In the Recurly Admin UI, go to Configuration → Payment Gateways.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/0b6cbe34ac7aaaee3048d867c74456c6c6162a4bd6efdb00fd1347efb553b623-image.png" align="center" width="30%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Open the gateway settings</h4><p>Select Options → Edit for the appropriate gateway instance.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/33858d709dd0f82c536ee5b337a748c89cc1c4ba647cafcea836af4cb25798f9-image.png" align="center" width="80%" border={true} />
+
+
+
+<Image src="https://files.readme.io/497c95fbf3ced74891ad0f4f1f93ba5266278d0b530fb8e5d6e8fa8bba4dca2e-image.png" align="center" width="30%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Enable MOTO transactions</h4><p>Select Enable MOTO transaction and save your changes.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/0f1d08f410b8731accd11f5d9e7b7e324674fdf6be2d4518c59cc1cfad8b5999-image.png" align="center" width="80%" border={true} />
+
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Gateway Routing</strong>If you're using Gateway Routing, make sure you're routing to the correct MOTO-enabled gateways to avoid processing errors.</div>
+</div>
+
+# FAQs
+
+<Accordion title="Can I use MOTO transactions when a customer is active on my website?">
+No. When a customer is in session on your website, that transaction is considered customer-initiated and is subject to PSD2 and SCA compliance mandates where applicable. Classifying these transactions as MOTO could result in regulatory fines from the card brands.
+</Accordion>
+
+<Accordion title="How do I process a MOTO transaction through Recurly?">
+If you're integrating with Recurly via API from your back office, classify your transactions through the `/purchase` endpoint using the `transaction_type` parameter set to MOTO.
+
+You can also add billing information and create invoices directly in the Recurly Admin UI. When doing this, create an invoice and charge it immediately — do not create subscriptions or invoices that are collected at a later date. Transactions processed directly by customers on your website, and recurring subscriptions, should never be classified as MOTO.
+</Accordion>
+
+<Accordion title="What's the difference between MOTO and Unscheduled Card on File MIT transactions?">
+MIT (Merchant Initiated Transactions) occur without direct customer interaction — for example, processing a transaction on a pre-approved schedule outside a subscription environment, such as a top-up or resubmission scenario.
+
+MOTO, by contrast, is driven by direct customer interaction (such as a phone call or email), but the actual transaction is entered and processed by the business on the customer's behalf.
+</Accordion>
+
+<br />

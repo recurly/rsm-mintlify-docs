@@ -1,0 +1,227 @@
+---
+title: VAT number/Tax ID number validation
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly validates customer-provided VAT and tax identification numbers using government lookup systems and format checks before invoices are generated. Validation runs automatically at billing events — blocking invalid numbers from sign-ups and ensuring accurate tax treatment on every invoice.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#government-lookup-validation"><span className="rp-toc-num">4</span>Government lookup validation</a>
+    <a className="rp-toc-pill" href="#format-validation"><span className="rp-toc-num">5</span>Format validation</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Tax ID validation verifies customer-provided tax identification numbers — such as VAT numbers — using government lookup systems and format checks. Validation runs automatically when tax IDs are added or updated, and at each billing event, ensuring invoice accuracy, correct VAT treatment, and regulatory compliance.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Enhanced accuracy</strong>
+    <span>Validates customer tax IDs against government systems and format rules, leading to more accurate VAT and tax calculations on every invoice.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-rotate" aria-hidden="true"></i></div>
+    <strong>Streamlined billing</strong>
+    <span>Automates the verification process, reducing manual errors and simplifying tax application so invoicing runs without friction.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Risk mitigation</strong>
+    <span>Keeps tax identifiers compliant with local standards, reducing the risk of fines and ensuring invoices meet regulatory requirements.</span>
+  </div>
+</div>
+
+# Key details
+
+## When validation runs
+
+VAT and tax ID numbers are validated at the following points:
+
+- Adding or editing Billing Information
+- Adding or editing Account Information
+- Creating or renewing Subscriptions
+- Creating one-time charges
+
+Additionally, Recurly re-validates a tax ID number at any billing event if the last validation was more than six months ago.
+
+## Enabling and disabling validation
+
+VAT/Tax ID validation can be enabled or disabled for any site by contacting <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a>. EU VAT validation is enabled by default on all production sites.
+
+# Government lookup validation
+
+The following countries support government system lookups for tax ID validation — providing the highest level of verification by checking directly against official registries.
+
+***
+
+## EU VAT validation
+
+### How VAT numbers affect VAT collection
+
+VAT numbers are business tax registration numbers used across all 27 EU member states. EU businesses with a valid VAT number only pay VAT on purchases made within their own country. For cross-border purchases within the EU, no VAT is charged at the point of sale — the buyer handles VAT through their own tax filing. This exemption makes it critical for merchants to verify that a VAT number is valid before issuing an invoice without VAT.
+
+### Validation via VIES
+
+Recurly integrates with the European Commission's <a href="http://ec.europa.eu/taxation_customs/vies/" target="_blank">VAT Information Exchange System (VIES)</a> — the only means of validating EU VAT numbers. All third-party VAT validation tools also use VIES. Direct access to individual EU country VAT databases isn't possible.
+
+VIES validation is separate from EU VAT collection and is enabled by default on all production sites. The valid/invalid response and timestamp are stored in Recurly, but the VIES consultation number (request identifier) is not currently stored.
+
+### Invalid VAT numbers
+
+A VAT number is invalid when VIES explicitly returns that the number isn't in their database. When this happens:
+
+- The number is not saved on the customer's account
+- Sign-up attempts with that number are blocked
+- The number won't be re-validated for one hour — customers who recently received their VAT number may need to wait if the VIES database hasn't yet updated
+
+If a VAT number becomes invalid while already on an account, it remains on the account but subscription renewals proceed with VAT applied.
+
+If a customer claims their VAT number is correct but VIES shows it as invalid, refer them to <a href="http://ec.europa.eu/taxation_customs/vies/faq.html" target="_blank">the European Commission's FAQ (question #13)</a> for instructions on correcting the official record.
+
+### VIES downtime and maintenance windows
+
+VIES aggregates 28 EU country databases, some of which have regular maintenance windows. VAT numbers for those countries can't be validated during these periods.
+
+- View maintenance windows: <a href="http://ec.europa.eu/taxation_customs/vies/help.html" target="_blank">VIES help page</a>
+- View per-country validator status: <a href="http://ec.europa.eu/taxation_customs/vies/technicalInformation.html" target="_blank">VIES technical information</a> — Recurly uses the VIES SOAP API, shown in the "Ws Access Status" column
+
+If VIES is unavailable when a VAT number is submitted, the number isn't saved and sign-up attempts are blocked. At subscription renewal, if VIES is still unavailable, Recurly falls back to the last stored validation status — allowing renewal without VAT if the previous status was valid, or with VAT if invalid.
+
+### Disabling EU VAT validation
+
+Contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a> to disable VAT number validation on your site.
+
+### Testing in sandbox
+
+VAT numbers are not validated in sandbox mode, allowing you to test workflows without valid VAT numbers. To simulate an invalid VAT number, use `000000000` with any EU country code.
+
+#### Sample error response for an invalid VAT number
+
+**Request:**
+
+```xml
+<account>
+  <account_code>1</account_code>
+  <email>verena@example.com</email>
+  <first_name>verena</first_name>
+  <last_name>example</last_name>
+  <vat_number>INVALID_VAT_1234</vat_number>
+  <address>
+    <zip>28070</zip>
+    <country>ES</country>
+  </address>
+</account>
+```
+
+**Response:**
+
+```xml
+<errors>
+  <error field="account.vat_number" symbol="invalid">is invalid</error>
+</errors>
+```
+
+***
+
+## UK VAT validation
+
+Recurly integrates with <a href="https://developer.service.hmrc.gov.uk/api-documentation" target="_blank">HMRC's API</a> for UK VAT ID lookups. Validation is automatically enabled for all merchants on all sites.
+
+To enable or disable UK VAT validation on your site, contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a>.
+
+***
+
+## Australia ABN validation
+
+Recurly integrates with the <a href="https://abr.business.gov.au/" target="_blank">Australian Business Register (ABR)</a> to validate Australian Business Numbers (ABNs). The validation checks two things:
+
+- **ABN validity** — the number must be correctly formatted and active
+- **GST registration** — the business must be registered for GST
+
+If either check fails, the ABN is rejected and GST is not applied to the invoice.
+
+To enable ABN validation on your site, contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a>.
+
+***
+
+## Belarus UNP validation
+
+Recurly integrates with the <a href="http://grp.nalog.gov.by/grp/rest-api" target="_blank">Belarus government business register</a> for UNP lookups.
+
+To enable Belarus UNP validation on your site, contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a>.
+
+***
+
+## Dominican Republic RNC validation
+
+Recurly integrates with the <a href="https://www.dgii.gov.do/wsMovilDGII/WSMovilDGII.asmx" target="_blank">Dominican Republic government business register</a> for RNC lookups.
+
+To enable Dominican Republic RNC validation on your site, contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a>.
+
+# Format validation
+
+For countries without a direct government registry integration, Recurly validates that VAT/tax ID numbers match the required format for that country. Format validation runs when a tax ID is added or updated on a customer account.
+
+To enable format validation, contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a>.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> US format validation</strong>All countries in the table below except the United States are grouped under a single enablement option. To enable format validation specifically for the United States, call that out explicitly in your support ticket.</div>
+</div>
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Location</td><td>Tax ID type(s)</td><td>Accepted format</td></tr>
+  <tr><td>Åland Islands</td><td>YT; ALV</td><td>8 or 9 numeric digits with or without a dash; 8 numeric digits with the optional prefix FI</td></tr>
+  <tr><td>Albania</td><td>NIPT</td><td>10 characters with optional AL prefix, in the format "A NNNNNNNN A" (A = alphanumeric, N = numeric)</td></tr>
+  <tr><td>Algeria</td><td>NIF</td><td>15 numeric digits</td></tr>
+  <tr><td>Angola</td><td>TIN; NIF</td><td>9–10 numeric digits</td></tr>
+  <tr><td>Armenia</td><td>INN</td><td>8 numeric digits</td></tr>
+  <tr><td>Barbados</td><td>TIN</td><td>13 numeric digits, first digit always "1"</td></tr>
+  <tr><td>Benin</td><td>IFN</td><td>13 numeric digits, first digit is 3, 4, 5, or 6</td></tr>
+  <tr><td>Bosnia &amp; Herzegovina</td><td>MBS; JIB; PIB</td><td>12 numeric digits</td></tr>
+  <tr><td>Canada</td><td>BN</td><td>9 numeric digits; or 9 numeric digits followed by 2 alphanumeric characters and 4 numeric digits</td></tr>
+  <tr><td>Canary Islands</td><td>NIF</td><td>9 characters in format ANNNNNNNA (A = letter, N = number); or optional ES prefix followed by 1 letter (A–H, J, N, P–S, or U–W), 7 numeric digits, and 1 alphanumeric character</td></tr>
+  <tr><td>Chile</td><td>RUT</td><td>9 numeric digits</td></tr>
+  <tr><td>China</td><td>USSC</td><td>15 numeric digits; or 18 characters where the last 10 may include alphanumeric characters</td></tr>
+  <tr><td>Colombia</td><td>NIT</td><td>10 numeric digits</td></tr>
+  <tr><td>Costa Rica</td><td>CPJ; NITE</td><td>9–12 numeric digits</td></tr>
+  <tr><td>Ecuador</td><td>RUC</td><td>13 characters; 3rd digit always "6" or "9," 4th–9th digits numeric, last three digits "001"</td></tr>
+  <tr><td>Egypt</td><td>TRN</td><td>9 numeric digits</td></tr>
+  <tr><td>Georgia</td><td>TIN</td><td>9 or 11 numeric digits</td></tr>
+  <tr><td>Iceland</td><td>KN; VSK</td><td>10 alphanumeric characters; or 5–6 numeric digits with optional IS prefix</td></tr>
+  <tr><td>India</td><td>PAN; GSTN</td><td>PAN: 10 characters in format AAAAANNNNA (A = letter, N = number). GSTN: 15 characters in format NNAAAAANNNNAXAX (first 2 numeric, next 10 alphanumeric, 13th numeric, 14th "Z," 15th alphanumeric)</td></tr>
+  <tr><td>Indonesia</td><td>NPWP</td><td>15 or 16 numeric digits</td></tr>
+  <tr><td>Israel</td><td>CN</td><td>9 numeric digits</td></tr>
+  <tr><td>Japan</td><td>CN</td><td>First digit 1–9, followed by 12 numeric digits</td></tr>
+  <tr><td>Kazakhstan</td><td>BIN</td><td>12 numeric digits</td></tr>
+  <tr><td>Kenya</td><td>PIN</td><td>8-character code in format XXXXXXXY (X = number, Y = alphanumeric)</td></tr>
+  <tr><td>Kosovo</td><td>NIB; NUI; NIF</td><td>8–9 numeric digits</td></tr>
+  <tr><td>Kyrgyzstan</td><td>TIN</td><td>14 numeric digits</td></tr>
+  <tr><td>Lebanon</td><td>TIN; TIN+VAT</td><td>1–15 numeric digits; or 1–15 digits optionally followed by "601," "603," or "604"</td></tr>
+  <tr><td>Liechtenstein</td><td>PEIN; PEID; TIN</td><td>5 numeric digits; or 11–12 numeric digits</td></tr>
+  <tr><td>Macedonia</td><td>EDB</td><td>13 numeric digits with optional MK prefix</td></tr>
+  <tr><td>Martinique</td><td>SPI; VAT</td><td>9 or 13 numeric digits; or FR followed by 11 numeric digits</td></tr>
+  <tr><td>Mexico</td><td>RFC</td><td>Business: 12 characters in format XXX-YYYYYY-ZZZ (X = letters, Y = numbers, Z = alphanumeric). Individual: 13 characters in format XXXX-YYYYYY-ZZZ</td></tr>
+  <tr><td>Moldova</td><td>IDNO; VAT</td><td>13 numeric digits; or 7 numeric digits with optional MD prefix</td></tr>
+  <tr><td>Norway</td><td>ORGNR; MVA</td><td>9 numeric digits; or 9 numeric digits followed by "MVA" with optional NO prefix</td></tr>
+  <tr><td>Serbia</td><td>PIB</td><td>9 numeric digits</td></tr>
+  <tr><td>South Africa</td><td>TRN</td><td>10 numeric digits, first digit is 0, 1, 2, 3, 4, or 9</td></tr>
+  <tr><td>South Korea</td><td>BRN</td><td>10 digits: first 3 digits between 101–999, next 2 digits 01–89 (excluding 80), followed by 4 numeric digits greater than "0000," ending in any numeric digit</td></tr>
+  <tr><td>Switzerland</td><td>UID; VAT</td><td>UID: 12 characters in format CHE-NNN.NNN.NNN. VAT: 15–16 characters in format CHE-NNN.NNN.NNN AAA with suffix MWST, TVA, IVA, or VAT</td></tr>
+  <tr><td>Taiwan</td><td>BAN</td><td>8 numeric digits</td></tr>
+  <tr><td>Thailand</td><td>TIN</td><td>13 numeric digits</td></tr>
+  <tr><td>Togo</td><td>NIF</td><td>10 numeric digits</td></tr>
+  <tr><td>Turkey</td><td>VKN</td><td>10 numeric digits</td></tr>
+  <tr><td>Ukraine</td><td>EDRPOU</td><td>8 numeric digits</td></tr>
+  <tr><td>United Arab Emirates</td><td>TRN</td><td>15 numeric digits</td></tr>
+  <tr><td>United States</td><td>EIN</td><td>9 numeric digits in format NN-NNNNNNN</td></tr>
+  <tr><td>Vietnam</td><td>MST</td><td>10–13 numeric digits; 3rd through 10th digits cannot be "0000000," last 3 digits cannot be "000"</td></tr>
+</table>
+
+<br />

@@ -1,0 +1,657 @@
+---
+title: Adjustments — taxes - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Prerequisite
+
+You must enable one of our tax integrations (Vertex, Avalara) to view this export. Please reach out to your Recurly account manager or [support@recurly.com](mailto:support@recurly.com) to have this feature activated in your account.
+
+# Definition
+
+The Adjustments - Taxes export is designed for reporting on taxes calculated through Vertex. It is pertinent to note that for reporting on taxes calculated through Avalara, you should utilize the Adjustments export. This CSV file contains a row for each tax jurisdiction that is returned for a line item. Even line items without taxes will be included but as a single row in the export.
+
+<Image border={false} src="https://files.readme.io/ca45e9d315dccb3986571f8782841a29b8bd566e1dd02375cfb2bb973708ac47-image.png" />
+
+<br />
+
+# Filters
+
+### Versions Filter
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the Version changelog at the bottom of this page.
+
+### Time Range Filter
+
+This export showcases adjustments alongside their respective taxes created during a predefined time range. It is important to note that the creation date of an adjustment coincides with the invoice issuance date unless the adjustment was initiated on the account uninvoiced, awaiting processing in the upcoming billing event.
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The **Start Date** and **End Date** will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+<br />
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+<Table align={[null,null,null,"left"]}>
+  <thead>
+    <tr>
+      <th>
+        Column Name
+      </th>
+
+      <th>
+        Example
+      </th>
+
+      <th>
+        Description
+      </th>
+
+      <th>
+        Data type (max size)
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <span id="adjustment_uuid">adjustment_uuid</span>
+      </td>
+
+      <td>
+        34a302b4ed87c4eebeee4942b98b932f
+      </td>
+
+      <td>
+        The unique id for the line item.
+      </td>
+
+      <td>
+        varchar(32)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_code">account_code</span>
+      </td>
+
+      <td>
+        1234568
+      </td>
+
+      <td>
+        The unique code for the account.
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="subscription_id">subscription_id</span>
+      </td>
+
+      <td>
+        2f1f711a62b424391a690e4895a3f2a5
+      </td>
+
+      <td>
+        The unique id for the subscription associated with the line item.
+      </td>
+
+      <td>
+        varchar(32)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_id">invoice_id</span>
+      </td>
+
+      <td>
+        34a27fd20e668a389c064e43c183bcf1
+      </td>
+
+      <td>
+        The unique id for the invoice.
+      </td>
+
+      <td>
+        varchar(32)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_number">invoice_number</span>
+      </td>
+
+      <td>
+        1001
+      </td>
+
+      <td>
+        The invoice number displayed on the invoice.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_billed_date">invoice_billed_date</span>
+      </td>
+
+      <td>
+        2016-08-03 16:26:26 UTC
+      </td>
+
+      <td>
+        The date the invoice was posted.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_state">invoice_state</span>
+      </td>
+
+      <td>
+        pending, past_due, paid, failed, open, closed, voided, processing
+      </td>
+
+      <td>
+        The current state of the invoice.
+      </td>
+
+      <td>
+        varchar(32)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="refund_tax_date">refund_tax_date</span>
+      </td>
+
+      <td>
+        2016-08-03 16:26:26 UTC
+      </td>
+
+      <td>
+        Date of the original purchase invoice if the invoice is a refund or subscription change.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="refund_geo_code">refund_geo_code</span>
+      </td>
+
+      <td>
+        123456789
+      </td>
+
+      <td>
+        Not applicable for Vertex O Series or Vertex Cloud integrations.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_description">adjustment_description</span>
+      </td>
+
+      <td>
+        Gold Plan
+      </td>
+
+      <td>
+        The line item description on the invoice.
+      </td>
+
+      <td>
+        varchar(255)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_product_code">adjustment_product_code</span>
+      </td>
+
+      <td>
+        gold_plan
+      </td>
+
+      <td>
+        The plan code, add-on code, or one-off charge product code for the line item’s product.
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_currency">adjustment_currency</span>
+      </td>
+
+      <td>
+        USD
+      </td>
+
+      <td>
+        The currency of the line item.
+      </td>
+
+      <td>
+        varchar(3)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_amount">adjustment_amount</span>
+      </td>
+
+      <td>
+        74.97
+      </td>
+
+      <td>
+        Pre-discount, pre-tax amount of the line item. If negative, it reflects a credit from a downgrade or refund.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_discount">adjustment_discount</span>
+      </td>
+
+      <td>
+        49.99
+      </td>
+
+      <td>
+        The discount amount on the line item.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_coupon_code">adjustment_coupon_code</span>
+      </td>
+
+      <td>
+        5dollars_off
+      </td>
+
+      <td>
+        The coupon code applied to the line item for the discount.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_type">tax_type</span>
+      </td>
+
+      <td>
+        vat
+      </td>
+
+      <td>
+        The tax type represented in the row for the line item.
+      </td>
+
+      <td>
+        varchar(6)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="jurisdiction">jurisdiction</span>
+      </td>
+
+      <td>
+        country, province, state, city, county, federal, district
+      </td>
+
+      <td>
+        The tax jurisdiction represented in the row for the line item.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="jurisdiction_amount">jurisdiction_amount</span>
+      </td>
+
+      <td>
+        1.31
+      </td>
+
+      <td>
+        The tax amount for the jurisdiction.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="jurisdiction_rate">jurisdiction_rate</span>
+      </td>
+
+      <td>
+        0.01744
+      </td>
+
+      <td>
+        The tax rate for the jurisdiction.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="jurisdiction_description">jurisdiction_description</span>
+      </td>
+
+      <td>
+        Florida Communications Tax
+      </td>
+
+      <td>
+        The name of the imposition in the jurisdiction.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="jurisdiction_name">jurisdiction_name</span>
+      </td>
+
+      <td>
+        france, united kingdom
+      </td>
+
+      <td>
+        The identifying name for the jurisdiction.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="geo_code">geo_code</span>
+      </td>
+
+      <td>
+        123456789
+      </td>
+
+      <td>
+        Not applicable for Vertex O Series or Vertex Cloud integrations.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_tax_code">adjustment_tax_code</span>
+      </td>
+
+      <td>
+        digital_product
+      </td>
+
+      <td>
+        The tax code of the product represented by the line item. Available from version 2.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="classification">classification</span>
+      </td>
+
+      <td>
+        product_1
+      </td>
+
+      <td>
+        * <br />
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="item_code">item_code</span>
+      </td>
+
+      <td>
+        item123
+      </td>
+
+      <td>
+        The user-specified unique ID of the sold item on this adjustment. More details on [this page](https://docs.recurly.com/docs/catalog).
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="item_id">item_id</span>
+      </td>
+
+      <td>
+        1234567890
+      </td>
+
+      <td>
+        The system-generated unique ID of the sold item on this adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="external_sku">external_sku</span>
+      </td>
+
+      <td>
+        abc123
+      </td>
+
+      <td>
+        The user-specified SKU of the sold item on this adjustment.
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_region">tax_region</span>
+      </td>
+
+      <td>
+        US
+      </td>
+
+      <td>
+        Indicates the tax region.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_inclusive">tax_inclusive</span>
+      </td>
+
+      <td>
+        true
+      </td>
+
+      <td>
+        Indicates whether the price includes tax.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="business_entity_code">business_entity_code</span>
+      </td>
+
+      <td>
+        123456789
+      </td>
+
+      <td>
+        Indicates business entity code.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        adjustment_api_id
+      </td>
+
+      <td>
+        e28zov4fw0v2
+      </td>
+
+      <td>
+        Adjustment API ID
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+# Version changelog
+
+### Version 8 - Feb 5, 2025
+
+* Addition of `adjustment_api_id`.
+
+### Version 7 - May 15, 2023
+
+* **Update to export made 8/20/2024:** Merchants integrated directly with Vertex will now see the corresponding geocode values passed from Vertex populated in the "geo_code" field within this export.  The "geocode" identifier passed serves as a specific way to pinpoint the location/address that was used for tax calculation on the invoice. This field provides accurate reporting for tax to state and local tax authorities. This field is also queryable via V2/V3 API.
+* Added business_entity_code column.
+
+### Version 6 - March 3, 2022
+
+* Added tax_inclusive column.
+
+### Version 5 - August 11, 2021
+
+* Added tax_region column.
+
+### Version 4 - February 13, 2020
+
+* Added a column for external_sku pertaining to Item Charges.
+
+### Version 3 - November 21, 2019
+
+* Added item_code and item_id columns for Item Charges.
+
+### Version 2 - September 20, 2018
+
+* Added adjustment_tax_code column.
+* Added classification column. (Conditional on Vertex tax integration)

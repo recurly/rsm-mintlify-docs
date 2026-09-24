@@ -1,0 +1,903 @@
+---
+title: Subscriptions  - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The Subscriptions export helps you identify accounts that have stored subscriptions along with all the pertinent details of those subscriptions.
+
+![](https://files.readme.io/c91818fee8695b63b36a0bbe4975ca04361b03419d60f466b0b87289c639b819-image.png)
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### **Subscription Status Filter**
+
+Distinguish between different subscription statuses using these filters:
+
+* **All**: All active and inactive subscriptions
+* **Live**: All active subscriptions
+* **Renewing**: Live subscriptions set to renew post the present term
+* **Trial**: Subscriptions currently in a trial phase
+* **Canceled**: Subscriptions that will not renew after the present term concludes
+* **Past Due**: Live subscriptions associated with a past-due invoice
+* **Future**: Subscriptions that will activate on reaching the start date
+* **Expired**: Inactive subscriptions
+* **Paused**: Subscriptions that are presently on a pause
+* **Last Billing Period**: Refers to subscription is in its last billing period within the selected timeframe.
+
+### Export On Filters
+
+Understand your subscriptions' timelines with the following filters:
+
+* **Activated**: Focuses on subscriptions activated in a chosen time range
+* **Modified**: Shows subscriptions altered in the chosen time frame, excluding the original subscription
+* **Created**: Displays subscriptions created within a selected time frame, including those with future activation dates.
+
+### **Time Range Filter**
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+<Table align={["left","left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        <span id="Column Name">
+          Column Name
+        </span>
+      </th>
+
+      <th>
+        Example
+      </th>
+
+      <th>
+        Description
+      </th>
+
+      <th>
+        Datatype (max size)
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <span id="uuid">uuid</span>
+      </td>
+
+      <td>
+        b964b5439c2548a489
+      </td>
+
+      <td>
+        Unique internal identifier for the subscription. Even if a subscription is modified, this identifier is maintained.
+      </td>
+
+      <td>
+        varchar(32)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_code">account_code</span>
+      </td>
+
+      <td>
+        123456789, [test@example.com](mailto:test@example.com)
+      </td>
+
+      <td>
+        Account associated with a given subscription UUID.
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="email">email</span>
+      </td>
+
+      <td>
+        [test@example.com](mailto:test@example.com)
+      </td>
+
+      <td>
+        Email address associated with a given subscription UUID.
+      </td>
+
+      <td>
+        varchar(255)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="plan_code">plan_code</span>
+      </td>
+
+      <td>
+        basic
+      </td>
+
+      <td>
+        Plan that the customer is subscribed to with this UUID.
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="state">state</span>
+      </td>
+
+      <td>
+        pending,  active, canceled, expired
+      </td>
+
+      <td>
+        Current state of the subscription.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="auto_renew">auto_renew</span>
+      </td>
+
+      <td>
+        TRUE, FALSE
+      </td>
+
+      <td>
+        Defaults to TRUE for auto-renewing subscriptions. FALSE if subscription configured to expire at the end of the current term.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="currency">currency</span>
+      </td>
+
+      <td>
+        USD
+      </td>
+
+      <td>
+        Identifies the currency being charged with this subscription.
+      </td>
+
+      <td>
+        varchar(3)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="quantity">quantity</span>
+      </td>
+
+      <td>
+        1
+      </td>
+
+      <td>
+        Identifies the quantity of the subscription purchase.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="unit_amount">unit_amount</span>
+      </td>
+
+      <td>
+        99
+      </td>
+
+      <td>
+        Identifies the base price of 1 quantity of the subscription
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="add_on_amount">add_on_amount</span>
+      </td>
+
+      <td>
+        15
+      </td>
+
+      <td>
+        Identifies any additional charges to the subscription base fee from add_ons.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="total_recurring_amount">total_recurring_amount</span>
+      </td>
+
+      <td>
+        114
+      </td>
+
+      <td>
+        Identifies total recurring charges - unit_amount x quantity + add_on_amount.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="current_period_started_at">current_period_started_at</span>
+      </td>
+
+      <td>
+        2009-12-04 00:46:59 PST
+      </td>
+
+      <td>
+        Date and time that the current billing period starts at.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="current_period_ends_at">current_period_ends_at</span>
+      </td>
+
+      <td>
+        2009-01-04 00:46:59 PST
+      </td>
+
+      <td>
+        Date and time that the current billing period ends at
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="trial_started_at">trial_started_at</span>
+      </td>
+
+      <td>
+        2010-03-24 17:18:46 PDT
+      </td>
+
+      <td>
+        Date and time that a trial period began on the subscription.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="trial_ends_at">trial_ends_at</span>
+      </td>
+
+      <td>
+        2010-04-23 17:18:46 PDT
+      </td>
+
+      <td>
+        Date and time that a trial period ends on the subscription.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="total_billing_cycles">total_billing_cycles</span>
+      </td>
+
+      <td>
+        1
+      </td>
+
+      <td>
+        This is the total number of billing periods in the current term.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="remaining_billing_cycles">remaining_billing_cycles</span>
+      </td>
+
+      <td>
+        0
+      </td>
+
+      <td>
+        This is the remaining number of billing periods remaining in the subscription term that will bill. Always 0 for subscriptions with a single billing period term set to auto_renew=true
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="activated_at">activated_at</span>
+      </td>
+
+      <td>
+        2010-03-24 17:18:46 PDT
+      </td>
+
+      <td>
+        Date and time the subscription became active on an account. This might not match to the subscription_created_at date if the subscription is added with a future start date.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="modified_at">modified_at</span>
+      </td>
+
+      <td>
+        2010-03-24 17:18:44 PDT
+      </td>
+
+      <td>
+        Date and time the subscription was last updated.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="canceled_at">canceled_at</span>
+      </td>
+
+      <td>
+        2010-03-28 22:54:46 PDT
+      </td>
+
+      <td>
+        Date and time the subscription was canceled.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="expires_at">expires_at</span>
+      </td>
+
+      <td>
+        2010-04-23 22:51:53 PDT
+      </td>
+
+      <td>
+        Date and time the subscription was/ will churn. This field is populated when a subscription cancels with the expected expiration date.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="maintenance_url">maintenance_url</span>
+      </td>
+
+      <td>
+        app.recurly.com/account/test
+      </td>
+
+      <td>
+        Link to the customer's hosted account maintenance URL.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="net_terms">net_terms</span>
+      </td>
+
+      <td>
+        102
+      </td>
+
+      <td>
+        Identifies the net_terms agreement associated with the subscription.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="po_number">po_number</span>
+      </td>
+
+      <td>
+        213123
+      </td>
+
+      <td>
+        For manual invoicing, this identifies the PO number associated with the subscription.
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="collection_method">collection_method</span>
+      </td>
+
+      <td>
+        automatic/manual
+      </td>
+
+      <td>
+        Identifies whether the subscription fees are collected via manual or automatic invoicing.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="plan_name">plan_name</span>
+      </td>
+
+      <td>
+        Gold
+      </td>
+
+      <td>
+        The name of the plan associated with the subscription. This is the current name of the plan.
+      </td>
+
+      <td>
+        varchar(255)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="started_with_gift">started_with_gift</span>
+      </td>
+
+      <td>
+        TRUE, FALSE
+      </td>
+
+      <td>
+        TRUE if the subscription was started with a gift card, whether or not billing information was collected.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="no_billing_info_reason">no_billing_info_reason</span>
+      </td>
+
+      <td>
+        plan_free_trial
+      </td>
+
+      <td>
+        Identifies the reason why a subscription did not have billing information at time of renewal/activation.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="converted_at">converted_at</span>
+      </td>
+
+      <td>
+        2016-09-02 15:53:18 UTC
+      </td>
+
+      <td>
+        Date of the first successful transaction for the subscription. This field is only used for gifts cards and cardless free trial conversions. In other words, it will only have a value if started_with_gift is `TRUE` OR no_billing_info_reason is "plan_free" trial. " Converted_at compared to the subscription's activated_at will give you the time to conversion.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="paused_at">paused_at</span>
+      </td>
+
+      <td>
+        2018-05-13 00:00:12 MDT
+      </td>
+
+      <td>
+        Date of subscription pause initiation.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="remaining_pause_cycles">remaining_pause_cycles</span>
+      </td>
+
+      <td>
+        9
+      </td>
+
+      <td>
+        Identifies the number of remaining billing cycles for the subscription that is either currently paused or scheduled to pause.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="current_term_started_at">current_term_started_at</span>
+      </td>
+
+      <td>
+        2018-12-04 00:46:59 PST
+      </td>
+
+      <td>
+        Date and time that the current term started at.  This currently is an unpopulated field relating to an upcoming feature which will be released later this year.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="current_term_ends_at">current_term_ends_at</span>
+      </td>
+
+      <td>
+        2019-12-04 00:46:59 PST
+      </td>
+
+      <td>
+        Date and time that the current term ends at.  This currently is an unpopulated field relating to an upcoming feature which will be released later this year.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="renewal_billing_cycles">renewal_billing_cycles</span>
+      </td>
+
+      <td>
+        1
+      </td>
+
+      <td>
+        The length of a subscription's next term, if auto_renew = true,  NIL if subscription auto_renew = false
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="shipping_amount_in_cents">shipping_amount_in_cents</span>
+      </td>
+
+      <td>
+        500
+      </td>
+
+      <td>
+        The shipping fee on the subscription, in cents.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="shipping_method_code">shipping_method_code</span>
+      </td>
+
+      <td>
+        usps-overnight
+      </td>
+
+      <td>
+        The code from the shipping method (created through the UI).
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="pricing_model">pricing_model</span>
+      </td>
+
+      <td>
+        ramp
+      </td>
+
+      <td>
+        Pricing model of the subscription. Will be either fixed or ramp.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="current_ramp_id">current_ramp_id</span>
+      </td>
+
+      <td>
+        pz82514rbd3s
+      </td>
+
+      <td>
+        The id of the current ramp interval.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_inclusive">tax_inclusive</span>
+      </td>
+
+      <td>
+        true
+      </td>
+
+      <td>
+        Indicates whether the subscription is billed inclusively or exclusively of tax.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="subscription_api_id">subscription_api_id</span>
+      </td>
+
+      <td>
+        e28zov4fw0v2
+      </td>
+
+      <td>
+        Subscription API ID
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="gateway_code">gateway_code</span>
+      </td>
+
+      <td>
+        e28zov4fw0v2
+      </td>
+
+      <td>
+        Gateway Code
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="price_segment_id">price_segment_id</span>
+      </td>
+
+      <td>
+        e30zov45fw0v2
+      </td>
+
+      <td>
+        Price segment id
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="price_segment_code">price_segment_code</span>
+      </td>
+
+      <td>
+        gold
+      </td>
+
+      <td>
+        Price segment code
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        user-defined custom field label
+      </td>
+
+      <td>
+        subscription custom field
+      </td>
+
+      <td>
+        Appears only if a custom field is configured and enabled to be visible in the export. The column name in the export reflects the label defined in the custom field configuration.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+# Version changelog
+
+#### Version 7 - 10/14/2025
+
+* Addition of `price_segment_id` and `price_segment_code`.
+
+#### Version 6 - 2/5/2025
+
+* Addition of `subscription_api_id` and `gateway_code`.
+
+#### Version 5 - 1/10/2022
+
+* Added a column to indicate tax inclusive.
+
+#### Version 4 - 12/7/2021
+
+* Added a column for the pricing model
+* Introduced a column for current_ramp_id
+
+#### Version 3 - 5/2/2019
+
+* A new column was added to show the Shipping Cost
+* Added a column for indicating the Shipping Method
+
+#### Version 2 - 9/6/2018
+
+* Introduced column additions for Custom Fields
+* Custom fields will now be the last column in the export and will only appear if exports are enabled in the custom field definition

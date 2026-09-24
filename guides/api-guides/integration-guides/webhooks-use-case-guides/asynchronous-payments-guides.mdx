@@ -1,0 +1,52 @@
+---
+title: Aynchronous payments webhook guide
+---
+
+# Overview
+
+This guide helps you understand which webhooks you need to consume if you are using payment methods that return delayed success and decline responses, thus ensuring a smoother, more transparent integration.
+
+### Prerequisites
+
+* Familiarity with Recurly Webhooks
+* Basic understanding of RESTful APIs and JSON
+* Access to Recurly with valid API credentials
+
+***
+
+# Definition
+
+In the context of webhooks, an**asynchronous payment method** is one where the final status of the transaction (success, declined, or error) is not returned immediately in the direct API response to the payment request. Status update timing will depend largely on the individual payment method, and the consumer's bank. Certain APMs may take hours to update, while others may take days.
+
+**Supported Payment Methods**
+
+* Credit Cards (India-region only), all Direct Debit (ACH, BACS, BECS, SEPA, Revolut) and regional APMs such as Pix Automatico, Mercado Pago, and UPI AutoPay. Depending on the financial instrument of the consumer, AmazonPay, Stripe Link, and PayPal also apply, especially when users have a bank account instead of a card in their PayPal wallet.
+
+## Suggested Events
+
+Please note, this list is not exhaustive, please review the entire list of events as there may be others that serve your specific use case. This list serves as the bare minimum for a successful implementation.
+
+### Payment Notifications
+
+Specific to [Payments notifications](/guides/webhooks/notifications/payment-notifications#/), you will want to listen for the following events. See the events list for all Payments event notifications and their descriptions.
+
+* [payment.scheduled ](/guides/webhooks/notifications/payment-notifications#scheduled-payment-for-asynchronous-payment-methods): Sent when a Purchase payment is successfully submitted but the final status is pending a final status update.
+* [payment.processing](/guides/webhooks/notifications/payment-notifications#processing-payment-only-for-ach-and-paypal-echeck-payments): Sent on certain gateways for ACH and PayPal eCheck payments.
+* [payment.transaction_status_updated](/guides/webhooks/notifications/payment-notifications#transaction-status-updated): Sent when a purchase has received a status update while previously in a pending state. Query to check the final state, or listen for `succeeded` or `failed` webhooks. It is recommended to query on the transaction.
+* [payment.succeeded ](/guides/webhooks/notifications/payment-notifications#/successful-payment): Sent when a Purchase payment is successfully approved following a pending state. This will also apply to status updates for Asynchronous methods.
+* [payment.failed](/guides/webhooks/notifications/payment-notifications#/failed-payment): Sent when a payment fails or is declined immediately or after a pending state.
+
+### Invoice Notifications
+
+Invoices for asynchronous payment methods will start out in a Pending state and then move to a Paid or Past Due state in most cases. They are also automatically created on all transactions except for verifications. You can read about all events on the dedicated [Invoice notifications documentation](/guides/webhooks/notifications/invoice-notifications).
+
+* [invoice.created ](/guides/webhooks/notifications/payment-notifications#/successful-payment): Sent when a new invoice is generated. This will also apply to Asynchronous methods. As with all webhooks, you'll want to query on the relevant invoice id to see the status of the payment.
+
+### Subscription Notifications
+
+Subscription notifications are sent when an action is taken against a specific subscription within an account. Read more about [subscription-level notifications](/guides/webhooks/notifications/subscription-notifications) in our dedicated documentation.
+
+* [subscription.created ](/guides/webhooks/notifications/subscription-notifications#new-subscription): Sent when a new Subscription is created for a customer.
+* [subscription.renewed](/guides/webhooks/notifications/subscription-notifications#renewed-subscription): Sent when an active subscription's renewal invoice is paid successfully.
+* [subscription.canceled](/guides/webhooks/notifications/subscription-notifications#canceled-subscription): Sent when subscription is canceled, and will not renew, but is valid until its next bill date.
+* [subscription.expired](/guides/webhooks/notifications/subscription-notifications#expired-subscription): Sent when a subscription is expired, rendering it invalid immediately.

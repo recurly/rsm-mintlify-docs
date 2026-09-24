@@ -1,0 +1,191 @@
+---
+title: 3D Secure
+---
+
+`recurly.Risk().ThreeDSecure()` lets you trigger and complete Strong Customer Authentication (SCA) in-browser. Pass the `three_d_secure_action_token_id` (or proactive token) you received from the Recurly API, attach the component to an element on your page, and listen for either a `token` (success) or `error` event. The library handles device-fingerprinting, challenge display, and returns a `three_d_secure_action_result` token you can use in any subsequent API call (purchase, subscription, billing-info update, etc.).
+
+## Prerequisites & limitations
+
+* Your site must use a gateway that Recurly supports for 3DS 2.x (e.g., Braintree, Cybersource, Worldpay, Adyen).
+* You must already have an **action token** from the Recurly API (`three_d_secure_action_token_id` or proactive token).
+* `threeDSecure.attach()` must be called from a **user-initiated event** such as `click` or `touchend`—otherwise browsers will block the pop-up/iframe.
+* By default Recurly performs gateway **device-data pre-flights**; you may disable them (`preflightDeviceDataCollector.enabled: false`) only if you are certain no challenge will be required.
+* **Proactive 3DS** (authenticate before the first transaction) is currently available **only for Braintree**; enable it via `risk.threeDSecure.proactive` in `recurly.configure`.
+* Provide a visible **container element** (\~250 × 400 px) for the challenge; remove or hide it only after a `token` or `error` event.
+* The resulting `three_d_secure_action_result` token **expires in 20 minutes** and cannot be recovered after expiry.
+
+***
+
+# Key details
+
+Strong customer authentication for your users.
+
+Recurly.js provides a set of utilities that allow you to support 3-D Secure authentication on your checkout page seamlessly. For more information on 3-D Secure, see our [Introduction to Strong Customer Authentication](https://docs.recurly.com/recurly-subscriptions/v1.0/docs/revised-payment-services-directive-psd2#/).
+
+Recurly's support for 3-D Secure utilizes both Recurly.js and our API. For a complete guide to this integration, start with our <Anchor label="Strong Customer Authentication (SCA) Integration Guide" target="_blank" href="https://docs.recurly.com/recurly-subscriptions/v1.1/docs/3d-secure-20-integration-guide#/understanding-the-sca-flows">Strong Customer Authentication (SCA) Integration Guide</Anchor>.
+
+Let's take a look at an example implementation.
+
+```javascript
+const risk = recurly.Risk();
+const threeDSecure = risk.ThreeDSecure({
+  actionTokenId: myActionTokenId
+});
+
+threeDSecure.on('token', function (token) {
+  // handle passing the action result
+  // token back to your server
+
+  // token.type => 'three_d_secure_action_result'
+  // token.id
+
+  // optionally, you may call threeDSecure.remove() to remove the element
+});
+
+threeDSecure.on('error', function (error) {
+  // handle error scenarios.
+
+  // error.code
+  // error.message
+
+  // optionally, you may call threeDSecure.remove() to remove the element
+});
+
+threeDSecure.attach(document.querySelector('#my-auth-container'));
+```
+
+### Additional Configuration
+
+#### Pre-flight 3-D Secure authentication
+
+Recurly.js will perform some pre-flight authentication steps prior to tokenization. If you use a compatible compatible\
+with this process, then this process occurs automatically.
+
+This process can be prevented with the following configuration value:
+
+```javascript
+recurly.configure({
+  // ...
+  risk: {
+    threeDSecure: {
+      preflightDeviceDataCollector: {
+        enabled: false
+      }
+    }
+  }
+  // ..
+});
+```
+
+#### Re-authenticating Existing Billing Information
+
+You can collect device data to re-authenticate existing billing information by providing the billing info ID alongside the CVV element.
+
+Below is an example of configuring preflight fingerprinting for existing billing infos for Cybersource and WorldPay gateways.
+
+```javascript
+recurly.configure({
+  // ...
+  risk: {
+    threeDSecure: {
+      preflightDeviceDataCollector: {
+        enabled: true,
+        billingInfoId: "abc1234"
+      },
+    }
+  }
+  // ..
+});
+```
+
+#### Proactive 3D-Secure
+
+Recurly.js can perform Strong Customer Authentication prior to an initial transaction. This feature is currently\
+available only if you are using a Braintree gateway.
+
+Enable proactive 3-D Secure with the following configuration:
+
+```javascript
+recurly.configure({
+  // ...
+  risk: {
+    threeDSecure: {
+      proactive: {
+        enabled: true,
+        gatewayCode: 'my-gateway-code',
+        amount: 0.00
+      },
+    }
+  }
+  // ..
+});
+```
+
+With proactive 3D-Secure enabled, you will receive a `three_d_secure_proactive_action_token` when you\
+tokenize your billing information. This value can be passed in as an `actionTokenId` to the `threeDSecure`
+class to enable the Strong Customer Authentication flow.
+
+<br />
+
+### Reference
+
+#### <span className="heading-tag heading-tag--fn">fn</span> recurly.Risk
+
+##### Arguments
+
+None.
+
+##### Returns
+
+A new `Risk` instance
+
+#### <span className="heading-tag heading-tag--fn">fn</span> recurly.ThreeDSecure
+
+##### Arguments
+
+| Param                 | Type     | Description                                                                                                                                                             |
+| :-------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| options               | `Object` |                                                                                                                                                                         |
+| options.actionTokenId | `String` | `three_d_secure_action_token_id` OR `three_d_secure_proactive_action_token_id` returned by the Recurly API when 3-D Secure authentication is required for a transaction |
+
+##### Returns
+
+A new `ThreeDSecure` instance.
+
+#### <span className="heading-tag heading-tag--fn">fn</span> threeDSecure.attach
+
+##### Arguments
+
+| Param     | Type          | Description                                                                                                                                                                                                                                                                                            |
+| :-------- | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| container | `HTMLElement` | A DOM element to contain any UI elements necessary to fulfill the 3-D Secure authentication process. We recommend this element be a minimum size of 250px (W) x 400px (H), and contain an interstitial message to explain that 3-D Secure authentication will be required to complete the transaction. |
+
+##### Returns
+
+Nothing
+
+##### <span className="heading-tag heading-tag--event">events</span> Emits
+
+##### `token`
+
+This event is fired when your customer has completed the 3-D Secure flow. Recurly has received the authentication details, and generated this token to be used in our API.
+
+##### Signature
+
+| Param      | Type     | Description                            |
+| :--------- | :------- | :------------------------------------- |
+| token      | `Object` |                                        |
+| token.type | `String` | 'three\_d\_secure\_action\_result'     |
+| token.id   | `String` | Token identifier to be sent to the API |
+
+##### `error`
+
+This event is emitted when any error is encountered, whether during setup of the 3-D Secure flow, or during authentication. It will be useful to display errors to your customer if a problem occurs during the 3-D Secure flow.
+
+##### Signature
+
+| Param | Type           | Description                                  |
+| :---- | :------------- | :------------------------------------------- |
+| error | `RecurlyError` | An error describing the issue that occurred. |
+
+***

@@ -1,0 +1,65 @@
+---
+title: EMEA Payment Methods
+---
+
+# Overview
+
+This document provides detailed API instructions for processing payments via Cards, SEPA, BACS, iDeal, and Klarna Debit Risk (formerly Sofort), with a critical focus on navigating the region's mandatory PSD2 / SCA requirements. You'll find links to our existing guides for 3DS for new customers, existing customers, Recurly.js requirements, and explanations for payment methods ensuring your integration is fully compliant, reduces transaction declines, and provides a seamless checkout experience for your customers across LATAM.
+
+# Key Details
+
+There are several gateways and payment methods that support the LATAM region including Adyen, Ebanx, WorldPay, and Braintree.
+
+**Payment Methods and Gateways:**
+
+* **[Cards](/guides/payment-orchestration/payment-methods/credit-cards#/)**: PSD2 Compliant support on Stripe, Adyen, Braintree, WorldPay, and Cybersource.
+* **[iDeal](/guides/payment-orchestration/payment-methods/ideal#/)**: Supported on Stripe and Adyen.
+* **[SEPA](/guides/payment-orchestration/payment-methods/sepa-direct-debit#/) and [BACS](/guides/payment-orchestration/payment-methods/bacs#/)**: Supported on Stripe, Adyen, and GoCardless.
+* **[Revolut](/guides/payment-orchestration/payment-methods/revolut#/)**: Supported on Stripe.
+* **[Klarna Debit Risk (formerly Sofort)](/guides/payment-orchestration/payment-methods/sofort#/)**: Supported on Adyen
+
+Additionally, integrations supporting credit cards will require 3DS to comply with SCA/PSD2 regulations in the EU and UK regions. For co-badged regions, such as France, Belgium and Denmark, we also support customer preference via [CoBadge](/guides/api-guides/integration-guides/popular-use-cases/co-badged-cards-guide#/) solutions.
+
+# Payment Methods
+
+## Credit Cards
+
+Generally speaking, when processing cards in the EMEA region, you can follow standard guides (see below), however these countries require authenticating the consumer via 3DS. We offer 3DS on our most popular gateways for both new customers and stored billing information for return customers.
+
+You can find this information separately in our [3DS Integration Guide](/guides/api-guides/integration-guides/popular-use-cases/3d-secure-20-integration-guide#/). For verifying or using Stored Billing Information with 3DS, see our [Stored billing information guide](/guides/api-guides/integration-guides/popular-use-cases/using-3d-secure-with-stored-billing-information#/).
+
+## Direct Debit
+
+Recurly supports two Wallet payment methods on Ebanx including Mercado Pago and Pix Automatico.
+
+### SEPA
+
+<br />
+
+### BACS
+
+<br />
+
+## Realtime Bank Payments
+
+### iDeal
+
+<br />
+
+### Sofort / Klarna Debit Risk
+
+<br />
+
+## Wallets
+
+### Revolut
+
+<br />
+
+# Recommended Webhooks
+
+In the EMEA region, some payment methods are synchronous and some are Asynchronous. You can find our dedicated webhooks recommendations using the Best Practices guide below:
+
+It is recommended to listen for all webhooks given that some payment methods are asynchronous (they update hours or days later with an official status), and some are synchronous (the payment status is known immediately).
+
+* [Webhooks Best Practices](https://docs.recurly.com/recurly-subscriptions/docs/best-practices#/)

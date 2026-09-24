@@ -1,0 +1,24 @@
+---
+title: Kount Content Security Policy (CSP) Script Configuration
+---
+
+> ❗️ Notice for merchants without a CSP
+>
+> This documentation only applies to merchants who use a Content Security Policy (CSP). If you do not use a CSP, you do not need to complete this configuration.
+
+### Background
+
+With the Google Chrome 80 update, Recurly has needed to make several updates to our Kount integration, which powers all existing fraud management solutions within Recurly. These updates will require some action from your end if you use a Content Security Policy on your checkout page. 
+
+### Configuration
+
+To ensure device fingerprinting continues to work as expected for your site, you will need to add the script called out below to your existing CSP:
+
+```text
+<meta http-equiv="Content-Security-Policy" content="img-src https://DATA_COLLECTOR_URL;connect-src 'self' 'unsafe-eval' 'unsafe-inline' https://DATA_COLLECTOR_URL; script-src 'unsafe-eval' 'unsafe-inline' https://DATA_COLLECTOR_URL; child-src https://DATA_COLLECTOR_URL">
+```
+
+For the script above, replace the DATA\_COLLECTOR\_URL value with one of the following URLs depending on your site mode:
+
+* Sandbox: [https://tst.kaptcha.com](https://tst.kaptcha.com)
+* Production: [https://ssl.kaptcha.com](https://ssl.kaptcha.com)

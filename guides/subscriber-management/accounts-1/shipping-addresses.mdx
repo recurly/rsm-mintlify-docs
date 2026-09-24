@@ -1,0 +1,97 @@
+---
+title: Shipping addresses
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Shipping addresses let you associate a physical delivery address with each subscription on a customer account. When a subscription has a shipping address, that address appears on the invoice and is used for tax calculations — ensuring the right taxes are applied based on where goods are delivered.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+  </div>
+</div>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Customers cannot manage their own shipping addresses through Checkout, Hosted Payment Pages, or Hosted Account Management — shipping addresses must be managed by admins via the Admin UI or the API</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Recurly's shipping addresses feature lets businesses associate and manage physical delivery addresses with individual subscriptions. Each account supports up to 20 distinct shipping addresses, and different addresses can be assigned to different subscriptions on the same account. When a subscription is linked to a shipping address, that address is displayed on the invoice and used as the basis for tax calculations.</div>
+
+# Key details
+
+## Managing shipping addresses
+
+Shipping addresses are managed from the account detail page in the Admin UI.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the account detail page</h4><p>Navigate to the customer's account in the Admin UI and click Manage addresses.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/dfc1567-Screen_Shot_2016-08-12_at_5.59.14_PM.png" align="center" width="50%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Create, edit, or delete an address</h4><p>From the Manage addresses page, create a new shipping address or find an existing one to edit or delete.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/6ad1499-Screen_Shot_2016-08-16_at_6.44.16_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Associate the address with a subscription</h4><p>Open the subscription detail page and link the shipping address to that subscription.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/4564703-Screen_Shot_2016-08-18_at_10.46.37_AM.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/0a1b00a-Screen_Shot_2016-08-18_at_10.52.02_AM.png" align="center" width="75%" border={true} />
+
+
+Once associated, the shipping address appears on all invoices for that subscription and is used for tax calculations where applicable.
+
+Shipping addresses can also be managed programmatically via the <a href="https://developers.recurly.com/" target="_blank">Recurly API</a>. For endpoint details, see the <a href="https://docs.recurly.com/v1.0/docs/shipping-addresses#section-managing-addresses-via-the-api" target="_blank">API documentation</a>.
+
+## Activity log
+
+All changes to shipping addresses are recorded in the Activity Log of the customer account, providing a full audit trail of any additions, edits, or deletions.
+
+## Email parameters
+
+The following parameters are available to include shipping address details in Recurly email templates:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Parameter</td><td>Description</td></tr>
+  <tr><td><code>&#123;&#123;subscription_has_shipping_address?&#125;&#125;</code></td><td>Returns <code>true</code> if the subscription has a shipping address.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_nickname&#125;&#125;</code></td><td>The nickname assigned to the shipping address.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_first_name&#125;&#125;</code></td><td>First name on the shipping address.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_last_name&#125;&#125;</code></td><td>Last name on the shipping address.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_address1&#125;&#125;</code></td><td>Street address line 1.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_address2&#125;&#125;</code></td><td>Street address line 2.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_city&#125;&#125;</code></td><td>City.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_state&#125;&#125;</code></td><td>State or province.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_zip&#125;&#125;</code></td><td>Postal / ZIP code.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_country&#125;&#125;</code></td><td>Country.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_phone&#125;&#125;</code></td><td>Phone number on the shipping address.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_email&#125;&#125;</code></td><td>Email address associated with the shipping address.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_shipping_vat_number&#125;&#125;</code></td><td>VAT number on the shipping address.</td></tr>
+  <tr><td><code>&#123;&#123;subscription_full_shipping_address&#125;&#125;</code></td><td>Full formatted shipping address as a single string.</td></tr>
+</table>
+
+<br />

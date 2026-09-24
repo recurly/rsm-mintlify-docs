@@ -1,0 +1,148 @@
+---
+title: Billings
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Billings dashboards give you a clear view of payments, refunds, and net billings from all customers, based only on successful gateway transactions. Compare new versus renewing revenue, break billings down by region, country, or state, and drill into the specific transactions behind any number.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have Analytics user role permission.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Billings dashboards show you payments, refunds, and net billings from all customers, using only successful gateway transactions — manual invoices, credit invoices, and wire transfers aren't included. Use them to understand your cash flow over any time period and build stronger revenue strategies.</div>
+
+The dashboards also break billings down by region, so you can tailor your approach to each market. Available regional views:
+
+<ul className="rp-list">
+  <li>Billings (Global)</li>
+  <li>Billings (North America)</li>
+  <li>Billings (Europe)</li>
+  <li>Billings (Asia)</li>
+  <li>Billings (South America)</li>
+  <li>Billings (Oceania)</li>
+  <li>Billings (Africa)</li>
+</ul>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong>For more on navigating and using the filter tools, see our <a href="https://docs.recurly.com/docs/recurly-analytics-overview#navigation-features" target="_blank">analytics overview documentation</a>.</div>
+</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Cash flow clarity</strong>
+    <span>See how much you've billed and collected, by region and over time.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>New vs. renewing insight</strong>
+    <span>See what's driving your billings — new customers or renewals.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Regional performance</strong>
+    <span>Compare billings across regions, countries, and states to find untapped opportunity.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Drill-down detail</strong>
+    <span>Go from a chart number down to the specific transactions and invoices behind it.</span>
+  </div>
+</div>
+
+# Key details
+
+## Billing key performance indicators (KPIs)
+
+
+<Image src="https://files.readme.io/a65b617d1632b38d373d82ade719843db1b94f0093b7193d612695bfe1ae4e0b-image.png" align="center" width="75%" border={true} />
+
+
+This widget gives you a detailed breakdown of your payment totals to date. Compare month-to-date totals against last month, two months ago, three months ago, and even one year ago.
+
+### Summary
+
+
+<Image src="https://files.readme.io/9e95f1845631f71c6d52993bb3945b7f00e7c937b8a70b75cb0d5bb0e57bfbe7-image.png" align="center" width="75%" border={true} />
+
+
+This chart brings together new and renewing customer payments and refunds over your chosen date range, so you can see the full shape of your billing cycle — transactions coming in and refunds going out.
+
+## New vs renewing detail
+
+
+<Image src="https://files.readme.io/961ff0e5b32ecf4e99bfd2751fc1fc9b9ea892a0c08414d4d26162bc28376509-image.png" align="center" width="75%" border={true} />
+
+
+The Net Billings dashboard compares net new and net renewing payments side by side:
+
+<ul className="rp-list">
+  <li><strong>Net new</strong>: New payments minus any new refunds.</li>
+  <li><strong>Net renewing</strong>: Renewing payments minus renewing refunds.</li>
+</ul>
+
+Together, these two values make up your Total Net Billings.
+
+For clarity, within this dashboard:
+
+<ul className="rp-list">
+  <li>"New" refers to a subscriber's first payment.</li>
+  <li>"Renewing" covers any payment made after that first one.</li>
+</ul>
+
+## Billing drills
+
+In the Summary and New vs Renewing detail charts, select any bar or number to access two drills:
+
+<ul className="rp-list">
+  <li><strong>Product details</strong>: A summarized view of the invoice line items, including a breakdown of the products contributing to the total for the selected billing record. Minor differences may appear between this total and the dashboard value due to currency conversion and tax rounding. For more detail, drill further into transaction and invoice details for each product total.</li>
+  <li><strong>Transaction and invoice details</strong>: All transactions and their associated invoices that contribute to the total for the selected billing record, shown in the transaction currency.</li>
+</ul>
+
+## Billings by country
+
+
+<Image src="https://files.readme.io/3b43ba4efe077cb6fe7e844b1d7f087359ded5bd09f5bd4c4a75117e03677752-image.png" align="center" width="75%" border={true} />
+
+
+An expanded version of the by-state map at a global level. Select an individual country to see its total payments. Transactions without an assigned country are grouped into the Amount Unmapped box below the map, helping you understand your international reach and spot untapped potential.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>A Europe-only map is also available.</div>
+</div>
+
+## Billings by state
+
+This dashboard shows a geographic breakdown of payment amounts by state. Location is determined from the account's billing information or, when that's unavailable, the IP address — a straightforward way to understand regional revenue distribution.
+
+
+<Image src="https://files.readme.io/fb520256cc62e37a04001f25543126266c18f7c477527829688762374814506b-image.png" align="center" width="75%" border={true} />
+
+
+The current version covers:
+
+<ul className="rp-list">
+  <li><strong>Billings by state</strong>: Revenue distribution across different states.</li>
+  <li><strong>Billings by country in Europe</strong>: Revenue distribution across European countries.</li>
+</ul>
+
+Adjacent widgets show the percentage of global billings for each region, and a table below lists each country or state within its region.
+
+## Using the geographic charts
+
+The Billings dashboard includes territory-shaped charts for different geographic areas. Select a territory on the map to see total payments, refunds, and net billings for that state or country in the hover text.
+
+Below the maps, two boxes break down mapped and unmapped amounts. Mapped transactions have been assigned to a specific state or country; unmapped transactions haven't. This helps you see where your transactions are coming from, and catch any that might be miscategorized.

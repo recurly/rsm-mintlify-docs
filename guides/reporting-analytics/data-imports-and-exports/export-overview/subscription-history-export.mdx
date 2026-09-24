@@ -1,0 +1,112 @@
+---
+title: Subscriptions — history - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Prerequisites
+
+Please reach out to your Recurly account manager or [support@recurly.com](mailto:support@recurly.com) to have this feature activated in your account.
+
+# Definition
+
+The “Subscriptions - History” section enables users to view the history of each subscription including all versions created following any change to a subscription. This includes monitoring various movements such as upgrades, downgrades, cancellations, trial conversions, and more, facilitating in-depth tracking of a subscriber's lifecycle. It is essential to note that the subscription history export only tracks the changes post the activation of a subscription. The oldest historical data available for this export is April 2019.
+
+<Image border={false} src="https://files.readme.io/b393490192b8f18f4eb66a0e75f9c8b14c25304cbfedcc735c505c5849082866-image.png" />
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Subscription Status Filter
+
+* **All**: Displays all subscription history status.
+* **Trial**: Displays all subscription history respective to trial status.
+* **Open**: Displays all subscription history respective to open status.
+* **Canceled**: Displays all subscription history respective to canceled status.
+* **Expired**: Displays all subscription history respective to expired status.
+
+### Export On Filters
+
+* **Activated**: Use this filter to view past versions of activated or reactivated subscriptions within a specified timeframe, utilizing the _subscription_activated_at_ column.
+* **Version Created**: View recent creations to all subscriptions within a chosen time range, referring to the _version_created_at_ column.
+* **Version Modified**: View recent alterations to all subscriptions within a chosen time range, referring to a combination of _version_state_ and _version_created_at_ columns.
+
+### **Time Range Filter**
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Column Name                                                                         | Example                                                | Description                                                                                                                                    |        |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | :----- |
+| <span id="subscription_uuid">subscription_uuid</span>                               | 434f11do8b297982eb                                     | Unique internal identifier for the subscription. Even if a subscription is modified, this identifier is maintained.                            |        |
+| <span id="version_uuid">version_uuid</span>                                         | 43509049eb30fb                                         | Unique internal identifier for the version of a subscription_uuid. A new version is created when a change is made to a subscription.           |        |
+| <span id="account_code">account_code</span>                                         | 123456789, [test@example.com](mailto:test@example.com) | Account associated with a given subscription_uuid.                                                                                             |        |
+| <span id="subscription_activated_at">subscription_activated_at</span>               | 2018-03-24 17:18:46 PDT                                | Date and time the subscription became active (or reactivated) on an account.                                                                   |        |
+| <span id="subscription_expires_at">subscription_expires_at</span>                   | 2018-09-24 17:18:46 PDT                                | Date and time the subscription was/will churn. This field is populated when a subscription cancels with the expected expiration date.          |        |
+| <span id="subscription_state">subscription_state</span>                             | active, canceled, paused, expired                      | State of the subscription at the time the version was active.                                                                                  |        |
+| <span id="version_started_at">version_started_at</span>                             | 2018-03-20 03:22:25 EST                                | The date a change was made to the subscription and thus the new version was created.                                                           |        |
+| <span id="version_ended_at">version_ended_at</span>                                 | 2018-07-20 03:22:25 EST                                | The date a version is no longer active because another change to the subscription is made and a newer version is created.                      |        |
+| <span id="version_state">version_state</span>                                       | inactive or active                                     | Versions reflecting the current attributes of the subscription (i.e., are currently in use) are "active." All expired versions are "inactive". |        |
+| <span id="plan_code">plan_code</span>                                               | bronze_1                                               | The plan that the subscription was actively on while that version was active. Codes are used internally only.                                  |        |
+| <span id="plan_name">plan_name</span>                                               | Bronze Plan # 1                                        | The name of the plan the subscriber was actively on while that version was active.                                                             |        |
+| <span id="subscription_currency">subscription_currency</span>                       | USD, GBP, CAD                                          | The currency associated with that subscription at the time that version was active.                                                            |        |
+| <span id="version_plan_interval_unit">version_plan_interval_unit</span>             | months, weeks, days, years                             | The interval type at which that subscription is billed while that version was active.                                                          |        |
+| <span id="version_plan_interval_length">version_plan_interval_length</span>         | any number                                             | The length of the interval type at which the subscription is billed at while the version was active.                                           |        |
+| <span id="version_collection_method">version_collection_method</span>               | automatic, manual                                      | Identifies whether the subscription fees are collected via manual or automatic invoicing.                                                      |        |
+| <span id="version_total_billing_cycles">version_total_billing_cycles</span>         | 1                                                      | The total number of bill cycles that the subscription will bill at the time the version was active.                                            |        |
+| <span id="version_subscription_quantity">version_subscription_quantity</span>       | 1, 2                                                   | Identifies the quantity of the subscription purchase at the time the version was active.                                                       |        |
+| <span id="version_subscription_unit_amount">version_subscription_unit_amount</span> | 100                                                    | Identifies the base price of 1 quantity of the subscription at the time the version was active.                                                |        |
+| <span id="version_add_on_codes">version_add_on_codes</span>                         | add_on1, add_on1, add_on2                              | A list of add-ons that were active on the subscription at the time the version was active.                                                     |        |
+| <span id="version_add_on_types">version_add_on_types</span>                         | fixed, fixed, usage                                    | Lists the type of add-on in corresponding order to the listed add_on_codes on the subscription at the time the version was active.             |        |
+| <span id="version_add_on_unit_amounts">version_add_on_unit_amounts</span>           | 10, 10, 5%                                             | Lists the unit amount of the add-on in corresponding order to the listed add_on_codes and listed add_on_types.                                 |        |
+| <span id="version_add_ons_total">version_add_ons_total</span>                       | 20                                                     | Sums the add_on_unit_amounts on the subscription at the time the version was active. Does not include usage-based add-ons.                     |        |
+| <span id="version_total_recurring_amount">version_total_recurring_amount</span>     | 120                                                    | (version_unit_amount) * (version_subscription_quantity) + version_add_on_total                                                                 |        |
+| <span id="version_in_trial">version_in_trial</span>                                 | Y, N                                                   | Indicates whether or not the subscription was in trial while the version was active.                                                           |        |
+| <span id="version_auto_renew">version_auto_renew</span>                             | Y, N                                                   | Indicates whether or not the subscription was set to auto renew while the version was active.                                                  |        |
+| <span id="version_renewal_billing_cycles">version_renewal_billing_cycles</span>     | 1                                                      |                                                                                                                                                |        |
+| <span id="version_shipping_method_name">version_shipping_method_name</span>         | USPS Overnight                                         | The shipping method name used at the time when the version was active.                                                                         |        |
+| <span id="version_shipping_amount">version_shipping_amount</span>                   | 5                                                      | Identifies the shipping price on the subscription at the time the version was active.                                                          |        |
+| <span id="pricing_model">pricing_model</span>                                       | ramp                                                   | Pricing model of the subscription. Will be either fixed or ramp.                                                                               |        |
+| <span id="current_ramp_id">current_ramp_id</span>                                   | pz82514rbd3s                                           | The id of the current ramp interval.                                                                                                           |        |
+| <span id="tax_inclusive">tax_inclusive</span>                                       | false                                                  | Boolean (TRUE/FALSE) flag to indicate whether subscription is tax inclusive.                                                                   |        |
+| subscription_api_id                                                                 | e28zov4fw0v2                                           | Subscription API ID                                                                                                                            | string |
+
+# Version changelog
+
+### Version 7 - 2/5/2025
+
+* Addition of `subscription_api_id`.
+
+### Version 6 - 1/28/2022
+
+* Added columns for tax_inclusive.
+
+### Version 5 - 12/7/2021
+
+* Added columns for pricing_model and current_ramp_id.
+
+### Version 4 - 5/12/2021
+
+* Removed concatenation in columns: version_add_on_codes, version_add_on_types, version_add_on_unit_amounts.
+
+### Version 3 - 3/25/2020
+
+* Introduced a new column: version_add_on_tier_types.
+
+### Version 2 - 1/9/2020
+
+* Incorporated columns for shipping method and amount.

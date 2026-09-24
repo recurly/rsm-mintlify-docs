@@ -1,0 +1,600 @@
+---
+title: Single sign-on
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Single Sign-On (SSO) lets your team access Recurly using a single set of credentials from your identity provider — no separate Recurly password required. Recurly supports SSO via Okta, Microsoft Entra, and Google, with optional SCIM provisioning for Okta to automate user management.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#set-up-okta"><span className="rp-toc-num">4</span>Set up Okta</a>
+    <a className="rp-toc-pill" href="#set-up-microsoft-entra"><span className="rp-toc-num">5</span>Set up Microsoft Entra</a>
+    <a className="rp-toc-pill" href="#set-up-google-sso"><span className="rp-toc-num">6</span>Set up Google SSO</a>
+    <a className="rp-toc-pill" href="#manage-users-and-certificates"><span className="rp-toc-num">7</span>Manage users and certificates</a>
+    <a className="rp-toc-pill" href="#scim-for-okta"><span className="rp-toc-num">8</span>SCIM for Okta</a>
+    <a className="rp-toc-pill" href="#faqs-and-troubleshooting"><span className="rp-toc-num">9</span>FAQs and troubleshooting</a>
+  </div>
+</div>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>User provisioning:</strong> New users must be added manually in Recurly before they can authenticate via SSO for Microsoft Entra and Google. For Okta, user provisioning can be automated via SCIM — contact <a href="mailto:support@recurly.com">support@recurly.com</a> for details.</li>
+  <li><strong>Supported identity providers:</strong> Recurly SSO currently supports Okta, Microsoft Entra, and Google. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> to discuss other providers.</li>
+  <li>SCIM for Okta is available on request — contact your Recurly account manager or <a href="mailto:support@recurly.com">support@recurly.com</a> for details.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Single Sign-On (SSO) is a user authentication method that allows a user to access multiple applications with one set of login credentials. In Recurly, SSO authentication is handled by your identity provider (Okta, Microsoft Entra, or Google) — reducing password sprawl, streamlining access management, and improving security across your team.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Enhanced security</strong>
+    <span>Reduce the number of passwords in use across your organization, minimizing the risk of password-related security breaches.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-key" aria-hidden="true"></i></div>
+    <strong>Streamlined access management</strong>
+    <span>One set of credentials for multiple applications means simpler access management and a smoother experience for your team.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-building" aria-hidden="true"></i></div>
+    <strong>Flexible identity provider support</strong>
+    <span>Supports Okta, Microsoft Entra, and Google — giving you flexibility to use your existing identity infrastructure.</span>
+  </div>
+</div>
+
+# Key details
+
+## Key principles
+
+- **One-to-one relationship** — Each Recurly user must have a corresponding account in the identity provider. A user can't use two different identity providers for the same Recurly account. For access to multiple Recurly sites via different providers, separate Recurly accounts are required.
+- **User ID matching** — The email address registered in Recurly must exactly match the email in your identity provider. Update the Recurly user email first if they differ.
+- **Site-level configuration** — SSO is configured per site. If a user is associated with multiple sites, the first site that requires SSO determines which identity provider and configuration the user must use.
+- **Access control is separate** — SSO handles authentication only. Once logged in, users have access to all Recurly sites associated with their account.
+- **SSO replaces two-factor authentication** — When a user switches to SSO, Recurly's two-factor authentication is disabled for that account.
+- **Limited provider support** — Only Okta, Microsoft Entra, and Google are currently supported. Contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a> for other providers.
+
+## SSO certificates
+
+Your identity provider generates an SSO public certificate used to sign and encrypt SAML responses between Recurly and your IdP. This certificate verifies that login requests are from the correct source and haven't been tampered with.
+
+If the certificate expires and isn't updated, SSO users will be unable to log in. To find the expiration date, go to **Admin → SSO Settings** in Recurly — the expiration date is displayed alongside the certificate. Renew the certificate before it expires to avoid login disruptions.
+
+# Set up Okta
+
+## Step 1: Add the Recurly app in Okta
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the App Catalog</h4><p>As an Okta Administrator, go to <strong>Admin → Applications → Applications</strong> and click <strong>Browse App Catalog</strong>. Search for "Recurly."</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Add the integration</h4><p>Select <strong>Recurly</strong> from the results and click <strong>Add Integration</strong>. Under General Settings, set the application name and click <strong>Next</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/3296693-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Set the Default Relay State</h4><p>Under Sign-On Options, set the <strong>Default Relay State</strong> to your Recurly site's subdomain (subdomain only — not the full URL). Find your subdomain under <strong>Configuration → Site Settings</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/ddba16e161724317a80e179f69571752497841aec15ee32d6f9f4780193a7b83-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Upload the Recurly certificate</h4><p>Get a copy of the certificate from <a href="mailto:support@recurly.com">support@recurly.com</a> and upload it in this step.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Set the application username format</h4><p>Select <strong>Email</strong> for the Application username format and click <strong>Done</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">6</div>
+    <div><h4>Assign the Recurly app to users</h4><p>Assign the Recurly app to the appropriate users in Okta.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/59de449-image.png" align="center" width="40%" border={true} />
+
+
+## Step 2: Configure SAML credentials in Recurly
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Get the metadata from Okta</h4><p>In Okta, click the <strong>Sign On</strong> tab and then <strong>More Details</strong> to see the SAML metadata.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/9836171-image.png" align="center" width="40%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable SSO in Recurly</h4><p>In Recurly, go to <strong>Admin → SSO Settings</strong>. Set <strong>Status</strong> to Enabled and <strong>Provider</strong> to Okta.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Copy the metadata to Recurly</h4><p>Transfer the Okta metadata to Recurly SSO Settings using the field mapping below.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/497d725-image.png" align="center" width="40%" border={true} />
+
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Okta field</td><td>Recurly field</td></tr>
+  <tr><td>Sign-On URL</td><td>Login URL</td></tr>
+  <tr><td>Issuer</td><td>SAML Issuer ID</td></tr>
+  <tr><td>Signing Certificate</td><td>Certificate</td></tr>
+</table>
+
+
+<Image src="https://files.readme.io/8ed8616-image.png" align="center" width="40%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Save your changes</h4><p>Click <strong>Save Changes</strong> once all fields are filled in.</p></div>
+  </div>
+</div>
+
+## Log in via SP-initiated SSO
+
+Navigate to `https://app.recurly.com/login/sso`, enter your email, and click **Log In**.
+
+# Set up Microsoft Entra
+
+Follow <a href="https://learn.microsoft.com/en-us/azure/active-directory/saas-apps/recurly-tutorial" target="_blank">Microsoft's Entra Active Directory tutorial for Recurly</a> to configure Microsoft Entra as your identity provider. Contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a> if you need assistance during setup.
+
+# Set up Google SSO
+
+Super Administrator permissions in Google Workspace are required for this configuration.
+
+## Configure a custom SAML app in Google Admin Console
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Add a custom SAML app</h4><p>In the Google Admin Console, go to <strong>Apps → Web and mobile apps</strong>. Click <strong>Add App → Add custom SAML app</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/7d2257f-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Name the app</h4><p>Enter a name and optional description for the SAML app.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/5e97bdf-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Copy the SSO URL and certificate</h4><p>On the Google Identity Provider details page, copy the <strong>SSO URL</strong> and download the <strong>Certificate</strong>. You'll need these for the Recurly configuration.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/b41aa90-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Configure Service Provider details</h4><p>On the Service Provider details page, set the following values exactly:</p></div>
+  </div>
+</div>
+
+- **ACS URL:** `https://app.recurly.com/login/sso`
+- **Entity ID:** `https://app.recurly.com`
+- **Signed Response:** Uncheck this box — Google won't sign the assertion if it's checked, but Recurly requires the assertion to be signed
+- **Name ID format:** EMAIL
+- **Name ID:** Basic Information → Primary email
+
+
+<Image src="https://files.readme.io/d795b1d-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Map the email attribute</h4><p>On the Attribute mapping page, map <strong>Primary email</strong> to an app attribute named <strong>Email</strong> (case-sensitive).</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/6be0aa4-image.png" align="center" width="75%" border={true} />
+
+
+## Configure access
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the SAML app</h4><p>In the Admin Console, go to <strong>Apps → Web and mobile apps</strong> and select the SAML app you just created.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/1e046ff-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Assign user groups</h4><p>Click <strong>User access</strong>, then under <strong>Groups</strong>, select the group to grant access.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/43fdede-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Email addresses used to sign in to the SAML app must match the email addresses used to sign in to the Google domain.</div>
+</div>
+
+## Configure the Recurly app
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open SSO Settings in Recurly</h4><p>Log into Recurly and go to <strong>Admin → SSO Settings</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/8226aa8b49c12d6707dad83a359d1954f986dcf4c52d41ba29a15bf463507828-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter the SSO values</h4><p>Set <strong>Login URL</strong> to the SSO URL copied from Google. Set <strong>SAML Issuer ID</strong> to <code>https://app.recurly.com</code> (matching the Entity ID from step 4 of the SAML app config). Set <strong>Certificate</strong> to the downloaded certificate. Toggle <strong>Single Sign-On</strong> to <strong>Enabled</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Save your settings</h4><p>Click <strong>Save</strong>.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>If Recurly App-initiated logins fail, confirm that the SAML Issuer ID in Recurly matches the Entity ID in the Google Service Provider details page.</div>
+</div>
+
+# Manage users and certificates
+
+## Finalize SSO settings after setup
+
+After completing your identity provider configuration, enable SSO in Recurly:
+
+1. Go to **Admin → SSO Settings**.
+2. Click the **Enabled** radio button.
+
+Once SSO is enabled, new user invitations automatically require SSO by default.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Existing users</strong>Enabling SSO doesn't immediately affect existing users. To require SSO for existing users, update their settings manually using the steps below.</div>
+</div>
+
+## Transition an existing user to SSO
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the user's profile</h4><p>Navigate to the Users page on your Recurly site and select the user.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable SSO for the user</h4><p>Click the <strong>Single Sign-On</strong> radio button. If the user has 2FA enabled, you'll be prompted to confirm disabling it.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/fe4dc4167f4c80d54023882daf9bffc19b42a62039650f9c625f929b0b569392-image.png" align="center" width="75%" border={true} />
+
+
+After saving, Recurly logs the user out, sends them an email notification that SSO is now required, and the user can log back in via `https://app.recurly.com/login/sso`, the link in the notification email, or their identity provider's Recurly tile.
+
+The **Security** column on the Users page shows each user's authentication method: **SSO**, **2FA**, or blank (email and password only).
+
+
+<Image src="https://files.readme.io/6d293db1a0fb1d44a5ab5c427a66167c7c694000b09ea09f1dba128a4f7a4fad-image.png" align="center" width="40%" border={true} />
+
+
+## Invite a new user with SSO
+
+With SSO enabled, new invitations default to requiring SSO. To invite a new user:
+
+1. Send the invitation with the SSO option selected.
+2. Ensure the user also has access to Recurly through your identity provider.
+3. The user receives an email invitation and, upon accepting, is notified that SSO is required.
+
+
+<Image src="https://files.readme.io/29d0f633a990369b5fead8e37dcc7a923800a940ed51dc937e76fbf980b20620-image.png" align="center" width="75%" border={true} />
+
+
+## Remove SSO from an existing user
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the user's profile</h4><p>Navigate to the site requiring SSO for the user, then go to the Users page and click <strong>Edit</strong> for that user.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Change to password only</h4><p>Set <strong>Account Security</strong> to <strong>Password only</strong> and confirm the action.</p></div>
+  </div>
+</div>
+
+After saving, Recurly logs the user out and sends them an email with a link to reset their password.
+
+## Disable SSO for the site
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open SSO Settings</h4><p>Navigate to the site, go to the Users page, and click <strong>Configure Single Sign-On</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Disable SSO</h4><p>Select the <strong>Disable</strong> radio button and save. Confirm when prompted.</p></div>
+  </div>
+</div>
+
+All SSO users are logged out, notified by email, and prompted to create a new password.
+
+## Update your SSO certificate
+
+### Okta
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Generate a new certificate</h4><p>In Okta, open the Recurly application, go to the <strong>Sign On</strong> tab, scroll to <strong>SAML Signing Certificates</strong>, and click <strong>Generate new certificate</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Activate the new certificate</h4><p>Under <strong>Actions</strong>, activate the new certificate. The old certificate will show as Inactive.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Update Recurly</h4><p>Download the new certificate under <strong>Actions</strong> and paste it into the <strong>Certificate</strong> field in your Recurly SSO Settings.</p></div>
+  </div>
+</div>
+
+### Microsoft Entra
+
+See <a href="https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/tutorial-manage-certificates-for-federated-single-sign-on" target="_blank">Microsoft's certificate management documentation</a> for Entra.
+
+### Google
+
+See <a href="https://support.google.com/a/answer/7394709?hl=en" target="_blank">Google's SSO certificate rotation documentation</a>.
+
+# SCIM for Okta
+
+SCIM (System for Cross-domain Identity Management) lets you automate user provisioning and deprovisioning in Recurly via Okta. Supported features include creating users, deactivating users, and group push.
+
+## Configure SCIM in Recurly
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open SSO Settings</h4><p>In Recurly, navigate to <strong>Admin → SSO Settings</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable SCIM provisioning</h4><p>Select <strong>Enable</strong> under <strong>SCIM Provisioning</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Set the initial provisioning role</h4><p>Select a default role for new users provisioned via SCIM. This role can be updated after provisioning. It's recommended to create a dedicated role with appropriate permissions rather than using Site Admin as the default.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Save and copy the API token</h4><p>Click <strong>Save Changes</strong>. Click the icon at the end of the API Token field to reveal it, then copy the token.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/35f385f-first_one.png" align="center" width="75%" border={true} />
+
+
+## Configure SCIM in Okta
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the Provisioning tab</h4><p>In Okta, navigate to the Recurly SAML App and click the <strong>Provisioning</strong> tab.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/a584551-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Configure API integration</h4><p>Click <strong>Configure API Integration</strong>, then <strong>Enable API Integration</strong>. Paste the Recurly API token into the <strong>API Token</strong> field.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/7e9d6b4-the_onenow.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/66eb572-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Test and save</h4><p>Click <strong>Test API Credentials</strong>. After a successful test, click <strong>Save</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/5c92519-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Enable Create Users and Deactivate Users</h4><p>Under <strong>To App</strong>, click <strong>Edit</strong>, enable <strong>Create Users</strong> and <strong>Deactivate Users</strong>, then click <strong>Save</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/f4e4d9f-image.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/563ef76-image.png" align="center" width="75%" border={true} />
+
+
+Once configured, users assigned to the Recurly app in Okta receive an invitation to the Recurly site. Users unassigned from the Recurly app in Okta are removed from the site.
+
+## SCIM group support
+
+### Configure groups in Okta
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Create a group in Okta</h4><p>Open the Okta Admin portal, expand <strong>Directory</strong>, click <strong>Groups</strong>, and create a new group.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/e5bd4dd-add_group_dark.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Push the group to Recurly</h4><p>Go to <strong>Applications → Applications</strong>, select the Recurly app, click <strong>Push Groups → Find Groups by Name</strong>, and select each group you want to push.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/25c8ae2-image.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/66d3f59-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Groups pushed via Push Groups should not also be assigned directly to the application — see <a href="https://help.okta.com/oie/en-us/content/topics/users-groups-profiles/usgp-about-group-push.htm" target="_blank">Okta's documentation on Group Push limitations</a> for details.</div>
+</div>
+
+Pushed groups appear in Recurly prefixed with `SCIM_`.
+
+
+<Image src="https://files.readme.io/a704759-Screenshot_2023-11-07_at_3.23.48_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Default permissions</strong>When a group is first pushed to Recurly, the corresponding role is created with Customer Read Only permissions. Update the role's permissions in Recurly before assigning users.</div>
+</div>
+
+### Set group permissions in Recurly
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the role in Recurly</h4><p>Go to <strong>Admin → Roles</strong> and select the role that was pushed from Okta.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Edit permissions</h4><p>Click <strong>Edit</strong> and assign the appropriate permissions.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/b545e67-Screenshot_2023-11-07_at_4.51.39_PM.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/16cd1b3-Screenshot_2023-11-07_at_3.24.11_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Group notes</strong>Groups created from Okta can only be renamed and deleted from Okta when SCIM provisioning is enabled. Assign users to only one group — users assigned to multiple groups inherit only the permissions of the last group assignment.</div>
+</div>
+
+### Assigning and removing users
+
+**Assign users** by adding them to the Recurly Okta App individually or through a group. Users are assigned the default SCIM role unless using Group Push, in which case they receive the corresponding role.
+
+**Remove users** by unassigning them from the Recurly Okta App (individual) or removing them from the assigned group. Unassigning an entire group removes all users in that group from Recurly.
+
+### Changing a user's role
+
+To change a user's role via groups: remove the user from their current pushed Okta group (their role reverts to the default SCIM role), then assign them to the pushed group corresponding to the target role.
+
+### Removing pushed groups
+
+- **Unlink and delete** the pushed group to delete the corresponding Recurly role — affected users revert to the default SCIM role. This is the recommended approach.
+- **Unlink and leave** the pushed group to preserve the Recurly role and keep affected users on their current permissions.
+
+## Migrating existing users to SCIM
+
+After enabling SCIM, existing users assigned to the Recurly Okta Integration app need to be migrated — Okta only recognizes users as provisioned after SCIM is enabled.
+
+To migrate: unassign and then reassign the users to the Recurly Okta Integration app. Unassigning won't remove them from Recurly since Okta doesn't recognize them as provisioned yet. During the brief window between unassigning and reassigning, users won't be able to log in. Once reassigned, Okta triggers a provisioning request — since the user already exists in Recurly, this is a no-op and the user's existing role is preserved.
+
+A user's role only changes via SCIM migration if they're a member of a pushed Okta group.
+
+# FAQs and troubleshooting
+
+<Accordion title="I'm trying to log in at https://app.recurly.com/login but keep getting an email/password error. What should I do?">
+  SSO users must log in at [https://app.recurly.com/login/sso](https://app.recurly.com/login/sso) or via their identity provider — not the standard login URL.
+</Accordion>
+
+<Accordion title="I'm trying to log in at https://app.recurly.com/login/sso but get an invalid email error. How do I fix this?">
+  You may be entering the wrong email address, or your account may not be configured for SSO. Contact your site administrator or [support@recurly.com](mailto:support@recurly.com) for help.
+</Accordion>
+
+<Accordion title="I'm trying to log in to a new site but get an error that I must first accept the invitation. What should I do?">
+  Check your email for an invitation from Recurly and click the **Accept invitation** link. If you didn't receive it, check your spam folder or ask your site administrator to resend the invitation.
+</Accordion>
+
+<Accordion title="I'm logging in via my identity provider but get an 'invalid login' error on the Recurly side. What could cause this?">
+  Verify that your Recurly account is configured to use SSO and that Recurly is expecting you to sign in via the identity provider you're using. If everything looks correct but login still fails, ask your site administrator to reset your account to password-only and then re-enable SSO.
+</Accordion>
+
+<br />

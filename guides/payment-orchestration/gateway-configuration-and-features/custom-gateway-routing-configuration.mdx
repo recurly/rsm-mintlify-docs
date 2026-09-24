@@ -1,0 +1,121 @@
+---
+title: Custom gateway routing (merchant-initiated)
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Custom Gateway Routing lets you direct transactions to a specific payment gateway by passing a <code>gateway_code</code> in your API requests. Use it to segregate funds, optimize acceptance rates through local processors, and control exactly which gateway handles each transaction or subscription renewal.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#setup-for-custom-gateway-routing"><span className="rp-toc-num">4</span>Setup</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Multiple gateways configured in Recurly for the payment type you want to route (e.g., credit cards).</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>Card on File Mandates</strong> — Depending on the gateway, Card on File mandate data is packaged in different formats. In most cases the raw network transaction ID is accepted and recurring transactions process normally. In rare cases, the data is incompatible and failover will not occur.</li>
+  <li><strong>Multiple subscriptions in a single request</strong> — When passing <code>gateway_code</code> for multiple subscriptions within a single request, routing to different gateways per subscription is not honoured.</li>
+  <li><strong>Stripe card brand awareness</strong> — Card brands for Stripe gateways are configured in the Stripe dashboard, not in Recurly. Recurly is not aware of which card brands your Stripe account supports. If certain card brands aren't supported by Stripe but are by other gateways, specify a <code>gateway_code</code> to route those transactions to the correct gateway. Review your Stripe configuration in the merchant portal to confirm your routing setup.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Custom Gateway Routing is a Recurly feature that lets merchants direct transactions to a specific payment gateway by passing a <code>gateway_code</code> parameter in API requests. It supports fund segregation, acceptance rate optimization, and granular routing control across subscriptions and one-time transactions.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-chart-bar" aria-hidden="true"></i></div>
+    <strong>Financial reporting efficiency</strong>
+    <span>Separate funds across specific gateway accounts to simplify financial reporting.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-route" aria-hidden="true"></i></div>
+    <strong>Business-centric routing</strong>
+    <span>Direct transactions based on your specific business logic, giving you control over which gateway handles each payment.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+    <strong>Enhanced acceptance rates</strong>
+    <span>Route transactions through local processors to reduce cross-border failures and improve approval rates.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrows-rotate" aria-hidden="true"></i></div>
+    <strong>Recurring transaction management</strong>
+    <span>Update gateway routes for recurring subscriptions at any time to align with renewals and changing business needs.</span>
+  </div>
+</div>
+
+# Key details
+
+## Supported transactions and payment methods
+
+**Supported transaction types:**
+
+- One-time transactions
+- Initial subscription transactions (and subsequent recurring transactions)
+- Recurring subscription renewals
+
+**Supported payment methods:**
+
+- <a href="/guides/payment-orchestration/payment-methods/credit-cards" target="_blank">Credit cards</a>
+- <a href="/guides/payment-orchestration/payment-methods/paypal-payments" target="_blank">PayPal</a> (excluding PayPal through Braintree)
+- Amazon Pay
+
+## gateway\_code behaviour
+
+- Passing `gateway_code` in an API request routes the transaction to the associated gateway. If the code is absent or doesn't match a configured gateway, the transaction routes to the default gateway — with certain mismatches causing a transaction failure.
+- The `gateway_code` persists for recurring transactions, routing all subsequent subscription renewals to the specified gateway unless updated.
+- Update the `gateway_code` via a PUT request to `v2/subscriptions/:uuid/notes` or `v3 /subscriptions/{subscription_id}`. Clear it with an empty tag to revert to standard routing logic.
+- Retrieve the `gateway_code` for a subscription via GET requests to `/subscriptions`.
+- Modify the `gateway_code` at the invoice level using `v2/invoices/<uuid>` or `v3 /invoices/<invoice_id>`.
+- Unique Recurly gateway instances are required to route to different gateways — either via a unique Merchant Account ID / MID or by using a different gateway provider entirely.
+- If the `gateway_code` is incompatible with the payment method on a transaction, the transaction defaults to the original gateway for that method.
+- Applying gateway codes to all subscriptions within a single API request is supported.
+- For aggregate invoices: if all subscriptions share the same `gateway_code`, that gateway is used. If codes differ or are unspecified, the default gateway is used.
+- The `gateway_code` is visible on the transaction detail page, included in the Transaction Export, and appears in webhooks.
+
+## Standard gateway routing
+
+If no `gateway_code` is passed, Recurly routes the transaction to the Default Gateway if it supports the combination of payment method, card type, and currency. If the Default Gateway doesn't support the transaction, Recurly looks for another configured gateway that matches.
+
+# Setup for custom gateway routing
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Obtain the gateway code</h4><p>In your Recurly account, go to the gateway configuration page. Each configured gateway has a unique <code>gateway_code</code> generated by Recurly. Note the code for the gateway you want to route transactions to.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Identify your API endpoint</h4><p>Custom Gateway Routing is available via the <code>v2/purchases</code> and <code>v3/purchases</code> endpoints. Use the appropriate version for your integration.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Pass the gateway_code in your API request</h4><p>Include the <code>gateway_code</code> parameter at the root level of your request to the purchases endpoint. This directs the transaction to the specified gateway.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Use a supported client library</h4><p>Custom Gateway Routing is supported across all Recurly-provided client libraries. Confirm you're using a current supported library.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Review your configuration</h4><p>Visit the gateway configuration page in Recurly to confirm your gateways and their associated <code>gateway_code</code> values.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">6</div>
+    <div><h4>Test the setup</h4><p>Run a few test transactions and monitor their routing to confirm they're directed to the specified gateway per the <code>gateway_code</code> in your requests.</p></div>
+  </div>
+</div>
+
+<br />

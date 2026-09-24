@@ -1,0 +1,121 @@
+---
+title: Subscriber churn benchmarks
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Subscriber Churn Benchmarks dashboard shows you your churn rates — overall, involuntary, and voluntary — and compares your performance against others in your industry using Recurly's built-in benchmarks.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">4</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have Analytics user role permission.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The subscriber churn benchmarks dashboard shows you your churn rates — including overall, involuntary, and voluntary churn — and compares your performance to others in your industry using Recurly's built-in benchmarks.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Industry comparison</strong>
+    <span>Compare key subscription metrics with industry benchmarks to see how you stack up against peers, and spot your strengths and weaknesses.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Competitive insights</strong>
+    <span>See how competitors are performing on the same subscription metrics, and find areas where you can differentiate and improve.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Informed decision-making</strong>
+    <span>Make decisions based on real-world data to set realistic goals for subscription growth and customer retention.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Forecasting and planning</strong>
+    <span>Enable more accurate forecasting and long-term planning, so you can set reachable growth targets and allocate resources effectively.</span>
+  </div>
+</div>
+
+<div className="rp-card">
+
+### Subscription churn (legacy) dashboard
+
+The Subscription Churn (Legacy) dashboard is still available via a link at the bottom of this dashboard. It measures churn at the subscription level rather than the subscriber level. We recommend measuring churn at the subscriber level for two reasons:
+
+1. Recurly uses subscriber-level churn to benchmark merchant performance.
+2. Subscription-level churn can be inflated when subscriptions automatically expire and roll into new subscriptions.
+
+</div>
+
+# Key details
+
+## General filters (top left corner)
+
+<ul className="rp-list">
+  <li><strong>Date range</strong>: Adjust the time period for your benchmark comparisons. The default is 14 months, so you can analyze trends over more than a year.</li>
+  <li><strong>Industry</strong>: View benchmark data tailored to your specific industry for more relevant insights.</li>
+  <li><strong>Subscriber type</strong>: A non-editable filter preset to Paying Subscribers, focusing your comparison on subscribers who have made payments.</li>
+</ul>
+
+## Subscriber benchmarks
+
+The Subscriber Churn Benchmarks dashboard is a valuable tool for evaluating your customer retention strategies. By laying out your churn rates clearly, it helps you identify what's working and what isn't, so you can refine your approach and strengthen retention.
+
+#### Churn rates
+
+Churn rate is calculated by dividing the number of subscribers you lost during a period by the total number of subscribers you had at the start of that period. A few things to know about how it's calculated:
+
+<ul className="rp-list">
+  <li><strong>Eligibility criteria</strong>: Only subscribers with at least one paid subscription invoice are included — subscribers in a trial, or in dunning from a trial, aren't counted.</li>
+  <li><strong>Detailed calculation</strong>: Benchmarks apply only to monthly periods. Churn that occurs and resolves within the same month ("ghost churn") isn't included.</li>
+  <li><strong>Benchmark calculation</strong>: Benchmark quartiles are generated monthly, giving you a consistent comparison at the start of each month. Individual merchant KPI rates, like the renewal invoice paid rate, are calculated daily and refreshed on their own dashboards — but the broader benchmark comparisons stay static until the next monthly update.</li>
+  <li><strong>Multiple subscriptions</strong>: If a subscriber has multiple subscriptions that expire, the reason for the last subscription's expiration determines whether the churn is classified as voluntary or involuntary.</li>
+</ul>
+
+Your churn performance is shown as a percentile rank within your industry. Track your percentile trend over time to see how your churn rate compares to industry standards and whether your retention strategies are becoming more or less effective.
+
+There are three key churn benchmarks to consider:
+
+1. **Overall churn**: Combines involuntary and voluntary churn for a complete picture of subscriber loss.
+
+
+<Image src="https://files.readme.io/16e5f0911248d473d19a5fac8da791654b1e17dfcba604ff40c3312badf2edfb-image.png" align="center" width="75%" border={true} />
+
+
+2. **Involuntary churn**: Subscribers lost due to payment issues, showing how effective your payment recovery efforts are.
+
+
+<Image src="https://files.readme.io/7c473db56aa2c62de8ee6963bf6034ef1c150b0bce00c7903dbd82182c26e897-image.png" align="center" width="75%" border={true} />
+
+
+3. **Voluntary churn**: The rate at which subscribers choose to leave on their own, reflecting subscriber satisfaction and perceived value.
+
+
+<Image src="https://files.readme.io/bf456526c2f24c1639f5c1d15e1199ec328d863a18dcf931c2c0c1d9829a6e3f-image.png" align="center" width="75%" border={true} />
+
+
+## About benchmarks
+
+Recurly's benchmark reports show how your performance metrics compare to similar businesses in your industry over time. Use them to understand your competitive position and find growth opportunities by comparing your key performance indicators (KPIs) against industry standards.
+
+# FAQs
+
+<Accordion title="What is a &quot;Paid Subscriber&quot;?">
+  A "Paid Subscriber" is someone who has at least one paid invoice associated with their subscription. This excludes subscribers who are currently in a trial period or in a dunning process following a trial.
+</Accordion>
+
+<Accordion title="Why is the timeframe preset to &quot;Monthly&quot;?">
+  Benchmarks are compiled and analyzed on a monthly basis to keep the data consistent and accurate. This gives you a standardized comparison of performance metrics across different periods and companies.
+</Accordion>

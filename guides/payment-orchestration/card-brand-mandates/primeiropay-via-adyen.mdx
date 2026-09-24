@@ -1,0 +1,86 @@
+---
+title: PrimeiroPay via Adyen
+---
+
+PrimeiroPay Product Documentation
+
+If your business is looking to expand to Brazil or Mexico, you need a local payment solution to help ensure your success. Recurly’s partnership with Adyen and PrimeiroPay empowers our merchants to process credit card payments in Brazil and Mexico with higher success rates and without the hassle of creating a local entity or calculating VAT in Brazil. 
+
+## PrimeiroPay Mexico
+
+How to get started\
+Recurly in Mexico is available via our partnership with Adyen and PrimeiroPay. Merchants need a commercial agreement with both partners in order to go live. Recurly can facilitate introductions, please reach out to [partners@recurly.com](mailto:partners@recurly.com) when you’re ready to get started.
+
+Technical Work\
+If you have a credit card integration with Recurly and Adyen, you're all set from a technical perspective. 
+
+Adyen Configurations 
+
+Reach out to [support@adyen.com](mailto:support@adyen.com) to enable PrimeiroPay for your Mexico card payments. 
+
+You will need your merchant account and credentials from PrimeiroPay for Adyen to configure this payment method. 
+
+Recurly Configurations
+
+Ensure you have Adyen configured as a gateway\
+Enable Mexican Peso on your site 
+
+Callouts\
+This solution does not support non-cobranded locally issued Mexican cards. The vast majority of cards in Mexico either cary an international card brand like Visa or are co-branded. 
+
+This is a cards-only solution. Local payment methods such as OXXO are not supported at this time
+
+## PrimeiroPay Brazil
+
+Note: This feature requires a feature flag, please reach out to [support@recurly.com](mailto:support@recurly.com) to enable. 
+
+How to get started
+
+Recurly in Brazil is available via our partnership with Adyen and PrimeiroPay. Merchants need a commercial agreement with both partners in order to go live. Recurly can facilitate introductions, please reach out to [partners@recurly.com](mailto:partners@recurly.com) when you’re ready to get started.
+
+Merchants can begin configuration and testing while commercial conversations are in flight!
+
+Technical Work
+
+Your existing Recurly integration will work to enable payments in Brazil, but you will need to append some additional data. 
+
+CPF - This is a tax id field in Brazil and is required for creating billing information. Once the billing information is created, Recurly will securely store this data so that merchants don’t need to retain it going forward. 
+
+Tax Id Type - When creating a billing information, you’ll need to designate the tax identifier type as CPF.
+
+These fields are outside of PCI scope and therefore can be sent via direct API. Recurly JS also supports encrypting this field. However, Recurly will store them encrypted for an additional layer of security.
+
+* For more information, please visit our technical documentation\
+  RJS: [https://developers.recurly.com/reference/recurly-js/index.html#how-it-works](https://developers.recurly.com/reference/recurly-js/index.html#how-it-works)
+
+For testing, please use the Elo test card provided by Adyen ([https://docs.adyen.com/development-resources/test-cards/test-card-numbers](https://docs.adyen.com/development-resources/test-cards/test-card-numbers))
+
+Any valid CPF will work for testing, here's are some examples you can use:\
+123.456.789‐09\
+284.763.786‐96\
+804.654.341‐18
+
+Adyen Configuration 
+
+You will need your merchant account and credentials from PrimeiroPay for Adyen to configure this payment method. 
+
+Also have Adyen configure Elo and Hipercard for your merchant account (if you're planning to accept these)
+
+Adyen recommends having a separate MIDS for 0 dollar authorization v full authorizations. This can be accomplished via one Adyen merchant account and there is no additional work needed on the Recurly configuration. Please contact your Adyen representative if you'd like to pursue this setup.
+
+Contact [Support@Adyen.com](mailto:Support@Adyen.com) and ask them to enable PrimeiroPay on your merchant account. 
+
+Recurly Configuration
+
+Ask Recurly support to enable the PrimeiroPay feature flag "encrypted tax identifiers (Brazilian CPF numbers"\
+Ensure you have Adyen configured as a gateway\
+Enable BRL on your site\
+If you’d like to accept Brazil card brands Elo and Hipercard, enable them under your Adyen gateway.
+
+Call Outs
+
+This solution is specifically for major credit cards, and two local card brands; ELO and Hipercard. Local payment methods (such as Boleto) are not supported at this time. Debit cards in Brazil usually require 3DS, which PrimeiroPay does not support yet. Some debit card traffic does not support 3DS and may go through, but we expect much lower authorization rates for debit cards in Brazil. Debit cards represent \<5% of card traffic in Brazil, so merchants can confidently launch a credit card based Brazil payment solution. 
+
+Chargeback notifications are not sent from PrimeiroPay to Adyen, so you’ll need to get chargeback information directly from PrimeiroPay. 
+
+All verifications on PrimeiroPay will be sent as 0 BRL from Recurly to Adyen. Adyen then dynamically updates the amount to reflect the amount most likely to succeed in Brazil (currently, 6 BRL). Adyen will automatically cancel or refund (depending on your Adyen configuration) the transaction. This allows Recurly to use a consistent value while giving our merchants the best chance for a successful card verification.

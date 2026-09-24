@@ -1,0 +1,629 @@
+---
+title: Billing info - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The “Billing Info” export section in Recurly's user guide helps you identify and understand the billing information and payment methods associated with various accounts. It offers data that aids in distinguishing primary from backup payment methods, along with comprehensive billing details to keep track of each account’s status and payment preferences.
+
+<Image border={false} src="https://files.readme.io/c8e0fd286ff1c47ef44cba851cd146c649874be2979ae370284701d60f93be3d-image.png" />
+
+<br />
+
+# Filters
+
+### Versions Filter
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the Version changelog at the bottom of this page.
+
+### Account Status Filter
+
+You can filter the billing information export data based on the account status. Here is how different statuses are defined:
+
+* **Open**: Accounts that are currently not closed.
+* **Non-subscribers**: Open accounts that do not have any active subscriptions.
+* **Active Subscribers**: Open accounts holding at least one active subscription.
+* **In Trial**: Accounts holding one or more subscriptions in the trial phase.
+* **Past Due**: Accounts having at least one invoice in the past-due state.
+* **Non-Renewing**: Accounts with subscriptions that will not renew post the current billing cycle; recently canceled.
+* **Future**: Accounts with a subscription that hasn't yet begun.
+
+### Export on filters
+
+* **Created**: Filter billing info based on their creation date within a selected range.
+* **Modified**: Filter billing info based on the modification date within the specified range.
+
+### Time Range Filter
+
+Utilize the "created_at" field to filter data showcasing the accounts that had billing information added within a selected timeframe.
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The **Start Date** and **End Date** will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+<Table align={[null,null,null,"left"]}>
+  <thead>
+    <tr>
+      <th>
+        Column Name
+      </th>
+
+      <th>
+        Example
+      </th>
+
+      <th>
+        Description
+      </th>
+
+      <th>
+        Data type (max size)
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <span id="account_code">account_code</span>
+      </td>
+
+      <td>
+        123456789, [janedoe@gmail.com](mailto:janedoe@gmail.com)
+      </td>
+
+      <td>
+        Uniquely identifies your customers in Recurly, mainly using the email address.
+      </td>
+
+      <td>
+        varchar(50)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_first_name">billing_first_name</span>
+      </td>
+
+      <td>
+        JJ
+      </td>
+
+      <td>
+        The first name provided in the customer's billing details.
+      </td>
+
+      <td>
+        varchar(255)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_last_name">billing_last_name</span>
+      </td>
+
+      <td>
+        Smith
+      </td>
+
+      <td>
+        The last name provided in the customer's billing details.
+      </td>
+
+      <td>
+        varhcar(255)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_company_name">account_company_name</span>
+      </td>
+
+      <td>
+        Bluth Industries, Inc.
+      </td>
+
+      <td>
+        Company name as per the billing details.
+      </td>
+
+      <td>
+        varchar(255)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_address1">billing_address1</span>
+      </td>
+
+      <td>
+        123 Main Street
+      </td>
+
+      <td>
+        The first line of the customer's billing address.
+      </td>
+
+      <td>
+        varchar(60)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_address2">billing_address2</span>
+      </td>
+
+      <td>
+        Suite 300
+      </td>
+
+      <td>
+        The second line of the customer's billing address.
+      </td>
+
+      <td>
+        varchar(60)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_city">billing_city</span>
+      </td>
+
+      <td>
+        San Francisco
+      </td>
+
+      <td>
+        The city component of the customer's billing address.
+      </td>
+
+      <td>
+        varchar(60)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_state">billing_state</span>
+      </td>
+
+      <td>
+        CA
+      </td>
+
+      <td>
+        The state component of the customer's billing address.
+      </td>
+
+      <td>
+        varchar(60)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_postal_code">billing_postal_code</span>
+      </td>
+
+      <td>
+        94107
+      </td>
+
+      <td>
+        The postal code component of the customer's billing address.
+      </td>
+
+      <td>
+        varchar(20)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_country">billing_country</span>
+      </td>
+
+      <td>
+        US
+      </td>
+
+      <td>
+        The country component of the customer's billing address.
+      </td>
+
+      <td>
+        varchar(30)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_phone">billing_phone</span>
+      </td>
+
+      <td>
+        555-2368
+      </td>
+
+      <td>
+        The phone number provided in the customer's billing details.
+      </td>
+
+      <td>
+        varchar(30)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_email">account_email</span>
+      </td>
+
+      <td>
+        [test@example.com](mailto:test@example.com)
+      </td>
+
+      <td>
+        The email address associated with the customer's account.
+      </td>
+
+      <td>
+        varchar(255)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="cc_type">cc_type</span>
+      </td>
+
+      <td>
+        visa/master/discover/jcb/amex/diners
+      </td>
+
+      <td>
+        Indicates the type of credit card associated with the customer's account.
+      </td>
+
+      <td>
+        varchar(20)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="cc_last_four">cc_last_four</span>
+      </td>
+
+      <td>
+        1111
+      </td>
+
+      <td>
+        The last four digits of the customer's credit card number.
+      </td>
+
+      <td>
+        varchar(4)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="expire_month">expire_month</span>
+      </td>
+
+      <td>
+        4
+      </td>
+
+      <td>
+        The month when the customer's credit card expires.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="expire_year">expire_year</span>
+      </td>
+
+      <td>
+        2014
+      </td>
+
+      <td>
+        The year when the customer's credit card expires.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_vat_number">billing_vat_number</span>
+      </td>
+
+      <td>
+        IE213123123
+      </td>
+
+      <td>
+        VAT number provided by EU customers.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="created_at">created_at</span>
+      </td>
+
+      <td>
+        2011-08-15
+      </td>
+
+      <td>
+        The date when the billing information was added to the account.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="updated_at">updated_at</span>
+      </td>
+
+      <td>
+        2013-09-12
+      </td>
+
+      <td>
+        The last date when the billing information was updated on the account.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="Payment_method">Payment_method</span>
+      </td>
+
+      <td>
+        CreditCard / PayPal/ Roku/ Amazon / Bank Account / paypal_braintree, jcb, qiwiwallet, etc.
+      </td>
+
+      <td>
+        The payment method chosen by the customer for transactions.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="maintenance_url">maintenance_url</span>
+      </td>
+
+      <td>
+        app.recurly.com/account/sdasdasd
+      </td>
+
+      <td>
+        The URL directing to the customer's hosted account maintenance.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="geo_code">geo_code</span>
+      </td>
+
+      <td>
+        * <br />
+      </td>
+
+      <td>
+        * <br />
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ip_address">ip_address</span>
+      </td>
+
+      <td>
+        99.89.1010.0101
+      </td>
+
+      <td>
+        The IP address noted at the time of entering the billing information.
+      </td>
+
+      <td>
+        varchar(20)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ip_address_country">ip_address_country</span>
+      </td>
+
+      <td>
+        US
+      </td>
+
+      <td>
+        The country associated with the IP address noted during billing information entry.
+      </td>
+
+      <td>
+        Varchar(2)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="cc_first_6">cc_first_6</span>
+      </td>
+
+      <td>
+        111111
+      </td>
+
+      <td>
+        The initial six digits of the credit card used for the transaction.
+      </td>
+
+      <td>
+        varchar(6)
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="primary_payment_method">primary_payment_method</span>
+      </td>
+
+      <td>
+        true, false
+      </td>
+
+      <td>
+        Indicates whether the billing info should be used as a primary payment method.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="billing_info_id">billing_info_id</span>
+      </td>
+
+      <td>
+        123456789
+      </td>
+
+      <td>
+        Unique identifier for billing info.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="backup_payment_method">backup_payment_method</span>
+      </td>
+
+      <td>
+        true, false
+      </td>
+
+      <td>
+        Indicates whether the billing info should be used as a backup for invoice failures.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        billing_info_api_id
+      </td>
+
+      <td>
+        e28zov4fw0v2
+      </td>
+
+      <td>
+        Billing Info API ID
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+# Version changelog
+
+### Version 7 - 02/5/24
+
+* Addition of `billing_info_api_id`.
+
+### Version 6 - 03/29/21
+
+* Introduction of the backup_payment_method column to highlight if the billing info is the backup payment method (TRUE/FALSE).
+
+### Version 5 - 12/3/20
+
+* Introduction of the “primary_payment_method” column to indicate if the billing info is the main payment method (TRUE/FALSE).
+* Addition of billing_info_id displaying the ID of the billing info.
+
+### Version 4 - 5/23/2019
+
+* 'cc_first_6' column was moved to the end of the export.
+
+### Version 3 - 4/25/2019
+
+* Addition of "cc_first_6" to the export.
+
+### Version 2 - 5/24/2018
+
+* Column names were refined to differentiate clearly between billing and account info.
+* Addition of "ip_address" and "ip_address_country" columns to the export.
+* Addition of “geo_code” column. (Applicable only if Vertex tax integration is enabled)

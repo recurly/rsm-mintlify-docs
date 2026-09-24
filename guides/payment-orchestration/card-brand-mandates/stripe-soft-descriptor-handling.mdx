@@ -1,0 +1,21 @@
+---
+title: Stripe Gateway
+---
+
+## Onboarding
+
+To integrate with Stripe, please access the Recurly Payment Gateway Configuration page. You may either log in with your existing Stripe account, or apply for a new Stripe account.
+
+## Processing
+
+Recurly's Stripe integration will not update Stripe customers as accounts update their billing information. Should you choose to process any payments directly inside of Stripe, please search for the most recently created Stripe customer.
+
+If you use Stripe and Gateway Failover, you must make sure the two gateways match the same currency and card type support.
+
+## Soft Descriptors
+
+Stripe descriptor suffix will be sent in the following manners automatically depending on the actions you are taking for your customers: 
+
+* For Subscriptions with free trials, Recurly will send the Stripe suffix with the word 'Trial' and the Plan name in adherence with the [Visa Trial Mandate](/guides/payment-orchestration/card-brand-mandates/visa-free-trial-mandate). The first payment after the trial ends will adhere to this behavior.
+* Transactions as part of a recurring series will also use Stripe suffix logic, including the Plan name, however standard subscriptions without a trial, and transactions that occur after the first trial-end payment will not contain the word 'Trial'.
+* Transactions that are not part of a recurring series or a first payment after trial ending will contain the invoice / payment description.

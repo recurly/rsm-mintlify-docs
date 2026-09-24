@@ -1,0 +1,102 @@
+---
+title: 'Transparent Post: Transactions'
+---
+
+The Transaction Transparent Post API allows you to securely create one-time transactions from your website.
+
+## Required Protected Fields
+
+Transparent Post API requires certain fields to be protected from tampering. The protected field is digitally signed using your private key to ensure that the user does not tamper with the value. At a minimum, you must include the redirect URL and account URL for every transparent post request. The one-time transaction endpoint also requires an amount in cents attribute so Recurly knows how much to charge.
+
+<dl>
+<dt>redirect_url</dt>
+<dd>URL for redirection after the Transparent Post completes. This should be a fully qualified URL to your web site. It must include a hostname.</dd>
+<dt>account[account_code]</dt>
+<dd>The account code is your site's unique identifier. This can be a unique, auto-incrementing id, GUID, username, or email -- anything on your site that uniquely identifies your user's account.</dd>
+<dt>transaction[amount_in_cents]</dt>
+<dd>The amount in cents to charge. Multiply the dollar amount by 100, e.g. $9.99 would be 999.</dd>
+<dt>transaction[currency]</dt>
+<dd>Optionally specify the currency for the transaction amount. If not specified, your company's default currency will be used.</dd>
+<dt>transaction[description]</dt>
+<dd>Transaction description for the customer's invoice.</dd>
+</dl>
+
+### Hidden HTML Field: Protected Data
+
+The client library saves the protected fields to a hidden field in the HTML form. While the values of the hidden field may be visible to a user viewing the HTML source, the values are protected with a secure hash. The hidden field is hashed using your private key to ensure that the form was legitimately created on your site and the values have not been tampered with before submission.
+
+#### HTML Example
+
+```
+<form method="POST" action="https://api.recurly.com/transparent/[subdomain]/transaction">
+  <input type="hidden" name="data" value="[protected form data]" />
+  <!-- Form here -->
+  <input type="text" name="account[first_name]" placeholder="First name" />
+</form>
+```
+
+## Transaction HTML Form Fields
+
+The following form fields may be submitted by your HTML form:
+
+#### Account Fields (optional)
+
+The account will be created upon a successful transaction if it does not already exist. These fields will update the account if it does exist.
+
+<dl>
+<dt>account[username]</dt>
+<dt>account[first_name]</dt>
+<dt>account[last_name]</dt>
+<dt>account[email]</dt>
+<dt>account[company_name]</dt>
+</dl>
+
+#### Billing Information Fields
+
+<dl>
+<dt>billing_info[first_name]</dt>
+<dt>billing_info[last_name]</dt>
+<dt>billing_info[address1]</dt>
+<dt>billing_info[address2]</dt>
+<dt>billing_info[city]</dt>
+<dt>billing_info[state]</dt>
+<dd>2-letter state/province code preferred</dd>
+<dt>billing_info[zip]</dt>
+<dd>Zip or postal code</dd>
+<dt>billing_info[country]</dt>
+<dd>2-letter country code strongly preferred</dd>
+<dt>billing_info[phone]</dt>
+<dt>billing_info[vat_number]</dt>
+<dt>billing_info[credit_card][number]</dt>
+<dt>billing_info[credit_card][verification_value]</dt>
+<dd>3-4 digit security code (CVV)</dd>
+<dt>billing_info[credit_card][year]</dt>
+<dt>billing_info[credit_card][month]</dt>
+<dt>billing_info[payment_method]</dt>
+<dd>`credit_card` (default) or `paypal` for PayPal transactions (requires PayPal Referential Transactions)</dd>
+</dl>
+
+#### HTML Example
+
+```
+<form method="POST" action="https://api.recurly.com/transparent/[subdomain]/transaction">
+  <input type="hidden" name="data" value="[protected form data]" />
+  <!-- Form here -->
+  <label for="billing_info[first_name]">First Name</label>
+  <input type="text" name="billing_info[first_name]" placeholder="First name" />
+  <!-- ... -->
+  <label for="billing_info[credit_card][number]">Card Number</label>
+  <input type="text" name="billing_info[credit_card][number]"
+    placeholder="Card number" />
+</form>
+```
+
+## Endpoint URL
+
+The client libraries handle the URL details automatically. If you are building your own transparent post implementation, use the endpoint below, substituting `subdomain` with your Recurly account's subdomain:
+
+`POST` `https://api.recurly.com/transparent/[subdomain]/transaction`
+
+## More Info
+
+Please see the [Transactions API](/reference/recurly-v2-api/transactions/index) for more information. The behavior of the Transactions Transparent Post API closely mirrors the behavior of the Subscriptions API for creating a new transaction.

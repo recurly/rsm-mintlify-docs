@@ -1,0 +1,39 @@
+---
+title: PSD2 Frequently Asked Questions
+---
+
+Question: How do I know if my business will be impacted by PSD2?\
+Answer: If your merchant account provider a.k.a. your acquirer or acquiring bank, is based in the EEA - and you transact with customers in the EEA - you will be impacted by PSD2 and should be prepared to do SCA. On the other hand, if either of the parties in a transaction are outside the EEA, then the SCA regulation does not apply.
+
+Question: When will technical documentation be available so my teams can plan to do the work necessary to prepare for PSD2?\
+Answer: We are aiming to have our technical documentation published and available by June 30, 2019.
+
+Question: How will 3DS impact my checkout conversion?\
+Answer: Businesses saw between a 3-15% dropoff in checkout conversion with 3DS1, though that number varies widely by country. With 3DS2, issuers are targeting at most a 5% dropoff at checkout. (Statistics provided by WorldPay)
+
+Question: How will 3DS affect authorization rates?\
+Answer: Businesses that have previously not implemented 3DS see, on the whole globally, about an 84% authorization rate. 3DS1 increased that to 92%. Issuers are hoping to see 3DS2 further improve authorization rates to 95%. (Statistics provided by WorldPay)
+
+Question: What reduction in fraud can be expected?\
+Answer: Businesses that have previously not implemented 3DS see, on the whole globally, about 0.29% in fraud rates, inclusive of both authenticated and unauthenticated fraud. 3DS1 reduced that to 0.12%. Issuers are hoping to see 3DS2 further reduce fraud rates to 0.05%. (Statistics provided by WorldPay)
+
+Question: How much transaction latency should I expect as a result of 3DS?\
+Answer: In general, 3DS authentication can take up to 10 seconds. In addition, if the issuer rejects an exemption and forces SCA to take place, there could be an additional latency of up to 1-2 seconds for the issuer to evaluate an exemption, reject it, and then force SCA. (Statistics provided by WorldPay)
+
+Question: I have more specific questions about PSD2, SCA, or 3DS. Who should I ask?\
+Answer: While Recurly is here to help you prepare for PSD2, your gateway is your primary resource. We are working with each of the gateways listed above to understand how best to meet their technical integration requirements around PSD2 and SCA, but in terms of what the regulation means, how it will impact your business and customers, etc your gateway will be the subject matter expert.
+
+Question: What about PayPal?\
+Answer: For PayPal transactions (where PayPal is the payment method, aka "PayPal Business"), there will be no work required by merchants. PayPal will augment their "Pay with PayPal" user flow to do Strong Customer Authentication. Recurly will additionally augment our integration for this payment method to handle subsequent recurring scenarios.
+
+Question: Will 3DS ever be prompted on recurring, merchant-initiated transactions, e.g. if the value differs, etc?\
+Answer: The card issuer can technically challenge a transaction, even merchant-initiated ones, for any reason. Because of this, Recurly is planning to provide fallback option(s) like a "3DS dunning flow" to help you recover MIT transactions that fail due to SCA and need to be re-authenticated by your customer.
+
+Question: With usage-based billing, would SCA be required on each re-bill?\
+Answer: As long as the transaction is merchant-initiated and is appropriately flagged as such, subsequent re-bills should in most cases not require SCA, even if the amount varies (as in usage-based billing). However, note that there will still be cases where subsequent renewal “MIT” purchases will still require SCA. Card issuers always have the final say and can require SCA for any transaction, for any reason.
+
+Question: With a fixed subscription where the first month is prorated, would the second month (charging the full amount) still qualify to be exempted from SCA?\
+Answer: Best practice suggests that in this scenario, merchants should authenticate for the full amount of the subscription at the time the customer signs up, even if the first month is prorated. Then, subsequent re-bills should in most cases not require SCA as long as they are appropriately flagged as MIT. Recurly will take care of both of these pieces for our merchants: authenticating for the full amount, and flagging subsequent re-bills as MIT.
+
+Question: What happens with MITs where the original transaction was pre-Sept 14, 2019? Will we have to authenticate all MITs for existing customers prior to Sept 14?\
+Answer: For subsequent renewal purchases, Recurly will endeavor on your behalf to exempt these transactions from SCA by flagging those transactions as "MIT" (Merchant Initiated Transactions). This includes existing subscriptions that started prior to September 14, 2019. Recurly will endeavor to "grandfather" these subscriptions as merchant-initiated so that they don't require SCA when they come up for renewal on/after September 14.

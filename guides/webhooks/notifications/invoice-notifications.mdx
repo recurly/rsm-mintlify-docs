@@ -1,0 +1,358 @@
+---
+title: Invoice notifications
+---
+
+Invoice Notifications are the legacy webhook events for standard invoices. Once your site has the Credit Invoices feature enabled, new invoices emit Charge Invoice or Credit Invoice notifications instead. However, invoices created before enabling Credit Invoices will continue to send these legacy Invoice Notifications for additional states (e.g., Closed Invoice).
+
+### Prerequisites and limitations
+
+* Your site **must have** Credit Invoices enabled to retire these legacy notifications for new invoices.
+* Invoices **issued before** enabling Credit Invoices will still emit Invoice Notifications.
+* New invoices (post–feature enablement) will **not** send these events; they use Charge Invoice or Credit Invoice notifications instead.
+* XML payloads include both account and transaction data; JSON payloads are lightweight and focus on event metadata.
+
+# Key details
+
+When using XML webhooks, all invoice notifications contain the account and transaction as part of the XML body. The root element determines the notification type. In most applications, you can ignore these notifications for new invoices—Recurly will send the proper Charge Invoice or Credit Invoice events instead.
+
+## New invoice
+
+Sent when a new invoice is generated.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "created",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>open</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1000</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:21:44Z</date>
+    <closed_at type="datetime" nil="true"></closed_at>
+  </invoice>
+</new_invoice_notification>
+```
+
+## New invoice (manual)
+
+Sent when a new manual invoice is generated. Partially paid manual invoices will not emit further notifications after each partial payment.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "created",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>open</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1000</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:21:44Z</date>
+    <closed_at type="datetime" nil="true"></closed_at>
+    <net_terms type="integer">0</net_terms>
+    <collection_method>manual</collection_method>
+  </invoice>
+</new_invoice_notification>
+```
+
+## Pending invoice (automatic)
+
+Sent when an automatic invoice requires further action—e.g., an ACH payment fails and the invoice state returns to pending.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "pending",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<pending_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>pending</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1000</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:21:44Z</date>
+    <closed_at type="datetime" nil="true"></closed_at>
+    <net_terms type="integer">0</net_terms>
+    <collection_method>automatic</collection_method>
+  </invoice>
+</pending_invoice_notification>
+```
+
+### Processing invoice (Automatic – ACH/PayPal eCheck)
+
+Sent when an invoice moves to processing due to ACH or PayPal eCheck payments.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "processing",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<processing_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>processing</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1000</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:21:44Z</date>
+    <closed_at type="datetime" nil="true"></closed_at>
+    <net_terms type="integer">0</net_terms>
+    <collection_method>automatic</collection_method>
+  </invoice>
+</processing_invoice_notification>
+```
+
+### Closed invoice
+
+Sent when an invoice is closed—either fully paid or failed to collect.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "closed",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<closed_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>collected</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1100</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:20:29Z</date>
+    <closed_at type="datetime">2014-01-01T20:24:02Z</closed_at>
+  </invoice>
+</closed_invoice_notification>
+```
+
+### Closed invoice (manual)
+
+Sent when a manual invoice is closed—either fully paid or failed to collect.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "closed",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<closed_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>collected</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1100</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:20:29Z</date>
+    <closed_at type="datetime">2014-01-01T20:24:02Z</closed_at>
+    <net_terms type="integer">0</net_terms>
+    <collection_method>manual</collection_method>
+  </invoice>
+</closed_invoice_notification>
+```
+
+### Past due invoice
+
+Sent when an invoice is past due due to failure to collect by its due date.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "past_due",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<past_due_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>past_due</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1100</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:20:29Z</date>
+    <closed_at type="datetime">2014-01-01T20:24:02Z</closed_at>
+  </invoice>
+</past_due_invoice_notification>
+```
+
+### Past due invoice (manual)
+
+Sent when a manual invoice is past due due to failure to collect by its due date.
+
+```json
+{
+  "id": "radnhqhipxkw",
+  "object_type": "invoice",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "past_due",
+  "event_time": "2022-07-27T15:34:35Z",
+  "invoice_number": 1000
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<past_due_invoice_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verana</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <invoice>
+    <uuid>ffc64d71d4b5404e93f13aac9c63b007</uuid>
+    <subscription_id nil="true"></subscription_id>
+    <state>past_due</state>
+    <invoice_number_prefix></invoice_number_prefix>
+    <invoice_number type="integer">1000</invoice_number>
+    <po_number></po_number>
+    <vat_number></vat_number>
+    <total_in_cents type="integer">1100</total_in_cents>
+    <currency>USD</currency>
+    <date type="datetime">2014-01-01T20:20:29Z</date>
+    <closed_at type="datetime">2014-01-01T20:24:02Z</closed_at>
+    <net_terms type="integer">0</net_terms>
+    <collection_method>manual</collection_method>
+  </invoice>
+</past_due_invoice_notification>
+```
+
+### Updated invoice
+
+Sent when a legacy [invoice is edited](/guides/recurring-billing/invoices-1/edit-invoice).

@@ -1,0 +1,84 @@
+---
+title: Recovered Revenue
+---
+
+The Recovered Revenue dashboard calculates how much revenue Recurly has helped you recover by minimizing involuntary churn from declined transactions.
+
+There are three major mechanisms that make up Recurly's revenue recovery engine:
+
+* **Expiration Date Changes:** The expiration date is updated on the account billing information
+* **Account Updater:** If enabled, Recurly's Account Updater checks for credit card updates with credit card providers before a subscription renewal and/or when a one-time transaction or re-subscribe sign-up results in a hard decline. 
+* **Dunning Retries:** Recurly uses sophisticated retry logic to maximize the likelihood a failed transaction becomes successful.
+
+Only one recovery reason can be applied to a customer’s invoice, even though the invoice can meet the criteria for multiple recovery reasons. The recovery reasons are applied in order.
+
+To maintain access to the most current information, widgets on this dashboard to refresh the screen.  The data for this dashboard updates multiple times a day. You can verify the time the  last changes were uploaded by checking the widget at the bottom of the dashboard.
+
+# Recovered Revenue Dashboard
+
+This dashboard helps merchants understand the value Recurly brings to their business and track the ongoing return on investment with Recurly. While this dashboard merely captures individual transaction saves, it does not capture the potential loss of all future revenue saved from a customer who didn’t end up churning because the failed transaction was repaired. The value from Recurly’s recovered revenue engine has both a monthly impact on saved transactions and continuing impact on reducing customer churn.
+
+The Recovered Revenue dashboard is divided into a view of the totals at-a-glance, a bar chart, and a details status.  
+
+The widgets on this dashboard’s user interface provide you with access to the following common features:
+
+**Actions** at the top right corner of the dashboard provide the following functionality:
+
+* Reload action tracks the last time you refreshed your data up to four hours. The counter then resets, beginning with 1m ago This tells you how current your data is from the last refresh.
+* Hide Filters action hides filters that display in the top left corner of the dashboard.
+* Dashboard actions allow you to either clear the cache and refresh the data, view a Download Dashboard menu from where you can select a download format, page size, or choose how to arrange downloaded data, or reset filters to default settings.
+* Open Folders action allows you to open and view contents of folders from the dashboard.
+
+**Filters** in the top left corner of both parts of this dashboard provide the following options:
+
+* Select Timeframe filter allows you to select a daily, weekly, or monthly option for displaying subscriber data.
+* Date filter provides dropdown menus where you can choose a timeframe and date range from within the last 18 months to determine the data that displays on the dashboard.
+* Primary Currency filter allows you to choose the currency type that will display on the dashboard from currencies that you already enabled in the site settings.
+
+**Multi-Currency support** is available in the Recurly Professional, Elite, and Enterprise plans. You may run transactions in more than one currency through one or more payment gateways that accept the currencies you want to collect. If you choose US dollars, this will be your Primary currency and the default choice. Totals on the dashboard will display in US dollars.
+
+Once Multiple Currency support is enabled on your Recurly account, you can then specify which currencies you want to accept for your account. When a currency is added to your accepted list, you may then define pricing for your subscription plans and coupons using the new currency. Then, choose one of the enabled currencies for the dashboard.
+
+* Sites that support more than one currency (the primary currency) will see a default view that shows the total payments, refunds and net billings across all currencies, converted to their primary currency and summed.
+* Users can also view the payments, refunds and net billings processed in each individually supported currency on their site.
+* Conversion rates are updated daily (via [https://openexchangerates.org/](https://openexchangerates.org/)) Historical billings use the conversion rate at time of transaction and do not change over time for current conversion rates.
+
+**Clear Cache options** allow you to clear cache and refresh data in three places on this dashboard:
+
+* Click the vertical ellipse on any of the widgets, at the bottom of the dashboard to see the timestamp for the most current version of data on the dashboard.
+* Click the vertical ellipse on any of the widgets within the dashboard to update that selected widget with the most current data available during the session.
+* Click the Actions widget -> vertical ellipse at top right corner of the dashboard to clear the cache and refresh the data. Recurly updates the data multiple times a day, so after a refresh, the most current data available will upload.
+
+**Vertical ellipses** available on widgets for either charts or tables, provide you with a dropdown menu where you can select the following options:
+
+* Click the vertical ellipse on a widget to download data or clear cache and refresh data for a selected widget.
+* Click the vertical ellipse on a column in a table to download data or clear the cache and refresh the data on display, but also to auto size or resize columns.
+
+**Charts and legends** display data on this dashboard within widgets in bar, line, and pie charts. This data often includes customer, subscriber, subscription, plans, and revenue totals in increments specified by time and date ranges. If the information on one of these charts is color-coded, there will be a legend on the widget that identifies the value assigned to the color. For example, specific colors are assigned to specific data or totals being tracked, to enable you to read the chart. 
+
+* Click a point in a line chart or a specific color on a bar or pie chart to display the corresponding timeframe and value in hover text. For example, total number of subscribers for a corresponding month.
+* Click the corresponding color in the legend to hide that corresponding line, bar, or pie chart segment from the widget. Click on the color again, to restore the data.
+
+# Recover Revenue Section
+
+The Recover Revenue section includes a view of the revenue key performance indicators, a recovered revenue bar chart, and a recovered revenue details chart. 
+
+**Recovered Revenue Key Performance Indicators:** shows the revenue to date totals in a view-a-glance widget that includes the current payment amount totals, and totals for last month, previous month, three months ago, and one year ago.
+
+<Image title="recovery revenue totals KIP.png" alt={2358} src="https://files.readme.io/982c5c8-recovery_revenue_totals_KIP.png">
+  Recovered Revenue Key Performance Indicators
+</Image>
+
+The up arrow under each total indicates the difference between the additional recovered  revenue totals and the “to-date” recovered revenue total.
+
+**Recovered Revenue bar chart:** calculate the amount of revenue Recurly has helped you recover by minimizing involuntary churn from declined transactions.
+
+<Image title="recovery revenue bar chart.png" alt={2374} src="https://files.readme.io/68abd75-recovery_revenue_bar_chart.png">
+  Recovered Revenue Totals
+</Image>
+
+**Recovered Revenue Detail:** calculates the total amount of revenue recovered by Recurly processes by adding (Expired Card Management + Account Updater + Intelligent Retries + Backup Payment Method = Total Recovered by Recurly).
+
+<Image title="recovery revenue details.png" alt={2372} src="https://files.readme.io/5800e3e-recovery_revenue_details.png">
+  Details of Recovered Revenue
+</Image>

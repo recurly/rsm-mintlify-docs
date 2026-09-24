@@ -1,0 +1,84 @@
+---
+title: Native Mobile SDKs
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly's native mobile SDKs for Android and iOS make it straightforward to add recurring payment collection to your mobile app. Payment details go directly from the customer's device to Recurly — your app never handles sensitive data — and you receive a token to complete the subscription via Recurly's API.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#integrate-the-sdk"><span className="rp-toc-num">4</span>Integrate the SDK</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Platform-specific</strong>The SDKs are platform-specific — separate integrations are required for Android and iOS.</div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Recurly's native mobile SDKs are software libraries for Android and iOS that handle recurring payment collection within mobile applications. When a customer submits their payment details, the SDK transmits that data directly to Recurly for encryption and storage. Your app receives an authorization token in return, which you use to complete the subscription via the Recurly API — without your application ever touching sensitive payment data.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-mobile-screen" aria-hidden="true"></i></div>
+    <strong>Native integration</strong>
+    <span>Purpose-built for Android and iOS, the SDKs fit naturally into your existing mobile application architecture.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Secure payment handling</strong>
+    <span>Payment data goes directly from the customer's device to Recurly — your app never stores or processes sensitive card details.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+    <strong>Reduced PCI scope</strong>
+    <span>Because your application doesn't handle payment information, your PCI compliance obligations are significantly reduced.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-plug" aria-hidden="true"></i></div>
+    <strong>Full API access</strong>
+    <span>Use the authorization token returned by the SDK to call Recurly's API and access the full range of subscription management features.</span>
+  </div>
+</div>
+
+# Key details
+
+## How the SDKs work
+
+When a customer submits a payment form in your app, the SDK securely transmits their payment details to Recurly, where they're encrypted and stored. Your application receives an authorization token in return. Use this token with Recurly's API to complete the subscription process — the payment data never passes through your servers.
+
+## Security and PCI compliance
+
+Because sensitive payment information is sent directly from the customer's device to Recurly, your application doesn't handle or store it at any point. This direct transfer keeps payment details secure and reduces your app's PCI scope.
+
+# Integrate the SDK
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Download the SDK</h4><p>Download the Android or iOS SDK source code from Recurly's official repository.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Initialize the SDK</h4><p>Within your app, initialize the SDK using your Recurly account credentials.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Implement the payment form</h4><p>Design and implement the payment form in your app, ensuring it captures all required payment details.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Handle form submissions</h4><p>Set up event listeners to handle payment form submissions. When the customer submits, the SDK sends their payment details to Recurly.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Use the authorization token</h4><p>Recurly returns an authorization token once the payment details are received. Use this token in server-side API calls to complete the subscription process.</p></div>
+  </div>
+</div>
+
+For detailed integration guides and troubleshooting, see the documentation included with each SDK. Contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a> for assistance during integration.

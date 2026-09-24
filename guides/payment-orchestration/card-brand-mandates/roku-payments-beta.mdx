@@ -1,0 +1,47 @@
+---
+title: Roku Payments
+---
+
+Roku allows you to publish and sell your content to their existing customers. Roku as payment method (RPM) makes it easy way for you to bill Roku's customers using their stored card on file. If you are already using Recurly to processing payments then it's pretty straightforward to accept payments through RPM.
+
+## Getting started
+
+As a merchant, you will need to do the following:
+
+* Sign partner agreement with Roku.
+* Configure your Roku gateway in Recurly (see the gateway configuration section below).
+* Create and publish your channel app in Roku store. Your channel app will need to implement the customer sign-up flow. Roku will pass the CIB (customer information for billing) to your channel app after the subscription flow is successful.
+* Use Recurly’s APIs to:
+  * Create an account for the customer in Recurly.
+  * Add the appropriate subscription plan to the customer account.
+  * Set the billing method as Roku passing in Roku token (CIB - Customer information for billing). Recurly will verify the validity (if free trial) or charge the customer using the CIB. Please refer to <a href="https://dev.recurly.com/docs/create-an-accounts-billing-info-using-external-token">Recurly’s API</a> for more details.
+  * Recurly will then manage the customer subscription as usual.
+* Receive Recurly's webhook notifications to keep track of successful and failed payments and subscription renewal events.
+* Use Recurly’s exports to identify Roku transactions. The following exports will contain new info related to Roku Payments.
+  * Billing Infos export will contain "Roku" as the value for payment\_method.
+  * Transactions export will contain "Roku" as the value for payment\_method and "roku" as the value for transaction\_gateway\_type.
+
+## Roku gateway configuration
+
+### Credentials
+
+You’ll need to provide the following credentials you received from Roku.
+
+* Partner API Key
+* Secret Key
+
+### Dunning emails and notifications
+
+Recurly recommends disabling dunning emails for Roku customers if your dunning email content is different for Roku customers. Recurly will send dunning webhook notifications whenever a dunning email is due. You can send out customer emails to Roku customers when you receive a dunning webhooks from Recurly. You can manage dunning emails settings through Roku configuration page.
+
+## Please review the following integration notes
+
+### Revenue share code (rev\_type)
+
+Roku’s agreement may have complex revenue share clauses. Recurly doesn’t have the necessary rev\_type information on any product to pass to Roku. Merchants will need to work with Roku and figure out if the rev share can be handled offline via monthly reporting.
+
+### Billing address updates
+
+Roku will most often have current customer credit card and billing address info. When a customer updates their billing address in Roku, you may want to update your records to offer the right programming content or for tax calculation purposes. Recurly will not be able to retrieve the latest billing address from Roku. You may want to check with Roku if you’ll need the latest information.
+
+In the meantime, please contact [Recurly Support](https://support.recurly.com/) and ask for more a detailed Roku integration guide.

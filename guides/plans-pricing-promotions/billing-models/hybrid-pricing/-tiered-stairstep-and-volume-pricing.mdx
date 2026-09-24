@@ -1,0 +1,273 @@
+---
+title: Tiered, volume and stairstep pricing
+---
+
+<div className="rp-page">
+  <div className="rp-overview">
+    Recurly supports three quantity-based pricing models — tiered, volume, and stairstep — each with a different approach to how price changes as quantity increases. This page covers how each model works and how to set one up on a plan or add-on.
+  </div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#set-up-tiered-pricing"><span className="rp-toc-num">4</span>Set up tiered pricing</a>
+    <a className="rp-toc-pill" href="#set-up-volume-pricing"><span className="rp-toc-num">5</span>Set up volume pricing</a>
+    <a className="rp-toc-pill" href="#set-up-stairstep-pricing"><span className="rp-toc-num">6</span>Set up stairstep pricing</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">
+  <strong>Tiered pricing</strong> is a progressive cost model that adjusts the unit price based on defined quantity thresholds. Each tier has its own per-unit rate — units are priced at the rate of the tier they fall into.<br /><br />
+  <strong>Volume pricing</strong> is a model where the per-unit cost decreases as quantity increases, but the rate that applies to the highest tier reached is applied to <em>all</em> units — not just those above the threshold.<br /><br />
+  <strong>Stairstep pricing</strong> charges a flat rate for a defined quantity range, regardless of the exact quantity purchased within that range. Moving into a new range ("step") changes the flat rate.
+</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+    <strong>Tiered pricing</strong>
+    <span>Encourages customers to buy more by reducing the per-unit price at higher quantities, driving sales volumes without requiring an all-or-nothing bulk commitment.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-boxes-stacked" aria-hidden="true"></i></div>
+    <strong>Volume pricing</strong>
+    <span>Rewards bulk purchases with a single lower per-unit rate applied across the entire order — a straightforward incentive that benefits both businesses and customers through economies of scale.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-stairs" aria-hidden="true"></i></div>
+    <strong>Stairstep pricing</strong>
+    <span>Offers predictable, flat-rate pricing within defined quantity ranges — simplifying budget planning for customers and revenue forecasting for your business.</span>
+  </div>
+</div>
+
+# Key details
+
+## Tiered pricing
+
+With tiered pricing, units are charged at different rates depending on which tier they fall into. A business might charge $1.00 per unit for the first 100 units, then $0.50 per unit for every unit beyond that. The customer pays different rates for different portions of their total quantity.
+
+This model works well for any product where the marginal cost of delivering an additional unit decreases at higher volumes, and where you want customers to feel a direct reward as they increase their usage.
+
+## Volume pricing
+
+With volume pricing, the entire quantity is priced at the rate of the highest tier reached. If a customer purchases 21 seats and the volume threshold for $9/seat is 20+, all 21 seats are billed at $9 — not just the last one. This makes volume pricing simpler for customers to reason about, and a stronger incentive for pushing past a tier threshold.
+
+## Stairstep pricing
+
+With stairstep pricing, the total charge is a flat rate based on which quantity range the purchase falls into. A SaaS provider might offer: $50 for 1–10 seats, $100 for 11–20 seats, and $150 for 21+ seats. A customer buying 25 seats pays $150 — the same as a customer buying 100. The price doesn't scale linearly; it jumps at each step.
+
+This works best when your delivery costs are similarly step-shaped — for example, when each pricing tier corresponds to a server tier, support tier, or capacity block.
+
+# Set up tiered pricing
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Create or open a plan</h4>
+      <p>In your Recurly account, create a new plan or open an existing add-on you want to configure.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/e850bbb00f83aebde0b5d78c438e65fa23822353957f35b74c219822162ac5cd-Screenshot_2025-01-16_at_11.38.57_AM.png" alt="Plan creation screen in Recurly" className="rp-zoom-img" /> </a>
+  <a id="zoom-e850bbb" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/e850bbb00f83aebde0b5d78c438e65fa23822353957f35b74c219822162ac5cd-Screenshot_2025-01-16_at_11.38.57_AM.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Select Tiered pricing</h4>
+      <p>In the pricing model section, choose <strong>Tiered Pricing</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/5e9aa7392e822d34d0daee0240098ae9fb192cac2ae433b05e15f7a0f84d9b67-Screenshot_2025-01-16_at_11.32.58_AM.png" alt="Tiered Pricing selected in the pricing model dropdown" className="rp-zoom-img" /> </a>
+  <a id="zoom-5e9aa73" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/5e9aa7392e822d34d0daee0240098ae9fb192cac2ae433b05e15f7a0f84d9b67-Screenshot_2025-01-16_at_11.32.58_AM.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Define your tiers and prices</h4>
+      <p>Set up each tier at the plan level, specifying the quantity threshold and per-unit rate for each.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/77da2e9-image.png" alt="Tier and price configuration fields" className="rp-zoom-img" /> </a>
+  <a id="zoom-77da2e9" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/77da2e9-image.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div>
+      <h4>Assign the subscription quantity</h4>
+      <p>Enter the quantity for the subscription add-on. Recurly will automatically calculate the correct total based on the tiers and quantity you've set.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div>
+      <h4>Enable editable quantity (optional)</h4>
+      <p>If you're using Recurly's Checkout or Hosted Payment Pages, check <strong>Editable Quantity</strong> to let subscribers choose their own quantity at signup.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/dd26624-image.png" alt="Editable Quantity checkbox on the Hosted Payment Page configuration" className="rp-zoom-img" /> </a>
+  <a id="zoom-dd26624" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/dd26624-image.png" alt="" /> </a>
+</span>
+
+# Set up volume pricing
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Create or open a plan</h4>
+      <p>In your Recurly account, create a new plan or open an existing add-on you want to configure.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Select Volume pricing</h4>
+      <p>In the pricing model section, choose <strong>Volume Pricing</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/50fedf7bf0859eea6dd2c1c9e5acc7f142f91f9e3fec6bb1049d151cca5fcd50-Screenshot_2025-01-16_at_11.34.57_AM.png" alt="Volume Pricing selected in the pricing model dropdown" className="rp-zoom-img" /> </a>
+  <a id="zoom-50fedf7" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/50fedf7bf0859eea6dd2c1c9e5acc7f142f91f9e3fec6bb1049d151cca5fcd50-Screenshot_2025-01-16_at_11.34.57_AM.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Configure volume ranges and costs</h4>
+      <p>Define the quantity ranges and the per-unit rate for each. Higher volume ranges should have lower rates.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/85273ad-image.png" alt="Volume range and cost configuration" className="rp-zoom-img" /> </a>
+  <a id="zoom-85273ad" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/85273ad-image.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div>
+      <h4>Assign the subscription quantity</h4>
+      <p>Enter the quantity for the subscription add-on. Recurly calculates the correct total by applying the rate of the highest tier reached to all units.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/57e6827-image.png" alt="Subscription quantity assigned with calculated total" className="rp-zoom-img" /> </a>
+  <a id="zoom-57e6827" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/57e6827-image.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div>
+      <h4>Enable editable quantity (optional)</h4>
+      <p>If you're using Recurly's Checkout or Hosted Payment Pages, enable <strong>Editable Quantity</strong> to let subscribers select their quantity at signup.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/f2f99db-image.png" alt="Editable Quantity enabled on Hosted Payment Page" className="rp-zoom-img" /> </a>
+  <a id="zoom-f2f99db" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/f2f99db-image.png" alt="" /> </a>
+</span>
+
+# Set up stairstep pricing
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Create or open a plan</h4>
+      <p>In your Recurly account, create a new plan or open an existing add-on you want to configure.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Select Stairstep pricing</h4>
+      <p>In the pricing model section, choose <strong>Stairstep Pricing</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/c997473503d6a04046f5bc0df17ba02c179f3b7bf47860faed273b86863abdc5-Screenshot_2025-01-16_at_11.36.23_AM.png" alt="Stairstep Pricing selected in the pricing model dropdown" className="rp-zoom-img" /> </a>
+  <a id="zoom-c997473" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/c997473503d6a04046f5bc0df17ba02c179f3b7bf47860faed273b86863abdc5-Screenshot_2025-01-16_at_11.36.23_AM.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Define your ranges and flat rates</h4>
+      <p>Set the starting and ending quantities for each step and assign the flat rate for that range. The rate stays consistent for any quantity within the step.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/7b3c437-image.png" alt="Stairstep range and flat rate configuration" className="rp-zoom-img" /> </a>
+  <a id="zoom-7b3c437" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/7b3c437-image.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div>
+      <h4>Add more steps as needed</h4>
+      <p>Add as many steps (tiers) as your pricing structure requires, adjusting the flat rate for each one. Recurly will automatically calculate the correct total based on which step the quantity falls into.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/de697fe-image.png" alt="Multiple stairstep tiers configured" className="rp-zoom-img" /> </a>
+  <a id="zoom-de697fe" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/de697fe-image.png" alt="" /> </a>
+</span>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div>
+      <h4>Enable editable quantity (optional)</h4>
+      <p>If you're using Recurly's Checkout or Hosted Payment Pages, check <strong>Editable Quantity</strong> to let subscribers specify their quantity at signup.</p>
+    </div>
+  </div>
+</div>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/eddbaf2-image.png" alt="Editable Quantity checkbox enabled on Hosted Payment Page" className="rp-zoom-img" /> </a>
+  <a id="zoom-eddbaf2" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/eddbaf2-image.png" alt="" /> </a>
+</span>
+
+<span id="rp-close"></span>

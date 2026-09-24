@@ -1,0 +1,49 @@
+---
+title: BACS (UK Only)
+---
+
+<div className="rp-page">
+  <div className="rp-overview">BACS (Bankers' Automated Clearing Services) is a UK direct debit scheme that lets merchants collect GBP-denominated recurring payments directly from customers' bank accounts. Recurly supports BACS via GoCardless, Stripe, and Adyen.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#checkout-flow"><span className="rp-toc-num">3</span>Checkout flow</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>A supported BACS gateway: <a href="/guides/payment-orchestration/payment-gateways-1/gocardless" target="_blank">GoCardless</a>, <a href="/guides/payment-orchestration/payment-gateways-1/stripe#/" target="_blank">Stripe</a> (via <a href="https://recurly.com/developers/guides/3rd-party-checkout.html" target="_blank">Third Party Checkout</a>), or <a href="/guides/payment-orchestration/payment-gateways-1/adyen" target="_blank">Adyen</a>.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>100% coupons during signup are not supported — billing agreement creation is required for this payment method. Use a free trial instead where supported. Standard coupons are supported.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">BACS Direct Debit is the UK's bank-to-bank payment scheme for collecting recurring payments in GBP. It allows merchants to debit customers' bank accounts directly, making it well-suited for subscription billing. Recurly integrates BACS through GoCardless, Stripe (Third Party Checkout), and Adyen.</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong> See the <a href="/guides/payment-orchestration/gateway-configuration-and-features/how-to-test-your-gateway" target="_blank">How to test your gateway</a> guide to verify your setup before going live.</div>
+</div>
+
+# Key details
+
+<div className="rp-card">
+
+### Use cases
+
+**Recurring subscriptions** — Use BACS Direct Debit for subscription billing and recurring collections in GBP across the UK.
+
+**International direct debit** — GoCardless supports multiple global direct debit schemes beyond BACS, making it straightforward to expand direct debit collections internationally from the same integration.
+
+</div>
+
+# Checkout flow
+
+Collect the customer's full name and UK bank account details (sort code and account number) during checkout to set up a BACS Direct Debit mandate. For specific address requirements per payment method, consult your gateway's documentation.

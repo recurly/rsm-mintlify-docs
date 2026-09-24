@@ -1,0 +1,240 @@
+---
+title: Quick-start guide
+---
+
+<div className="rp-page">
+<div className="rp-overview">This guide walks you through your first Recurly API integration — generating an API key, installing a client library, creating a client instance, and defining your first subscription plan. By the end you'll have a working plan visible in the Recurly Admin Dashboard and be ready to start creating accounts and subscriptions.</div>
+<div className="rp-toc">
+  <a className="rp-toc-pill" href="#prerequisites"><span className="rp-toc-num">1</span>Prerequisites</a>
+  <a className="rp-toc-pill" href="#integration-guide"><span className="rp-toc-num">2</span>Integration guide</a>
+</div>
+</div>
+
+# Prerequisites
+
+<ul className="rp-list">
+  <li>A valid Recurly account with API access</li>
+  <li>Basic familiarity with RESTful APIs and JSON</li>
+  <li>A compatible programming environment: Ruby, Node.js, Python, Java, C#, or PHP</li>
+</ul>
+
+<div className="rp-sdk-grid">
+<CardGroup cols={2}>
+  <Card title="Ruby" href="https://github.com/recurly/recurly-client-ruby" target="_blank"></Card>
+  <Card title="Node.js" href="https://github.com/recurly/recurly-client-node" target="_blank"></Card>
+  <Card title="Python" href="https://github.com/recurly/recurly-client-python" target="_blank"></Card>
+  <Card title="Java" href="https://github.com/recurly/recurly-client-java" target="_blank"></Card>
+  <Card title="C#" href="https://github.com/recurly/recurly-client-dotnet" target="_blank"></Card>
+  <Card title="PHP" href="https://github.com/recurly/recurly-client-php" target="_blank"></Card>
+</CardGroup>
+</div>
+
+# Integration guide
+
+## Step 1: Get your private API key
+
+Recurly authenticates every API request using your private API key. Generate and manage your keys in the Recurly Admin Dashboard under <a href="https://app.recurly.com/go/integrations/api_keys" target="_blank">Integrations > API Keys</a>.
+
+<div className="rp-callout rp-callout-warning">
+<strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Keep your API key secret</strong>
+Never embed your private API key in client-side code or commit it to version control. Always load it from an environment variable or secrets manager.
+</div>
+
+## Step 2: Install the SDK
+
+Install the Recurly client library for your language.
+
+```bash Ruby
+gem install recurly
+```
+```bash Node.js
+npm install recurly --save
+```
+```bash Python
+pip install --upgrade recurly
+```
+```xml Java
+<dependency>
+  <groupId>com.recurly.v3</groupId>
+  <artifactId>api-client</artifactId>
+  <version>4.4.0</version>
+</dependency>
+```
+```bash C#
+dotnet add package Recurly --version 4.*
+```
+```bash PHP
+composer install recurly/recurly-client
+```
+
+You can also declare the dependency in your project's config file:
+
+```ruby Ruby
+gem 'recurly', '~> 4.0'
+```
+```json Node.js
+{
+  "recurly": "^4.0.0"
+}
+```
+```text Python
+recurly~=4.0
+```
+```xml Java
+implementation 'com.recurly.v3:api-client:4.4.0'
+```
+```xml C#
+<ItemGroup>
+  <PackageReference Include="Recurly" Version="4.*" />
+</ItemGroup>
+```
+```json PHP
+{
+  "require": {
+    "recurly/recurly-client": "^4"
+  }
+}
+```
+
+For full docs and source, see the official client libraries: <a href="https://www.rubydoc.info/github/recurly/recurly-client-ruby/" target="_blank">Ruby</a>, <a href="https://recurly.github.io/recurly-client-node/" target="_blank">Node.js</a>, <a href="https://recurly-client-python.readthedocs.io/en/latest/" target="_blank">Python</a>, <a href="https://search.maven.org/artifact/com.recurly.v3/api-client/4.4.0/jar" target="_blank">Java (Maven)</a>, <a href="https://github.com/recurly/recurly-client-dotnet" target="_blank">C#</a>, <a href="https://github.com/recurly/recurly-client-php" target="_blank">PHP</a>.
+
+## Step 3: Create a client instance
+
+Every API operation is a method on the `Client` object. Create one instance per application using your private API key loaded from an environment variable.
+
+```ruby Ruby
+require 'recurly'
+@client = Recurly::Client.new(
+  api_key: ENV['RECURLY_PRIVATE_KEY']
+)
+```
+```javascript Node.js
+const recurly = require('recurly')
+const client = new recurly.Client(process.env.RECURLY_PRIVATE_KEY)
+```
+```python Python
+import recurly
+client = recurly.Client(os.environ['RECURLY_PRIVATE_KEY'])
+```
+```java Java
+import com.recurly.v3.Client;
+
+final Client client = new Client(System.getenv("RECURLY_PRIVATE_KEY"));
+```
+```csharp C#
+using Recurly;
+
+var client = new Recurly.Client(Environment.GetEnvironmentVariable("RECURLY_PRIVATE_KEY"));
+```
+```php PHP
+$client = new \Recurly\Client(getenv('RECURLY_PRIVATE_KEY'));
+```
+
+## Step 4: Create a plan
+
+A plan defines how often and how much Recurly charges your customers. Plans support free trials, setup fees, add-ons, and more. You can create plans in the <a href="https://app.recurly.com/go/plans/new" target="_blank">Admin Dashboard</a> or via the <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_plan" target="_blank">API</a>.
+
+The example below creates a monthly coffee delivery plan priced at $100/month with the unique identifier `coffee-monthly`.
+
+```ruby Ruby
+plan_create = {
+  code: "coffee-monthly",
+  name: "Monthly Coffee Subscription",
+  currencies: [
+    {
+      currency: "USD",
+      unit_amount: 100
+    }
+  ]
+}
+plan = @client.create_plan(body: plan_create)
+puts "Created Plan #{plan}"
+```
+```javascript Node.js
+const planCreate = {
+  code: 'coffee-monthly',
+  name: 'Monthly Coffee Subscription',
+  currencies: [
+    {
+      currency: 'USD',
+      unitAmount: 100
+    }
+  ]
+}
+const plan = await client.createPlan(planCreate)
+console.log('Created Plan: ', plan.code)
+```
+```python Python
+plan_create = {
+    "code": 'coffee-monthly',
+    "name": "Monthly Coffee Subscription",
+    "currencies": [{
+        "currency": "USD",
+        "unit_amount": 100
+    }],
+}
+plan = client.create_plan(plan_create)
+print("Created Plan %s" % plan)
+```
+```java Java
+import com.recurly.v3.requests.PlanCreate;
+import com.recurly.v3.requests.PlanPricing;
+import com.recurly.v3.resources.Plan;
+import java.util.ArrayList;
+import java.util.List;
+
+PlanCreate planCreate = new PlanCreate();
+planCreate.setCode("coffee-monthly");
+planCreate.setName("Monthly Coffee Subscription");
+
+List<PlanPricing> currencies = new ArrayList<>();
+PlanPricing planPrice = new PlanPricing();
+planPrice.setCurrency("USD");
+planPrice.setUnitAmount(100.0f);
+currencies.add(planPrice);
+planCreate.setCurrencies(currencies);
+
+Plan plan = client.createPlan(planCreate);
+System.out.println("Created Plan " + plan.getCode());
+```
+```csharp C#
+using Recurly.Resources;
+using System.Collections.Generic;
+
+var planReq = new PlanCreate()
+{
+    Code = "coffee-monthly",
+    Name = "Monthly Coffee Subscription",
+    Currencies = new List<PlanPricing>() {
+        new PlanPricing() {
+            Currency = "USD",
+            UnitAmount = 100
+        }
+    }
+};
+Plan plan = client.CreatePlan(planReq);
+Console.WriteLine($"Created plan {plan.Code}");
+```
+```php PHP
+$plan_create = array(
+    "name" => "Monthly Coffee Subscription",
+    "code" => $plan_code,
+    "currencies" => [
+        array(
+            "currency" => "USD",
+            "unit_amount" => 100
+        )
+    ]
+);
+
+$plan = $client->createPlan($plan_create);
+
+echo 'Created Plan:' . PHP_EOL;
+var_dump($plan);
+```
+
+## Step 5: Verify in the Admin Dashboard
+
+Log in to the <a href="https://app.recurly.com/go/plans" target="_blank">Recurly Admin Dashboard</a> and confirm your new plan appears under Plans. That's it — your integration is working.
+
+With a plan in place, you're ready to create customer accounts, attach billing info, and process subscriptions or one-time payments. Follow the <a href="/guides/api-guides/integration-guides/popular-use-cases/purchases-guide" target="_blank">Purchases guide</a> to continue.

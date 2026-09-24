@@ -1,0 +1,52 @@
+---
+title: Site activities - export
+---
+
+# Overview
+
+The Site Activities export gives you a comprehensive, timestamped log of everything happening at the site level in Recurly. Unlike the Account Activities export — which tracks customer account-level actions — this export focuses on changes made to the Recurly site itself. That includes plan modifications, site setting updates, user management changes, and login activity.
+
+<Image align="center" border={true} width="75%" src="https://files.readme.io/c10045b59667229a3134cfee35f747e47562e569f477e00fb17dcc6e481ec02e-image.png" className="border" />
+
+> 🚧 Please note
+>
+> The Site Activities export only displays data from activities that occur after the Site Activities feature flag is enabled on your site. Historical events that predate the feature being turned on will not appear.
+>
+> This export supports **data retention for 12 months only**. After that window, data is no longer accessible here. If you need to retain data beyond 12 months, back it up in your own data system.
+
+### Required plan
+
+This feature is available to all merchants on an Elite Recurly plan with an Admin and Integrations role, or a role that includes Admin and Integrations permissions. To enable this feature on your Elite site, create a support request or contact your CSM. This export is also available as an optional add-on for customers on Recurly's Starter and Professional plans — reach out to Support or your CSM for more information.
+
+## Filters
+
+Use these filters to narrow down the activities displayed in your export:
+
+* **Versions**: Select the export version that best fits your needs. Versions are based on the changelog at the bottom of this page
+* **Export on**: Defaults to the creation timestamp of each activity
+* **Time range**: Defaults to yesterday, capturing all activities created on that day in your site's default time zone
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+| Id                                                                | Example                                                                                     | Description                                                                                                  | Data type |
+| :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------- | :-------- |
+| <span id="event_type">event_type</span>                           | update                                                                                      | The type of event that triggered the entry in the audit log.                                                 | string    |
+| <span id="created_at">created_at</span>                           | 2014-01-01 10:00:00 PST                                                                     | The date and time when the activity occurred.                                                                | timestamp |
+| <span id="resource_id">resource_id</span>                         | w2o3vcs36vfh                                                                                | The API identifier for the audited record.                                                                   | string    |
+| <span id="resource_code">resource_code</span>                     | add_on_1                                                                                    | The code of the audited record (e.g., add_on_code, account_code, coupon_code).                               | string    |
+| <span id="resource_type">resource_type</span>                     | add_on                                                                                      | The type of the audited record (e.g., add_on, account_updater, coupon).                                      | string    |
+| <span id="target_resource_id">target_resource_id</span>           | w2o0le8prd7oplan1                                                                           | The API identifier for the target record.                                                                    | string    |
+| <span id="target_resource_code">target_resource_code</span>       | plan1                                                                                       | The code of the target record (e.g., plan_code, account_code, coupon_code).                                  | string    |
+| <span id="target_resource_type">target_resource_type</span>       | plan                                                                                        | The type of the target record (e.g., plan, coupon).                                                          | string    |
+| <span id="principal_resource_id">principal_resource_id</span>     | Recurly Support                                                                             | The identifier of the principal who performed the action (e.g., email address or API key name/masked value). | string    |
+| <span id="principal_resource_type">principal_resource_type</span> | user                                                                                        | The type of principal that performed the action. Accepted values: `user` or `api_key`.                       | string    |
+| <span id="ip_address">ip_address</span>                           | 127.0.0.1                                                                                   | The IP address of the principal who performed the action.                                                    | string    |
+| <span id="details">details</span>                                 | `{"currencies":{"changed":[{"currency":"USD","unit_amount":{"from":4.82,"to":20000000}}]}}` | A JSON string containing the values that changed as part of the activity.                                    | string    |
+
+# Version changelog
+
+* N/A

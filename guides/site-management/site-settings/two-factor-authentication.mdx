@@ -1,0 +1,88 @@
+---
+title: Two-factor authentication (2FA)
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Limitations
+
+While 2FA provides a strong additional layer of security to protect your Recurly account, it's important to note:
+
+* 2FA does not replace the need for strong, unique passwords and secure account practices.
+* Users are responsible for maintaining access to their chosen method of receiving verification codes (SMS or Authenticator app).
+* If a user loses access to their chosen method of verification, they may be unable to access their account until they can receive verification codes again.
+* As 2FA applies universally across all Recurly sites accessed with the same email, disabling 2FA will remove this layer of security from all connected sites.
+
+# Definition
+
+Two-Factor Authentication (2FA) is a feature provided by Recurly that adds an extra layer of security to your account by requiring users to provide two pieces of information for authentication - the user password and a verification code.
+
+# Key benefits
+
+* **Enhanced security:** With 2FA, safeguard your account against unauthorized access, providing an additional layer of protection beyond your username and password.
+* **Flexible authentication methods:** Choose between receiving verification codes via SMS or using an Authenticator app, ensuring accessibility and convenience.
+* **Universal application:** If you access more than one Recurly site with the same email address, enabling 2FA ensures the feature applies across all sites, enhancing security throughout your Recurly experience.
+
+# Key details
+
+* **Enabling Two-Factor Authentication:** Users can enable 2FA from the User Settings of their Recurly account. This includes choosing a preferred delivery method for verification codes (SMS or Authenticator app).
+* **Disabling Two-Factor Authentication:** Users can also disable 2FA when required, providing flexibility in account security options.
+* **Authentication Code:** A unique, temporary code required for authentication, delivered via the user's chosen method (SMS or Authenticator app).
+* **2FA Frequency:** You will be required to provide a 2FA code if it has been more than 14 days since your last session, or if you log in from an unrecognized device.
+
+# Enabling Two-Factor Authentication
+
+1. Navigate to your user profile in your Recurly account.
+2. Click on the 'Enable Two-Factor Authentication' link.
+3. Enter your password for verification.
+4. Choose your preferred verification method: SMS or Authenticator App.
+
+## SMS Verification
+
+```
+  - Enter a mobile phone number capable of receiving SMS text messages.
+```
+
+* An SMS with a verification code will be sent to the entered number.
+* Input the received code into the verification field.
+
+## Authenticator App Verification
+
+<Image align="center" className="border" width="45% " border={true} src="https://files.readme.io/aca299a-image2.png" />
+
+* Recurly supports various authenticator apps, such as Twilio Authy, Okta Verify, Google Authenticator, Microsoft Authenticator, LastPass Authenticator, and more.
+* You will be presented with a QR code to scan using your chosen authenticator app. Alternatively, you can enter a provided human-readable code manually into the app.
+* The app will generate a code that you will enter into Recurly to enable two-factor authentication.
+
+# Switching Two-Factor Authentication Methods
+
+1. Go to your user profile and click on 'Options'.
+2. Select 'Change Authentication Method'.\
+   ![](https://files.readme.io/e4a3e72-image1.png "image1.png")
+3. A dialog box for enabling 2FA will appear. Note that you cannot update to the current method you're using.
+
+<Image align="center" width="50% " src="https://files.readme.io/24319c5-image3.png" />
+
+# Instructions for site administrator users
+
+Admin users can disable Two-Factor Authentication for any site user:
+
+1. Go to the 'Users' section in Recurly.
+2. Click to edit the profile of the user who needs Two-Factor Authentication disabled.
+3. Click the 'disable' link for Two-Factor Authentication in the right-hand card.
+
+# Troubleshooting
+
+* **Lost Mobile Device**: If you can't access the mobile device that receives your authentication codes, consider these steps:
+  * Many authenticator apps provide account restoration options or use alternative devices to receive codes. Check your app's documentation for details.
+  * Reach out to your Recurly site administrator. Admin users can disable Two-Factor Authentication on your profile, allowing you to log in using only your password.
+  * Contact Recurly Support. They can disable Two-Factor Authentication on your profile, allowing login with just your password.
+* **General tips**: 
+  * If Two-Factor Authentication is enabled, ensure you log into your Recurly site via [https://app.recurly.com.](https://app.recurly.com.) Logging in from https\://\[yoursitename].recurly.com/ will not work with Two-Factor Authentication.
+  * If authentication fails multiple times, try synchronizing your phone's clock with your mobile provider.
+  * If you're not receiving authentication codes via SMS, double-check that your phone number has been entered correctly.
+  * If your code isn't working, make sure not to enter spaces between the numbers in the code.

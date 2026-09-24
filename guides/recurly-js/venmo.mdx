@@ -1,0 +1,150 @@
+---
+title: Venmo
+---
+
+`recurly.Venmo` opens Venmo’s checkout window directly from your site. After the shopper approves the payment:
+
+1. Venmo returns an authorization to Recurly.
+2. Recurly replies to the browser with a short-lived **token** (`token.id`).
+3. Your front end posts that token to your server; any v3 endpoint that accepts `billing_info` can create the charge.
+
+You may process tokens through **Recurly’s native Venmo gateway** or **Braintree** (pass `braintree.clientAuthorization`, with `webAuthentication: true` for the best conversion).
+
+### Prerequisites and limitations
+
+* Your Recurly site must have **Venmo** enabled—either the native Venmo gateway or Braintree-with-Venmo.
+* `start()` **must** be called from a user-initiated event (`click`, `touchend`, etc.).
+* Venmo opens a new window; if you enforce a Cross-Origin Opener Policy, be sure it allows pop-up communication.
+* Tokens expire after **20 minutes** and are unrecoverable once expired.
+
+***
+
+# Key details
+
+A Venmo transaction is handled entirely within the Venmo checkout flow in a new window. Your customer will authorize a transaction within Venmo. Recurly will then record the authorization and return a Recurly token to you as it does for other payment methods.
+
+You will need to use the token within our API before it expires, and expired tokens cannot be retrieved.
+
+If you wish to make the first and last name fields optional for Venmo tokens through our API, please\
+contact Recurly support to have us enable this feature.
+
+First, place a button on your page specifically for checking out with Venmo.
+
+```html
+<button id="venmo-button">Pay with Venmo</button>
+```
+
+Next, create a new `recurly.Venmo` instance
+
+```js
+const venmo = recurly.Venmo({
+  display: {
+      amount: '100.55',
+      currency: 'USD',
+      displayName: 'Display Name',
+      locale: 'en_US',
+    }
+});
+```
+
+**If you're processing Venmo transactions with Braintree**, you'll pass a client authorization and a web authentication flag during instantiation:
+
+```js
+const venmo = recurly.Venmo({
+  braintree: { clientAuthorization: MY_CLIENT_AUTHORIZATION, webAuthentication: true }
+});
+```
+
+Braintree strongly recommends enabling the web authentication flag as it offers a better customer experience and improves conversion rates.
+
+Your instance must then be setup to handle error scenarios.
+
+```js
+venmo.on('error', function (err) {
+  // err.code
+  // err.message
+  // [err.cause] if there is an embedded error
+});
+```
+
+Next we must bind a listener to a user action on the button and have it trigger the `start` function on your `recurly.Venmo` instance. This will open the Venmo checkout flow.
+
+> **Note**  As with the rest of Recurly.js, there are no external dependencies. The example uses jQuery to demonstrate binding events, but this can be done any way you wish.
+
+```js
+$('#venmo-button').on('click', function () {
+  venmo.start();
+});
+```
+
+The `start` function must be called within a user-initiated event like 'click' or 'touchend'
+
+Finally, add a function to receive the token once your customer completes the checkout flow. At this point you will send the token id to your server to be used in the Recurly API to create a billing info for an account.
+
+```js
+venmo.on('token', function (token) {
+  // token.id
+});
+```
+
+### Reference
+
+#### <span className="heading-tag heading-tag--fn">fn</span> recurly.Venmo
+
+##### Arguments
+
+| Param                                 | Type     | Description                                                                                    |
+| :------------------------------------ | :------- | :--------------------------------------------------------------------------------------------- |
+| options                               | `Object` | Optional.                                                                                      |
+| options.braintree                     | `Object` | Optional. Braintree configuration.                                                             |
+| options.braintree.clientAuthorization | `String` | If using Braintree to process Venmo transactions, provide your client authorization code here. |
+
+##### Returns
+
+A new `Venmo` instance
+
+#### <span className="heading-tag heading-tag--fn">fn</span> venmo.start
+
+##### Arguments
+
+| Param   | Type     | Description |
+| :------ | :------- | :---------- |
+| options | `Object` | Optional.   |
+
+##### Returns
+
+Nothing.
+
+#### <span className="heading-tag heading-tag--event">events</span> Emits
+
+##### `error`
+
+This event is emitted when any error is encountered, whether during setup of the Venmo flow, or during the checkout process. It will be useful to display errors to your customer if a problem occurs during Venmo checkout.
+
+##### Payload
+
+| Param | Type           | Description                                  |
+| :---- | :------------- | :------------------------------------------- |
+| error | `RecurlyError` | An error describing the issue that occurred. |
+
+##### `cancel`
+
+This event is emitted when the customer has canceled the Venmo checkout flow before completion. You may wish to reset parts of your checkout experience if this occurs.
+
+##### Payload
+
+None.
+
+##### `token`
+
+This event is fired when the customer has completed the Venmo checkout flow. Recurly has received the payment details, and generated this token to be used in our API.
+
+##### Payload
+
+| Param      | Type     | Description                            |
+| :--------- | :------- | :------------------------------------- |
+| token      | `Object` |                                        |
+| token.type | `String` | 'VenmoAccount'                         |
+| token.id   | `String` | Token identifier to be sent to the API |
+
+***

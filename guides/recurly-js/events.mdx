@@ -1,0 +1,38 @@
+---
+title: Events
+---
+
+Recurly.js Elements, as well as other Recurly.js objects, act as **event emitters**.
+
+Register listeners with `.on(event, handler)` and remove them with `.off(event, handler)` to react to card-entry changes, focus, validation states, and more.
+
+# Key details
+
+```javascript
+// 1. Create your Elements group and individual element
+const elements = recurly.Elements();
+const card = elements.CardElement();
+
+// 2. Attach the element to the DOM
+card.attach('#card-container');
+
+// 3. Add an event listener
+function changeHandler (state) {
+  // `state` contains validity, card brand, last4, etc.
+  console.log(state);
+}
+card.on('change', changeHandler);
+
+// 4. Remove the listener when it's no longer needed
+card.off('change', changeHandler);
+```
+
+| Common event | Fired when…                               | Payload highlights                          |
+| ------------ | ----------------------------------------- | ------------------------------------------- |
+| `change`     | Field value changes or validity updates   | `state.valid`, `state.brand`, `state.empty` |
+| `focus`      | Element gains focus                       | —                                           |
+| `blur`       | Element loses focus                       | —                                           |
+| `ready`      | Element is fully rendered and interactive | —                                           |
+
+> **Tip**\
+> Keep a reference to the exact handler you passed to `.on()`; you must supply the same function reference to `.off()` to successfully detach the listener.

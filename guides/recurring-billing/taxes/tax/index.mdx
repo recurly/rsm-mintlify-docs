@@ -1,0 +1,707 @@
+---
+title: Sales taxes
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly's built-in tax solution — powered by Avalara — automatically calculates and applies the correct sales tax, VAT, or GST to invoices based on customer and merchant addresses. Enable the regions where you collect tax, configure your plans, and let Recurly handle the calculations. For advanced tax rules, custom product taxability, or broader global coverage, upgrade to your own Avalara AvaTax or Vertex account.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#go-live-checklist"><span className="rp-toc-num">3</span>Go-live checklist</a>
+    <a className="rp-toc-pill" href="#supported-tax-regions-and-rates"><span className="rp-toc-num">4</span>Supported regions and rates</a>
+  </div>
+</div>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Recurly's built-in tax calculations are based on Avalara's AvaTax. Advanced tax rules and rate mappings require integration with your own Avalara AvaTax or Vertex account.</li>
+  <li>Custom credit adjustments don't support tax calculations.</li>
+  <li>In sandbox mode, Avalara's address validation can't be tested, and minor variations in applied tax rates may occur.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Recurly Taxes is the platform's built-in sales tax compliance solution, powered by Avalara. It calculates and applies the appropriate sales tax, VAT, or GST to transactions based on merchant and customer addresses across a wide range of supported regions. For communications taxes, surcharges, or regions not covered by Recurly Taxes, additional integrations are available.</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Need more advanced tax options?</strong>Connecting your own Avalara AvaTax or Vertex account gives you access to more taxable regions, detailed product taxability rules, advanced tax reporting, and tax filing services. Learn more about <a href="/guides/partner-integrations/accounting-fraud-and-taxes/avalara" target="_blank">Avalara AvaTax</a> and <a href="/guides/partner-integrations/accounting-fraud-and-taxes/vertex" target="_blank">Vertex</a>.</div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Tax compliance disclaimer</strong>Recurly's tools are designed to help merchants comply with local sales tax and VAT laws, but Recurly does not guarantee tax compliance. For advice on laws applicable to your business, consult a sales tax professional. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> for a referral to a tax firm.</div>
+</div>
+
+Additional resources:
+
+- For wider global sales tax support beyond the regions covered on this page, see <a href="/guides/partner-integrations/accounting-fraud-and-taxes/avalara" target="_blank">Direct Integration with Avalara AvaTax</a>.
+- For tax-inclusive pricing support, see <a href="/guides/recurring-billing/taxes/tax/tax-inclusive-pricing" target="_blank">Tax-inclusive pricing</a>.
+- For communications taxes and surcharges, see <a href="/guides/partner-integrations/accounting-fraud-and-taxes/afc" target="_blank">Avalara for Communications</a>.
+
+# Key details
+
+## Determining taxable addresses
+
+Every invoice passes two addresses to your tax service: an **Origin Address** (your business address) and a **Destination Address** (the customer's location where goods or services are fulfilled). The tax service uses both to identify the applicable rate.
+
+### Merchant taxable address
+
+The merchant's taxable address always reflects the business entity's tax address. On each business entity configuration page, you can use the same address for both invoice display and tax calculation, or set a separate address for each. In all cases, the entity tax address is what's sent to the tax service as the Origin Address.
+
+
+<Image src="https://files.readme.io/9490870-Screenshot_2024-06-06_at_9.44.56_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/3508a11-Screenshot_2024-06-06_at_9.43.52_PM.png" align="center" width="75%" border={true} />
+
+
+### Customer taxable address
+
+The customer's taxable address is drawn from one of three sources, depending on the invoice type and your Tax Settings configuration:
+
+**Account Information address** — Always used as the customer's taxable address on manual invoices, unless a shipping address is present on the invoice. You can also enable this for all invoices (manual and automatic) via the Tax Settings page.
+
+
+<Image src="https://files.readme.io/1b1e2d0-Screenshot_2024-06-11_at_2.25.27_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/6e7280d-Screenshot_2024-06-11_at_12.44.48_PM.png" align="center" width="75%" border={true} />
+
+
+**Billing Information address** — Used as the customer's taxable address on all automatic invoices, unless a shipping address is present or the Account Info address override is enabled in Tax Settings.
+
+
+<Image src="https://files.readme.io/dd6b481-Screenshot_2024-06-11_at_8.04.03_PM.png" align="center" width="75%" border={true} />
+
+
+**Shipping address** — When a shipping address is present on an invoice, it always takes precedence as the customer's taxable address — regardless of invoice type or Tax Settings configuration.
+
+
+<Image src="https://files.readme.io/155b94a-Screenshot_2024-06-11_at_2.26.13_PM.png" align="center" width="75%" border={true} />
+
+
+#### Multiple shipping addresses
+
+Some invoices have <a href="/guides/subscriber-management/accounts-1/shipping-address-per-line-item#shipping-addresses-per-purchase" target="_blank">multiple unique shipping addresses</a> — this can occur with <a href="/guides/subscriber-management/accounts-1/ah-invoice-rollup" target="_blank">Account Hierarchy Invoice Rollup</a> and/or <a href="/guides/recurring-billing/billing-preferences/calendar-billing" target="_blank">Calendar Billing</a>. In these cases, Recurly sends the unique shipping address for each line item to the tax service. If different rates apply across line items, the invoice displays a generic "Tax" label with the total tax amount, plus a breakdown section showing each shipping address's state/country code, rate, and cumulative tax amount.
+
+**Note:** If you are using Recurly's out of the box tax solution or your own Avalara account and need to ship to different countries on the same invoice, you will need to contact Support to enable this feature.
+
+
+<Image src="https://files.readme.io/39e4e93-multi_shipping_address.png" align="center" width="75%" border={true} />
+
+
+### Setting taxable addresses
+
+Taxable address configuration is set at the business entity level under the entity's **Tax Settings** section.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tax exemptions apply first</strong>If a customer or plan is tax-exempt, no tax is applied to the invoice or subscription — regardless of taxable address settings.</div>
+</div>
+
+
+<Image src="https://files.readme.io/b0a13d1-Screenshot_2024-06-06_at_9.47.06_PM.png" align="center" width="75%" border={true} />
+
+
+By default, Recurly sets all entities to use the **Business Entity Tax Address** as the Origin Address and the **Customer Tax Address** as the Destination Address. This is the standard configuration for most regions and ensures invoices reflect the customer's local tax rate.
+
+
+<Image src="https://files.readme.io/6876f6c-Screenshot_2024-06-06_at_9.31.37_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/8463c4b-Screenshot_2024-06-11_at_3.11.17_PM.png" align="center" width="75%" border={true} />
+
+
+You can override these defaults if your business requires a different configuration:
+
+**Business Entity address for both Origin and Destination** — Use this when all customers should be taxed based on your business entity's location. Tax will reflect the merchant's jurisdiction (e.g., GB VAT at 20% for a UK-based entity) regardless of the customer's location.
+
+
+<Image src="https://files.readme.io/a4d250b-Screenshot_2024-06-06_at_10.02.15_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/46c9707-Screenshot_2024-06-11_at_3.05.09_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/b9362c2-Screenshot_2024-06-11_at_2.47.18_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Standard practice for most regions</strong>Using the merchant's taxable address for Origin and the customer's taxable address for Destination is standard for most regions. Consult your accounting or compliance team before overriding these defaults — doing so may cause invoices to ignore standard tax service rules, such as reverse VAT. Additionally, if both the Origin and Destination addresses use the Business Entity tax address and that address is outside the United States, the invoice will display a "USST" VAT prefix for US customers instead of the local country code. The correct tax rate will still apply.</div>
+</div>
+
+**Customer address for both Origin and Destination** — Some US states require this for specific goods, or when a merchant ships from a warehouse without a taxable presence at that location.
+
+
+<Image src="https://files.readme.io/88ae714-Screenshot_2024-06-06_at_10.04.49_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/927dd57-Screenshot_2024-06-11_at_2.41.58_PM.png" align="center" width="75%" border={true} />
+
+
+The taxable address configuration set on a business entity applies to all invoices associated with that entity. Each entity can have its own unique configuration. Changes to taxable address settings don't affect existing invoices — only invoices generated after the update follow the new behavior.
+
+### Taxable addresses for one-time charges
+
+Taxable address settings for one-time charges are available via the Admin Console and both API versions for merchants on Recurly's Elite plan.
+
+By default, charges inherit the taxable address configuration from the business entity applied to the invoice. To override this for a specific charge, enable **Tax Collection** when creating the charge, then check **Override taxable address settings from business entity** to set custom Origin and Destination addresses for that charge.
+
+
+<Image src="https://files.readme.io/d5b7a87-Screenshot_2024-07-02_at_4.12.49_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/cc827b9-Screenshot_2024-07-02_at_4.15.32_PM.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/b702ee9-Screenshot_2024-07-02_at_4.26.14_PM.png" align="center" width="75%" border={true} />
+
+
+If an invoice contains multiple charges, each charge can have distinct taxable address settings — tax is calculated per line item based on each item's individual configuration.
+
+***
+
+## Address requirements
+
+### Minimum address requirements by region
+
+The minimum address fields required to calculate tax vary by region. Invoices missing the minimum required fields are posted without tax.
+
+- **Australia:** Country
+- **Canada:** Country and postal code
+- **Chile:** Country
+- **Europe (non-EU):** Country
+- **European Union:** Country
+- **Indonesia:** Country
+- **Israel:** Country
+- **New Zealand:** Country
+- **South Africa:** Country
+- **Thailand:** Country
+- **United Kingdom:** Country
+- **United States:** Country and postal code (full street address recommended)
+
+### Recurly address requirements
+
+When you activate a tax region, Recurly automatically requires a country field for all new or updated customer billing addresses. This requirement applies to billing addresses only — if you're taxing based on the Account Information address, collect and store the necessary fields manually.
+
+### Address field character limits
+
+Recurly Taxes enforces maximum character limits on address fields. Exceeding these limits can result in inaccurate tax calculation or no tax being applied.
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Field</td><td>Max characters</td><td>Example</td></tr>
+  <tr><td>Street address</td><td>50</td><td>200 Main Street</td></tr>
+  <tr><td>Address line 2</td><td>100</td><td>—</td></tr>
+  <tr><td>City</td><td>50</td><td>Irvine</td></tr>
+  <tr><td>State/province</td><td><a href="https://docs.recurly.com/countries-provinces-and-states" target="_blank">ISO alpha-2 codes</a></td><td>CA</td></tr>
+  <tr><td>Country</td><td><a href="https://docs.recurly.com/countries-provinces-and-states" target="_blank">ISO alpha-2 codes</a></td><td>US</td></tr>
+  <tr><td>Zip/postal code</td><td>11</td><td>92614</td></tr>
+</table>
+
+Recurly uses <a href="https://docs.recurly.com/countries-provinces-and-states" target="_blank">ISO alpha-2 country codes</a> on all forms. For example, the United Kingdom is "GB," not "UK." The state/province field is required for US, Canada, Italy, and the Netherlands when mandated by your Site Settings Address Requirement.
+
+***
+
+## Address validation
+
+Recurly uses Avalara's address validation tools to verify the addresses used on taxed invoices before generating an invoice.
+
+### For new sign-ups
+
+When using Recurly Taxes, if the address is invalid or the tax jurisdiction can't be determined, the sign-up is blocked — no subscription or invoice is created. One of the following errors is returned:
+
+- _"The address provided is invalid, could not determine taxing jurisdictions"_ — The customer's or merchant's address is invalid or lacks sufficient information for jurisdiction determination.
+- _"The state/province provided is invalid, could not apply tax"_ — The state/province in the customer's or merchant's address is invalid.
+- _"The city provided is invalid, could not apply tax"_ — The city in the customer's or merchant's address is invalid for the specified country.
+
+To allow sign-ups to proceed even when address validation fails, go to **Configuration → Taxes → Tax Settings → Tax Service Settings** and disable **Require valid address for initial purchases**. With this setting off, addresses are still sent to Avalara for jurisdiction determination, but an invalid address won't block invoice creation — the invoice is created without tax.
+
+### For renewals and ongoing subscriptions
+
+Addresses are still validated on renewal, but an invalid address won't block invoice creation. The invoice is generated without tax until a valid address is on file.
+
+### Military addresses
+
+For customers with military addresses, add "General Delivery" or "GD" to an extra street address line for proper validation.
+
+### When Avalara validation is used
+
+For merchants using Recurly Taxes, only addresses in your active taxable regions are sent to Avalara for validation. For merchants with their own Avalara AvaTax account, all addresses are validated. If an account has no address, invoices are created without tax and skip Avalara validation.
+
+***
+
+## Exempt customers
+
+To mark an account as tax-exempt, navigate to the customer's account page in the Admin Console, edit the Account Information, and check **Tax Exempt?**. All future invoices for the account will be created without tax.
+
+***
+
+## Your merchant address
+
+Before activating a taxable region, confirm your merchant address is complete. This address — used on customer invoices and for tax calculations — is located in the Admin Console under **Configuration → Business Entities**. A postal code and country are required. Missing these fields will cause an error when attempting to enable a taxable region.
+
+### Tax registration numbers
+
+In Business Entities, you can specify a default VAT Number and Tax Registration Number. These appear on all invoices you issue. For customer-specific VAT numbers or Tax IDs, a separate field is available on the customer's account record.
+
+To display different VAT or Tax Registration Numbers for customers in specific countries (e.g., a Turkish VAT number on invoices to Turkey), configure this when adding or updating a business entity.
+
+***
+
+## Enable a taxable region
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Enable tax regions at the start of the day UTC</strong>Avalara's taxable region start and end dates don't include times. Enabling taxes mid-day UTC may result in customers invoiced earlier in that day not being taxed, and if a refund is later needed, Avalara may calculate taxes on the refund — potentially blocking it. To prevent this, enable new taxable regions and relevant plans at the start of the day UTC. If this issue occurs, contact <a href="mailto:support@recurly.com">support@recurly.com</a>.</div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open tax configuration</h4><p>Go to <strong>Configuration → Taxes</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select the country</h4><p>Click <strong>Configure</strong> for the country you want to enable.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Enable the region</h4><p>Choose the <strong>Enabled</strong> option. If the country has state or province sub-regions, select the applicable ones.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Save and confirm</h4><p>Click <strong>Save Changes</strong>, then confirm by clicking <strong>I agree to the above terms</strong> and <strong>Enable</strong> in the confirmation dialog.</p></div>
+  </div>
+</div>
+
+### Disable a taxable region
+
+Disabling a taxable region stops tax collection on future invoices for customers in that location. Recurly tracks the date range during which you collected tax, so refunds on past invoices from a disabled region will still refund tax correctly.
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Do not disable and re-enable a tax region in production</strong>Re-enabling a previously disabled tax region resets the tracked date range, which means past invoices may not refund tax correctly. Only disable a region if you no longer have a tax obligation there. If you encounter this issue, contact <a href="mailto:support@recurly.com">support@recurly.com</a>.</div>
+</div>
+
+***
+
+## Taxable plans and adjustments
+
+### Plans
+
+After enabling a taxable region, configure your plans to collect tax. All existing plans default to tax-exempt — edit each plan individually to enable **Collect Tax**. All new plans default to collecting tax. When a plan has tax collection enabled, its included add-ons are also taxed.
+
+
+<Image src="https://files.readme.io/I4jdxgmIRjq5DT9kW6vE_tax-on-plan.png" align="center" width="75%" border={true} />
+
+
+### One-time charges
+
+After enabling a taxable region, you can create custom charge adjustments that collect tax. The Create Charge page in the Admin Console defaults to collecting tax on new charges. Custom credit adjustments don't support tax calculation — to credit a customer and refund tax, issue a refund rather than creating a custom credit.
+
+
+<Image src="https://files.readme.io/LHEDJwmZRAu5dYDWRxOx_tax-on-charge.png" align="center" width="75%" border={true} />
+
+
+### Tax product type and tax codes
+
+Recurly's built-in tax calculations treat each line item (plan, add-on, adjustment) as Tangible Personal Property (TPP). In many regions, digital goods and services follow the same tax rules as TPP. If your business requires a specific tax code, you can enter one per product.
+
+You can find <a href="https://taxcode.avatax.avalara.com/" target="_blank">suggested tax codes</a> on Avalara's website. Consult your tax and accounting team before applying a specific tax code. For advanced product distinctions and rule mappings, upgrade to your own <a href="/guides/partner-integrations/accounting-fraud-and-taxes/avalara" target="_blank">Avalara AvaTax</a> or <a href="/guides/partner-integrations/accounting-fraud-and-taxes/vertex" target="_blank">Vertex</a> account.
+
+
+<Image src="https://files.readme.io/a0b212d-Screenshot_2024-07-09_at_1.48.10_PM.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Tax previews at checkout
+
+Recurly provides tax estimate previews based on internal rate tables. Final invoices use Avalara for tax calculation. Previews are available on Checkout, Hosted Payment Pages, via the API for Subscriptions and Invoices, and via Recurly.js for subscription sign-ups.
+
+***
+
+## Tax on invoices
+
+Invoices that include tax display:
+
+- A **Tax** column next to Subtotal, showing the tax rate per line item (0.00% if not applicable)
+- A **Total** column showing the combined subtotal and tax per line item
+- An invoice-level tax row showing the tax region, rate, and total tax amount
+
+When an invoice contains multiple tax rates (e.g., mixed item types or multiple shipping addresses), the invoice also includes a **Tax Details** card that breaks down each rate, the associated subtotal, and the tax amount per rate.
+
+### Tax amount rounding
+
+In sandbox mode and production previews, tax amounts are always rounded up to two decimal places. On actual production invoices, Avalara applies region- and jurisdiction-specific rounding at the line item level — amounts below five round down, five or above round up.
+
+**Example with HU VAT at 27%:**
+
+|                     | Sandbox / preview | Production |
+| :------------------ | :---------------- | :--------- |
+| Line item 1 ($5.79) | $1.57             | $1.56      |
+| Line item 2 ($5.81) | $1.57             | $1.57      |
+| Total tax           | $3.14             | $3.13      |
+
+***
+
+## Tax on credits and refunds
+
+### Refunds
+
+Refunds generate a refund invoice that acts as a credit memo.
+
+**Line item refunds** — Recurly calculates tax on the selected refund line items, maintaining the product identity so the correct tax amount is linked to the refunded credit on both the refund invoice and the Adjustments export. This is the recommended approach.
+
+**Open amount refunds** — Recurly calculates the tax to be returned so the net refund matches the requested amount. Since these are at the invoice level, line item associations are lost.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Rounding issues with multiple partial refunds</strong>Partial refunds including tax may cause rounding discrepancies where the final refund's tax is slightly higher than the original transaction — which can block the refund with an error. If this occurs, contact <a href="mailto:support@recurly.com">support@recurly.com</a>.</div>
+</div>
+
+### Immediate upgrades and downgrades
+
+Immediate subscription changes generate a single invoice that combines prorated charges for the new subscription and credits for the unused portion of the old one. Positive tax applies to new charges and negative tax applies to credits. The invoice's total tax is the net of both. Tax reporting through the Adjustments export reflects the correct amounts at the line item level.
+
+### Custom credit adjustments
+
+Recurly doesn't calculate tax on custom credit adjustments. To credit a customer and refund tax, issue a refund rather than creating a custom credit.
+
+***
+
+## Tax exports
+
+Detailed tax reporting at the line item level is available through the <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/adjustments-exports" target="_blank">Adjustments export</a>. This export itemizes state, county, local, and special tax rates and amounts as calculated by Avalara.
+
+Specialized tax reports and filings are available when you upgrade to your own Avalara AvaTax or Vertex account.
+
+***
+
+## Existing customer addresses
+
+Before activating tax collection, audit existing customer addresses to ensure they meet the minimum requirements for your taxable regions. Use the **Accounts** and **Billing Info** exports in the Reports section of the Admin Console to review postal codes and countries.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Notify existing customers before activating</strong>Existing customers in newly taxable regions will see taxes on their next invoice. Proactively communicating this change reduces surprise and complaints. Also note: if an existing customer makes an immediate subscription change before their first taxed renewal, the change invoice includes tax on new charges but not on returned credits — because the original charge was invoiced before tax collection began.</div>
+</div>
+
+***
+
+## Avalara downtime
+
+When Recurly can't reach Avalara to calculate tax, behavior varies by invoice type.
+
+**New sign-ups and purchases** — Blocked until Avalara responds. The customer sees: _"Tax service currently unavailable, please try again later."_
+
+To allow sign-ups to proceed without tax during Avalara downtime, go to **Configuration → Taxes → Tax Settings → Tax Service Settings** and disable **Require successful tax response for initial purchases**. Invoices created without tax during downtime must be handled by the merchant — it's not possible to add tax to an existing invoice. Recurly recommends merchants who disable this setting be prepared to absorb any missing tax rather than attempting to collect it from customers after the fact. Monitor for affected invoices using the Invoices — Summary export or the Invoices API.
+
+**Future subscriptions and renewals** — Recurly retries activation or renewal every hour until Avalara responds, honoring the original billing cycle dates. If Avalara returns an error (rather than being unreachable) during a renewal, the renewal proceeds and the invoice is created without tax.
+
+To check Avalara's operational status, visit <a href="http://status.avalara.com/" target="_blank">Avalara's status page</a> and review the Avalara AvaTax section under "Tax Calculation Service."
+
+### Determining if the tax service was used
+
+- In the API and exports, the `used_tax_service` boolean field indicates whether the tax service was used for a given invoice.
+- In the Admin Console, a note on the invoice indicates whether the tax service was used.
+
+***
+
+## Sandbox testing
+
+In sandbox mode, both preview and final invoices use Recurly's internal rate tables instead of Avalara. In production, Avalara handles final invoice tax calculations and Recurly's internal tables are used for checkout previews only. As a result, sandbox mode can't test Avalara's address validation, and minor differences in applied tax rates may occur compared to production.
+
+# Go-live checklist
+
+Follow these steps before enabling tax collection on your production site. Test all configurations in sandbox mode first.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Activate taxable regions</h4><p>Enable the <a href="#supported-tax-regions-and-rates">countries and/or states/provinces</a> where you plan to collect tax. This makes tax options visible on plan and account pages.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Choose the customer taxable address</h4><p>Decide which <a href="#customer-taxable-address">customer address</a> to use for tax calculation — billing address or account address — and configure your Tax Settings accordingly.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Audit existing customer addresses</h4><p>Ensure existing and new customer addresses meet the <a href="#minimum-address-requirements-by-region">minimum requirements</a> for your taxable regions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Verify your merchant address</h4><p>Confirm your <a href="#your-merchant-address">merchant address</a> in Business Entities includes a postal code and country — required for tax calculations to work.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Configure taxable addresses per business entity</h4><p>On each business entity, set the <a href="#setting-taxable-addresses">Origin and Destination address</a> configuration for tax calculation.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">6</div>
+    <div><h4>Mark tax-exempt customers</h4><p>Identify <a href="#exempt-customers">tax-exempt customers</a> and mark their accounts accordingly before going live.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">7</div>
+    <div><h4>Enable tax collection on plans</h4><p>Edit each plan that should collect tax and enable <strong>Collect Tax</strong>. This applies to new invoices only — existing invoices are unaffected.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">8</div>
+    <div><h4>Add tax previews to checkout</h4><p>Update your checkout pages to include <a href="#tax-previews-at-checkout">tax previews</a> so customers see estimated tax before completing a purchase.</p></div>
+  </div>
+</div>
+
+# Supported tax regions and rates
+
+## Africa
+
+| Country                          | Tax region | Tax rate | Tax type |
+| :------------------------------- | :--------- | :------- | :------- |
+| Algeria                          | DZ         | 19%      | VAT      |
+| Angola                           | AO         | 14%      | VAT      |
+| Benin                            | BJ         | 18%      | VAT      |
+| Botswana                         | BW         | 12%      | GST      |
+| Burkina Faso                     | BF         | 18%      | VAT      |
+| Burundi                          | BI         | 18%      | GST      |
+| Cameroon                         | CM         | 19.25%   | GST      |
+| Canary Islands                   | IC         | 7%       | VAT      |
+| Cape Verde                       | CV         | 15%      | GST      |
+| Democratic Republic of the Congo | CD         | 16%      | VAT      |
+| Côte d'Ivoire                    | CI         | 18%      | VAT      |
+| Egypt                            | EG         | 14%      | VAT      |
+| Ethiopia                         | ET         | 15%      | GST      |
+| Ghana                            | GH         | 15%      | GST      |
+| Kenya                            | KE         | 16%      | VAT      |
+| Lesotho                          | LS         | 15%      | GST      |
+| Madagascar                       | MG         | 20%      | GST      |
+| Mauritania                       | MR         | 16%      | GST      |
+| Mozambique                       | MZ         | 16%      | GST      |
+| Namibia                          | NA         | 15%      | GST      |
+| Nigeria                          | NG         | 15%      | GST      |
+| Rwanda                           | RW         | 18%      | GST      |
+| Senegal                          | SN         | 18%      | GST      |
+| South Africa                     | ZA         | 15%      | VAT      |
+| Tanzania                         | TZ         | 18%      | GST      |
+| Togo                             | TG         | 18%      | VAT      |
+| Uganda                           | UG         | 18%      | GST      |
+| Zambia                           | ZM         | 16%      | GST      |
+| Zimbabwe                         | ZW         | 14.5%    | GST      |
+
+## Asia
+
+| Country                      | Tax region | Tax rate | Tax type |
+| :--------------------------- | :--------- | :------- | :------- |
+| Armenia                      | AM         | 20%      | VAT      |
+| China                        | CN         | 13%      | VAT      |
+| Hong Kong                    | HK         | 0%       | GST      |
+| Indonesia                    | ID         | 11%      | VAT      |
+| Iran                         | IR         | 9%       | GST      |
+| Israel                       | IL         | 17%      | VAT      |
+| Japan                        | JP         | 10%      | VAT      |
+| Jordan                       | JO         | 16%      | GST      |
+| Kazakhstan                   | KZ         | 12%      | VAT      |
+| Kyrgyzstan                   | KG         | 12%      | VAT      |
+| Republic of Korea (South)    | KR         | 10%      | VAT      |
+| Lebanon                      | LB         | 11%      | VAT      |
+| Maldives                     | MV         | 8%       | GST      |
+| Malaysia                     | MY         | 10%      | GST      |
+| Nepal                        | NP         | 13%      | GST      |
+| Pakistan                     | PK         | 17%      | GST      |
+| Palestine Occupied Territory | PS         | 16%      | GST      |
+| Philippines                  | PH         | 12%      | GST      |
+| Singapore                    | SG         | 8%       | GST      |
+| Sri Lanka                    | LK         | 15%      | GST      |
+| Taiwan                       | TW         | 5%       | GST      |
+| Thailand                     | TH         | 7%       | GST      |
+| United Arab Emirates         | AE         | 5%       | VAT      |
+| Vietnam                      | VN         | 8%       | VAT      |
+
+## Australia
+
+Enabling tax collection in Australia applies 10% GST to all taxable plan, add-on, or adjustment line items for Australian customers.
+
+| Tax region | Tax type | Tax rate | Minimum address requirement |
+| :--------- | :------- | :------- | :-------------------------- |
+| AU         | GST      | 10%      | Country                     |
+
+### ABN and ACN
+
+When a customer's country is set to Australia, the VAT number field is labeled **ABN / ACN** across invoices, Checkout, Hosted Pages, and the Admin Console. Values entered are validated as either nine or 11 digits and saved in the formats "000 000 000" or "00 000 000 000," respectively.
+
+To identify customers with an active, GST-registered ABN for Australian GST exemption, contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a> to enable ABN validation through the Australian Business Register on your site.
+
+### AU GST on digital services
+
+Effective July 1, 2017, Australia requires non-resident businesses selling digital services above a certain threshold to register and collect GST. Businesses with an active, GST-registered ABN are exempt.
+
+When ABN validation is enabled, 11-digit values in the ABN/ACN field are checked against the Australian Business Register API. Invalid ABNs are rejected. Valid, GST-registered ABNs for cross-border sales (where your Site Settings country is outside Australia) result in no GST being applied. ABNs that are valid but not GST-registered still appear on the invoice, but GST is charged.
+
+Recurly revalidates ABNs every six months. If a revalidation finds the ABN no longer qualifies, GST is applied to the next invoice.
+
+**Test ABNs for sandbox mode:**
+
+- `10 120 000 004` — Active and GST-registered; exempt from tax
+- `10 000 000 000` — Valid ABN, not GST-registered; taxed
+- `51 824 753 555` — Not a valid ABN; not saved
+
+To require two pieces of matching location evidence from Australian customers, enable <a href="/guides/recurring-billing/taxes/tax-location-validation" target="_blank">Tax Location Validation for Australia</a>.
+
+## Europe
+
+### Non-EU Europe
+
+Enabling tax collection in a non-EU European country applies that country's VAT rate to all taxable plan, add-on, or adjustment line items. All non-EU European countries have a tax type of VAT and a minimum address requirement of Country.
+
+| Country                | Tax region | Tax rate |
+| :--------------------- | :--------- | :------- |
+| Albania                | AL         | 20%      |
+| Åland Islands          | AX         | 24%      |
+| Andorra                | AD         | 4.5%     |
+| Belarus                | BY         | 20%      |
+| Bosnia and Herzegovina | BA         | 17%      |
+| Georgia                | GE         | 18%      |
+| Iceland                | IS         | 24%      |
+| Isle of Man            | IM         | 0%       |
+| Kosovo                 | XK         | 18%      |
+| Latvia                 | LV         | 21%      |
+| Liechtenstein          | LI         | 7.7%     |
+| Moldova                | MD         | 20%      |
+| Monaco                 | MC         | 20%      |
+| Montenegro             | ME         | 19%      |
+| Northern Ireland       | XI         | 20%      |
+| Norway                 | NO         | 25%      |
+| Russia                 | RU         | 20%      |
+| Serbia                 | RS         | 20%      |
+| Switzerland            | CH         | 7.7%     |
+| Turkey                 | TR         | 18%      |
+| Ukraine                | UA         | 20%      |
+
+#### Russia
+
+If you need to collect a State Registration Number (SRN) instead of a VAT number for Russia, contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a> to display the VAT Number field as "SRN / SRNIE" when the associated address country is Russia. This applies across invoices, the Admin Console, Checkout, and Hosted Pages. Values saved in this field are validated to be 13 or 15 digits.
+
+### European Union
+
+The EU VAT system has its own dedicated page. See <a href="https://docs.recurly.com/eu-vat-2015" target="_blank">European Union VAT</a> for full details.
+
+### United Kingdom
+
+| Location       | Tax region | Tax rate | Tax type | Minimum address requirement |
+| :------------- | :--------- | :------- | :------- | :-------------------------- |
+| United Kingdom | GB         | 20%      | VAT      | Country                     |
+
+## Oceania
+
+### New Zealand
+
+Enabling tax collection in New Zealand applies 15% GST to all taxable plan, add-on, or adjustment line items for New Zealand customers.
+
+| Country     | Tax region | Tax rate | Tax type | Minimum address requirement |
+| :---------- | :--------- | :------- | :------- | :-------------------------- |
+| New Zealand | NZ         | 15%      | GST      | Country                     |
+
+Starting October 1, 2016, New Zealand requires non-resident digital services businesses to collect GST from non-business customers. To enforce collection of two matching pieces of location evidence, enable <a href="/guides/recurring-billing/taxes/tax-location-validation" target="_blank">Tax Location Validation for New Zealand</a>.
+
+Recurly supports collecting GST Numbers from New Zealand business customers. Enter the GST Number in the VAT Number field — for New Zealand addresses, the field is labeled "GST Number" and validated as eight or nine digits. When a valid GST Number is provided and your Site Settings country is not New Zealand, no GST is applied.
+
+## North America
+
+### Canada
+
+Activating Canada applies 5% GST to all taxable line items for Canadian customers. Additional provincial taxes (PST, HST, or QST) apply when you enable specific provinces as taxable sub-regions. To collect GST only across all provinces, enable Canada without selecting any specific province.
+
+| Tax region | Tax type                          | Minimum address requirement |
+| :--------- | :-------------------------------- | :-------------------------- |
+| CA         | GST / GST+PST / GST+HST / GST+QST | Country and postal code     |
+
+Provincial tax types by province:
+
+| Province                  | Tax type |
+| :------------------------ | :------- |
+| Alberta                   | GST      |
+| British Columbia          | GST/PST  |
+| Manitoba                  | GST/PST  |
+| New Brunswick             | GST/HST  |
+| Newfoundland and Labrador | GST/HST  |
+| Northwest Territories     | GST      |
+| Nova Scotia               | GST/HST  |
+| Nunavut                   | GST      |
+| Ontario                   | GST/HST  |
+| Prince Edward Island      | GST/HST  |
+| Quebec                    | GST/QST  |
+| Saskatchewan              | GST/PST  |
+| Yukon                     | GST      |
+
+Customers in a province not enabled in your Canada tax settings are charged GST only. Some Canadian cities have unique exemption rules (e.g., Lloydminster spans Alberta and Saskatchewan and is PST-exempt). Recurly Taxes accounts for city-specific rules in production; sandbox mode and production previews calculate at the provincial level only.
+
+### United States
+
+Enabling US tax collection applies sales tax — including state, county, local, and special taxes — to all taxable line items for customers in the states you enable. The tax region always shows as the two-letter state code.
+
+The minimum address requirement for US Sales Tax is postal code and country.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Collect the full street address for more accurate US rates</strong>US sales tax jurisdiction lines can run down to the street level — two houses across the street in the same postal code may be in different jurisdictions. While postal code and country are the minimum requirement, collecting the full street address produces more accurate tax rates.</div>
+</div>
+
+## Caribbean and Central America
+
+| Country            | Tax region | Tax rate | Tax type |
+| :----------------- | :--------- | :------- | :------- |
+| Barbados           | BB         | 17.5%    | VAT      |
+| Costa Rica         | CR         | 13%      | VAT      |
+| Dominican Republic | DO         | 18%      | VAT      |
+| Guadeloupe         | GP         | 8.5%     | GST      |
+| Guatemala          | GT         | 12%      | GST      |
+| Honduras           | HN         | 15%      | GST      |
+| Jamaica            | JM         | 15%      | GST      |
+| Martinique         | MQ         | 8.5%     | VAT      |
+| Mexico             | MX         | 16%      | GST      |
+| Nicaragua          | NI         | 15%      | GST      |
+| Panama             | PA         | 7%       | GST      |
+| El Salvador        | SV         | 13%      | GST      |
+
+## South America
+
+| Country             | Tax region | Tax rate | Tax type |
+| :------------------ | :--------- | :------- | :------- |
+| Argentina           | AR         | 21%      | GST      |
+| Bolivia             | BO         | 13%      | GST      |
+| Chile               | CL         | 19%      | VAT      |
+| Colombia            | CO         | 19%      | VAT      |
+| Curacao             | CW         | 6%       | GST      |
+| Ecuador             | EC         | 12%      | VAT      |
+| Falkland Islands    | FK         | 0%       | GST      |
+| Guyana              | GY         | 14%      | GST      |
+| Paraguay            | PY         | 10%      | GST      |
+| Peru                | PE         | 18%      | GST      |
+| Suriname            | SR         | 10%      | GST      |
+| Trinidad and Tobago | TT         | 12.5%    | GST      |
+| Uruguay             | UY         | 22%      | GST      |
+| Venezuela           | VE         | 16%      | GST      |
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Chile</strong>Recurly does not support RUT number validation, format validation, or IP address validation for Chile.</div>
+</div>
+
+<br />

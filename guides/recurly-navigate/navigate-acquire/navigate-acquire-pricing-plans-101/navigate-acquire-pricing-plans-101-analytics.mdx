@@ -1,0 +1,560 @@
+---
+title: 'Pricing & Plans 101: Tracking success'
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* HOST-THEME BACKGROUND OVERRIDE */
+body { background: #ffffff !important; }
+
+/* ── GLOBAL CSS IMMUNITY BLOCK ── */
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+/* FA6 font restore — (0,0,2,0) beats wildcard (0,0,1,0) */
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+.rc-guide {
+  --yellow:    #FFD706;
+  --orange:    #FF8200;
+  --offblack:  #0D0D0B;
+  --darkgray:  #32312D;
+  --gray:      #807D73;
+  --lightgray: #D1CFC4;
+  --brightgray:#F2F1EA;
+  --offwhite:  #FCFBF7;
+  font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+  color: #0D0D0B !important;
+  background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+
+/* ── NAVIGATE MASTER ARMOR ── */
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a,
+.rc-guide a:link,
+.rc-guide a:visited,
+.rc-guide a:active {
+  color: #008CFF !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: unset !important;
+  border-bottom: 0 !important;
+}
+.rc-guide a:hover {
+  color: #0067BE !important;
+  text-decoration: underline !important;
+  text-decoration-color: #008CFF !important;
+  text-underline-offset: 2px !important;
+}
+
+/* FA6 ICON HELPERS */
+.rc-fa-announce { color: var(--offblack); font-size: 1rem; flex-shrink: 0; }
+.rc-fa-dark    { color: var(--yellow) !important; font-size: 1.3rem; display: block; margin-bottom: 10px; }
+.rc-fa-light   { color: var(--offblack); font-size: 1.3rem; display: block; margin-bottom: 10px; }
+.rc-fa-section { color: var(--offblack); font-size: 1rem; }
+
+/* TOP NAV */
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link { color: #807D75 !important; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 6px; transition: color .2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; text-decoration: none !important; }
+
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* HERO */
+.rc-hero {
+  background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)),
+              url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center;
+  background-color: var(--offblack); background-size: cover;
+  color: #fff; padding: 48px 40px 44px; text-align: center; border-radius: 16px; margin-bottom: 0;
+}
+.rc-lp-pillar-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,215,6,0.20); border: 1px solid rgba(255,215,6,0.45);
+  color: var(--yellow); font-size: .75rem; font-weight: 800;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: var(--offwhite); margin: 0; }
+.rc-hero > p { font-size: 1rem; opacity: .85; max-width: 640px; margin: 0 auto; color: var(--lightgray); line-height: 1.6; }
+
+/* NAV */
+details.rc-sticky-nav-wrap {
+  position: relative;
+  z-index: 1;
+  background-color: var(--yellow);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 24px 0 48px 0; border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08); overflow: hidden;
+}
+details.rc-sticky-nav-wrap > summary { list-style: none; display: flex; align-items: center; padding: 15px 24px; cursor: pointer; user-select: none; }
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+.rc-nav-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .88rem; letter-spacing: 0.6px; text-transform: uppercase; color: var(--offblack); }
+.rc-nav-chevron { font-size: .72rem; color: var(--offblack); opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link {
+  color: var(--offblack) !important; font-weight: 700; font-size: .83rem; letter-spacing: 0.4px;
+  text-transform: uppercase; padding: 7px 14px; border-radius: 7px; transition: all .18s;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: var(--offblack) !important; text-decoration: none !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--offblack); color: var(--yellow); font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: var(--offblack) !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: var(--offblack) !important; text-decoration: none !important; }
+
+/* CONTENT SECTIONS */
+.rc-lp-section { margin-bottom: 48px; }
+.rc-lp-section h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 20px; color: var(--offblack); display: flex; align-items: center; gap: 12px; }
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: var(--lightgray); }
+.rc-lp-section p { font-size: .95rem; line-height: 1.65; color: var(--darkgray); margin: 0 0 16px; }
+
+/* CALLOUTS */
+.rc-callout { border-radius: 10px; padding: 16px 20px; margin: 20px 0; display: flex; gap: 14px; align-items: flex-start; }
+.rc-callout + .rc-callout { margin-top: 12px; }
+.rc-callout-icon { font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; }
+.rc-callout-body { flex: 1; }
+.rc-callout-body > strong { font-size: .88rem; font-weight: 800; display: block; margin-bottom: 4px; }
+.rc-callout-body p { font-size: .9rem; line-height: 1.55; margin: 0; color: var(--darkgray); }
+.rc-callout-tip { background: var(--brightgray); border-left: 4px solid var(--offblack); }
+.rc-callout-tip .rc-callout-body > strong { color: var(--offblack); }
+.rc-callout-warning { background: rgba(255,215,6,0.12); border-left: 4px solid var(--yellow); }
+.rc-callout-warning .rc-callout-body > strong { color: var(--darkgray); }
+.rc-callout-caution { background: var(--warning-bg); border-left: 4px solid var(--warning-fg); }
+.rc-callout-caution .rc-callout-body > strong { color: var(--darkgray); }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide .rc-callout-body a { color: #008CFF !important; font-weight: 600; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide .rc-callout-body a:hover { color: #0067BE !important; text-decoration: underline !important; text-decoration-color: #008CFF !important; text-underline-offset: 2px !important; }
+
+/* KPI CARDS — 2-column grid with metric + definition layout */
+.rc-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 32px; }
+.rc-kpi-card { background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 6px; }
+.rc-kpi-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.rc-kpi-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--offblack); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.rc-kpi-icon i { color: var(--yellow) !important; font-size: .85rem; }
+.rc-kpi-name { font-size: .98rem; font-weight: 800; color: var(--offblack); }
+.rc-kpi-where { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--gray); background: var(--brightgray); padding: 2px 8px; border-radius: 10px; display: inline-block; width: fit-content; }
+.rc-kpi-def { font-size: .88rem; color: var(--darkgray); line-height: 1.6; margin: 0; }
+.rc-kpi-watch { font-size: .82rem; color: var(--gray); line-height: 1.5; border-top: 1px solid var(--brightgray); padding-top: 10px; margin-top: 4px; }
+.rc-kpi-watch strong { color: var(--darkgray); }
+
+/* TABLE */
+.rc-table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--lightgray); margin: 20px 0 32px; }
+.rc-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.rc-table thead tr th { background: var(--offblack) !important; color: var(--offwhite) !important; font-weight: 700; padding: 12px 16px; text-align: left; border: 0; }
+.rc-table tbody tr td { background: var(--offwhite) !important; color: var(--darkgray) !important; padding: 11px 16px; border-bottom: 1px solid var(--brightgray); vertical-align: top; line-height: 1.55; }
+.rc-table tbody tr:last-child td { border-bottom: 0; }
+.rc-table tbody tr td:first-child { font-weight: 700; color: var(--offblack) !important; width: 28%; }
+
+/* NUMBERED STEPS */
+.rc-steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0 0; }
+.rc-step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--brightgray); }
+.rc-step:last-child { border-bottom: none; }
+.rc-step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--offblack); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+.rc-step-content h4 { font-size: 1.02rem; font-weight: 800; color: var(--offblack); margin: 0 0 6px; line-height: 1.3; }
+.rc-step-content p { font-size: .92rem; color: var(--gray); line-height: 1.6; margin: 0; }
+.rc-step-content strong { color: var(--darkgray); }
+
+/* ACCENT CARD */
+.rc-accent-card { background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+.rc-accent-card.rc-accent-yellow { border-left: 4px solid var(--yellow); }
+.rc-accent-card h4 { font-size: 1rem; font-weight: 800; color: var(--offblack); margin: 0 0 12px; }
+.rc-accent-card ul { font-size: .9rem; color: var(--gray); line-height: 1.75; padding-left: 20px; margin: 0; }
+.rc-accent-card ul li { margin-bottom: 4px; }
+.rc-accent-card ul li strong { color: var(--darkgray); }
+
+/* OH CTA */
+.rc-oh-cta { background: var(--offblack); border: 2px solid var(--yellow); border-radius: 14px; padding: 32px 36px; margin: 32px 0; }
+.rc-oh-cta h4 { color: var(--yellow); font-size: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px; }
+.rc-oh-cta p { color: var(--lightgray); font-size: .95rem; line-height: 1.6; margin: 0 0 20px; }
+.rc-oh-cta p strong { color: var(--offwhite); }
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-oh-btn { background: var(--yellow); color: var(--offblack) !important; text-decoration: none !important; padding: 12px 24px; border-radius: 10px; font-weight: 800; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; transition: all .2s; border: 2px solid var(--yellow) !important; border-bottom: 2px solid var(--yellow) !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-oh-btn:hover { background: transparent !important; color: var(--yellow) !important; border: 2px solid var(--yellow) !important; border-bottom: 2px solid var(--yellow) !important; text-decoration: none !important; }
+
+/* PATH NAV */
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 16px; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: var(--lightgray); letter-spacing: .5px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-prev { background: transparent; color: var(--offblack) !important; text-decoration: none !important; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--lightgray) !important; border-bottom: 2px solid var(--lightgray) !important; transition: all .2s; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-prev:hover { border: 2px solid var(--offblack) !important; border-bottom: 2px solid var(--offblack) !important; text-decoration: none !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path { background: var(--yellow); color: var(--offblack) !important; text-decoration: none !important; padding: 13px 28px; border-radius: 10px; font-weight: 800; font-size: .95rem; display: inline-flex; align-items: center; gap: 8px; transition: all .2s; border: 2px solid var(--yellow) !important; border-bottom: 2px solid var(--yellow) !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover { background: transparent !important; color: var(--offblack) !important; border: 2px solid var(--yellow) !important; border-bottom: 2px solid var(--yellow) !important; text-decoration: none !important; }
+
+/* RESOURCES */
+.rc-resources { background: var(--brightgray); border-left: 4px solid var(--yellow); border-radius: 10px; padding: 20px 24px; margin: 32px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--gray); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link { color: #807D75 !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: var(--lightgray) !important; font-weight: 500; font-size: .88rem; transition: all .18s; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover { color: var(--offblack) !important; text-decoration: underline !important; text-decoration-color: var(--yellow) !important; }
+
+/* FOOTER */
+.rc-footer-nav { border-top: 1px solid var(--lightgray); padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: var(--darkgray); background: var(--brightgray); padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link { color: #807D75 !important; text-decoration: none !important; font-weight: 600; font-size: .88rem; transition: color .2s ease; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; text-decoration: none !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--brightgray); }
+
+/* ANNOUNCE BAR */
+.rc-announce-bar { display: none; background: var(--yellow); color: var(--offblack); align-items: center; justify-content: space-between; padding: 10px 20px; font-size: .88rem; font-weight: 600; border-radius: 10px; margin-bottom: 16px; gap: 12px; line-height: 1.4; }
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-inner { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link { color: var(--offblack) !important; font-weight: 800; white-space: nowrap; padding: 4px 12px; background: rgba(0,0,0,0.10); border-radius: 6px; transition: background 0.2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { background: rgba(0,0,0,0.20); color: var(--offblack) !important; text-decoration: none !important; }
+
+@media(max-width:1300px) {
+  .rc-lp-nav { justify-content: center !important; gap: 12px; }
+  .rc-lp-nav-indicator { width: 100% !important; text-align: center; }
+}
+
+@media(max-width:768px){
+  .rc-content-wrap { padding: 0 20px; }
+  .rc-top-nav { padding: 16px 20px; }
+  .rc-hero { padding: 36px 20px; }
+  .rc-lp-hero-title h1 { font-size: 1.8rem; }
+  .rc-oh-cta { padding: 24px 20px; }
+  .rc-lp-nav { flex-wrap: wrap; justify-content: center; }
+  .rc-lp-nav-indicator { width: 100%; text-align: center; }
+  .rc-kpi-grid { grid-template-columns: 1fr; }
+  .rc-table-wrap { font-size: .82rem; }
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-path,
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-prev {
+    padding: 10px 16px !important;
+    font-size: 0.82rem !important;
+  }
+}
+</style>
+
+<div class="rc-guide">
+
+  <!-- Announce bar -->
+  <div class="rc-announce-bar">
+    <div class="rc-announce-inner">
+      <i class="fa-regular fa-calendar-days rc-fa-announce"></i>
+      <strong>Upcoming:</strong> Review your analytics questions with Recurly CSMs at Global Office Hours.
+      <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-announce-link">Register now →</a>
+    </div>
+  </div>
+
+  <!-- Back link -->
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire" class="rc-back-link">← Back to Acquire</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <!-- Hero -->
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/d92be816a9e838fb46356e2547d5f8bb663dddb7b4a77cac37434efbd825e216-Acquire-icon-white.png" alt="Acquire"> Acquire · Pricing &amp; Plans 101
+      </div>
+      <div class="rc-lp-hero-title"><h1>Tracking success</h1></div>
+      <p>Your pricing and plan setup generates data from day one. This page covers the six metrics that tell you whether your plans are working, where to find them in Recurly, and what to look for as you grow.</p>
+    </div>
+
+    <!-- Nav -->
+    <details class="rc-sticky-nav-wrap" open>
+      <summary>
+        <span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span>
+      </summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101" class="rc-sticky-link">Path Overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-plans" class="rc-sticky-link"><span class="rc-step-badge">1</span> Plans</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-add-ons" class="rc-sticky-link"><span class="rc-step-badge">2</span> Add-ons</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-currency" class="rc-sticky-link"><span class="rc-step-badge">3</span> Currency</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-pricing-models" class="rc-sticky-link"><span class="rc-step-badge">4</span> Pricing models</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-trials" class="rc-sticky-link"><span class="rc-step-badge">5</span> Trials</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-analytics" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> Tracking success
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-review" class="rc-sticky-link"><span class="rc-step-badge">7</span> Review &amp; resources</a>
+        
+      </div></div></div>
+    </details>
+
+    <!-- Section: Where to find your analytics -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-chart-line rc-fa-section"></i> Where to find your analytics</h2>
+      <p>Recurly Analytics is available to all plans and requires the Analytics user role permission. Your plan and pricing data lives across multiple dashboards — each answers a different question about how your setup is performing.</p>
+
+      <div class="rc-table-wrap">
+        <table class="rc-table">
+          <thead>
+            <tr>
+              <th>Dashboard</th>
+              <th>Where to find it</th>
+              <th>What it answers</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr>
+              <td>Plan KPI</td>
+              <td><strong>Analytics → Plans, Pricing, & Promotions → Plan KPI</strong></td>
+              <td>Acquisition rate, churn rate, ARPU per plan.</td>
+            </tr>
+            <tr>
+              <td>Subscriptions by Plan</td>
+              <td><strong>Analytics → Plans, Pricing &amp; Promotions → Subscriptions by Plan</strong></td>
+              <td>Subscriber distribution across plans.</td>
+            </tr>
+            <tr>
+              <td>Churn Trends by Plan</td>
+              <td><strong>Analytics → Plans, Pricing &amp; Promotions → Churn Trends by Plan</strong></td>
+              <td>Churn metrics segmented by plan.</td>
+            </tr>
+            <tr>
+              <td>Retention by Plan</td>
+              <td><strong>Analytics → Plans, Pricing &amp; Promotions → Retention by Plan</strong></td>
+              <td>Subscriber duration and loyalty by plan.</td>
+            </tr>
+            <tr>
+              <td>Trials by Plan</td>
+              <td><strong>Analytics → Plans, Pricing &amp; Promotions → Trials by Plan</strong></td>
+              <td>Trial conversion rates by plan, with growth breakout.</td>
+            </tr>
+            <tr>
+              <td>MMR by Plan</td>
+              <td><strong>Analytics → Plans, Pricing &amp; Promotions → MMR by Plan</strong></td>
+              <td>Monthly recurring revenue per plan, with growth breakout.</td>
+            </tr>
+            <tr>
+              <td>LTV by Plan</td>
+              <td><strong>Analytics → Plans, Pricing &amp; Promotions → LTV by Plan</strong></td>
+              <td>Lifetime value of subscribers per plan.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rc-callout rc-callout-tip">
+        <div class="rc-callout-icon"><i class="fa-solid fa-lightbulb" style="color:var(--offblack);"></i></div>
+        <div class="rc-callout-body">
+          <strong>Set your industry for benchmarking</strong>
+          <p>Go to <strong>Configuration → Analytics settings</strong> and select the industry category that best matches your business. Recurly will compare your key metrics against industry benchmarks — helping you calibrate whether your numbers are strong, average, or need attention relative to peers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: Six metrics -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-gauge-high rc-fa-section"></i> Six metrics to track from launch</h2>
+      <p>These are the metrics most directly shaped by how you've set up your plans, pricing models, and trials. Review them within the first 30 days of launch and continue monitoring monthly.</p>
+
+      <div class="rc-kpi-grid">
+
+        <div class="rc-kpi-card">
+          <div class="rc-kpi-card-top">
+            <div class="rc-kpi-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+            <span class="rc-kpi-name">MRR</span>
+          </div>
+          <span class="rc-kpi-where">MRR by Plan</span>
+          <p class="rc-kpi-def">Monthly Recurring Revenue — the predictable revenue your active subscriptions generate each month, normalized to a monthly figure regardless of billing interval.</p>
+          <p class="rc-kpi-watch"><strong>Watch for:</strong> Which plans drive the most MRR. If annual plans represent a small share of MRR relative to subscriber count, your annual plan pricing or discounting may need adjustment.</p>
+        </div>
+
+        <div class="rc-kpi-card">
+          <div class="rc-kpi-card-top">
+            <div class="rc-kpi-icon"><i class="fa-solid fa-users"></i></div>
+            <span class="rc-kpi-name">Active subscribers</span>
+          </div>
+          <span class="rc-kpi-where">Analytics Dashboard</span>
+          <p class="rc-kpi-def">The count of unique subscribers with at least one active subscription. Note: a subscriber with multiple subscriptions is counted once, not once per subscription.</p>
+          <p class="rc-kpi-watch"><strong>Watch for:</strong> Subscriber count growing faster or slower than MRR. Fast subscriber growth with slow MRR growth may signal that lower-priced plans are acquiring more than higher-value ones.</p>
+        </div>
+
+        <div class="rc-kpi-card">
+          <div class="rc-kpi-card-top">
+            <div class="rc-kpi-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+            <span class="rc-kpi-name">Churn rate</span>
+          </div>
+          <span class="rc-kpi-where">Plans, Pricing &amp; Promotions</span>
+          <p class="rc-kpi-def">The percentage of subscribers who cancelled in a given period relative to active subscribers at the start of that period. Available at the per-plan level in the Plans, Pricing &amp; Promotions dashboard.</p>
+          <p class="rc-kpi-watch"><strong>Watch for:</strong> High churn on a specific plan shortly after the first charge. This often signals a pricing perception problem — subscribers don't feel the value matched the price when the trial ended.</p>
+        </div>
+
+        <div class="rc-kpi-card">
+          <div class="rc-kpi-card-top">
+            <div class="rc-kpi-icon"><i class="fa-solid fa-user-plus"></i></div>
+            <span class="rc-kpi-name">Acquisition rate</span>
+          </div>
+          <span class="rc-kpi-where">Plans, Pricing &amp; Promotions</span>
+          <p class="rc-kpi-def">The rate at which new subscribers are joining each plan. Tracked per plan so you can compare which plans are converting visitors into subscribers most effectively.</p>
+          <p class="rc-kpi-watch"><strong>Watch for:</strong> One plan dramatically outperforming others. This is often your natural "anchor" plan — consider whether its pricing and packaging should be more prominent in your checkout experience.</p>
+        </div>
+
+        <div class="rc-kpi-card">
+          <div class="rc-kpi-card-top">
+            <div class="rc-kpi-icon"><i class="fa-solid fa-chart-bar"></i></div>
+            <span class="rc-kpi-name">ARPS</span>
+          </div>
+          <span class="rc-kpi-where">Analytics Dashboard</span>
+          <p class="rc-kpi-def">Average Revenue Per Subscriber — MRR at end of month divided by active subscribers at end of month. A simple measure of how much each subscriber contributes on average.</p>
+          <p class="rc-kpi-watch"><strong>Watch for:</strong> ARPS trending down over time while subscriber count grows. This indicates newer subscribers are joining at lower-priced plans, which may be intentional or may signal your higher-value plans need better visibility.</p>
+        </div>
+
+        <div class="rc-kpi-card">
+          <div class="rc-kpi-card-top">
+            <div class="rc-kpi-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+            <span class="rc-kpi-name">Trial conversion rate</span>
+          </div>
+          <span class="rc-kpi-where">Plans, Pricing &amp; Promotions</span>
+          <p class="rc-kpi-def">The percentage of trial subscribers who convert to paid at the end of their trial period. Tracked per plan so you can compare card-required vs. cardless trials directly.</p>
+          <p class="rc-kpi-watch"><strong>Watch for:</strong> Conversion rates below 34% — the approximate industry average. If you're consistently below this, review your trial length, onboarding experience, and the 3-day pre-trial-end communication.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section: MRR growth breakout -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-magnifying-glass-chart rc-fa-section"></i> Reading the MRR growth breakout</h2>
+      <p>The MRR by Plan dashboard breaks net MRR movement into five categories. Understanding each one helps you diagnose whether your pricing structure is working as intended.</p>
+
+      <div class="rc-table-wrap">
+        <table class="rc-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>What it means</th>
+              <th>What it tells you about your plans</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>New business MRR</td>
+              <td>Revenue from subscribers joining for the first time</td>
+              <td>Your acquisition plans and trial setup are working if this grows steadily</td>
+            </tr>
+            <tr>
+              <td>Expansion MRR</td>
+              <td>Revenue from existing subscribers upgrading or adding add-ons</td>
+              <td>Your add-on architecture and plan upgrade path are generating incremental revenue</td>
+            </tr>
+            <tr>
+              <td>Contraction MRR</td>
+              <td>Revenue lost from existing subscribers downgrading</td>
+              <td>Subscribers are stepping down to lower-priced plans — check whether your mid-tier plans are priced to retain</td>
+            </tr>
+            <tr>
+              <td>Churn MRR</td>
+              <td>Revenue lost from subscribers cancelling entirely</td>
+              <td>The cost of voluntary and involuntary churn — the primary metric to monitor for pricing-driven cancellations</td>
+            </tr>
+            <tr>
+              <td>Reactivation MRR</td>
+              <td>Revenue from previously churned subscribers returning</td>
+              <td>Former subscribers coming back — often a signal that win-back pricing or offers are working</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rc-accent-card rc-accent-yellow">
+        <h4>A healthy growth picture</h4>
+        <ul>
+          <li><strong>New business and expansion MRR exceed contraction and churn MRR.</strong> Net MRR is positive — your plan architecture is generating more than it's losing.</li>
+          <li><strong>Expansion MRR grows over time.</strong> Subscribers are finding more value and purchasing add-ons or upgrading — a direct signal that your add-on and plan structure is working.</li>
+          <li><strong>Churn MRR is concentrated in lower-priced plans.</strong> Higher-value plans retain better; lower-priced plans churn more but are also easier to replace with new acquisition.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Office Hours CTA -->
+    <div class="rc-oh-cta">
+      <h4><i class="fa-solid fa-headset rc-fa-dark"></i>Want help interpreting your numbers?</h4>
+      <p>It's one thing to find the dashboards; it's another to know what the numbers mean for your specific plan structure. Bring your metrics to <strong>Global Office Hours</strong> — our CSMs can help you read them in context.</p>
+      <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-oh-btn">Register for Office Hours →</a>
+    </div>
+
+    <!-- Resources -->
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://docs.recurly.com/docs/recurly-analytics-overview" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Analytics overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/mmr-by-plan" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: MRR by Plan</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/plans-pricing-and-promotions-analytics" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Plans, Pricing &amp; Promotions analytics</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/analytics-settings" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Analytics settings</a>
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-solid fa-globe"></i> Join Global Office Hours</a>
+        <a href="mailto:support@recurly.com" class="rc-resource-link"><i class="fa-solid fa-headset"></i> Contact Recurly Support</a>
+      </div>
+    </div>
+
+    <!-- Path nav -->
+    <div class="rc-lp-nav">
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-trials" class="rc-btn-prev">← Trials</a>
+      <span class="rc-lp-nav-indicator">6 of 7</span>
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-review" class="rc-btn-path">Next: Review &amp; resources →</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+        <div class="rc-footer-section">
+          <span class="rc-footer-label">Pricing &amp; Plans 101</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101" class="rc-footer-link">Path Overview</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-plans" class="rc-footer-link">1. Plans</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-add-ons" class="rc-footer-link">2. Add-ons</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-currency" class="rc-footer-link">3. Currency</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-pricing-models" class="rc-footer-link">4. Pricing models</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-trials" class="rc-footer-link">5. Trials</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-analytics" class="rc-footer-link">6. Tracking success</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-101-review" class="rc-footer-link">7. Review &amp; resources</a>
+        </div>
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt="Home"> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+
+<br />
+```

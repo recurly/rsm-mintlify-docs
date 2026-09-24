@@ -1,0 +1,161 @@
+---
+title: Test gateway
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Recurly Test Gateway provides a simulated environment for testing payment configurations using predefined credit card and bank account numbers — without affecting live operations or real money. It's active by default on your Recurly sandbox.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#test-credit-card-numbers"><span className="rp-toc-num">3</span>Test credit card numbers</a>
+    <a className="rp-toc-pill" href="#test-bank-account-numbers-ach"><span className="rp-toc-num">4</span>Test bank account numbers (ACH)</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>A Recurly account with administrator access.</li>
+  <li>Familiarity with the Recurly dashboard and gateway configuration.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Test transactions do not involve real money and are for testing purposes only.</li>
+  <li>Test Gateway results may not always match live gateway outcomes.</li>
+  <li>Not all real-world error scenarios can be simulated.</li>
+  <li>Supported currencies: USD, AUD, BRL, CAD, CHF, CZK, DKK, EUR, GBP, HUF, ILS, INR, JPY, MXN, NOK, NZD, PLN, SEK, SGD, and ZAR.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Recurly Test Gateway provides a simulated environment for testing payment transactions using predefined credit card and bank account numbers. It helps merchants identify and resolve configuration issues before going live, without affecting real-world operations.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-flask" aria-hidden="true"></i></div>
+    <strong>Risk-free testing</strong>
+    <span>Test gateway configurations and transaction flows without real-world consequences.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-list-check" aria-hidden="true"></i></div>
+    <strong>Diverse scenarios</strong>
+    <span>Simulate a range of transaction outcomes — from successful payments to specific decline reasons.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>3DS2 ready</strong>
+    <span>Test 3DS2 challenge flows without actual cardholder authentication.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div>
+    <strong>Immediate feedback</strong>
+    <span>Get instant results to diagnose and troubleshoot integration issues quickly.</span>
+  </div>
+</div>
+
+# Test credit card numbers
+
+With the Test Gateway active, use the card numbers below to simulate specific transaction outcomes.
+
+## Successful transactions
+
+| Card number         | Outcome                                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 4111-1111-1111-1111 | Success                                                                                                        |
+| 4222-2222-2222-2220 | Success, but flagged for fraud review by the gateway. _(Relevant only to PayPal gateways in production mode.)_ |
+| 4000000000002024    | Successful purchase with a declined refund                                                                     |
+
+## Additional successful card numbers
+
+| Card number      | Card type                  |
+| ---------------- | -------------------------- |
+| 378282246310005  | American Express           |
+| 371449635398431  | American Express           |
+| 378734493671000  | American Express Corporate |
+| 30569309025904   | Diners Club                |
+| 38520000023237   | Diners Club                |
+| 6011000990139424 | Discover                   |
+| 3530111333300000 | JCB                        |
+| 3566002020360505 | JCB                        |
+| 5555555555554444 | Mastercard                 |
+| 5105105105105100 | Mastercard                 |
+| 2223000048400011 | 2 Series Mastercard        |
+| 4012888888881881 | Visa                       |
+| 4222222222222    | Visa                       |
+
+All numbers except 4222222222222 pass the Luhn validation algorithm.
+
+## Declined transactions
+
+| Card number         | Decline reason                                                                 |
+| ------------------- | ------------------------------------------------------------------------------ |
+| 4000-0000-0000-0002 | Declined by the gateway                                                        |
+| 4000-0000-0000-0010 | AVS failed on street address and postal code                                   |
+| 4000-0000-0000-0028 | AVS failed on street address                                                   |
+| 4000-0000-0000-0036 | AVS failed on postal code                                                      |
+| 4000-0000-0000-0044 | Advanced Verification failed (3DS, etc.)                                       |
+| 4000-0000-0000-0051 | Card number declined                                                           |
+| 4000-0000-0000-0069 | Expired card or expiration date mismatch                                       |
+| 4000-0000-0000-0077 | Insufficient funds                                                             |
+| 4000-0000-0000-0085 | Did not pass fraud filters                                                     |
+| 4000-0000-0000-0093 | Originating from a fraudulent IP address                                       |
+| 4000-0000-0000-1190 | Declined due to a fraud risk score                                             |
+| 4000-0000-0000-0101 | CVV / security code mismatch                                                   |
+| 4000-0000-0000-0119 | Declined by issuing bank — customer must contact their bank                    |
+| 4000-0000-0000-0200 | Invalid data or parameter                                                      |
+| 4222-2222-2222-2222 | Invalid card number (fails Luhn algorithm)                                     |
+| 4000-0000-0000-0226 | Invalid expiration date                                                        |
+| 4000-0000-0000-0309 | Gateway timeout                                                                |
+| 4000-0000-0000-0317 | Duplicate transaction                                                          |
+| 4000-0000-0000-0325 | Card type not accepted                                                         |
+| 4000-0000-0000-0341 | "Declined by Gateway" error returned, but Recurly allows the card to be stored |
+
+## 3DS2 test cards
+
+Use these cards to test 3DS2 challenge flows only. See the <a href="https://recurly.com/developers/guides/3ds2.html#3d-secure-20-integration-guide" target="_blank">3DS2 integration guide</a> for implementation details and instructions on using these cards.
+
+| Card number      | Description                                                                 |
+| ---------------- | --------------------------------------------------------------------------- |
+| 4000000000003220 | Triggers the 3DS2 challenge flow                                            |
+| 4000000000003063 | Triggers the device fingerprint flow                                        |
+| 4222222222222220 | Triggers an approved transaction requiring fraud review (frictionless flow) |
+| 4000008400001629 | Tests the 3DS2 dunning flow                                                 |
+
+# Test bank account numbers (ACH)
+
+ACH bank account testing uses Recurly's internal test gateway — it does not test your live gateway connection, but simulates transaction responses and invoice states for ACH payments and refunds.
+
+Add bank account details via the API, Hosted Account Management pages, or the **Make a Payment** button on the hosted invoice page.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> Adding bank account details through the Recurly Admin is not supported due to NACHA regulations on merchant access to customer account information.</div>
+</div>
+
+## Routing number
+
+| Routing number | Description                                                                    |
+| -------------- | ------------------------------------------------------------------------------ |
+| 123456780      | The only routing number that works in sandbox mode. Returns "BANK OF RECURLY." |
+
+## Successful bank account number
+
+| Account number | Description |
+| -------------- | ----------- |
+| 111111111      | Settled     |
+
+## Declined bank account numbers
+
+| Account number | Description                                    |
+| -------------- | ---------------------------------------------- |
+| 111111112      | Transaction canceled by the bank               |
+| 111111113      | Transaction canceled by the bank               |
+| 111111114      | Initially successful, then issues a chargeback |
+| 111111115      | If refunded, returns a successful refund       |
+| 111111116      | If refunded, returns a declined refund         |
+
+<br />

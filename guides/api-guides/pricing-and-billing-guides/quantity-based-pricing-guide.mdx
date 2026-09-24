@@ -1,0 +1,970 @@
+---
+title: Quantity-based pricing guide
+---
+
+# Overview
+
+This guide demonstrates how to set up **quantity-based pricing** (also known as tiered, volume, or stairstep pricing) for your Recurly plans. You’ll see how to create items, add them to a plan, and subscribe customers with varying quantities. Before getting started, review the [Quickstart Guide](https://docs.recurly.com/v1.1/docs/quick-start-guide#/) and [Subscription Management Guide](https://docs.recurly.com/v1.1/docs/managing-subscription-methods-guides#/) for foundational knowledge.
+
+### Prerequisites & limitations
+
+* A working Recurly setup with API credentials
+* Familiarity with Recurly’s core concepts (items, add-ons, plans, subscriptions)
+* Knowledge of JSON and RESTful API usage
+* Sufficient understanding of quantity-based pricing models (tiered, volume, stairstep)
+
+## Step 1: Creating an item
+
+In this guide, we'll create an item to use in plans and subscriptions. To do this, we'll use the [Create Item](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_item) endpoint. When creating items, you can specify various attributes such as the name, accounting codes, external SKU, default pricing, and more. For simplicity, we'll keep things straightforward in this guide (there's no need to define a default price, as it will be overwritten by the pricing models we'll explore below). For more options, refer to the endpoint documentation linked above.
+
+To give ourselves a concrete example, let's imagine our product is T-shirts. We'll be creating plans to schedule regular deliveries of T-shirts that our customers can distribute at vendor booths or other events. We can create a T-shirt item as follows:
+
+```ruby
+item_create = {
+  code: "promo-shirt",
+  name: "Custom Promotional T-shirt"
+}
+item = @client.create_item(body: item_create)
+puts "Created Item #{item}"
+```
+```js
+const itemCreate = {
+  code: 'promo-shirt',
+  name: 'Custom Promotional T-shirt'
+}
+const item = await client.createItem(itemCreate)
+console.log('Created Item: ', item.code)
+```
+```java
+ItemCreate itemReq = new ItemCreate();
+
+itemReq.setCode("promo-shirt");
+itemReq.setName("Custom Promotional T-shirt");
+
+Item item = client.createItem(itemReq);
+System.out.println("Created item " + item.getCode());
+```
+```python
+item_create = {
+    "code": "promo-shirt",
+    "name": "Custom Promotional T-shirt"
+}
+item = client.create_item(item_create)
+print("Created Item %s" % item)
+```
+```csharp
+var itemReq = new ItemCreate()
+{
+    Code = "promo-shirt",
+    Name = "Custom Promotional T-shirt"
+};
+Item item = client.CreateItem(itemReq);
+Console.WriteLine($"Created item {item.Code}");
+```
+```php
+$item_create = array(
+    "code" => "promo-shirt",
+    "name" => "Custom Promotional T-shirt"
+);
+$item = $client->createItem($item_create);
+
+echo 'Created Item:' . PHP_EOL;
+var_dump($item);
+```
+
+**Note:** You have the option to use either an item or an add-on to set up quantity-based pricing models. Items are ideal when you are selling the same product across multiple plans, while add-ons are best when the offering is specific to each plan.
+
+## Step 2: Creating a plan with the item add-on
+
+This guide covers three types of pricing models: `tiered`, `volume`, and `stairstep`. Examples of all three are included below. For more options, refer to the [Plan Creation](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_plan) endpoint documentation. All quantity-based pricing models adjust prices based on the quantities purchased, though they do so in different ways depending on the [model used](https://recurly.com/billing-models#quantity-based).
+
+### Using the tiered pricing model
+
+The tiered pricing model charges each unit based on the price of its corresponding tier. For example, you might have two tiers: one for quantities at or under 100 and another for quantities over that. Items in the first tier (up to 100 in this example) will be charged at the rate specified for that tier. Any quantities beyond the first tier (e.g., if the quantity is 105, the excess 5 units) will be charged at the rate specified for the second tier. Here’s how to set it up:
+
+```ruby
+plan_create = {
+  code: "tiered-tshirt-plan",
+  name: "Tiered T-shirt Plan",
+  currencies: [
+    {
+      currency: "USD",
+      unit_amount: 100
+    }
+  ],
+  add_ons: [
+    {
+      item_code: item.code,
+      display_quantity: true,
+      tier_type: "tiered",
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 20
+            }
+          ],
+          ending_quantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 15
+            }
+          ],
+          ending_quantity: 999999999 # maximum value
+        }
+      ]
+    }
+  ]
+}
+plan = @client.create_plan(body: plan_create)
+puts "Created Plan #{plan}"
+```
+```js
+const planCreate = {
+  code: 'tiered-tshirt-plan',
+  name: 'Tiered T-shirt Plan',
+  currencies: [
+    {
+      currency: 'USD',
+      unitAmount: 100
+    }
+  ],
+  add_ons: [
+    {
+      item_code: item.code,
+      display_quantity: true,
+      tier_type: 'tiered',
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unit_amount: 20
+            }
+          ],
+          ending_quantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unit_amount: 15
+            }
+          ],
+          ending_quantity: 999999999 // maximum value
+        }
+      ]
+    }
+  ]
+}
+const plan = await client.createPlan(planCreate)
+console.log('Created Plan: ', plan.code)
+```
+```java
+PlanCreate planCreate = new PlanCreate();
+
+planCreate.setName("Tiered T-shirt Plan");
+planCreate.setCode("tiered-tshirt-plan");
+
+List<PlanPricing> currencies = new ArrayList<PlanPricing>();
+PlanPricing planPrice = new PlanPricing();
+planPrice.setCurrency("USD");
+planPrice.setUnitAmount(100.0f);
+currencies.add(planPrice);
+
+planCreate.setCurrencies(currencies);
+
+List<AddOnCreate> addOns = new ArrayList<AddOnCreate>();
+AddOnCreate addOn = new AddOnCreate();
+addOn.setItemCode(item.getCode());
+addOn.setDisplayQuantity(true);
+addOn.setTierType("tiered");
+
+List<Tier> tiers = new ArrayList<Tier>();
+Tier tier = new Tier();
+tier.setEndingQuantity(100);
+List<Pricing> tierCurrencies = new ArrayList<Pricing>();
+Pricing price = new Pricing();
+price.setCurrency("USD");
+price.setUnitAmount(20.0f);
+tierCurrencies.add(price);
+tier.setCurrencies(tierCurrencies);
+tiers.add(tier);
+
+tier = new Tier();
+tier.setEndingQuantity(999999999); // maximum value
+tierCurrencies = new ArrayList<Pricing>();
+price = new Pricing();
+price.setCurrency("USD");
+price.setUnitAmount(15.0f);
+tierCurrencies.add(price);
+tier.setCurrencies(tierCurrencies);
+tiers.add(tier);
+
+addOn.setTiers(tiers);
+addOns.add(addOn);
+
+planCreate.setAddOns(addOns);
+
+Plan plan = client.createPlan(planCreate);
+System.out.println("Created Plan " + plan.getCode());
+```
+```python
+plan_create = {
+    "name": "Tiered T-shirt Plan",
+    "code": "tiered-tshirt-plan",
+    "currencies": [{"currency": "USD", "unit_amount": 100}],
+    "add_ons": [
+        {
+            "item_code": item.code,
+            "display_quantity": True,
+            "tier_type": "tiered",
+            "tiers": [
+                {
+                    "currencies": [
+                        {
+                            "currency": "USD",
+                            "unit_amount": 20
+                        }
+                    ],
+                    "ending_quantity": 100
+                },
+                {
+                    "currencies": [
+                        {
+                            "currency": "USD",
+                            "unit_amount": 15
+                        }
+                    ],
+                    "ending_quantity": 999999999 # maximum value
+                }
+            ],
+        }
+    ]
+}
+plan = client.create_plan(plan_create)
+print("Created Plan %s" % plan)
+```
+```csharp
+var planReq = new PlanCreate()
+{
+    Name = "Tiered T-shirt Plan",
+    Code = "tiered-tshirt-plan",
+    Currencies = new List<PlanPricing>() {
+        new PlanPricing() {
+            Currency = "USD",
+            UnitAmount = 100
+        }
+    },
+    AddOns = new List<AddOnCreate>() {
+        new AddOnCreate() {
+            ItemCode = item.Code,
+            DisplayQuantity = true,
+            TierType = "tiered",
+            Tiers = new List<Tier>() {
+                new Tier() {
+                    EndingQuantity = 100,
+                    Currencies = new List<Pricing>() {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 20
+                        }
+                    }
+                },
+                new Tier() {
+                    EndingQuantity = 999999999, // maximum value
+                    Currencies = new List<Pricing>() {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 15
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+Plan plan = client.CreatePlan(planReq);
+Console.WriteLine($"Created plan {plan.Code}");
+```
+```php
+$plan_create = array(
+    "name" => "Tiered T-shirt Plan",
+    "code" => "tiered-tshirt-plan",
+    "currencies" => [
+        array(
+            "currency" => "USD",
+            "unit_amount" => 100
+        )
+    ],
+    "add_ons" =>[
+        array(
+            "item_code" => $item->getCode(),
+            "display_quantity" => true,
+            "tier_type" => "tiered",
+            "tiers" => [
+                array(
+                    "currencies" => [
+                        array(
+                            "currency" => "USD",
+                            "unit_amount" => 20
+                        ),
+                    ],
+                    "ending_quantity" => 100
+                ),
+                array(
+                    "currencies" => [
+                        array(
+                            "currency" => "USD",
+                            "unit_amount" => 15
+                        ),
+                    ],
+                    "ending_quantity" => 999999999 // maximum value
+                )
+            ]
+        )
+    ]
+);
+
+$plan = $client->createPlan($plan_create);
+
+echo 'Created Plan:' . PHP_EOL;
+var_dump($plan);
+```
+
+### Using the volume pricing model
+
+The volume pricing model charges each unit based on the price of the highest tier reached.
+
+> For example, you might have two tiers: one for quantities at or under 100 and another for quantities above 100. If the total quantity is 100 or less, each item will be charged at the first tier price. If the total quantity exceeds 100, every item (including the first 100) will be charged at the second tier price.
+
+Here’s how to set it up:
+
+```ruby
+plan_create = {
+  code: "volume-tshirt-plan",
+  name: "Volume T-shirt Plan",
+  currencies: [
+    {
+      currency: "USD",
+      unit_amount: 100
+    }
+  ],
+  add_ons: [
+    {
+      item_code: item.code,
+      display_quantity: true,
+      tier_type: "volume",
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 20
+            }
+          ],
+          ending_quantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 15
+            }
+          ],
+          ending_quantity: 999999999 # maximum value
+        }
+      ]
+    }
+  ]
+}
+plan = @client.create_plan(body: plan_create)
+puts "Created Plan #{plan}"
+```
+```js
+const planCreate = {
+  code: 'volume-tshirt-plan',
+  name: 'Volume T-shirt Plan',
+  currencies: [
+    {
+      currency: 'USD',
+      unitAmount: 100
+    }
+  ],
+  add_ons: [
+    {
+      item_code: item.code,
+      display_quantity: true,
+      tier_type: 'volume',
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unit_amount: 20
+            }
+          ],
+          ending_quantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unit_amount: 15
+            }
+          ],
+          ending_quantity: 999999999 // maximum value
+        }
+      ]
+    }
+  ]
+}
+const plan = await client.createPlan(planCreate)
+console.log('Created Plan: ', plan.code)
+```
+```java
+PlanCreate planCreate = new PlanCreate();
+
+planCreate.setName("Volume T-shirt Plan");
+planCreate.setCode("volume-tshirt-plan");
+
+List<PlanPricing> currencies = new ArrayList<PlanPricing>();
+PlanPricing planPrice = new PlanPricing();
+planPrice.setCurrency("USD");
+planPrice.setUnitAmount(100.0f);
+currencies.add(planPrice);
+
+planCreate.setCurrencies(currencies);
+
+List<AddOnCreate> addOns = new ArrayList<AddOnCreate>();
+AddOnCreate addOn = new AddOnCreate();
+addOn.setItemCode(item.getCode());
+addOn.setDisplayQuantity(true);
+addOn.setTierType("volume");
+
+List<Tier> tiers = new ArrayList<Tier>();
+Tier tier = new Tier();
+tier.setEndingQuantity(100);
+List<Pricing> tierCurrencies = new ArrayList<Pricing>();
+Pricing price = new Pricing();
+price.setCurrency("USD");
+price.setUnitAmount(20.0f);
+tierCurrencies.add(price);
+tier.setCurrencies(tierCurrencies);
+tiers.add(tier);
+
+tier = new Tier();
+tier.setEndingQuantity(999999999); // maximum value
+tierCurrencies = new ArrayList<Pricing>();
+price = new Pricing();
+price.setCurrency("USD");
+price.setUnitAmount(15.0f);
+tierCurrencies.add(price);
+tier.setCurrencies(tierCurrencies);
+tiers.add(tier);
+
+addOn.setTiers(tiers);
+addOns.add(addOn);
+
+planCreate.setAddOns(addOns);
+
+Plan plan = client.createPlan(planCreate);
+System.out.println("Created Plan " + plan.getCode());
+```
+```python
+plan_create = {
+    "name": "Volume T-shirt Plan",
+    "code": "volume-tshirt-plan",
+    "currencies": [{"currency": "USD", "unit_amount": 100}],
+    "add_ons": [
+        {
+            "item_code": item.code,
+            "display_quantity": True,
+            "tier_type": "volume",
+            "tiers": [
+                {
+                    "currencies": [
+                        {
+                            "currency": "USD",
+                            "unit_amount": 20
+                        }
+                    ],
+                    "ending_quantity": 100
+                },
+                {
+                    "currencies": [
+                        {
+                            "currency": "USD",
+                            "unit_amount": 15
+                        }
+                    ],
+                    "ending_quantity": 999999999 # maximum value
+                }
+            ],
+        }
+    ]
+}
+plan = client.create_plan(plan_create)
+print("Created Plan %s" % plan)
+```
+```csharp
+var planReq = new PlanCreate()
+{
+    Name = "Volume T-shirt Plan",
+    Code = "volume-tshirt-plan",
+    Currencies = new List<PlanPricing>() {
+        new PlanPricing() {
+            Currency = "USD",
+            UnitAmount = 100
+        }
+    },
+    AddOns = new List<AddOnCreate>() {
+        new AddOnCreate() {
+            ItemCode = item.Code,
+            DisplayQuantity = true,
+            TierType = "volume",
+            Tiers = new List<Tier>() {
+                new Tier() {
+                    EndingQuantity = 100,
+                    Currencies = new List<Pricing>() {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 20
+                        }
+                    }
+                },
+                new Tier() {
+                    EndingQuantity = 999999999, // maximum value
+                    Currencies = new List<Pricing>() {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 15
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+Plan plan = client.CreatePlan(planReq);
+Console.WriteLine($"Created plan {plan.Code}");
+```
+```php
+$plan_create = array(
+    "name" => "Volume T-shirt Plan",
+    "code" => "volume-tshirt-plan",
+    "currencies" => [
+        array(
+            "currency" => "USD",
+            "unit_amount" => 100
+        )
+    ],
+    "add_ons" =>[
+        array(
+            "item_code" => $item->getCode(),
+            "display_quantity" => true,
+            "tier_type" => "volume",
+            "tiers" => [
+                array(
+                    "currencies" => [
+                        array(
+                            "currency" => "USD",
+                            "unit_amount" => 20
+                        ),
+                    ],
+                    "ending_quantity" => 100
+                ),
+                array(
+                    "currencies" => [
+                        array(
+                            "currency" => "USD",
+                            "unit_amount" => 15
+                        ),
+                    ],
+                    "ending_quantity" => 999999999 // maximum value
+                )
+            ]
+        )
+    ]
+);
+
+$plan = $client->createPlan($plan_create);
+
+echo 'Created Plan:' . PHP_EOL;
+var_dump($plan);
+```
+
+### Using the stairstep model
+
+The stairstep model charges a fixed price based on the highest tier reached. For example, you might have two tiers: one for quantities at or under 100 and another for quantities above 100. If the total quantity is 100 or less, all items will be covered by a single charge at the tier price, regardless of the exact quantity within that range. If the quantity exceeds 100, all items will be covered by a single charge at the second tier price. Here’s how to set it up:
+
+```ruby
+plan_create = {
+  code: "stairstep-tshirt-plan",
+  name: "Stairstep T-shirt Plan",
+  currencies: [
+    {
+      currency: "USD",
+      unit_amount: 100
+    }
+  ],
+  add_ons: [
+    {
+      item_code: item.code,
+      display_quantity: true,
+      tier_type: "stairstep",
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 2_000
+            }
+          ],
+          ending_quantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: "USD",
+              unit_amount: 4_000
+            }
+          ],
+          ending_quantity: 999999999 # maximum value
+        }
+      ]
+    }
+  ]
+}
+plan = @client.create_plan(body: plan_create)
+puts "Created Plan #{plan}"
+```
+```js
+const planCreate = {
+  code: 'stairstep-tshirt-plan',
+  name: 'Stairstep T-shirt Plan',
+  currencies: [
+    {
+      currency: 'USD',
+      unitAmount: 100
+    }
+  ],
+  add_ons: [
+    {
+      item_code: item.code,
+      display_quantity: true,
+      tier_type: 'stairstep',
+      tiers: [
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unit_amount: 2000
+            }
+          ],
+          ending_quantity: 100
+        },
+        {
+          currencies: [
+            {
+              currency: 'USD',
+              unit_amount: 4000
+            }
+          ],
+          ending_quantity: 999999999 // maximum value
+        }
+      ]
+    }
+  ]
+}
+const plan = await client.createPlan(planCreate)
+console.log('Created Plan: ', plan.code)
+```
+```java
+PlanCreate planCreate = new PlanCreate();
+
+planCreate.setName("Stairstep T-shirt Plan");
+planCreate.setCode("stairstep-tshirt-plan");
+
+List<PlanPricing> currencies = new ArrayList<PlanPricing>();
+PlanPricing planPrice = new PlanPricing();
+planPrice.setCurrency("USD");
+planPrice.setUnitAmount(100.0f);
+currencies.add(planPrice);
+
+planCreate.setCurrencies(currencies);
+
+List<AddOnCreate> addOns = new ArrayList<AddOnCreate>();
+AddOnCreate addOn = new AddOnCreate();
+addOn.setItemCode(item.getCode());
+addOn.setDisplayQuantity(true);
+addOn.setTierType("stairstep");
+
+List<Tier> tiers = new ArrayList<Tier>();
+Tier tier = new Tier();
+tier.setEndingQuantity(100);
+List<Pricing> tierCurrencies = new ArrayList<Pricing>();
+Pricing price = new Pricing();
+price.setCurrency("USD");
+price.setUnitAmount(2000.0f);
+tierCurrencies.add(price);
+tier.setCurrencies(tierCurrencies);
+tiers.add(tier);
+
+tier = new Tier();
+tier.setEndingQuantity(999999999); // maximum value
+tierCurrencies = new ArrayList<Pricing>();
+price = new Pricing();
+price.setCurrency("USD");
+price.setUnitAmount(4000.0f);
+tierCurrencies.add(price);
+tier.setCurrencies(tierCurrencies);
+tiers.add(tier);
+
+addOn.setTiers(tiers);
+addOns.add(addOn);
+
+planCreate.setAddOns(addOns);
+
+Plan plan = client.createPlan(planCreate);
+System.out.println("Created Plan " + plan.getCode());
+```
+```python
+plan_create = {
+    "name": "Stairstep T-shirt Plan",
+    "code": "stairstep-tshirt-plan",
+    "currencies": [{"currency": "USD", "unit_amount": 100}],
+    "add_ons": [
+        {
+            "item_code": item.code,
+            "display_quantity": True,
+            "tier_type": "stairstep",
+            "tiers": [
+                {
+                    "currencies": [
+                        {
+                            "currency": "USD",
+                            "unit_amount": 2000
+                        }
+                    ],
+                    "ending_quantity": 100
+                },
+                {
+                    "currencies": [
+                        {
+                            "currency": "USD",
+                            "unit_amount": 4000
+                        }
+                    ],
+                    "ending_quantity": 999999999 # maximum value
+                }
+            ],
+        }
+    ]
+}
+plan = client.create_plan(plan_create)
+print("Created Plan %s" % plan)
+```
+```csharp
+var planReq = new PlanCreate()
+{
+    Name = "Stairstep T-shirt Plan",
+    Code = "stairstep-tshirt-plan",
+    Currencies = new List<PlanPricing>() {
+        new PlanPricing() {
+            Currency = "USD",
+            UnitAmount = 100
+        }
+    },
+    AddOns = new List<AddOnCreate>() {
+        new AddOnCreate() {
+            ItemCode = item.Code,
+            DisplayQuantity = true,
+            TierType = "stairstep",
+            Tiers = new List<Tier>() {
+                new Tier() {
+                    EndingQuantity = 100,
+                    Currencies = new List<Pricing>() {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 2000
+                        }
+                    }
+                },
+                new Tier() {
+                    EndingQuantity = 999999999, // maximum value
+                    Currencies = new List<Pricing>() {
+                        new Pricing() {
+                            Currency = "USD",
+                            UnitAmount = 4000
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+Plan plan = client.CreatePlan(planReq);
+Console.WriteLine($"Created plan {plan.Code}");
+```
+```php
+$plan_create = array(
+    "name" => "Stairstep T-shirt Plan",
+    "code" => "stairstep-tshirt-plan",
+    "currencies" => [
+        array(
+            "currency" => "USD",
+            "unit_amount" => 100
+        )
+    ],
+    "add_ons" =>[
+        array(
+            "item_code" => $item->getCode(),
+            "display_quantity" => true,
+            "tier_type" => "stairstep",
+            "tiers" => [
+                array(
+                    "currencies" => [
+                        array(
+                            "currency" => "USD",
+                            "unit_amount" => 2000
+                        ),
+                    ],
+                    "ending_quantity" => 100
+                ),
+                array(
+                    "currencies" => [
+                        array(
+                            "currency" => "USD",
+                            "unit_amount" => 4000
+                        ),
+                    ],
+                    "ending_quantity" => 999999999 // maximum value
+                )
+            ]
+        )
+    ]
+);
+
+$plan = $client->createPlan($plan_create);
+
+echo 'Created Plan:' . PHP_EOL;
+var_dump($plan);
+```
+
+> **Note**: As you can see, the format for all three pricing models is the same, the amounts just have different meanings.
+
+## Step 3: Creating a subscription
+
+### Creating a subscription with the item add-on
+
+Once a plan is created, you can add it to an account as a subscription. For this guide, we assume that an account has already been created, though you can also create an account at this stage. Refer to the [Subscription Create](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_subscription) endpoint for more information. Any of the plans mentioned above can be used.
+
+```ruby
+subscription_create = {
+  plan_code: plan.code,
+  currency: "USD",
+  account: {
+    code: account_code,
+  },
+  add_ons: [
+    {
+      code: item.code,
+      quantity: 101
+    }
+  ]
+}
+subscription = @client.create_subscription(
+  body: subscription_create
+)
+puts "Created Subscription #{subscription}"
+```
+```js
+const subscriptionReq = {
+  planCode: plan.code,
+  currency: `USD`,
+  account: {
+    code: accountCode
+  },
+  add_ons: [
+    {
+      code: item.code,
+      quantity: 101
+    }
+  ]
+}
+const sub = await client.createSubscription(subscriptionReq)
+console.log('Created subscription: ', sub.uuid)
+```
+```java
+SubscriptionCreate subscriptionCreate = new SubscriptionCreate();
+AccountCreate accountCreate = new AccountCreate();
+List<SubscriptionAddOn> subscriptionAddOns = new List<SubscriptionAddOn>();
+
+accountCreate.setCode(accountCode);
+subscriptionCreate.setCurrency("USD");
+subscriptionCreate.setAccount(accountCreate);
+subscriptionCreate.setPlanCode(plan.getCode());
+
+SubscriptionAddOn subscriptionAddOn = new SubscriptionAddOn();
+subscriptionAddOn.setCode(item.getCode());
+subscriptionAddOn.setQuantity(101);
+subscriptionAddOns.add(subscriptionAddOns);
+subscriptionCreate.setSubscriptionAddOns(subscriptionAddOns);
+
+Subscription subscription = client.createSubscription(subscriptionCreate);
+System.out.println("Created Subscription with Id: " + subscription.getUuid());
+```
+```python
+sub_create = {
+    "plan_code": plan.code,
+    "currency": "USD",
+    "account": {"code": account_code},
+    "add_ons": [{"code": item.code, "quantity": 101}],
+}
+sub = client.create_subscription(sub_create)
+print("Created Subscription %s" % sub)
+```
+```csharp
+var subReq = new SubscriptionCreate()
+{
+    Currency = "USD",
+    Account = new AccountCreate()
+    {
+        Code = accountCode
+    },
+    PlanCode = plan.Code,
+    AddOns = new List<SubscriptionAddOnCreate>() {
+        new SubscriptionAddOnCreate() {
+            Code = item.Code,
+            Quantity = 101
+        }
+    }
+};
+Subscription subscription = client.CreateSubscription(subReq);
+Console.WriteLine($"Created Subscription with Id: {subscription.Uuid}");
+```
+```php
+$sub_create = array(
+    "plan_code" => $plan->getCode(),
+    "currency" => "USD",
+    "account" => array(
+        "code" => $account_code
+    ),
+    "add_ons" => [
+        array(
+            "code" => $item->getCode(),
+            "quantity" => 101
+        )
+    ]
+);
+
+$subscription = $client->createSubscription($sub_create);
+
+echo 'Created Subscription:' . PHP_EOL;
+var_dump($subscription);
+```

@@ -1,0 +1,240 @@
+---
+title: User roles and permissions
+---
+
+<div className="rp-page">
+  <div className="rp-overview">User roles and permissions let you control exactly what each team member can see and do in Recurly. Create custom roles, assign them to users, and update them as your organization evolves — keeping access aligned with responsibilities and sensitive data appropriately restricted.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#create-a-role"><span className="rp-toc-num">4</span>Create a role</a>
+    <a className="rp-toc-pill" href="#delete-a-role"><span className="rp-toc-num">5</span>Delete a role</a>
+    <a className="rp-toc-pill" href="#invite-a-user"><span className="rp-toc-num">6</span>Invite a user</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">User roles in Recurly are defined sets of permissions that determine what actions and features a user can access within the platform. You can tailor roles to match your organization's structure — granting each team member access to exactly the sections and functions they need, and nothing more.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Tailored access</strong>
+    <span>Customize roles to grant specific permissions so users only access the sections relevant to their work.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Enhanced security</strong>
+    <span>Limit access to sensitive data by assigning roles with restricted permissions, keeping your account secure.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-users" aria-hidden="true"></i></div>
+    <strong>Optimized collaboration</strong>
+    <span>Ensure team members have the tools they need by matching roles to their actual responsibilities.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-table-list" aria-hidden="true"></i></div>
+    <strong>Streamlined management</strong>
+    <span>Manage and modify all roles from a centralized dashboard, with a clear view of who has access to what.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrows-spin" aria-hidden="true"></i></div>
+    <strong>Flexibility</strong>
+    <span>Adapt roles as your organization grows or changes, keeping access aligned with evolving business needs.</span>
+  </div>
+</div>
+
+# Key details
+
+## Permission areas
+
+### Customers
+
+Two access levels are available for the Customers section.
+
+**Read Only** — View accounts, invoices, transactions, and subscriptions; add account notes; and view customer information. Users at this level can't access Hosted Account Management links or update billing information.
+
+**Can Edit** — All Read Only capabilities, plus the ability to edit accounts, subscriptions, invoices, and transactions. Note that editing, deleting, or adding plans, transactions, coupons, items, or gift card redemptions from the Customers section also requires edit access to the Configuration section.
+
+
+<Image src="https://files.readme.io/ea6bf4e-image.png" align="center" width="40%" border={true} />
+
+
+### Analytics
+
+Users with Analytics access can view and export all data in the Analytics section, with full visibility into analytics reporting.
+
+
+<Image src="https://files.readme.io/270b250-image.png" align="center" width="75%" border={true} />
+
+
+### Revenue Recognition
+
+Users can be assigned Read-Only or Admin access to Recurly's Revenue Recognition platform. The **Allow Access** checkbox enables or disables general access to Revenue Recognition for the role.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>The Read-Only vs. Admin distinction within Revenue Recognition can only be set during initial role configuration. After a role is saved, granular access control within Revenue Recognition itself is the only way to change this. The Revenue Recognition section only appears on sites with the Revenue Recognition feature flag enabled.</div>
+</div>
+
+### Configuration
+
+Users with Configuration access can view and edit: Site Settings, Business Entities, Email Templates, Payment Gateways, Custom Fields, Hosted Payment Pages, Dunning Management, Measured Units, Tax Settings, Currencies, Fraud Management, Shipping Information, Network Tokens, Apple Pay, Entitlements, Payment Settings, Gift Card Settings, and Analytics Settings. They can also create, edit, and view Plans, Items, and Coupons.
+
+
+<Image src="https://files.readme.io/56e2aa4-image.png" align="center" width="75%" border={true} />
+
+
+### Integrations
+
+Users with Integrations access can view and edit Webhooks, API keys, and Recurly integrations with QuickBooks Online, Xero, Mailchimp, Salesforce, and Zendesk.
+
+### Admin
+
+Users with Admin access have full control over company billing information, account settings, Users, Roles, Admin Exports, and SSO Settings — the highest level of access in Recurly.
+
+***
+
+## Site Admin role
+
+The Site Admin role provides unrestricted access to all features and settings in Recurly. It's automatically assigned to the first user added to a site, and at least one user must hold this role on every production site at all times.
+
+Key things to know:
+
+- **Unrestricted access** — Full access to all permissions, including billing information, account settings, and user management
+- **Mandatory presence** — At least one site user must be assigned the Site Admin role at all times
+- **Can't be deleted or fully edited** — The role itself can't be deleted or edited, except for its description. This prevents a situation where no one can manage the site
+- **Assign thoughtfully** — Given the extent of its permissions, Site Admin should only be assigned to trusted individuals such as business owners or top-level managers
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Recommendation</strong>Review your Site Admin assignments regularly. Remove the Site Admin role from users who no longer need it to maintain the security and integrity of your Recurly account.</div>
+</div>
+
+***
+
+## Out-of-the-box roles for pre-existing merchants
+
+If your site was live in production before migrating to the roles-based user management system, Recurly provides a set of out-of-the-box roles to ensure a smooth transition:
+
+- Out-of-the-box roles match the permission sets assigned to individual site users before migration
+- They reflect the unique permission combinations that existed on your site
+- You can create custom roles and rename or delete these roles as needed — except for the Site Admin role
+- The Site Admin role is always created for every site and must have at least one user assigned at all times
+
+# Create a role
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Roles</h4><p>Navigate to <strong>Admin → Roles</strong> in the Recurly App.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/540ff370d0d48eb9193c1a5e2918625c2b34ea42312fa604cac05ed19d906404-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Create a new role</h4><p>Click <strong>Create Role</strong> in the top right corner of the screen.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/62a5f2d519f87321ed20db7a4775c7e2fe03641ef29179bad5b03a58d752ebd5-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Name and describe the role</h4><p>Give the role a descriptive name that reflects its purpose, and add a brief description to help others understand its function and scope.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Configure permissions</h4><p>Select the appropriate actions and functionalities to grant to users with this role.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/6ad62ba-image.png" align="center" width="75%" border={true} />
+
+
+# Delete a role
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Roles</h4><p>Navigate to <strong>Admin → Roles</strong> and find the role you want to delete.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Delete</h4><p>Choose the <strong>Delete</strong> option for the role.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/342cf78-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Reassign users (if needed)</h4><p>If users are assigned to the role, a prompt appears asking you to reassign them to an alternative role. If no existing role fits, you can create a new one at this step.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/176cfc0-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Confirm deletion</h4><p>Follow the prompts to confirm. Once deleted, all assigned users assume the permissions of their newly designated role.</p></div>
+  </div>
+</div>
+
+### Reassigning and removing a Site Admin
+
+To change or remove a user's Site Admin role, open the user's profile and select a different role from the **User Role** field.
+
+
+<Image src="https://files.readme.io/6fe5b06-image.png" align="center" width="75%" border={true} />
+
+
+If the user is the only active Site Admin on the site, assign another user to the Site Admin role first. At least one user must hold the Site Admin role at all times.
+
+# Invite a user
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the invite flow</h4><p>From the main menu, navigate to <strong>Admin → Users → User Actions → Invite Users</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Fill in the invitation details</h4><p>Enter the user's email address and select their role, then click <strong>Send Invite</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/c9a0734852ba90a8d925406e6b2d6973da9f5d68a58915201c135a26fb82705d-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>User accepts the invitation</h4><p>The user receives an email invitation and must accept it to join the platform.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Manage the new user</h4><p>Once accepted, you can view and manage the user's privileges under <strong>Admin → Users</strong>.</p></div>
+  </div>
+</div>
+
+<br />

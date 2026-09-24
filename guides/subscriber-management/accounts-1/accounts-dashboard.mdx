@@ -1,0 +1,148 @@
+---
+title: Accounts dashboard
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Accounts section in Recurly gives you a centralized interface for every customer account activity — monitoring subscriptions, managing billing information, tracking account status, and performing account lifecycle actions from a single view.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#dashboard"><span className="rp-toc-num">3</span>Dashboard</a>
+    <a className="rp-toc-pill" href="#account-search"><span className="rp-toc-num">4</span>Account search</a>
+    <a className="rp-toc-pill" href="#create-an-account"><span className="rp-toc-num">5</span>Create an account</a>
+    <a className="rp-toc-pill" href="#billing-info"><span className="rp-toc-num">6</span>Billing info</a>
+    <a className="rp-toc-pill" href="#account-notes"><span className="rp-toc-num">7</span>Account notes</a>
+    <a className="rp-toc-pill" href="#update-an-account"><span className="rp-toc-num">8</span>Update an account</a>
+    <a className="rp-toc-pill" href="#close-an-account"><span className="rp-toc-num">9</span>Close an account</a>
+    <a className="rp-toc-pill" href="#reopen-a-closed-account"><span className="rp-toc-num">10</span>Reopen a closed account</a>
+    <a className="rp-toc-pill" href="#delete-an-account"><span className="rp-toc-num">11</span>Delete an account</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Admin access to Recurly's dashboard</li>
+  <li>Familiarity with your customer data and billing processes</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Account codes cannot be modified once set</li>
+  <li>Accounts can only be deleted in sandbox mode</li>
+</ul>
+
+# Definition
+
+
+<Image src="https://files.readme.io/d74cea9-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-definition">Accounts Management in Recurly is the organized interface for handling all customer account activity — from monitoring subscriptions and billing information to searching, creating, updating, closing, or deleting accounts as your business requires.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Centralized management</strong>
+    <span>View all customer accounts and subscriptions from one platform, keeping operations streamlined.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Easy tracking and updating</strong>
+    <span>Track and update billing information to keep financial records accurate and current.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Efficient account search</strong>
+    <span>Search and filter across multiple identifiers for fast, accurate access to any account.</span>
+  </div>
+</div>
+
+# Dashboard
+
+Your accounts dashboard is the gateway to every customer account managed by Recurly. Search by first name, last name, email address, account code, and more. Use filters to narrow results by status category — note that filters can overlap: the **Open** filter includes both **Non-subscribers** and **Subscribers**.
+
+## Account status
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Status</td><td>Description</td></tr>
+  <tr><td>Open</td><td>Accounts that are active and not closed.</td></tr>
+  <tr><td>Closed</td><td>Accounts that have been deactivated or closed.</td></tr>
+</table>
+
+## Subscription status
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Status</td><td>Description</td></tr>
+  <tr><td>Active</td><td>Subscribers with an ongoing subscription without interruptions.</td></tr>
+  <tr><td>Renewing</td><td>Subscribers whose subscriptions are set to renew automatically at the end of the current term.</td></tr>
+  <tr><td>Non-renewing</td><td>Subscribers whose subscriptions will not renew automatically after the current term concludes.</td></tr>
+  <tr><td>Future start date</td><td>Subscribers whose subscriptions are set to begin at a future date.</td></tr>
+  <tr><td>In trial</td><td>Subscribers who are currently in a trial period.</td></tr>
+  <tr><td>Paused</td><td>Subscribers whose subscriptions are temporarily on hold but not canceled.</td></tr>
+  <tr><td>Past due</td><td>Subscribers with at least one invoice that has not been paid by the due date.</td></tr>
+  <tr><td>No subscription</td><td>Accounts without any current or past subscriptions.</td></tr>
+</table>
+
+# Account search
+
+Locate any account using the search bar with any of the following fields:
+
+<ul className="rp-list">
+  <li>Account code</li>
+  <li>Company name</li>
+  <li>Email</li>
+  <li>First name</li>
+  <li>Last name</li>
+  <li>Username</li>
+</ul>
+
+# Create an account
+
+From the accounts overview page, select **New Account** to <a href="https://app.recurly.com/go/accounts/new" target="_blank">create a new customer account</a>. Complete the following fields:
+
+<table className="rp-params">
+  <tr className="rp-thead-row"><td>Field</td><td>Description</td></tr>
+  <tr><td>Account code</td><td>A unique identifier for the customer within Recurly — no two accounts can share the same code. Many merchants sync account codes with identifiers from their own tracking systems, or use the customer's email address as the code. Once set, the account code cannot be changed. Account codes must not start with a period (<code>.</code>) or contain slashes (<code>/</code>) or semicolons (<code>;</code>).</td></tr>
+  <tr><td>Username</td><td>A secondary identifier that is searchable from the dashboard.</td></tr>
+  <tr><td>Email</td><td>The customer's email address — used for all Recurly communications and for accessing hosted account management pages. Unlike the account code, email addresses do not need to be unique.</td></tr>
+  <tr><td>CC emails</td><td>Additional email addresses to copy on account correspondence. Separate multiple addresses with commas. All recipients listed here receive every communication sent to the primary email address.</td></tr>
+  <tr><td>First name</td><td>Customer's first name.</td></tr>
+  <tr><td>Last name</td><td>Customer's last name.</td></tr>
+  <tr><td>Company</td><td>Customer's company name, if applicable.</td></tr>
+  <tr><td>VAT number</td><td>VAT information, if applicable.</td></tr>
+  <tr><td>Phone number</td><td>Customer's phone number.</td></tr>
+  <tr><td>Address</td><td>Required for manual invoicing. When provided, include at least a postal code and country to enable accurate tax calculations on the account's transactions.</td></tr>
+</table>
+
+# Billing info
+
+The **Billing info** section displays stored payment information, typically provided by the customer during a purchase or account update. Required billing address fields are configured in the Admin under Site Settings. Note that billing info can differ from the account address. <a href="https://docs.recurly.com/docs/wallet" target="_blank">Learn more about the Subscriber Wallet →</a>
+
+# Account notes
+
+Keep internal notes on any account for context — refund reasons, customer requests, complaints, or anything else your team needs. Notes are never visible to customers.
+
+# Update an account
+
+All account fields except the account code can be updated after the account is created.
+
+# Close an account
+
+Closing an account permanently deletes its billing info, cancels all active subscriptions (which remain active through the end of the current billing period), and fails any open invoices. Make sure all business with the customer is concluded before closing. The close account option is available when viewing an account in the admin console.
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Irreversible billing data deletion</strong>Closing an account permanently removes its billing information. The customer must re-provide payment details if the account is later reopened.</div>
+</div>
+
+# Reopen a closed account
+
+To reopen a closed account, go to the Account Options menu in the admin console and select **Reopen Account** — or create a new account using the same account code. Reopening restores the account's history, but the customer must re-provide billing information before charges can resume.
+
+# Delete an account
+
+Account deletion is only available in sandbox mode using the **Clear Test Data** button in Site Settings. Once your site is in production, all data must be retained for historical accounting purposes and cannot be removed.

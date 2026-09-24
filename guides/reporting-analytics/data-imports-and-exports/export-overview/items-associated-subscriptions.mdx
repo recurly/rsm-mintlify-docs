@@ -1,0 +1,82 @@
+---
+title: Items — associated subscriptions - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Prerequisite
+
+You must enable the credit invoices feature to view this export. Please reach out to your Recurly account manager or [support@recurly.com](mailto:support@recurly.com) to have this feature activated in your account.
+
+# Definition
+
+The "Items - Associated Subscriptions" export provides comprehensive details of all subscription add-ons generated from a saved item in your catalog over a certain period. It focuses on add-ons linked to renewing, future start, last billing period, and paused subscriptions, omitting details from canceled or expired subscriptions.
+
+<Image border={false} src="https://files.readme.io/4ea2d491595760bcea37c0e445b53549a10fee9aab3bdd6fbba3a0f1c06822f0-image.png" />
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### **Item Name Filter**
+
+The Item name filter allows you to select existing item by name, code or SKU
+
+### **Time Range Filter**
+
+Customize your export to focus on renewing, future start, last billing period, and paused subscriptions formed during a selected period, leveraging the "subscription_add_on_created_at" date in the export to narrow down your data.
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Column Name                                                                                           | Example                 | Description                                                                                                                     | Data type (max size) |
+| ----------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- | :------------------- |
+| <span id="item_id">item_id</span>                                                                     | l20fl6bek3mp            | The system-generated unique identifier of the saved item utilized in creating this add-on.                                      | string               |
+| <span id="item_name">item_name</span>                                                                 | Pink Sweater            | The name of the saved item, mirrored in the add-on name on the customer's invoice.                                              | varchar(255)         |
+| <span id="item_code">item_code</span>                                                                 | pink_sweater            | The Recurly unique identifier for the saved item, also denoting the add-on code.                                                | varchar(50)          |
+| <span id="external_sku">external_sku</span>                                                           | PS1234                  | Optional external SKU of the saved item used in creating this add-on.                                                           | varchar(50)          |
+| <span id="item_status">item_status</span>                                                             | enabled                 | The status of the item in your Recurly catalog, being either "enabled" or "disabled".                                           | string               |
+| <span id="plan_code">plan_code</span>                                                                 | platinum                | The Recurly unique identifier for the plan affiliated with this subscription.                                                   | varchar(50)          |
+| <span id="plan_name">plan_name</span>                                                                 | Platinum Plan           | The contemporary name of the plan corresponding to this subscription.                                                           | varchar(255)         |
+| <span id="subscription_id">subscription_id</span>                                                     | 3c42a34d1442f840        | Unique system-generated identifier for the subscription housing this item as an add-on.                                         | varchar(32)          |
+| <span id="subscription_add_on_quantity">subscription_add_on_quantity</span>                           | 1                       | The count of add-ons integrated into the subscription for this item.                                                            | numeric              |
+| <span id="subscription_add_on_unit_amount_in_cents">subscription_add_on_unit_amount_in_cents</span>   | 600                     | The unit cost of the add-on in the subscription, denominated in cents; it may differ from the plan's or item's default pricing. | numeric              |
+| <span id="subscription_add_on_currency">subscription_add_on_currency</span>                           | USD                     | The currency utilized for billing in this subscription.                                                                         | varchar(3)           |
+| <span id="subscription_add_on_created_at">subscription_add_on_created_at</span>                       | 2020-02-07 10:18:34 MST | The date and time when the add-on was created, a critical filter for defining the date range.                                   | timestamp            |
+| <span id="subscription_add_on_modified_at">subscription_add_on_modified_at</span>                     | 2020-02-07 10:18:34 MST | The latest modification date and time for the add-on.                                                                           | timestamp            |
+| <span id="subscription_add_on_tier_type">subscription_add_on_tier_type</span>                         | flat                    | The subscription add-on tier type.                                                                                              | string               |
+| <span id="subscription_add_on_total_amount_in_cents">subscription_add_on_total_amount_in_cents</span> | 12345                   | Subscription add-on total amount in cents.                                                                                      | numeric              |
+| <span id="subscription_add_on_source">subscription_add_on_modified_at</span>                          | source1                 | Subscription add-on source.                                                                                                     | string               |
+| <span id="subscription_add_on_tax_inclusive">subscription_add_on_tax_inclusive</span>                 | false                   | Boolean flag to indicate whether the subscription add-on is tax inclusive.                                                      | boolean              |
+| item_api_id                                                                                           | e28zov4fw0v2            | Item API ID                                                                                                                     | string               |
+
+# Version changelog
+
+### Version 5 - 2/5/2025
+
+Addition of `item_api_id`.
+
+### Version 4 - 1/13/2022
+
+Addition of subscription_add_on_tax_inclusive column.
+
+### Version 3 - 7/23/2020
+
+Addition of subscription_add_on_source column.
+
+### Version 2 - 4/29/2020
+
+Addition of subscription_add_on_tier_type, subscription_add_on_total_amount_in_cents columns.

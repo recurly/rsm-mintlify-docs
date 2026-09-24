@@ -1,0 +1,1516 @@
+---
+title: Adjustments - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+Recurly's Adjustments Exports allow you to closely monitor the invoiced and uninvoiced adjustments associated with your accounts. This export encompasses every invoiced charge and credit adjustment and even offers the option to include uninvoiced adjustments that are presently on the account. You can access the Adjustments export by visiting the [Exports](http://app.recurly.com/go/exports) page found under the "Analytics" tab on your Recurly site.
+
+![](https://files.readme.io/0ef66874fe4eecfa3671a1d5e0a9b19418271c7c9900c9489f812068562ad76a-image.png)
+
+<br />
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the Version changelog at the bottom of this page.
+
+### **Options Filter**
+
+You are granted two distinct options for exporting data:
+
+* **Include uninvoiced adjustments**
+  * By default, the export primarily includes invoiced adjustments. However, upon selecting this option, you can view both charges and credits that haven't been invoiced as of yet, within a specified date range. These adjustments bear a 'pending' status and are placed at the commencement of the export document.
+* **Use invoice posted date**
+  * Ordinarily, the export utilizes the adjustment's creation date rather than the invoice date. Consequently, an older uninvoiced charge or credit that was created within a set date range but invoiced later will not be reflected in the export. To counter this, choose this option to instead use the invoice posted date for a comprehensive view. Note that the creation date determines the presence of uninvoiced adjustments in the export as they lack an associated invoice date.
+
+### **Time Range Filter**
+
+Utilize this feature to visualize charge and credit adjustments initiated in a specified timeframe. The "adjustment_created_at" date in the export is the default parameter used to filter results. In case you wish to filter adjustments based on the invoice creation date, simply opt for the "Use invoice date" option.
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The **Start Date** and **End Date** will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+<br />
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+<Table align={["left","left","left","left"]}>
+  <thead>
+    <tr>
+      <th>
+        Column Name
+      </th>
+
+      <th>
+        Example
+      </th>
+
+      <th>
+        Description
+      </th>
+
+      <th>
+        Data type
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <span id="uuid">uuid</span>
+      </td>
+
+      <td>
+        b964b5439c2548a489
+      </td>
+
+      <td>
+        Unique internal identifier for the adjustment. Equivalent to line_item_uuid in the deprecated Invoices export.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_code">account_code</span>
+      </td>
+
+      <td>
+        123122E
+      </td>
+
+      <td>
+        Account code being charged for this invoice.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="subscription_id">subscription_id</span>
+      </td>
+
+      <td>
+        1fed8d153fcf4ea2a1
+      </td>
+
+      <td>
+        Subscription UUID associated with this adjustment on the invoice.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_id">invoice_id</span>
+      </td>
+
+      <td>
+        4bdb2171cebe4ecf
+      </td>
+
+      <td>
+        Unique internal identifier for the invoice. This is called the 'id' in the Invoices - Summary export or 'uuid' for the invoice in the API.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_status">adjustment_status</span>
+      </td>
+
+      <td>
+        invoiced or pending
+      </td>
+
+      <td>
+        Current status of the adjustment. Pending adjustments are charges or credits on an account that have not been applied to an invoice yet. Invoiced adjustments will always have an invoice associated with them.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_type">adjustment_type</span>
+      </td>
+
+      <td>
+        charge or credit
+      </td>
+
+      <td>
+        Charges are positive adjustments that debit the account. Credits are negative adjustments that credit the account.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_created_at">adjustment_created_at</span>
+      </td>
+
+      <td>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td>
+        Creation date of the adjustment. This date will equal the billed_date of the invoice in most cases, but will be older than the billed_date if the adjustment was created on the account a period of time before it was invoiced. The adjustment_created_at date will never be after the invoice's billed_date.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_start_at">adjustment_start_at</span>
+      </td>
+
+      <td>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td>
+        Bill cycle start date for a specific adjustment. Equivalent to line_item_start_date in the deprecated Invoices export.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_end_at">adjustment_end_at</span>
+      </td>
+
+      <td>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td>
+        Bill cycle end date for a specific adjustment. Equivalent to line_item_end_date in the deprecated Invoices.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_description">adjustment_description</span>
+      </td>
+
+      <td>
+        Gold Plan
+      </td>
+
+      <td>
+        Description for a specific adjustment. This is automatically generated for all plan adjustments. This is custom for one-time custom charges and credits. Equivalent to line_item_description in the deprecated Invoices export
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_quantity">adjustment_quantity</span>
+      </td>
+
+      <td>
+        1
+      </td>
+
+      <td>
+        Quantity of the adjustment.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_currency">adjustment_currency</span>
+      </td>
+
+      <td>
+        USD
+      </td>
+
+      <td>
+        Currency of the adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_amount">adjustment_amount</span>
+      </td>
+
+      <td>
+        100
+      </td>
+
+      <td>
+        Adjustment amount, before discounts or taxes.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_total">adjustment_total</span>
+      </td>
+
+      <td>
+        50
+      </td>
+
+      <td>
+        The total amount of the adjustment after discounts and taxes [(quantity x price) + discount + tax]. Equivalent to line_item_total in the deprecated Invoices.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_taxable">adjustment_taxable</span>
+      </td>
+
+      <td>
+        0 or 1
+      </td>
+
+      <td>
+        0 indicates adjustment is not taxable, 1 indicates adjustment is taxable.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_discount">adjustment_discount</span>
+      </td>
+
+      <td>
+        5
+      </td>
+
+      <td>
+        The discount applied to the adjustment.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_tax">adjustment_tax</span>
+      </td>
+
+      <td>
+        5
+      </td>
+
+      <td>
+        The tax amount for the adjustment.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_accounting_code">adjustment_accounting_code</span>
+      </td>
+
+      <td>
+        X100
+      </td>
+
+      <td>
+        Internal accounting code for a specific adjustment. This value will only populate if you define an accounting code for the adjustment. Accounting codes can be defined for all adjustments except free trials, which will inherit the plan's accounting code. Equivalent to line_item_accounting_code in the deprecated Invoices export.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_product_code">adjustment_product_code</span>
+      </td>
+
+      <td>
+        gold
+      </td>
+
+      <td>
+        Product code for a specific adjustment. This will populate automatically with the plan code or add-on code if the adjustment is for a subscription. This will populate for custom charges and credits (origin = debit or one_time) if a value was set when the adjustment was created. Equivalent to line_item_product_code in the deprecated Invoices export.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_tax_code">adjustment_tax_code</span>
+      </td>
+
+      <td>
+        P0000000, physical
+      </td>
+
+      <td>
+        Tax code is a field associated with the adjustment that we send to Avalara for tax calculations. If you are using Recurly's EU VAT feature, you can use values of 'unknown', 'physical', or 'digital'. If you have your own Avalara AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_origin">adjustment_origin</span>
+      </td>
+
+      <td>
+        plan, plan_trial, setup_fee, add_on, add_on_trial, usage_add_on, usage_add_on_trial, one_time, debit, credit, coupon, carryforward, gift_card, external_gift_card
+      </td>
+
+      <td>
+        The original source for an adjustment. A credit created from an original charge will have the value of the charge's origin. Equivalent to line_item_origin in the deprecated Invoices export. (plan = subscription fee, plan_trial = trial period 0 amount charge, setup_fee = subscription setup fee, add_on = subscription add-on fee, debit = custom charge through the UI or Adjustments API, one_time = custom charge through the Transactions API, credit = custom credit, carryforward = the charge that zeros out a negative invoice and should be ignored)
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_type">tax_type</span>
+      </td>
+
+      <td>
+        usst, vat, ca, au, nz
+      </td>
+
+      <td>
+        Tax type for the adjustment. Will be "vat" for EU VAT, "usst" for U.S. Sales Tax, or the 2 letter country code for country level tax types like Canada, Australia, New Zealand, Israel, and all non-EU European countries.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_region">tax_region</span>
+      </td>
+
+      <td>
+        NY, FR, GST, VAT
+      </td>
+
+      <td>
+        The tax region for the adjustment. For U.S. Sales Tax, this will be the 2 letter state code. For EU VAT this will be the 2 letter country code. For all country level tax types, this will display the regional tax, like VAT, GST, or PST.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_rate">tax_rate</span>
+      </td>
+
+      <td>
+        0.09
+      </td>
+
+      <td>
+        Tax rate applied to the adjustment.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_amount">tax_amount</span>
+      </td>
+
+      <td>
+        5
+      </td>
+
+      <td>
+        The tax amount for the adjustment. This column is the same as the adjustment_tax column, but tax_amount may be missing a few values for merchants who have used Recurly's older VAT feature (pre-2015). Merchants who used the old VAT feature should use the adjustment_tax column for older reports.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="country_juris">country_juris</span>*
+      </td>
+
+      <td>
+        united states
+      </td>
+
+      <td>
+        Country tax jurisdiction of the adjustment. This will be the full name of the country in lowercase.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="country_rate">country_rate</span>*
+      </td>
+
+      <td>
+        0
+      </td>
+
+      <td>
+        Country tax rate of the adjustment. This is the tax rate that corresponds to the country_juris and country_amount.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="country_amount">country_amount</span>*
+      </td>
+
+      <td>
+        0
+      </td>
+
+      <td>
+        Country tax amount of the adjustment. This is the tax amount that corresponds to country_rate and country_juris.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="state_juris">state_juris</span>*
+      </td>
+
+      <td>
+        california, ontario
+      </td>
+
+      <td>
+        State or province tax jurisdiction of the adjustment. This will be the full name of the state or province in lowercase.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="state_rate">state_rate</span>*
+      </td>
+
+      <td>
+        0.065
+      </td>
+
+      <td>
+        State or province tax rate of the adjustment. This is the tax rate that corresponds to the state_juris and state_amount.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="state_amount">state_amount</span>*
+      </td>
+
+      <td>
+        0.33
+      </td>
+
+      <td>
+        State or province tax amount of the adjustment. This is the tax amount that corresponds to state_rate and state_juris.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="county_juris">county_juris</span>*
+      </td>
+
+      <td>
+        san mateo
+      </td>
+
+      <td>
+        County tax jurisdiction of the adjustment. This will be the full name of the county in lowercase.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="county_rate">county_rate</span>*
+      </td>
+
+      <td>
+        0.01
+      </td>
+
+      <td>
+        County tax rate of the adjustment. This is the tax rate that corresponds to the county_juris and county_amount.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="county_amount">county_amount</span>*
+      </td>
+
+      <td>
+        0.05
+      </td>
+
+      <td>
+        County tax amount of the adjustment. This is the tax amount that corresponds to county_rate and county_juris.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="city_juris">city_juris</span>*
+      </td>
+
+      <td>
+        san francisco
+      </td>
+
+      <td>
+        City tax jurisdiction of the adjustment. This will be the full name of the city in lowercase.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="city_rate">city_rate</span>*
+      </td>
+
+      <td>
+        0.1
+      </td>
+
+      <td>
+        City tax rate of the adjustment. This is the tax rate that corresponds to the city_juris and city_amount.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="city_amount">city_amount</span>*
+      </td>
+
+      <td>
+        0.05
+      </td>
+
+      <td>
+        City tax amount of the adjustment. This is the tax amount that corresponds to city_rate and city_juris.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="special_juris">special_juris</span>*
+      </td>
+
+      <td>
+        san francisco
+      </td>
+
+      <td>
+        Special tax jurisdiction of the adjustment. This will be the full name of the jurisdiction in lowercase.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="special_rate">special_rate</span>*
+      </td>
+
+      <td>
+        0.1
+      </td>
+
+      <td>
+        Special jurisdiction tax rate of the adjustment. This is the tax rate that corresponds to the special_juris and special_amount.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="special_amount">special_amount</span>*
+      </td>
+
+      <td>
+        0.05
+      </td>
+
+      <td>
+        Special jurisdiction tax amount of the adjustment. This is the tax amount that corresponds to special_rate and special_juris.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_refund">adjustment_refund</span>
+      </td>
+
+      <td>
+        TRUE, FALSE
+      </td>
+
+      <td>
+        TRUE indicates that the adjustment is a refund of a charge. FALSE indicates that the adjustment was a standard charge.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="original_adjustment_uuid">original_adjustment_uuid</span>
+      </td>
+
+      <td>
+        b964b5439c2548a
+      </td>
+
+      <td>
+        Value is the uuid of the previous related adjustment. Will only have a value if the adjustment is a credit created from a previous credit, or if the credit was created from a charge refund.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_number">invoice_number</span>
+      </td>
+
+      <td>
+        1291
+      </td>
+
+      <td>
+        Invoice number of the invoice the adjustment was on.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_state">invoice_state</span>
+      </td>
+
+      <td>
+        pending
+      </td>
+
+      <td>
+        Current state of the invoice the adjustment was on. Equivalent to invoice_status in the Invoices - Summary export.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_coupon_code">adjustment_coupon_code</span>
+      </td>
+
+      <td>
+        1monthfree-K09SC9R8
+      </td>
+
+      <td>
+        The coupon code that discounted the specific adjustment_discount amount on the adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_billed_date">invoice_billed_date</span>
+      </td>
+
+      <td>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td>
+        Creation date of the invoice. Equivalent to date in the deprecated Invoices export.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_closed_at">invoice_closed_at</span>
+      </td>
+
+      <td>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td>
+        Date invoice was paid or failed.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_net_terms">invoice_net_terms</span>
+      </td>
+
+      <td>
+        on-receipt, net-10, net-30, net-60
+      </td>
+
+      <td>
+        Identifies the net_terms agreement associated with the invoice. All automatic collection invoices are due 'on-receipt'. Manual collection invoices can have terms of net-10, net-30, net-60, or a custom net day amount.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_po_number">invoice_po_number</span>
+      </td>
+
+      <td>
+        AE12523
+      </td>
+
+      <td>
+        For manual invoicing, this identifies the Purchase Order number associated with the invoice. This value must be entered by the merchant at the time the invoice is created or it will not exist.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_collection_method">invoice_collection_method</span>
+      </td>
+
+      <td>
+        automatic or manual
+      </td>
+
+      <td>
+        Identifies whether the invoice fees are collected via manual or automatic invoicing. An automatic invoice means a corresponding transaction is run using the account's billing information at the same time the invoice is created. Manual invoices are created without a corresponding transaction. The merchant must enter a manual payment transaction or have the customer pay the invoice with an automatic method, like credit card, PayPal, Amazon, or ACH bank payment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_type">invoice_type</span>
+      </td>
+
+      <td>
+        purchase or refund
+      </td>
+
+      <td>
+        The original invoice will have a type of 'purchase'. Any refunds or voids will create a negative invoice to cancel out the original. This negative invoice will have a type of 'refund'.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_name">account_name</span>
+      </td>
+
+      <td>
+        JJ Smith
+      </td>
+
+      <td>
+        First and last name from account.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_country">account_country</span>
+      </td>
+
+      <td>
+        US
+      </td>
+
+      <td>
+        The 2 letter country code for the country of the customer's address on the invoice. This will come from the Billing Address or the Account Address depending on your tax settings and the invoice collection method.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="account_vat_number">account_vat_number</span>
+      </td>
+
+      <td>
+        IE124211145
+      </td>
+
+      <td>
+        VAT registration number for the customer on the invoice. This will come from the VAT Number field in the Billing Info or the Account Info depending on your tax settings and the invoice collection method.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_plan_code">adjustment_plan_code</span>
+      </td>
+
+      <td>
+        basic
+      </td>
+
+      <td>
+        The plan code for the plan associated with the subscription. This value will exist for plan fee, setup fee, add-on fee and free trial adjustments. This value will not exist for custom charges, custom credits, or open amount refund credits.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="original_invoice_number">original_invoice_number</span>
+      </td>
+
+      <td>
+        1002
+      </td>
+
+      <td>
+        If the row is an adjustment on a refund invoice, this value will exist and show the invoice number of the purchase invoice the refund was created from.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="invoice_due_on">invoice_due_on</span>
+      </td>
+
+      <td>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td>
+        The due date of the invoice.
+      </td>
+
+      <td>
+        timestamp
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_subtotal">adjustment_subtotal</span>
+      </td>
+
+      <td>
+        50.25
+      </td>
+
+      <td>
+        The adjustment amount after discounts, but before taxes.
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_credit_reason_code">adjustment_credit_reason_code</span>
+      </td>
+
+      <td>
+        general, service, promotional, refund, write_off, gift_card
+      </td>
+
+      <td>
+        The credit reason code of the adjustment. This is a new attribute with Recurly defined values the merchant can choose from when creating custom credits, or Recurly will set when issuing credits.
+        **This column will be null until Recurly's Credit Invoices feature is enabled on your Recurly site.**
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_refundable_amount">adjustment_refundable_amount</span>
+      </td>
+
+      <td>
+        50.25
+      </td>
+
+      <td>
+        The refundable amount of the charge adjustment, which is the adjustment total, including discounts and tax, minus all credit adjustments issued against it.
+        **This column will be null until Recurly's Credit Invoices feature is enabled on your Recurly site.**
+      </td>
+
+      <td>
+        numeric
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_name">ship_address_name</span>
+      </td>
+
+      <td>
+        Jane Doe
+      </td>
+
+      <td>
+        The first and last name associated with the shipping address for the adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_line1">ship_address_line1</span>
+      </td>
+
+      <td>
+        123 Main Street
+      </td>
+
+      <td>
+        The first address line associated with the shipping address for the adjustment
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_line2">ship_address_line2</span>
+      </td>
+
+      <td>
+        Suite #202
+      </td>
+
+      <td>
+        The second address line associated with the shipping address for the adjustment
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_city">ship_address_city</span>
+      </td>
+
+      <td>
+        San Francisco
+      </td>
+
+      <td>
+        The city associated with the shipping address for the adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_state">ship_address_state</span>
+      </td>
+
+      <td>
+        CA
+      </td>
+
+      <td>
+        The state associated with the shipping address for the adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_zip">ship_address_zip</span>
+      </td>
+
+      <td>
+        94110
+      </td>
+
+      <td>
+        The zip code associated with the shipping address for the adjustment
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_country">ship_address_country</span>
+      </td>
+
+      <td>
+        US
+      </td>
+
+      <td>
+        The country ISO code associated with the shipping address for the adjustment
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="ship_address_phone">ship_address_phone</span>
+      </td>
+
+      <td>
+        510-100-1000
+      </td>
+
+      <td>
+        The phone number associated with the shipping address for the adjustment
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="shipping_method_code">shipping_method_code</span>
+      </td>
+
+      <td>
+        usps-overnight
+      </td>
+
+      <td>
+        The Shipping Method code used when the Shipping Method was created.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="item_code">item_code</span>
+      </td>
+
+      <td>
+        item123
+      </td>
+
+      <td>
+        The Item Code maps to the user-specified unique ID of the item that was sold on this adjustment.
+
+        Reference [this page](https://docs.recurly.com/docs/catalog) for more on items.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="item_id">item_id</span>
+      </td>
+
+      <td>
+        12345678998
+      </td>
+
+      <td>
+        The Item ID maps to the system-generated unique ID of the item that was sold on this adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="external_sku">external_sku</span>
+      </td>
+
+      <td>
+        abc123
+      </td>
+
+      <td>
+        The External SKU mapps to the user-specified SKU of the item that was sold on this adjustment.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="tax_inclusive">tax_inclusive</span>
+      </td>
+
+      <td>
+        true
+      </td>
+
+      <td>
+        Indicates whether the purchase was inclusive or exclusive of tax.
+      </td>
+
+      <td>
+        boolean
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="business_entity_code">business_entity_code</span>
+      </td>
+
+      <td>
+        2345678
+      </td>
+
+      <td>
+        Business entity code.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="adjustment_api_id">adjustment_api_id</span>
+      </td>
+
+      <td>
+        e28zov4fw0v2
+      </td>
+
+      <td>
+        Adjustment API ID
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="price_segment_id">price_segment_id</span>
+      </td>
+
+      <td>
+        e30zov45fw0v2
+      </td>
+
+      <td>
+        Price segment id
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span id="price_segment_code">price_segment_code</span>
+      </td>
+
+      <td>
+        gold
+      </td>
+
+      <td>
+        Price segment code
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        user-defined custom field label
+      </td>
+
+      <td>
+        charge custom field 
+      </td>
+
+      <td>
+        Appears only if a custom field is configured and enabled to be visible in the export. The column name in the export reflects the label defined in the custom field configuration.
+      </td>
+
+      <td>
+        string
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+***Is not populated when using Vertex tax service**
+
+# Version changelog
+
+### Version 9 - 10/14/2025
+
+* Addition of `price_segment_id and price_segment_code`.
+
+### Version 8 - 2/5/2025
+
+* Addition of `adjustment_api_id`.
+
+### **Version 7** - 7/25/2023
+
+* Integrated an additional column to indicate `business_entity_code`.
+
+### **Version 6** - 1/17/2022
+
+* Introduced a column designated for Charge Custom Field Objects, custom field columns will always appear at the end of exports, including the following versions
+
+### **Version 5** - 3/30/2022
+
+* Integrated an additional column to indicate tax_inclusive.
+
+### **Version 4** - 2/13/2020
+
+* A new column for external_sku added to facilitate Item Charges.
+
+### **Version 3** - 11/21/2019
+
+* Added columns specifying item_code and item_id for Item Charges.
+
+### **Version 2** - 5/2/2019
+
+* Introduced a column to denote shipping_method_code.

@@ -1,0 +1,161 @@
+---
+title: Cybersource
+---
+
+<div className="rp-page">
+  <div className="rp-overview">CyberSource is a full-service payment management platform. Integrating it with Recurly lets you securely process card payments, Apple Pay, and Google Pay globally, with 3DS2 support and flexible AVS configuration. You'll need your CyberSource Merchant ID, a SOAP Toolkit key, and a P12 certificate to complete the setup.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#configuring-cybersource-in-recurly"><span className="rp-toc-num">3</span>Configuring CyberSource in Recurly</a>
+  </div>
+</div>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>No gateway-level fraud management</strong> — Recurly does not support gateway-level fraud management behaviors for CyberSource.</li>
+  <li><strong>No lifecycle or post-auth webhooks</strong> — Recurly does not support lifecycle or post-auth webhooks from CyberSource. If you're using gateway-level fraud review systems or making transaction actions directly at the gateway, Recurly and CyberSource can fall out of sync. Always capture, void, and process refunds from Recurly rather than directly in the gateway.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">CyberSource is a full-service payment management platform that supports subscription billing, one-time transactions, and a wide range of card brands globally. The Recurly integration uses CyberSource's SOAP Toolkit API and P12 certificate-based authentication. You'll need your CyberSource Merchant ID, SOAP Toolkit key, and a P12 certificate file and password to connect.</div>
+
+# Key details
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Feature</td><td>Details</td></tr>
+  <tr><td>Services that work with Recurly</td><td>Payment processing</td></tr>
+  <tr><td>Supported operations</td><td>Purchase, Authorize and Capture, Void, Refund, AVS checks</td></tr>
+  <tr><td>Supported payment types</td><td>Credit/debit card, Apple Pay, Google Pay. <em>Note: Apple Pay is not supported with the TSYS/Vital acquirer.</em></td></tr>
+  <tr><td>Supported card brands</td><td>Visa, Mastercard, American Express, Discover, Diners Club, JCB, Union Pay</td></tr>
+  <tr><td>Gateway-specific 3DS2 supported</td><td>Yes</td></tr>
+  <tr><td>Card on file supported</td><td>Yes</td></tr>
+  <tr><td>Regions</td><td>Global</td></tr>
+  <tr><td>Currencies</td><td><a href="/guides/payment-orchestration/gateway-configuration-and-features/currency-support-by-gateway" target="_blank">See all available</a></td></tr>
+</table>
+
+## Address Verification System (AVS) settings
+
+CyberSource merchants can configure AVS checks to one of three options — set this when configuring or editing the gateway in Recurly:
+
+- **All transactions** — AVS checks run on every transaction globally.
+- **US and Canada only** _(recommended)_ — AVS checks run only for US and Canadian transactions.
+- **Disabled** — AVS checks are turned off entirely.
+
+Recurly recommends enabling AVS for the US and Canada only. AVS works reliably in those regions but can be inconsistent or unsupported internationally — enabling it globally may cause unnecessary declines.
+
+## CyberSource processor configuration
+
+CyberSource may require different integration parameters depending on the processor linked to your account. When configuring the CyberSource gateway in Recurly, you must select the correct processor in the **Credit Card Processor** dropdown.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Warning</strong> Do not leave the Credit Card Processor selection unset. Various compliance mandates rely on this value to pass the correct data to the gateway. Leaving it blank can cause transaction failures.</div>
+</div>
+
+# Configuring CyberSource in Recurly
+
+## Step 1: Access your CyberSource Business Gateway
+
+Log in to your CyberSource Business Gateway. If you don't have an account, sign up through CyberSource to get started.
+
+## Step 2: Generate a SOAP Toolkit key
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Navigate to Key Management</h4><p>In your CyberSource Business Center, go to <strong>Payment Configuration → Key Management</strong> and select <strong>Generate Key → SOAP Toolkit API</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Download the key</h4><p>Click <strong>Download Key</strong>. If prompted for a password, use your Merchant ID.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Copy the key before leaving the page</h4><p>Copy the generated key immediately — you'll need it in Step 4 to connect CyberSource with Recurly.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Important — P12 authentication required</strong> CyberSource is upgrading SOAP API authentication from username/password to P12 certificate-based authentication. You must remove username/password authentication and transition to certificate-based authentication by the following dates:<br /><br /><strong>Sandbox:</strong> September 1, 2025<br /><strong>Production:</strong> September 15, 2025</div>
+</div>
+
+## Step 3: Generate your P12 certificate
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Generate the certificate</h4><p>In your CyberSource Business Center, go to <strong>Payment Configuration → Key Management</strong>, select <strong>Generate Key → REST Certificate</strong>, and click <strong>Download Key</strong>. Note where the file is saved — you'll need it in Step 4.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Set a certificate password</h4><p>Enter a password in the <strong>New Password</strong> and <strong>Confirm Password</strong> fields, then click <strong>Generate Key</strong>. Keep this password — you'll need it in Step 4.</p></div>
+  </div>
+</div>
+
+## Step 4: Enter CyberSource credentials in Recurly
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Payment Gateways</h4><p>In Recurly, navigate to <strong>Payment Gateways</strong>, click <strong>Add a New Gateway</strong>, and select <strong>CyberSource</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter your Merchant ID and SOAP key</h4><p>Enter your CyberSource Merchant ID in the <strong>Login</strong> field, and paste your SOAP Toolkit key into the <strong>Key</strong> field.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Upload your P12 certificate</h4><p>Upload the P12 certificate file you generated in Step 3, then enter its password in the <strong>P12 File Password</strong> field.</p></div>
+  </div>
+</div>
+
+## Step 5: Configure 3DS2 support (optional)
+
+Check **Enable 3DS2 support** if you want to support 3DS2 verification flows. Only enable this if 3DS is active on your CyberSource account.
+
+To enforce 3DS challenges for subscription signups and one-time charges, contact Recurly Support to enable the `challengeCode` parameter for your implementation.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Warning</strong> Not all CyberSource processors support the <code>challengeCode</code> parameter. Confirm with your CyberSource representative before enabling it in Recurly — enabling it on an unsupported processor will cause payment failures.</div>
+</div>
+
+## Step 6: Set your credit card processor and card types
+
+Under **Accepted Card Types**, enable only the card brands active on your CyberSource account. In the **Credit Card Processor** dropdown, select the main processor for your CyberSource account. If you're unsure which processor to select, consult your CyberSource account representative.
+
+## Step 7: Enable currencies
+
+USD is enabled by default. Use the currency selection tool to add or remove currencies based on what your CyberSource gateway accepts.
+
+## Step 8: Enable Zero Dollar Authorizations
+
+Enable Zero Dollar Authorizations (ZDA) for each applicable card type. ZDA is essential for validating card data before subscriptions start and when offering free trials.
+
+## Step 9: Configure AVS settings
+
+Select your AVS preference for the CyberSource gateway — see the [AVS settings](#address-verification-system-avs-settings) section above for guidance on each option.
+
+## Step 10: Save and enable the gateway
+
+Click **Add Payment Gateway**. CyberSource will appear in your Production Gateways list in Recurly with a status of **Enabled**.
+
+## Step 11: Test the configuration
+
+Run a test transaction to confirm the integration is working correctly. Use your Recurly sandbox site in development mode before going live.
+
+## Step 12: Go live
+
+Once testing passes, you're ready to accept live payments through CyberSource.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong> Keep your CyberSource credentials secure and limit access to authorized personnel. Regularly review and regenerate your SOAP Toolkit keys for added security. Consult your CyberSource account representative to confirm your account is in good standing and compliant with all relevant regulations.</div>
+</div>
+
+# FAQ
+
+<Accordion title="I am using Recurly.js and I am not receiving a token -- what's wrong?">
+  Cybersource uses pre-flights to initiate 3DS requests using the Gateway's SDK when using Recurly.js by default. If you do not have 3DS enabled on your gateway account and are calling 3DS in your R.js configuration, you are likely running up against a Cybersource gateway configuration issue where you are calling 3DS behavior and your gateway account does not support it. Talk to your Cybersource contacts about enabling 3DS, or remove 3DS configuration from your R.js setup.
+</Accordion>

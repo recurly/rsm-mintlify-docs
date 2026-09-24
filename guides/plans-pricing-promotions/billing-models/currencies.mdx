@@ -1,0 +1,149 @@
+---
+title: Currencies
+---
+
+<div className="rp-page">
+  <div className="rp-overview">
+    Recurly lets you accept payments in up to 141 currencies, so you can price your plans independently for each market and present charges to customers in their local denomination. Recurly passes the currency amount you define directly to your payment gateway — no conversion is performed on our end.
+  </div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#setting-up-multiple-currencies"><span className="rp-toc-num">3</span>Setting up multiple currencies</a>
+    <a className="rp-toc-pill" href="#specifying-a-currency"><span className="rp-toc-num">4</span>Specifying a currency</a>
+    <a className="rp-toc-pill" href="#payment-gateway-support"><span className="rp-toc-num">5</span>Payment gateway support</a>
+    <a className="rp-toc-pill" href="#tax-support"><span className="rp-toc-num">6</span>Tax support</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">
+  Multi-currency support lets you offer subscription plans and coupons priced independently in each currency you accept. When a customer checks out, Recurly presents the amount in the currency you've defined and passes it to your payment gateway in that same currency for processing. Recurly does not perform currency conversion — your merchant account may settle the transaction in a different currency depending on your gateway configuration.
+</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-globe" aria-hidden="true"></i></div>
+    <strong>Reach a global audience</strong>
+    <span>Support for 141 currencies opens your business to customers worldwide, letting them pay in their preferred local denomination.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></div>
+    <strong>Cleaner financial management</strong>
+    <span>All charges and credits on a single invoice share the same currency, keeping your books straightforward and reducing reconciliation overhead.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+    <strong>Automatic currency selection</strong>
+    <span>Hosted Payment Pages automatically select the most appropriate currency based on the customer's geo-location, improving the checkout experience and conversion rates.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Independent pricing per currency</strong>
+    <span>Define prices separately for each currency so you can optimize your pricing strategy for each market without being locked into a fixed exchange rate.</span>
+  </div>
+</div>
+
+# Setting up multiple currencies
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Enable multi-currency support and define accepted currencies</h4>
+      <p>After multi-currency support is activated on your Recurly account, add the currencies you want to accept. Once a currency is enabled, you can set pricing for your subscription plans and coupons in that currency.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Update existing plans with prices in each currency</h4>
+      <p>Add pricing in every accepted currency to your existing subscription plans. Prices are defined independently per currency, giving you full control over each market.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Confirm gateway compatibility</h4>
+      <p>Verify that the currencies you've enabled are supported by your configured payment gateways. The Currencies Configuration page shows which currencies your current gateway setup can handle.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div>
+      <h4>Enable zero-dollar authorizations</h4>
+      <p>Recurly recommends enabling zero-dollar authorization support on all gateway accounts used to process non-USD currencies. This prevents invalid amount errors that can result from exchange rate differences. See the <a href="/guides/payment-orchestration/gateway-configuration-and-features/payment-gateways#section-zero-dollar-authorizations-zda" target="_blank">zero-dollar authorizations</a> section of our gateway documentation for setup steps.</p>
+    </div>
+  </div>
+</div>
+
+# Specifying a currency
+
+How currency is determined at checkout depends on which integration method you're using.
+
+## Checkout
+
+When multiple currencies are accepted, Recurly's Checkout hosted page offers several options for currency selection. See <a href="https://docs.recurly.com/docs/checkout#currencies" target="_blank">Currencies on Checkout</a> for details.
+
+## Hosted Payment Pages
+
+Legacy Hosted Payment Pages default to the most appropriate currency for the customer based on their country, detected via automatic geo-IP lookup. See <a href="/guides/hosted-pages/hosted-payment-pages#multi-currency" target="_blank">Currencies on Hosted Payment Pages</a> for details.
+
+## Recurly.js
+
+Recurly.js forms accept a `currency` parameter, letting you specify the currency when creating a new subscription or transaction. See the <a href="https://docs.recurly.com/recurly-subscriptions/v1.2/docs/overview-recurlyjs#/" target="_blank">Recurly.js documentation</a> for details.
+
+## Invoices
+
+All charges and credits on an invoice are in the same currency. Because Recurly doesn't perform currency conversion, charges in different currencies cannot be combined on the same invoice.
+
+## Subscriptions
+
+Currency is stored at the subscription level when the subscription begins. **The currency of an active subscription cannot be changed.** To switch a subscriber to a different currency, the current subscription must be canceled and a new one created.
+
+# Payment gateway support
+
+Some gateways require separate accounts to collect payments in different currencies. For a full list of currencies supported by each gateway integration, see <a href="/guides/payment-orchestration/gateway-configuration-and-features/currency-support-by-gateway" target="_blank">currency support by gateway</a>. Contact your gateway directly for account-specific information.
+
+<table className="rp-gw-table">
+  <tbody>
+    <tr className="rp-thead-row">
+      <td>Gateway</td>
+      <td>Multi-currency notes</td>
+    </tr>
+    <tr>
+      <td>Authorize.Net</td>
+      <td>Accepts one currency per gateway account. To accept more than one currency, you'll need to open multiple accounts with the gateway.</td>
+    </tr>
+    <tr>
+      <td>Braintree</td>
+      <td>Supports multiple currencies. Each currency requires a separate merchant account ID.</td>
+    </tr>
+    <tr>
+      <td>CyberSource</td>
+      <td>Supports multiple currencies with a single account. Contact CyberSource to enable additional currencies.</td>
+    </tr>
+    <tr>
+      <td>PayPal Payments Pro / PayFlow Pro</td>
+      <td>Currencies are automatically configured for US, CA, and UK merchants based on your PayPal account settings. Note: Japanese yen (JPY) is not currently supported by Recurly.</td>
+    </tr>
+    <tr>
+      <td>Stripe</td>
+      <td>Supports multiple currencies with a single Stripe account. You'll need to add a separate gateway instance (using the same credentials) for each currency you're approved to accept.</td>
+    </tr>
+    <tr>
+      <td>Vantiv</td>
+      <td>Supports multiple currencies. Each currency requires a separate account.</td>
+    </tr>
+  </tbody>
+</table>
+
+# Tax support
+
+Tax region support is configured independently from currency enablement — enabling a currency does not automatically enable tax collection for that region. For information on supported tax regions, see the <a href="https://docs.recurly.com/docs/tax" target="_blank">tax documentation</a>.
+
+<br />

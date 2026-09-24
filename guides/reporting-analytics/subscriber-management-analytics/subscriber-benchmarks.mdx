@@ -1,0 +1,130 @@
+---
+title: Subscriber benchmarks
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Subscriber Benchmarks dashboard shows how your acquisition rate, signup decline rate, and churn rate stack up against others in your industry, using Recurly's built-in benchmarks.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">4</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have the Analytics user role permission.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Subscriber Benchmarks dashboard provides insights on your acquisition rate, signup decline rate, and overall churn rate, comparing your performance to others in your industry using Recurly's built-in benchmarks.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Industry comparison</strong>
+    <span>Compare your key subscription metrics against industry benchmarks to see how you stack up against peers and spot your strengths and weaknesses.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Competitive insights</strong>
+    <span>See how competitors are performing on subscription metrics, and find areas to differentiate and gain a competitive edge.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Informed decision-making</strong>
+    <span>Make decisions based on real-world data, so you can set realistic goals for subscription growth and customer retention.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Forecasting and planning</strong>
+    <span>Forecast more accurately and plan for the long term, so you can set reachable growth targets and allocate resources effectively.</span>
+  </div>
+</div>
+
+# Key details
+
+## General filters (top left corner)
+
+<ul className="rp-list">
+  <li><strong>Date range</strong>: Adjust the monthly period for benchmark comparisons. The default is 14 months, letting you track and analyze long-term trends.</li>
+  <li><strong>Benchmarks industry</strong>: See benchmark data specific to your industry for relevant insights and comparisons.</li>
+  <li><strong>Subscriber type</strong>: Fixed to "Paying Subscribers," focusing the benchmark comparison on subscribers with at least one paid invoice.</li>
+</ul>
+
+## Subscriber benchmarks
+
+The Subscriber Benchmarks dashboard helps you understand how effective your strategies are throughout the subscription lifecycle. By examining your acquisition rate, signup decline rate, and churn rate, you get a full picture of what's working and what needs improvement.
+
+### Acquisition rate
+
+The acquisition rate is calculated by dividing the number of subscribers gained during a certain period by the number of subscribers at the start of that period.
+
+<ul className="rp-list">
+  <li><strong>Eligibility</strong>: Only includes subscribers who have a paid invoice with an amount greater than zero, excluding those in trial or undergoing dunning from trial.</li>
+  <li><strong>Detailed calculation</strong>: To be considered an acquisition in a given month, the subscriber must either have only expired subscriptions at the beginning of the month, or no subscriptions at all, and also have at least one non-expired subscription at the end of the month (for example, the subscription state could be active, canceled, or paused). Future, pending, and failed subscriptions aren't included. Because benchmarks are calculated on a monthly basis, this omits any subscribers acquired intra-month who were also present at the beginning of the month, referred to as "ghost acquisition."</li>
+  <li><strong>Benchmark calculation</strong>: Benchmark quartiles are generated monthly, providing a consistent framework for comparison at the start of each new month. Individual merchant KPI rates, such as the renewal invoice paid rate, are calculated daily — so while the benchmarks themselves update monthly, the underlying data for specific KPIs refreshes throughout the day and can be observed on their respective dashboards. Even with these daily updates, the broader benchmark comparisons remain static throughout the month until the next monthly update cycle.</li>
+</ul>
+
+**Example:** Assume a subscriber is active on January 1, 2024 and in dunning, then expires or churns on January 10th, and signs back up on January 15th while remaining active through the end of the month. This subscriber won't count as an acquisition, since they were active at the beginning of the month, despite churning and signing up again within the month.
+
+
+<Image src="https://files.readme.io/496ee080d8409235e089fd6918f1ac06ffb94e375ee030882156c8918a02260b-image.png" align="center" width="75%" border={true} />
+
+
+Your ranking within your industry is shown as a percentile, letting you track how your acquisition rate compares to peers over time through the trend of your percentile ranking.
+
+### Signup decline rate
+
+The signup decline rate is calculated by dividing the number of unsuccessful initial transaction attempts on an account by the total number of initial transaction attempts on an account.
+
+<ul className="rp-list">
+  <li><strong>Failed signup definition</strong>: An account is considered to have a failed signup if its initial attempt to sign up doesn't succeed. Even if the account makes subsequent attempts and eventually succeeds, it's still marked as a failed signup due to the initial failure.</li>
+  <li><strong>Inclusion criteria</strong>: The calculation includes all kinds of initial transactions, such as authorization or verification transactions, one-time purchases, and subscription signup attempts.</li>
+  <li><strong>Example calculation</strong>: If five accounts try to sign up, and three succeed on the first try, one fails initially but succeeds later, and one fails and never succeeds, the decline rate is 40%. That's because two out of the five initial signup attempts were unsuccessful.</li>
+</ul>
+
+
+<Image src="https://files.readme.io/c75301528d853b2ea0819fd5023ff98351eaff3847ee0ed8c0dcc42571ee9a7b-image.png" align="center" width="75%" border={true} />
+
+
+Your performance in this area is displayed as a percentile, showing how you rank compared to others in your industry. Monitoring your percentile trend over time can show you how your signup process compares to industry standards and highlight areas for improvement.
+
+### Churn rate
+
+The churn rate metric shows the proportion of subscribers lost during a specified time period, compared to the total number of subscribers at the beginning of that period.
+
+<ul className="rp-list">
+  <li><strong>Subscriber eligibility</strong>: Only includes subscribers who have had at least one paid subscription invoice. Subscribers in trial periods, or in dunning following a trial, aren't considered.</li>
+  <li><strong>Detailed calculation</strong>: Churn benchmarks are calculated on a monthly basis. To be considered churned in a given month, the subscriber must have a non-expired subscription at the beginning of the month (for example, the subscription state could be active, canceled, or paused) and only expired subscriptions at the end of the month. Future, pending, and failed subscriptions aren't considered. Churn that occurs within the month, often referred to as "ghost churn," isn't included in the benchmarks.</li>
+  <li><strong>Benchmark calculation</strong>: Benchmarks are calculated at the end of each month, with a new benchmark ranking and percentile available at the start of each month.</li>
+  <li><strong>Multiple subscriptions</strong>: For subscribers with several subscriptions, the last expired subscription is used to categorize the churn as either voluntary (the subscriber chose to leave) or involuntary (due to issues like payment failure).</li>
+</ul>
+
+**Example of ghost churn:** A subscriber isn't active at the beginning of the month, signs up for a subscription mid-month, then expires before the end of the month. This is not churn, since the subscriber wasn't active at the beginning of the month.
+
+
+<Image src="https://files.readme.io/7449fa5015cd883529d9e15eed5b3b36a5fd718d4b4338d127c887501bf8064c-image.png" align="center" width="75%" border={true} />
+
+
+Your performance is represented as a percentile, showing how your churn rate compares to others in your industry. Watching the trend of your percentile over time can reveal valuable insights into the effectiveness of your retention strategies and how they stack up against industry norms.
+
+## About benchmarks
+
+Recurly's benchmark reports show how your performance metrics compare to similar businesses in your industry over time. This helps you understand your competitive position and identify growth opportunities by comparing your key performance indicators (KPIs) with industry standards.
+
+# FAQs
+
+<Accordion title="What is a &#x22;Paid Subscriber&#x22;?">
+  A "Paid Subscriber" refers to a subscriber who has paid for at least one invoice associated with their subscription. This excludes those currently in a trial period or in a dunning process following a trial.
+</Accordion>
+
+<Accordion title="Why is the timeframe preset to &#x22;Monthly&#x22;?">
+  Benchmarks are compiled and analyzed monthly to ensure uniform data aggregation and calculation, providing clear and comparable metrics consistently across different periods.
+</Accordion>

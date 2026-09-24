@@ -1,0 +1,177 @@
+---
+title: Business entities overview
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Business Entity Overview dashboard lets you choose which of your site's business entities to view key metrics for. View one, several, or all of your business entities at once in a single dashboard — each entity is color-coded so you can distinguish individual performance at a glance.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have the Analytics user role permission.</li>
+  <li>This dashboard is intended for merchants with more than one business entity configured on their site.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Business Entity Overview dashboard lets merchants choose which of their site's defined business entities to view key metrics for. Choose to view one, several, or all of your business entities' data at once in a single dashboard. Each entity is color-coded to distinguish individual entity performance.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>A single view into your top metrics</strong>
+    <span>This dashboard brings Recurly's most-used tables into one place, so you can understand individual entity performance without stitching reports together.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Entity performance comparison</strong>
+    <span>Compare key subscription metrics side by side across each of your business entities.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Understand subscriber trends</strong>
+    <span>Track churn and refund patterns and see which entities have the highest rates of acquisition and expansion — useful context for deciding when to use Recurly's retention and acquisition tools, such as promotional and dunning campaigns, pricing adjustments, discounted add-ons, and descending ramp-pricing plans for loyal customers.</span>
+  </div>
+</div>
+
+# Key details
+
+## Filters
+
+Filter by the timeframe, date range, and business entity or entities you want to see data for.
+
+<ul className="rp-list">
+  <li><strong>Timeframe</strong>: How to display the data. Choose between a daily, weekly, monthly, quarterly, or yearly view.</li>
+  <li><strong>Date range</strong>: The duration you want the data to reflect. For example, set your timeframe to monthly and your date range to "is in the last six months" for a monthly view of the dashboard's performance over that period.</li>
+  <li><strong>Business entity</strong>: The entity or entities you want to view data for. Select all, some, or one. Other dashboards in Recurly's Analytics section automatically show comprehensive data across all of your business entities.</li>
+</ul>
+
+## Key dashboards
+
+The Business Entity Overview includes the following dashboards.
+
+### Monthly Recurring Revenue (MRR)
+
+The Monthly Recurring Revenue (MRR) dashboard is a vital tool for subscription-based businesses, offering a deep dive into predictable monthly revenue patterns. While not equivalent to Generally Accepted Accounting Principles (GAAP) revenue, MRR is a pivotal metric that reflects your company's growth and revenue trends. Updated multiple times daily, this dashboard provides the freshest insights into successful and failed transactions, dunning activity, discounts, and projected MRR.
+
+The MRR calculation incorporates components related to invoiced recurring charges, credits, and refunds from subscriptions. A charge is included in MRR if the line item associated with it has a start and end date on the invoice.
+
+**Examples of adjustments included in the MRR calculation:**
+
+<ul className="rp-list">
+  <li>Subscription and subscription add-on amounts</li>
+  <li>Manual recurring charges</li>
+  <li>Proration credit from a subscription downgrade or upgrade</li>
+  <li>Refund of a subscription amount</li>
+  <li>Invoiced one-time charges with a start_date and end_date</li>
+</ul>
+
+**Not included in the MRR calculation:**
+
+<ul className="rp-list">
+  <li>One-time charges without a start_date and end_date</li>
+  <li>One-time credits</li>
+  <li>Taxes</li>
+  <li>Usage-based billing amounts</li>
+</ul>
+
+For sites that support multiple currencies, the default view shows total MRR across all currencies, converted to the primary currency and summed. Conversion rates are updated daily using data from <a href="https://openexchangerates.org/" target="_blank">openexchangerates.org</a>. Historical MRR uses the conversion rate at the time the charge was created and doesn't change over time as current conversion rates update.
+
+### Monthly Recurring Revenue Growth
+
+This dashboard breaks down the key factors driving MRR changes, helping you track revenue trends over time.
+
+<ul className="rp-list">
+  <li><strong>New business</strong>: Revenue from new customers subscribing for the first time.</li>
+  <li><strong>Expansion</strong>: Additional revenue from existing customers, such as plan upgrades or add-ons.</li>
+  <li><strong>Reactivation</strong>: Revenue from previously canceled accounts that resubscribed after having no active subscriptions.</li>
+  <li><strong>Total growth</strong>: Combined revenue from new business, expansion, and reactivation.</li>
+  <li><strong>Churn</strong>: Revenue lost from customers fully canceling their subscriptions.</li>
+  <li><strong>Contraction</strong>: Revenue reduction from downgrades or plan changes.</li>
+  <li><strong>Total loss</strong>: Combined revenue lost from churn and contraction.</li>
+  <li><strong>Net MRR</strong>: Total growth minus total loss, reflecting overall MRR movement.</li>
+</ul>
+
+#### Clarification on reactivation
+
+Reactivation MRR represents revenue from accounts that previously had no active subscriptions and later resubscribed. Merchants can explore reactivated accounts by drilling into the cohort details, where they can see subscription expirations and subsequent reactivations.
+
+### Billings
+
+The Billings dashboard helps you understand payments, refunds, and net billings from all customers. It shows only successful transactions, excluding manual and credit invoices. Use it to see your cash flow over a chosen duration, make informed decisions, and build effective revenue strategies.
+
+#### Net new billings and net renewing billings
+
+The Billings dashboard separates net new payments from net renewing payments:
+
+<ul className="rp-list">
+  <li><strong>Net new</strong>: New payments minus any new refunds.</li>
+  <li><strong>Net renewing</strong>: Renewing payments minus renewing refunds.</li>
+</ul>
+
+Together, these two values make up your Total Net Billings. Within this dashboard, "new" refers to a subscriber's first payment, and "renewing" refers to any payment made after that first one.
+
+### Recovered Revenue
+
+The Recovered Revenue dashboard shows how much revenue you've recovered through Recurly's system. By monitoring involuntary churn from declined invoices, the dashboard uses several mechanisms to maximize your rate of paid invoices:
+
+<ul className="rp-list">
+  <li><strong>Expiration date changes</strong>: Updates the expiration date on the account's billing information, allowing continuity of invoices and subscriptions. This reduces the likelihood of service disruption for the customer and prevents potential revenue loss.</li>
+  <li><strong>Account updater</strong>: If enabled, checks for credit card updates with providers before a subscription renewal, or when a one-time invoice or re-subscribe sign-up results in a hard decline. Staying current with a customer's payment details reduces failed invoices and helps maintain a steady revenue stream.</li>
+  <li><strong>Intelligent retries</strong>: Recurly's retry logic that maximizes the likelihood of turning failed invoices into successful ones by strategically timing retry attempts, reducing involuntary churn caused by failed invoices.</li>
+  <li><strong>Backup payment method</strong>: Ensures uninterrupted service for your customers even when their primary payment method fails, by securely storing an alternative payment option.</li>
+  <li><strong>Customer updates</strong>: When a customer updates their payment method, Recurly attempts collection on the failed automated invoice. Customers may be prompted to update their payment method through Recurly's dunning emails or other notifications built into your application. This data doesn't include manual invoices.</li>
+  <li><strong>External recovery</strong>: Counts cases where another system successfully collects on a failed invoice and sends an update to Recurly.</li>
+</ul>
+
+### Subscribers
+
+This table lets you dig into the specific changes month over month, offering insight into the ebb and flow of your subscriber dynamics — data that's crucial for understanding the overall health and growth trajectory of your subscriber base.
+
+<ul className="rp-list">
+  <li><strong>New subscribers</strong>: Individuals signing up for a subscription for the first time.</li>
+  <li><strong>Returning subscribers</strong>: Former subscribers who have reactivated their subscription.</li>
+  <li><strong>Churned subscribers</strong>: Subscribers whose subscriptions have ended, either voluntarily or involuntarily.</li>
+</ul>
+
+### Churn Reasons
+
+See a breakdown of your data across all churn reasons, including:
+
+<ul className="rp-list">
+  <li>Active subscribers</li>
+  <li>Churned subscribers</li>
+  <li>Non-payment</li>
+  <li>Tax location invalid</li>
+  <li>Canceled</li>
+  <li>Non-payment gift card</li>
+  <li>Non-renewing</li>
+  <li>Account closed</li>
+  <li>Unknown</li>
+  <li>Non-payment trial</li>
+  <li>Canceled trial</li>
+</ul>
+
+### Explore Invoices Dashboard
+
+View details for all invoices created across your Recurly site in the Explore Invoices dashboard. This dashboard lets you filter invoice details by:
+
+<ul className="rp-list">
+  <li>Custom fields</li>
+  <li>Account primary billing info</li>
+  <li>Accounts</li>
+  <li>Business entities</li>
+  <li>Charges</li>
+  <li>Dunning settings</li>
+  <li>Plans</li>
+  <li>Subscriptions</li>
+</ul>

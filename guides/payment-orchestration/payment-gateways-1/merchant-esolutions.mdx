@@ -1,0 +1,93 @@
+---
+title: Merchant eSolutions
+---
+
+# Overview
+
+> ❗️ Deprecated. Do not use.
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+Merchant eSolutions (MeS) is a robust payment gateway integrated with Recurly to simplify your subscription billing. This integration allows US-based merchants to effortlessly connect their Merchant eSolutions account with Recurly.
+
+> **Note**: Visit our guide on testing your gateway configurations in Recurly to ensure your payment processes are set up correctly.
+
+# Key details
+
+| Feature                         | Description/Availability                                                                                                        |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Services that work with Recurly | Payment Processing, Subscriptions, [MOTO](/guides/subscriber-management/transactions/moto-transactions#/)   Processing |
+| Supported Operations            | Purchase, Void, Refund, Subscription Billing                                                                                    |
+| Supported Payment Types         | Credit/Debit Card Transactions                                                                                                  |
+| Supported Card Brands           | Visa, MasterCard, Amex, Discover, JCB, Diners Club                                                                              |
+| Gateway Specific 3DS2 Supported | No                                                                                                                              |
+| Card on File Supported          | Yes                                                                                                                             |
+| Regions                         | United States                                                                                                                   |
+| Currencies                      | USD, AUD, CAD, EUR, GBP                                                                                                         |
+
+## Recurly’s Integration with Merchant eSolutions
+
+Recurly has integrated support for Merchant eSolutions (MeS), allowing US merchants a streamlined way to manage subscription billing. In order to connect your Recurly account to Merchant eSolutions, you need to have your `Profile` and `Profile Key` information, both of which are provided by Merchant eSolutions.
+
+## Address Verification Service (AVS)
+
+When integrated with Recurly, Merchant eSolutions runs AVS on all recurring transactions. This is a powerful feature for merchants, as it helps to verify the identity of the person claiming to own the credit card and thereby reduce the risk of fraud.
+
+The importance of AVS extends beyond security. By employing AVS on recurring transactions, Merchant eSolutions helps to ensure that their merchants are able to qualify for the lowest possible interchange rates on card-not-present transactions. These lower rates can represent significant cost savings over time, making the integration of Recurly with Merchant eSolutions a financially savvy choice for subscription businesses.  
+#Integrating Merchant eSolutions with Recurly
+
+### Step 1: Obtain your merchant eSolutions credentials
+
+* Contact Merchant eSolutions and request your `Profile` and `Profile Key` credentials.
+
+### Step 2: Log in to your Recurly account
+
+* Sign in to your Recurly account. If you don't have an account yet, sign up [here](https://www.recurly.com/).
+
+### Step 3: Navigate to payment gateways
+
+* Once logged in, go to the `Configuration` section in your Recurly Dashboard.
+* Select `Payment Gateways` from the drop-down menu.
+
+### Step 4: Add merchant eSolutions gateway
+
+* In the `Payment Gateways` section, click on the `Add a Gateway` button.
+* From the list of available gateways, select `Merchant eSolutions`.
+
+### Step 5: Enter your merchant eSolutions credentials
+
+* In the `Merchant eSolutions` configuration page, input your `Profile ID` and `Profile Key` credentials that you received from Merchant eSolutions.
+
+### Step 6: Set your credit card types
+
+* Under the ‘ACCEPTED CARD TYPES’ header, you will see multiple card brand names. Only enable (select) those card types that you have enabled on your MeS account.
+
+### Step 7: Enable currencies
+
+* USD will be enabled by default. If you want to add additional currencies, or remove USD, use the selection tool on the left to add the currencies your MeS gateway accepts.
+
+### Step 8: Enable Zero Dollar Authorizations
+
+* It is extremely important to ensure you have enabled this on your card types available. Zero dollar authorizations will be an important part of validating card data prior to subscriptions starting or when offering free trials.
+
+### Step 9: Save your settings
+
+* After entering your credentials click the `Add Payment Gateway` button at the bottom of the page.
+
+### Step 10: Test the integration
+
+* It is highly recommended to test the integration before going live.
+* Use the test credit card information provided by Merchant eSolutions or Recurly to run a test transaction.
+
+### Step 11: Review and monitor
+
+* After testing, review the transaction logs in Recurly to confirm that the integration is working correctly.
+* Regularly monitor your transactions to ensure ongoing functionality and to spot any potential issues early.
+
+### Step 12: Go live
+
+* If your tests are successful and you are satisfied the integration is set up correctly, you can move the Merchant eSolutions environment from ‘test’ to ‘live’ in Recurly’s configuration settings.

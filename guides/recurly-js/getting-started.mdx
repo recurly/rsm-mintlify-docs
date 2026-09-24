@@ -1,0 +1,120 @@
+---
+title: Getting started
+---
+
+To begin, include the Recurly.js script on your page:
+
+```html
+<script src="https://js.recurly.com/v4/recurly.js"></script>
+<link href="https://js.recurly.com/v4/recurly.css" rel="stylesheet" type="text/css">
+```
+
+> **Note:** Including `recurly.css` is optional but recommended as it provides helpful default styles for Recurly Elements during setup.
+
+### Prerequisites & limitations
+
+- You must have a valid Recurly account with API access.
+- Basic familiarity with HTML, JavaScript, and RESTful APIs.
+- Using Recurly.js is optional but recommended for enhanced security and reduced PCI scope.
+- **Self-hosting:** we recommend only using the Recurly-hosted version of Recurly.js, which is updated regularly to maintain compatibility with Recurly’s system updates. Self-hosted copies may encounter integration issues or service interruptions.
+
+***
+
+# How it works
+
+Recurly.js streamlines your checkout by securely capturing customer payment information. When a customer submits your payment form, Recurly.js encrypts their payment data and stores it on our servers, returning an authorization key (or _token_). With this token, you can complete the subscription process using our API—without ever directly handling sensitive payment data. This reduces your PCI compliance requirements significantly.
+
+***
+
+# Configure
+
+Call `recurly.configure` anywhere on your page, passing your public key to identify your site to Recurly servers. You can find your public key in the [API Access section](https://app.recurly.com/go/developer/api_access) of your admin app.
+
+```js
+recurly.configure('sc-ABCDEFGHI123456789');
+```
+
+**Use Your Site's Public Key:** Replace `sc-ABCDEFGHI123456789` with your own public key.
+
+_Note:_`recurly.configure`_&#x20;accepts additional options. For further details, refer to the [source](https://github.com/recurly/recurly-js/blob/master/lib/recurly.js#L48)._
+
+***
+
+# Build a payment form with Elements
+
+Design an HTML form to collect customer payment details. Use the `data-recurly` attribute to identify non-card billing fields. Recurly.js builds the card fields using Elements.
+
+```html
+<form id="my-form">
+  <input type="text" data-recurly="first_name" placeholder="First Name">
+  <input type="text" data-recurly="last_name" placeholder="Last Name">
+
+  <div id="recurly-elements">
+    <!-- Recurly Elements will be attached here -->
+  </div>
+
+  <!-- Recurly.js will update this field automatically -->
+  <input type="hidden" name="recurly-token" data-recurly="token">
+
+  <button type="submit">Submit</button>
+</form>
+```
+
+***
+
+# The Card Element
+
+
+<Image src="https://files.readme.io/5a6031def261981056429456e6e339475283e49e59948602bf500c497b358182-image.png" align="center" width="400px" />
+
+
+The Card Element is the simplest way to accept customer card data. Recurly.js injects a single, responsive field for the card number, expiry, and CVV. This field includes helpful UX enhancements for smooth entry on any device.
+
+```js
+const elements = recurly.Elements();
+const cardElement = elements.CardElement();
+cardElement.attach('#recurly-elements');
+```
+
+***
+
+# Other Elements
+
+Recurly.js also offers individual Elements for separate card fields if a combined field doesn't fit your design needs. See the [Elements documentation](https://docs.recurly.com/recurly-subscriptions/v1.2/docs/elements#/) for further details.
+
+***
+
+# Billing fields
+
+Below is a table of potential billing fields supported by Recurly.js. Some fields may be required depending on your [billing address requirements](https://docs.recurly.com/site-settings#address_requirements).
+
+| Field Name          | Example          | Description                                                              |
+| ------------------- | ---------------- | ------------------------------------------------------------------------ |
+| first_name          | `Ben`            | Cardholder first name (**Required**)                                     |
+| last_name           | `du Monde`       | Cardholder last name (**Required**)                                      |
+| address1            | `1313 Main St.`  | First line of a street address                                           |
+| address2            | `Unit 1`         | Second line of a street address                                          |
+| city                | `Hope`           | Town or locality                                                         |
+| state               | `WA`             | Province or region                                                       |
+| postal_code         | `98552`          | Postal code                                                              |
+| country             | `US`             | ISO 3166-1 alpha-2 country code                                          |
+| phone               | `555-867-5309`   | Phone number                                                             |
+| vat_number          | `SE0000`         | Customer VAT number (used for VAT exclusion)                             |
+| tax_identifier      | `972.791.615-53` | A valid CPF or CUIT (required for consumer cards in Brazil or Argentina) |
+| tax_identifier_type | `cpf` or `cuit`  | Accepted values: `cpf` or `cuit`                                         |
+
+***
+
+# Additional configuration
+
+When configuring Recurly.js, some additional options are available to customize your implementation.
+
+```javascript
+recurly.configure({
+  publicKey: 'sc-ABCDEFGHI123456789',
+
+  // Specify which fields are required to create a token.
+  // default: ['number', 'month', 'year', 'first_name', 'last_name']
+  required: ['number', 'month', 'year', 'cvv'],
+});
+```

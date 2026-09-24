@@ -1,0 +1,112 @@
+---
+title: Payment processing
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Payment Analytics dashboard gives you a deep dive into the performance of your payment stack — from high-level success rates and trends over time to granular breakdowns by payment method, gateway, and card BIN. Paired with visibility into top decline reasons, it equips you to pinpoint underperformance, understand its root cause, and take targeted action to improve authorization rates and protect revenue.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>You must have the Analytics user role permission.</li>
+  <li>To see splits in pie chart cards, your site must be processing more than one payment method, such as cards and ACH, or cards and Apple Pay.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Payment Analytics dashboard gives you a deep dive into the performance of your payment stack — from high-level success rates and trends over time to granular breakdowns by payment method, gateway, and card BIN.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Pinpoint underperformance quickly</strong>
+    <span>Break success rates down across gateways, payment methods, and card BINs to isolate exactly where failures are occurring, rather than chasing broad trends.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Turn declines into recoverable revenue</strong>
+    <span>Understanding your top decline reasons gives you a clear, actionable starting point for reducing preventable payment failures.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Optimize with confidence</strong>
+    <span>Combine trend data with granular breakdowns to make informed decisions about your payment stack — whether that's switching gateways, prioritizing payment methods, or flagging underperforming card BINs.</span>
+  </div>
+</div>
+
+# Key details
+
+## General filters (top left corner)
+
+<ul className="rp-list">
+  <li><strong>Date range</strong> — Adjust the time interval for your data to track and analyze long-term trends. The default view is 30 days.</li>
+  <li><strong>Country</strong> — See data specific to your country, offering relevant insights and comparisons.</li>
+  <li><strong>Gateway</strong> — Segment and analyze data by available payment processors — look at all gateways together or examine one at a time to understand where issues are happening.</li>
+  <li><strong>Payment method</strong> — See the breakdown of failed payments by the method your customers use, and select specific payment options to analyze.</li>
+  <li><strong>Initiated by</strong> — Select between CIT (customer-initiated) or MIT (merchant-initiated) transactions.</li>
+  <li><strong>Currency</strong> — Narrow your view to a specific currency or currencies.</li>
+</ul>
+
+## Payment success rate
+
+This card displays your overall payment success rate as a single, at-a-glance percentage — encompassing both customer- and merchant-initiated transactions for a fully holistic view of payment health — paired with a comparison to the previous time period, so you can immediately see whether performance is moving in the right direction.
+
+
+<Image src="https://files.readme.io/fdab704983d618d07856b31c1c0f243a69b11af35427781d0dabdbc65fc851a1-image.png" align="center" width="40%" border={true} />
+
+
+## Payment success rate over time
+
+This chart tracks your overall payment success rate over the timeframe in view, giving you a more detailed picture of how performance is trending.
+
+
+<Image src="https://files.readme.io/990c9649897c4951cc72cadb8ac24f2499ae9adc2fb53f2fb4a49922b6cf2172-image.png" align="center" width="75%" border={true} />
+
+
+## Payment method distribution
+
+This chart breaks down every payment method accepted on your site, showing the relative distribution of transactions across each, giving you an instant read on how your customers prefer to pay.
+
+
+<Image src="https://files.readme.io/5c8d9cf777870794051ad03ea1ea0a04b9234ac71a32074c1db32255a431eb40-image.png" align="center" width="75%" border={true} />
+
+
+## Gateway success rates
+
+This graph breaks down payment success rates by gateway, giving you a side-by-side comparison of how each PSP is performing within your selected timeframe. Seeing performance isolated by gateway makes it easy to identify underperforming routing paths and validate the impact of gateway changes.
+
+
+<Image src="https://files.readme.io/4fcc2f024b2b21e72fb0543368ce4cc67574cdb2f96408d0293671d13041ac05-image.png" align="center" width="75%" border={true} />
+
+
+## Payment method success rates
+
+This card breaks down payment success rates by payment method, giving you a side-by-side comparison of how each performs independent of the gateway processing it. Isolating success rates at the payment method level helps you identify which methods are underperforming and understand whether declines are method-specific.
+
+
+<Image src="https://files.readme.io/85e30bc6549491443c6c0a1e68dc357b6c1525a3081f50772da5bdbdb097ee45-image.png" align="center" width="75%" border={true} />
+
+
+## Card BIN success rates
+
+This card breaks down payment success rates by card BIN, surfacing the top-performing and most common BINs transacting on your site within a given timeframe. Visibility at the BIN level lets you identify whether specific card issuers or card types are experiencing higher decline rates, giving you the granularity needed to take targeted action — whether that's working with your gateway or flagging patterns.
+
+
+<Image src="https://files.readme.io/685d9bffaf3e06ae70999223c5e9a2ec59205752eb6e974f1a6bd88c7a9c907b-image.png" align="center" width="75%" border={true} />
+
+
+## Payment decline reasons
+
+This table surfaces your top payment decline reasons, categorized by hard or soft decline type, and ranked by count, percentage, and associated dollar volume — giving you a comprehensive view of where and why payments are failing. Distinguishing between hard and soft declines is critical: soft declines often represent recoverable revenue through retries or account updates, while hard declines signal issues that require more targeted intervention, such as routing changes or issuer outreach.
+
+
+<Image src="https://files.readme.io/c83f911da5c3212387e1ddde43e38a4a5dff163baeb38dac2d65d2b5ece58f77-image.png" align="center" width="75%" border={true} />

@@ -1,0 +1,69 @@
+---
+title: Subscriptions — pending changes - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The “Subscriptions - Pending Changes” export enables users to view all active subscriptions with a pending change that will be applied at the next renewal or a future date. This includes changes to the plan, price, or quantity.
+
+<Image border={false} src="https://files.readme.io/c1ad1d96ad50d479e893d51e50ae6558616075a064c85c7171c98668f128f052-image.png" />
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Export On Filters
+
+Understand your subscriptions included in the export with the following filters:
+
+* **Created**: Displays subscriptions created within a selected time frame, including those with future activation dates.
+* **Modified**: Shows subscriptions altered in the chosen time frame.
+
+### **Time Range Filter**
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Column Name                                                             | Example                                             | Description                                                                                         | Data type |
+| :---------------------------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------------------------------------------------------- | :-------- |
+| <span id="subscription_change_api_id">subscription_change_api_id</span> | ukkl9dx5tm93                                        | Unique internal identifier for the pending change subscription.                                     | string    |
+| <span id="account_api_id">account_api_id</span>                         | ukkjdj81sial                                        | Unique internal identifier for the account.                                                         | string    |
+| <span id="subscription_api_id">subscription_api_id</span>               | ukkl9bwjg4u5                                        | Unique internal identifier for the current subscription.                                            | string    |
+| <span id="account_code">account_code</span>                             | 00148a18-8a5d-438b-a979-0569d580f5e9                | Unique identifier for the customer's account.                                                       | string    |
+| <span id="subscription_uuid">subscription_uuid</span>                   | 6fad91251b20b90458a00b48588c731d1234-abcd-5678-efgh | Unique identifier for the subscription.                                                             | string    |
+| <span id="change_type">change_type</span>                               | plan_change_same_price                              | The nature of the change.                                                                           | string    |
+| <span id="change_initiator">change_initiator</span>                     | api                                                 | Person or API that initiated the change (e.g., Customer, Merchant, API).                            | string    |
+| <span id="change_created_at">change_created_at</span>                   | 2025-07-20 03:22:25 EST                             | The date and time when the pending change was created.                                              | timestamp |
+| <span id="change_scheduled_at">change_scheduled_at</span>               | 2025-07-31 11:59:59 EST                             | The date and time when the pending change is scheduled to be applied (e.g., the next renewal date). | timestamp |
+| <span id="change_updated_at">change_updated_at</span>                   | 2025-07-25 11:00:00 EST                             | The date and time when the pending change was updated.                                              | timestamp |
+| <span id="current_plan_api_id">current_plan_api_id</span>               | 143509049eb30fb                                     | The unique id of the current plan.                                                                  | string    |
+| <span id="pending_plan_api_id">pending_plan_api_id</span>               | 143509049eb30fb                                     | The unique id of the pending plan.                                                                  | string    |
+| <span id="current_add_on_api_id">current_add_on_api_id</span>           | 143509049eb30fb                                     | The unique id of the current add on.                                                                | string    |
+| <span id="pending_add_on_api_id">pending_add_on_api_id</span>           | 143509049eb30fb                                     | The unique id of the pending add on if changed.                                                     | string    |
+| <span id="current_product_code">current_product_code</span>             | product12345                                        | The current product code.                                                                           | string    |
+| <span id="pending_product_code">pending_product_code</span>             | product67890                                        | The pending product code if changed.                                                                | string    |
+| <span id="current_quantity">current_quantity</span>                     | 10                                                  | The current quantity                                                                                | numeric   |
+| <span id="pending_quantity">pending_quantity</span>                     | 12                                                  | The pending quantity if changed.                                                                    | numeric   |
+| <span id="current_currency">current_currency</span>                     | USD                                                 | The currency of the current subscription period.                                                    | string    |
+| <span id="pending_currency">pending_currency</span>                     | USD                                                 | The currency after the change takes effect.                                                         | string    |
+| <span id="current_recurring_amount">current_recurring_amount</span>     | 1200.00                                             | The total recurring amount of the current subscription period.                                      | numeric   |
+| <span id="pending_recurring_amount">pending_recurring_amount</span>     | 125                                                 | The new total recurring amount after the change takes effect.                                       | numeric   |
+
+# Version changelog
+
+<br />

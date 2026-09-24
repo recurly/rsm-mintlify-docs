@@ -1,0 +1,86 @@
+---
+title: Recovered revenue
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Recovered Revenue dashboard shows you how much revenue Recurly has helped you reclaim from declined invoices. See your recovery performance at a glance, understand which process is doing the most work, and track your progress over time.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have Analytics user role permission.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Recovered Revenue dashboard highlights revenue reclaimed through Recurly's tools, focusing on declined invoices and recovery strategies.</div>
+
+<ul className="rp-list">
+  <li><strong>Expiration date changes</strong>: Automatically updates expiration dates for continuous invoices.</li>
+  <li><strong>Account updater</strong>: Refreshes payment details to prevent transaction failures.</li>
+  <li><strong>Intelligent retries</strong>: Strategically retries failed invoices to maximize recovery.</li>
+  <li><strong>Backup payment method</strong>: Automatically retries failed payments using a backup payment method.</li>
+  <li><strong>Customer updates</strong>: Lets customers update their payment method to resolve failed payments.</li>
+  <li><strong>External recovery</strong>: Recovers failed invoices using systems outside of Recurly.</li>
+  <li><strong>Forced recovery</strong>: When merchants manually initiate a collection attempt on a past-due invoice.</li>
+</ul>
+
+# Key details
+
+The Recovered Revenue dashboard gives you insight into how much revenue you've recovered through Recurly's system. By monitoring involuntary churn from declined invoices, it uses several mechanisms — including expiration date changes, account updater, and intelligent retries — to help maximize your rate of paid invoices.
+
+## How recovery works
+
+<ul className="rp-list">
+  <li><strong>Expiration date changes</strong>: Updates the expiration date on an account's billing information, so invoices and subscriptions continue without interruption. This reduces the risk of service disruption and potential revenue loss.</li>
+  <li><strong>Account updater</strong>: When enabled, checks for credit card updates with card providers before a renewal, or when a one-time invoice or resubscribe results in a hard decline. Keeping payment details current helps reduce failed invoices and maintain steady revenue.</li>
+  <li><strong>Intelligent retries</strong>: Recurly's retry logic, which times retry attempts strategically to maximize the chance of turning a failed invoice into a successful one and reduce involuntary churn.</li>
+  <li><strong>Backup payment method</strong>: Securely stores an alternative payment method, so service continues uninterrupted even if a customer's primary payment method fails.</li>
+  <li><strong>Customer updates</strong>: When a customer updates their payment method — often prompted by a dunning email or another in-app notification — Recurly attempts collection on the failed automated invoice. This doesn't include manual invoices.</li>
+  <li><strong>External recovery</strong>: Applied when another system successfully collects on a failed invoice and sends an update to Recurly.</li>
+</ul>
+
+## Features and benefits
+
+The Recovered Revenue dashboard gives you an at-a-glance view of your revenue KPIs, a bar chart showing recovered revenue, and a chart breaking recovered revenue down by process — a complete picture of your business's health and Recurly's impact on revenue recovery.
+
+Filter by invoice creation date or invoice closed date to track the success of automated invoice recovery, and view amounts by currency — the default includes all invoices converted to your primary currency. On the time graph, expect the current month to start low and rise as the month progresses and more invoices are recovered.
+
+### Recovered revenue KPI
+
+These indicators give you a real-time snapshot of your revenue recovery, comparing current payment amounts to totals from last month, the previous month, three months ago, and a year ago. Use them to spot trends, track progress, and proactively manage involuntary churn.
+
+
+<Image src="https://files.readme.io/82bf6559f3b90ad2b458c0d0e513079879d6d33d951e0050a89d5dd077bc7baa-image.png" align="center" width="75%" border={true} />
+
+
+### Recovered revenue chart
+
+This bar chart shows the revenue Recurly has helped you recover by reducing involuntary churn from declined automated invoices — a clear view of Recurly's financial impact, useful for forecasting and resource planning. View it as total revenue saved or as a count of invoices recovered.
+
+
+<Image src="https://files.readme.io/40dfc0fa1fe13c6e9c395906a99fab9b12cc298514d48502e78a8e6915813e60-image.png" align="center" width="75%" border={true} />
+
+
+### Recovered revenue detail
+
+This breakdown shows how much revenue each process recovers — Expired Card Management, Account Updater, Intelligent Retries, Backup Payment Method, Customer Updates, and External Recovery — so you can see which tools are most effective and focus your efforts accordingly. View it as total revenue saved or as a count of invoices recovered.
+
+
+<Image src="https://files.readme.io/1b47403d9847c0becfa5fab2226f73ff73c118f2aae3fb1490013271d45ad266-image.png" align="center" width="75%" border={true} />
+
+
+Understanding these features helps you get the most out of them, reducing involuntary churn and strengthening your revenue recovery.
+
+## Related dashboards
+
+Explore related dashboards to learn more about how Recurly helps prevent churn and improve your recovered invoice rate. Review your dunning campaign strategy too, to keep increasing your dunning recoveries.
+
+
+<Image src="https://files.readme.io/91d2dd4-Screen_Shot_2024-01-22_at_7.58.05_PM.png" align="center" width="75%" border={true} />

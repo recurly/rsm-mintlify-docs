@@ -1,0 +1,243 @@
+---
+title: Shipping fees
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly lets you record shipping costs and methods on subscriptions and one-time purchases, so shipping fees appear as recurring line items on invoices — complete with tax calculations and refund support. Configure your shipping methods once, then apply them across your billing workflows.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#configure-shipping-methods"><span className="rp-toc-num">3</span>Configure shipping methods</a>
+    <a className="rp-toc-pill" href="#add-shipping-to-a-subscription"><span className="rp-toc-num">4</span>Add shipping to a subscription</a>
+    <a className="rp-toc-pill" href="#add-shipping-to-a-one-time-purchase"><span className="rp-toc-num">5</span>Add shipping to a one-time purchase</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Site requirements</strong>Shipping fees require the <a href="https://docs.recurly.com/v1.0/docs/credit-invoices-release" target="_blank">Credit Invoices</a>, <a href="https://docs.recurly.com/v1.0/docs/only-bill-what-changed" target="_blank">Only Bill What Changed</a>, and <a href="https://docs.recurly.com/docs/subscription-terms-new" target="_blank">Subscription Billing Terms</a> features to be enabled on your site. Recurly sites created after July 26, 2018 have these features enabled by default. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> if you need to enable them.</div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Shipping fees in Recurly let you record the cost and method of shipping on a subscription or one-time purchase. Unlike ecommerce, where shipping is a one-time charge per order, subscriptions are long-lived — Recurly handles recurring shipping fees automatically, billing the same shipping cost each renewal period alongside your subscription charges.</div>
+
+# Key details
+
+## How shipping appears on invoices
+
+Shipping appears as a line item on the invoice, always positioned after any subscription or one-time charges. Tax on the shipping fee (where applicable) is included in the tax estimate and reflected on the invoice.
+
+## Changing the shipping fee or method
+
+If you change a shipping fee immediately (mid-cycle), Recurly issues a full refund for the original shipping amount and its tax, then generates a new charge invoice for the updated amount and its tax. To avoid generating multiple separate charge and credit invoices, make shipping fee changes at the next renewal rather than immediately.
+
+## Refunding shipping fees
+
+When refunding an invoice that includes a shipping fee, you can either refund the full shipping amount or exclude the shipping fee from the refund. Partial shipping fee refunds are not supported. Any refund of a shipping fee also refunds the associated tax amount.
+
+To refund shipping in the Admin Console, navigate to the invoice and select **Invoice Actions → Refund Invoice**.
+
+## Coupons and shipping fees
+
+Coupons don't apply to shipping fees. To discount a shipping fee, pass the discounted amount directly in your API call or Admin Console entry for the subscription or one-time charge.
+
+## Exporting shipping data
+
+Shipping information is available in the following exports:
+
+- Adjustments
+- Subscriptions
+- Subscriptions — Churned
+
+## Taxation on shipping fees
+
+Shipping is taxable in some jurisdictions and not in others. Recurly works with Avalara and Vertex to handle shipping tax calculations.
+
+If you use multiple shipping addresses on one invoice, the VAT number from the billing address is used. If you need VAT reverse charges applied, use only one shipping address per invoice.
+
+### Avalara tax codes
+
+For merchants using Recurly's built-in Avalara integration, you can specify a tax code per shipping method. The following options are available:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Tax option</td><td>Use case</td></tr>
+  <tr><td>Common Carrier FOB Destination</td><td>A common carrier (e.g., USPS or FedEx) where title passes to the customer upon delivery.</td></tr>
+  <tr><td>Common Carrier FOB Origin</td><td>A common carrier where title passes to the customer when the item ships.</td></tr>
+  <tr><td>Non Common Carrier FOB Destination</td><td>A private delivery company where title passes to the customer upon delivery.</td></tr>
+  <tr><td>Non Common Carrier FOB Origin</td><td>A private delivery company where title passes to the customer when the item ships.</td></tr>
+  <tr><td>Delivery by Company Vehicle Before Passage of Title</td><td>Your own delivery vehicle and staff; you retain ownership of the goods until delivery.</td></tr>
+  <tr><td>Delivery by Company Vehicle After Passage of Title</td><td>Your own delivery vehicle and staff; title passes to the customer before delivery.</td></tr>
+  <tr><td>Non-Taxable</td><td>Shipping costs that are not subject to tax.</td></tr>
+</table>
+
+Merchants with their own Avalara or Vertex account can specify an exact tax code per shipping method for more precise compliance control.
+
+### International shipping and customs
+
+Recurly computes sales tax on shipping fees for both domestic and international shipments. For international shipments, customs fees and duties are typically collected and remitted by your carrier. Recurly doesn't provide the ability to communicate customs fees or duties to customers — contact your shipping provider to discuss how to handle this in your workflow.
+
+# Configure shipping methods
+
+Navigate to **Configuration → Shipping** to set up and manage shipping methods. Recurly creates a default shipping method automatically when you enable shipping.
+
+If you use only one shipping method or don't display the method name to customers, no further configuration is needed. Configure additional methods if you use multiple carriers or want to show customers which method is used to ship their items.
+
+## Rename a shipping method
+
+If you're changing shipping providers, rename the existing shipping method rather than deleting and recreating it. This ensures active subscriptions using that method are automatically migrated to the new name.
+
+## Delete a shipping method
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Use caution when deleting shipping methods</strong>Active subscriptions using a deleted shipping method will renew without any shipping method applied. Only delete a shipping method if it was created by mistake. This action cannot be undone and may result in data loss.</div>
+</div>
+
+To delete a shipping method, click the three-dot menu to the right of the method and select **Delete Shipping Method**. You'll be prompted to type the method's name to confirm the deletion.
+
+# Add shipping to a subscription
+
+## Admin Console
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the customer's account</h4><p>Navigate to the account you want to add the subscription to, then select <strong>Account Actions → Create Subscription</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable shipping</h4><p>Check <strong>Include Shipping</strong> and enter the shipping fee amount and shipping method.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Add a shipping address</h4><p>Enter the shipping address manually, or copy it from an existing address on the account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Add the subscription</h4><p>Click <strong>Add Subscription</strong>. The shipping fee is added to the subscription cost on a recurring basis, and the tax estimate includes tax on the shipping fee.</p></div>
+  </div>
+</div>
+
+## API
+
+Pass `shipping_amount_in_cents` and `shipping_method_code` on the subscription create or update call, along with a `shipping_address` block.
+
+```xml
+<subscription>
+  <plan_code>gold</plan_code>
+  <currency>USD</currency>
+  <account>
+    <account_code>34</account_code>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <billing_info>
+      <number>4111-1111-1111-1111</number>
+      <month>12</month>
+      <year>2019</year>
+      <address1>123 Main St.</address1>
+      <city>San Francisco</city>
+      <state>CA</state>
+      <zip>94105</zip>
+      <country>US</country>
+    </billing_info>
+  </account>
+  <shipping_address>
+    <nickname>Work</nickname>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company>Recurly Inc</company>
+    <phone>555-222-1212</phone>
+    <email>verena@example.com</email>
+    <address1>123 Main St.</address1>
+    <address2>Suite 101</address2>
+    <city>San Francisco</city>
+    <state>CA</state>
+    <zip>94105</zip>
+    <country>US</country>
+  </shipping_address>
+  <shipping_amount_in_cents>10000</shipping_amount_in_cents>
+  <shipping_method_code>foo</shipping_method_code>
+  <renewal_billing_cycles>4</renewal_billing_cycles>
+  <auto_renew>true</auto_renew>
+</subscription>
+```
+
+You can also preview a subscription with shipping fees using the Subscription Preview endpoint:
+
+```xml
+<subscription>
+  <plan_code>gold</plan_code>
+  <currency>USD</currency>
+  <account>
+    <account_code>32</account_code>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <billing_info>
+      <number>4111-1111-1111-1111</number>
+      <month>12</month>
+      <year>2019</year>
+      <address1>123 Main St.</address1>
+      <city>San Francisco</city>
+      <state>CA</state>
+      <zip>94105</zip>
+      <country>US</country>
+    </billing_info>
+  </account>
+  <shipping_address>
+    <nickname>Work</nickname>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company>Recurly Inc</company>
+    <phone>555-222-1212</phone>
+    <email>verena@example.com</email>
+    <address1>123 Main St.</address1>
+    <address2>Suite 101</address2>
+    <city>San Francisco</city>
+    <state>CA</state>
+    <zip>94105</zip>
+    <country>US</country>
+  </shipping_address>
+  <unit_amount_in_cents>10000</unit_amount_in_cents>
+  <shipping_amount_in_cents>1299</shipping_amount_in_cents>
+  <shipping_method_code>foo</shipping_method_code>
+  <renewal_billing_cycles>4</renewal_billing_cycles>
+  <auto_renew>true</auto_renew>
+</subscription>
+```
+
+# Add shipping to a one-time purchase
+
+To charge a shipping fee on an invoice with only one-time purchases, use the `/purchases` endpoint (available from API v2.20 onwards). See the full <a href="https://developers.recurly.com/api/latest.html#operation/create_purchase" target="_blank">Purchases API documentation</a> for all available parameters.
+
+```xml
+<purchase>
+  <account>
+    <account_code>c442b36c-c64f-41d7-b8e1-9c04e7a6ff82</account_code>
+  </account>
+  <shipping_fees>
+    <shipping_fee>
+      <shipping_amount_in_cents>1000</shipping_amount_in_cents>
+      <shipping_method_code>fedex-2-day</shipping_method_code>
+      <shipping_address>
+        ...
+      </shipping_address>
+    </shipping_fee>
+  </shipping_fees>
+  <adjustments>
+    <adjustment>
+      <product_code>foobar</product_code>
+      <unit_amount_in_cents>1000</unit_amount_in_cents>
+      <description>Thingy</description>
+    </adjustment>
+  </adjustments>
+  <subscriptions>
+    <subscription>
+      <plan_code>plan1</plan_code>
+    </subscription>
+  </subscriptions>
+</purchase>
+```
+
+<br />

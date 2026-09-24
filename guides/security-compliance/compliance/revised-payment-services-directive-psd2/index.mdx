@@ -1,0 +1,138 @@
+---
+title: PSD2 compliance
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Limitations
+
+* Card issuers always have the final say on whether to challenge a transaction — SCA may be required even when Recurly flags a charge as a Merchant-Initiated Transaction (MIT)
+* PSD2 applies only when both the merchant's acquiring bank and the customer's issuing bank are located in the European Economic Area (EEA) or the UK. See [One Leg Out scenarios](#one-leg-out-scenarios) for exceptions
+
+***
+
+# Definition
+
+The Revised Payment Services Directive (PSD2) is a European Union directive that came into effect on December 31, 2020, requiring financial institutions to apply stronger authentication for online transactions within the European Economic Area (EEA). Its core objectives are to enhance payment security, reduce fraud, and protect customer data by mandating additional authentication steps at checkout.
+
+For UK merchants, enforcement began on March 14, 2022.
+
+***
+
+# Key benefits
+
+* **Simplified SCA compliance:** Recurly handles Strong Customer Authentication (SCA) through 3D Secure (3DS) for initial and one-time purchases, so you don't have to build this from scratch.
+* **Reduced friction on renewals:** Recurly automatically flags subscription renewals as Merchant-Initiated Transactions (MITs) wherever possible, minimizing repeated authentication for your subscribers.
+* **Built-in fallback handling:** When SCA is required and a charge fails, Recurly provides fallback options — including 3DS dunning emails — to help recover those transactions.
+
+***
+
+# Key details
+
+## How Recurly supports PSD2
+
+Recurly supports SCA through 3D Secure (3DS) for initial and one-time purchases. For subscription renewals, Recurly flags subsequent charges as MITs wherever possible to minimize the need for repeated customer authentication — including for subscriptions that started before December 31, 2020.
+
+That said, card issuers always have the final say. In cases where SCA is still required, Recurly provides fallback options to help recover failed MIT charges.
+
+***
+
+## Subscription reactivation and SCA
+
+Under PSD2, resuming or reactivating a subscription is a non-invoiced action — but the customer's card should be re-verified to stay compliant and prevent fraud. The following scenarios typically require customer re-authentication:
+
+* **Resuming a paused subscription** — SCA is required. The customer should re-verify their card on file before the subscription resumes
+* **Reactivating a canceled subscription** — SCA is also required when a customer cancels and later restarts their subscription
+* **Automatic retries after failed payments** — Recurly treats these as MITs. In rare cases, however, issuers may still enforce SCA. Use [3D Secure dunning emails](/guides/security-compliance/compliance/revised-payment-services-directive-psd2/dunning-configuration-for-3ds-2-declines#/) to handle these reauthentication requests
+
+> **Tip:** If your integration supports subscription pauses or reactivation, make sure it also supports 3D Secure challenges where needed to stay compliant.
+
+For implementation guidance, see the [API guide for 3DS on stored billing information](https://docs.recurly.com/recurly-subscriptions/v1.1/docs/using-3d-secure-with-stored-billing-information#/).
+
+***
+
+## One Leg Out scenarios
+
+PSD2 applies only when **both** the merchant's acquiring bank and the customer's issuing bank are located in the EEA or the UK. If either party is outside this region, the transaction falls under a "One Leg Out" exemption:
+
+* **Merchant outside the EEA, customer's issuer inside** — PSD2 technically doesn't apply, but issuers may still request SCA at their discretion
+* **Merchant inside the EEA, customer's issuer outside** — The transaction is out of PSD2 scope, though issuers may still choose to enforce SCA
+
+Because card issuers control enforcement — and the broader industry is moving toward consumer-driven authentication to reduce fraud — Recurly recommends supporting 3D Secure wherever possible to avoid unnecessary declines.
+
+***
+
+## PSD2 compliance checklist
+
+Use this checklist to ensure full SCA support through Recurly:
+
+1. **Engage your gateway provider** — Confirm your gateway supports 3D Secure 2.0 and make any required updates. See [gateway-specific updates](/guides/security-compliance/gateway-specific-updates)
+2. **Update your Recurly setup** — Enable SCA challenge flows during checkout using the [3DS2 implementation guide](/guides/api-guides/integration-guides/popular-use-cases/3d-secure-20-integration-guide). Note: hosted checkout pages handle this automatically
+3. **Adjust your dunning flow** — Configure dunning settings and emails to manage SCA declines. See the [dunning configuration guide](/guides/security-compliance/compliance/revised-payment-services-directive-psd2/dunning-configuration-for-3ds-2-declines)
+4. **Test your integration** — Use [test cards](/guides/payment-orchestration/gateway-configuration-and-features/test) to simulate 3DS2 flows
+
+***
+
+## More resources
+
+* [Adyen: PSD2 and SCA](https://www.adyen.com/blog/psd2-understanding-strong-customer-authentication)
+* [Braintree: Preparing for PSD2](https://www.braintreepayments.com/blog/understanding-and-preparing-for-psd2-strong-customer-authentication/)
+* [Stripe: SCA guide](https://stripe.com/guides/strong-customer-authentication)
+* [WorldPay: PSD2 overview](https://www.worldpay.com/global/psd2)
+* [Cybersource: 3D Secure and PSD2](https://www.cybersource.com/en-us/solutions/fraud-and-risk-management/3d-secure-and-psd2.html)
+
+***
+
+# FAQs
+
+**Do I need to worry about PSD2?**
+
+If your business's bank or payment provider is in the EEA and you have customers there too, yes — you need SCA in place. If either you or your customers are outside the EEA, PSD2 doesn't apply, though card issuers may still request authentication at their discretion.
+
+**Where can I find technical information on preparing for PSD2?**
+
+The full technical details are in our [3D Secure 2.0 integration guide](https://dev.recurly.com/page/recurly-3d-secure-2-integration-guide).
+
+**Will my checkout conversions change because of 3DS?**
+
+The first version of 3DS could reduce checkout conversions by 3–15%. The second version aims to limit that impact to a maximum of 5%, though results vary by country. (Statistics provided by WorldPay.)
+
+**What's the effect of 3DS on authorization rates?**
+
+If you're new to 3DS, authorization rates typically improve from around 84% to 92% with the first version. The second version aims to push that to 95%. (Statistics provided by WorldPay.)
+
+**Can 3DS help reduce fraud?**
+
+Yes. Businesses not using 3DS reported fraud rates of around 0.29%. With 3DS1, that dropped to 0.12%. The second version is expected to bring it down further to 0.05%. (Statistics provided by WorldPay.)
+
+**Will 3DS slow down my transactions?**
+
+Using 3DS can add up to 10 seconds to a transaction. If an exemption is rejected and SCA is enforced, that could add another 1–2 seconds. (Statistics provided by WorldPay.)
+
+**Who should I contact with more questions about PSD2, SCA, or 3DS?**
+
+Your payment gateway is the best starting point — they'll have the most up-to-date guidance on how PSD2 and SCA affect your specific setup. Recurly Support is also here to help.
+
+**What about PayPal transactions?**
+
+No extra work needed. PayPal handles SCA within their own "Pay with PayPal" flow. Recurly also ensures our integration can handle recurring PayPal payments.
+
+**Could 3DS be triggered on recurring payments I initiate, especially if the value changes?**
+
+Yes, it's possible. Card issuers can challenge any transaction. That's why Recurly offers a 3DS dunning flow to help manage transactions that fail due to SCA and need to be re-authenticated by your customer.
+
+**Will SCA be required every time I re-bill a customer on a usage-based plan?**
+
+As long as the transaction is flagged as merchant-initiated, most re-bills won't require SCA — even if the amount varies. That said, card issuers have the final say and can request SCA on any transaction.
+
+**I have a fixed subscription but the first month is prorated. Will the full charge in the second month need SCA?**
+
+Ideally, you should authenticate the full subscription amount when the customer signs up, even if the first month is prorated. After that, renewals generally won't need SCA as long as they're flagged as merchant-initiated — Recurly handles this automatically.
+
+**What if the original transaction happened before September 14, 2019? Will I need to re-authenticate those subscriptions?**
+
+For renewals, Recurly marks these as merchant-initiated to exempt them from SCA — including subscriptions that started before September 14, 2019. The goal is to treat these as MITs so they won't require SCA on renewal.

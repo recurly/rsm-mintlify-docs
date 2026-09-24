@@ -1,0 +1,355 @@
+---
+title: FreedomPay
+---
+
+<div className="rp-page">
+  <div className="rp-overview">FreedomPay is a full-service payment platform that supports ecommerce and recurring transactions. Integrating it with Recurly lets you process credit and debit card payments, gateway tokens, and — with additional configuration — Point of Sale–derived subscriptions. You'll need a FreedomPay Store ID, Terminal ID, Enhanced Security Key, and RSA Key Slot ID to complete setup.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#configuring-freedompay-in-recurly"><span className="rp-toc-num">3</span>Configuring FreedomPay in Recurly</a>
+    <a className="rp-toc-pill" href="#processing-with-freedompay"><span className="rp-toc-num">4</span>Processing with FreedomPay</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">5</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>An existing relationship with FreedomPay is required to use this gateway.</li>
+  <li><strong>Point of Sale / NTID via API</strong> — To use a POS system with FreedomPay and provide POS-derived NTIDs via the Recurly API, contact Recurly Support to enable the <strong>Allow NTIDs to be sent via API</strong> feature flag on your account.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>Multi-currency requires multiple gateway instances</strong> — FreedomPay currencies are managed per credential set. To support multiple currencies, configure a separate FreedomPay gateway instance in Recurly for each currency.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">FreedomPay is a full-service payment platform that supports ecommerce and recurring transactions via Recurly.js, the API, Checkout, and Hosted Payment Pages. It uses Store ID, Terminal ID, Enhanced Security Key, and RSA Key Slot ID credentials for authentication. If you're using a Card Present Point of Sale system with FreedomPay and want to offer subscriptions, contact Recurly Support for guidance.</div>
+
+# Key details
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Feature</td><td>Details</td></tr>
+  <tr><td>Services that work with Recurly</td><td>Payment processing, renewals, <a href="/guides/subscriber-management/transactions/moto-transactions#/" target="_blank">MOTO</a> processing</td></tr>
+  <tr><td>Supported integrations</td><td>Recurly.js, API, Checkout, HPP</td></tr>
+  <tr><td>Supported operations</td><td>Verify, Purchase, Void, Refund</td></tr>
+  <tr><td>Supported payment types</td><td>Credit and debit cards, gateway tokens</td></tr>
+  <tr><td>Supported card brands</td><td>Visa, Mastercard, Discover, Amex, JCB, Diners, UnionPay</td></tr>
+  <tr><td>Gateway-specific 3DS2 supported</td><td>N/A</td></tr>
+  <tr><td>Supported capabilities</td><td>Card on file, gateway tokens, ZDA</td></tr>
+  <tr><td>Regions</td><td>United States</td></tr>
+  <tr><td>Currencies</td><td><a href="/guides/payment-orchestration/gateway-configuration-and-features/currency-support-by-gateway" target="_blank">See all available</a></td></tr>
+</table>
+
+# Configuring FreedomPay in Recurly
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> No additional URL configuration is needed beyond setting your Recurly site mode. Recurly automatically connects to the correct FreedomPay environment based on mode:<br /><br /><strong>Development mode</strong> → FreedomPay UAT: <code>https://cs.uat.freedompay.com/Freeway/Service.asmx</code><br /><strong>Production mode</strong> → FreedomPay production: <code>https://cs12.freedompay.us/Freeway/Service.asmx</code><br /><strong>Sandbox mode</strong> → Recurly internal test gateway (FreedomPay not used)</div>
+</div>
+
+## Step 1: Obtain your Store ID and Terminal ID
+
+Log in to your FreedomPay Gateway account and retrieve your Store ID and Terminal ID. If you don't have an account, sign up with FreedomPay first.
+
+## Step 2: Generate your Enhanced Security (ES) Key
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Navigate to Enhanced Security Keys</h4><p>In FreedomPay, go to <strong>Administration → Enhanced Security Keys</strong> and click <strong>Create new</strong> under the <strong>All enhanced security keys</strong> section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Configure the key</h4><p>Enter a description (e.g., <em>Recurly Configuration Key</em>) and ensure <strong>Freeway Payments</strong> is checked.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Verify Tiers and Stores before creating</h4><p>Do <strong>not</strong> click Create yet. Click the <strong>Freeway Payments</strong> tab and confirm the correct Tiers and Stores are associated with this key.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Create and copy the key</h4><p>Click <strong>Create</strong> at the bottom of the page, then copy the key using the copy icon. You can click to view the masked key, but copying is all that's needed for configuration.</p></div>
+  </div>
+</div>
+
+## Step 3: Acquire RSA Key permissions and Key Slot ID
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Enable RSA Key Management</h4><p>Ask your FreedomPay contact to enable RSA Key Management for your Freeway user account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Create a new RSA key</h4><p>Navigate to <strong>Administration → RSA Key Management</strong>. Select <strong>FreedomPay</strong> as the RSA Key Provider (this is the default), then click <strong>Create New RSA Key</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Name and save the key slot</h4><p>Enter an alphanumeric Key Slot ID name with no spaces — choose a name you'll recognize to avoid accidental deletion. Add a description for future reference, then click <strong>Save</strong>.</p></div>
+  </div>
+</div>
+
+## Step 4: Enter credentials in Recurly
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Payment Gateways</h4><p>In Recurly, navigate to <strong>Payment Gateways</strong>, click <strong>Add a New Gateway</strong>, and select <strong>FreedomPay</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter your credentials</h4><p>Input your <strong>Store ID</strong>, <strong>Terminal ID</strong>, <strong>Enhanced Security Key</strong> (from Step 2), <strong>Enterprise Code</strong> (provided by your FreedomPay representative), and <strong>RSA Key ID</strong> (from Step 3).</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/33fdca18f84fb22cd0419e959e33f43dd03df30040d0d1bf9aff296b02c05983-Screenshot_2025-02-11_at_2.38.45_PM.png" align="center" width="75%" border={true} />
+
+
+## Step 5: Configure gateway settings and save
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Select card types and currencies</h4><p>Under <strong>Accepted Credit Card Types</strong>, select the card brands you accept in FreedomPay. Under <strong>Accepted Currencies</strong>, select your supported currencies.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Save the gateway</h4><p>Click <strong>Add Payment Gateway</strong> once all sections are complete.</p></div>
+  </div>
+</div>
+
+# Processing with FreedomPay
+
+## Further reading
+
+- <a href="https://recurly.com/developers/pages/api-transaction-errors.html" target="_blank">Developer Hub: Error messages</a>
+- <a href="/guides/recurring-billing/invoices-1/invoices#view-invoices" target="_blank">Invoice dashboard</a>
+- <a href="/guides/recurring-billing/invoices-1/credit-invoices" target="_blank">Refunds: Refund / credit invoices</a>
+- <a href="/guides/recurring-billing/invoices-1/credit-invoices#voiding-credit-invoices-or-balances" target="_blank">Voids: Voiding invoices</a>
+- <a href="/guides/subscriber-management/transactions/auth-and-capture" target="_blank">Auth and Capture</a>
+
+## Escalating to FreedomPay or Recurly Support
+
+When escalating a transaction issue to FreedomPay, have the following details ready:
+
+- Store ID, Terminal ID, Error Code, Request ID of the transaction
+
+**Gateway Store and Terminal IDs** are in your Recurly account under **Configuration → Payment Gateways** — select the appropriate gateway instance.
+
+**Gateway error codes** appear at the top of a declined or errored transaction. In the example below, the error code is `431`.
+
+
+<Image src="https://files.readme.io/92f850e81aa3275cd791b2ecb986d23418f6a37e7d3b6cf641f3706edd2ba14d-Screenshot_2024-12-12_at_11.44.34_AM.png" align="center" width="75%" border={true} />
+
+
+The **Reference** field maps to the FreedomPay **Request ID**.
+
+
+<Image src="https://files.readme.io/9d127b4c8086b0dc6deb14cab328a7f14dee6e7d03946dbde4f7df80cea13252-Screenshot_2024-12-12_at_11.44.43_AM.png" align="center" width="75%" border={true} />
+
+
+**FreedomPay contact details:**
+
+- **Test environment help desk**: <a href="https://freedompay.atlassian.net/servicedesk" target="_blank">freedompay.atlassian.net/servicedesk</a>
+- **Production email**: <a href="mailto:techsupport@freedompay.com">[techsupport@freedompay.com](mailto:techsupport@freedompay.com)</a>
+- **Production phone**: 888-495-2446 (US) / +44-2030148966 (UK)
+- **Status page**: <a href="https://status.freedompay.com" target="_blank">status.freedompay.com</a>
+
+## Payload examples and error documentation
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> FreedomPay error code documentation</strong> See the <a href="https://freedompay.atlassian.net/wiki/spaces/IP/pages/878673921/FreedomPay+Error+Guide?preview=/878673921/3989143571/FreedomPay_Error_Codes_Guide-v6.8.pdf" target="_blank">FreedomPay Error Code Guide</a>. If you can't access the PDF, contact FreedomPay directly — Recurly Support cannot grant access.</div>
+</div>
+
+Per FreedomPay's request, the following are examples of a standard payment request and response.
+
+**Token request example**
+
+```xml
+<SOAP-ENV:Body>  
+    <Submit>  
+      <request>  
+        <storeId>******</storeId>  
+        <terminalId>******</terminalId>  
+        <esKey>******</esKey>  
+        <merchantReferenceCode>{{Recurly-UUID}}</merchantReferenceCode>  
+        <brand>VS</brand>  
+        <ccAuthService run="true">  
+          <transType>purchase</transType>  
+          <allowPartial>N</allowPartial>  
+          <returnBalance>Y</returnBalance>  
+          <cofIndicator>U</cofIndicator>  
+          <cofComplianceData>{{NTID}}</cofComplianceData>  
+          <enableAVS>Y</enableAVS>  
+          <commerceIndicator>internet</commerceIndicator>  
+          <recurring>Y</recurring>  
+        </ccAuthService>  
+        <ccCaptureService run="true">  
+          <isSplitTransaction>N</isSplitTransaction>  
+        </ccCaptureService>  
+        <billTo>  
+          <customerID>{{Recurly-Account-Code}}</customerID>  
+          <firstName>Jane</firstName>  
+          <lastName>Doe</lastName>  
+          <street1>123 Main</street1>  
+          <city>Chicago</city>  
+          <state>IL</state>  
+          <postalCode>12345</postalCode>  
+          <country>US</country>  
+        </billTo>  
+        <card>  
+          <accountNumber>{{gateway-token}}</accountNumber>  
+          <cardType>token</cardType>  
+          <cvNumber>{{masked-cvv}}</cvNumber>  
+          <nameOnCard>Jane Doe</nameOnCard>  
+        </card>  
+        <invoiceHeader>  
+          <invoiceNumber>1000</invoiceNumber>  
+          <purchaserCode>12345</purchaserCode>  
+        </invoiceHeader>  
+        <clientMetadata>  
+          <sellingSystemName>merchantdomain.com</sellingSystemName>  
+          <sellingSystemVersion>1.0</sellingSystemVersion>  
+          <sellingMiddlewareName>Recurly</sellingMiddlewareName>  
+          <sellingMiddlewareVersion>1.0</sellingMiddlewareVersion>  
+        </clientMetadata>  
+        <pos>  
+          <entryMode>keyed</entryMode>  
+          <cardPresent>N</cardPresent>  
+          <paymentDate>2024-12-31T17:22:18Z</paymentDate>  
+          <caps>K</caps>  
+        </pos>  
+        <purchaseTotals>   
+          <chargeAmount>10.00</chargeAmount>  
+          <taxTotal>0</taxTotal>  
+        </purchaseTotals>  
+        <items>  
+          <item>  
+            <id>1234567890</id>  
+            <productName>Product Name</productName>  
+            <productDescription>Description of the Product</productDescription>  
+            <unitPrice>10.00</unitPrice>  
+            <quantity>1</quantity>  
+            <totalAmount>10.00</totalAmount>  
+            <unitOfMeasure>EA</unitOfMeasure>  
+            <saleCode>S</saleCode>  
+            <taxAmount>0</taxAmount>  
+            <taxIncludedFlag>N</taxIncludedFlag>  
+          </item>  
+        </items>  
+      </request>  
+    </Submit>  
+  </SOAP-ENV:Body>  
+</SOAP-ENV:Envelope>
+```
+
+**Token response example**
+
+```xml
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema">  
+  <soap:Body>  
+    <SubmitResponse xmlns="http://freeway.freedompay.com/">  
+      <SubmitResult>  
+        <merchantReferenceCode>{{Recurly-UUID}}</merchantReferenceCode>  
+        <ccAuthReply>  
+          <amount>10.00</amount>  
+          <processorTransactionID>1234567890</processorTransactionID>  
+          <enhancedDataEnabled>N</enhancedDataEnabled>  
+          <avsCodeRaw>N</avsCodeRaw>  
+          <processorResponseCode>100</processorResponseCode>  
+          <reasonCode>100</reasonCode>  
+          <authorizationCode>123456</authorizationCode>  
+          <avsCode>N</avsCode>  
+          <partialAmount>N</partialAmount>  
+          <cvCode>M</cvCode>  
+          <authorizedDateTime>2024-12-01T17:22:18.8622020Z</authorizedDateTime>  
+          <processorResponseMessage>APPROVED</processorResponseMessage>  
+          <requestDateTime>2024-12-01T17:22:18.7641802Z</requestDateTime>  
+          <cvCodeRaw>M</cvCodeRaw>  
+          <reconciliationID>252306047</reconciliationID>  
+        </ccAuthReply>  
+        <requestID>01Z6MGHC2A97U6G5L9DH6JCG10BDCLTD</requestID>  
+        <networkData>  
+          <network>FREEWAY</network>  
+        </networkData>  
+        <tokenInformation>  
+          <brand>VS</brand>  
+          <accountNumberMasked>411111xxxxxx1111</accountNumberMasked>  
+          <cardExpirationYear>29</cardExpirationYear>  
+          <cardExpirationMonth>12</cardExpirationMonth>  
+          <cardType>credit</cardType>  
+        </tokenInformation>  
+        <decision>ACCEPT</decision>  
+        <reasonCode>100</reasonCode>  
+        <ccCaptureReply>  
+          <processorTransactionID>252306047</processorTransactionID>  
+          <amount>55.15</amount>  
+          <requestDateTime>2024-12-10T17:22:18.7641802Z</requestDateTime>  
+          <processorResponseCode>100</processorResponseCode>  
+          <purchasingLevel3Enabled>N</purchasingLevel3Enabled>  
+          <enhancedDataEnabled>N</enhancedDataEnabled>  
+          <reasonCode>100</reasonCode>  
+          <reconciliationID>1234567890</reconciliationID>  
+          <partialAmount>N</partialAmount>  
+          <processorResponseMessage>APPROVED</processorResponseMessage>  
+        </ccCaptureReply>  
+      </SubmitResult>  
+    </SubmitResponse>  
+  </soap:Body>  
+</soap:Envelope>
+```
+
+## Security suggestions
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Security suggestions from FreedomPay</strong> See FreedomPay's <a href="https://drive.google.com/file/d/1yN6GzwmdbxkKL6dtrQDa0vGVcIa4AAMC/view?usp=drive_link" target="_blank">Ecommerce Integration Requirements for Security</a>. Not all recommendations will apply to Recurly or your own systems — contact FreedomPay directly with any questions.</div>
+</div>
+
+# FAQs
+
+<Accordion title="How do I contact Recurly Support?">
+  See the <a href="/guides/getting-started/do-you-need-help" target="_blank">Do you need help?</a> page for all Recurly Support contact options.
+</Accordion>
+
+<Accordion title="What if my customer doesn't provide an address or CVV and AVS rejection is enabled?">
+  FreedomPay will still generate AVS and CVV response codes in those cases, which will likely result in a rejection due to missing address or CVV data. Collect billing information and CVV codes for all customer-initiated transactions to reduce declines when these features are enabled.
+</Accordion>
+
+<Accordion title="I'm getting authentication failure or gateway configuration errors when making a purchase. How do I fix this?">
+  Check the following:
+
+  - Verify your ES Key has the correct mappings to your Terminal and Store IDs in FreedomPay (this must be done in your FreedomPay account, not in Recurly).
+  - Check which Tiers the ES Key is mapped to in your Enterprise FreedomPay login — review the **Enterprise Management** tab if you have special mappings.
+  - Confirm you're not using a UAT Store ID, Terminal ID, or ES Key in Production mode (or vice versa).
+  - Verify that the card types selected in Recurly match what's enabled at FreedomPay. If a card brand is selected in Recurly but not enabled in FreedomPay, either contact your FreedomPay representative to add it or remove it from your Recurly gateway configuration.
+
+  If the issue persists, contact FreedomPay Support directly.
+</Accordion>
+
+<Accordion title="I'm using a Point of Sale card terminal. How can I connect it to Recurly?">
+  Recurly does not directly support EMV or Card Present transactions. To set up a Card Present → Recurring Subscription flow, first build your card present solution with FreedomPay. That integration should produce a gateway token and a subscription Network Transaction ID (NTID). Once complete, follow the <a href="/guides/integration-methods/recurlyjs" target="_blank">Recurly.js guide</a> to create subscriptions and provide the external NTID correctly. See also: <a href="/guides/security-compliance/compliance/card-on-file" target="_blank">Card on File</a> compliance documentation.
+</Accordion>
+
+<Accordion title="How does customer data flow from my site to FreedomPay?">
+  Data flows from a supported front-end — the Recurly API, Recurly.js, or a Hosted Page — into Recurly and through to FreedomPay via their API connection. Recurly supports two transaction types: CIT (Customer Initiated) and MIT (Merchant Initiated). See <a href="/guides/security-compliance/compliance/card-on-file" target="_blank">Card on File</a> for compliance details.
+
+  <Image src="https://files.readme.io/23b1a5df529958cb91e9302a1af5673b7c5a426628e395b3702fea8316322395-Screenshot_2024-12-12_at_11.49.56_AM.png" align="center" width="75%" border={true} />
+
+  For Merchant Initiated Transactions, the customer is no longer in session, but their bank still approves or declines the transaction. Recurly does not approve or decline transactions — for decline details, have the customer contact their bank directly.
+
+  <Image src="https://files.readme.io/f101629887765a924175984e6e7c1d7407b72e5d0ef2cdbbc4cd41e3d7b72306-Screenshot_2024-12-12_at_11.49.49_AM.png" align="center" width="75%" border={true} />
+</Accordion>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> More Recurly resources</strong> For general Recurly troubleshooting and how-tos, search <a href="https://docs.recurly.com/" target="_blank">docs.recurly.com</a>. Helpful starting points: <a href="/guides/recurly-js/getting-started" target="_blank">Getting started</a>, <a href="https://docs.recurly.com/docs/subscription-lifecycle" target="_blank">Subscription lifecycle</a>, <a href="https://recurly.com/developers/" target="_blank">Developer Hub</a>, and <a href="/guides/subscriber-management/transactions/auth-and-capture" target="_blank">Auth and Capture</a>.</div>
+</div>
+
+<br />

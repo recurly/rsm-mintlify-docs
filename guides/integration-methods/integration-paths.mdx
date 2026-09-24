@@ -1,0 +1,64 @@
+---
+title: Implementing Recurly
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Implementing Recurly means setting up the technical integrations that handle billing for your customers. The right approach depends on how much customization you need and how quickly you want to get live — from a hosted checkout that launches in minutes to a fully custom payment form built with Recurly.js.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Recurly is a subscription management platform with the tools to handle subscription billing end-to-end. Implementing Recurly involves setting up the technical integrations that fit your company's billing requirements — whether that's a hosted checkout page, a custom payment form, direct API calls, or webhooks for real-time event handling.</div>
+
+# Key details
+
+## Checkout vs Recurly.js
+
+Recurly offers two primary front-end integration options. The table below highlights the key differences to help you choose.
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Aspect</td><td>Checkout</td><td>Recurly.js</td></tr>
+  <tr><td><strong>Development timeframe</strong></td><td>Launches within minutes.</td><td>Setup ranges from one to two days, depending on web development readiness.</td></tr>
+  <tr><td><strong>Location</strong></td><td>Hosted on your personalized subdomain (<code>your-subdomain.recurly.com</code>) or a custom domain.</td><td>Directly integrated into your website.</td></tr>
+  <tr><td><strong>Technical skill required</strong></td><td>Little to no coding knowledge needed.</td><td>Requires a basic understanding of APIs and HMAC digital signatures.</td></tr>
+  <tr><td><strong>Look and feel</strong></td><td>Responsive design with customizable branding and product selection.</td><td>Fully customizable, pre-built payment form.</td></tr>
+  <tr><td><strong>Billing flexibility</strong></td><td>Localized currencies and a wide variety of payment methods for customers worldwide.</td><td>Supports regular subscription sign-ups, multiple plans, and one-time payments.</td></tr>
+  <tr><td><strong>Customer management</strong></td><td>Streamlined purchase experience for single plans, multiple plans, or one-time purchases.</td><td>Includes a form to update billing information. Other account actions are handled via separate methods.</td></tr>
+  <tr><td><strong>PCI compliance</strong></td><td>All card information is handled directly inside Recurly, making your business eligible for reduced PCI scope.</td><td>All card information is handled directly inside Recurly, making your business eligible for reduced PCI scope.</td></tr>
+</table>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Legacy: Hosted Payment Pages</strong>Recurly also has <a href="https://docs.recurly.com/hosted-payment-pages" target="_blank">Hosted Payment Pages</a> as a legacy option. For new implementations, <a href="https://docs.recurly.com/docs/checkout" target="_blank">Checkout</a> is recommended — it provides the same hosted experience with more flexibility and a better customer experience.</div>
+</div>
+
+***
+
+## Integration methods
+
+<div className="rp-nav-grid">
+
+<CardGroup cols={2}>
+  <Card title="Checkout" href="https://docs.recurly.com/docs/checkout" target="_blank">
+    A hosted payment experience that launches in minutes with no coding required. Customizable branding, multiple payment methods, and full PCI compliance built in.
+  </Card>
+  <Card title="Recurly.js" href="/guides/integration-methods/recurlyjs" target="_blank">
+    Embed a customizable payment form directly into your website. Ideal for teams with web development experience who need full control over the payment UI.
+  </Card>
+  <Card title="REST API keys" href="/guides/integration-methods/api-keys" target="_blank">
+    Communicate directly with Recurly's systems using RESTful API keys. Designed for developers who need precision and full programmatic control over billing workflows.
+  </Card>
+  <Card title="Webhooks (JSON and XML)" href="/guides/integration-methods/webhooks" target="_blank">
+    Receive real-time notifications about events in your Recurly account. Supports both JSON and XML for maximum compatibility with your existing systems.
+  </Card>
+  <Card title="Native mobile SDKs" href="/guides/integration-methods/native-mobile-sdks" target="_blank">
+    Integrate Recurly directly into your iOS or Android app using native SDKs, enabling in-app payment experiences without routing users to a browser.
+  </Card>
+</CardGroup>
+</div>
+
+<br />

@@ -1,0 +1,172 @@
+---
+title: Refund
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Use refunds to return money to a customer from a transaction or invoice. You can refund the entire amount, a specific amount, or selected line items — with options to prorate subscription charges and control how credits are applied.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#refund-from-the-admin-ui"><span className="rp-toc-num">4</span>Refund from the Admin UI</a>
+    <a className="rp-toc-pill" href="#refund-via-api"><span className="rp-toc-num">5</span>Refund via API</a>
+    <a className="rp-toc-pill" href="#troubleshooting"><span className="rp-toc-num">6</span>Troubleshooting</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Staff access to Invoices and Transactions in the Recurly Admin UI, or API credentials with scope to refund invoices</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Refunds are always issued to the original payment method (the same card or bank account used for ACH) and are tied to the original gateway. They cannot be routed to a different payment method or gateway</li>
+  <li>Unsettled transactions can be <a href="/guides/subscriber-management/transactions/void-transaction#/" target="_blank">voided</a> instead of refunded. Some gateways also allow refunds against unsettled transactions, but this is not recommended</li>
+  <li><a href="/guides/subscriber-management/transactions/void-transaction#/" target="_blank">Voided</a> and <a href="https://docs.recurly.com/recurly-subscriptions/update/docs/auth-and-capture#/" target="_blank">uncaptured authorization</a> transactions cannot be refunded</li>
+  <li>Percentage refunds on invoices require the Credit Memos feature flag to be enabled</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">A refund reverses all or part of a previously collected charge. In Recurly, refunding an invoice or its underlying transaction creates a refund invoice and a refund transaction, and can optionally return account credit before issuing money back.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i></div>
+    <strong>Work from one place</strong>
+    <span>Refund from the invoice, the transaction, or via API — whichever fits your workflow.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Fine-grained control</strong>
+    <span>Refund by full amount, a specific dollar or percentage amount, or selected line items — exactly what you need and nothing more.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-calculator" aria-hidden="true"></i></div>
+    <strong>Accurate billing math</strong>
+    <span>The refund preview respects proration, taxes, discounts, and quantities so you know exactly what will be returned before confirming.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></div>
+    <strong>Consistent accounting</strong>
+    <span>Recurly generates refund invoices and refund transactions for every reversal, keeping your audit trail clean.</span>
+  </div>
+</div>
+
+# Key details
+
+## Refund types
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Type</td><td>What it does</td><td>Typical use</td></tr>
+  <tr><td>Full</td><td>Returns the entire original charge.</td><td>Billing error or immediate cancellation.</td></tr>
+  <tr><td>Amount</td><td>Returns an exact currency amount.</td><td>Goodwill credit or partial service issue.</td></tr>
+  <tr><td>Line items</td><td>Returns selected lines with optional proration and quantities.</td><td>Plan swaps, partial periods, or item-level adjustments.</td></tr>
+</table>
+
+## Credit handling
+
+When an invoice contains credit line items and you're issuing a partial refund, you can control the order in which value is returned.
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Option</td><td>Result</td></tr>
+  <tr><td>Credit first (default)</td><td>Refund returns account credit first, then creates a transaction for any remaining amount.</td></tr>
+  <tr><td>Transaction first</td><td>Refund issues money back to the customer first; any remainder is returned as account credit.</td></tr>
+</table>
+
+## Taxes, discounts, and proration
+
+The refund preview calculates the exact impact of your selection before you confirm:
+
+- Line-item refunds respect original taxability and discount allocation
+- Proration applies to subscription charges when selected on the refund screen
+- The preview shows all calculated taxes, discounts, and proration adjustments
+
+## What gets created
+
+When a refund is completed, Recurly generates two records:
+
+- A **refund invoice** reflecting the reversal, including taxes and discount allocation
+- A **refund transaction** against the original payment method
+
+# Refund from the Admin UI
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the transaction or invoice</h4><p>Go to the customer's account and select the transaction in Transactions, or the invoice in Invoices.</p></div>
+  </div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Initiate the refund</h4><p>On the Transaction details page, select Refund transaction. On the Invoice details page, select Refund invoice.</p></div>
+  </div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose what to refund</h4><p>Select the refund scope using one of the options below.</p></div>
+  </div>
+</div>
+
+- **Line items** — Select specific charge lines. Optionally prorate subscription charges or select specific quantities.
+- **Specific amount** — Select "Refund a partial item or specific amount?" and enter a custom amount. The amount cannot exceed the original transaction value.
+- **Unsettled transactions** — Only a full refund (void) is available until the gateway settles the charge.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Set the credit return order (partial refunds only)</h4><p>If the invoice includes credit line items and you're issuing a partial refund, choose how to apply value using the radio buttons at the top of the page.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Credit first is the default</strong>Recurly returns credit to the account before issuing money back. Select Transaction first to reverse this order.</div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Preview the refund</h4><p>Select Preview refund to review discounts, taxes, credits, and totals before committing.</p></div>
+  </div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">6</div>
+    <div><h4>Complete the refund</h4><p>Select Refund charges to finalize. Recurly creates a refund invoice and a refund transaction.</p></div>
+  </div>
+</div>
+
+# Refund via API
+
+To refund an invoice programmatically, use the Refund Invoice endpoint in Recurly's API.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> API reference</strong>See <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/refund_invoice" target="_blank">Refund an Invoice</a> in the Recurly API documentation for the full endpoint spec, required fields, and request examples.</div>
+</div>
+
+# Troubleshooting
+
+<Accordion title="Why can't I refund — the transaction shows as unsettled?">
+Unsettled transactions can only be fully reversed with a void. A refund is not available until the gateway settles the charge, which typically happens at end of day. Wait for settlement, then issue the refund — or proceed with a void if you want an immediate full reversal.
+</Accordion>
+
+<Accordion title="The gateway or bank blocked my refund attempt. What should I do?">
+You may be outside the gateway's refund window (often 30–60 days after the original transaction), or the original payment method may no longer be able to receive the refund. In these cases, consider issuing an offline credit outside the processor and recording the adjustment in Recurly manually.
+</Accordion>
+
+<Accordion title="I'm getting a validation error via the API. How do I fix it?">
+Confirm that the `type` field and all required parameters are present in your request. For line-item refunds, verify that the line IDs and quantities are valid for the original invoice. Refer to the <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/refund_invoice" target="_blank">Refund an Invoice</a> API reference for the full parameter spec.
+</Accordion>
+
+<br />

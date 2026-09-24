@@ -1,0 +1,8 @@
+# Preserve source formatting in converted docs and the supplied stylesheet.
+guides/** -whitespace
+reference/** -whitespace
+recipes/** -whitespace
+custom-pages/** -whitespace
+custom.css -whitespace
+openapi/recurly-v2.yaml -whitespace
+scripts/source-assets/recurly-docs-global-styles.css.txt -whitespace

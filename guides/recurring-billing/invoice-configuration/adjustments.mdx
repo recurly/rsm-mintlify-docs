@@ -1,0 +1,191 @@
+---
+title: Charges and credits adjustments
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Adjustments let you add charges or credits to a customer's account outside of the regular subscription billing cycle. Most are created automatically during subscription events, but you can also create them manually via the Admin Console or API — billing them immediately or rolling them into the next scheduled invoice.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#create-a-custom-charge"><span className="rp-toc-num">4</span>Create a custom charge</a>
+    <a className="rp-toc-pill" href="#issue-a-credit"><span className="rp-toc-num">5</span>Issue a credit</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">6</span>FAQs</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Charge and credit adjustments represent changes to the amount a customer is billed. They're created automatically by Recurly during subscription billing events — sign-ups, plan changes, renewals, refunds — and can also be created manually or via the API for custom billing scenarios like one-time products, service credits, or professional services.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-pen-ruler" aria-hidden="true"></i></div>
+    <strong>Flexible billing management</strong>
+    <span>Create custom charges and credits for unique scenarios — one-time products, professional services, goodwill credits, and more.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-rotate" aria-hidden="true"></i></div>
+    <strong>Automated and manual options</strong>
+    <span>Adjustments are created automatically during subscription billing events, and can also be configured manually for precise control over timing and amounts.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></div>
+    <strong>Streamlined invoicing</strong>
+    <span>Consolidate multiple charges and credits into a single invoice, or hold them until the next billing cycle — keeping invoices clean and predictable.</span>
+  </div>
+</div>
+
+# Key details
+
+## Subscription billing events that trigger adjustments
+
+Recurly automatically creates adjustments during the following subscription events:
+
+- **Sign-up** — Adjustments are created for setup fees, plan fees, and add-on fees when a customer subscribes.
+- **Immediate upgrade or downgrade** — A plan change generates a prorated credit, charge, or both depending on the direction of the change. Learn more about <a href="/guides/subscriber-management/subscription-lifecycle/change-subscription" target="_blank">subscription changes</a>.
+- **Start of a new billing period** — Adjustments are created for the plan fee and any active add-ons at the start of each billing cycle.
+- **Refund** — A credit adjustment is created to reflect the amount returned to the customer.
+- **Final invoice (usage-based billing)** — For usage-based billing plans, adjustments are created when the final invoice is issued.
+
+***
+
+## Custom charge adjustments
+
+Custom charge adjustments are manually created charges outside of regular subscription billing. Common use cases include:
+
+- Billing for a one-time physical product purchased alongside a subscription
+- Charging for professional services such as consulting or training
+- Recreating charges after an incorrect invoice was voided
+
+### Create charges via the Purchases API
+
+The <a href="https://developers.recurly.com/api/v2019-10-10/index.html#tag/purchase" target="_blank">Purchases</a> endpoint is the right choice for complex billing scenarios. It handles:
+
+- Custom one-time charges
+- Subscription charges (plan fee, add-on fee, setup fee)
+- Combinations of subscription and one-time charges
+- New customer sign-ups with subscriptions and/or one-time products
+
+All charges created via the Purchases endpoint are combined into a single transaction sent to your payment gateway, treating the entire purchase as one unit.
+
+### Create charges via the Adjustments or Line Items API
+
+For scenarios where you want to add a charge without immediately invoicing it, use the <a href="https://dev.recurly.com/docs/create-a-charge" target="_blank">Adjustments</a> endpoint (v2 API) or the <a href="https://developers.recurly.com/api/v2019-10-10/index.html#tag/line_item" target="_blank">Line Items</a> endpoint (v3 API). You can also create charges directly in the Admin Console.
+
+This approach is useful when you want a mid-cycle charge to appear on the next regularly scheduled invoice rather than triggering a new invoice immediately.
+
+
+<Image src="https://files.readme.io/4fcbd1a7339135f2c54e08cab1d117c8e00d2668c38b7d759147f7485a5fc190-image.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Custom credit adjustments
+
+Custom credit adjustments are manually created credits that reduce the amount a customer owes. Common use cases include:
+
+- Issuing a service credit as compensation for downtime or a service issue
+- Issuing an external gift card credit (API only)
+
+To issue a credit, navigate to the customer's account in the Admin Console and click **Add Credit** in the **Account Actions** dropdown.
+
+
+<Image src="https://files.readme.io/a5ad6216705ddc0d431efbd8773731e07b3898ad14402632b63b48a767d97f61-Screenshot_2025-11-21_at_3.36.24_PM.png" align="center" width="75%" border={true} />
+
+
+When issuing a credit, you control the amount, currency, and how it's described on the customer's invoice.
+
+***
+
+## Credit application control
+
+The `credit_application_policy` field lets you control when available credit is applied — at the subscription, purchase, or invoice level — via the v3 API. When set to `all`, you can also specify which credit invoice origin types (credit, gift card, prepayment, etc.) are eligible.
+
+To override the credit application policy for a specific purchase without changing the subscription-level setting, use the `credit_application_policy_override` field. If neither field is set, Recurly applies available credit automatically by default.
+
+**Example:**
+
+```json
+"credit_application_policy": {
+  "mode": "all",
+  "allowed_origins": [
+    "line_item_refund"
+  ]
+}
+```
+
+This field is available on the following API endpoints: <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_purchase" target="_blank">Purchases</a>, <a href="https://recurly.com/developers/api/v2021-02-25/index.html#tag/invoice" target="_blank">Invoices</a>, and <a href="https://recurly.com/developers/api/v2021-02-25/index.html#tag/subscription" target="_blank">Subscriptions</a>.
+
+# Create a custom charge
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the customer's account</h4><p>In the Admin Console, navigate to the customer's account page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Add a charge</h4><p>Click <strong>Add Item/Charge</strong> above the Charges and Credits table.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Fill in charge details</h4><p>Select the currency, then choose <strong>Invoice Now</strong> or <strong>Invoice at Next Bill Date</strong>. Select a Charge Type and enter the description, quantity, and amount. Optionally, add a product code, accounting code, <a href="https://docs.recurly.com/recurly-subscriptions/docs/catalog#creating-items" target="_blank">HS code</a>, and timeframe.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Configure tax collection (if applicable)</h4><p>Check <strong>Tax Collection</strong> if you want to collect tax on this charge according to your tax configuration.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Save and review</h4><p>Click <strong>Add to account</strong> and review the charge.</p></div>
+  </div>
+</div>
+
+# Issue a credit
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the customer's account</h4><p>In the Admin Console, navigate to the customer's account page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Add a credit</h4><p>Click <strong>Add Credit</strong> above the Charges and Credits table.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Fill in credit details</h4><p>Select the currency and add a note if applicable.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Configure the credit adjustment</h4><p>Enter the description, quantity, and amount. Optionally, add a reason code, product code, accounting code, and timeframe.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Save and post</h4><p>Click <strong>Save</strong> to create the credit. Then click <strong>Post Credit Invoice</strong> to generate the invoice with the credit applied, or <strong>Preview</strong> to review it first.</p></div>
+  </div>
+</div>
+
+# FAQs
+
+<Accordion title="Can I create a charge without immediately invoicing it?">
+  Yes. When creating a charge via the Adjustments (v2) or Line Items (v3) endpoint, or in the Admin Console by selecting **Invoice at Next Bill Date**, the charge is held on the account and included in the next subscription billing event or manually posted invoice.
+</Accordion>
+
+<Accordion title="Can I issue a credit that reverses a tax or discount amount?">
+  Custom credits aren't taxable or discountable by default. To reverse taxes or discounts, issue a Line Item Refund instead.
+</Accordion>
+
+<Accordion title="What happens if I create a charge in a different currency than the customer's existing subscriptions?">
+  If there are uninvoiced charges on an account in multiple currencies, you'll see an option to generate one invoice per currency when manually generating an invoice from the Admin Console.
+</Accordion>
+
+<Accordion title="Can I apply a credit to a specific invoice?">
+  Yes. Navigate to the specific invoice in the Admin Console and apply the credit directly to that invoice.
+</Accordion>
+
+<br />

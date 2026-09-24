@@ -1,0 +1,260 @@
+---
+title: Account notifications
+---
+
+These webhooks alert you to changes in accounts and associated resources—new accounts, updates, closures, billing info changes, and shipping address events—so your systems can stay in sync.
+
+### Prerequisites and limitations
+
+* Ensure your endpoint is subscribed to the desired account notifications in the Webhooks settings.
+* Each endpoint can receive up to 10 different notification types.
+* Notifications are delivered separately (e.g., a new subscription payment generates both a subscription and a payment webhook).
+
+# Account notifications
+
+## New account
+
+Sent when a new account is created.
+
+```json
+{
+  "id": "r3oplsj3zo7a",
+  "object_type": "account",
+  "site_id": "r23khg9b5kyb",
+  "event_type": "created",
+  "event_time": "2022-06-24T19:55:25Z",
+  "account_code": "verena"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_account_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+</new_account_notification>
+```
+
+## Updated account
+
+Sent when an account is updated. Specifically attributes in the account information, not the billing information, shipping addresses, or account acquisition. See the [Update Account](https://recurly.com/developers/api/latest/) API call for a list of attributes.
+
+```json
+{
+  "id": "r3oplsj3zo7a",
+  "object_type": "account",
+  "site_id": "r23khg9b5kyb",
+  "event_type": "updated",
+  "event_time": "2022-06-24T19:55:25Z",
+  "account_code": "verena"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<updated_account_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+</updated_account_notification>
+```
+
+## Closed account
+
+Sent when an account is closed.
+
+```json
+{
+  "id": "r3oplsj3zo7a",
+  "object_type": "account",
+  "site_id": "r23khg9b5kyb",
+  "event_type": "closed",
+  "event_time": "2022-06-24T19:55:25Z",
+  "account_code": "verena"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<canceled_account_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+</canceled_account_notification>
+```
+
+## Updated billing information
+
+Sent when billing information is successfully created with a credit card or updated with a credit card or token.
+
+```json
+{
+  "id": "ra8etjg1z0pr",
+  "object_type": "billing_info",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "updated",
+  "event_time": "2022-07-26T21:57:05Z",
+  "account_code": "2cfc561c374@example.com"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<billing_info_updated_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+</billing_info_updated_notification>
+```
+
+## New shipping address
+
+Sent when a new shipping address is created.
+
+```json
+{
+  "id": "ra8f7lksukbd",
+  "object_type": "shipping_address",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "created",
+  "event_time": "2022-07-26T21:59:15Z",
+  "account_code": "2597c5c5eb3@example.com"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_shipping_address_notification>
+  <account>
+    <account_code>SamSmith</account_code>
+    <username></username>
+    <email></email>
+    <first_name>Sam</first_name>
+    <last_name>Smith</last_name>
+    <company_name>Smith Co</company_name>
+    <phone></phone>
+  </account>
+  <shipping_address>
+    <id type="integer">2019760742762202549</id>
+    <nickname>Steven</nickname>
+    <first_name>Steven</first_name>
+    <last_name>Smith</last_name>
+    <company_name></company_name>
+    <vat_number></vat_number>
+    <street1>231 Oregon Street</street1>
+    <street2></street2>
+    <city>Portland</city>
+    <state>OR</state>
+    <zip>97201</zip>
+    <country>US</country>
+    <email>stevensmith@example.com</email>
+    <phone></phone>
+  </shipping_address>
+</new_shipping_address_notification>
+```
+
+## Updated shipping address
+
+Sent when an existing shipping address is edited.
+
+```json
+{
+  "id": "ra8f7lksukbd",
+  "object_type": "shipping_address",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "updated",
+  "event_time": "2022-07-26T21:59:16Z",
+  "account_code": "2597c5c5eb3@example.com"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<updated_shipping_address_notification>
+  <account>
+    <account_code>SamSmith</account_code>
+    <username></username>
+    <email></email>
+    <first_name>Sam</first_name>
+    <last_name>Smith</last_name>
+    <company_name>Smith Co</company_name>
+    <phone></phone>
+  </account>
+  <shipping_address>
+    <id type="integer">2019760742762202549</id>
+    <nickname>Steven</nickname>
+    <first_name>Steven</first_name>
+    <last_name>Smith</last_name>
+    <company_name></company_name>
+    <vat_number></vat_number>
+    <street1>231 Oregon Street</street1>
+    <street2></street2>
+    <city>Portland</city>
+    <state>OR</state>
+    <zip>97201</zip>
+    <country>US</country>
+    <email>stevensmith@example.com</email>
+    <phone></phone>
+  </shipping_address>
+</updated_shipping_address_notification>
+```
+
+## Deleted shipping address
+
+Sent when an existing shipping address is deleted.
+
+```json
+{
+  "id": "ra8f7lksukbd",
+  "object_type": "shipping_address",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "deleted",
+  "event_time": "2022-07-26T21:59:16Z",
+  "account_code": "2597c5c5eb3@example.com"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<deleted_shipping_address_notification>
+  <account>
+    <account_code>SamSmith</account_code>
+    <username></username>
+    <email></email>
+    <first_name>Sam</first_name>
+    <last_name>Smith</last_name>
+    <company_name>Smith Co</company_name>
+    <phone></phone>
+  </account>
+  <shipping_address>
+    <id type="integer">2019760742762202549</id>
+    <nickname>Steven</nickname>
+    <first_name>Steven</first_name>
+    <last_name>Smith</last_name>
+    <company_name></company_name>
+    <vat_number></vat_number>
+    <street1>231 Oregon Street</street1>
+    <street2></street2>
+    <city>Portland</city>
+    <state>OR</state>
+    <zip>97201</zip>
+    <country>US</country>
+    <email>stevensmith@example.com</email>
+    <phone></phone>
+  </shipping_address>
+</deleted_shipping_address_notification>
+```

@@ -1,0 +1,266 @@
+---
+title: Bulk unique coupons
+---
+
+<div className="rp-page">
+  <div className="rp-overview">
+    Bulk unique coupons let you generate thousands — or millions — of individually unique codes under a single campaign. Each code can be targeted to a specific customer segment, tracked on its own, and reported on together, making large-scale promotions manageable without the overhead of creating codes one by one.
+  </div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#bulk-unique-code-syntax"><span className="rp-toc-num">4</span>Code syntax</a>
+    <a className="rp-toc-pill" href="#creating-bulk-unique-codes"><span className="rp-toc-num">5</span>Creating codes</a>
+    <a className="rp-toc-pill" href="#managing-your-codes"><span className="rp-toc-num">6</span>Managing codes</a>
+    <a className="rp-toc-pill" href="#exporting-and-reporting-on-redemptions"><span className="rp-toc-num">7</span>Reporting</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">
+  Bulk unique coupons is a Recurly feature that lets you create a single coupon campaign made up of thousands of individually unique codes. Each code can be targeted to specific customer segments, tracked individually, and reported on as part of one unified campaign.
+</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-bolt" aria-hidden="true"></i></div>
+    <strong>Efficiency at scale</strong>
+    <span>Generate up to five million unique codes in a single campaign — no need to create codes one by one.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-bullseye" aria-hidden="true"></i></div>
+    <strong>Precision targeting</strong>
+    <span>Share unique codes with specific customer segments to tailor promotions to the right audience.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-chart-bar" aria-hidden="true"></i></div>
+    <strong>Insightful reporting</strong>
+    <span>Track redemptions and discount effectiveness grouped under one campaign so you can see what's working.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrows-split-up-and-left" aria-hidden="true"></i></div>
+    <strong>Marketing attribution</strong>
+    <span>Associate unique codes with specific marketing channels to identify which sources drive the most redemptions.</span>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-important">
+  <strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Limitations</strong>
+  Campaigns exceeding 100,000 codes require an override — contact <a href="mailto:support@recurly.com">support@recurly.com</a> or your account manager. The synchronous API generation endpoint returns a maximum of 200 codes per call. Maximum redemptions and redemptions per account cannot be configured in the UI for bulk unique codes — use the API. To extend the redeem-by date, add more codes through the UI; this is not possible once you've reached the 100,000-code limit, so plan ahead. Custom code templates (for example, without dashes) are only available via API.
+</div>
+
+# Key details
+
+## Maximum redemptions
+
+When **Bulk unique codes** is selected, the maximum redemptions field is hidden in the Recurly UI. By default, maximum redemptions are unlimited — the number of unique codes acts as the natural cap.
+
+To set a specific maximum, use the API. If you set a maximum lower than the total number of unique codes generated, redemptions stop once the limit is reached — even if unused codes remain.
+
+## Redemptions per account
+
+When **Bulk unique codes** is selected, the redemptions per account field is also hidden in the UI. By default, this is set to one — each unique code can only be redeemed once.
+
+To allow a customer to redeem more than one unique code on their account, set redemptions per account to a higher value via the API.
+
+## Bulk coupon status
+
+Bulk coupons appear as **Expired** in the UI when all unique codes have been redeemed — even though their underlying API status remains `active`. This is by design: it signals that the coupon can't currently be redeemed and prompts you to add more codes to restore it.
+
+<div className="rp-list">
+  <ul>
+    <li>The API status stays <code>active</code> even with no redeemable codes, so you can hit the generate unique codes endpoint without needing to restore the coupon first. This matters for merchants who generate codes on demand at the time of a redemption request.</li>
+    <li>If the campaign contains any expired unique codes, the bulk coupon itself won't automatically expire as long as redeemable codes remain. The coupon only expires if you manually expire it, or if the max redemptions count or redeem-by date is reached.</li>
+  </ul>
+</div>
+
+To restore a specific unique code within a campaign, go to the bulk coupon's overview page and select **Restore Code** from the hover actions in that code's row.
+
+# Bulk unique code syntax
+
+Each bulk unique code is assembled from a required prefix, a generated unique portion, and an optional suffix.
+
+<table className="rp-params">
+  <tbody>
+    <tr className="rp-thead-row">
+      <td>Part</td>
+      <td>Description</td>
+    </tr>
+    <tr>
+      <td>Required prefix</td>
+      <td>The shared identifier for the campaign. Must be unique across all redeemable coupons on your site. Supports alphanumeric characters, dashes (-), underscores (_), and plus signs (+).</td>
+    </tr>
+    <tr>
+      <td>Generated code format</td>
+      <td>The character type for the unique portion of each code. Options: alphabetic, alphanumeric, or numeric.</td>
+    </tr>
+    <tr>
+      <td>Generated code length</td>
+      <td>The character length of the generated portion. Minimum: four characters (alphabetic or alphanumeric) or six characters (numeric). Maximum: 50 characters. Does not include the prefix or suffix.</td>
+    </tr>
+    <tr>
+      <td>Optional suffix</td>
+      <td>A static string appended to the end of every code. Supports alphanumeric characters, dashes (-), underscores (_), and plus signs (+).</td>
+    </tr>
+    <tr>
+      <td>Unique code preview</td>
+      <td>A sample code reflecting your current template settings. The prefix and suffix are always separated from the generated portion by dashes — customers must enter the full code, including dashes, at redemption.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div className="rp-callout rp-callout-tip">
+  <strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Custom templates</strong>
+  To use a different format or remove dashes from your codes, design your own template via the API.
+</div>
+
+# Creating bulk unique codes
+
+## Via the Recurly UI
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Open the Coupons dashboard</h4>
+      <p>Navigate to <strong>Coupons</strong> and click <strong>New Coupon</strong>.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Select Bulk unique codes</h4>
+      <p>Choose <strong>Bulk unique codes</strong> as the code type.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Configure your code template</h4>
+      <p>Set the total number of codes (1–100,000, numbers only — no commas), required prefix, generated code format and length, and optional suffix. Review the unique code preview before proceeding.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div>
+      <h4>Configure coupon settings</h4>
+      <p>Complete the remaining coupon fields following the steps in the <a href="https://docs.recurly.com/docs/coupons#creating-and-customizing-coupons" target="_blank">Coupons and discounts guide</a>.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div>
+      <h4>Click Create coupon</h4>
+    </div>
+  </div>
+</div>
+
+## Via the API
+
+Once a bulk coupon template exists, you have two options for generating codes.
+
+**Asynchronous** — <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/generate_unique_coupon_codes" target="_blank">Generate codes</a> via one endpoint, then <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/list_unique_coupon_codes" target="_blank">retrieve them</a> via a second. Best for large batches where you don't need codes in real time.
+
+**Synchronous** — <a href="https://recurly.com/developers/api/v2021-02-25/index.html#operation/generate_unique_coupon_codes_sync" target="_blank">Generate and receive codes immediately</a> in the response. Limited to 200 codes per call. Best for on-demand generation as part of a real-time redemption flow.
+
+**Path:** `POST /coupons/code-20off/generate_sync`
+
+**Request:**
+
+```json
+{
+  "number_of_unique_codes": 1
+}
+```
+
+**Response:**
+
+```json
+{
+  "object": "unique_coupon_code_generation",
+  "unique_coupon_codes": [
+    {
+      "id": "yde3fqeku6ghm",
+      "object": "unique_coupon_code",
+      "code": "20off-kngm-def",
+      "state": "redeemable",
+      "bulk_coupon_id": "ywe3dlf0eef5",
+      "bulk_coupon_code": "20off",
+      "created_at": "2026-04-08T19:57:56Z",
+      "updated_at": "2026-04-08T19:57:56Z",
+      "redeemed_at": null,
+      "expired_at": null
+    }
+  ]
+}
+```
+
+# Managing your codes
+
+## Expiring codes
+
+You can expire an entire bulk coupon campaign or individual codes at any time from the coupon's overview page.
+
+## Invoice display
+
+Each invoice that includes a redeemed unique code displays both the code itself and the name of the coupon campaign it belongs to, making reconciliation straightforward.
+
+# Exporting and reporting on redemptions
+
+To generate a report of unique code redemptions for a specific time period:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Go to the Bulk Unique Codes export</h4>
+      <p>Navigate to <strong>Coupons — Bulk Unique Codes</strong> in the export section.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Select your campaign and time range</h4>
+      <p>Choose your bulk coupon campaign from the dropdown. Set <strong>Export on</strong> to <strong>Modified</strong> and configure your desired time range.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Download and filter the CSV</h4>
+      <p>Download the CSV file. Filter out any rows without a value in the <code>applied_at</code> column, then sort by <code>applied_at</code> and remove rows with dates outside your selected time range.</p>
+    </div>
+  </div>
+</div>
+
+For full export instructions, see the <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/coupons-export" target="_blank">Coupons export documentation</a> and <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/coupons-redemption" target="_blank">Coupon Redemptions export documentation</a>.
+
+## Exports reference
+
+<table className="rp-gw-table">
+  <tbody>
+    <tr className="rp-thead-row">
+      <td>Export</td>
+      <td>What it contains</td>
+    </tr>
+    <tr>
+      <td>Coupons</td>
+      <td>Identifies bulk unique coupon campaigns. Filter by <code>"bulk"</code> under the <code>coupon_type</code> column.</td>
+    </tr>
+    <tr>
+      <td>Coupon redemptions</td>
+      <td>Shows which unique codes have been redeemed and by which accounts.</td>
+    </tr>
+    <tr>
+      <td>Coupons — Bulk unique codes</td>
+      <td>A full ledger of all unique codes in a bulk coupon campaign, including redemption details.</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />

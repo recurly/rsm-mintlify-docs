@@ -1,0 +1,146 @@
+---
+title: Amazon Pay
+---
+
+`recurly.AmazonPay` lets you offer Amazon Pay with just a few lines of JavaScript. After you render Amazon’s “Pay with Amazon” button and call `attach()` from a user-initiated action, the customer completes checkout in a secure Amazon window. When authorization succeeds, Recurly returns a token that represents the customer’s Amazon Pay billing agreement. Use this token in the Recurly API to create billing info, purchases, or subscriptions—exactly as you would with card or PayPal tokens.
+
+***
+
+## Prerequisites and limitations
+
+* **Gateway setup:** Your Recurly site must have an **Amazon Pay v2 gateway** enabled for the region you plan to use (`us`, `eu`, or `uk`).
+* **User interaction:** `amazonPay.attach()` **must** be invoked inside a user-initiated event (`click`, `touchend`, etc.); browsers block pop-ups otherwise.
+* **Cross-origin policies:** Amazon Pay opens a new window. Any Cross-Origin-Opener-Policy or similar headers on your page must allow cross-origin communication with that window.
+* **Token lifetime:** Amazon Pay tokens expire **20 minutes** after creation and cannot be recovered once expired—be sure to pass them to your server immediately.
+
+# Key details
+
+Use Recurly to process Amazon Pay v2 transactions.
+
+Recurly recommends the use of the renderButton function to display Amazon's Amazon Pay button on your page.\
+To do this you will need to place a \`div\`\` element on your page where you intend to have the button rendered.
+
+```html
+<div id="amazon-pay-button">Pay with Amazon Pay</div>
+```
+
+Next, create a new `recurly.AmazonPay` instance and pass the correct region for your Amazon Pay account.\
+An `options` object param can be added to pass the account region. If not provided, it will default to 'us'.
+
+```js
+const amazonPay = recurly.AmazonPay();
+```
+
+If you are rendering the Amazon Pay button, add a listener for the `ready` event and call the `renderButton` function, passing the id of the element.
+
+```js
+amazonPay.on('ready', () => {
+  amazonPay.renderButton('amazon-pay-button')
+});
+```
+
+Your instance must then be setup to handle error scenarios.
+
+```js
+amazonPay.on('error', function (err) {
+  // err.code
+  // err.message
+  // [err.cause] if there is an embedded error
+});
+```
+
+Next, a listener must be bound to a user action on the button and have it trigger the `attach` function on your `recurly.AmazonPay` instance. This will open the Amazon Pay checkout flow in a new window.
+
+> **Note**  As with the rest of Recurly.js, there are no external dependencies. The example uses jQuery to demonstrate binding events, but this can be done any way you wish.
+
+```js
+$('#amazon-pay-container').on('click', function () {
+  amazonPay.attach();
+});
+```
+
+The `attach` function must be called within a user-initiated event like 'click' or 'touchend'
+
+Finally, add a function to receive the token once your customer completes the checkout flow. At this point you will send the token id to your server to be used in the Recurly API via the `token_id` parameter to create a billing info for an account.
+
+```js
+amazonPay.on('token', function (token) {
+  // token
+});
+```
+
+### Reference
+
+#### <span className="heading-tag heading-tag--fn">fn</span> recurly.AmazonPay
+
+##### Arguments
+
+| Param               | Type     | Description                                                                                        |
+| :------------------ | :------- | :------------------------------------------------------------------------------------------------- |
+| options             | `Object` | Conditional                                                                                        |
+| options.region      | `String` | The region for the account. Can be 'us', 'eu' or 'uk'. If is not provided, it will default to 'us' |
+| options.gatewayCode | `String` | If it is not provided, it will default to the inital Amazon Pay V2 gateway                         |
+
+##### Returns
+
+A new `AmazonPay` instance
+
+#### <span className="heading-tag heading-tag--fn">fn</span> amazonPay.renderButton
+
+##### Arguments
+
+| Param      | Type     | Description                              |
+| :--------- | :------- | :--------------------------------------- |
+| element id | `string` | Required. The id of the amazon container |
+
+##### Returns
+
+A promise.
+
+#### <span className="heading-tag heading-tag--fn">fn</span> amazonPay.attach
+
+##### Returns
+
+An error or a token.
+
+#### <span className="heading-tag heading-tag--event">events</span> Emits
+
+##### `error`
+
+This event is emitted when any error is encountered, whether during setup of the Amazon Pay flow, or during the checkout process. It will be useful to display errors to your customer if a problem occurs during Amazon Pay checkout.
+
+##### Payload
+
+| Param | Type           | Description                                  |
+| :---- | :------------- | :------------------------------------------- |
+| error | `RecurlyError` | An error describing the issue that occurred. |
+
+##### `closed`
+
+This event is emitted when the customer has closed the Amazon Pay checkout flow before completion. You may wish to reset parts of your checkout experience if this occurs.
+
+##### Payload
+
+None.
+
+##### `ready`
+
+This event is emitted when the Amazon Pay script has loaded onto your page. This script must load before you can call the `renderButton` function.
+
+##### Payload
+
+None.
+
+##### `token`
+
+This event is fired when the customer has completed the Amazon Pay checkout flow. Recurly has received the payment details, and generated this token to be used in our API.
+
+##### Payload
+
+| Param      | Type     | Description                            |
+| :--------- | :------- | :------------------------------------- |
+| token      | `Object` |                                        |
+| token.type | `String` | 'amazon\_pay'                          |
+| token.id   | `String` | Token identifier to be sent to the API |
+
+***

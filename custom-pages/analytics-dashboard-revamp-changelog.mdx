@@ -1,0 +1,451 @@
+---
+title: Analytics Dashboard Revamp - Changelog
+---
+
+## Global Changes
+
+This section covers changes that span all of the analytics dashboards. 
+
+### Feature Enhancements
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Data updates every hour for all dashboards except Subscribers and MRR (still daily)</li> </ul>
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Data updates daily based on configured site timezone</li> </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Ability to download dashboard components (e.g. charts, tables) in</li> </ul>
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Modern
+      </td>
+
+      <td>
+        Classic
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        \:-------------------------------------------------------------------------------------------------------------------------------------------
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        \:-----------------------------------------------------------------------------------------------------------
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>All filters are at top of the dashboard.</li> </ul>
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Filters that pertain to specific sections of the dashboards are placed at that location.</li> </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Changing dashboard filters requires user to click ‘reload’ button in top right hand corner to refresh the dashboard data</li> </ul>
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Changing any filter immediately causes the dashboard data to refresh</li> </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Currency filters always appear (even if only one option)</li> </ul>
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Currency filters only appeared if more than one currency available.</li> </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Date ranges default to last 12 months</li> </ul>
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        <ul> <li>Date ranges default to last 18 months</li> </ul>
+      </td>
+
+      <td>
+
+      </td>
+
+      <td>
+        <ul> <li>Classic look and feel</li> </ul>
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+### UI / UX Modifications
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * All filters are at top of the dashboard.
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Filters that pertain to specific sections of the dashboards are placed at that location.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Changing dashboard filters requires user to click ‘reload’ button in top right hand corner to refresh the dashboard data
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Changing any filter immediately causes the dashboard data to refresh
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Currency filters always appear (even if only one option)
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Currency filters only appeared if more than one currency available.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Date ranges default to last 12 months
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Date ranges default to last 18 months
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+> ❗️ Current Known Issues
+>
+> * Some dashboard drop-down filters (Currency, Dunning Versions) have some latency before displaying values.
+> * Selecting the 'Any Value' option on the Currency filters will return erroneous data. This option is not needed and will be removed in a later iteration.
+> * Recovered Revenue  dashboard exhibits long load times on KPIs and data table
+
+## Changes by Dashboard
+
+## Overview Dashboard
+
+### Functionality Removed
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Percent change and dates not available on the KPI cards
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Total Subscriptions components doesn't show 'All other' plans
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+### Feature Enhancements
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * KPIs now all feature values for the current month to date compared to the previous month to give a better sense how KPIs are trending
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Some KPIs focused on month to date but others provided data for the previous month compared to two months ago
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+## Churn Analysis
+
+### UI / UX Modifications
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Subscription Churn Reasons chart shows percentage and absolute side by side without the need to toggle back and forth
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Must toggle percentage vs absolute to see either one
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+## Monthly Recurring Revenue (MRR)
+
+### Feature Enhancements
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Uses new business logic to provide a better reflection of MRR Totals and Growth. See [here](https://docs.recurly.com/docs/monthly-recurring-revenue-modern-beta) for details
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Uses older business logic
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+## Subscriber Retention
+
+### Functionality Removed
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * No longer able to view retention metrics at plan level granularity
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Filter is provided to view retention metrics by plan
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+## Dunning Effectiveness
+
+### Feature Enhancements
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Added additional visualizations to depict the dunning lifecycle: Funnel and Water-rise
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Only provides dunning lifecycle visualization as bar chart
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+### UI / UX Modifications
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Dunning version selection is now at the top of the dashboard with all other filters
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Dunning version selection was localized to the chart component to which it applied
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+### Functionality Removed
+
+<Table align={["left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Modern
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Classic
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Removed ability to filter Subscriptions and Dunning Lifecycle by Plan
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Filter provided to select a plan on the 'Subscriptions Saved' and 'Dunning Lifecycle' components
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        * Removed dunning version configuration settings
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        * Displayed configuration information for the selected dunning version
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+## Recovered Revenue
+
+No changes aside from those noted in  [global](page:analytics-dashboard-revamp-changelog#section-global-changes)
+
+## Billings
+
+No changes aside from those noted in  [global](page:analytics-dashboard-revamp-changelog#section-global-changes)
+
+## Subscribers
+
+No changes aside from those noted in  [global](page:analytics-dashboard-revamp-changelog#section-global-changes)
+
+## Trial Performance
+
+No changes aside from those noted in  [global](page:analytics-dashboard-revamp-changelog#section-global-changes)
+
+## Plans
+
+Revamped dashboard will be added to early access at a subsequent date. Current experience remains as Classic
+
+## Plan Performance
+
+Ability to compare and contrast more than two plans. Classic only allows comparison of two.

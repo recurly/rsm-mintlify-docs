@@ -1,0 +1,121 @@
+---
+title: Dashboard
+---
+
+The Analytics Dashboard shows you key performance indicators, widgets with up-to-date data, and charts which provide an at-a-glance view of the state of your business. To maintain access to the most current information, you can use widgets on this dashboard to refresh the screen. The data for this dashboard updates multiple times a day. You can verify the time the  last changes were uploaded by checking the widget at the bottom of the dashboard. 
+
+# Analytics Dashboard
+
+The Overview Dashboard is divided into three sections: Customers, Subscriptions, and Revenue.\
+All of the widgets on this dashboard’s user interface provide you with access to the following common features:
+
+**Actions** at the top right corner of the dashboard provide the following functionality:
+
+* itemReload action tracks the last time Recurly uploaded your data, up to four hours before resetting the counter. The counter then resets to 1m ago. This tells you how current your data is from the last reload.
+* Dashboard actions allow you to either clear the cache and refresh the data, view a Download Dashboard  where you can select a download format, page size, or downloaded data arrangement.
+* Open Folders action allows you to open/close folders from the dashboard.
+
+**Clear Cache options:** allow you to clear cache and refresh data in three places on this dashboard:
+
+* Click the vertical ellipse on any of the widgets at the bottom of the dashboard to see the timestamp for the most current version of data on the dashboard.
+* Click the vertical ellipse on any of the widgets on the dashboard to update the selected widget with the most current data available during the session.
+* Click the Actions widget -> vertical ellipse at top right corner of the dashboard to clear the cache and refresh the data. Recurly updates the data multiple times a day, so after a refresh, the most current data available will load.
+
+**Vertical ellipses** available on widgets with either charts or tables, provide you with a dropdown menu where you can select the following options:
+
+* Click the vertical ellipse on a widget to either download data or clear cache and refresh data for a selected widget.
+* Click the vertical ellipse on a column in a table to download data, clear the cache and refresh the data on display, or auto size or resize columns.
+
+**Charts and legends** display data on this dashboard within widgets in bar, line, and pie charts. This data often includes customer, subscriber, subscription, plans, and revenue totals in increments specified by time and date ranges. If the information on one of these charts is color-coded, there will be a legend on the widget that identifies the value assigned to the color. For example, specific colors are assigned to specific plans or totals being tracked, to enable you to read the chart. 
+
+* Click a point in a line chart or a specific color on a bar or pie chart to display the corresponding timeframe and value in hover text. For example, total number of subscribers for a corresponding month.
+* Click the corresponding color in the legend to hide that corresponding line, bar, or pie chart segment from the widget. Click on the color again, to restore the data.
+
+# Customers Section
+
+The Customers section includes the following five widgets shown in the screenshot below: 
+
+**Active Subscribers:** Unique subscriptions that have at least one active subscriber?. This includes subscribers in trial and those that have canceled but not yet churned. 
+
+**Subscriber Churn Rate:** Percentage of subscribers who churned in the previous month divided by the number of active subscribers at the beginning of the previous month.
+
+**Subscriber Lifetime Value (LTV):**  Estimated lifetime value of each subscriber, based on discounted cash flows and the risks associated with future revenue and the time value of money. 
+
+```
+Subscriber LTV = ARPS (1 + d) / d + Churn Rate
+ARPS = Average revenue per subscriber (Monthly Recurring Revenue {MRR} at the end of the month/ number 
+of active subscribers at the end of the month). A subscriber is anyone with at least 1 subscription.
+Churn rate = Calculation used above.
+d = discount rate. This constant is commonly used when looking at future revenue. It takes into account 
+market, financial and other risks as well as the time value of money. Using a discount rate helps you 
+understand: In today’s dollars, what future dollars are worth? Recurly uses a discount rate of 1%.
+
+Note: Recurly uses a discount rate of 1% because this is a generally accepted value for SaaS companies. (see: 
+https://www.forentrepreneurs.com/discount-rate-for-dcf/)
+
+**Example:**
+Company X has an MRR at the end of August of $555,000. This is found in the Monthly Recurring Revenue 
+Report.
+Company X has 5,000 total subscribers at the end of August. This is found in the Subscribers Report.
+Company X has a Subscriber Churn rate in August of 3.5%. This is found on the Dashboard. The average 
+Subscriber LTV of Company X's subscribers can be calculated as such: Subscriber LTV = ($555,000/ 5,000) 
+(1 + 0.1) / (0.1 + .035), which equals ~$904
+```
+
+**Net Subscriber Change:** Net subscriber change displayed in this widget equals new subscriber + returning\
+subscriber + churned subscriber.
+
+* Click any point on the line to view the net subscriber totals for the selected timeframe in hover text. 
+* Click one of the color-coded sections of any bar to view the totals for the selected timeframe in hover text. The totals correspond to the colors in the legend at the bottom of the chart. On the chart in this example, light blue depicts the new subscriber totals, dark blue depicts the returning subscriber totals, and yellow depicts the churned subscriber totals.
+* Click the vertical ellipse -> clear cache and refresh action, in the Subscriber Data widget at the bottom of this dashboard to see when the data was last updated with the most recent subscriber information.
+
+**Subscriber Churn Rate:** Churn rate for a selected date range. The subscriber churn rate will not be calculated if the subscription is not for a full month. Click any point in the line to view the churn rates for the selected timeframe in hover text.
+
+* Click the vertical ellipse -> clear cache and refresh action in the Subscriber Data widget at the bottom of this page, to see when the data was last updated.
+
+<Image title="dashboard customers section.png" alt={2724} src="https://files.readme.io/58793ed-dashboard_customers_section.png">
+  Customer Dashboard Segment
+</Image>
+
+# Subscriptions Section
+
+The Subscriptions section includes the following three widgets shown in the screenshot, below:
+
+**Total Subscriptions:** Total number of subscriptions for your top five plans as of the latest update. 
+
+* Click the arrow in the first column to show the data in either ascending or descending order.
+* Click the vertical ellipse in the second column to freeze or copy the values or to auto size or resize the columns. 
+* Click the vertical ellipse>clear cache and refresh action in the Subscriptions Data widget at the bottom of this dashboard, to see when the data that you are viewing was last updated.
+
+**Top 5 Plans by Subscriptions:** Pie chart that shows the top five plans by subscription over the last six months. 
+
+* Click a color-coded segment of the pie chart to either remove that plan from the calculation or to display hover text that identifies the total number of subscriptions for the plan. This widget includes a color-coded legend that identifies each plan.
+* Click the vertical ellipse -> clear cache and refresh action in the Plans Data widget at the bottom of this dashboard, to see when the data that you are viewing was last updated. 
+
+Top 5 Plans by Subscriptions: Line chart that shows the top five plans by subscription over the last six months. 
+
+* Click any point on the line to view the total number of subscriptions for the selected timeframe in hover text. This widget includes a color-coded legend that identifies each plan. Click the vertical ellipse -> clear cache and refresh action in the Plans Data widget at the bottom of this dashboard, to see when the data that  you are viewing was last updated.
+
+<Image title="Dashboard subscriptions section.png" alt={2714} src="https://files.readme.io/505bedc-Dashboard_subscriptions_section.png">
+  Subscriptions Dashboard Segment
+</Image>
+
+# Revenue Section
+
+The Revenue section includes the following four widgets shown in the following screenshot:
+
+**Average Revenue per Customer:** Sum of all billings (for both recurring and nonrecurring subscriptions) in the previous month divided by the number of unique customers making payments.
+
+**Current MRR:** Calculates the predicted revenue a business can expect on a monthly basis by taking the sum of charges from active subscriptions and normalizing it for the month. This amount is shown in the site’s primary currency. 
+
+**Recovered Revenue:** Revenue recovered by Recurly that would otherwise be lost due to failed credit card transactions.
+
+**Net Billings Month to Date:** Compares the net billings for the current month to the previous month. 
+
+* Click a point in the color-coded line of the following line chart to view details in hover text for the selected timeframe. For example, points on the dark green line in the following image depict total net billings for the current month and points on the lighter green line depict total net billings for the previous month.
+* Click one of the color-coded points in the legend at the bottom of the widget, to prevent that line from displaying in the widget. Reclick the point to restore it to the widget.
+* Click the vertical ellipse -> clear cache and refresh action in the Billing Data widget at the bottom of this page, to specify the time that the data was last updated. 
+
+<Image title="dashboard revenue section.png" alt={2706} src="https://files.readme.io/c6d3857-dashboard_revenue_section.png">
+  Revenue Dashboard Segment
+</Image>

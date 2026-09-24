@@ -1,0 +1,191 @@
+---
+title: Stripe
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Stripe integrates with Recurly via OAuth — no credential copy-pasting required. You get access to credit and debit cards, Apple Pay, Google Pay, and an extensive range of Stripe Elements payment methods including ACH, SEPA, BACS, Klarna, and more. This guide covers gateway setup, payment method configuration, webhook behavior, India e-mandates, and ongoing maintenance.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#integrate-stripe-with-recurly"><span className="rp-toc-num">3</span>Integration</a>
+    <a className="rp-toc-pill" href="#stripe-webhook-behavior"><span className="rp-toc-num">4</span>Webhook behavior</a>
+    <a className="rp-toc-pill" href="#india-mandates-with-credit-cards"><span className="rp-toc-num">5</span>India mandates</a>
+    <a className="rp-toc-pill" href="#ongoing-maintenance"><span className="rp-toc-num">6</span>Ongoing maintenance</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Access to the Recurly Payment Gateway Configuration page.</li>
+  <li>An active Stripe account (existing or newly created).</li>
+  <li>When using Gateway Failover, currencies and card types must match across both Stripe and Recurly.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>Billing info changes don't sync to Stripe</strong> — Updates to billing information in Recurly do not automatically reflect on Stripe customers. Manual updates are required for direct Stripe payments.</li>
+  <li><strong>Manual customer lookup required in Stripe</strong> — When processing payments directly in Stripe, you'll need to manually search for the most recent Stripe customer record.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Stripe is a full-service payment gateway that connects to Recurly via OAuth authentication — no API keys to copy or paste. It supports credit and debit cards, Apple Pay, Google Pay natively, and extends to a broad range of alternative payment methods via Stripe Elements. Billing information changes in Recurly do not automatically sync to Stripe; manual updates in Stripe are required for direct payments.</div>
+
+# Key details
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Feature</td><td>Details</td></tr>
+  <tr><td>Services that work with Recurly</td><td>Payment processing (including Gateway Failover), Stripe Elements (Payment, Express Checkout, LinkPay), <a href="/guides/payment-orchestration/gateway-configuration-and-features/payment-descriptors#/" target="_blank">dynamic descriptors</a>, <a href="/guides/subscriber-management/transactions/moto-transactions#/" target="_blank">MOTO</a> processing</td></tr>
+  <tr><td>Supported operations</td><td>Zero-dollar verification, Purchase, Auth and Capture, Void, Refund, Recurring billing</td></tr>
+  <tr><td>Supported payment types — native</td><td>Credit/debit cards, Apple Pay, Google Pay</td></tr>
+  <tr><td>Supported payment types — Stripe Elements</td><td>Cards, Apple Pay, Google Pay, Link Pay (cards), Cash App Pay, Revolut (UK/EU only), ACH, SEPA, BACS, BECS, iDEAL, and <a href="/guides/payment-orchestration/payment-methods/klarna-bnpl-pay-now-pay-later#/" target="_blank">Klarna</a> (Pay Now, Pay Later, BNPL). <a href="https://stripe.com/financial-connections" target="_blank">Financial Connections</a> is required for bank account verification.</td></tr>
+  <tr><td>Supported card brands — native</td><td>Visa, Mastercard, American Express, Discover, JCB, Diners Club, Union Pay</td></tr>
+  <tr><td>Supported card brands — Stripe Elements</td><td>Visa, Mastercard, American Express, Discover, JCB, Diners Club, Union Pay, Cartes Bancaires</td></tr>
+  <tr><td>Gateway-specific 3DS2 supported</td><td>Yes</td></tr>
+  <tr><td>Card on file supported</td><td>Yes</td></tr>
+  <tr><td>Regions</td><td>Global (some APMs have regional restrictions)</td></tr>
+  <tr><td>Currencies</td><td><a href="/guides/payment-orchestration/gateway-configuration-and-features/currency-support-by-gateway" target="_blank">See all available</a>. Currencies must match across Stripe and Recurly when using Gateway Failover.</td></tr>
+  <tr><td>Additional feature support</td><td><a href="/guides/api-guides/integration-guides/popular-use-cases/level-2-and-level-3-cedp-guide" target="_blank">Level 2 and Level 3 data</a>, payment method tokens, <a href="/guides/api-guides/integration-guides/apac-payment-methods/e-mandates-with-cards-in-india#/" target="_blank">India e-mandates</a> / <a href="/guides/security-compliance/compliance/rbi-regulations-update#/" target="_blank">RBI compliance</a></td></tr>
+</table>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong> Before going live, see Recurly's <a href="/guides/payment-orchestration/gateway-configuration-and-features/how-to-test-your-gateway" target="_blank">guide to testing gateway configurations</a> to verify your payment setup is working correctly.</div>
+</div>
+
+# Integrate Stripe with Recurly
+
+## Step 1: Confirm your Stripe account eligibility
+
+Verify your business is eligible to process on Stripe. Review <a href="https://stripe.com/legal/restricted-businesses" target="_blank">Stripe's restricted businesses list</a> — if your business appears there, you won't be able to use the Stripe gateway.
+
+## Step 2: Open Payment Gateway Configuration
+
+In Recurly, navigate to <a href="https://app.recurly.com/go/configuration/payment_gateways/new" target="_blank">Configuration → Payment Gateways → Add Payment Gateway</a>.
+
+## Step 3: Select Stripe
+
+Choose **Stripe** from the list of available gateways. Stripe uses OAuth authentication — you won't need to copy or paste API keys.
+
+## Step 4: Log in or create your Stripe account
+
+You'll be prompted to log in with your Stripe credentials or create a new account. Follow the prompts to authenticate.
+
+## Step 5: Configure gateway settings
+
+After authenticating, you'll be redirected to Recurly to finish configuration:
+
+- Exclude this instance from Gateway Failover (if applicable)
+- Enable Alternative Payment Methods (Apple Pay, Google Pay)
+- Set currency preferences
+
+## Step 6: Review Gateway Failover settings
+
+If you plan to use <a href="/guides/payment-orchestration/gateway-configuration-and-features/gateway-failover" target="_blank">Gateway Failover</a>, confirm that supported currencies and card types match in both Stripe and Recurly.
+
+## Step 7: Enable payment methods
+
+Enable payment methods in your Stripe Dashboard. If you're using Stripe Elements, only enable methods that Recurly supports (see Key details above). Enabling an unsupported payment method will cause payment failures.
+
+## Step 8: Test and go live
+
+Test the integration in Recurly's development environment to confirm everything works as expected, then switch to production to begin processing live transactions.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> Stripe does not require explicit zero-dollar verification configuration at Recurly.</div>
+</div>
+
+## Authorization and capture
+
+Stripe supports Recurly's Auth and Capture feature, which pre-authorizes funds before capturing them — confirming availability without completing the charge immediately. See the <a href="/guides/subscriber-management/transactions/auth-and-capture" target="_blank">Auth and Capture documentation</a> for details.
+
+# Stripe webhook behavior
+
+Recurly supports several Stripe webhook event types automatically. No additional configuration is needed in your Stripe dashboard.
+
+## Payment method and customer token lifecycle
+
+- **Payment Method Detach** — If a payment method token is deleted in the Stripe Dashboard, Recurly disables the associated billing info. Active subscriptions will enter dunning if no other payment method is on file.
+- **Customer Deletion** — Deleting a Stripe Customer in the Stripe Dashboard removes all associated payment methods at Stripe, with the same dunning effect as a Detach event.
+- **Payment Method Update** — If a token attribute such as an expiration date is updated in the Stripe Dashboard, Recurly automatically updates the billing info on file.
+- **Account Updater** — If you use Account Updater at Stripe, Recurly consumes those events to keep gateway tokens in sync automatically.
+
+## Transaction lifecycle
+
+- **Expired Authorization** — Uncaptured authorizations expire after 7 days. Recurly updates the authorization to Void status and it can no longer be captured.
+- **Hard Decline** — In certain cases, Stripe may update a charge with new retry advice. When Stripe deems it necessary, Recurly will stop retries on a previously soft-declined transaction.
+- **Chargeback Dispute** — If you receive a card chargeback and have the early access Chargeback Management feature enabled, Refund Invoices with an origin of Chargeback will appear in your Recurly dashboard. Affected subscriptions can be automatically expired depending on your settings.
+- **Radar Review** — If you configure "review" rules in Stripe Radar, Recurly returns `approved_fraud_review` responses via API when those rules trigger. When Stripe Webhooks are enabled for Recurly (contact Recurly Support), closing a review triggers the following actions:
+
+  - Closed with reason `canceled` → Recurly automatically voids pending auths or voids/refunds purchases.
+  - Closed with reasons `approved`, `redacted`, or `acknowledged` → Recurly takes no action.
+
+  See <a href="https://docs.stripe.com/radar/reviews" target="_blank">Stripe's review documentation</a> for more details.
+
+# India mandates with credit cards
+
+Recurly supports creating e-mandates for recurring transactions for customers located in India, in compliance with <a href="/guides/security-compliance/compliance/rbi-regulations-update#/" target="_blank">RBI regulations</a>. See the <a href="/guides/api-guides/integration-guides/apac-payment-methods/e-mandates-with-cards-in-india#/" target="_blank">India e-mandates integration guide</a> for full implementation details.
+
+### Integration style
+
+All CIT/subscription signups for Indian customers require 3DS. Combine subscription creation and customer interaction into a single step — do not add billing info via verification and set up the subscription in two separate steps.
+
+### Public Preview status
+
+India e-mandates are in Public Preview at Stripe. Unintended issues may arise before the implementation is fully stable. Contact Recurly Support to escalate any issues.
+
+### Single subscription per account
+
+E-mandates are stored at the Customer Account level in Recurly. Only one active subscription is permitted per account for Indian customers — adding multiple subscriptions risks invalidating older ones.
+
+### Single plan per transaction
+
+To avoid renewal declines and mandate cancellations, use a single plan per invoice. Multiple subscriptions on a single transaction can result in renewal failures.
+
+### Asynchronous transactions
+
+Due to the pre-renewal notification requirement in India, e-mandate transactions enter a Scheduled state with a Pending invoice for up to 26 hours after submission to Stripe. During this window, customers receive a notification via their banking app to approve or decline the mandate or payment. Use payment and invoice webhooks to listen for status updates.
+
+### Automatic subscription cancellations
+
+If a customer cancels their mandate through their banking app, Recurly may receive a cancellation indicator on the next renewal attempt and will cancel the subscription immediately. Work with the customer to update their payment method, or revoke service access in your environment as needed.
+
+### Billing country requirements
+
+Send the customer's full billing address including country code (`IN`) to trigger an e-mandate correctly. Without the India country indicator, Recurly may not request a mandate from Stripe and renewals will likely fail.
+
+### Webhook requirements
+
+Async payments require Stripe webhook support on your Recurly site. Contact Recurly Support to enable async status updates for Stripe. See [Stripe webhook behavior](#stripe-webhook-behavior) above.
+
+### Mandate amounts
+
+Mandate amounts are calculated from your plan amount plus taxes, plus an 18% buffer to allow for plan amount changes over the subscription lifetime. Discounts are not factored in to avoid undervaluing the mandate.
+
+### Customer interaction indicator
+
+When a transaction is in a Scheduled state, the Recurly UI shows a customer interaction indicator — this tells you whether the customer needs to act in their banking app and by when. Subscriptions can be marked as failed if customers don't respond in time.
+
+### 3DS requirement
+
+RBI requires 3DS for all customer-in-session payments including subscription signups and one-time transactions. If a renewal triggers a 3DS verification response, ensure the <a href="/guides/security-compliance/compliance/revised-payment-services-directive-psd2/dunning-configuration-for-3ds-2-declines#/" target="_blank">3DS Dunning Email</a> is enabled and a valid customer email address is on file. 3DS on Stripe requires a Recurly.js integration — see the <a href="https://docs.recurly.com/recurly-subscriptions/v1.1/docs/3d-secure-20-integration-guide#/" target="_blank">3DS implementation guide</a> if you haven't integrated yet.
+
+# Ongoing maintenance
+
+## Keep billing information current in Stripe
+
+Billing info changes in Recurly do not automatically sync to Stripe. Regularly update customer records in Stripe to ensure direct payments process correctly.
+
+## Monitor parity between Stripe and Recurly
+
+Maintain matching currency and card support settings in both platforms to avoid payment disruptions. This is especially important when using Gateway Failover.
+
+## Monitor your Stripe Dashboard
+
+Review your Stripe transactions regularly. Stripe may send transaction notices that Recurly doesn't receive. Recurly also sends metadata to Stripe that is visible in the Dashboard.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Warning</strong> Do not modify Recurly metadata sent to Stripe. While Stripe allows merchants to edit this data, Recurly relies on it for the integration to function correctly. Editing or deleting it can break transaction processing.</div>
+</div>

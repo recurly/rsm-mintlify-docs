@@ -1,0 +1,52 @@
+---
+title: Shopify migration
+---
+
+# Overview
+
+Recurly’s import tool makes it easy to migrate your current subscribers to Recurly’s platform. Whilst you will be responsible for providing the required data in the import template, Recurly’s experienced Professional Services team will handle the validation & import process to ensure a smooth transition from your existing platform. For each validation & import round, a results file will be generated for your team to audit.
+
+Imports can be broken down into multiple phases depending on your requirements.
+
+# Key details
+
+To help ensure a seamless transition to Shopify and Recurly, Recurly Professional Services will work with you throughout the following phases.
+
+## Preparation phase
+
+* Recurly embedded Shopify app is installed and is connected to your Recurly site
+* Your Shopify Product, variants and discounts will automatically be imported into the Recurly embedded Shopify app and synced with your Recurly site
+* Enable “Require first and last name” setting within Customer Information. Navigate to Shopify Admin→Settings→Checkout→Customer Information.
+* Create 5 - 10 subscriptions within your legacy platform that can be used to pilot the migration process once live with the Recurly platform
+* Prepare a system cutover plan & customer communication strategy
+
+## Validation phase
+
+* Export your customer Account and Subscription data from your legacy platform (see required fields below).
+* Populate the data into Recurly’s import file template
+* Create a pilot import file with the 5 - 10 ‘test’ subscriptions from your legacy platform
+* Recurly will validate your import file(s) to ensure formatting accuracy
+* Recurly will not proceed with the import until 100% validation is achieved
+
+## Import phase
+
+* Recurly recommends new subscribers are signing up and syncing into Recurly before importing existing customers. This ensures the integration is running smoothly.
+* Your import file has been fully validated and all data errors are corrected
+* Recurly Professional Services imports the pilot file to ensure renewals are successfully transacting via Shopify checkout & Recurly objects are updating within your Recurly site (Account, Subscriptions, Invoice, Transactions).
+* The ‘next bill date’ within the import file will trigger the exact subscription renewal for each subscriber
+* Recurly Professional Services team imports the full import file to ensure renewals are successfully transacting via Shopify checkout & Recurly objects are updating within your Recurly site (Account, Subscriptions, Invoice, Transactions).
+
+## Clean up phase
+
+Review the import results file, if any errors are identified, generate a new import file for Recurly to import.
+
+## Minimum Import Data Requirements
+
+| **Field**                                  | **Example**         |
+| :----------------------------------------- | :------------------ |
+| shopify\_customer\_id                      | 6442353426686       |
+| subscription\_shopify\_payment\_method\_id | 234567890           |
+| subscription\_plan\_code                   | 877687              |
+| subscription\_state                        | active              |
+| subscription\_next\_bill\_date             | 2023-01-01 13:30:00 |
+| subscription\_currency                     | USD                 |

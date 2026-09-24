@@ -1,0 +1,536 @@
+---
+title: 'Payments Hub: Account Updater'
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* HOST-THEME BACKGROUND OVERRIDE */
+body { background: #ffffff !important; }
+
+/* GLOBAL CSS IMMUNITY BLOCK */
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+/* FA6 font restore — (0,0,2,0) beats wildcard (0,0,1,0); must follow wildcard */
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+
+/* NAVIGATE MASTER ARMOR — (0,0,7,1) beats global section 1.1 rule (0,0,6,2)
+   All .rc-guide a.[class] overrides must be declared AFTER this block. */
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a,
+.rc-guide a:link,
+.rc-guide a:visited,
+.rc-guide a:active {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: unset !important;
+  border-bottom: 0 !important;
+  color: #008CFF !important;
+}
+
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a:hover {
+  color: #0067BE !important;
+  text-decoration: underline !important;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+.rc-guide {
+  --yellow:    #FFD706;
+  --blue:      #008CFF;
+  --blue-tint1: #D5EAFF;
+  --blue-tint2: #96C8FF;
+  --warning-fg: #FFD706;
+  --warning-bg: #FFFECB;
+  --error-fg:  #FF5126;
+  --error-bg:  #FFEEE9;
+  --success-fg: #5DC32E;
+  --success-bg: #EFFAEA;
+  --info-fg:   #008CFF;
+  --info-bg:   #E5F3FF;
+  --offblack:  #0D0D0B;
+  --darkgray:  #32312D;
+  --gray:      #807D73;
+  --lightgray: #CCC9B8;
+  --brightgray:#F1EFE3;
+  --offwhite:  #FFFDF2;
+  font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+  color: #32312D !important;
+  background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+
+/* ── FONT AWESOME ICON HELPERS ── */
+.rc-fa-announce { color: #0D0D0B; font-size: 1rem; flex-shrink: 0; }
+.rc-fa-dark  { color: #FFD706 !important; font-size: 1.3rem; display: block; margin-bottom: 10px; }
+.rc-fa-light { color: #0D0D0B; font-size: 1.3rem; display: block; margin-bottom: 10px; }
+.rc-fa-section { color: #0D0D0B; font-size: 1rem; }
+
+/* ── LAYOUT ── */
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* Back link — (0,0,8,1) */
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link {
+  color: #807D73 !important; font-weight: 700; font-size: .9rem;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: color .2s; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; }
+
+/* ── ANNOUNCEMENT BAR ── */
+.rc-announce-bar {
+  display: none; background: var(--yellow); color: var(--offblack);
+  align-items: center; justify-content: space-between;
+  padding: 10px 20px; font-size: .88rem; font-weight: 600;
+  border-radius: 10px; margin-bottom: 16px; gap: 12px; line-height: 1.4;
+}
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-inner { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+/* Announce link — (0,0,8,1) */
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link {
+  color: #0D0D0B !important; font-weight: 800; white-space: nowrap;
+  padding: 4px 12px; background: rgba(0,0,0,0.10); border-radius: 6px;
+  transition: background 0.2s; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { background: rgba(0,0,0,0.20); color: #0D0D0B !important; }
+
+/* ── HERO ── */
+.rc-hero {
+  background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)),
+              url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center;
+  background-color: var(--offblack); background-size: cover;
+  color: #fff; padding: 48px 40px 44px; text-align: center; border-radius: 16px; margin-bottom: 0;
+}
+/* Scale pillar pill */
+.rc-lp-pillar-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(0,140,255,0.20); border: 1px solid rgba(0,140,255,0.45);
+  color: #008CFF; font-size: .75rem; font-weight: 800;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: var(--offwhite); margin: 0; }
+.rc-hero > p { font-size: 1rem; opacity: .85; max-width: 640px; margin: 0 auto 32px; color: var(--lightgray); line-height: 1.6; }
+
+/* ── NAVIGATION — non-sticky + open (Course page) — Scale pillar ── */
+details.rc-sticky-nav-wrap {
+  position: relative; z-index: 1;
+  background-color: #008CFF;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 24px 0 48px 0; border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08); overflow: hidden;
+}
+details.rc-sticky-nav-wrap > summary { list-style: none; display: flex; align-items: center; padding: 15px 24px; cursor: pointer; user-select: none; }
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+/* Scale nav: label + chevron must be black */
+.rc-nav-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .88rem; letter-spacing: 0.6px; text-transform: uppercase; color: #0d0d0d; }
+.rc-nav-chevron { font-size: .72rem; color: #0d0d0d; opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+/* Nav links — Scale: black text + dark hover overlay — (0,0,8,1) */
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link {
+  color: #0d0d0d !important; font-weight: 700; font-size: .83rem; letter-spacing: 0.4px;
+  text-transform: uppercase; padding: 7px 14px; border-radius: 7px; transition: all .18s;
+  white-space: nowrap !important; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: #0d0d0d !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: #0D0D0B; color: #FFD706; font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1; }
+/* Badge inverts on hover so it stays visible against dark hover overlay */
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover .rc-step-badge,
+.rc-guide a.rc-sticky-link:hover .rc-step-badge { background: #FFD706; color: #0D0D0B; }
+/* Active item — no persistent background; map pin icon identifies current page */
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: #0d0d0d !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: #0D0D0D !important; }
+
+/* ── SECTION HEADINGS ── */
+.rc-lp-section { margin-bottom: 48px; }
+.rc-lp-section h2 {
+  font-size: 1.5rem; font-weight: 800; margin: 0 0 20px;
+  color: var(--offblack); display: flex; align-items: center; gap: 12px;
+}
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: var(--lightgray); }
+.rc-lp-section p { font-size: .95rem; line-height: 1.65; color: var(--darkgray); margin: 0 0 16px; }
+
+/* ── SCREENSHOT ── */
+.rc-screenshot { width: 100%; border-radius: 14px; border: 1px solid var(--lightgray); margin-bottom: 24px; display: block; }
+
+/* ── INLINE STEP VIDEO ── */
+.rc-step-video { border-radius: 10px; margin-top: 16px; border: 1px solid var(--lightgray); overflow: hidden; background: var(--offblack); }
+.rc-step-video-label { background: var(--offblack); padding: 9px 14px; display: flex; align-items: center; gap: 8px; }
+.rc-step-video-label::before { content: '▶'; font-size: .6rem; color: #008CFF; flex-shrink: 0; }
+.rc-step-video-label span { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: var(--lightgray); }
+.rc-step-video-frame { aspect-ratio: 16/9; display: block; width: 100%; }
+.rc-step-video-frame iframe { aspect-ratio: 16/9; display: block; width: 100%; border: none; }
+.rc-step-video-caption { font-size: .8rem; color: var(--gray); padding: 8px 14px 10px; background: var(--brightgray); border-top: 1px solid var(--lightgray); line-height: 1.5; }
+
+/* ── CARD ── */
+.rc-card { background: var(--offwhite); border-radius: 16px; padding: 28px; border: 1px solid var(--lightgray); margin-bottom: 24px; }
+.rc-card p { font-size: .92rem; color: var(--darkgray); line-height: 1.75; margin: 0; }
+
+/* ── CALLOUTS ── */
+.rc-callout { border-radius: 10px; padding: 16px 20px; margin: 20px 0; display: flex; gap: 14px; align-items: flex-start; }
+.rc-callout + .rc-callout { margin-top: 12px; }
+.rc-callout-icon { font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; }
+.rc-callout-body { flex: 1; }
+.rc-callout-body > strong { font-size: .88rem; font-weight: 800; display: block; margin-bottom: 4px; }
+.rc-callout-body p { font-size: .9rem; line-height: 1.55; margin: 0; color: var(--darkgray); }
+/* Callout inline links — (0,0,8,1) */
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide .rc-callout-body a { color: #008CFF !important; font-weight: 600; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide .rc-callout-body a:hover { text-decoration: underline !important; text-decoration-color: #0067BE !important; text-underline-offset: 2px !important; }
+.rc-callout-tip { background: var(--brightgray); border-left: 4px solid var(--offblack); }
+.rc-callout-tip .rc-callout-body > strong { color: var(--offblack); }
+.rc-callout-caution { background: rgba(0,140,255,0.08); border-left: 4px solid #008CFF; }
+.rc-callout-caution .rc-callout-body > strong { color: var(--darkgray); }
+
+/* ── CHECKLIST — pure CSS, no JS ── */
+.rc-checklist { background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; overflow: hidden; margin: 20px 0 32px; }
+.rc-checklist-header { padding: 14px 22px; background: var(--offblack); display: flex; align-items: center; gap: 10px; }
+.rc-checklist-header h4 { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #FFD706; margin: 0; }
+.rc-checklist-item { padding: 14px 22px; border-bottom: 1px solid var(--brightgray); display: flex; align-items: flex-start; gap: 14px; transition: background .15s; cursor: pointer; }
+.rc-checklist-item:last-child { border-bottom: none; }
+.rc-checklist-item:hover { background: var(--brightgray); }
+.rc-checklist-item input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.rc-checkbox-box { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--lightgray); flex-shrink: 0; background: #fff; display: flex; align-items: center; justify-content: center; transition: all .18s; margin-top: 1px; }
+.rc-checklist-item input[type="checkbox"]:checked + .rc-checkbox-box { background: var(--offblack); border-color: var(--offblack); }
+.rc-checklist-item input[type="checkbox"]:checked + .rc-checkbox-box::after { content: '✓'; color: var(--yellow); font-size: .75rem; font-weight: 800; line-height: 1; }
+.rc-checklist-item input[type="checkbox"]:checked ~ .rc-checklist-text strong { text-decoration: line-through; color: var(--gray); }
+.rc-checklist-item:has(input[type="checkbox"]:checked) { background: rgba(0,140,255,0.06); }
+.rc-checklist-text { flex: 1; }
+.rc-checklist-text strong { font-size: .9rem; font-weight: 700; color: var(--offblack); display: block; margin-bottom: 2px; transition: color .18s; }
+.rc-checklist-text span { font-size: .8rem; color: var(--gray); line-height: 1.4; display: block; }
+.rc-checklist-footer { padding: 10px 22px; background: var(--brightgray); border-top: 1px solid var(--lightgray); font-size: .78rem; color: var(--gray); font-weight: 600; }
+
+/* ── OFFICE HOURS CTA ── */
+.rc-oh-cta { background: #0D0D0B !important; border: 2px solid #FFD706 !important; border-radius: 14px; padding: 32px 36px; margin: 32px 0; }
+.rc-oh-cta h4 { color: #FFD706 !important; font-size: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px; display: block; }
+.rc-oh-cta p { color: #CCC9B8 !important; font-size: .95rem; line-height: 1.6; margin: 0 0 20px; }
+.rc-oh-cta p strong { color: #FFFDF2 !important; }
+/* OH button — (0,0,8,1) via double-prefix */
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-oh-btn {
+  background: #FFD706 !important; color: #0D0D0B !important;
+  text-decoration: none !important; padding: 12px 24px; border-radius: 10px;
+  font-weight: 800; font-size: .9rem; display: inline-flex; align-items: center;
+  gap: 8px; transition: all .2s;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-oh-btn:hover {
+  background: transparent !important; color: #FFD706 !important;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+
+/* ── PATH NAVIGATION ── */
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 16px; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: var(--lightgray); letter-spacing: .5px; }
+/* rc-btn-prev — (0,0,8,1); hex borders per Known Issue #52; nowrap per Known Issue #68 */
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-prev {
+  background: transparent; color: #0D0D0B !important;
+  text-decoration: none !important; padding: 13px 24px; border-radius: 10px;
+  font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px;
+  border: 2px solid #CCC9B8 !important; border-bottom: 2px solid #CCC9B8 !important;
+  transition: all .2s; white-space: nowrap !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-prev:hover {
+  border: 2px solid #0D0D0B !important; border-bottom: 2px solid #0D0D0B !important;
+}
+/* rc-btn-path — (0,0,8,1) per Known Issue #44; nowrap per Known Issue #68 */
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path {
+  background: #FFD706; color: #0D0D0B !important;
+  text-decoration: none !important; padding: 13px 28px; border-radius: 10px;
+  font-weight: 800; font-size: .95rem; display: inline-flex; align-items: center; gap: 8px;
+  transition: all .2s; white-space: nowrap !important;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover {
+  background: transparent !important; color: #0D0D0B !important;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+
+@media(max-width:1300px) {
+  .rc-btn-prev, .rc-btn-path { padding: 11px 18px; font-size: .85rem; }
+}
+
+@media(max-width:768px) {
+  .rc-btn-prev, .rc-btn-path { padding: 9px 14px; font-size: .8rem; }
+}
+
+/* ── RESOURCES ── */
+.rc-resources { background: var(--brightgray); border-left: 4px solid #008CFF; border-radius: 10px; padding: 20px 24px; margin: 32px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--gray); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+/* Resource links — (0,0,8,1); base color is #807D73 (gray), NOT darkgray */
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link {
+  color: #807D73 !important; text-decoration: underline !important; text-underline-offset: 3px;
+  text-decoration-color: #CCC9B8 !important; font-weight: 500; font-size: .88rem;
+  transition: all .18s; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover {
+  color: #0D0D0B !important; text-decoration: underline !important;
+  text-underline-offset: 3px; text-decoration-color: #008CFF !important;
+}
+
+/* ── FOOTER NAV ── */
+.rc-footer-nav { border-top: 1px solid var(--lightgray); padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: var(--darkgray); background: var(--brightgray); padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+/* Footer links — (0,0,8,1) */
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link {
+  color: #807D73 !important; text-decoration: none !important; font-weight: 600; font-size: .88rem;
+  transition: color .2s ease; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--brightgray); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .rc-content-wrap { padding: 0 20px; }
+  .rc-top-nav { padding: 16px 20px; }
+  .rc-hero { padding: 36px 20px 36px; }
+  .rc-lp-hero-title h1 { font-size: 1.8rem; }
+  .rc-oh-cta { padding: 24px 20px; }
+  .rc-lp-nav { flex-wrap: wrap; justify-content: center; }
+  .rc-lp-nav-indicator { width: 100%; text-align: center; }
+}
+</style>
+
+<div class="rc-guide">
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-back-link">← Back to Home</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <!-- Announcement bar — add rc-active class before publishing to show -->
+    <div class="rc-announce-bar">
+      <div class="rc-announce-inner">
+        <i class="fa-regular fa-calendar-days rc-fa-announce"></i>
+        <strong>Upcoming:</strong> Join our CSMs for a live Payments Hub walkthrough.
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-announce-link">Register now →</a>
+      </div>
+    </div>
+
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/7038a0b3a299cfe800553d4c8a6721f92b1fc7e031ef697861d3603fb1bb5a05-Scale-icon-white.png" alt="Scale">
+        Scale · Payments Hub
+      </div>
+      <div class="rc-lp-hero-title"><h1>Account Updater dashboard</h1></div>
+      <p>The Account Updater dashboard shows you how much revenue was protected through proactive, automatic card updates — before those payments ever had a chance to fail.</p>
+    </div>
+
+    <!-- Navigation Menu — non-sticky, open on load (Course page) -->
+    <details class="rc-sticky-nav-wrap" open>
+      <summary>
+        <span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span>
+      </summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub" class="rc-sticky-link"><span class="rc-step-badge">1</span> Getting started</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-overview" class="rc-sticky-link">
+          <span class="rc-step-badge">2</span> Overview dashboard
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-payment-processing" class="rc-sticky-link">
+          <span class="rc-step-badge">3</span> Payment processing dashboard
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-account-updater" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> Account updater dashboard
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-payment-retries" class="rc-sticky-link">
+          <span class="rc-step-badge">5</span> Payment retry recovery dashboard
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-fraud-prevention" class="rc-sticky-link">
+          <span class="rc-step-badge">6</span> Fraud prevention dashboard
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-review-resources" class="rc-sticky-link">
+          <span class="rc-step-badge">7</span> Review &amp; resources
+        </a>
+      </div></div></div>
+    </details>
+
+    <!-- Section: Account Updater dashboard -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-chart-line rc-fa-section"></i> Account Updater dashboard</h2>
+      <p>The Account Updater dashboard shows you how much revenue was protected through proactive, automatic card updates — before those payments ever had a chance to fail.</p>
+
+      <img class="rc-screenshot"
+           src="https://files.readme.io/2e488cefdf0e0cbbac44170f4774480b23c60e9445a66061c27f83f040bccf4c-Account_Updater_Dashboard.png"
+           alt="Account Updater dashboard overview" />
+
+      <div class="rc-callout rc-callout-caution">
+        <div class="rc-callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="rc-callout-body">
+          <strong>Not seeing Account Updater data?</strong>
+          <p>This dashboard requires Account Updater to be enabled on your Recurly site. If you see no data or a "Learn More" prompt, Account Updater may not be active for your account. <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-account-updater">Learn about Account Updater →</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: Walkthrough video -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-circle-play rc-fa-section"></i> Account Updater walkthrough</h2>
+
+      <div class="rc-step-video">
+        <div class="rc-step-video-label"><span>Dashboard demo</span></div>
+        <div class="rc-step-video-frame">
+          <iframe src="https://share.synthesia.io/embeds/videos/6c1379d4-8c98-4640-a53b-5b70a60d5f23" loading="lazy" title="Payments Hub: Account Updater dashboard demo" allowfullscreen allow="encrypted-media; fullscreen; microphone; screen-wake-lock;"></iframe>
+        </div>
+        <div class="rc-step-video-caption">A walkthrough of the Account Updater dashboard — card update volume, update types, and revenue protected.</div>
+      </div>
+    </div>
+
+    <!-- Section: What's on this dashboard -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-table-columns rc-fa-section"></i> What's on this dashboard</h2>
+
+      <div class="rc-card">
+        <p>
+          <strong>Successful card updates</strong> — Total number of cards successfully updated in the period, with comparison to previous period.<br><br>
+          <strong>Successful updates over time</strong> — A line chart showing the daily count of card updates. A sudden drop may signal an issue worth investigating.<br><br>
+          <strong>Payments authorized on updated cards</strong> — The total payment volume authorized on updated cards — this includes cards that were updated prior to the time period in view.<br><br>
+          <strong>Successful payments over time</strong> — A bar chart showing the revenue volume on updated cards by day.<br><br>
+          <strong>Update type</strong> — A breakdown of card number changes vs. expiration date updates. Card number changes carry more disruption risk; expiry updates are more routine.<br><br>
+          <strong>Updates by card type</strong> — Which card networks (Visa, Mastercard, Amex, Discover) are driving the most update activity.
+        </p>
+      </div>
+
+      <div class="rc-callout rc-callout-tip">
+        <div class="rc-callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="rc-callout-body">
+          <strong>What to look for in update type</strong>
+          <p>A card number change means the subscriber received an entirely new card — often due to fraud or bank migration. These carry more risk than an expiry update because the old number is fully invalid. If you see a high proportion of card number changes, it may indicate a fraud event at a major issuer affecting your subscriber base.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: Activity checklist -->
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-list-check rc-fa-section"></i> Activity: explore Account Updater</h2>
+
+      <div class="rc-checklist" id="rcChecklist">
+        <div class="rc-checklist-header">
+          <i class="fa-solid fa-list-check" style="color: #FFD706; font-size: 1rem;"></i>
+          <h4>Account Updater activity</h4>
+        </div>
+        <label class="rc-checklist-item">
+          <input type="checkbox">
+          <div class="rc-checkbox-box"></div>
+          <div class="rc-checklist-text">
+            <strong>How much revenue was authorized on updated cards in the last 30 days?</strong>
+            <span>This is the revenue you would have likely lost without Account Updater running in the background.</span>
+          </div>
+        </label>
+        <label class="rc-checklist-item">
+          <input type="checkbox">
+          <div class="rc-checkbox-box"></div>
+          <div class="rc-checklist-text">
+            <strong>Look at the Update type chart. What percentage of your updates are card number changes vs. expiry updates?</strong>
+            <span>A high proportion of card number changes may indicate a recent fraud event at an issuer.</span>
+          </div>
+        </label>
+        <label class="rc-checklist-item">
+          <input type="checkbox">
+          <div class="rc-checkbox-box"></div>
+          <div class="rc-checklist-text">
+            <strong>Check Updates by card type. Which card network is generating the most update activity?</strong>
+            <span>A small number of updates for a lesser-used card brand is normal — zero updates could indicate a problem.</span>
+          </div>
+        </label>
+        <div class="rc-checklist-footer">Tap each item to mark it complete</div>
+      </div>
+    </div>
+
+    <!-- Office Hours CTA -->
+    <div class="rc-oh-cta">
+      <i class="fa-solid fa-headset rc-fa-dark"></i>
+      <h4>Not using Account Updater yet?</h4>
+      <p>Join <strong>Global Office Hours</strong> to talk with a CSM about whether Account Updater is right for your business and how to get it enabled. It's one of the most impactful, proactive revenue recovery tools available to Recurly merchants.</p>
+      <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-oh-btn">Register for Office Hours →</a>
+    </div>
+
+    <!-- Path navigation -->
+    <div class="rc-lp-nav">
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-payment-processing" class="rc-btn-prev">← Payment processing</a>
+      <span class="rc-lp-nav-indicator">4 of 7</span>
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-payment-retries" class="rc-btn-path">Next: Payment retry recovery →</a>
+    </div>
+
+    <!-- Resources -->
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-retain-account-updater" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Navigate: Account Updater learning path</a>
+        <a href="mailto:support@recurly.com" class="rc-resource-link"><i class="fa-solid fa-headset"></i> Contact Recurly Support</a>
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-solid fa-globe"></i> Join Global Office Hours</a>
+      </div>
+    </div>
+
+    <!-- Footer nav -->
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+
+        <div class="rc-footer-section">
+          <span class="rc-footer-label">Payments Hub</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub" class="rc-footer-link">1. Getting started</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-overview" class="rc-footer-link">2. Overview dashboard</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-payment-processing" class="rc-footer-link">3. Payment processing dashboard</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-account-updater" class="rc-footer-link">4. Account updater dashboard</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-payment-retries" class="rc-footer-link">5. Payment retry recovery dashboard</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-fraud-prevention" class="rc-footer-link">6. Fraud prevention dashboard</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payments-hub-review-resources" class="rc-footer-link">7. Review &amp; resources</a>
+        </div>
+
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt="Home"> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+
+<br />
+```

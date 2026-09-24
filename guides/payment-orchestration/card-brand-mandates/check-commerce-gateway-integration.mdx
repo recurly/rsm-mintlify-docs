@@ -1,0 +1,35 @@
+---
+title: Check Commerce Gateway Integration
+---
+
+Check Commerce is a gateway that specifically accepts ACH payments. In order to process ACH payments, merchants will need to get a Check Commerce account via Recurly. The ACH application process generally takes 3-4 days with submittal of required documents.
+
+* Merchants must be located in the United States to apply 
+* Merchants must have a chargeback rate of 0.5% or lower
+* Standard Check Commerce accounts are limited to $5,000/transaction, but merchants may be approved for higher limits
+* If approved for a higher limit, you will receive two Check Commerce accounts, one for $5,000 or less transactions and one for above $5,000 transactions
+* The Check Commerce application will require you to provide: a voided check, driver's license, articles of incorporation and web screenshots of your check out flow with the required disclaimers. Additional requirements apply if the merchant has one or more Principal who is based in Canada (e.g. copy of Principal's passport).
+
+PRO TIP: Once you request an application from Check Commerce following the instructions below, we suggest you gather the above documents while you wait to be contacted by Check Commerce. While in the application process, you can <a href="https://docs.recurly.com/payment-gateways/check-gateway-ach#sandbox_testing">start testing ACH on a sandbox Recurly site</a> in order to get your integration ready. You do not need a Check Commerce account to test on a sandbox site.
+
+## Apply for an Account
+
+To apply for a Check Commerce account, log into Recurly and visit the Payment Gateways page.
+
+1. Click on the "Add a New Gateway" button at the top right of the Payment Gateways page.
+2. Select the Check Commerce option at the bottom of the page. If your Site Settings country is not in the United States, you will not see the Check Commerce option and will not be able to use the payment gateway.
+3. Once you have selected Check Commerce, click the "Request an Account" button.
+4. You will be redirected to Check Commerce's online application for a new account. 
+
+## Connect your Account to Recurly
+
+Once you are approved for a Check Commerce account and have been given your credentials, use them to connect your account to Recurly.
+
+1. Make sure you have subscribed to Recurly's Enterprise or Professional plan and have moved into production mode.
+2. Visit the Payment Gateways page in your Recurly Admin and click "Enter Credentials" next to your Check Commerce application status.
+3. Enter your Check Commerce Merchant ID (a numeric string) and Password.
+4. Make sure Check Commerce is enabled for new transactions.
+5. Click "Add Payment Gateway".
+6. You will see that Check Commerce has been added to our list of Production Gateways and has a status of enabled.
+
+Now that you have Check Commerce enabled for ACH, you will need to configure your payment forms to include the "Bank Account" option.

@@ -1,0 +1,137 @@
+---
+title: Implementation Guide
+---
+
+## What You Need
+
+In order to use Recurly, you will need a merchant account and a payment gateway. A **merchant account** is the account you will use to accept payments, and a **payment gateway** authorizes your payments and process transactions.
+
+### Getting a Merchant Account
+
+If you don’t already have a merchant account, [start the merchant account application process][1] immediately—approval can take 1-2 weeks, and you can start your Recurly integration while you wait for approval.
+
+[1]: https://app.recurly.com/go/configuration/merchant_account/new
+
+### Selecting a Payment Gateway
+
+Different gateways serve different countries and currencies. To see a list of the gateways available to you, visit the [Payment Gateways][2] page on your site. For more information about configuring your payment gateway, please see the [Payment Gateway documentation][3].
+
+[2]: https://app.recurly.com/go/configuration/payment_gateways/new
+
+[3]: /payment-gateways
+
+**Note:** You may not want to configure your payment gateway until you’ve completed the rest of your site set-up.
+
+## Configuring Your Site
+
+Recurly allows you to configure everything from subscription plans to customer communication.
+
+### Site Settings
+
+The [Site Settings][4] page allows you to configure:
+
+* Your company name & subdomain
+* Your address requirement-the minimum fields required for billing address from your customers. This must match the address requirements for your gateway.
+* Accepted currencies. This cannot be changed once you switch to production mode, unless you are on Enterprise Pricing.
+* Billing & technical contact information
+* Company details. These will be displayed on your invoices.
+* Whitelisted IPs. You can whitelist IPs that you wish to be exempt from Fraud Velocity Checks.
+* Invoice prefixing
+
+[4]: https://app.recurly.com/go/configuration/edit
+
+### Subscription Plans
+
+Click **New Subscription Plan** on the [Subscription Plans][5] page to begin creating a plan. This page allows you to set pricing, billing cycles, trial information and add-ons, as well as set a success URL for your Hosted Payment Page (see below).
+
+[5]: https://app.recurly.com/go/plans
+
+### Hosted Payment Pages
+
+Recurly will host your subscriptions checkout page, if you wish. This page can be configured on the Hosted Payment Pages page. [Hosted Payment Pages][6] allow for minimal customization such as:
+
+* Look and Feel - You can upload your company’s logo, as well as changing the background color and signup button text.
+* Optional Fields - You can choose to display certain fields to collect additional information, such as phone number, VAT number, and coupon code.
+* Legal Options - If you choose, you can also add Privacy Policy and Terms of Service URLs.
+
+[6]: https://app.recurly.com/go/configuration/hosted_pages
+
+For additional integration options, see the [Advanced Configuration][10] section below.
+
+[10]: #advanced
+
+### Customer Communication
+
+Recurly offers several pre-built email templates that will be sent to your customers throughout the lifecycle of their subscription. The email templates can be customized or enabled/disabled on the [Email Templates][7] page. For more information on the customization of email templates, see the [Email Templates][8] documentation.
+
+[7]: https://app.recurly.com/go/emails
+
+[8]: /email-templates
+
+### Users
+
+To allow users within your organization to access your Recurly admin site, go to the [Users][9] page and click **Invite User**. You will be asked to enter their email address, as well as assign them roles. These permissions can be modified at any time.
+
+[9]: http://app.recurly.com/go/users
+
+### Advanced Configuration
+
+There are many more configuration options available! Please see the recommended topics for more:
+
+* [Webhooks][11] - Can be used as alerts to keep your system in sync with actions inside Recurly.
+* [API/Recurly.js Integration][12] - Allows for the creation of more flexible checkout processes.
+* [Manual Payments][13] - Allows you to manually invoice customers
+
+[11]: /push-notifications
+
+[12]: https://dev.recurly.com
+
+[13]: /manual-payments
+
+## Integrate Your Website With Recurly
+
+Recurly offers a variety of options for connecting to your website or application. From simple pre-designed forms to a fully customizable API, choose the integration option that fits your needs.
+
+### Hosted Payment Pages
+
+The simplest way to get started with Recurly is using [Hosted Payment Pages][6] to handle your subscription checkout pages. These can be configured in the [Hosted Payment Pages][6] section and allow for customizations such as:
+
+* Look and Feel: upload your company’s logo, as well as changing the background color and signup button text.
+* Optional Fields: choose to display certain fields to collect additional information, such as phone number, VAT number, and coupon code.
+* Legal Options: optionally add links to Privacy Policy and Terms of Service.
+
+### Recurly.js
+
+[Recurly.js][18] is a Javascript library designed to be easily embedded and customized to match your website. The library performs in-line validation, real-time total calculations, and gracefully handles errors. Your customer stays on your website while their billing information is securely sent to Recurly for approval. Because the cardholder data is sent directly to Recurly, your PCI compliance scope is dramatically reduced.
+
+[18]: https://js.recurly.com
+
+### API
+
+[The Recurly API][19] (application programming interface) provides access to nearly every aspect of the product features via either JSON or XML APIs. Additionally, Recurly offers a variety of client libraries in the most popular languages to speed up your integration time. Using the Recurly API allows you to fully customize the look and feel of your integration as well maintain complete control over the full customer experience from checkout to account management.
+
+[19]: https://dev.recurly.com
+
+## Testing
+
+A new Recurly account will have a test gateway associated with it. You can use this gateway to test your company’s sign up process.
+
+**Note:** The payment gateway will only process test credit card information. For a list of test credit cards, see the [Test Gateway][14] documentation. These credit cards are not associated with any other information, so you can enter anything you want for the name, billing address, etc.
+
+[14]: /payment-gateways/test
+
+You can check that your account sign-up worked as expected by checking the [Accounts][15] and [Transactions][16] panels on your Recurly site.
+
+[15]: https://app.recurly.com/go/accounts
+
+[16]: https://app.recurly.com/go/transactions
+
+## Subscribe and Switch to Production Mode
+
+In order to begin processing transactions against your production payment gateway, you must [subscribe to the Recurly Service][17].
+
+[17]: https://app.recurly.com/go/recurly_subscription
+
+**Note:** Once you’ve subscribed, you will begin to be billed on a monthly basis, even if you have not switched to production mode or begun to process existing transactions.
+
+Your site will not begin to process real transactions until you [switch to production mode][18]. This will clear all test accounts and data. **Data cannot be cleared once you’re in production mode, and switching to production mode is not reversible.**

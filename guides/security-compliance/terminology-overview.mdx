@@ -1,0 +1,109 @@
+---
+title: Terminology Overview
+---
+
+## Merchant Bank Accounts
+
+Merchant bank account is a bank account used to accept payments. It serves as a buffer in the event that a transaction is contested via chargebacks. An example of a merchant bank account would be TSYS.
+
+For more information: 
+
+* \[1]
+* \[2]\
+  \[1]: [http://docs.recurly.com/payment-gateways/gateway-merchant-account-overview](http://docs.recurly.com/payment-gateways/gateway-merchant-account-overview)\
+  \[2]: [http://docs.recurly.com/implementation-guide](http://docs.recurly.com/implementation-guide)
+
+## Payment Gateways
+
+Payment gateways are used to process credit card transactions. Some examples of payment gateways are Paypal, Stripe, and Braintree. Gateways tend to specifically serve certain currencies or geographical regions, so businesses operating across multiple countries may need multiple payment gateways.
+
+For more information: 
+
+* \[1]
+* \[3]
+* \[4]\
+  \[3]: [http://docs.recurly.com/payment-gateways](http://docs.recurly.com/payment-gateways)\
+  \[4]: [http://docs.recurly.com/implementation-guide](http://docs.recurly.com/implementation-guide)
+
+## Accounts
+
+An account represents a customer that subscribes to your service. An account can have multiple subscriptions, but only one credit card.
+
+### States
+
+An account can be open or closed. The state of a subscription on an account has no bearing on whether the account is open or closed.
+
+For more information, see the [Account documentation][5].
+
+[5]: http://docs.recurly.com/accounts
+
+## Subscriptions
+
+A subscription tells Recurly how often and how much to charge your customers. They can have free trials, add-ons, setup fees, and more. 
+
+### States
+
+A subscription can be:\ <br/>\
+**Active** - Renewing.\ <br/>\
+**Canceled** - The subscription will not renew. Canceled subscriptions can be reopened.\ <br/>\
+**Expired** - Also known as terminated. The subscription will not renew, and cannot be reopened.
+
+For more information, see the [Subscription documentation][6].
+
+[6]: http://docs.recurly.com/subscriptions
+
+## Invoices
+
+An invoice relates charges, credits, and payments together.
+
+### States
+
+An invoice can be:\ <br/>\
+**Open** - An invoice that is pending collection.\ <br/>\
+**Past due** - An invoice that attempted collection, but had the payment fail. These will be retried automatically through the dunning process.\ <br/>\
+**Failed** - An invoice that has either experienced 20 declines, or has been through the dunning process without successful payment. These invoices will not be retried.\ <br/>\
+**Closed** - A successfully collected invoice.
+
+For more information, see the [Invoice documentation][7].
+
+[7]: http://docs.recurly.com/invoices
+
+## Transactions
+
+A transaction is any purchasing information that is sent to your payment gateway.
+
+### Types
+
+There are multiple types of transactions.\ <br/>\
+**Payments** - Purchases processed through Recurly.\ <br/>\
+**Refunds** - Refunds processed on a previously-successful Recurly transaction.\ <br/>\
+**Authorizations** - $0 or $1 transactions used to verify billing information. These are voided immediately.
+
+### States
+
+A transaction can be:\ <br/>\
+**Successful** - Approved by the payment gateway\ <br/>\
+**Declined** - Declined by the payment gateway\ <br/>\
+**Voided** - Voided before the payment has settled
+
+For more information, see the [Transaction documentation][8].
+
+[8]: http://docs.recurly.com/transactions
+
+## Miscellaneous Vocabulary
+
+### Credits
+
+Credits are not transactions - they do not cause money to be sent to the customer. They are simply a positive balance on an account. Credits are applied to the next invoice after all charges, coupons and VAT (if applicable). Any leftover credits remain in the account and continue to be applied to future invoices until the balance is satisfied. Credits do not post back to the original payment method, nor coupon discounts to reduce a plan or item amount. 
+
+### Refunds
+
+A transaction can be refunded. A refund will always be issued to the card used on the original payment.
+
+### Voids
+
+An unsettled transaction can be voided—stopping the transaction from processing and removing it from the customer’s account. Once a transaction has been settled it can only be refunded. Because payment gateways have different processing times for settling transactions, Recurly will automatically attempt a void before processing a refund.
+
+**For a list of other terms you might find helpful, please visit the[Glossary][9].**
+
+[9]: /glossary.html

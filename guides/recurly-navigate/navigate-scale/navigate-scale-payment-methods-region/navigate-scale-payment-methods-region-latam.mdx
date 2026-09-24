@@ -1,0 +1,342 @@
+---
+title: 'Payment methods by region: LATAM'
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body { background: #ffffff !important; }
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a, .rc-guide a:link, .rc-guide a:visited, .rc-guide a:active {
+  color: #008CFF !important; text-decoration: none !important; text-decoration-line: none !important;
+  text-decoration-color: transparent !important; text-underline-offset: unset !important; border-bottom: 0 !important;
+}
+.rc-guide a:hover { color: #0067BE !important; text-decoration: underline !important; text-decoration-color: #008CFF !important; text-underline-offset: 2px !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+.rc-guide {
+  --yellow: #FFD706; --blue: #008CFF; --blue-tint1: #D5EAFF; --blue-tint2: #96C8FF;
+  --offblack: #0D0D0B; --darkgray: #32312D; --gray: #807D75; --lightgray: #D1CFC4;
+  --brightgray: #F2F1EA; --offwhite: #FCFBF7; --scale: #008CFF;
+  --warning-fg: #FFD706; --warning-bg: #FFFECB; --error-fg: #FF5126; --error-bg: #FFEEE9;
+  --success-fg: #5DC32E; --success-bg: #EFFAEA; --info-fg: #008CFF; --info-bg: #E5F3FF;
+  font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+  color: #32312D !important; background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+.rc-fa-section { color: #0D0D0B; font-size: 1rem; }
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link { color: #807D75 !important; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 6px; transition: color .2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; }
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.rc-announce-bar { display: none; background: #FFD706; color: #0D0D0B; align-items: center; justify-content: space-between; padding: 10px 20px; font-size: .88rem; font-weight: 600; border-radius: 10px; margin-bottom: 16px; gap: 12px; line-height: 1.4; }
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-inner { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+.rc-fa-announce { color: #0D0D0B; font-size: 1rem; flex-shrink: 0; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link { color: #0D0D0B !important; font-weight: 800; white-space: nowrap; padding: 4px 12px; background: rgba(0,0,0,0.10); border-radius: 6px; transition: background 0.2s; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { background: rgba(0,0,0,0.20); color: #0D0D0B !important; }
+.rc-hero { background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)), url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center; background-color: var(--offblack); background-size: cover; color: #fff; padding: 48px 40px 44px; text-align: center; border-radius: 16px; margin-bottom: 0; }
+.rc-lp-pillar-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(0,140,255,0.20); border: 1px solid rgba(0,140,255,0.45); color: #008CFF; font-size: .75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px; }
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: var(--offwhite); margin: 0; }
+.rc-hero > p { font-size: 1rem; opacity: .85; max-width: 640px; margin: 0 auto 32px; color: var(--lightgray); line-height: 1.6; }
+@media(max-width:768px){ .rc-hero { padding: 36px 20px 36px; } .rc-lp-hero-title h1 { font-size: 1.8rem; } }
+details.rc-sticky-nav-wrap { position: relative; z-index: 1; background-color: var(--scale); box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin: 24px 0 48px 0; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; }
+details.rc-sticky-nav-wrap > summary { list-style: none; display: flex; align-items: center; padding: 15px 24px; cursor: pointer; user-select: none; }
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+.rc-nav-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .88rem; letter-spacing: 0.6px; text-transform: uppercase; color: var(--offblack); }
+.rc-nav-chevron { font-size: .72rem; color: var(--offblack); opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link { color: #0D0D0B !important; font-weight: 700; font-size: .83rem; letter-spacing: 0.4px; text-transform: uppercase; padding: 7px 14px; border-radius: 7px; transition: all .18s; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--offblack); color: var(--yellow); font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; }
+.rc-lp-section { margin-bottom: 40px; }
+.rc-lp-section h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 20px; color: var(--offblack); display: flex; align-items: center; gap: 12px; }
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: var(--lightgray); }
+.rc-lp-section p { font-size: .95rem; line-height: 1.65; color: var(--darkgray); margin: 0 0 16px; }
+.rc-callout { border-radius: 10px; padding: 16px 20px; margin: 20px 0; display: flex; gap: 14px; align-items: flex-start; }
+.rc-callout + .rc-callout { margin-top: 12px; }
+.rc-callout-icon { font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; }
+.rc-callout-body { flex: 1; }
+.rc-callout-body > strong { font-size: .88rem; font-weight: 800; display: block; margin-bottom: 4px; }
+.rc-callout-body p { font-size: .9rem; line-height: 1.55; margin: 0; color: var(--darkgray); }
+.rc-callout-tip { background: var(--brightgray); border-left: 4px solid var(--offblack); }
+.rc-callout-tip .rc-callout-body > strong { color: var(--offblack); }
+.rc-callout-caution { background: var(--warning-bg); border-left: 4px solid var(--warning-fg); }
+.rc-callout-caution .rc-callout-body > strong { color: var(--darkgray); }
+.rc-accent-card { background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+.rc-accent-card.rc-accent-scale { border-left: 4px solid var(--scale); }
+.rc-accent-card h4 { font-size: 1rem; font-weight: 800; color: var(--offblack); margin: 0 0 12px; }
+.rc-accent-card p { font-size: .92rem; color: var(--darkgray); line-height: 1.65; margin: 0; }
+.rc-steps { display: flex; flex-direction: column; gap: 0; margin: 20px 0 0; }
+.rc-step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--brightgray); }
+.rc-step:last-child { border-bottom: none; }
+.rc-step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--offblack); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+.rc-step-content h4 { font-size: 1.02rem; font-weight: 800; color: var(--offblack); margin: 0 0 6px; line-height: 1.3; }
+.rc-step-content p { font-size: .92rem; color: var(--gray); line-height: 1.6; margin: 0; }
+.rc-step-content strong { color: var(--darkgray); }
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 16px; flex-wrap: wrap; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: var(--lightgray); letter-spacing: .5px; white-space: nowrap !important; flex-shrink: 0; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-prev { background: transparent; color: #0D0D0B !important; text-decoration: none !important; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; border: 2px solid #D1CFC4 !important; border-bottom: 2px solid #D1CFC4 !important; transition: all .2s; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-prev:hover { border: 2px solid #0D0D0B !important; border-bottom: 2px solid #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path { background: var(--yellow); color: var(--offblack) !important; text-decoration: none !important; padding: 13px 28px; border-radius: 10px; font-weight: 800; font-size: .95rem; display: inline-flex; align-items: center; gap: 8px; transition: all .2s; border: 2px solid var(--yellow) !important; border-bottom: 2px solid var(--yellow) !important; white-space: nowrap !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover { background: transparent !important; color: var(--offblack) !important; border: 2px solid var(--yellow) !important; border-bottom: 2px solid var(--yellow) !important; }
+@media(max-width:1300px) { .rc-lp-nav { justify-content: center !important; gap: 12px; } .rc-lp-nav-indicator { width: 100% !important; text-align: center; } }
+@media(max-width:768px) {
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-prev,
+  .rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+  .rc-guide a.rc-btn-path { padding: 10px 16px !important; font-size: 0.82rem !important; }
+}
+.rc-resources { background: var(--brightgray); border-left: 4px solid #008CFF; border-radius: 10px; padding: 20px 24px; margin: 32px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--gray); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link { color: #807D75 !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: #D1CFC4 !important; font-weight: 500; font-size: .88rem; transition: all .18s; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover { color: #0D0D0B !important; text-decoration: underline !important; text-underline-offset: 3px; text-decoration-color: #008CFF !important; }
+.rc-footer-nav { border-top: 1px solid var(--lightgray); padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: var(--darkgray); background: var(--brightgray); padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link { color: #807D75 !important; text-decoration: none !important; font-weight: 600; font-size: .88rem; transition: color .2s ease; display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--brightgray); }
+
+/* LATAM comparison table wrapper */
+.rc-latam-table-wrap { 
+  overflow-x: auto; 
+  margin: 8px 0 24px; 
+  border: 1px solid var(--lightgray); 
+  border-radius: 10px; 
+}
+
+/* Force table expansion and remove bottom margin white space */
+.rm-Markdown.markdown-body .rc-guide table.rc-latam-table,
+.rc-latam-table { 
+  width: 100% !important; 
+  display: table !important; 
+  border-collapse: collapse; 
+  font-size: .84rem; 
+  margin: 0 !important; 
+  margin-bottom: 0 !important; 
+}
+
+.rc-latam-table thead tr { 
+  background: #0D0D0B !important; 
+}
+
+/* Header high-specificity font color & background fix */
+.rm-Markdown.markdown-body .rc-guide .rc-latam-table thead th,
+.rc-latam-table thead th { 
+  background-color: #0D0D0B !important; 
+  color: #ffffff !important; 
+  font-weight: 700; 
+  text-align: left; 
+  padding: 10px 12px; 
+  white-space: normal; 
+  vertical-align: bottom; 
+}
+
+/* Body rows & cell styles */
+.rc-latam-table tbody tr { 
+  background: var(--offwhite); 
+}
+
+.rc-latam-table tbody tr:nth-child(even) { 
+  background: #ffffff; 
+}
+
+.rc-latam-table tbody td { 
+  padding: 10px 12px; 
+  color: var(--darkgray); 
+  border-bottom: 1px solid var(--brightgray); 
+}
+
+.rc-latam-table tbody tr:last-child td { 
+  border-bottom: none; 
+}
+@media(max-width:768px){ .rc-content-wrap { padding: 0 20px; } .rc-top-nav { padding: 16px 20px; } }
+</style>
+
+<div class="rc-guide">
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale" class="rc-back-link">← Back to Scale</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <div class="rc-announce-bar">
+      <div class="rc-announce-inner">
+        <i class="fa-regular fa-calendar-days rc-fa-announce"></i>
+        <strong>Upcoming:</strong> Join our CSMs for a live session.
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-announce-link">Register now →</a>
+      </div>
+    </div>
+
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/7038a0b3a299cfe800553d4c8a6721f92b1fc7e031ef697861d3603fb1bb5a05-Scale-icon-white.png" alt="Scale"> Scale · Payment methods by region
+      </div>
+      <div class="rc-lp-hero-title"><h1>LATAM</h1></div>
+      <p>Why Brazil's payment mix, led by Pix Automático, looks nothing like the rest of the world.</p>
+    </div>
+
+    <details class="rc-sticky-nav-wrap" open>
+      <summary><span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span></summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region" class="rc-sticky-link">Path overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-UK" class="rc-sticky-link"><span class="rc-step-badge">1</span> UK</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-North-America" class="rc-sticky-link"><span class="rc-step-badge">2</span> North America</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-EU" class="rc-sticky-link"><span class="rc-step-badge">3</span> EU</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-APAC" class="rc-sticky-link"><span class="rc-step-badge">4</span> APAC</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-LATAM" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> LATAM
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-review" class="rc-sticky-link"><span class="rc-step-badge">6</span> Review &amp; resources</a>
+
+      </div></div></div>
+    </details>
+
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-earth-americas rc-fa-section"></i> Why it matters</h2>
+      <p>Brazil doesn't fit the credit-card-first model most merchants default to. Pix Automático is used by more than 75% of Brazilians, charges no fees to individuals, and settles near-instantly — but it's new enough that most merchants haven't adopted it yet. Meanwhile credit cards, the most commonly offered method, convert at just 58.45% sign-up.</p>
+
+      <div class="rc-latam-table-wrap">
+        <table class="rc-latam-table">
+          <thead><tr><th>Payment Type</th><th>Sign-up %</th><th>Renewal %</th><th>% of Volume when Merchant is Offering Payment Type</th></tr></thead>
+          <tbody>
+            <tr><td>Apple Pay</td><td>46.54%</td><td>68.02%</td><td>3.30%</td></tr>
+            <tr><td>Credit Card</td><td>42.82%</td><td>80.27%</td><td>93.56%</td></tr>
+            <tr><td>Google Pay</td><td>48.30%</td><td>68.19%</td><td>3.90%</td></tr>
+            <tr><td>PayPal</td><td>76.26%</td><td>86.55%</td><td>5.32%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rc-callout rc-callout-tip">
+        <div class="rc-callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="rc-callout-body">
+          <strong>Pix Automático and Mercado Pago are new but growing fast</strong>
+          <p>Recurly added Pix Automático and Mercado Pago support specifically to strengthen LATAM coverage. Adoption is still early, so merchants who enable them now are ahead of where most of the market currently sits. Mercado Pago via Ebanx also extends to Argentina, Chile, Mexico, and Uruguay.</p>
+        </div>
+      </div>
+
+      <div class="rc-accent-card rc-accent-scale">
+        <h4>Installments change how you should price</h4>
+        <p>Brazil has a strong cultural preference for installment payments. A monthly subscription billed over 12 months will typically outperform an annual plan billed as a single lump sum — structure your Brazil pricing with that in mind rather than porting your standard annual plan directly.</p>
+      </div>
+
+      <div class="rc-callout rc-callout-caution">
+        <div class="rc-callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="rc-callout-body">
+          <strong>E-invoicing is mandatory for domestic taxpayers</strong>
+          <p>Brazil's tax system is one of the most complex globally, and e-invoicing is required for virtually all domestic taxpayers. Merchants with a local entity or a local partner need systems that comply with this before launching.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rc-lp-section">
+      <h2><i class="fa-solid fa-gears rc-fa-section"></i> How to enable it</h2>
+      <div class="rc-steps">
+        <div class="rc-step">
+          <div class="rc-step-num">1</div>
+          <div class="rc-step-content">
+            <h4>Enable BRL</h4>
+            <p>In <strong>Configuration → Currencies</strong>, add Brazilian Real and set localized, installment-friendly pricing under each plan.</p>
+          </div>
+        </div>
+        <div class="rc-step">
+          <div class="rc-step-num">2</div>
+          <div class="rc-step-content">
+            <h4>Connect Ebanx</h4>
+            <p>Pix Automático, UPI-style local mandates, and Mercado Pago all route through Ebanx — Recurly's gateway partner built for local acquiring in LATAM.</p>
+          </div>
+        </div>
+        <div class="rc-step">
+          <div class="rc-step-num">3</div>
+          <div class="rc-step-content">
+            <h4>Plan for tax compliance</h4>
+            <p>Use a tax engine such as Avalara or Vertex, and confirm your e-invoicing setup complies with Brazilian requirements before going live.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rc-lp-nav">
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-APAC" class="rc-btn-prev">← APAC</a>
+      <span class="rc-lp-nav-indicator">5 of 6</span>
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-review" class="rc-btn-path">Next: Review &amp; resources →</a>
+    </div>
+
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/pix-automatico" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Pix Automático</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/mercadopago" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Mercado Pago</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/ebanx-gateway" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Ebanx gateway</a>
+        <a href="mailto:support@recurly.com" class="rc-resource-link"><i class="fa-solid fa-headset"></i> Contact Recurly Support</a>
+      </div>
+    </div>
+
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+        <div class="rc-footer-section">
+          <span class="rc-footer-label">Payment methods by region</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region" class="rc-footer-link">Path overview</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-UK" class="rc-footer-link">1. UK</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-North-America" class="rc-footer-link">2. North America</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-EU" class="rc-footer-link">3. EU</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-APAC" class="rc-footer-link">4. APAC</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-LATAM" class="rc-footer-link">5. LATAM</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-scale-payment-methods-region-review" class="rc-footer-link">6. Review &amp; resources</a>
+        </div>
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt="Home"> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+```

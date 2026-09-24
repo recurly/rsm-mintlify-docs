@@ -1,0 +1,4242 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+@font-face {
+    font-family: "Polar";
+    font-weight: 400;
+    font-style: normal;
+    src:
+        url("https://recurly.com/img2/fonts/FTPolar-Regular.woff2") format("woff2"),
+        url("https://recurly.com/img2/fonts/FTPolar-Regular.woff") format("woff");
+    }
+
+    @font-face {
+    font-family: "Polar";
+    font-weight: 700;
+    font-style: normal;
+    src:
+    url("/img2/fonts/FTPolar-Bold.woff2") format("woff2"),
+    url("/img2/fonts/FTPolar-Bold.woff") format("woff");
+    }
+
+@font-face {
+    font-family: "Gruffy";
+    font-weight: 400;
+    font-style: normal;
+    src:
+    url("https://recurly.com/img2/fonts/F37Gruffy-Regular.woff2") format("woff2"),
+    url("https://recurly.com/img2/fonts/F37Gruffy-Regular.woff") format("woff");
+    }
+
+@font-face {
+    font-family: "Gruffy";
+    font-weight: 700;
+    font-style: normal;
+    src:
+    url("/img2/fonts/F37Gruffy-Bold.woff2") format("woff2"),
+    url("/img2/fonts/F37Gruffy-Bold.woff") format("woff");
+}
+
+.rm-TryIt {display:none !important}
+
+.Reference-section {
+    margin-bottom: 1em;
+    display: none;
+}
+body {
+    margin: 0;
+    font-family: "Polar", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+}
+
+.ThemeContext_line .rm-Header {
+	    --Header-background: #0D0D0B;
+}
+
+.rm-Header-top-link.Button {
+	color: #FCFBF7;
+}
+
+#enterprise .SuperHub-hub-wrapper3t_-5gSx4Sax {
+	border-radius: 0;
+}
+
+
+#enterprise .rm-Header-bottom-link {
+    display: none;
+} 
+
+#enterprise .rm-SearchToggle {
+  width: 320px;	
+	height: 48px;
+}
+
+#enterprise .Header-search_featherYsmQBn55F3d9 {
+    position: absolute;
+    top: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.new-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.new-btn-icon {
+      margin-right: 4px !important;
+  }
+
+.new-btn-text {
+    position: relative;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+.new-btn {
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #0d0d0b;
+    min-width: 112px;
+    min-height: 42px;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none !important;
+    transition: background-color 500ms ease-in-out;
+  	text-decoration: none;
+		width: 100%;
+		margin: 24px;
+}
+
+.new-btn-primary {
+    background: linear-gradient(102.03deg, #fff688, #ffd706);
+}
+
+.new-btn-primary:hover {
+    background: linear-gradient(90.39deg, #ffec5f, #ffc10b);
+}
+
+.new-btn-primary:active,
+.new-btn-primary:focus {
+    box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px #51a1c9;
+}
+
+.globallp-header-section {
+    background: #0D0D0B;
+    padding: 48px 0 150px;
+}
+
+.globallp-header-content {
+		font-family: "Polar", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.globallp-subheading {
+		font-family: "Polar", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+    color: #FFD706;
+    font-size: 16px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.globallp-heading {
+    color: #fff;
+    font-size: 48px;
+    font-family: "Gruffy", "Helvetica Neue", Helvetica, arial, sans-serif;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.globallp-supporting-text {
+		font-family: "Polar", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+    color: #F9F7EB;
+    font-size: 20px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.search-bar {
+    max-width: 320px;
+    margin: 0 auto 64px auto;
+    padding: 12px 14px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(13, 13, 11, 0.05);
+    border-radius: 8px;
+    border: 1px solid #D1CFC4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    border: 1.67px solid #807D75;
+    border-radius: 50%;
+}
+
+.search-text {
+    color: #807D75;
+    font-size: 16px;
+}
+
+.globallp-card-container {
+		font-family: "Polar", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+    max-width: 1200px;
+    margin: 96px auto;
+}
+
+.globallp-cards-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 96px 32px;
+    justify-items: center;
+    align-items: center;
+    background: #fff;
+    margin: 0 12px;
+}
+
+.globallp-cards-section > a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.globallp-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 2px -1px rgba(13, 13, 11, 0.04);
+    outline: 1px solid rgba(13, 13, 11, 0.08);
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    height: auto;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.globallp-card:hover {
+    box-shadow: 0px 12px 16px -4px rgba(13, 13, 11, 0.08), 0px 4px 6px -2px rgba(13, 13, 11, 0.03), 0px 2px 2px -1px rgba(13, 13, 11, 0.04) !important;
+    
+}
+
+.globallp-card:hover .new-btn-primary {
+    background: linear-gradient(90.39deg, #ffec5f, #ffc10b);
+}
+
+.globallp-card-header {
+    padding: 32px;
+    text-align: center;
+}
+
+.globallp-card-icon {
+    width: 56px;
+    height: 56px;
+    background: #FFD706;
+    border-radius: 50%;
+    margin: 0 auto 24px auto;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.globallp-card-image {
+    width: auto;
+    height: 32px;
+    margin-bottom: 8px;
+}
+
+.globallp-card-desc-title {
+    color: #0D0D0B;
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.globallp-card-desc-text {
+    color: #46443F;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.globallp-card-footer {
+    width: 100%;
+    background: #F2F1EA;
+    border-top: 1px solid #E2DFD0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.globallp-card-button {
+    background: linear-gradient(135deg, #FFF688 0%, #FFD706 100%);
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 16px;
+    color: #0D0D0B;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+}
+
+.newsletter-section {
+    background: #F2F1EA;
+    padding: 64px 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.newsletter-header {
+    margin-bottom: 32px;
+}
+
+.newsletter-header h2 {
+    color: #0D0D0B;
+    font-size: 36px;
+    line-height: 42px;
+    margin-bottom: 16px;
+}
+
+.newsletter-header p {
+    color: #0D0D0B;
+    font-size: 20px;
+}
+
+.newsletter-footer {
+    width: 100%;
+}
+
+.globallp-footer {
+		font-family: "Polar", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+    background: #0D0D0B;
+    color: #fff;
+    padding: 48px 0;
+    text-align: center;
+}
+
+.globallp-footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.globallp-footer-content img {
+    width: auto;
+    height: 16px;
+    margin: 0;
+}
+
+.globallp-footer-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #FCFBF7;
+}
+
+.globallp-footer-content a {
+    color: #FCFBF7;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.globallp-footer-content a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+    .globallp-header-content {
+        max-width: 100%;
+    }
+    .globallp-cards-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .globallp-card {
+        width: 90%;
+        margin-bottom: 32px;
+    }
+}
+
+/* ============================================================
+   RECURLY DOCS — README NATIVE CSS
+   ============================================================
+   Single consolidated stylesheet for ReadMe's global CSS settings.
+   Targets ReadMe's own native classes across all page types and
+   UI surfaces.
+
+   DEPENDENCY
+   ─────────────────────────────────────────────────────────────
+   Requires recurly-readme-theme-v8.1.css to be present in the same
+   global theme. V8.1 provides the full --recurly-* color token set.
+   This file adds the three tokens V8.0 didn't yet prefix, then
+   uses --recurly-* throughout for consistency.
+
+   PARTS
+   ─────────────────────────────────────────────────────────────
+   1 — General Articles    Shared chrome: prose links, AI dropdown,
+                           copy button, pagination, date line,
+                           page thumbs, dividers. Fires on both
+                           Guide and API Reference.
+
+   2 — Guide pages         h1 yellow border (guide-only), excerpt
+                           subtitle, and right-hand TOC sidebar.
+
+   3 — API Reference pages HTTP method badges, endpoint URL,
+                           section headers, parameter rows,
+                           response accordion, status chits,
+                           and the full Playground panel.
+
+   4 — Sidebar navigation  Shared sidebar chrome: container,
+                           section headings, links, subpages,
+                           expand chevron, external icon,
+                           section separators.
+
+   5 — API Reference sidebar  ID alias, QuickNav button, inline
+                           method pills, page icon wrappers,
+                           user avatar.
+
+   6 — QuickNav modal      The "Jump To" search overlay.
+
+   7 — Changelog           Full brand styling for the changelog.
+
+   SELECTOR STABILITY NOTE
+   ─────────────────────────────────────────────────────────────
+   ReadMe exposes two tiers of class names:
+
+     Stable  — prefixed with rm- (rm-Playground, rm-TryIt,
+               rm-LanguageButton, rm-APIMethod, etc.).
+               Primary selectors throughout.
+
+     Hashed  — long alphanumeric suffixes generated by CSS-in-JS.
+               May change between ReadMe deployments. Used only
+               alongside a stable rm-* counterpart — never solo.
+
+   All rules use !important to override ReadMe's host CSS.
+   ============================================================ */
+
+
+/* ============================================================
+   Token extensions
+   NOTE: superseded by the consolidated brand v2 palette block
+   further down this file. Values kept in sync to avoid a stale
+   landmine if this file is ever reordered. darknavy/deepchar are
+   retired bluish neutrals — brand v2 has no bluish gray, so they
+   collapse to Off Black.
+   ============================================================ */
+
+:root {
+  --recurly-brightgray: #F2F1EA;  /* OB Tint 2 */
+  --recurly-darknavy:   #0D0D0B;  /* retired → Off Black */
+  --recurly-deepchar:   #0D0D0B;  /* retired → Off Black */
+}
+
+
+/* ============================================================
+   PART 0 — Global page background
+   ============================================================
+   Sets the overall ReadMe canvas and content areas to
+   Recurly offwhite (#FCFBF7) for both Guide and API Reference
+   pages. Targets the SuperHub wrapper and inner content panes.
+   ============================================================ */
+
+.rm-SuperHub,
+.SuperHub,
+[class*="SuperHub-wrapper"],
+[class*="SuperHub-content"],
+[class*="SuperHub-body"],
+.rm-ReferenceMain,
+[class*="ReferenceMain"],
+.rm-Article,
+[class*="Article-content"],
+.content-body,
+#hub-content,
+#content {
+  background: #fff !important;
+}
+
+/* Sidebar background is set again here to complement Part 4's
+   rule — Part 4 handles font/link, this handles the bg color. */
+#hub-sidebar,
+#reference-sidebar,
+.rm-Sidebar {
+  background: #fff !important;
+}
+
+
+/* ============================================================
+   PART 1 — General Articles
+   ============================================================
+   Fires on BOTH Guide and API Reference pages.
+   h1 yellow border is intentionally NOT here — it is scoped
+   to Guide pages only in Part 2 to avoid clashing with the
+   compact badge + URL layout on API Reference pages.
+   ============================================================ */
+
+/* ——— 1.1 — Prose links inside the markdown body ——— */
+
+.rm-Markdown.markdown-body p > a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):not(.rp-btn-primary):not(.rp-btn-secondary):not(.rp-btn-ghost):not(.rp-btn-download),
+.rm-Markdown.markdown-body li:not(.menu-item) > a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):not(.rp-btn-primary):not(.rp-btn-secondary):not(.rp-btn-ghost):not(.rp-btn-download) {
+  color: var(--recurly-tangerine) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid transparent !important;
+  transition: border-color 0.15s !important;
+}
+
+.rm-Markdown.markdown-body p > a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):not(.rp-btn-primary):not(.rp-btn-secondary):not(.rp-btn-ghost):not(.rp-btn-download):hover,
+.rm-Markdown.markdown-body li:not(.menu-item) > a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):not(.rp-btn-primary):not(.rp-btn-secondary):not(.rp-btn-ghost):not(.rp-btn-download):hover {
+  border-bottom-color: var(--recurly-tangerine) !important;
+}
+
+/* ——— 1.2 — AI Dropdown ("Copy Page" / "Ask AI" button cluster) ——— */
+
+.rm-AIDropdown .Button,
+.AIDropdownzmvdRdsNayZl .Button {
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-darkgray) !important;
+  background: transparent !important;
+  border-color: var(--recurly-lightgray) !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+.rm-AIDropdown .Button:hover,
+.AIDropdownzmvdRdsNayZl .Button:hover {
+  background: var(--recurly-offblack) !important;
+  border-color: var(--recurly-offblack) !important;
+  color: var(--recurly-yellow) !important;
+}
+
+/* ——— 1.3 — Copy to Clipboard button ——— */
+
+.CopyToClipboard {
+  background: transparent !important;
+  border-color: var(--recurly-lightgray) !important;
+  color: var(--recurly-gray) !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+.CopyToClipboard:hover,
+.CopyToClipboard:focus {
+  background: var(--recurly-tangerine) !important;
+  border-color: var(--recurly-tangerine) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+/* Copy button inside Text-type snippets */
+pre:has(> code.rdmd-code):not(.CodeTabs *) {
+  position: relative !important;
+}
+
+pre:has(> code.rdmd-code):not(.CodeTabs *) > .rdmd-code-copy {
+  position: absolute !important;
+  top: 16px !important;
+  right: 10px !important;
+  background: transparent !important;
+  border: 1px solid var(--recurly-gray) !important;
+  color: var(--recurly-lightgray) !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  cursor: pointer !important;
+  z-index: 2 !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+pre:has(> code.rdmd-code):not(.CodeTabs *) > .rdmd-code-copy:hover {
+  background: var(--recurly-tangerine) !important;
+  border-color: var(--recurly-tangerine) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+/* ——— 1.4 — Pagination controls ——— */
+
+.rm-Pagination {
+  font-family: var(--recurly-font) !important;
+}
+
+.rm-Pagination .PaginationControls-link {
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  color: var(--recurly-offblack) !important;
+  text-decoration: none !important;
+  transition: color 0.15s !important;
+}
+
+.rm-Pagination .PaginationControls-link:hover {
+  color: var(--recurly-tangerine) !important;
+}
+
+/* ——— 1.5 — Next steps divider ——— */
+
+.NextStepsDivider {
+  border: 0 !important;
+  border-top: 1px solid var(--recurly-lightgray) !important;
+  margin: 28px 0 !important;
+}
+
+/* ——— 1.6 — Updated-at date line ——— */
+
+.UpdatedAt .DateLine,
+.DateLine {
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  color: var(--recurly-gray) !important;
+}
+
+/* ——— 1.7 — "Did this page help you?" thumbs ——— */
+
+.rm-PageThumbs .PageThumbs-helpful {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  color: var(--recurly-darkgray) !important;
+}
+
+.rm-PageThumbs .PageThumbs-button {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  color: var(--recurly-gray) !important;
+  background: transparent !important;
+  border: 0 !important;
+  transition: color 0.15s !important;
+}
+
+.rm-PageThumbs .PageThumbs-button:hover {
+  color: var(--recurly-tangerine) !important;
+}
+
+
+/* ============================================================
+   PART 2 — Guide article pages
+   ============================================================ */
+
+/* ——— 2.1 — Page h1 yellow border (guide-only) ——— */
+
+.rm-Guides-SuperHub #content-head h1,
+.rm-Guides-SuperHub .Title.Title1 {
+  font-family: var(--recurly-font) !important;
+  color: var(--recurly-offblack) !important;
+  font-weight: 800 !important;
+  border-bottom: 2px solid var(--recurly-yellow) !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+/* ——— 2.2 — Page excerpt ——— */
+
+.rm-Guides-SuperHub .excerpt,
+.rm-Article .excerpt {
+  font-family: var(--recurly-font) !important;
+  font-size: 15px !important;
+  color: var(--recurly-darkgray) !important;
+  line-height: 1.65 !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 24px !important;
+}
+
+.rm-Guides-SuperHub .excerpt a,
+.rm-Article .excerpt a {
+  color: var(--recurly-tangerine) !important;
+}
+
+/* ——— 2.3 — Right-hand TOC sidebar ——— */
+
+.content-toc {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+}
+
+.content-toc a {
+  color: var(--recurly-gray) !important;
+  text-decoration: none !important;
+  transition: color 0.15s !important;
+}
+
+.content-toc a:hover {
+  color: var(--recurly-offblack) !important;
+}
+
+.content-toc a.active,
+.content-toc .toc-active > a {
+  color: var(--recurly-offblack) !important;
+  font-weight: 700 !important;
+}
+
+/* ——— 2.4 — Content headings h1–h5 ——— */
+
+.rm-Markdown.markdown-body h1.heading {
+  font-family: var(--recurly-font) !important;
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  color: var(--recurly-offblack) !important;
+  margin: 40px 0 16px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid var(--recurly-yellow) !important;
+}
+
+.rm-Markdown.markdown-body h2.heading {
+  font-family: var(--recurly-font) !important;
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  color: var(--recurly-offblack) !important;
+  margin: 36px 0 14px !important;
+  padding-bottom: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.rm-Markdown.markdown-body h3.heading {
+  font-family: var(--recurly-font) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: var(--recurly-darkgray) !important;
+  margin: 28px 0 10px !important;
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.rm-Markdown.markdown-body h4.heading {
+  font-family: var(--recurly-font) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: var(--recurly-darkgray) !important;
+  margin: 20px 0 8px !important;
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.rm-Markdown.markdown-body h5.heading {
+  font-family: var(--recurly-font) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  color: var(--recurly-darkgray) !important;
+  margin: 16px 0 6px !important;
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ——— 2.5 — First-child margin resets ——— */
+
+.rm-Markdown.markdown-body h3.heading:first-child,
+.rm-Markdown.markdown-body h4.heading:first-child,
+.rm-Markdown.markdown-body h5.heading:first-child {
+  margin-block-start: 0 !important;
+}
+
+/* ——— 2.6 — Heading anchor icons ——— */
+
+.rm-Markdown.markdown-body h1.heading,
+.rm-Markdown.markdown-body h2.heading,
+.rm-Markdown.markdown-body h3.heading,
+.rm-Markdown.markdown-body h4.heading,
+.rm-Markdown.markdown-body h5.heading {
+  position: relative !important;
+  overflow: visible !important;
+  cursor: pointer !important;
+}
+
+.rm-Markdown.markdown-body h1.heading .heading-anchor-icon,
+.rm-Markdown.markdown-body h2.heading .heading-anchor-icon,
+.rm-Markdown.markdown-body h3.heading .heading-anchor-icon,
+.rm-Markdown.markdown-body h4.heading .heading-anchor-icon,
+.rm-Markdown.markdown-body h5.heading .heading-anchor-icon {
+  position: absolute !important;
+  left: -22px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 0 !important;
+  color: var(--recurly-lightgray) !important;
+  font-size: 0.75em !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transition: opacity 0.15s !important;
+  /* Tight bounding box — never overlaps the sidebar */
+  pointer-events: auto !important;
+  z-index: 1 !important;
+}
+
+.rm-Markdown.markdown-body h1.heading .heading-anchor-icon:focus,
+.rm-Markdown.markdown-body h2.heading .heading-anchor-icon:focus,
+.rm-Markdown.markdown-body h3.heading .heading-anchor-icon:focus,
+.rm-Markdown.markdown-body h4.heading .heading-anchor-icon:focus,
+.rm-Markdown.markdown-body h5.heading .heading-anchor-icon:focus {
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.rm-Markdown.markdown-body h1.heading:hover .heading-anchor-icon,
+.rm-Markdown.markdown-body h2.heading:hover .heading-anchor-icon,
+.rm-Markdown.markdown-body h3.heading:hover .heading-anchor-icon,
+.rm-Markdown.markdown-body h4.heading:hover .heading-anchor-icon,
+.rm-Markdown.markdown-body h5.heading:hover .heading-anchor-icon {
+  opacity: 1 !important;
+}
+
+
+/* ============================================================
+   PART 3 — API Reference article pages
+   ============================================================ */
+
+/* ——— 3.1 — Endpoint URL ——— */
+
+[data-testid="serverurl"] {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 13px !important;
+  color: var(--recurly-tangerine) !important;
+}
+
+/* ——— 3.2 — HTTP method badges ——— */
+
+.rm-APIMethod,
+.APIMethod {
+  font-family: var(--recurly-font) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.6px !important;
+  text-transform: uppercase !important;
+  padding: 4px 12px !important;
+  border-radius: 14px !important;
+  border: 0 !important;
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+
+.APIMethod_get    { color: var(--recurly-green) !important; }
+.APIMethod_post   { color: var(--recurly-tangerine) !important; }
+.APIMethod_put    { color: var(--recurly-yellow) !important; }
+.APIMethod_patch  { color: var(--recurly-teal) !important; }
+.APIMethod_delete { color: var(--recurly-vermillion) !important; }
+.APIMethod_del    { color: var(--recurly-vermillion) !important; }
+.APIMethod_head   { color: var(--recurly-lightgray) !important; }
+
+/* ——— 3.3 — API section headers (light background context) ——— */
+
+.rm-APISectionHeader {
+  font-family: var(--recurly-font) !important;
+  border-bottom: 1px solid var(--recurly-lightgray) !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 16px !important;
+}
+
+.rm-APISectionHeader [class*="APISectionHeader-heading"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-darkgray) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* ——— 3.4 — Parameter rows ——— */
+
+[class*="Param-name"] {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-offblack) !important;
+}
+
+[class*="Param-type"] {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-gray) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+}
+
+[class*="Param-is-enum"] {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-tangerine) !important;
+  background: rgba(0, 140, 255, 0.10) !important;
+  padding: 1px 6px !important;
+  border-radius: 10px !important;
+}
+
+[class*="Param-default-label"],
+[class*="Param-minmax-label"] {
+  font-size: 11px !important;
+  color: var(--recurly-gray) !important;
+}
+
+[class*="Param-description"] .rm-Markdown,
+[class*="Param-description"] .markdown-body {
+  font-size: 13px !important;
+  color: var(--recurly-darkgray) !important;
+  line-height: 1.55 !important;
+}
+
+[class*="Param-enum-section-item"] {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background: var(--recurly-offblack) !important;
+  border: 1px solid var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  border-radius: 20px !important;
+  padding: 4px 12px !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+[class*="Param-enum-section-item"]:hover {
+  background: var(--recurly-darkgray) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-yellow) !important;
+}
+
+/* Inner code token — transparent so button shell color wins */
+[class*="Param-enum-section-item"] code,
+[class*="Param-enum-section-item-value"] {
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.rm-ParamInput,
+.rm-ParamSelect {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  background: var(--recurly-offwhite) !important;
+  border-color: var(--recurly-lightgray) !important;
+  color: var(--recurly-darkgray) !important;
+}
+
+.rm-ParamInput:focus,
+.rm-ParamSelect:focus {
+  border-color: var(--recurly-offblack) !important;
+  outline: none !important;
+}
+
+/* ——— 3.5 — HTTP status chits ——— */
+
+.HTTPStatus {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 2px 8px !important;
+  border-radius: 10px !important;
+}
+
+.HTTPStatus_2 { background: rgba(93, 195, 46, 0.14) !important; color: var(--recurly-green) !important; }
+.HTTPStatus_4 { background: rgba(255, 81, 38, 0.12) !important; color: var(--recurly-vermillion) !important; }
+.HTTPStatus_5 { background: rgba(255, 81, 38, 0.20) !important; color: var(--recurly-vermillion) !important; }
+.HTTPStatus_1 { background: var(--recurly-brightgray) !important; color: var(--recurly-gray) !important; }
+
+/* ——— 3.6 — Response schema accordion ——— */
+
+.rm-APIResponseSchemaPicker {
+  border: 1px solid var(--recurly-lightgray) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  margin: 8px 0 24px !important;
+  font-family: var(--recurly-font) !important;
+  background: var(--recurly-offblack) !important;
+  /* Override ReadMe's --Accordion-icon-color custom property used by SVG chevron */
+  --Accordion-icon-color: var(--recurly-gray) !important;
+}
+
+/* Kill background on intermediate wrappers — AccordionToggle handled separately below */
+.rm-APIResponseSchemaPicker [class*="AccordionPanel"],
+.rm-APIResponseSchemaPicker [class*="APIResponseSchemaPicker-option"] {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* AccordionToggle h1 — no own background; inherits offblack from parent section */
+.rm-APIResponseSchemaPicker [class*="AccordionToggle"] {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* On hover (closed rows only): entire h1 turns yellow.
+   --Accordion-icon-color controls the chevron fill/stroke via ReadMe's Icon system.
+   --icon-color is the resolved custom property the SVG inline style reads directly. */
+.rm-APIResponseSchemaPicker [class*="AccordionPanel"]:not([class*="AccordionPanel_active"]) [class*="AccordionToggle"]:has(button:hover) {
+  background: var(--recurly-yellow) !important;
+  --Accordion-icon-color: var(--recurly-offblack) !important;
+  --icon-color: var(--recurly-offblack) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+/* Row divider — subtle on dark bg */
+.rm-APIResponseSchemaPicker [class*="APIResponseSchemaPicker-option"] {
+  border-bottom: 1px solid var(--recurly-darkgray) !important;
+}
+.rm-APIResponseSchemaPicker [class*="APIResponseSchemaPicker-option"]:last-child {
+  border-bottom: 0 !important;
+}
+
+/* Toggle button — offblack default, pure white text */
+.rm-APIResponseSchemaPicker [class*="AccordionToggle"] button {
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 16px 20px !important;
+  background: transparent !important;
+  color: #fff !important;
+  width: 100% !important;
+  text-align: left !important;
+  border: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  transition: color 0.15s !important;
+}
+
+/* Hover — text goes offblack; background handled by parent h1 :has() rule above */
+.rm-APIResponseSchemaPicker [class*="AccordionPanel"]:not([class*="AccordionPanel_active"]) [class*="AccordionToggle"] button:hover {
+  background: transparent !important;
+  color: var(--recurly-offblack) !important;
+}
+
+/* All text descendants go offblack on hover (closed rows only) */
+.rm-APIResponseSchemaPicker [class*="AccordionPanel"]:not([class*="AccordionPanel_active"]) [class*="AccordionToggle"] button:hover *,
+.rm-APIResponseSchemaPicker [class*="AccordionPanel"]:not([class*="AccordionPanel_active"]) [class*="AccordionToggle"] button:hover p {
+  color: var(--recurly-offblack) !important;
+}
+
+/* Active/open row — yellow left accent, offblack bg */
+.rm-APIResponseSchemaPicker [class*="AccordionPanel_active"] [class*="AccordionToggle"] button,
+.rm-APIResponseSchemaPicker [class*="AccordionToggle_active"] button {
+  background: transparent !important;
+  border-left: 3px solid var(--recurly-yellow) !important;
+  padding-left: 17px !important;
+  color: var(--recurly-yellow) !important;
+}
+
+/* Expanded content pane — clean white */
+.rm-APIResponseSchemaPicker [class*="AccordionContent"] {
+  background: #fff !important;
+  border-top: 1px solid var(--recurly-darkgray) !important;
+}
+
+/* Status label text ("200", "404") — always white on dark bg */
+[class*="APIResponseSchemaPicker-label"] {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* Description text — warm secondary gray */
+[class*="APIResponseSchemaPicker-description"],
+[class*="APIResponseSchemaPicker-description"] p {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  color: var(--recurly-gray) !important;
+}
+
+/* Chevron default color — controlled by --Accordion-icon-color on parent */
+.rm-APIResponseSchemaPicker [class*="AccordionToggle-icon"] {
+  color: var(--recurly-gray) !important;
+}
+
+/* ——— 3.7 — API Playground panel (right-hand column) ——— */
+
+.rm-Playground {
+  background: var(--recurly-offblack) !important;
+  border-left: 1px solid var(--recurly-darkgray) !important;
+  font-family: var(--recurly-font) !important;
+  color: var(--recurly-offwhite) !important;
+}
+
+[class*="Playground-section"] {
+  border-bottom: 1px solid var(--recurly-darkgray) !important;
+  padding: 14px 16px !important;
+}
+
+.rm-Playground .rm-APISectionHeader {
+  border-bottom-color: var(--recurly-darkgray) !important;
+}
+
+.rm-Playground .rm-APISectionHeader [class*="APISectionHeader-heading"] {
+  color: var(--recurly-lightgray) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* 3.7.1 — Language picker */
+
+.rm-LanguageButton {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-lightgray) !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 5px 12px !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+
+.rm-LanguageButton:hover {
+  background: transparent !important;
+  color: var(--recurly-yellow) !important;
+}
+
+.rm-LanguageButton_active,
+.rm-LanguageButton[aria-pressed="true"] {
+  background: var(--recurly-yellow) !important;
+  color: var(--recurly-offblack) !important;
+  cursor: default !important;
+}
+
+/* 3.7.2 — Credentials / Auth inputs */
+
+.rm-APIAuth [class*="InputGroup-input"] {
+  background: rgba(255, 253, 242, 0.06) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-offwhite) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+}
+
+.rm-APIAuth [class*="InputGroup-input"]::placeholder {
+  color: var(--recurly-gray) !important;
+}
+
+.rm-APIAuth [class*="InputGroup-input"]:focus {
+  border-color: var(--recurly-yellow) !important;
+  outline: none !important;
+}
+
+.rm-APIAuth [class*="InputGroup-button"] {
+  background: var(--recurly-darkgray) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-lightgray) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+/* 3.7.3 — URL bar */
+
+.ServerVars [class*="InputGroup-button"] {
+  background: var(--recurly-darkgray) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-lightgray) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.ServerVars [class*="ServerVars-url"] {
+  background: rgba(255, 253, 242, 0.06) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-offwhite) !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 12px !important;
+}
+
+/* 3.7.4 — Request code block */
+
+.rm-PlaygroundRequest [class*="APIRequest-header"] {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-lightgray) !important;
+  letter-spacing: 0.3px !important;
+  text-transform: uppercase !important;
+}
+
+.rm-PlaygroundRequest .CodeSnippet,
+.rm-PlaygroundRequest [class*="CodeSnippet"] {
+  background: var(--recurly-offblack) !important;
+  border: 1px solid var(--recurly-darkgray) !important;
+  border-radius: 8px !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 12px !important;
+}
+
+.rm-PlaygroundRequest .CodeMirror {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+.rm-PlaygroundRequest .CodeMirror .cm-builtin  { color: var(--recurly-yellow) !important; }
+.rm-PlaygroundRequest .CodeMirror .cm-attribute { color: var(--recurly-tangerine) !important; }
+.rm-PlaygroundRequest .CodeMirror .cm-string    { color: var(--recurly-green) !important; }
+
+[class*="APIRequest-footer"] {
+  border-top: 1px solid var(--recurly-darkgray) !important;
+  padding: 10px 14px !important;
+}
+
+/* 3.7.5 — Try It! button */
+
+.rm-TryIt {
+  background: var(--recurly-yellow) !important;
+  color: var(--recurly-offblack) !important;
+  font-family: var(--recurly-font) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  padding: 8px 18px !important;
+  cursor: pointer !important;
+  transition: background 0.12s !important;
+}
+
+.rm-TryIt:hover {
+  background: var(--recurly-tangerine) !important;
+}
+
+/* 3.7.6 — Response panel */
+
+.rm-PlaygroundResponse {
+  background: var(--recurly-offblack) !important;
+  font-family: var(--recurly-font) !important;
+}
+
+[class*="APIResponse-header"] {
+  border-bottom: 1px solid var(--recurly-darkgray) !important;
+  padding: 10px 14px !important;
+}
+
+[class*="APIResponse-header-title"] {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-lightgray) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+}
+
+[class*="APIResponse-empty-prompt"] {
+  color: var(--recurly-gray) !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+[class*="APIResponse-empty-tryit"] {
+  color: var(--recurly-yellow) !important;
+  background: rgba(255, 215, 6, 0.12) !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+}
+
+[class*="APIResponse-empty-examples-header"] {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-lightgray) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.4px !important;
+}
+
+[class*="APIResponse-empty-examples-button"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  background: rgba(255, 253, 242, 0.06) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-lightgray) !important;
+  border-radius: 6px !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+[class*="APIResponse-empty-examples-button"]:hover {
+  background: var(--recurly-yellow) !important;
+  border-color: var(--recurly-yellow) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+/* 3.7.7 — API Logs Table + footer */
+
+/* Table container */
+.rm-APILogsTable {
+  font-family: var(--recurly-font) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+  /* No background here — table and footer handle their own backgrounds */
+}
+
+/* The actual <table> — must be full-width to match the footer */
+.rm-APILogsTable table {
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  border: 0 !important;
+}
+
+/* Header row — offblack */
+.rm-APILogsTable thead tr {
+  background: var(--recurly-offblack) !important;
+}
+
+.rm-APILogsTable thead th {
+  font-family: var(--recurly-font) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  color: var(--recurly-offwhite) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  background: var(--recurly-offblack) !important;
+  padding: 10px 16px !important;
+  border: 0 !important;
+  text-align: left !important;
+}
+
+/* Body rows */
+.rm-APILogsTable tbody td {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  color: var(--recurly-darkgray) !important;
+  background: #fff !important;
+  padding: 12px 16px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--recurly-lightgray) !important;
+}
+
+/* Empty state */
+[class*="APILogsTable_empty"],
+[class*="LogsTable_empty"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  color: var(--recurly-gray) !important;
+  padding: 28px 16px !important;
+  text-align: center !important;
+}
+
+/* Footer — offblack to match the Playground panel */
+.rm-APILogInfo,
+[class*="APILogsTable-footer"] {
+  background: var(--recurly-offblack) !important;
+  border-top: 1px solid var(--recurly-darkgray) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  padding: 10px 16px !important;
+}
+
+[class*="APILogInfo-requests-count"] {
+  color: var(--recurly-offwhite) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+}
+
+/* "See All Requests →" button — ghost white, yellow pill on hover */
+.rm-APILogInfo .Button {
+  font-family: var(--recurly-font) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  color: var(--recurly-offwhite) !important;
+  background: transparent !important;
+  border: 1px solid var(--recurly-gray) !important;
+  border-radius: 20px !important;
+  padding: 6px 16px !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+.rm-APILogInfo .Button:hover {
+  background: var(--recurly-yellow) !important;
+  border-color: var(--recurly-yellow) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+
+/* ============================================================
+   PART 4 — Sidebar navigation
+   ============================================================ */
+
+#hub-sidebar,
+#reference-sidebar,
+.rm-Sidebar {
+  font-family: var(--recurly-font) !important;
+  background: #fff !important;
+}
+
+.rm-Sidebar .rm-Sidebar-heading,
+#hub-sidebar .rm-Sidebar-heading,
+#reference-sidebar .rm-Sidebar-heading {
+  font-family: var(--recurly-font) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  color: var(--recurly-gray) !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  padding: 20px 16px 6px !important;
+  margin: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.rm-Sidebar .rm-Sidebar-list,
+#hub-sidebar .rm-Sidebar-list,
+#reference-sidebar .rm-Sidebar-list {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link,
+#hub-sidebar .rm-Sidebar-link,
+#reference-sidebar .rm-Sidebar-link {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--recurly-offblack) !important;
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 7px 16px !important;
+  transition: background 0.12s, color 0.12s !important;
+  line-height: 1.4 !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link:hover,
+#hub-sidebar .rm-Sidebar-link:hover,
+#reference-sidebar .rm-Sidebar-link:hover {
+  color: var(--recurly-offblack) !important;
+  background: rgba(13, 13, 11, 0.05) !important;
+  text-decoration: none !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link.active,
+.rm-Sidebar .rm-Sidebar-link[aria-current="page"],
+#hub-sidebar .rm-Sidebar-link.active,
+#hub-sidebar .rm-Sidebar-link[aria-current="page"],
+#reference-sidebar .rm-Sidebar-link.active,
+#reference-sidebar .rm-Sidebar-link[aria-current="page"] {
+  color: var(--recurly-offblack) !important;
+  font-weight: 700 !important;
+  background: rgba(255, 215, 6, 0.20) !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link.Sidebar-link_parent,
+#hub-sidebar .rm-Sidebar-link.Sidebar-link_parent,
+#reference-sidebar .rm-Sidebar-link.Sidebar-link_parent {
+  font-weight: 600 !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link.Sidebar-link_hidden,
+#hub-sidebar .rm-Sidebar-link.Sidebar-link_hidden,
+#reference-sidebar .rm-Sidebar-link.Sidebar-link_hidden {
+  opacity: 0.45 !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link.Sidebar-link_hidden:hover,
+#hub-sidebar .rm-Sidebar-link.Sidebar-link_hidden:hover,
+#reference-sidebar .rm-Sidebar-link.Sidebar-link_hidden:hover {
+  opacity: 0.7 !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link.subpage,
+#hub-sidebar .rm-Sidebar-link.subpage,
+#reference-sidebar .rm-Sidebar-link.subpage {
+  font-size: 12.5px !important;
+  font-weight: 400 !important;
+  color: var(--recurly-offblack) !important;
+  padding-left: 28px !important;
+  align-items: flex-start !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link.subpage:hover,
+#hub-sidebar .rm-Sidebar-link.subpage:hover,
+#reference-sidebar .rm-Sidebar-link.subpage:hover {
+  color: var(--recurly-offblack) !important;
+  background: rgba(13, 13, 11, 0.04) !important;
+}
+
+.rm-Sidebar .rm-Sidebar-link.subpage.active,
+.rm-Sidebar .rm-Sidebar-link.subpage[aria-current="page"],
+#hub-sidebar .rm-Sidebar-link.subpage.active,
+#hub-sidebar .rm-Sidebar-link.subpage[aria-current="page"],
+#reference-sidebar .rm-Sidebar-link.subpage.active,
+#reference-sidebar .rm-Sidebar-link.subpage[aria-current="page"] {
+  color: var(--recurly-offblack) !important;
+  font-weight: 700 !important;
+  background: rgba(255, 215, 6, 0.20) !important;
+}
+
+.rm-Sidebar .subpages .subpages .rm-Sidebar-link.subpage,
+#hub-sidebar .subpages .subpages .rm-Sidebar-link.subpage,
+#reference-sidebar .subpages .subpages .rm-Sidebar-link.subpage {
+  padding-left: 40px !important;
+}
+
+.rm-Sidebar .subpages .subpages .subpages .rm-Sidebar-link.subpage,
+#hub-sidebar .subpages .subpages .subpages .rm-Sidebar-link.subpage,
+#reference-sidebar .subpages .subpages .subpages .rm-Sidebar-link.subpage {
+  padding-left: 52px !important;
+}
+
+[class*="Sidebar-link-text_label"] {
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  color: inherit !important;
+}
+
+.rm-Sidebar [class*="Sidebar-link-buttonWrapper"],
+#hub-sidebar [class*="Sidebar-link-buttonWrapper"],
+#reference-sidebar [class*="Sidebar-link-buttonWrapper"] {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 4px 6px !important;
+  color: var(--recurly-offblack) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+
+.rm-Sidebar [class*="Sidebar-link-buttonWrapper"]:hover,
+#hub-sidebar [class*="Sidebar-link-buttonWrapper"]:hover,
+#reference-sidebar [class*="Sidebar-link-buttonWrapper"]:hover {
+  background: rgba(13, 13, 11, 0.06) !important;
+  color: var(--recurly-tangerine) !important;
+}
+
+[class*="Sidebar-link-expandIcon"] {
+  font-size: 13px !important;
+  transition: transform 0.18s ease !important;
+  color: inherit !important;
+}
+
+[class*="Sidebar-link-buttonWrapper"][aria-expanded="true"] [class*="Sidebar-link-expandIcon"],
+.subnav-expanded > .rm-Sidebar-link > [class*="Sidebar-link-buttonWrapper"] [class*="Sidebar-link-expandIcon"] {
+  transform: rotate(90deg) !important;
+  color: var(--recurly-tangerine) !important;
+}
+
+[class*="Sidebar-link-externalIcon"] {
+  font-size: 10px !important;
+  color: var(--recurly-offblack) !important;
+}
+
+.rm-Sidebar-link:hover [class*="Sidebar-link-externalIcon"] {
+  color: var(--recurly-tangerine) !important;
+}
+
+.rm-Sidebar .rm-Sidebar-section + .rm-Sidebar-section,
+#hub-sidebar .rm-Sidebar-section + .rm-Sidebar-section,
+#reference-sidebar .rm-Sidebar-section + .rm-Sidebar-section {
+  border-top: 1px solid var(--recurly-lightgray) !important;
+  margin-top: 4px !important;
+}
+
+[class*="Nav-toggle-collapse"] {
+  color: var(--recurly-gray) !important;
+  background: transparent !important;
+  border: 0 !important;
+  transition: color 0.12s !important;
+}
+
+[class*="Nav-toggle-collapse"]:hover {
+  color: var(--recurly-offblack) !important;
+}
+
+
+/* ============================================================
+   PART 5 — API Reference sidebar specifics
+   ============================================================ */
+
+[class*="QuickNav-button"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.6px !important;
+  color: var(--recurly-gray) !important;
+  background: transparent !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+[class*="QuickNav-button"]:hover {
+  background: rgba(13, 13, 11, 0.05) !important;
+  border-color: var(--recurly-offblack) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+[class*="KbdShortcut"] {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 10px !important;
+  color: var(--recurly-gray) !important;
+  background: rgba(13, 13, 11, 0.06) !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+  border-radius: 4px !important;
+  padding: 1px 5px !important;
+}
+
+#reference-sidebar .rm-APIMethod,
+[class*="Sidebar-method"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.4px !important;
+  text-transform: uppercase !important;
+  padding: 2px 6px !important;
+  border-radius: 10px !important;
+  border: 0 !important;
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
+}
+
+[class*="Sidebar-link-pageIconCustom"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+  color: var(--recurly-gray) !important;
+}
+
+.rm-Sidebar-link:hover [class*="Sidebar-link-pageIconCustom"] {
+  color: var(--recurly-tangerine) !important;
+}
+
+.rm-Sidebar-link.active [class*="Sidebar-link-pageIconCustom"],
+.rm-Sidebar-link[aria-current="page"] [class*="Sidebar-link-pageIconCustom"] {
+  color: var(--recurly-offblack) !important;
+}
+
+.rm-UserAvatar {
+  font-family: var(--recurly-font) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-yellow) !important;
+  border-radius: 50% !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+
+/* ============================================================
+   PART 6 — QuickNav modal
+   ============================================================ */
+
+[class*="QuickNav-modal-search"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  color: var(--recurly-offblack) !important;
+  background: var(--recurly-offwhite) !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  width: 100% !important;
+  outline: none !important;
+  transition: border-color 0.12s !important;
+}
+
+[class*="QuickNav-modal-search"]:focus {
+  border-color: var(--recurly-offblack) !important;
+}
+
+[class*="QuickNav-modal-search"]::placeholder {
+  color: var(--recurly-lightgray) !important;
+}
+
+[class*="QuickNav-content"] {
+  font-family: var(--recurly-font) !important;
+}
+
+[class*="QuickNav-destination-section"] {
+  list-style: none !important;
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+}
+
+[class*="QuickNav-destination-section-heading"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  color: var(--recurly-lightgray) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 14px 12px 6px !important;
+  list-style: none !important;
+}
+
+[class*="destination-item"] {
+  list-style: none !important;
+}
+
+[class*="destination-item-anchor"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--recurly-darkgray) !important;
+  text-decoration: none !important;
+  display: block !important;
+  padding: 6px 12px !important;
+  transition: background 0.1s, color 0.1s !important;
+}
+
+[class*="destination-item-anchor"]:hover {
+  color: var(--recurly-offblack) !important;
+  background: rgba(13, 13, 11, 0.04) !important;
+  text-decoration: none !important;
+}
+
+[class*="destination-item-anchor"].active,
+[class*="destination-item-anchor"][aria-current="page"] {
+  color: var(--recurly-offblack) !important;
+  font-weight: 700 !important;
+  background: rgba(255, 215, 6, 0.20) !important;
+}
+
+[class*="destination-item-anchor-row-container"] {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  font-size: inherit !important;
+  color: inherit !important;
+}
+
+[class*="destination-item-anchor-row-container-method"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.4px !important;
+  text-transform: uppercase !important;
+  padding: 2px 6px !important;
+  border-radius: 10px !important;
+  border: 0 !important;
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
+}
+
+[class*="destination-item-anchor-row-container-method"].APIMethod_get    { color: var(--recurly-green) !important; }
+[class*="destination-item-anchor-row-container-method"].APIMethod_post   { color: var(--recurly-tangerine) !important; }
+[class*="destination-item-anchor-row-container-method"].APIMethod_put    { color: var(--recurly-yellow) !important; }
+[class*="destination-item-anchor-row-container-method"].APIMethod_patch  { color: var(--recurly-teal) !important; }
+[class*="destination-item-anchor-row-container-method"].APIMethod_del    { color: var(--recurly-vermillion) !important; }
+
+
+/* ============================================================
+   PART 7 — Changelog
+   ============================================================ */
+
+#recurly-changelog-header {
+  background: var(--recurly-offblack) !important;
+  border-radius: 12px !important;
+  padding: 32px 36px !important;
+  margin: 0 auto 28px auto !important;
+  max-width: 930px !important;
+}
+
+#recurly-changelog-header h1 {
+  font-family: var(--recurly-font) !important;
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  color: var(--recurly-yellow) !important;
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+#recurly-changelog-header p {
+  font-family: var(--recurly-font) !important;
+  font-size: 15px !important;
+  color: var(--recurly-lightgray) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+#recurly-changelog-header .rss-line {
+  margin-top: 14px !important;
+  padding-top: 14px !important;
+  border-top: 1px solid var(--recurly-darkgray) !important;
+  font-size: 13px !important;
+  color: var(--recurly-lightgray) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+#recurly-changelog-header .rss-icon {
+  color: var(--recurly-yellow) !important;
+  font-size: 13px !important;
+  flex-shrink: 0 !important;
+  opacity: 0.9 !important;
+}
+
+#recurly-changelog-header .rss-copy {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: 700 !important;
+  color: var(--recurly-yellow) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--recurly-yellow) !important;
+  text-underline-offset: 3px !important;
+  cursor: pointer !important;
+  transition: color 0.15s, text-decoration-color 0.15s !important;
+}
+
+#recurly-changelog-header .rss-copy:hover {
+  color: var(--recurly-tangerine) !important;
+  text-decoration-color: var(--recurly-tangerine) !important;
+}
+
+#recurly-changelog-header .rss-copy.rss-copied {
+  color: var(--recurly-yellow) !important;
+  text-decoration: none !important;
+}
+
+.rm-Changelog article {
+  background: #fff !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+  border-radius: 10px !important;
+  padding: 22px 26px !important;
+  margin-bottom: 16px !important;
+  max-width: 930px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.rm-Changelog .ChangelogPost_title3ME_vWC95yTD {
+  font-family: var(--recurly-font) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 8px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid var(--recurly-tangerine) !important;
+}
+
+.rm-Changelog .ChangelogPost_title3ME_vWC95yTD a {
+  color: var(--recurly-offblack) !important;
+  text-decoration: none !important;
+  transition: color 0.15s !important;
+}
+
+.rm-Changelog .ChangelogPost_title3ME_vWC95yTD a:hover {
+  color: var(--recurly-tangerine) !important;
+}
+
+.rm-Changelog .DateLine {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  color: var(--recurly-gray) !important;
+  margin-bottom: 12px !important;
+}
+
+.rm-Changelog .ChangelogPost_textdx2lvBFg0xLI > .markdown-body > p:first-child,
+.rm-Changelog .ChangelogPost_textdx2lvBFg0xLI > p {
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  color: var(--recurly-darkgray) !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI { overflow: hidden; }
+
+.ChangelogPost_textdx2lvBFg0xLI .markdown-body p {
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  color: var(--recurly-darkgray) !important;
+  line-height: 1.65 !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .markdown-body a {
+  color: var(--recurly-tangerine) !important;
+  text-decoration: none !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .markdown-body a:hover {
+  text-decoration: underline !important;
+  text-decoration-color: var(--recurly-tangerine) !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .markdown-body h2,
+.ChangelogPost_textdx2lvBFg0xLI .markdown-body h2.heading {
+  font-family: var(--recurly-font) !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: var(--recurly-offblack) !important;
+  margin: 32px 0 12px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 2px solid var(--recurly-yellow) !important;
+  background: transparent !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .heading-anchor-icon {
+  display: none !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  margin: 4px 0 24px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table-inner {
+  min-width: 560px !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  border: 0 !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table thead tr,
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table thead th {
+  background: var(--recurly-offblack) !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table thead th {
+  color: var(--recurly-offwhite) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+  padding: 10px 14px !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody tr,
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td {
+  background: #fff !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td {
+  color: var(--recurly-darkgray) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  padding: 10px 14px !important;
+  vertical-align: top !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--recurly-lightgray) !important;
+  line-height: 1.55 !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td:first-child {
+  white-space: nowrap !important;
+  color: var(--recurly-gray) !important;
+  font-size: 12px !important;
+  width: 72px !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td:nth-child(2) {
+  font-weight: 600 !important;
+  color: var(--recurly-offblack) !important;
+  width: 180px !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td:nth-child(3) {
+  white-space: nowrap !important;
+  width: 80px !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.4px !important;
+  color: var(--recurly-gray) !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td a {
+  color: var(--recurly-tangerine) !important;
+  text-decoration: none !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td a:hover {
+  text-decoration: underline !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td code.rdmd-code {
+  background: var(--recurly-brightgray) !important;
+  color: var(--recurly-darkgray) !important;
+  font-size: 12px !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace !important;
+  display: inline !important;
+}
+
+.ChangelogPost_textdx2lvBFg0xLI .rdmd-table .rdmd-code-copy {
+  display: none !important;
+}
+
+/* ── RSS instructions collapsible ───────────────────────── */
+
+#recurly-changelog-header .rss-instructions-wrap {
+  margin-top: 10px !important;
+}
+
+/* Toggle button — pill style, subtle border */
+#recurly-changelog-header .rss-instructions-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  background: transparent !important;
+  border: 1px solid var(--recurly-darkgray) !important;
+  border-radius: 20px !important;
+  padding: 5px 14px 5px 10px !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--recurly-lightgray) !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s, color 0.15s !important;
+  line-height: 1 !important;
+}
+
+#recurly-changelog-header .rss-instructions-toggle:hover {
+  border-color: var(--recurly-yellow) !important;
+  color: var(--recurly-yellow) !important;
+}
+
+/* Chevron rotates when open */
+#recurly-changelog-header .rss-chevron {
+  font-size: 10px !important;
+  transition: transform 0.2s ease !important;
+}
+
+#recurly-changelog-header .rss-instructions-open .rss-chevron {
+  transform: rotate(180deg) !important;
+}
+
+/* Body panel */
+#recurly-changelog-header .rss-instructions-body {
+  margin-top: 14px !important;
+  padding: 16px 18px !important;
+  background: rgba(255, 253, 242, 0.04) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--recurly-darkgray) !important;
+}
+
+/* Paragraphs — override the broad header p rule */
+#recurly-changelog-header .rss-instructions-body p {
+  font-size: 13px !important;
+  color: var(--recurly-lightgray) !important;
+  line-height: 1.65 !important;
+  margin: 0 0 10px !important;
+  opacity: 1 !important;
+}
+
+#recurly-changelog-header .rss-instructions-body p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Ordered list */
+#recurly-changelog-header .rss-instructions-body ol {
+  margin: 10px 0 12px 0 !important;
+  padding-left: 20px !important;
+  list-style: decimal !important;
+}
+
+#recurly-changelog-header .rss-instructions-body ol li {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  color: var(--recurly-lightgray) !important;
+  line-height: 1.65 !important;
+  margin-bottom: 6px !important;
+  opacity: 1 !important;
+}
+
+#recurly-changelog-header .rss-instructions-body ol li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Strong inside body */
+#recurly-changelog-header .rss-instructions-body strong {
+  font-weight: 700 !important;
+  color: rgba(255, 253, 242, 0.92) !important;
+}
+
+/* Links (Feedly / Feeder) */
+#recurly-changelog-header .rss-instructions-body a {
+  color: var(--recurly-tangerine) !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
+
+#recurly-changelog-header .rss-instructions-body a:hover {
+  text-decoration: underline !important;
+  text-decoration-color: var(--recurly-tangerine) !important;
+}
+
+/* Tip paragraph — yellow left-border callout */
+#recurly-changelog-header .rss-instructions-tip {
+  margin-top: 12px !important;
+  padding: 10px 12px !important;
+  background: rgba(255, 201, 0, 0.06) !important;
+  border-left: 3px solid var(--recurly-yellow) !important;
+  border-radius: 0 6px 6px 0 !important;
+  font-size: 12px !important;
+  color: var(--recurly-lightgray) !important;
+  display: flex !important;
+  gap: 8px !important;
+  align-items: flex-start !important;
+}
+
+#recurly-changelog-header .rss-instructions-tip i {
+  color: var(--recurly-yellow) !important;
+  font-size: 13px !important;
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── end RSS instructions collapsible ───────────────────── */
+
+@media (max-width: 640px) {
+  .ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td:first-child,
+  .ChangelogPost_textdx2lvBFg0xLI .rdmd-table thead th:first-child {
+    display: none !important;
+  }
+  .ChangelogPost_textdx2lvBFg0xLI .rdmd-table tbody td:nth-child(2) {
+    width: 130px !important;
+  }
+}
+
+/* ============================================================
+   PART 8 — rm-ToC animated active indicator
+   ============================================================ */
+
+.rm-ToC {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  position: relative !important;
+}
+
+.rm-ToC::before {
+  background: var(--recurly-yellow) !important;
+  transition: top 0.2s ease, height 0.2s ease !important;
+}
+
+.rm-ToC .toc-list,
+.rm-ToC .toc-list ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ============================================================
+   RECURLY READMETHEME — V8.1
+   ============================================================
+   Drop-in stylesheet for ReadMe's theme CSS. Five layers:
+
+     PART 1 — Recurly brand design system (rp-* classes)
+     PART 2 — ReadMe native code-snippet overrides
+     PART 3 — ReadMe native MDX component branding
+     PART 4 — ReadMe native table branding
+     PART 5 — Version selector branding
+
+   V8.1 changelog:
+     - rp-plan pill: offblack bg + yellow text, premium badge treatment.
+     - rp-btn-ghost hover: solid yellow bg + offblack text.
+     - rp-h2, rp-h3 first-child: margin-top: 0.
+     - Card (MDX): solid yellow bg, offblack icons, inverts on hover.
+     - Accordion chevron: offblack weight 900 for contrast.
+     - Sidebar container: border-right removed.
+     - h2.heading: yellow underline removed (h1 only).
+     - Tables: border-collapse separate, corner-cell radius, :has(thead)
+       scope on rdmd-table to prevent rule collision with rp-* tables.
+   ============================================================ */
+
+
+/* ============================================================
+   Brand color tokens
+   ============================================================ */
+
+:root {
+  /* =====================================================================
+     RECURLY BRAND v2 — palette source of truth
+     Neutrals follow the Off Black tint scale (OB1–OB5).
+     Secondary = Blue; accents = Poppy / Teal / Green (semantic success).
+     Legacy accent + gray names below are retained as aliases so every
+     existing rule keeps resolving — the values are remapped to brand v2.
+     ===================================================================== */
+
+  /* Primary */
+  --recurly-yellow:      #FFD706;
+  --recurly-offblack:    #0D0D0B;
+
+  /* Secondary — Blue */
+  --recurly-blue:        #008CFF;
+  --recurly-blue-hover:  #0067BE;   /* B Shade 1 — available for hover states */
+
+  /* Accents — use sparingly */
+  --recurly-poppy:       #FF5126;   /* errors / negative data */
+  --recurly-teal:        #2DCECE;   /* occasional data-viz / method accent */
+  --recurly-green:       #5DC32E;   /* semantic success */
+
+  /* Neutrals — Off Black tint scale */
+  --recurly-ob1:         #FCFBF7;   /* card surfaces */
+  --recurly-ob2:         #F2F1EA;   /* page / content backgrounds */
+  --recurly-ob3:         #D1CFC4;   /* borders, inactive states */
+  --recurly-ob4:         #807D75;   /* tertiary text, dividers */
+  --recurly-ob5:         #32312D;   /* secondary text, dark UI */
+
+  /* Neutral aliases (legacy names → OB scale) */
+  --recurly-offwhite:    var(--recurly-ob1);
+  --recurly-brightgray:  var(--recurly-ob2);
+  --recurly-lightgray:   var(--recurly-ob3);
+  --recurly-gray:        var(--recurly-ob4);
+  --recurly-darkgray:    var(--recurly-ob5);
+
+  /* Legacy accent aliases (remapped to brand v2) */
+  --recurly-tangerine:   var(--recurly-blue);     /* was #FF8200 — links / interactive */
+  --recurly-vermillion:  var(--recurly-poppy);    /* was #FF5810 — errors / DELETE / 4xx-5xx */
+  --recurly-salmon:      var(--recurly-poppy);    /* was #FF9D88 — deprecated; usages migrated to Teal/Green */
+  --recurly-deepchar:    var(--recurly-offblack); /* was #232932 — retired bluish neutral */
+  --recurly-darknavy:    var(--recurly-offblack); /* was #343F4B — retired bluish neutral */
+
+  --recurly-font: 'Figtree', 'Segoe UI', system-ui, sans-serif;
+
+  /* Shorthand set — mirrors the --recurly-* tokens above */
+  --yellow:      var(--recurly-yellow);
+  --offblack:    var(--recurly-offblack);
+  --blue:        var(--recurly-blue);
+  --blue-hover:  var(--recurly-blue-hover);
+  --poppy:       var(--recurly-poppy);
+  --teal:        var(--recurly-teal);
+  --green:       var(--recurly-green);
+  --tangerine:   var(--recurly-tangerine);
+  --vermillion:  var(--recurly-vermillion);
+  --salmon:      var(--recurly-salmon);
+  --darkgray:    var(--recurly-darkgray);
+  --gray:        var(--recurly-gray);
+  --lightgray:   var(--recurly-lightgray);
+  --brightgray:  var(--recurly-brightgray);
+  --offwhite:    var(--recurly-offwhite);
+  --deepchar:    var(--recurly-deepchar);
+  --darknavy:    var(--recurly-darknavy);
+  --font:        var(--recurly-font);
+
+  /* ReadMe markdown font tokens → Figtree */
+  --rm-font-body:    var(--recurly-font);
+  --rm-font-heading: var(--recurly-font);
+  --markdown-font:   var(--recurly-font);
+  --font-family:     var(--recurly-font);
+}
+
+
+/* ============================================================
+   PART 1 — Recurly brand design system (rp-* classes)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+  .rp-page {
+    font-family: var(--font);
+    color: var(--deepchar);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+  }
+
+  .rp-overview {
+    border-left: 4px solid var(--yellow);
+    background: var(--offwhite);
+    padding: 16px 22px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: var(--darkgray);
+  }
+
+  .rp-plan {
+    display: inline-block;
+    background: var(--offblack) !important;
+    color: var(--yellow) !important;
+    border: 0 !important;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    letter-spacing: 0.3px;
+  }
+
+  .rp-cost {
+    border-left: 4px solid var(--tangerine);
+    background: #FFF8F2;
+    padding: 14px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--darkgray);
+  }
+  .rp-cost a { color: var(--tangerine); }
+
+  .rp-definition {
+    background: var(--brightgray);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-bottom: 28px;
+    font-size: 15px;
+    color: var(--darkgray);
+    line-height: 1.7;
+  }
+
+  .rp-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .rp-benefits.rp-benefits-2x2 { grid-template-columns: repeat(2, 1fr); }
+  .rp-benefit {
+    background: var(--offblack) !important;
+    color: var(--offwhite) !important;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .rp-benefit-icon { color: var(--yellow) !important; font-size: 20px; margin-bottom: 10px; }
+  .rp-benefit strong {
+    display: block; font-size: 14px; font-weight: 700;
+    margin-bottom: 6px; color: var(--offwhite) !important;
+  }
+  .rp-benefit span { font-size: 13px; color: var(--lightgray) !important; line-height: 1.5; }
+  .rp-benefit code,
+  .rp-benefit code.rdmd-code,
+  .rp-benefit .rdmd-code {
+    background: rgba(255, 253, 242, 0.10) !important;
+    color: var(--tangerine) !important;
+    border-radius: 4px !important;
+    padding: 1px 5px !important;
+    font-size: 0.92em !important;
+    box-shadow: none !important;
+  }
+  .rp-h1 {
+    font-size: 1.5rem !important; font-weight: 800 !important; color: var(--offblack) !important;
+    margin: 36px 0 14px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--yellow) !important;
+  }
+  .rp-h2 { font-size: 1.1rem !important; font-weight: 700 !important; color: var(--offblack) !important; margin: 28px 0 10px; border-bottom: 0 !important; padding-bottom: 0 !important; text-decoration: none !important; }
+  .rp-h3 { font-size: 0.95rem !important; font-weight: 700 !important; color: var(--darkgray) !important; margin: 20px 0 8px; border-bottom: 0 !important; padding-bottom: 0 !important; text-decoration: none !important; }
+  .rp-h4 { font-size: 0.9rem !important; font-weight: 600 !important; color: var(--darkgray) !important; margin: 16px 0 6px; border-bottom: 0 !important; padding-bottom: 0 !important; text-decoration: none !important; }
+
+  .rp-h2:first-child { margin-top: 0 !important; }
+  .rp-h3:first-child { margin-top: 0 !important; }
+
+  .rp-card {
+    background: var(--offwhite);
+    border: 1px solid var(--lightgray);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--darkgray);
+    line-height: 1.65;
+  }
+
+  .rp-steps { display: flex; flex-direction: column; margin-bottom: 24px; }
+  .rp-step {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--offwhite); border: 1px solid var(--lightgray);
+    border-radius: 10px; padding: 18px 22px;
+    margin-bottom: 12px;
+  }
+  .rp-steps .rp-step { margin-bottom: 0; }
+  .rp-steps .rp-step + .rp-step { margin-top: 12px; }
+  .rp-step-num {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--offblack); color: var(--yellow);
+    font-weight: 800; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .rp-step h4 { font-size: 0.95rem; font-weight: 700; color: var(--offblack); margin: 0 0 4px; }
+  .rp-step p  { font-size: 0.87rem; color: var(--gray); line-height: 1.6; margin: 0; }
+
+  /* Callout icons: Note fa-info-circle | Tip fa-lightbulb | Warning fa-exclamation-triangle | Important fa-exclamation-circle */
+  .rp-callout {
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0;
+    font-size: 14px;
+  }
+  .rp-callout strong { display: inline; }
+  .rp-callout strong:first-child { display: block; margin-bottom: 4px; }
+  .rp-callout-note      { border-left: 4px solid var(--offblack); background: var(--brightgray); color: var(--offblack); }
+  .rp-callout-tip       { border-left: 4px solid var(--green);    background: #EFFAEA;           color: var(--offblack); }
+  .rp-callout-warning   { border-left: 4px solid var(--yellow);   background: #FFFECB;           color: var(--offblack); }
+  .rp-callout-important { border-left: 4px solid var(--poppy);    background: #FFEEE9;           color: var(--offblack); }
+
+  /* rp-btn-* rules moved outside this scoped block — see Part 1.5 below */
+
+  /* border-collapse: separate allows border-radius on corner <td> cells.
+     :has(thead) scoping on rdmd-table (Part 4) prevents that rule from
+     overriding these with border-collapse: collapse !important. */
+  .rp-gw-table { width: 100%; border-collapse: separate !important; border-spacing: 0 !important; font-size: 14px; margin-bottom: 28px; border-radius: 10px !important; border: 1px solid var(--lightgray); }
+  .rp-gw-table tr.rp-thead-row td {
+    background: var(--offblack) !important;
+    color: var(--offwhite) !important;
+    font-weight: 700;
+    padding: 12px 16px;
+  }
+  .rp-gw-table tr.rp-thead-row td:first-child { color: var(--offwhite) !important; }
+  .rp-gw-table td { padding: 12px 16px; vertical-align: top; background: var(--offwhite) !important; }
+  .rp-gw-table tr:not(.rp-thead-row) td:first-child { font-weight: 600; color: var(--offblack); width: 35%; }
+  .rp-gw-table a { color: var(--tangerine); }
+  .rp-gw-table tr:first-child td:first-child { border-top-left-radius:    9px; }
+  .rp-gw-table tr:first-child td:last-child  { border-top-right-radius:   9px; }
+  .rp-gw-table tr:last-child  td:first-child { border-bottom-left-radius:  9px; }
+  .rp-gw-table tr:last-child  td:last-child  { border-bottom-right-radius: 9px; }
+
+  .rp-pm-table { width: 100%; border-collapse: separate !important; border-spacing: 0 !important; font-size: 13px; margin: 12px 0 24px; border-radius: 10px !important; border: 1px solid var(--lightgray); }
+  .rp-pm-table tr.rp-thead-row td {
+    background: var(--offblack) !important;
+    color: var(--offwhite) !important;
+    font-weight: 700;
+    padding: 10px 12px;
+  }
+  .rp-pm-table tr.rp-thead-row td:first-child { color: var(--offwhite) !important; }
+  .rp-pm-table td { padding: 10px 12px; border-bottom: 1px solid var(--lightgray); vertical-align: top; background: var(--offwhite) !important; }
+  .rp-pm-table tr:last-child td { border-bottom: 0 !important; }
+  .rp-pm-table tr:first-child td:first-child { border-top-left-radius:    9px; }
+  .rp-pm-table tr:first-child td:last-child  { border-top-right-radius:   9px; }
+  .rp-pm-table tr:last-child  td:first-child { border-bottom-left-radius:  9px; }
+  .rp-pm-table tr:last-child  td:last-child  { border-bottom-right-radius: 9px; }
+
+  .rp-params { width: 100%; border-collapse: separate !important; border-spacing: 0 !important; font-size: 14px; margin: 12px 0 24px; border-radius: 10px !important; border: 1px solid var(--lightgray); }
+  .rp-params tr.rp-thead-row td {
+    background: var(--offblack) !important;
+    color: var(--offwhite) !important;
+    font-weight: 700;
+    padding: 10px 14px;
+  }
+  .rp-params tr.rp-thead-row td:first-child { color: var(--offwhite) !important; }
+  .rp-params td { padding: 10px 14px; border-bottom: 1px solid var(--lightgray); vertical-align: top; background: var(--offwhite) !important; }
+  .rp-params tr:last-child td { border-bottom: 0 !important; }
+  .rp-params tr:not(.rp-thead-row) td:first-child { font-weight: 600; color: var(--offblack); width: 28%; }
+  .rp-params tr:first-child td:first-child { border-top-left-radius:    9px; }
+  .rp-params tr:first-child td:last-child  { border-top-right-radius:   9px; }
+  .rp-params tr:last-child  td:first-child { border-bottom-left-radius:  9px; }
+  .rp-params tr:last-child  td:last-child  { border-bottom-right-radius: 9px; }
+
+  .rp-btn-download {
+    display: inline-flex !important; align-items: center !important; gap: 8px !important;
+    background: var(--yellow) !important; color: var(--offblack) !important;
+    font-family: var(--font) !important; font-size: 14px !important; font-weight: 700 !important;
+    padding: 10px 22px !important; border-radius: 8px !important; text-decoration: none !important;
+    margin-bottom: 20px !important; border: 0 !important; cursor: pointer !important;
+    transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+  .rp-btn-download:hover {
+    filter: brightness(0.92) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(255, 215, 6, 0.25) !important;
+  }
+  .rp-btn-download:active {
+    transform: scale(0.97) translateY(0) !important;
+    box-shadow: 0 1px 4px rgba(255, 215, 6, 0.15) !important;
+    filter: brightness(0.85) !important;
+  }
+
+  .rp-list {
+    background: var(--offwhite); border: 1px solid var(--lightgray);
+    border-radius: 10px; padding: 16px 22px 16px 38px;
+    margin-bottom: 20px; font-size: 14px; color: var(--darkgray); line-height: 1.7;
+  }
+
+  .rp-video { position: relative; padding-top: 56.25%; margin-bottom: 28px;
+              border-radius: 10px; overflow: hidden; }
+  .rp-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+  /* ── IFRAME SIZING ───────────────────────────────────────────
+     The project-specific CSS applies a blanket iframe height for
+     non-video contexts. These two rules ensure that iframes inside
+     a padding-top aspect-ratio wrapper (Wistia embeds) always fill
+     the container correctly, regardless of that blanket rule.
+     The :not selector excludes video embeds from the blanket rule;
+     the child selector restores correct sizing inside wrappers.
+     ──────────────────────────────────────────────────────────── */
+  iframe:not([style*="position: absolute"]):not([style*="position:absolute"]) {
+    width: 100%;
+    height: 450px;
+  }
+
+  [style*="padding-top"] > iframe,
+  [style*="paddingTop"] > iframe {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+  }
+
+  /* ── NATIVE IMAGE COMPONENT — ALIGNMENT ─────────────────────
+     ReadMe's <Image align="center"> renders as:
+       span.img.img-align-center
+         span.lightbox-inner
+           img.img
+     The span is display:block by default; margin:auto handles centering.
+     text-align:center covers inline-block fallback contexts.
+     ──────────────────────────────────────────────────────────── */
+  .img.img-align-center,
+  span.img.img-align-center {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  /* ── IMAGE LIGHTBOX ─────────────────────────────────────────
+     ReadMe renders our <a class="rp-zoom-label"><img> as:
+       span.img.lightbox.closed
+         span.lightbox-inner
+           img.img[width="auto"][height="auto"]
+     When clicked, ReadMe's native JS opens its own lightbox.
+     We style the inline image only — sizing, border, hover.
+     The open-state lightbox is left to ReadMe's native behavior.
+
+     IMPORTANT: rp-zoom-label anchors must NEVER have target="_blank".
+     When target="_blank" is present, ReadMe skips lightbox conversion
+     and renders a real <a> that opens/downloads the image in a new tab.
+     Keep the <a> as a plain href with no target attribute.
+     ──────────────────────────────────────────────────────── */
+  .rp-zoom { display: contents; }
+  .rp-zoom-label { display: block; }
+
+  /* Defensive rule: if the anchor survives as a real <a> (lightbox
+     conversion skipped), block navigation so the image isn't downloaded. */
+  a.rp-zoom-label {
+    pointer-events: none !important;
+  }
+  a.rp-zoom-label .img.lightbox,
+  a.rp-zoom-label span.img {
+    pointer-events: auto !important;
+    cursor: zoom-in !important;
+  }
+
+  /* Hide the legacy :target overlay anchor — still present in page MDX
+     but no longer needed now that ReadMe's native lightbox handles clicks */
+  .rp-zoom-overlay { display: none !important; }
+
+  /* Outermost wrapper — controls width and centering */
+  .rp-zoom-label .img.lightbox,
+  .rp-zoom-label span.img {
+    display: block !important;
+    width: 90% !important;
+    max-width: 860px !important;
+    margin: 16px auto !important;
+    cursor: zoom-in !important;
+  }
+  /* Inner span */
+  .rp-zoom-label .lightbox-inner {
+    display: block !important;
+    width: 100% !important;
+  }
+  /* The actual image — box-shadow for border (immune to border:none resets) */
+  .rp-zoom-label .lightbox-inner img,
+  .rp-zoom-label img.img,
+  .rp-zoom-img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 0 1px #D1CFC4 !important;
+    transition: opacity 0.15s ease;
+    box-sizing: border-box !important;
+  }
+  .rp-zoom-label:hover .lightbox-inner img,
+  .rp-zoom-label:hover img.img { opacity: 0.88; }
+
+  /* Small images — add class="rp-zoom-small" directly on the <a class="rp-zoom-label"> */
+  /* The <div class="rp-zoom-small"> wrapper approach fails: ReadMe's MDX parser strips
+     block-level elements (div) from inline/paragraph contexts before the DOM is built,
+     so the div never renders and no descendant selectors fire.
+     Solution: apply rp-zoom-small as an additional class on the <a> anchor itself.
+     Scope to .img.lightbox.closed (not .open) — ReadMe toggles closed→open on click,
+     not removes the class. The open lightbox renders in a separate fixed full-screen
+     overlay so the anchor width cap must not apply when open. */
+  a.rp-zoom-label.rp-zoom-small {
+    display: block !important;
+    max-width: 320px !important;
+    width: 320px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  a.rp-zoom-label.rp-zoom-small .img.lightbox.closed,
+  a.rp-zoom-label.rp-zoom-small span.img.closed {
+    max-width: 320px !important;
+    width: 320px !important;
+  }
+
+  /* When open: release all size constraints so the full-screen overlay renders naturally */
+  a.rp-zoom-label.rp-zoom-small .img.lightbox.open,
+  a.rp-zoom-label.rp-zoom-small span.img.open {
+    max-width: none !important;
+    width: 90% !important;
+  }
+
+  .rp-toc {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 32px;
+  }
+  .rp-toc-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 18px 8px 10px; border-radius: 20px;
+    border: 1px solid var(--offblack) !important; background: var(--offblack) !important;
+    color: var(--offwhite) !important; text-decoration: none !important;
+    font-size: 13px; font-weight: 700;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .rp-toc-pill:hover {
+    background: var(--tangerine) !important;
+    border-color: var(--tangerine) !important;
+    color: var(--offblack) !important;
+  }
+  .rp-toc-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--yellow) !important; color: var(--offblack) !important;
+    font-size: 11px; font-weight: 800; flex-shrink: 0;
+    text-decoration: none !important;
+  }
+
+  .rp-anchor {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    border-bottom: 0 !important;
+  }
+  .rp-anchor::after {
+    content: " #"; opacity: 0;
+    color: var(--lightgray); font-weight: 400; font-size: 0.75em;
+    transition: opacity 0.15s;
+  }
+  .rp-anchor:hover::after { opacity: 1; }
+
+  .rp-page ol:not(.rp-list), .rp-page ul:not(.rp-list) {
+    margin: 8px 0 16px;
+    padding-left: 24px;
+  }
+  .rp-page ol:not(.rp-list) li, .rp-page ul:not(.rp-list) li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .rp-benefits,
+    .rp-benefits.rp-benefits-2x2 { grid-template-columns: 1fr; }
+    .rp-h1 { font-size: 1.25rem; }
+  }
+
+
+/* ============================================================
+   PART 1.5 — rp-btn-* navigation buttons
+   ============================================================
+   Placed OUTSIDE the scoped :root theme block so these rules
+   run at top-level specificity. Scoped under .rm-Markdown to
+   beat ReadMe's own .rm-Markdown.markdown-body a rules which
+   apply tangerine color, border-radius-full, and borders to
+   all <a> elements.
+
+   Every variant is self-contained (single class). ReadMe's MDX
+   parser mangles space-separated multi-class strings on <a>
+   elements into comma-separated values — "rp-btn rp-btn-primary"
+   becomes the literal class "rp-btn,rp-btn-primary" which matches
+   nothing. Single class only, always.
+
+   Token values are hardcoded here (not var()) because these rules
+   sit outside the :root scoped block where the shorthand tokens
+   (--yellow, --offblack, etc.) are defined.
+   ============================================================ */
+
+.rm-Markdown.markdown-body a.rp-btn-primary,
+.rm-Markdown.markdown-body .rp-btn-primary {
+  display: inline-block !important;
+  padding: 10px 22px !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  font-family: var(--recurly-font) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  margin: 6px 8px 6px 0 !important;
+  background: #0D0D0B !important;
+  color: #FFD706 !important;
+  transition: all 0.15s ease !important;
+}
+.rm-Markdown.markdown-body a.rp-btn-primary:hover,
+.rm-Markdown.markdown-body .rp-btn-primary:hover {
+  background: #32312D !important;
+  color: #FFD706 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(13, 13, 11, 0.15) !important;
+}
+
+.rm-Markdown.markdown-body a.rp-btn-secondary,
+.rm-Markdown.markdown-body .rp-btn-secondary {
+  display: inline-block !important;
+  padding: 10px 22px !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  font-family: var(--recurly-font) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  margin: 6px 8px 6px 0 !important;
+  background: #FFD706 !important;
+  color: #0D0D0B !important;
+  transition: all 0.15s ease !important;
+}
+.rm-Markdown.markdown-body a.rp-btn-secondary:hover,
+.rm-Markdown.markdown-body .rp-btn-secondary:hover {
+  filter: brightness(0.9) !important;
+  color: #0D0D0B !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 6, 0.2) !important;
+}
+
+.rm-Markdown.markdown-body a.rp-btn-ghost,
+.rm-Markdown.markdown-body .rp-btn-ghost {
+  display: inline-block !important;
+  padding: 10px 22px !important;
+  border-radius: 8px !important;
+  border: 1px solid #D1CFC4 !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  font-family: var(--recurly-font) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  margin: 6px 8px 6px 0 !important;
+  background: transparent !important;
+  color: #32312D !important;
+  transition: all 0.15s ease !important;
+}
+.rm-Markdown.markdown-body a.rp-btn-ghost:hover,
+.rm-Markdown.markdown-body .rp-btn-ghost:hover {
+  background: #FFD706 !important;
+  color: #0D0D0B !important;
+  border-color: #FFD706 !important;
+}
+
+.rm-Markdown.markdown-body a.rp-btn-download,
+.rm-Markdown.markdown-body .rp-btn-download {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 22px !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  font-family: var(--recurly-font) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  margin-bottom: 20px !important;
+  background: #FFD706 !important;
+  color: #0D0D0B !important;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+.rm-Markdown.markdown-body a.rp-btn-download:hover,
+.rm-Markdown.markdown-body .rp-btn-download:hover {
+  filter: brightness(0.92) !important;
+  color: #0D0D0B !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 6, 0.25) !important;
+}
+.rm-Markdown.markdown-body a.rp-btn-download:active,
+.rm-Markdown.markdown-body .rp-btn-download:active {
+  transform: scale(0.97) translateY(0) !important;
+  box-shadow: 0 1px 4px rgba(255, 215, 6, 0.15) !important;
+  filter: brightness(0.85) !important;
+}
+
+/* ——— Collapse <p> wrapper margin around button anchors ———
+   ReadMe wraps standalone <a> elements in a <p> tag which carries
+   margin-bottom: 15px from the markdown body styles. Zero it out
+   when the paragraph contains only a button anchor. */
+.rm-Markdown.markdown-body p:has(> a.rp-btn-primary),
+.rm-Markdown.markdown-body p:has(> a.rp-btn-secondary),
+.rm-Markdown.markdown-body p:has(> a.rp-btn-ghost),
+.rm-Markdown.markdown-body p:has(> a.rp-btn-download) {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+
+/* ============================================================
+   PART 1.6 — rp-shelf-* spotlight carousel
+   ============================================================
+   Interactive category shelf used on browsable overview pages
+   (e.g., "More uses"). Three variants:
+
+     .rp-shelf-single    → 1 card, centered. No carousel.
+     .rp-shelf-pair      → 2 cards, both fully lit. No carousel.
+     .rp-shelf-carousel  → 3+ cards, infinite loop. Active card
+                           centered at 100% opacity, neighbors at
+                           30% opacity. Requires the companion
+                           rp-shelf init script in Custom JS.
+
+   Expected structure (rendered inside HTMLBlock):
+
+     <div class="rp-shelf rp-shelf-carousel">
+       <div class="rp-shelf-header">
+         <div class="rp-shelf-label"><i class="fa-solid fa-*"></i>Category</div>
+         <div class="rp-shelf-count">N scenarios</div>
+       </div>
+       <div class="rp-shelf-viewport">
+         <div class="rp-shelf-track">
+           <div class="rp-shelf-card">
+             <strong>Title</strong>
+             <span>Body copy.</span>
+           </div>
+           ...
+         </div>
+       </div>
+       <div class="rp-shelf-controls">
+         <button class="rp-shelf-btn rp-shelf-prev">...</button>
+         <button class="rp-shelf-btn rp-shelf-next">...</button>
+       </div>
+     </div>
+
+   Token values are hardcoded (not var()) because these rules
+   sit outside the :root scoped block where the shorthand tokens
+   (--yellow, --offblack, etc.) are defined — same pattern as
+   PART 1.5.
+   ============================================================ */
+
+/* ——— Outer container: dark hero panel with soft yellow glow ——— */
+.rp-shelf {
+  background: #0D0D0B;
+  border-radius: 16px;
+  padding: 24px 20px 20px;
+  margin-bottom: 20px;
+  box-shadow:
+    0 0 0 1px rgba(255, 215, 6, 0.10),
+    0 24px 60px -30px rgba(255, 215, 6, 0.20);
+}
+
+/* ——— Header: yellow pill label + muted count ——— */
+.rp-shelf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.rp-shelf-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFD706;
+  color: #0D0D0B;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  font-family: var(--recurly-font);
+}
+.rp-shelf-count {
+  font-size: 11px;
+  color: rgba(252, 251, 247, 0.45);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: var(--recurly-font);
+}
+
+/* ——— Viewport clips overflow; track holds the cards ——— */
+.rp-shelf-viewport {
+  overflow: hidden;
+}
+.rp-shelf-track {
+  display: flex;
+  gap: 14px;
+  will-change: transform;
+}
+
+/* ——— Cards: dimmed by default, spotlit when .rp-active ——— */
+.rp-shelf-card {
+  background: linear-gradient(135deg, #1C1B18 0%, #0D0D0B 100%);
+  border: 1px solid rgba(255, 215, 6, 0.15);
+  border-radius: 12px;
+  padding: 24px 26px;
+  min-height: 140px;
+  opacity: 0.3;
+  transform: scale(0.95);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+.rp-shelf-card strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #FCFBF7;
+  margin-bottom: 10px;
+  font-family: var(--recurly-font);
+}
+.rp-shelf-card span {
+  display: block;
+  font-size: 13px;
+  color: rgba(252, 251, 247, 0.70);
+  line-height: 1.65;
+  font-family: var(--recurly-font);
+}
+.rp-shelf-card a {
+  color: #FFD706;
+  text-decoration: underline;
+}
+.rp-shelf-card.rp-active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: rgba(255, 215, 6, 0.35);
+  box-shadow:
+    0 0 40px -10px rgba(255, 215, 6, 0.25),
+    0 0 0 1px rgba(255, 215, 6, 0.20);
+}
+
+/* ——— Carousel variant (3+ cards): 3 visible at a time ——— */
+.rp-shelf-carousel .rp-shelf-card {
+  flex: 0 0 calc((100% - 28px) / 3);
+}
+.rp-shelf-carousel .rp-shelf-track {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ——— Static variants (1 or 2 cards): no carousel, all lit ——— */
+.rp-shelf-pair .rp-shelf-track,
+.rp-shelf-single .rp-shelf-track {
+  justify-content: center;
+}
+.rp-shelf-pair .rp-shelf-card {
+  flex: 0 0 calc((100% - 14px) / 2);
+}
+.rp-shelf-single .rp-shelf-card {
+  flex: 0 0 88%;
+}
+.rp-shelf-pair .rp-shelf-card,
+.rp-shelf-single .rp-shelf-card {
+  opacity: 1;
+  transform: none;
+  border-color: rgba(255, 215, 6, 0.30);
+}
+
+/* ——— Controls (rendered only in .rp-shelf-carousel) ——— */
+.rp-shelf-controls {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+.rp-shelf-btn {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 215, 6, 0.25) !important;
+  background: transparent !important;
+  color: #FFD706 !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.rp-shelf-btn:hover {
+  background: #FFD706 !important;
+  color: #0D0D0B !important;
+  border-color: #FFD706 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 20px rgba(255, 215, 6, 0.35) !important;
+}
+.rp-shelf-btn:active {
+  transform: translateY(0) !important;
+}
+.rp-shelf-btn:focus-visible {
+  outline: 2px solid #FFD706 !important;
+  outline-offset: 2px !important;
+}
+
+/* ——— Mobile: ~1 card visible, larger touch targets ——— */
+@media (max-width: 640px) {
+  .rp-shelf-carousel .rp-shelf-card { flex: 0 0 82%; }
+  .rp-shelf-pair .rp-shelf-card { flex: 0 0 88%; }
+  .rp-shelf-pair .rp-shelf-track {
+    overflow-x: auto;
+    justify-content: flex-start;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 6px;
+  }
+  .rp-shelf-pair .rp-shelf-card {
+    scroll-snap-align: center;
+  }
+}
+
+
+/* ============================================================
+   PART 2 — ReadMe native code-snippet overrides
+   ============================================================ */
+
+.CodeTabs,
+.CodeTabs.theme-light,
+.CodeTabs.theme-dark,
+.CodeTabs.CodeTabs_initial {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  border: 1px solid var(--recurly-darkgray) !important;
+  border-radius: 10px !important;
+  margin: 16px 0 24px !important;
+  overflow: hidden !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+.CodeTabs-toolbar {
+  background: var(--recurly-offblack) !important;
+  border-bottom: 1px solid var(--recurly-darkgray) !important;
+  padding: 8px 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex-wrap: wrap !important;
+}
+
+/* ── CodeTabs toolbar buttons ─────────────────────────────────
+   ReadMe's JS adds class="CodeTabs_active" to the selected button.
+   DOM confirmed: <button class="CodeTabs_active">Language</button>
+   ──────────────────────────────────────────────────────────── */
+
+.CodeTabs { --color-tab-active: #FFD706; }
+
+/* Base — all buttons */
+.CodeTabs-toolbar button {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--recurly-lightgray) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 5px 12px !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+
+/* Hover — inactive tabs only */
+.CodeTabs-toolbar button:not(.CodeTabs_active):hover {
+  background: transparent !important;
+  color: #FFD706 !important;
+}
+
+/* Active tab — ReadMe adds class="CodeTabs_active" on the selected button */
+.CodeTabs-toolbar button.CodeTabs_active {
+  background: #FFD706 !important;
+  color: #0D0D0B !important;
+  border-radius: 14px !important;
+  cursor: default !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+/* Single-language block — plain yellow text label, never a pill */
+.CodeTabs-toolbar:has(> button:only-child) > button {
+  background: transparent !important;
+  color: #FFD706 !important;
+  border-radius: 0 !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+}
+
+
+.CodeTabs-inner {
+  background: var(--recurly-offblack) !important;
+  position: relative !important;
+}
+
+.CodeTabs-inner pre {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  margin: 0 !important;
+  padding: 16px 18px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important;
+  position: relative !important;
+}
+
+.CodeTabs-inner pre code,
+.CodeTabs code.rdmd-code {
+  background: transparent !important;
+  color: var(--recurly-offwhite) !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  padding: 0 !important;
+}
+
+.CodeTabs .rdmd-code-copy {
+  background: transparent !important;
+  border: 1px solid var(--recurly-gray) !important;
+  color: var(--recurly-lightgray) !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  cursor: pointer !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+.CodeTabs .rdmd-code-copy:hover,
+.CodeTabs .rdmd-code-copy:focus {
+  background: var(--recurly-tangerine) !important;
+  border-color: var(--recurly-tangerine) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+.CodeTabs .rdmd-code-copy.fa::before { color: inherit !important; }
+
+pre > code.rdmd-code:not(.CodeTabs *) {
+  display: block !important;
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  border: 1px solid var(--recurly-darkgray) !important;
+  border-radius: 10px !important;
+  margin: 16px 0 24px !important;
+  padding: 16px 18px !important;
+  overflow-x: auto !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  white-space: pre !important;
+}
+
+pre:has(> code.rdmd-code):not(.CodeTabs *) {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.CodeTabs code.rdmd-code .cm-s-neo,
+.CodeTabs code.rdmd-code .cm-s-neo span,
+pre > code.rdmd-code .cm-s-neo,
+pre > code.rdmd-code .cm-s-neo span { color: var(--recurly-offwhite) !important; }
+
+.CodeTabs code.rdmd-code .cm-s-neo .cm-keyword,
+pre > code.rdmd-code .cm-s-neo .cm-keyword     { color: var(--recurly-yellow)     !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-def,
+pre > code.rdmd-code .cm-s-neo .cm-def         { color: var(--recurly-tangerine)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-attribute,
+pre > code.rdmd-code .cm-s-neo .cm-attribute   { color: var(--recurly-tangerine)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-string,
+pre > code.rdmd-code .cm-s-neo .cm-string      { color: var(--recurly-green)      !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-string-2,
+pre > code.rdmd-code .cm-s-neo .cm-string-2    { color: var(--recurly-green)      !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-number,
+pre > code.rdmd-code .cm-s-neo .cm-number      { color: var(--recurly-vermillion) !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-comment,
+pre > code.rdmd-code .cm-s-neo .cm-comment     { color: var(--recurly-gray)       !important; font-style: italic; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-meta,
+pre > code.rdmd-code .cm-s-neo .cm-meta        { color: var(--recurly-tangerine)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-tag,
+pre > code.rdmd-code .cm-s-neo .cm-tag         { color: var(--recurly-yellow)     !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-builtin,
+pre > code.rdmd-code .cm-s-neo .cm-builtin     { color: var(--recurly-yellow)     !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-atom,
+pre > code.rdmd-code .cm-s-neo .cm-atom        { color: var(--recurly-vermillion) !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-variable,
+pre > code.rdmd-code .cm-s-neo .cm-variable    { color: var(--recurly-offwhite)   !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-variable-2,
+pre > code.rdmd-code .cm-s-neo .cm-variable-2  { color: var(--recurly-offwhite)   !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-variable-3,
+pre > code.rdmd-code .cm-s-neo .cm-variable-3  { color: var(--recurly-lightgray)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-property,
+pre > code.rdmd-code .cm-s-neo .cm-property    { color: var(--recurly-lightgray)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-operator,
+pre > code.rdmd-code .cm-s-neo .cm-operator    { color: var(--recurly-lightgray)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-punctuation,
+pre > code.rdmd-code .cm-s-neo .cm-punctuation { color: var(--recurly-gray)       !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-bracket,
+pre > code.rdmd-code .cm-s-neo .cm-bracket     { color: var(--recurly-lightgray)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-qualifier,
+pre > code.rdmd-code .cm-s-neo .cm-qualifier   { color: var(--recurly-tangerine)  !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-link,
+pre > code.rdmd-code .cm-s-neo .cm-link        { color: var(--recurly-yellow)     !important; text-decoration: underline !important; }
+.CodeTabs code.rdmd-code .cm-s-neo .cm-error,
+pre > code.rdmd-code .cm-s-neo .cm-error       { color: var(--recurly-vermillion) !important; }
+
+
+/* ============================================================
+   PART 3 — ReadMe native MDX component branding
+   ============================================================ */
+
+.Accordion {
+  background: transparent !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+  border-radius: 10px !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+  font-family: var(--recurly-font) !important;
+}
+
+.Accordion-title {
+  list-style: none !important;
+  cursor: pointer !important;
+  padding: 16px 22px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-offblack) !important;
+  background: var(--recurly-yellow) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  transition: background 0.15s, color 0.15s !important;
+}
+
+.Accordion-title::-webkit-details-marker { display: none !important; }
+.Accordion-title::marker { content: "" !important; }
+
+.Accordion-title:hover {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+}
+
+.Accordion[open] .Accordion-title {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+}
+
+.Accordion-toggleIcon {
+  color: var(--recurly-offblack) !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  transition: transform 0.2s, color 0.15s !important;
+  flex-shrink: 0 !important;
+  width: 14px !important;
+  text-align: center !important;
+}
+
+.Accordion-title:hover .Accordion-toggleIcon,
+.Accordion[open] .Accordion-title .Accordion-toggleIcon {
+  color: var(--recurly-yellow) !important;
+}
+
+.Accordion[open] .Accordion-toggleIcon {
+  transform: rotate(90deg) !important;
+}
+
+.Accordion-icon {
+  color: var(--recurly-offblack) !important;
+  --fa-primary-color: var(--recurly-offblack) !important;
+  --fa-secondary-color: var(--recurly-offblack) !important;
+  font-size: 15px !important;
+  flex-shrink: 0 !important;
+  width: 16px !important;
+  text-align: center !important;
+  transition: color 0.15s !important;
+}
+
+.Accordion-title:hover .Accordion-icon,
+.Accordion[open] .Accordion-title .Accordion-icon {
+  color: var(--recurly-yellow) !important;
+  --fa-primary-color: var(--recurly-yellow) !important;
+  --fa-secondary-color: var(--recurly-yellow) !important;
+}
+
+.Accordion-content {
+  padding: 16px 22px 18px 48px !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  color: var(--recurly-darkgray) !important;
+}
+
+.Accordion-content p { margin: 0 0 10px !important; }
+.Accordion-content p:last-child { margin-bottom: 0 !important; }
+.Accordion-content a { color: var(--recurly-tangerine) !important; }
+.Accordion-content code {
+  background: var(--recurly-brightgray) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-size: 0.92em !important;
+}
+
+.CardsGrid {
+  display: grid !important;
+  grid-template-columns: repeat(min(var(--CardsGrid-columns, 3), 3), minmax(var(--CardsGrid-cardWidth, 200px), 1fr)) !important;
+  gap: 14px !important;
+  margin: 16px 0 24px !important;
+}
+
+.Card,
+.Card.Card_card {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  background: var(--recurly-yellow) !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  padding: 20px !important;
+  text-decoration: none !important;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s !important;
+  font-family: var(--recurly-font) !important;
+  color: var(--recurly-offblack) !important;
+}
+
+.Card:hover,
+.Card.Card_card:hover {
+  background: var(--recurly-offblack) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 14px rgba(13, 13, 11, 0.20) !important;
+  text-decoration: none !important;
+}
+
+.Card-icon {
+  color: var(--recurly-offblack) !important;
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0 !important;
+  filter: none !important;
+}
+
+.Card:hover .Card-icon { color: var(--recurly-yellow) !important; }
+
+.Card-content { display: flex !important; flex-direction: column !important; gap: 6px !important; }
+
+.Card-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-offblack) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  line-height: 1.3 !important;
+}
+
+.Card:hover .Card-title { color: var(--recurly-offwhite) !important; }
+
+.Card-arrow {
+  color: var(--recurly-offblack) !important;
+  font-size: 13px !important;
+  transition: transform 0.15s !important;
+  flex-shrink: 0 !important;
+}
+
+.Card:hover .Card-arrow { transform: translateX(3px) !important; color: var(--recurly-yellow) !important; }
+
+
+/* ── FA6 DUOTONE DOUBLING FIX ────────────────────────────────
+   ReadMe's Card component outputs fa-duotone + fa-solid together.
+   In FA6 Pro, fa-duotone switches the font-family to the Duotone
+   font which renders two pseudo-element layers — causing doubled
+   or incomplete icons when the two layers don't align.
+   Fix: force the FA6 Pro solid font-family on these combos so
+   the icon renders as a clean single-layer solid icon.
+   This overrides the font-family set by fa-duotone without
+   touching the pseudo-elements, preserving icon completeness.
+   ──────────────────────────────────────────────────────────── */
+.fa-duotone.fa-solid,
+.fad.fa-solid {
+  font-family: "Font Awesome 6 Pro" !important;
+  font-weight: 900 !important;
+}
+.fa-duotone.fa-solid::after,
+.fad.fa-solid::after {
+  display: none !important;
+}
+.fa-duotone.fa-solid::before,
+.fad.fa-solid::before {
+  position: static !important;
+  opacity: 1 !important;
+}
+
+.Card p,
+.Card-body,
+.Card-content,
+.Card-content p,
+.Card-content div,
+.Card > p,
+.Card > div:not(.Card-title):not(.Card-icon):not(.Card-arrow):not(.Card-content) {
+  margin: 0 !important;
+  font-size: 13px !important;
+  color: var(--recurly-darkgray) !important;
+  line-height: 1.55 !important;
+  font-family: var(--recurly-font) !important;
+}
+
+/* Card-title sits inside Card-content — restore its own color */
+.Card-content .Card-title {
+  color: var(--recurly-offblack) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+.Card:hover p,
+.Card:hover .Card-body,
+.Card:hover .Card-content,
+.Card:hover .Card-content p,
+.Card:hover .Card-content div,
+.Card:hover > p,
+.Card:hover > div:not(.Card-title):not(.Card-icon):not(.Card-arrow):not(.Card-content) {
+  color: var(--recurly-lightgray) !important;
+}
+
+.Card:hover .Card-content .Card-title {
+  color: var(--recurly-offwhite) !important;
+}
+
+/* SDK split-pill cards — actual DOM:
+   <a class="Card"> <div class="Card-content"> <div class="Card-title">
+     Label <i class="Card-arrow"></i>
+   </div> </div> </a>
+   The yellow right block is a ::after pseudo-element on .Card so it's
+   independent of the DOM structure. The inline arrow <i> is hidden;
+   the arrow visual comes from the ::after pseudo's content.
+   Hover: full inversion — yellow body, offblack arrow block.
+   rp-sdk-grid margin-top separates the grid from TOC pills above. */
+.rp-sdk-grid {
+  margin-top: 28px !important;
+}
+
+.rp-sdk-grid .Card,
+.rp-sdk-grid .Card.Card_card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  background: #0D0D0B !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+  transition: transform 0.15s, box-shadow 0.15s !important;
+  text-decoration: none !important;
+}
+
+.rp-sdk-grid .Card:hover,
+.rp-sdk-grid .Card.Card_card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 6, 0.22) !important;
+}
+
+/* Left body */
+.rp-sdk-grid .Card-content {
+  flex: 1 !important;
+  background: transparent !important;
+  padding: 11px 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+
+.rp-sdk-grid .Card-title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #FCFBF7 !important;
+  letter-spacing: 0.2px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  width: 100% !important;
+}
+
+/* Hide the inline arrow icon — the ::after pseudo provides the arrow zone */
+.rp-sdk-grid .Card-arrow {
+  display: none !important;
+}
+
+/* Right yellow accent block via pseudo-element */
+.rp-sdk-grid .Card::after {
+  content: '→' !important;
+  flex-shrink: 0 !important;
+  background: #FFD706 !important;
+  color: #0D0D0B !important;
+  padding: 0 13px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  box-shadow: -3px 0 8px rgba(13, 13, 11, 0.30) !important;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s !important;
+  align-self: stretch !important;
+}
+
+/* Hover inversion */
+.rp-sdk-grid .Card:hover {
+  background: #FFD706 !important;
+}
+
+.rp-sdk-grid .Card:hover .Card-title {
+  color: #0D0D0B !important;
+}
+
+.rp-sdk-grid .Card:hover::after {
+  background: #0D0D0B !important;
+  color: #FFD706 !important;
+  box-shadow: -3px 0 8px rgba(0, 0, 0, 0.40) !important;
+}
+
+/* ── NAVIGATIONAL OVERVIEW CARDS (rp-nav-grid) ───────────────
+   Use for overview/orientation pages that link to child pages,
+   where each card has a title + multi-line description.
+   Distinct from rp-sdk-grid (compact split-pill, title-only).
+   rp-sdk-grid  → SDK links, partner integrations, short labels
+   rp-nav-grid  → overview pages, "Key details" nav cards with descriptions
+   ──────────────────────────────────────────────────────────── */
+.rp-nav-grid {
+  margin-top: 28px !important;
+}
+
+.rp-nav-grid .Card,
+.rp-nav-grid .Card.Card_card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--recurly-yellow) !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  padding: 20px 24px !important;
+  gap: 8px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.15s !important;
+  text-decoration: none !important;
+}
+
+.rp-nav-grid .Card:hover,
+.rp-nav-grid .Card.Card_card:hover {
+  background: var(--recurly-offblack) !important;
+  box-shadow: 0 6px 14px rgba(13, 13, 11, 0.20) !important;
+  transform: translateY(-2px) !important;
+}
+
+.rp-nav-grid .Card-icon {
+  display: none !important;
+}
+
+.rp-nav-grid .Card-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-offblack) !important;
+  justify-content: space-between !important;
+  white-space: normal !important;
+}
+
+.rp-nav-grid .Card:hover .Card-title {
+  color: var(--recurly-offwhite) !important;
+}
+
+.rp-nav-grid .Card-arrow {
+  color: var(--recurly-offblack) !important;
+  flex-shrink: 0 !important;
+}
+
+.rp-nav-grid .Card:hover .Card-arrow {
+  color: var(--recurly-yellow) !important;
+  transform: translateX(3px) !important;
+}
+
+.rp-nav-grid .Card p,
+.rp-nav-grid .Card-content p,
+.rp-nav-grid .Card-content div,
+.rp-nav-grid .Card > p {
+  font-size: 13px !important;
+  color: var(--recurly-offblack) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+.rp-nav-grid .Card:hover p,
+.rp-nav-grid .Card:hover .Card-content p,
+.rp-nav-grid .Card:hover .Card-content div,
+.rp-nav-grid .Card:hover > p {
+  color: var(--recurly-lightgray) !important;
+}
+
+.TabGroup-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-end !important;
+  border-bottom: 2px solid var(--recurly-lightgray) !important;
+  margin: 16px 0 24px !important;
+  padding: 0 !important;
+  gap: 4px !important;
+  font-family: var(--recurly-font) !important;
+}
+
+.TabGroup-tab,
+.TabGroup-tab_active {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  margin-bottom: -2px !important;
+  padding: 10px 18px !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-gray) !important;
+  cursor: pointer !important;
+  transition: color 0.15s, border-color 0.15s !important;
+}
+
+.TabGroup-tab:hover { color: var(--recurly-yellow) !important; }
+
+.TabGroup-tab_active {
+  color: var(--recurly-offblack) !important;
+  border-bottom-color: var(--recurly-yellow) !important;
+  cursor: default !important;
+}
+
+.Columns { display: grid !important; gap: 20px !important; margin: 16px 0 24px !important; font-family: var(--recurly-font) !important; }
+
+.Column { font-size: 14px !important; color: var(--recurly-darkgray) !important; line-height: 1.65 !important; min-width: 0 !important; }
+.Column > *:first-child { margin-top: 0 !important; }
+.Column > *:last-child  { margin-bottom: 0 !important; }
+.Column p { margin: 0 0 12px !important; }
+.Column blockquote { margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; border-radius: 0 !important; }
+.Column blockquote p { margin: 0 0 12px !important; font-style: normal !important; color: inherit !important; }
+.Column blockquote p:last-child { margin-bottom: 0 !important; }
+.Column a { color: var(--recurly-tangerine) !important; }
+
+@media (max-width: 640px) {
+  .Columns { grid-template-columns: 1fr !important; }
+  .CardsGrid { grid-template-columns: 1fr !important; }
+}
+
+
+/* ============================================================
+   PART 4 — ReadMe native table branding
+   ============================================================ */
+
+/* Scoped to :has(thead) so this collapse rule never fires on
+   rp-* HTML tables (which use rp-thead-row / td, not thead / th). */
+.rdmd-table:has(thead) table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  margin: 12px 0 24px !important;
+}
+
+.rdmd-table thead tr { background: var(--recurly-offblack) !important; }
+
+.rdmd-table thead tr th {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 12px 16px !important;
+  border: 0 !important;
+  text-align: left !important;
+}
+
+.rdmd-table thead tr th strong,
+.rdmd-table thead tr th * { color: var(--recurly-offwhite) !important; }
+
+.rdmd-table tbody tr { background: var(--recurly-offwhite) !important; }
+
+.rdmd-table tbody tr td {
+  background: var(--recurly-offwhite) !important;
+  color: var(--recurly-darkgray) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  padding: 12px 16px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--recurly-lightgray) !important;
+  vertical-align: top !important;
+  line-height: 1.6 !important;
+}
+
+.rdmd-table tbody tr td a { color: var(--recurly-tangerine) !important; }
+.rdmd-table tbody tr td a:hover { color: var(--recurly-offblack) !important; }
+
+.rdmd-table tbody tr td code.rdmd-code {
+  background: var(--recurly-brightgray) !important;
+  color: var(--recurly-darkgray) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-size: 0.92em !important;
+}
+
+.rdmd-table-inner {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+}
+
+/* rp-thead-row variant — tables that use <tr class="rp-thead-row"> instead of <thead>.
+   Mirrors the :has(thead) rules above without the thead scope guard. */
+.rdmd-table:not(:has(thead)) table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  margin: 12px 0 24px !important;
+}
+
+.rdmd-table tr.rp-thead-row {
+  background: var(--recurly-offblack) !important;
+}
+
+.rdmd-table tr.rp-thead-row td {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-offwhite) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 12px 16px !important;
+  border: 0 !important;
+  text-align: left !important;
+}
+
+.rdmd-table tr.rp-thead-row td strong,
+.rdmd-table tr.rp-thead-row td * { color: var(--recurly-offwhite) !important; }
+
+.rdmd-table:not(:has(thead)) tbody tr,
+.rdmd-table:not(:has(thead)) tr:not(.rp-thead-row) {
+  background: var(--recurly-offwhite) !important;
+}
+
+.rdmd-table:not(:has(thead)) tr:not(.rp-thead-row) td {
+  background: var(--recurly-offwhite) !important;
+  color: var(--recurly-darkgray) !important;
+  font-family: var(--recurly-font) !important;
+  font-size: 14px !important;
+  padding: 12px 16px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--recurly-lightgray) !important;
+  vertical-align: top !important;
+  line-height: 1.6 !important;
+}
+
+.rdmd-table:not(:has(thead)) tr:not(.rp-thead-row) td a { color: var(--recurly-tangerine) !important; }
+.rdmd-table:not(:has(thead)) tr:not(.rp-thead-row) td a:hover { color: var(--recurly-offblack) !important; }
+
+.rdmd-table:not(:has(thead)) tr:not(.rp-thead-row) td code.rdmd-code {
+  background: var(--recurly-brightgray) !important;
+  color: var(--recurly-darkgray) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-size: 0.92em !important;
+}
+
+
+/* ============================================================
+   PART 5 — Version selector branding
+   ============================================================ */
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) {
+  width: min(920px, calc(100vw - 40px)) !important;
+  max-width: min(920px, calc(100vw - 40px)) !important;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .tippy-box,
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .tippy-content,
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .Dropdown-content,
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .Box,
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu {
+  max-height: 620px !important;
+  overflow: auto !important;
+  padding: 16px !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)) !important;
+  gap: 10px !important;
+  font-family: var(--recurly-font) !important;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu::before {
+  content: "API V3"; order: 1; grid-column: 1 / -1; margin: 0 0 2px 0;
+  color: var(--recurly-darkgray) !important; font-family: var(--recurly-font) !important;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu::after {
+  content: "API V2"; order: 20; grid-column: 1 / -1; margin: 10px 0 2px 0;
+  color: var(--recurly-darkgray) !important; font-family: var(--recurly-font) !important;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item {
+  width: auto !important; min-width: 0 !important; min-height: 48px !important; height: auto !important;
+  display: flex !important; align-items: center !important; padding: 10px 12px !important;
+  border: 1px solid var(--recurly-lightgray) !important; border-radius: 10px !important;
+  background: var(--recurly-offwhite) !important; color: var(--recurly-darkgray) !important;
+  font-family: var(--recurly-font) !important; text-decoration: none !important;
+  box-sizing: border-box !important; transition: background 0.15s, border-color 0.15s, color 0.15s !important;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item[href*="/v20"],
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item[href*="/v2999"] { order: 10; }
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item[href*="/v2."] { order: 30; }
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item[href*="/v1."] { display: none !important; }
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item[href="/reference-docs/reference"] { display: none !important; }
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu [class*="VersionDropdown-item"],
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu [class*="VersionDropdown-item-content"] { width: 100% !important; min-width: 0 !important; }
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu [class*="VersionDropdown-item-label"] {
+  display: block !important; min-width: 0 !important; overflow: hidden !important;
+  text-overflow: ellipsis !important; white-space: nowrap !important;
+  font-family: var(--recurly-font) !important; font-size: 15px !important; font-weight: 600 !important;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item_active {
+  border-color: var(--recurly-tangerine) !important; background: var(--recurly-brightgray) !important;
+  color: var(--recurly-offblack) !important; box-shadow: 0 0 0 2px rgba(0, 140, 255, 0.12) !important;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item:hover,
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item:focus {
+  border-color: var(--recurly-tangerine) !important; background: var(--recurly-brightgray) !important;
+  color: var(--recurly-offblack) !important; outline: none !important;
+}
+
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Badge,
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .IconWrapper,
+[data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu [class*="IconWrapper"] { flex: 0 0 auto !important; }
+
+@media (max-width: 700px) {
+  [data-tippy-root]:has(.rm-VersionDropdown-menu) { width: calc(100vw - 32px) !important; max-width: calc(100vw - 32px) !important; }
+  [data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)) !important; max-height: 420px !important; }
+  [data-tippy-root]:has(.rm-VersionDropdown-menu) .rm-VersionDropdown-menu .Menu-Item { min-height: 44px !important; padding: 9px 10px !important; }
+}
+
+/* ============================================================
+   PART 9 — API Reference supplemental polish
+   ============================================================
+   Part 3 owns the primary styles for enum pills, response
+   accordion rows, and logs table/footer. This part only covers
+   what Part 3 doesn't: param expand rows, "required" badge,
+   param container backgrounds, page h1, and misc elements.
+   ============================================================ */
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9.1 — "required" badge  +  "Allowed:" label
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+[class*="Param-required"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.4px !important;
+  text-transform: uppercase !important;
+  color: var(--recurly-vermillion) !important;
+  background: rgba(255, 81, 38, 0.10) !important;
+  border-radius: 4px !important;
+  padding: 1px 6px !important;
+}
+
+[class*="Param-enum-section_compact-label"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  color: var(--recurly-gray) !important;
+}
+
+/* Inner code token inside enum pills — inherit from button shell */
+[class*="Param-enum-section-item"] code,
+[class*="Param-enum-section-item-value"] {
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9.2 — Param expand rows  (array-of-string: ADD STRING / STRING)
+   The full-row button has class "Flex … Param-expand-button…".
+   The icon-only reorder/delete buttons do NOT have "Flex".
+   Selecting on BOTH fragments excludes the icon buttons safely.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+[class*="Param-expand"] {
+  background: transparent !important;
+}
+
+/* Full-row expand button only (has both Flex + Param-expand-button in its class) */
+[class*="Flex"][class*="Param-expand-button"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  color: var(--recurly-offwhite) !important;
+  background: var(--recurly-offblack) !important;
+  border: 1px solid var(--recurly-darkgray) !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  width: 100% !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+[class*="Flex"][class*="Param-expand-button"]:hover {
+  background: var(--recurly-darkgray) !important;
+  border-color: var(--recurly-gray) !important;
+  color: var(--recurly-yellow) !important;
+}
+
+/* Label and icon inside — inherit color from button */
+[class*="Param-expand-label"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: inherit !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+}
+
+[class*="Param-expand-button-icon"] {
+  color: inherit !important;
+}
+
+/* ── "Show N enum values" / "Hide enum values" toggle ─────────
+   DOM: button.Button_minimum_ghost.Button_minimum inside
+        [class*="Param-enum-section_expanded-container-header"]
+   Same offblack→yellow pill style as enum pills.
+   ──────────────────────────────────────────────────────────── */
+[class*="Param-enum-section_expanded-container-header"] .Button,
+[class*="Param-enum-section_expanded-container-header"] button {
+  font-family: var(--recurly-font) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  color: var(--recurly-offwhite) !important;
+  background: var(--recurly-offblack) !important;
+  border: 1px solid var(--recurly-offblack) !important;
+  border-radius: 20px !important;
+  padding: 5px 14px !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+[class*="Param-enum-section_expanded-container-header"] .Button:hover,
+[class*="Param-enum-section_expanded-container-header"] button:hover {
+  background: var(--recurly-darkgray) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-yellow) !important;
+}
+
+/* Also style the "Show N enum values" collapsed button (sits outside the expanded container) */
+[class*="Param-enum-section"] > div > .Button[class*="Button_minimum"],
+[class*="Param-enum-section"] > div > button[class*="Button_minimum"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  color: var(--recurly-offwhite) !important;
+  background: var(--recurly-offblack) !important;
+  border: 1px solid var(--recurly-offblack) !important;
+  border-radius: 20px !important;
+  padding: 5px 14px !important;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+}
+
+[class*="Param-enum-section"] > div > .Button[class*="Button_minimum"]:hover,
+[class*="Param-enum-section"] > div > button[class*="Button_minimum"]:hover {
+  background: var(--recurly-darkgray) !important;
+  border-color: var(--recurly-darkgray) !important;
+  color: var(--recurly-yellow) !important;
+}
+
+[class*="Param-expand"] input,
+[class*="Param-expand"] .Input {
+  font-family: var(--recurly-font) !important;
+  font-size: 13px !important;
+  background: #fff !important;
+  border: 1px solid var(--recurly-lightgray) !important;
+  border-radius: 6px !important;
+  color: var(--recurly-darkgray) !important;
+}
+
+[class*="Param-expand"] input:focus,
+[class*="Param-expand"] .Input:focus {
+  border-color: var(--recurly-offblack) !important;
+  outline: none !important;
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9.3 — Param container backgrounds
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+[class*="Param-contentWrapper"],
+[class*="rm-ParamContainer"],
+[class*="Fieldset"],
+.rm-APISchema,
+[class*="rjsf"] {
+  background: #fff !important;
+}
+
+.rm-ParamInput,
+.rm-ParamSelect {
+  background: #fff !important;
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9.4 — Response accordion interior  (expanded pane only)
+   Part 3 owns the toggle buttons. This styles the open pane.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.rm-APIResponseSchemaPicker [class*="AccordionContent"] {
+  background: #fff !important;
+}
+
+.rm-APIResponseSchemaPicker .rm-APISectionHeader {
+  background: #fff !important;
+  border-bottom: 1px solid var(--recurly-lightgray) !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 12px !important;
+}
+
+.rm-APIResponseSchemaPicker .rm-APISectionHeader [class*="APISectionHeader-heading"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  color: var(--recurly-gray) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9.5 — Tag tooltip button (top-right of h1)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+[class*="TagTooltip-tag-button"] {
+  font-family: var(--recurly-font) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: var(--recurly-gray) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  padding: 2px 4px !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+
+[class*="TagTooltip-tag-button"]:hover {
+  background: var(--recurly-offblack) !important;
+  color: var(--recurly-yellow) !important;
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9.6 — API page h1
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+[class*="headline-container"] h1.Title,
+[class*="headline-container"] h1 {
+  font-family: var(--recurly-font) !important;
+  font-weight: 800 !important;
+  color: var(--recurly-offblack) !important;
+  font-size: 1.6rem !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid var(--recurly-yellow) !important;
+  margin-bottom: 14px !important;
+}
+
+
+/* ============================================================
+   CODETABS ACTIVE BUTTON — KEPT LAST IN FILE
+   DOM confirmed: class="CodeTabs_active" on selected button.
+   Duplicated here to win cascade battles with ReadMe's host
+   CSS which loads after this stylesheet.
+   ============================================================ */
+
+.CodeTabs-toolbar button.CodeTabs_active {
+  background: #FFD706 !important;
+  color: #0D0D0B !important;
+  border-radius: 14px !important;
+  cursor: default !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+/* Single-language lone button — plain yellow label, never a pill */
+.CodeTabs-toolbar:has(> button:only-child) > button {
+  background: transparent !important;
+  color: #FFD706 !important;
+  border-radius: 0 !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+}
+
+/* Hover — inactive buttons only */
+.CodeTabs-toolbar button:not(.CodeTabs_active):hover {
+  background: transparent !important;
+  color: #FFD706 !important;
+}
+/* Mintlify presentation, built from the supplied Recurly brand palette. */
+html { scroll-behavior: smooth; }
+body { font-family: "Figtree", Arial, sans-serif !important; background: #FCFBF7; color: #0D0D0B; }
+::selection { background: #FFD706; color: #0D0D0B; }
+.rp-page, .rc-guide { font-family: "Figtree", Arial, sans-serif; }
+.recurly-home { font-family: "Figtree", Arial, sans-serif; color: #0D0D0B; max-width: 1200px; margin: 0 auto 100px; }
+.recurly-home * { box-sizing: border-box; }
+.recurly-home a { text-decoration: none; }
+.recurly-hero { min-height: 505px; background: #0D0D0B; color: #FCFBF7; border-radius: 24px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); overflow: hidden; position: relative; }
+.recurly-hero-content { padding: 74px 6% 72px 8%; position: relative; z-index: 2; }
+.recurly-eyebrow { display: inline-flex; align-items: center; gap: 10px; color: #D1CFC4; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+.recurly-status-dot { width: 8px; height: 8px; background: #FFD706; border-radius: 50%; box-shadow: 0 0 0 4px rgba(255,215,6,.14); }
+.recurly-hero h1 { color: #FCFBF7 !important; font-size: clamp(43px, 5vw, 70px) !important; line-height: 1.02 !important; letter-spacing: -.052em !important; margin: 30px 0 20px !important; font-weight: 800 !important; border: 0 !important; }
+.recurly-hero h1 em { color: #FFD706; font-style: normal; }
+.recurly-hero-content > p { color: #D1CFC4; max-width: 500px; font-size: 17px; line-height: 1.6; margin: 0 0 31px; }
+.recurly-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.recurly-button-primary, .recurly-button-secondary { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 48px; padding: 0 18px; border-radius: 7px; font-size: 13px; font-weight: 800; transition: transform .18s, background .18s; }
+.recurly-button-primary { color: #0D0D0B !important; background: #FFD706; }
+.recurly-button-primary:hover { background: #FFE44B; transform: translateY(-2px); }
+.recurly-button-secondary { color: #FCFBF7 !important; border: 1px solid #57564D; }
+.recurly-button-secondary:hover { background: #32312D; transform: translateY(-2px); }
+.recurly-hero-art { min-height: 505px; position: relative; overflow: hidden; background: radial-gradient(circle at 55% 55%, #302B0A 0, #17170F 47%, #0D0D0B 75%); }
+.recurly-orbit { position: absolute; top: 50%; left: 50%; border: 1px solid rgba(255,215,6,.28); border-radius: 50%; transform: translate(-50%,-50%) rotate(-22deg); }
+.recurly-orbit-one { width: 240px; height: 240px; }
+.recurly-orbit-two { width: 380px; height: 380px; border-color: rgba(255,215,6,.20); }
+.recurly-orbit-three { width: 555px; height: 555px; border-color: rgba(255,215,6,.11); }
+.recurly-orbit-core { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-12deg); width: 200px; height: 200px; border-radius: 50%; display: grid; place-items: center; background: #FFD706; color: #0D0D0B; font-size: 118px; font-weight: 900; line-height: 1; letter-spacing: -.1em; box-shadow: 0 25px 100px rgba(255,215,6,.2); }
+.recurly-orbit-core span { position: absolute; top: 36px; right: 42px; font-size: 35px; letter-spacing: 0; }
+.recurly-art-label { position: absolute; color: #FFD706; font-size: 11px; letter-spacing: .17em; font-weight: 900; border: 1px solid #6A5A07; background: #18180F; border-radius: 20px; padding: 10px 13px; }
+.recurly-art-label span { margin-left: 14px; }
+.recurly-art-label-top { top: 17%; right: 10%; }.recurly-art-label-bottom { bottom: 17%; left: 7%; }
+.recurly-home-section { margin-top: 84px; }
+.recurly-section-kicker { display: block; color: #807D75; font-size: 11px; font-weight: 900; letter-spacing: .16em; margin-bottom: 16px; }
+.recurly-section-heading h2 { margin: 0 0 12px !important; color: #0D0D0B !important; border: 0 !important; font-size: clamp(32px, 3vw, 44px) !important; line-height: 1.12 !important; letter-spacing: -.035em; font-weight: 800; }
+.recurly-section-heading p { color: #57554F; font-size: 16px; margin: 0 0 31px; }
+.recurly-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+.recurly-home-card { position: relative; min-height: 244px; display: flex; flex-direction: column; background: #F2F1EA; color: #0D0D0B !important; border: 1px solid #E5E3D9; border-radius: 14px; padding: 22px; transition: transform .18s, border-color .18s, background .18s; }
+.recurly-home-card:hover { transform: translateY(-4px); border-color: #D1BB26; background: #FFFBE9; }
+.recurly-card-number { color: #807D75; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+.recurly-card-icon { width: 48px; height: 48px; display: grid; place-items: center; background: #FFD706; border-radius: 10px; color: #0D0D0B; font-size: 24px; margin: 17px 0 17px; }
+.recurly-home-card strong { font-size: 18px; font-weight: 800; line-height: 1.2; margin-bottom: 7px; }.recurly-home-card > span:nth-last-child(2) { color: #57554F; font-size: 13px; line-height: 1.5; max-width: 250px; }.recurly-card-arrow { position: absolute; right: 22px; bottom: 23px; font-weight: 800; }
+.recurly-topic-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; }
+.recurly-topic-grid a { position: relative; min-height: 126px; display: grid; grid-template-columns: 48px 1fr; column-gap: 16px; align-content: center; color: #0D0D0B !important; background: #FCFBF7; border: 1px solid #DCDAD0; border-radius: 12px; padding: 20px 46px 20px 20px; transition: border-color .18s, box-shadow .18s; }
+.recurly-topic-grid a:hover { border-color: #0D0D0B; box-shadow: 0 7px 20px rgba(13,13,11,.06); }
+.recurly-topic-symbol { grid-row: span 2; width: 44px; height: 44px; border-radius: 9px; background: #F2F1EA; display: grid; place-items: center; font-size: 22px; font-weight: 700; }
+.recurly-topic-grid strong { font-size: 16px; line-height: 1.4; }.recurly-topic-grid a > span:nth-last-child(2) { color: #57554F; font-size: 13px; line-height: 1.4; }.recurly-topic-grid b { position: absolute; right: 22px; top: 22px; font-size: 17px; }
+.recurly-api-cta { margin-top: 84px; background: #FFD706; color: #0D0D0B; border-radius: 20px; padding: 46px 55px; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+.recurly-api-cta > div > span { font-size: 11px; letter-spacing: .15em; font-weight: 900; }.recurly-api-cta h2 { color: #0D0D0B !important; border: 0 !important; font-size: clamp(32px,3vw,45px) !important; line-height: 1.08 !important; letter-spacing: -.04em; margin: 17px 0 10px !important; }.recurly-api-cta p { max-width: 430px; font-size: 14px; margin: 0; }.recurly-api-cta a { flex: none; background: #0D0D0B; color: #FCFBF7 !important; padding: 15px 19px; border-radius: 7px; font-size: 13px; font-weight: 800; }.recurly-api-cta a span { margin-left: 20px; }
+@media (max-width: 900px) { .recurly-hero { grid-template-columns: 1fr; }.recurly-hero-content { padding: 55px 6% 45px; }.recurly-hero-art { min-height: 280px; }.recurly-orbit-core { width: 160px; height: 160px; font-size: 90px; }.recurly-card-grid { grid-template-columns: 1fr; }.recurly-home-card { min-height: 205px; }.recurly-topic-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .recurly-hero { border-radius: 16px; }.recurly-hero-content { padding: 42px 24px; }.recurly-hero h1 { font-size: 43px !important; }.recurly-home-section, .recurly-api-cta { margin-top: 60px; }.recurly-api-cta { padding: 32px 25px; align-items: start; flex-direction: column; } }
+
+/* Product tour link stays useful when the source video provider blocks embeds. */
+.rp-page .recurly-tour { display: flex; align-items: center; gap: 24px; min-height: 210px; padding: 34px; margin: 0 0 28px; border-radius: 16px; background: radial-gradient(circle at 85% 25%, #35300b, #0d0d0b 55%); color: #fcfbf7 !important; text-decoration: none !important; }
+.rp-page .recurly-tour:hover { box-shadow: 0 12px 32px rgba(13, 13, 11, .18); }
+.recurly-tour-play { display: grid; place-items: center; flex: none; width: 64px; height: 64px; padding-left: 4px; border-radius: 50%; background: #ffd706; color: #0d0d0b; font-size: 20px; }
+.recurly-tour-copy { display: flex; flex-direction: column; gap: 7px; }
+.recurly-tour-copy strong { color: #fcfbf7; font-size: clamp(19px, 2vw, 28px); line-height: 1.15; }
+.recurly-tour-copy > span { color: #d1cfc4; font-size: 14px; }
+.recurly-tour-arrow { align-self: flex-start; margin-left: auto; color: #ffd706; font-size: 24px; }
+@media (max-width: 600px) { .rp-page .recurly-tour { min-height: 160px; gap: 16px; padding: 22px; }.recurly-tour-play { width: 48px; height: 48px; font-size: 16px; } }

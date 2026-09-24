@@ -1,0 +1,1998 @@
+---
+title: Adjustment Export Contents
+---
+
+### Export Contents
+
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Column Name
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Example
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        uuid
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        b964b5439c2548a489b3a136e75aee9f
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Unique internal identifier for the adjustment. Equivalent to line\_item\_uuid in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        123122E
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Account code being charged for this invoice.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        subscription\_id
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1fed8d153fcf4ea2a1d55ff2eebd51b7
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Subscription UUID associated with this adjustment on the invoice.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_id
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        4bdb2171cebe4ecfb0cb129bd1a65746
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Unique internal identifier for the invoice. This is called the 'id' in the Invoices - Summary export or 'uuid' for the invoice in the API.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_status
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        invoiced or pending
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Current status of the adjustment. Pending adjustments are charges or credits on an account that have not been applied to an invoice yet. Invoiced adjustments will always have an invoice associated with them.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_type
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        charge or credit
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Charges are positive adjustments that debit the account. Credits are negative adjustments that credit the account.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_created\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Creation date of the adjustment. This date will equal the billed\_date of the invoice in most cases, but will be older than the billed\_date if the adjustment was created on the account a period of time before it was invoiced. The adjustment\_created\_at date will never be after the invoice's billed\_date.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_start\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Bill cycle start date for a specific adjustment. Equivalent to line\_item\_start\_date in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_end\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Bill cycle end date for a specific adjustment. Equivalent to line\_item\_end\_date in the deprecated Invoices.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_description
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Gold Plan
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Description for a specific adjustment. This is automatically generated for all plan adjustments. This is custom for one-time custom charges and credits. Equivalent to line\_item\_description in the deprecated Invoices export
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_quantity
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Quantity of the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_currency
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        USD
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Currency of the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        100
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Adjustment amount, before discounts or taxes.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_total
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        50
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The total amount of the adjustment after discounts and taxes [(quantity x price) + discount + tax]. Equivalent to line\_item\_total in the deprecated Invoices.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_taxable
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0 or 1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0 indicates adjustment is not taxable, 1 indicates adjustment is taxable.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_discount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        5
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The discount applied to the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_tax
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        5
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The tax amount for the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_accounting\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        X100
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Internal accounting code for a specific adjustment. This value will only populate if you define an accounting code for the adjustment. Accounting codes can be defined for all adjustments except free trials, which will inherit the plan's accounting code. Equivalent to line\_item\_accounting\_code in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_product\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        gold
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Product code for a specific adjustment. This will populate automatically with the plan code or add-on code if the adjustment is for a subscription. This will populate for custom charges and credits (origin = debit or one\_time) if a value was set when the adjustment was created. Equivalent to line\_item\_product\_code in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_tax\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        P0000000, physical
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Tax code is a field associated with the adjustment that we send to Avalara for tax calculations. If you are using Recurly's EU VAT feature, you can use values of 'unknown', 'physical', or 'digital'. If you have your own Avalara AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_origin
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        plan, plan\_trial, setup\_fee, add\_on, add\_on\_trial, usage\_add\_on, usage\_add\_on\_trial, one\_time, debit, credit, coupon, carryforward, gift\_card, external\_gift\_card
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The original source for an adjustment. A credit created from an original charge will have the value of the charge's origin. Equivalent to line\_item\_origin in the deprecated Invoices export. (plan = subscription fee, plan\_trial = trial period 0 amount charge, setup\_fee = subscription setup fee, add\_on = subscription add-on fee, debit = custom charge through the UI or Adjustments API, one\_time = custom charge through the Transactions API, credit = custom credit, carryforward = the charge that zeros out a negative invoice and should be ignored)
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_type
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        usst, vat, ca, au, nz
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Tax type for the adjustment. Will be "vat" for EU VAT, "usst" for U.S. Sales Tax, or the 2 letter country code for country level tax types like Canada, Australia, New Zealand, Israel, and all non-EU European countries.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_region
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        NY, FR, GST, VAT
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The tax region for the adjustment. For U.S. Sales Tax, this will be the 2 letter state code. For EU VAT this will be the 2 letter country code. For all country level tax types, this will display the regional tax, like VAT, GST, or PST.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.09
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Tax rate applied to the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        5
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The tax amount for the adjustment. This column is the same as the adjustment\_tax column, but tax\_amount may be missing a few values for merchants who have used Recurly's older VAT feature (pre-2015). Merchants who used the old VAT feature should use the adjustment\_tax column for older reports.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        country\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        united states, germany, australia
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Country tax jurisdiction of the adjustment. This will be the full name of the country in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        country\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Country tax rate of the adjustment. This is the tax rate that corresponds to the country\_juris and country\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        country\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Country tax amount of the adjustment. This is the tax amount that corresponds to country\_rate and country\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        state\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        california, ontario
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        State or province tax jurisdiction of the adjustment. This will be the full name of the state or province in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        state\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.065
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        State or province tax rate of the adjustment. This is the tax rate that corresponds to the state\_juris and state\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        state\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.33
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        State or province tax amount of the adjustment. This is the tax amount that corresponds to state\_rate and state\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        county\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        san mateo
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        County tax jurisdiction of the adjustment. This will be the full name of the county in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        county\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.01
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        County tax rate of the adjustment. This is the tax rate that corresponds to the county\_juris and county\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        county\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.05
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        County tax amount of the adjustment. This is the tax amount that corresponds to county\_rate and county\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        city\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        san francisco
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        City tax jurisdiction of the adjustment. This will be the full name of the city in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        city\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        City tax rate of the adjustment. This is the tax rate that corresponds to the city\_juris and city\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        city\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.05
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        City tax amount of the adjustment. This is the tax amount that corresponds to city\_rate and city\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        special\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        san francisco
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Special tax jurisdiction of the adjustment. This will be the full name of the jurisdiction in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        special\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Special jurisdiction tax rate of the adjustment. This is the tax rate that corresponds to the special\_juris and special\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        special\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.05
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Special jurisdiction tax amount of the adjustment. This is the tax amount that corresponds to special\_rate and special\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_refund
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        TRUE, FALSE
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        TRUE indicates that the adjustment is a refund of a charge. FALSE indicates that the adjustment was a standard charge.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        original\_adjustment\_uuid
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        b964b5439c2548a489b3a136e75aee9f
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Value is the uuid of the previous related adjustment. Will only have a value if the adjustment is a credit created from a previous credit, or if the credit was created from a charge refund.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1291
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Invoice number of the invoice the adjustment was on.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_state
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        pending, processing, past\_due, paid, failed, voided
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Current state of the invoice the adjustment was on. Equivalent to invoice\_status in the Invoices - Summary export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_coupon\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1monthfree-K09SC9R8
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The coupon code that discounted the specific adjustment\_discount amount on the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_billed\_date
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Creation date of the invoice. Equivalent to date in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_closed\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Date invoice was paid or failed.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_net\_terms
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        on-receipt, net-10, net-30, net-60
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Identifies the net\_terms agreement associated with the invoice. All automatic collection invoices are due 'on-receipt'. Manual collection invoices can have terms of net-10, net-30, net-60, or a custom net day amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_po\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        AE12523
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For manual invoicing, this identifies the Purchase Order number associated with the invoice. This value must be entered by the merchant at the time the invoice is created or it will not exist.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_collection\_method
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        automatic or manual
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Identifies whether the invoice fees are collected via manual or automatic invoicing. An automatic invoice means a corresponding transaction is run using the account's billing information at the same time the invoice is created. Manual invoices are created without a corresponding transaction. The merchant must enter a manual payment transaction or have the customer pay the invoice with an automatic method, like credit card, PayPal, Amazon, or ACH bank payment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_type
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        purchase or refund
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The original invoice will have a type of 'purchase'. Any refunds or voids will create a negative invoice to cancel out the original. This negative invoice will have a type of 'refund'.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_name
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        JJ Smith
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        First and last name from account.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_country
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        US
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The 2 letter country code for the country of the customer's address on the invoice. This will come from the Billing Address or the Account Address depending on your tax settings and the invoice collection method.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_vat\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        IE124211145
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        VAT registration number for the customer on the invoice. This will come from the VAT Number field in the Billing Info or the Account Info depending on your tax settings and the invoice collection method.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_plan\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        basic
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The plan code for the plan associated with the subscription. This value will exist for plan fee, setup fee, add-on fee and free trial adjustments. This value will not exist for custom charges, custom credits, or open amount refund credits.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        original\_invoice\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1002
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        If the row is an adjustment on a refund invoice, this value will exist and show the invoice number of the purchase invoice the refund was created from.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_due\_on
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The due date of the invoice.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_subtotal
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        50.25
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The adjustment amount after discounts, but before taxes.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_credit\_reason\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        general, service, promotional, refund, write\_off, gift\_card
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The credit reason code of the adjustment. This is a new attribute with Recurly defined values the merchant can choose from when creating custom credits, or Recurly will set when issuing credits.\
+        **This column will be null until Recurly's Credit Invoices feature is enabled on your Recurly site.**
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_refundable\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        50.25
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The refundable amount of the charge adjustment, which is the adjustment total, including discounts and tax, minus all credit adjustments issued against it.\
+        **This column will be null until Recurly's Credit Invoices feature is enabled on your Recurly site.**
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_name
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Jane Doe
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The first and last name associated with the shipping address for the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_line1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        123 Main Street
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The first address line associated with the shipping address for the adjustment
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_line2
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Suite #202
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The second address line associated with the shipping address for the adjustment
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_city
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        San Francisco
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The city associated with the shipping address for the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_state
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        CA
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The state associated with the shipping address for the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_zip
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        94110
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The zip code associated with the shipping address for the adjustment
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_country
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        US
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The country ISO code associated with the shipping address for the adjustment
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        ship\_address\_phone
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        510-100-1000
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The phone number associated with the shipping address for the adjustment
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        shipping\_method\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        usps-overnight
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The Shipping Method code used when the Shipping Method was created.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        item\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        item123
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The Item Code maps to the user-specified unique ID of the item that was sold on this adjustment.
+
+        Reference [this page](https://docs.recurly.com/docs/catalog) for more on items.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        item\_id
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1234567899876543210
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The Item ID maps to the system-generated unique ID of the item that was sold on this adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        external\_sku
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        abc123
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The External SKU mapps to the user-specified SKU of the item that was sold on this adjustment.
+      </td>
+    </tr>
+  </tbody>
+</Table>
+
+# Adjustments - Coupons 
+
+*This export will only show on the Exports page if you have Multiple Coupons Per Account enabled under Coupon Settings.* 
+
+The Adjustments - Coupons export matches the regular Adjustments export, except there is a row for each charge or credit's discount. This export is useful for merchants allowing multiple active coupons on an account. If there are multiple coupon discount's on a single adjustment, this export will show how much of the discount came from each coupon redemption applied. To access the Adjustments - Coupons export, vist the <a href="http://app.recurly.com/go/exports">Exports</a> page under Reports in your Recurly site.
+
+### Version Change Log
+
+#### Version 3 - 2/13/2020
+
+* Column added for external\_sku for Item Charges
+
+#### Version 2 - 11/21/2019
+
+* Column added for shipping\_method\_code
+* Columns added for item\_code and item\_id
+
+### Options
+
+You have two options for exporting the data:
+
+#### Include uninvoiced adjustments
+
+By default, this export will only include invoiced adjustments. If this option is selected, the export will include charges and credits on an account that have not been invoiced yet. Uninvoiced charges and credits created on the account in the date range you specify will appear in the export. These adjustments will appear at the top of the export with an adjustment\_status of 'pending'.
+
+#### Use invoice posted date
+
+By default, this export will use the Created date of the adjustment, not the invoice. This means that an uninvoiced charge or credit created on the account on an older date, but invoiced in the date range you select will not show up in the export. If you would like to see all charges and credits invoiced in the date range you specify, select this option to use the invoice posted date. Any uninvoiced adjustments included in the export will exist depending on their creation date, since there is no invoice date to use.
+
+### Time Range Filter
+
+#### Created
+
+This export is set to use the creation date of the charge and credit adjustments. This is equivalent to the adjustment\_created\_at column. To use the invoice creation date, select the option "Use invoice date" mentioned above.
+
+#### Modified
+
+This option is not supported for the Adjustments - Coupons export.
+
+### Export Contents
+
+<Table align={["left","left","left"]}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left" }}>
+        Column Name
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Example
+      </th>
+
+      <th style={{ textAlign: "left" }}>
+        Description
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        uuid
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        b964b5439c2548a489b3a136e75aee9f
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Unique internal identifier for the adjustment. Equivalent to line\_item\_uuid in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        123122E
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Account code being charged for this invoice.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        subscription\_id
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1fed8d153fcf4ea2a1d55ff2eebd51b7
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Subscription UUID associated with this adjustment on the invoice.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_id
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        4bdb2171cebe4ecfb0cb129bd1a65746
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Unique internal identifier for the invoice. This is called the 'id' in the Invoices - Summary export or 'uuid' for the invoice in the API.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_status
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        invoiced or pending
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Current status of the adjustment. Pending adjustments are charges or credits on an account that have not been applied to an invoice yet. Invoiced adjustments will always have an invoice associated with them.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_type
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        charge or credit
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Charges are positive adjustments that debit the account. Credits are negative adjustments that credit the account.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_created\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Creation date of the adjustment. This date will equal the billed\_date of the invoice in most cases, but will be older than the billed\_date if the adjustment was created on the account a period of time before it was invoiced. The adjustment\_created\_at date will never be after the invoice's billed\_date.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_start\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Bill cycle start date for a specific adjustment. Equivalent to line\_item\_start\_date in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_end\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Bill cycle end date for a specific adjustment. Equivalent to line\_item\_end\_date in the deprecated Invoices.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_description
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Gold Plan
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Description for a specific adjustment. This is automatically generated for all plan adjustments. This is custom for one-time custom charges and credits. Equivalent to line\_item\_description in the deprecated Invoices export
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_quantity
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Quantity of the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_currency
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        USD
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Currency of the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        100
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Adjustment amount, before discounts or taxes.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_total
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        50
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The total amount of the adjustment after discounts and taxes [(quantity x price) + discount + tax]. Equivalent to line\_item\_total in the deprecated Invoices.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_taxable
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0 or 1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0 indicates adjustment is not taxable, 1 indicates adjustment is taxable.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_discount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        5
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The discount applied to the adjustment that comes from the specific coupon redemption in adjustment\_coupon\_code.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_tax
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        5
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The tax amount for the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_accounting\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        X100
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Internal accounting code for a specific adjustment. This value will only populate if you define an accounting code for the adjustment. Accounting codes can be defined for all adjustments. Plan set-up fees and plan free trial charges will inherit the plan's accounting code. Equivalent to line\_item\_accounting\_code in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_product\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        gold
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Product code for a specific adjustment. This will populate automatically with the plan code or add-on code if the adjustment is for a subscription. This will populate for custom charges and credits (origin = debit or one\_time) if a value was set when the adjustment was created. Equivalent to line\_item\_product\_code in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_tax\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        P0000000, physical
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Tax code is a field associated with the adjustment that we send to Avalara for tax calculations. If you are using Recurly's EU VAT feature, you can use values of 'unknown', 'physical', or 'digital'. If you have your own Avalara AvaTax account configured, you can use Avalara tax codes to assign custom tax rules.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_origin
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        plan, plan\_trial, setup\_fee, add\_on, debit, one\_time, credit, carryforward
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The original source for an adjustment. A credit created from an original charge will have the value of the charge's origin. Equivalent to line\_item\_origin in the deprecated Invoices export. (plan = subscription fee, plan\_trial = trial period 0 amount charge, setup\_fee = subscription setup fee, add\_on = subscription add-on fee, debit = custom charge through the UI or Adjustments API, one\_time = custom charge through the Transactions API, credit = custom credit, carryforward = the charge that zeros out a negative invoice and should be ignored)
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_type
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        usst, vat, ca, au, nz
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Tax type for the adjustment. Will be "vat" for EU VAT, "usst" for U.S. Sales Tax, or the 2 letter country code for country level tax types like Canada, Australia, New Zealand, Israel, and all non-EU European countries.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_region
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        NY, FR, GST, VAT
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The tax region for the adjustment. For U.S. Sales Tax, this will be the 2 letter state code. For EU VAT this will be the 2 letter country code. For all country level tax types, this will display the regional tax, like VAT, GST, or PST.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.09
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Tax rate applied to the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        tax\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        5
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The tax amount for the adjustment. This column is the same as the adjustment\_tax column, but tax\_amount may be missing a few values for merchants who have used Recurly's older VAT feature (pre-2015). Merchants who used the old VAT feature should use the adjustment\_tax column for older reports.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        country\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        united states, germany, australia
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Country tax jurisdiction of the adjustment. This will be the full name of the country in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        country\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Country tax rate of the adjustment. This is the tax rate that corresponds to the country\_juris and country\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        country\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Country tax amount of the adjustment. This is the tax amount that corresponds to country\_rate and country\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        state\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        california, ontario
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        State or province tax jurisdiction of the adjustment. This will be the full name of the state or province in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        state\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.065
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        State or province tax rate of the adjustment. This is the tax rate that corresponds to the state\_juris and state\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        state\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.33
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        State or province tax amount of the adjustment. This is the tax amount that corresponds to state\_rate and state\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        county\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        san mateo
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        County tax jurisdiction of the adjustment. This will be the full name of the county in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        county\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.01
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        County tax rate of the adjustment. This is the tax rate that corresponds to the county\_juris and county\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        county\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.05
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        County tax amount of the adjustment. This is the tax amount that corresponds to county\_rate and county\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        city\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        san francisco
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        City tax jurisdiction of the adjustment. This will be the full name of the city in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        city\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        City tax rate of the adjustment. This is the tax rate that corresponds to the city\_juris and city\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        city\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.05
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        City tax amount of the adjustment. This is the tax amount that corresponds to city\_rate and city\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        special\_juris
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        san francisco
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Special tax jurisdiction of the adjustment. This will be the full name of the jurisdiction in lowercase.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        special\_rate
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.1
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Special jurisdiction tax rate of the adjustment. This is the tax rate that corresponds to the special\_juris and special\_amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        special\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        0.05
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Special jurisdiction tax amount of the adjustment. This is the tax amount that corresponds to special\_rate and special\_juris.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_refund
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        TRUE, FALSE
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        TRUE indicates that the adjustment is a refund of a charge. FALSE indicates that the adjustment was a standard charge.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        original\_adjustment\_uuid
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        b964b5439c2548a489b3a136e75aee9f
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Value is the uuid of the previous related adjustment. Will only have a value if the adjustment is a credit created from a previous credit, or if the credit was created from a charge refund.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1291
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Invoice number of the invoice the adjustment was on.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_state
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        paid
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Current state of the invoice the adjustment was on. State can be: pending, processing, past\_due, paid, or failed. Equivalent to invoice\_status in the Invoices - Summary export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_coupon\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1monthfree-K09SC9R8
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The coupon code that discounted the adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_billed\_date
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Creation date of the invoice. Equivalent to date in the deprecated Invoices export.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_closed\_at
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Date invoice was paid or failed.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_net\_terms
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        on-receipt, net-10, net-30, net-60
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Identifies the net\_terms agreement associated with the invoice. All automatic collection invoices are due 'on-receipt'. Manual collection invoices can have terms of net-10, net-30, net-60, or a custom net day amount.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_po\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        AE12523
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        For manual invoicing, this identifies the Purchase Order number associated with the invoice. This value must be entered by the merchant at the time the invoice is created or it will not exist.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_collection\_method
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        automatic or manual
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        Identifies whether the invoice fees are collected via manual or automatic invoicing. An automatic invoice means a corresponding transaction is run using the account's billing information at the same time the invoice is created. Manual invoices are created without a corresponding transaction. The merchant must enter a manual payment transaction or have the customer pay the invoice with an automatic method, like credit card, PayPal, Amazon, or ACH bank payment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_type
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        invoice\_type
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The original invoice will have a type of 'purchase'. Any refunds or voids will create a negative invoice to cancel out the original. This negative invoice will have a type of 'refund'.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_name
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        JJ Smith
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        First and last name from account.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_country
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        US
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The 2 letter country code for the country of the customer's address on the invoice. This will come from the Billing Address or the Account Address depending on your tax settings and the invoice collection method.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        account\_vat\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        IE124211145
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        VAT registration number for the customer on the invoice. This will come from the VAT Number field in the Billing Info or the Account Info depending on your tax settings and the invoice collection method.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_plan\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        basic
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The plan code for the plan associated with the subscription. This value will exist for plan fee, setup fee, add-on fee and free trial adjustments. This value will not exist for custom charges, custom credits, or open amount refund credits.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        original\_invoice\_number
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1002
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        If the row is an adjustment on a refund invoice, this value will exist and show the invoice number of the purchase invoice the refund was created from.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        invoice\_due\_on
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        2012-02-19 12:01:33 PST
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The due date of the invoice.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_subtotal
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        50.25
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The adjustment amount after discounts, but before taxes.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_credit\_reason\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        general, service, promotional, refund, write\_off, gift\_card
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The credit reason code of the adjustment. This is a new attribute with Recurly defined values the merchant can choose from when creating custom credits, or Recurly will set when issuing credits.\
+        **This column will be null until Recurly's Credit Invoices feature is enabled on your Recurly site.**
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        adjustment\_refundable\_amount
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        50.25
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The refundable amount of the charge adjustment, which is the adjustment total, including discounts and tax, minus all credit adjustments issued against it.\
+        **This column will be null until Recurly's Credit Invoices feature is enabled on your Recurly site.**
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        shipping\_method\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        usps-overnight
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The Shipping Method code used when the Shipping Method was created.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        item\_code
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        item123
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The Item Code maps to the user-specified unique ID of the item that was sold on this adjustment.
+
+        Reference [this page](https://docs.recurly.com/docs/catalog) for more on items.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        item\_id
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        1234567899876543210
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The Item ID maps to the system-generated unique ID of the item that was sold on this adjustment.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ textAlign: "left" }}>
+        external\_sku
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        abc123
+      </td>
+
+      <td style={{ textAlign: "left" }}>
+        The External SKU mapps to the user-specified SKU of the item that was sold on this adjustment.
+      </td>
+    </tr>
+  </tbody>
+</Table>

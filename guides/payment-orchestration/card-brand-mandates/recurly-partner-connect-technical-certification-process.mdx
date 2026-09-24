@@ -1,0 +1,45 @@
+---
+title: Recurly Partner Connect | Technical Certification Process
+---
+
+## Background
+
+Prior to launching an integration version (either an initial version or any subsequent updated version) through the Recurly Partner Connect program, partners must run each integration version through Recurly’s Technical Certification Process.  This document outlines the process and criteria required to obtain certification for an integration version.  Only those partners that have been vetted and have commercial approval from the Recurly Partnerships team (see Additional Notes below) will be permitted to move forward with the Technical Certification Process.  For more information, contact [partnerships@recurly.com](mailto:partnerships@recurly.com)
+
+## Contact Information
+
+Please feel free to reach out to [rpc@recurly.com](mailto:rpc@recurly.com) for any questions you may have or clarifications you require. 
+
+## Steps to Complete Technical Certification
+
+1. To begin development work, create a Recurly sandbox account here. Once the sandbox account has been created, contact your point of contact to enable the "Recurly Partner Connect" feature flag on that account.
+
+2. To achieve certification, your integration version will need to demonstrate the following:
+   1. Domains listed on the PCI DSS AoC provided to Recurly match the ones set on integration version
+   2. Merchant Gateway Configuration Page:
+      1. Page populates with credential fields, currency settings, and card brand settings so Recurly merchants customers can properly configure the integration
+      2. Relevant credential fields set to secret = true
+   3. Integration Templates:
+      1. All required request and response templates are present. Each template’s mode is set to active.
+      2. Test Transactions Complete: 
+         1. One time (One authorized / One declined)
+         2. Renewal (One authorized / One declined)
+         3. Refund (One authorized / One declined)
+         4. Void/cancel (One successful)
+      3. Authentication configured on outgoing API calls to gateway
+   4. Error and Decline Mapping is in place, all codes mapped
+
+3. Once development work is complete and the integration is ready for certification review (i.e. demonstrate step 2 above), set the integration version to a “pending\_certification” state through [this API call](https://developers.recurly.com/gateways/v0.1/index.html#operation/request_configuration_version_certification) and notify your point of contact that your integration is ready for review.
+
+4. Once the integration version is certified, Recurly will update the integration version to a "certified" state, at which point the integration will be made available to all Recurly merchant customers.
+
+## Additional Notes
+
+* Prior to obtaining technical certification on your integration, you will also need to have the following in place with Recurly:
+  * PCI DSS AoC - covering domains used in the configuration.  Recurly will check to see if the domains listed on the AoC match the ones set on configuration. If they do not, the certification cannot continue
+  * Signed Partner Agreement
+* Before an integration version is certified, it will not be available to any Recurly merchant customer. 
+* Once an integration version is certified, it will be visible to all Recurly merchant customers and the following fields will no longer be editable by you:
+  * Domain
+  * Test Domain
+  * Configuration Fields

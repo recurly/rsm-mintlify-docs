@@ -1,0 +1,215 @@
+---
+title: Invoice template customization
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Invoice template customization lets you create multiple invoice templates, each with its own logo, company address, and display rules — then assign them to specific accounts. Whether you're billing across multiple entities or just want invoices that look exactly right for each customer segment, this feature gives you the flexibility to make it happen.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#create-an-invoice-template"><span className="rp-toc-num">4</span>Create a template</a>
+    <a className="rp-toc-pill" href="#assign-a-template-to-an-account"><span className="rp-toc-num">5</span>Assign to an account</a>
+    <a className="rp-toc-pill" href="#configure-line-item-display"><span className="rp-toc-num">6</span>Configure line item display</a>
+    <a className="rp-toc-pill" href="#upload-header-and-footer-images"><span className="rp-toc-num">7</span>Upload header and footer images</a>
+    <a className="rp-toc-pill" href="#override-the-merchant-business-address"><span className="rp-toc-num">8</span>Override business address</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">9</span>FAQs</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Invoice template customization lets you design and manage multiple invoice templates within Recurly. Each template can carry its own header and footer images, company address, and display rules — and can be assigned to individual accounts so every customer gets an invoice that reflects your relationship with them. You can create up to ten alternate templates alongside the site-wide default.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-paintbrush" aria-hidden="true"></i></div>
+    <strong>Branding consistency</strong>
+    <span>Add your company logo and details to every template, ensuring a uniform, professional presentation across all customer invoices.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Flexibility and control</strong>
+    <span>Create multiple templates for different business entities or customer segments, each with its own rules, address, and branding.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-up-right-dots" aria-hidden="true"></i></div>
+    <strong>Efficiency and scalability</strong>
+    <span>Streamline your invoicing process as your business grows without sacrificing clarity or quality in customer communications.</span>
+  </div>
+</div>
+
+# Key details
+
+## Default vs. alternate templates
+
+Every Recurly site has one **default template**, pre-configured with your company information from Site Settings. It's automatically applied to all accounts unless an alternate template is assigned.
+
+**Alternate templates** are additional templates you create to serve different business entities, customer segments, or billing scenarios. You can create up to ten alternate templates. Once multiple templates exist, any one of them can be set as the site default.
+
+## What you can customize per template
+
+Each invoice template supports the following customizations:
+
+- **Header image** — Your company logo or any brand image. Accepted formats: PNG, JPG, or GIF. Maximum size: 256 KB.
+- **Footer image** — A secondary image for branding, legal disclaimers, or additional information. Same format and size limits as the header.
+- **Merchant business address** — Override the company address displayed on invoices from this template. This is for display purposes only — tax calculations always use the address in Site Settings.
+- **Hide line item dates** — Remove dates from line items for a cleaner invoice layout.
+- **Hide zero-charge line items** — Suppress $0.00 line items to keep invoices focused on billable activity.
+
+## Template assignment
+
+Alternate templates can be assigned to individual accounts via the Admin Console or the API. You can assign a template, change the assigned template, or revert an account to the default at any time.
+
+For any account, you can view which template is currently assigned. Through the API, you can also retrieve a list of all accounts assigned to a specific template — useful for auditing at scale.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Assigning or changing a template only affects invoices generated after the assignment. Existing invoices on the account are not updated and remain as-is for auditing purposes.</div>
+</div>
+
+## API support
+
+Template configuration and setup must be done in the Admin Console — it's not available via the API. However, template assignment and reassignment are fully supported in both the v2 and v3 API.
+
+# Create an invoice template
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Invoice Templates</h4><p>In the Admin Console, go to <strong>Configuration → Invoice Templates</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Create a new template</h4><p>Click <strong>Create Invoice Template</strong> at the top right of the page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Fill in template details</h4><p>Enter the required fields and configure any additional settings for the new template.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Preview the template</h4><p>Click <strong>Preview Template</strong> to see a sample invoice using your configuration. The preview uses placeholder invoice data alongside your configured fields.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Save the template</h4><p>Click <strong>Save Changes</strong> to create the template.</p></div>
+  </div>
+</div>
+
+# Assign a template to an account
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the account</h4><p>Navigate to <strong>Accounts</strong> in the Admin Console and select the account you want to update.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Edit account information</h4><p>Click <strong>Edit</strong> in the Account Information section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Select a template</h4><p>Scroll to the <strong>Invoice Template</strong> section and select the desired template from the dropdown.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Save changes</h4><p>Click <strong>Save</strong> to apply the template to the account.</p></div>
+  </div>
+</div>
+
+# Configure line item display
+
+Both line item display options are configured from the same edit screen. Open the template you want to update (follow steps 1–3 of [Create an invoice template](#create-an-invoice-template) to reach the editing screen), then configure the options below under the **Body Section**.
+
+### Hide line item dates
+
+Check **Hide line item dates** to remove dates from all line items on invoices using this template. Click **Save** to apply.
+
+### Hide zero-charge line items
+
+Check **Hide zero-charge line items** to suppress $0.00 line items on invoices using this template. Click **Save** to apply.
+
+# Upload header and footer images
+
+Open the template you want to update and navigate to the editing screen.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Upload a header image</h4><p>In the <strong>Header Section</strong>, click to upload a logo or image. Accepted formats: PNG, JPG, or GIF. Maximum size: 256 KB.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Upload a footer image</h4><p>In the <strong>Footer Section</strong>, click to upload an image. Same format and size requirements apply.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Save changes</h4><p>Click <strong>Save</strong> to apply the images to the template.</p></div>
+  </div>
+</div>
+
+# Override the merchant business address
+
+Open the template you want to update and navigate to the editing screen.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Enable address override</h4><p>In the <strong>Header Section</strong>, select <strong>Customize invoice display address</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter the address</h4><p>Fill in the required fields and any additional address details you want displayed on invoices using this template.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Save changes</h4><p>Click <strong>Save</strong> to apply the address override.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Tax calculations are unaffected</strong>Overriding the business address on a template changes what's displayed on the invoice only. Tax calculations always use the address configured in Site Settings, regardless of the template address.</div>
+</div>
+
+# FAQs
+
+<Accordion title="Who can use invoice template customization?">
+  This feature is available on Pro and Elite plans. To upgrade, contact your Recurly account manager or [support@recurly.com](mailto:support@recurly.com).
+</Accordion>
+
+<Accordion title="Is there an additional cost for this feature?">
+  No — invoice template customization is included in Pro and Elite plans at no additional cost.
+</Accordion>
+
+<Accordion title="Is invoice template customization available via API?">
+  Template configuration and creation must be done in the Admin Console — it's not available via the API. However, assigning and reassigning templates to accounts is supported in both the v2 and v3 API.
+</Accordion>
+
+<Accordion title="Is there a limit on how many templates I can create?">
+  Yes. You can create up to ten alternate templates in addition to the site default.
+</Accordion>
+
+<Accordion title="Do I need to do anything to enable this feature?">
+  No — invoice template customization is automatically enabled for the Recurly Admin profile on qualifying plans.
+</Accordion>
+
+<Accordion title="Will I lose my current invoice settings if I change Recurly plans?">
+  No. The Invoice Settings page remains accessible through the Invoice Templates tab by clicking **Invoice Settings** in the top right of the screen. Existing configurations are preserved.
+</Accordion>
+
+<Accordion title="Will customizations to invoice templates also update email template content?">
+  No — email template content is managed separately. Any changes to invoice templates affect the invoice PDF only. To update email content, edit the relevant email templates directly.
+</Accordion>
+
+<Accordion title="If I override the business address on a template, will taxes be recalculated using the new address?">
+  No. The overridden address is for display purposes only. Tax calculations always use the business address configured in Site Settings.
+</Accordion>
+
+<Accordion title="Does assigning a new template to an account update existing invoices?">
+  No. Only invoices generated after the template is assigned will use the new template. Existing invoices remain unchanged for auditing purposes.
+</Accordion>
+
+<br />

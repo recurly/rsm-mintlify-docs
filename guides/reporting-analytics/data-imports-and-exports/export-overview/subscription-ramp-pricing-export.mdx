@@ -1,0 +1,75 @@
+---
+title: Subscriptions — ramp pricing - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The ramp pricing export function returns comprehensive data on each subscription operating under a ramp priced billing model. This allows for detailed tracking and analysis of various subscription attributes and statuses at different intervals of the ramp pricing lifecycle.
+
+<Image border={false} src="https://files.readme.io/4f21255101f3103fdffd89bdab65ce047474015c51685ccedfdcd9379305cf20-image.png" />
+
+<br />
+
+# Filters
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Subscription Status Filter
+
+This filter helps in sorting the subscriptions based on their current status. The different statuses are explained below:
+
+* **Live**: All active subscriptions.
+* **Open**: **Live** subscriptions that will renew after the current term.
+* **Trial**: **Live** subscriptions that are in a trial period.
+* **Paused**: **Live** subscriptions that are currently paused.
+* **Canceled**: **Live** subscriptions that will not renew after the current term.
+* **Past Due**: **Live** subscriptions with a past-due invoice.
+* **Future**: Subscriptions that will become active when the start date arrives.
+* **Expired**: Inactive subscriptions.
+
+### Export On Filters
+
+Under this filter, the subscriptions can be filtered based on the modifications and creations in a selected date range. The details are as follows:
+
+* **Modified**: It includes the subscriptions that were modified in the selected time range. This utilizes the "modified_at" column in the export, showing only the modified subscriptions while the original ones do not appear.
+* **Created**: This includes the subscriptions that were created within the selected timeframe, referring to the "created_at" column in the export. It also includes those created with a future activation date.
+
+### **Time Range Filter**
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Column Name                                                     | Example                 | Description                                                                                                                                         | Type   |
+| --------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | :----- |
+| <span id="uuid">uuid</span>                                     | b964b5439c2548a489      | Unique identifier for each subscription, retained despite modifications and aligns with identifiers in other exports like the Subscriptions export. |        |
+| <span id="ramp_id">ramp_id</span>                               | 101112                  | Unique identifier for ramp pricing, aligning with the current_ramp_id value in the subscriptions export.                                            |        |
+| <span id="unit_amount">unit_amount</span>                       | 14.99                   | Unit amount charged at each ramp interval.                                                                                                          |        |
+| <span id="starting_billing_cycle">starting_billing_cycle</span> | 2                       | The billing cycle at which the ramp interval initiates.                                                                                             |        |
+| <span id="elapsed_billing_cycles">elapsed_billing_cycles</span> | 2                       | The count of completed billing cycles in the current ramp interval.                                                                                 |        |
+| <span id="total_billing_cycles">total_billing_cycles</span>     | 3                       | The overall billing cycles that a ramp interval encompasses.                                                                                        |        |
+| <span id="started_at">started_at</span>                         | 2021-05-08 12:53:10 MDT | Marks the initiation date of the ramp interval.                                                                                                     |        |
+| <span id="ended_at">ended_at</span>                             | 2021-05-09 12:53:10 MDT | Denotes the closure date of the ramp interval.                                                                                                      |        |
+| <span id="estimated_start_date">estimated_start_date</span>     | 2021-05-11 12:53:10 MDT | The anticipated commencement date for the forthcoming ramp interval.                                                                                |        |
+| subscription_ramp_api_id                                        | e28zov4fw0v2            | Ramp API ID                                                                                                                                         | String |
+| subscription_api_id                                             | e28zov4fw0v2            | Subscription API ID                                                                                                                                 | String |
+
+# Version changelog
+
+### Version 2 - 2/5/2025
+
+* Addition of `subscription_ramp_api_id` and `subscription_api_id`.

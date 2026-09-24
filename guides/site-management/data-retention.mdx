@@ -1,0 +1,195 @@
+---
+title: Data retention
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Data Retention Settings lets site administrators automatically redact inactive account data on a schedule you control. You set independent retention windows for payment method data and full personally identifiable information (PII) — keeping you compliant with GDPR and similar regulations without any manual effort.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#webhooks"><span className="rp-toc-num">4</span>Webhooks</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">5</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Site administrator permissions are required to configure Data Retention Settings</li>
+  <li>A site feature flag must be enabled — contact <a href="mailto:support@recurly.com" target="_blank">Recurly Support</a> to request access</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Payment Method Retention and PII Retention periods must each be set between one and ten years</li>
+  <li>PII Retention must be equal to or longer than the Payment Method Retention period</li>
+  <li>Accounts with active subscriptions, open child accounts, unpaid invoices, or uninvoiced charges are excluded from redaction</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Data Retention Settings is a site-level configuration feature that automatically redacts sensitive account data after a period of inactivity. It supports two independent retention windows — one for payment method data and one for full PII — giving you granular control over how long each data class is kept and when it's cleared.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Built-in compliance</strong>
+    <span>Automatically redact inactive account data to meet GDPR, CCPA, and other data minimization requirements — no manual intervention required.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Two independent retention windows</strong>
+    <span>Configure separate timelines for payment method data and full PII, so you can minimize data exposure at your own pace.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Smart exclusions</strong>
+    <span>Accounts with active subscriptions, unpaid invoices, or open child accounts are automatically protected from redaction until they're fully settled.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-bell" aria-hidden="true"></i></div>
+    <strong>Webhook notifications</strong>
+    <span>Receive an <code>account.redacted</code> event every time an account is redacted, with a payload indicating exactly which data class was cleared.</span>
+  </div>
+</div>
+
+# Key details
+
+## Configuring retention periods
+
+Navigate to **Configuration → Data Retention Settings** to configure retention periods for your site.
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#zoom-data-retention-settings"> <img className="rp-zoom-img" src="https://files.readme.io/fe41a5f3c60a1674daa23ee530d4e60a5b534d8005ab1f336a78ebc2e69a1839-image.png" alt="Data Retention Settings configuration screen" /> </a>
+</span>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>All changes to Data Retention Settings are recorded in the audit log.</div>
+</div>
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Field</td><td>Description</td><td>Constraints</td></tr>
+  <tr><td>Payment Method Retention</td><td>How long card and billing data is kept after account inactivity</td><td>1–10 years</td></tr>
+  <tr><td>PII Retention</td><td>How long full PII (name, email, address, and more) is kept after account inactivity</td><td>1–10 years; must be equal to or longer than the Payment Method Retention period</td></tr>
+</table>
+
+## How redaction works
+
+### Two-phase redaction
+
+When PII Retention is set longer than Payment Method Retention, accounts pass through two sequential phases:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Payment method phase</h4><p>Billing info is deleted and card fields are cleared from transactions. Account PII — name, email, and address — is preserved.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>PII phase</h4><p>After the additional gap elapses, full PII is redacted: name, email, address, and IP addresses are cleared from the account and all associated invoices.</p></div>
+  </div>
+</div>
+
+If both retention periods are equal, redaction happens in a single pass.
+
+### Inactivity window
+
+An account's "last active" date is whichever of the following is most recent:
+
+<ul className="rp-list">
+  <li>The account's <code>created_at</code> date</li>
+  <li>The most recent transaction's <code>created_at</code> date</li>
+  <li>The most recent subscription renewal date</li>
+</ul>
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Important</strong>Accounts with active subscriptions, open child accounts, unpaid invoices, or uninvoiced charges are excluded from redaction until those conditions are resolved.</div>
+</div>
+
+### Redaction scope
+
+**Payment method redaction** clears:
+
+<ul className="rp-list">
+  <li>All billing info records</li>
+  <li>Card fields on transactions: card type, last four digits, expiry, BIN, and first six digits</li>
+</ul>
+
+**PII redaction** additionally clears:
+
+<ul className="rp-list">
+  <li>Account fields: first and last name, email, company, address, VAT number, username, and IP addresses</li>
+  <li>All invoice and shipping addresses</li>
+  <li>Customer fields on transactions: customer IP, VAT, and tax-exempt certificate</li>
+  <li>Update-attribute activity metadata</li>
+</ul>
+
+### Orphaned transactions
+
+Transactions without an associated account — such as those from closed accounts — are processed separately by a dedicated cron job. The same retention rules apply directly to those transaction records.
+
+## Account activity
+
+Redaction events appear in the account's activity log under the **Redacted** verb. Each entry indicates whether PII was cleared.
+
+# Webhooks
+
+When an account is redacted, Recurly fires an `account.redacted` webhook. The payload includes the account data in its post-redaction state and a `data_type` field indicating whether `payment_method` or `pii` data was cleared.
+
+## JSON payload — account.redacted
+
+```json
+{
+  "id": "b18znuwra79d",
+  "object_type": "account",
+  "site_id": "9s2roxi35o2v",
+  "event_type": "redacted",
+  "event_time": "2026-04-15T20:00:00Z",
+  "account_code": "abc123",
+  "data_type": "payment_method"
+}
+```
+
+## XML payload — redacted_account_notification
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<redacted_account_notification>
+  <account>
+    <account_code>abc123</account_code>
+    <username>jsmith</username>
+    <email>jane@example.com</email>
+    <first_name>Jane</first_name>
+    <last_name>Smith</last_name>
+    <company_name>Acme Corp</company_name>
+    <phone>555-1234</phone>
+    <dunning_campaign_id nil="nil"/>
+  </account>
+  <data_retention>
+    <data_type>payment_method</data_type>
+  </data_retention>
+</redacted_account_notification>
+```
+
+# FAQs
+
+<Accordion title="Can I set the payment method and PII retention periods to the same length?">
+  Yes. If both periods are equal, redaction happens in a single pass — payment method data and full PII are cleared at the same time.
+</Accordion>
+
+<Accordion title="What happens to transactions that don't have an associated account?">
+  Orphaned transactions — such as those from closed accounts — are handled by a dedicated background job. The same retention rules apply directly to those transaction records.
+</Accordion>
+
+<Accordion title="Will accounts with open invoices be redacted?">
+  No. Accounts with active subscriptions, open child accounts, unpaid invoices, or uninvoiced charges are excluded from redaction until those conditions are fully resolved.
+</Accordion>
+
+<Accordion title="How do I enable this feature?">
+  Data Retention Settings requires a site feature flag. Contact <a href="mailto:support@recurly.com" target="_blank">Recurly Support</a> to request access, then configure your retention periods at **Configuration → Data Retention Settings**.
+</Accordion>

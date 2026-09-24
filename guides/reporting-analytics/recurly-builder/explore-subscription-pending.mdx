@@ -1,0 +1,83 @@
+---
+title: Explore - Subscription pending
+---
+
+# Understanding the Explore feature
+
+The Explore feature, available exclusively to Recurly Elite plan users, is a dynamic, versatile, and powerful tool that provides a custom view of your organization's data. It transforms raw data into insightful and actionable information, catering to a wide array of your data needs. From transaction details to account information, and from credit card specifics to various other fields, Explore grants you the capability to truly delve into your Recurly data.
+
+# Features and benefits
+
+Explore's core feature, the Recurly Explorer. Easily create custom reports and visualize data that matter the most to your business. Here's a brief rundown of its primary components and how you can benefit from them:
+
+1. **Dimensions and measures:** These are the fundamental building blocks you use to assemble your custom reports. Dimensions, represented in black text, are qualitative variables such as names, geographical data, and dates. They are the 'categories' you'd like to analyze your data. Measures, on the other hand, are quantitative variables like counts, totals, or averages, represented in orange text. They provide the numerical metrics that you're interested in for each 'category' identified by dimensions. By offering a range of dimensions and measures, the Recurly Explore allows you to flexibly mix and match these variables to create reports tailored to your unique needs.
+2. **Data views:** Recurly Explore provides a range of predefined data views to help you jumpstart your data exploration. These views cover various aspects of your Recurly data:
+
+* **Custom fields**: Dive into custom data fields specific to your organization for personalized analysis.
+* **Transactions**: Get a detailed view of all your monetary exchanges to better understand your financial flow.
+* **Accounts**: Analyze all account related data to gauge your customer base and its behavior.
+* **Billing info**: Uncover insights from billing details to optimize your billing strategies.
+* **Charge dates**: Track all charge dates to ensure timely and accurate billing.
+* **Country**: Geographical analysis based on country data helps to understand your global presence.
+* **Credit card**: Analyze credit card transactions for a better understanding of your payment process.
+* **Dunning info**: Explore data on dunning campaigns to improve your debt recovery efforts.
+* Invoice: Detailed invoice data can reveal trends and insights on your billing patterns. Operations: Operation Specific data can provide insights into your operational efficiency.
+* Plans: Analyze subscription plan data to understand which plans are popular and why.
+* Subscription: Get a detailed overview of subscription data to optimize subscriber acquisition and retention strategies.
+* Geo (maps): Visualize your data on a geographical scale to understand regional trends and patterns.
+
+# Selecting, Removing, and Viewing Data in Explore
+
+Start by selecting a dimension or measure from the field selector on the left side of the page, then click "Run" to execute the query.
+
+The left sidebar of the Explore allows you to:
+
+* Search for a field you'd like to use in your report.
+* Click "All Fields" to see all available fields for your Recurly report.
+* Click "In Use" to see which fields are currently in use in your Recurly report. This view allows you to clear all fields and filters, or just the fields while leaving filters in place.
+* Hover over a field to pivot/unpivot it, filter your report based on it, or see more details about it.
+* To remove a dimension or measure, click the selected field in the left sidebar, or click "Remove" from the relevant column's gear menu.
+* Pivot your data when you have multiple dimensions selected. Each value in the dimension becomes a column when pivoted.
+* Click the “Totals” checkbox in the right corner of your data viewer to see the summary of your data within the report. Column and row totals are only available for measures and numerical data.
+
+# Filtering Data
+
+Filtering data is a crucial aspect of the Report Explore that enables you to refine your reports by specific conditions or criteria. You can apply filters to any dimension listed in the left toolbar. Simply hover over the dimension you wish to filter and select the "Filter by field" option. This brings up the filter section where you can specify your desired filter conditions.\
+For instance, for time filters, you're presented with a date range picker, allowing you to define a specific time frame for your data. Numeric filters provide options like "equal to" or "greater than" for more specific data points.
+
+Text attribute filters provide a list of data values for the field, and this list gets narrowed as you type in the search bar.
+
+You also have the flexibility to set a filter based on custom expressions, which can be entered into the input field. 
+
+If you need more personalization, you can create a filter based on attributes specific to an individual user or groups of users within your organization. This can be extremely useful when you want to track performance or analyze metrics related to specific users or teams.
+
+# Creating a Report
+
+Creating a report starts by selecting the relevant dimensions and measures from the left side of the page. Dimensions are qualitative measures (like names, dates, geographical data) and measures are quantitative (like counts, totals, or averages). 
+
+For example, to create a report showing the number of subscriptions by country and gateway type in the last 3 months, you'd select the "Country" and "Transaction Gateway Type" dimensions and the "Total Subscriptions" measure. Then, you'd filter by "Created At Date" and adjust the filter to "is in the past 3 months". Finally, click "Run" to generate the report.
+
+# Creating a Custom Field
+
+Creating a custom field provides another level of personalization to your reporting. You can use custom fields to create formulaic calculations based on existing fields. To do this, click the first custom field option in the left nav bar. Then, input the fields you want to use in your new formula. This option allows you to extract more detailed insights from your data and create more targeted reports.
+
+# Creating a Visualization
+
+Creating visualizations helps you to represent your data graphically, which can be easier to understand and interpret. To create a visualization, select the visualization drop down to see a list of available types such as Bar Gauge, Boxplot, Collapsible Tree, Map, Table, Timeline, and others.\
+Not all visualizations will be applicable to all types of data. For example, if your report doesn't contain location data, a map visualization won't be available.\
+After selecting a visualization type, you can further customize it. Click the “Edit” option in the top right corner of the visualization window. This brings up various editing options such as changing colors, sizes, labels, axes, and adding reference or trend lines.
+
+# Saving Report to A Dashboard or Look & Downloading Data
+
+After creating your report or visualization, you can save it for future reference. Click the “Settings” button in the top right corner and select “Save”. Here you can create a new dashboard using your custom report, or add your report to a pre-existing dashboard.\
+Dashboards can be added to folders that are only accessible to you, or shared with anyone in your organization with analytics permissions. You can also save your report as a Look, a single visualization or view of your data. 
+
+In addition, Recurly Explore allows you to download your data in various formats like TXT, Excel, CSV, JSON, HTML, Markdown, or PNG, providing flexibility in how you want to use or share your data.
+
+# Creating & Editing Dashboards
+
+To create a new dashboard, you first need to save your newly created report or visualization. Once you've done this, you can define whether to use the report or visualization’s filters as dashboard filters. This creates a coherent view across your entire dashboard, ensuring all the reports and visualizations within it are relevant to the same criteria.
+
+Once you've created your dashboard, you can add several attributes such as additional visualizations, text elements like headers, paragraphs, sub-headers, and even buttons that can link to either a Explore URL or an external URL. 
+
+After you've customized your dashboard, you can download it for presentation or further analysis. This functionality gives you the power to compile several different reports and visualizations into one cohesive view, and share it with your team in an easily digestible format.

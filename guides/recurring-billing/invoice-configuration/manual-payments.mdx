@@ -1,0 +1,241 @@
+---
+title: Manual invoicing
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Manual invoicing gives you full control over the billing process — set custom payment terms, add PO numbers, record payments as they come in, and manage past due accounts with a dedicated dunning workflow. It's ideal for B2B billing scenarios where customers pay on net terms rather than automatic collection.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#generate-a-manual-invoice-for-a-subscription"><span className="rp-toc-num">4</span>Generate a subscription invoice</a>
+    <a className="rp-toc-pill" href="#generate-a-one-off-invoice"><span className="rp-toc-num">5</span>Generate a one-off invoice</a>
+    <a className="rp-toc-pill" href="#record-a-payment"><span className="rp-toc-num">6</span>Record a payment</a>
+    <a className="rp-toc-pill" href="#reopen-a-manual-invoice"><span className="rp-toc-num">7</span>Reopen a manual invoice</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Manual invoicing lets businesses create and send invoices without automatic payment collection — instead setting specific payment terms, applying PO numbers, and recording payments as they're received. It's designed for companies with B2B billing workflows where customers pay on net terms rather than having a card charged on file.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Enhanced flexibility</strong>
+    <span>Customize payment terms, collection methods, and billing details to match specific customer agreements and business processes.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-file-invoice" aria-hidden="true"></i></div>
+    <strong>Professional and compliant</strong>
+    <span>Generate clean invoices aligned with tax regulations, with support for US sales tax and VAT — helping maintain customer trust and billing accuracy.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Streamlined payment management</strong>
+    <span>Record, track, and manage payments with options for partial payments, invoice reopening, and dedicated dunning rules for manually collected accounts.</span>
+  </div>
+</div>
+
+# Key details
+
+## Collection terms
+
+Every invoice in Recurly has a collection method that determines how payment is handled.
+
+**Automatically charge** — Bills the credit card stored on the customer's account directly.
+
+**Invoice (manual)** — Generates a manual invoice for the customer to pay according to the configured net terms.
+
+All invoices default to **On Receipt** terms, meaning payment is due immediately upon creation. On a manual invoice, this means the invoice becomes past due immediately if no payment is recorded.
+
+### Net terms options
+
+Professional and Elite plan customers issuing manual invoices have access to a Terms dropdown with the following options: On Receipt, Net 10, Net 30, Net 60, and Custom days.
+
+### End of month (EOM) terms
+
+EOM terms are useful for B2B customers who pay invoices weeks or months after issuance. Available on Professional and Elite plans.
+
+Due dates on EOM invoices are calculated from the last day of the month the invoice was issued, plus the selected EOM duration, plus an additional 24-hour window.
+
+**Examples:**
+
+- Invoice created June 6 with EOM +0 → Due July 1
+- Invoice created February 18 with EOM +15 → Due March 16
+- Invoice created September 27 with EOM +60 → Due November 30
+
+**Supported EOM terms:** EOM +0, EOM +15, EOM +30, EOM +45, EOM +60, and EOM +90.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> EOM restrictions</strong>Custom EOM terms are not supported. Once an EOM term is set on an invoice, the due date can't be edited. To change the due date, issue a refund on the current invoice and create a new one. EOM terms are available via the Admin Console and both the v2 and v3 API.</div>
+</div>
+
+### Understanding past due invoices
+
+An invoice becomes past due the day after its official due date. For example, a Net 30 invoice becomes past due on day 31.
+
+***
+
+## Modifying a subscription's collection method
+
+To switch a subscription between automatic and manual collection:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscription</h4><p>In the Admin Console, navigate to the customer's account and click <strong>Edit</strong> next to the subscription plan.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Change the collection method</h4><p>In the subscription details, toggle between <strong>Auto-Collect</strong> and <strong>Manually Collect</strong>. To switch to Auto-Collect, the account must have stored credit card details.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Changes to manual invoice terms don't generate new customer invoices. Price, quantity, or plan changes will still result in account credits or new invoices as usual.</div>
+</div>
+
+***
+
+## Tax and billing address
+
+For manual invoices, US sales tax and VAT are calculated using the account-level address. The account's VAT number, if available, is included in the calculation. The account address also serves as the billing address that appears on the invoice.
+
+If an account has a billing address but an empty account address, you'll need to add the account address before taxes can be calculated correctly.
+
+***
+
+## Email templates
+
+Manual invoicing uses the **New Invoice** and **Invoice Past Due** email templates. You can personalize these templates and add fields such as `po_number`, `net_terms`, and `net_terms_type` to align with your brand's messaging.
+
+You can also configure whether a payment confirmation is sent every time a payment is recorded, or only when an invoice is fully paid.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>The availability of <code>net_terms_type</code> in email templates may depend on specific feature settings on your account.</div>
+</div>
+
+***
+
+## List views and exports
+
+Filter the Invoices list view by **Manual** or **Automatic** to quickly manage and review invoices by collection method.
+
+In invoice, subscription, and transaction exports, additional fields are available for manual invoicing: `po_number`, `collection_method`, `net_terms`, and `net_terms_type`. These are useful for accounting, auditing, and reporting workflows.
+
+***
+
+## Dunning management
+
+Manual invoicing includes a dedicated set of dunning rules separate from automatic collection dunning. The dunning period for manual invoices starts the day after an invoice exceeds its net terms (net terms + one day).
+
+Recurly doesn't perform automatic payment retries on ACH payments for manual invoices. To retry, attempt to collect the invoice manually from the Admin Console or via the API.
+
+Configure your manual dunning settings at <a href="https://app.recurly.com/go/configuration/dunning" target="_blank">Dunning Configuration</a>.
+
+***
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Partial payments and write-offs</strong>When a manual invoice with a partial payment recorded fails dunning, a write-off invoice is created for the full invoice amount. A partial credit from the write-off invoice is applied to the remaining open balance on the purchase invoice, and the remainder of the open credit on the write-off invoice is voided.</div>
+</div>
+
+***
+
+## Integration notes
+
+<div className="rp-card">
+
+### API integration
+
+Create subscriptions and one-time invoices via the API by specifying the collection method, net terms, and PO number. Review the <a href="https://developers.recurly.com/" target="_blank">Recurly API documentation</a> for full details. Use HTTPS for all API calls and store API keys securely. Build in error handling for failed requests — retry logic or error logging is recommended.
+
+</div>
+
+<div className="rp-card">
+
+### Webhooks
+
+Set up webhooks to receive real-time notifications when manual invoice events occur (e.g., a new manual invoice is generated). This keeps invoice data synced between Recurly and your internal systems without polling.
+
+</div>
+
+<div className="rp-card">
+
+### Testing
+
+Test your manual invoicing integration in Recurly's <a href="/guides/getting-started/sandbox-features-to-discover" target="_blank">sandbox environment</a> before going live. This lets you verify collection method behavior, term calculations, and dunning flows without affecting production data.
+
+</div>
+
+# Generate a manual invoice for a subscription
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Create or open the customer account</h4><p>If the account doesn't exist yet, create one at <strong>Customers → New Account</strong>. Add account-level address information — this carries over to all invoices for the account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Add a subscription</h4><p>On the customer's account page, click <strong>Add Subscription</strong> and configure the subscription plan.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Set the collection method</h4><p>Under <strong>Billing Details</strong>, click <strong>Edit</strong> and set <strong>Collection Terms</strong> to <strong>Invoice</strong>. Select the appropriate net terms.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Confirm and notify</h4><p>Save the subscription. The customer will receive both a New Subscription and a New Invoice email.</p></div>
+  </div>
+</div>
+
+# Generate a one-off invoice
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Add charges to the account</h4><p>On the customer's account page, use the <strong>Add Charge</strong> button to add the line items you want to bill.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Generate the invoice</h4><p>Click <strong>Generate Invoice...</strong> at the top of the account page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Select Manual collection</h4><p>In the collection method dropdown on the left, select <strong>Manual</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Enter invoice details</h4><p>Add a PO number if the customer requested one, select your net terms, then click <strong>Create Invoice</strong>.</p></div>
+  </div>
+</div>
+
+# Record a payment
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the invoice</h4><p>Navigate to the customer's account in the Admin Console and click the open invoice you want to record a payment against.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Record a payment</h4><p>Choose <strong>Record a Payment</strong>, enter the payment amount, payment details, and receipt date, then click <strong>Save</strong>.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Partial payments</strong>If only a partial payment is recorded, the invoice may still enter a past due state and the customer may receive past due notifications.</div>
+</div>
+
+# Reopen a manual invoice
+
+<div className="rp-steps"> <div className="rp-step"> <div className="rp-step-num">1</div> <div><h4>Open the invoice</h4><p>Navigate to the paid or failed manual invoice you want to reopen.</p></div> </div> <div className="rp-step"> <div className="rp-step-num">2</div> <div><h4>Click Reopen</h4><p>Select <strong>Reopen</strong> from the <strong>Invoice Actions</strong> dropdown.</p></div> </div> <div className="rp-step"> <div className="rp-step-num">3</div> <div><h4>Record new payments</h4><p>After reopening, you can record new payments on the invoice and update its status to Paid.</p></div> </div> </div> 
+
+<div className="rp-callout rp-callout-note"> <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Legacy invoices only</strong>Reopening a manual invoice is only available on legacy invoices. If you've upgraded from legacy invoices, the option to reopen an invoice is removed from the UI — but you can still use the API to reopen existing legacy invoices.</div> </div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Reopening manual invoices</strong>Reopening a manual invoice is not logged in the account's Activity Log, and exports and the API won't indicate that a manual invoice was reopened.</div>
+</div>

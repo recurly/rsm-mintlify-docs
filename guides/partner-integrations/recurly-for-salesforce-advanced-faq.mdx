@@ -1,0 +1,125 @@
+---
+title: Recurly for Salesforce advanced FAQs
+---
+
+The purpose of this page is to describe answers to questions that advanced users may have with [Recurly for Salesforce](doc:salesforce).
+
+### How does the sync process work? Please go into detail.
+
+The order in which the objects sync is a more complicated question than you might hope.  Let me explain why:
+
+Recurly syncs data every 5 minutes (or at your configured time interval) by object based on the last time a successful sync completed. 
+
+**For example**: If we sync accounts at 8 am, the next batch will start at 8:05 and everything created or updated between 8 and 8:05 will be synced.  Let's say you have a customer who subscribes at 8:05:03 (so 8:05 and 3 seconds).  When our account sync is running that new account does not exist yet, but when the subscription sync starts after the account sync is complete, the subscription will exist, so the subscription will be synced.  The next time the account sync runs it will pick up all data from 8:05, so that subscriber who came in at 8:05:03 will now have their account saved, and the subscription will be linked.
+
+This timing complexity is the main reason we let each object sync by itself and we have separate apex jobs that do the linking. It means there are no dependencies and you'll get each piece of data as soon as it is available based on sync timing.
+
+In general the sync object order is:
+
+* Plans
+* Addons
+* Recurly Accounts/Accounts
+* Subscriptions
+* Invoices
+* Line Items
+* Transactions
+
+Each of those objects will sync and link to each other if the related record is there. If the related record is not yet present in Salesforce, there is a separate batch job for linking that occurs after the sync job completes to ensure all the records are properly linked.
+
+### What code gets used? What are the resources that are required?
+
+For the best answer to this question, please reach out to [support@recurly.com](mailto:support@recurly.com).
+
+### Which data can be synced back to Recurly?
+
+The following objects are synced back to Recurly (provided you have enabled the bidirectional sync on the Recurly Admin tab):
+
+#### Recurly Accounts (creation and edit)
+
+* Account Code (this is the only required field on Recurly account)
+* Company
+* First Name
+* Last Name
+* Recurly Email
+* Recurly Username
+* CC Email
+* VAT Number
+* ALL Account Address fields
+
+> 🚧 Reminder: Using the Edit button on the Recurly Account will not enable you to edit the "Billing Information" fields
+
+#### Billing Information
+
+This data can be synced by using the Add Payment Information button on a Recurly Account.
+
+![1241](https://files.readme.io/32b8ce5-Screen_Shot_2017-07-31_at_10.32.45_AM.png "Screen Shot 2017-07-31 at 10.32.45 AM.png")
+
+* First Name
+* Last Name
+* Credit Card Number
+* Expiration
+* CVV
+* Street Address
+* City
+* State
+* ZIP
+* Country
+
+> 📘 This field will transfer credit card information to Recurly in a PCI-compliant fashion using [Recurly.JS](https://recurly.com/recurlyjs/)
+
+#### Recurly Subscriptions
+
+The only way to sync Recurly Subscription information from Salesforce to Recurly is to use the Manage Subscription Plan button. Clicking the Edit button on the Subscription record will not send information to Recurly.
+
+![1242](https://files.readme.io/92512b2-Screen_Shot_2017-07-31_at_10.36.42_AM.png "Screen Shot 2017-07-31 at 10.36.42 AM.png")
+
+* Plan
+* Currency
+* Price
+* Quantity
+
+You can also choose to cancel or terminate the subscription from this screen.
+
+### Can I set up an Subscription in a different, non-primary currency via an Opportunity
+
+Yes, you can! Whatever currency settings you have for your org is available on the Opportunity and that will then be used for the Subscription Creation as well.  So, if your Opportunity is in EUR while your org's primary currency is USD, the Subscription created will be in EUR.
+
+### Which permissions are required for users of the integration?
+
+Users will need access to a Recurly permission set. While it is technically possible to assign the necessary object and code level permissions, we strongly recommend using one of the permission sets that are provided to avoid any issues with data syncing.  If you do need a custom set of permissions, please contact [support@recurly.com](mailto:support@recurly.com) with the functionality your users need and we can help define what permissions they need.
+
+It's important to note that a permission set will not be assigned to a standard Salesforce admin when the package is initially installed. You should ensure that you assign the Recurly Admin permission set to any user that will be activating or deactivating the sync, even if that person is already a system administrator.
+
+### How can I re-sync all of my data?
+
+This is a great option if you are missing data for some reason. The best method to use to accomplish a data re-sync is to navigate to the Recurly Admin tab, deactivate the sync process, and then set the Last Sync Date to a time far in the past, for example 1/1/2010. Then you need to Save the page and Activate the Sync process.
+
+This will cause the integration to attempt to re-sync all records from Recurly to Salesforce.
+
+### How can I force the sync process to run off-cycle (i.e. not on the 5-minute interval)?
+
+The best way to accomplish this is to navigate to the Recurly Admin tab, deactivate the sync process, and then reactivate the sync process. This causes all of the jobs to be rescheduled and to begin immediately (provided your Salesforce instance does not have any other jobs in the queue).
+
+### Why is my data not syncing every 5 minutes?
+
+Recurly for Salesforce is a force.com application, and as such is governed by the limits of your salesforce org. The integration uses batch and scheduled Apex jobs as well as future methods.  
+
+These pieces of functionality are limited by Salesforce, and those limits are shared across all of the functionality in salesforce, including both standard and installed AppExchange packages.  If you have custom code that uses scheduled Apex or another installed package that uses scheduled Apex, the Recurly for Salesforce sync may experience delays waiting for resources to become available. While most of the limits we hit are hourly, there may be limits that are reached for a 24 hour period. Until the usage has returned under Salesforce's threshold, the jobs to sync data will not run.
+
+### How do I ensure that a single Recurly Account and its related records are synced between Recurly and Salesforce?
+
+There is a button on the Recurly account record that will sync the information that is stored in Salesforce on a Recurly account back to Recurly. The purpose of this button is to resolve situations in which accounts in Recurly and Salesforce are out of sync.
+
+If you have an account that exists in Salesforce but not in Recurly, or when the data is not properly in sync, you can use the *Resync Recurly Account* button on the Recurly Account record to ensure that the account syncs back to Recurly.
+
+Beginning in version 2.38, you can choose which records associated with the subscription will also re-sync between Recurly and Salesforce (e.g. Subscription, Invoice, etc).
+
+If this process creates an error, you can find it in the Recurly Logs section of the application.
+
+### Can I extend the start date of a Subscription in Salesforce?
+
+Yes if the subscription has a status of future with a future start date already.  Once the date is current or in the past, the ability to modify the start date is not available anymore.
+
+### Will Salesforce on Recurly work with Salesforce CPQ
+
+Yes it will in most cases.  You can create a quote and sync products to the opportunity which would eventually flow to Recurly when the Opportunity is Closed-Won.  There is some uplift to enable one-time charges with CPQ captured [here](/guides/partner-integrations/recurly-for-salesforce-set-up#section-salesforce-cpq-configuration-considerations).

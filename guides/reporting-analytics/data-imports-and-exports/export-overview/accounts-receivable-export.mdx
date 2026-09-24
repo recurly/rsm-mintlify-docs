@@ -1,0 +1,92 @@
+---
+title: Invoices — accounts receivable - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The Invoices - Accounts Receivable export helps you to pinpoint customers who have yet to settle their invoices and gives a detailed report on the aging of all unsettled receivables.
+
+<Image border={false} src="https://files.readme.io/7787d519d850d6ffbaf945729d233d887d15ce073fce287e90bd4504b2f9318e-image.png" />
+
+<br />
+
+# Filters
+
+### Versions Filter
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Invoice Status Filter
+
+* **All**: Includes all invoices that remain unpaid.
+* **Processing**: Concerns ACH transactions presently undergoing processing.
+* **Past Due**: Involves all invoices that have surpassed their due date without being settled.
+* **Pending**: Consists of invoices not yet due and only encompasses manual invoices.
+* **Failed**: Pertains to invoices labeled as failed or not collected within the Dunning period.
+
+### Export On Filters
+
+* **Created**: Invoices formulated within the chosen timeframe.
+* **Modified**: Invoices altered in the specified period.
+* **Due On**: Invoices due in the specified period.
+
+### Time range filters
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Column Name                                                               | Example                                     | Description                                                                                                                                                                                           | Data type    |
+| ------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------- |
+| <span id="invoice_id">invoice_id</span>                                   | 336e028b12345b00b60b7845438d18b1            | Unique identifier for invoices within Recurly. This ID is also used in Invoices - Summary and Adjustments exports.                                                                                    | varchar(32)  |
+| <span id="invoice_number">invoice_number</span>                           | 1001                                        | Number used on the invoice through the admin console.                                                                                                                                                 | string       |
+| <span id="account_code">account_code</span>                               | smith                                       | Uniquely identifies your customers in Recurly. Defaults to the email address if no specific value is provided and cannot be modified. It is the main Recurly identifier for joining multiple exports. | varchar(50)  |
+| <span id="account_first_name">account_first_name</span>                   | Eric                                        | First name of the customer from the associated account.                                                                                                                                               | varchar(255) |
+| <span id="account_last_name">account_last_name</span>                     | Schmidt                                     | Last name of the customer from the associated account.                                                                                                                                                | varchar(255) |
+| <span id="account_company">account_company</span>                         | Bluth Industries, Inc.                      | Optionally identifies the company name provided.                                                                                                                                                      | varchar(255) |
+| <span id="account_email">account_email</span>                             | [test@example.com](mailto:test@example.com) | Optional. Email address provided by the customer during signup, used for all customer communications. If absent, the site's billing contact will receive emails.                                      | varchar(255) |
+| <span id="account_phone">account_phone</span>                             | 123-456-7890                                | Optional. The phone number of the customer.                                                                                                                                                           | string       |
+| <span id="billed_date">billed_date</span>                                 | 2016-01-01 10:17:02 UTC                     | Date of invoice creation.                                                                                                                                                                             | timestamp    |
+| <span id="net_terms">net_terms</span>                                     | on-receipt                                  | Specifies the terms of the invoice.                                                                                                                                                                   | string       |
+| <span id="due_on">due_on</span>                                           | 2016-01-01 10:17:02 UTC                     | Due date of the invoice.                                                                                                                                                                              | timestamp    |
+| <span id="status">status</span>                                           | failed                                      | Current status of the invoice, equivalent to "invoice_state" in the Adjustments export.                                                                                                               | varchar(20)  |
+| <span id="collection_method">collection_method</span>                     | automatic                                   | Indicates the collection method for the invoice - either "automatic" or "manual".                                                                                                                     | string       |
+| <span id="days_overdue">days_overdue</span>                               | 12                                          | The number of days the invoice is overdue; will be zero if not overdue.                                                                                                                               | numeric      |
+| <span id="currency">currency</span>                                       | USD                                         | The 3-character ISO code representing the invoice's currency.                                                                                                                                         | varchar(3)   |
+| <span id="po_number">po_number</span>                                     | 1234                                        | The Purchase Order (PO) number associated with the invoice.                                                                                                                                           | varchar(50)  |
+| <span id="closed_date">closed_date</span>                                 | 2016-05-18 11:17:07 UTC                     | The date when the invoice was closed, applicable if failed or paid.                                                                                                                                   | timestamp    |
+| <span id="modified_at">modified_at</span>                                 | 2016-05-18 11:17:07 UTC                     | The date the invoice last underwent modification, including payment status updates.                                                                                                                   | timestamp    |
+| <span id="invoice_subtotal">invoice_subtotal</span>                       | 136.78                                      | Subtotal amount of the invoice, prior to the addition of tax, discounts, and credits to compute the total amount.                                                                                     | numeric      |
+| <span id="invoice_total">invoice_total</span>                             | 345.67                                      | The total invoice amount.                                                                                                                                                                             | numeric      |
+| <span id="invoice_tax_amount">invoice_tax_amount</span>                   | 123.45                                      | The total tax amount levied on the invoice.                                                                                                                                                           | numeric      |
+| <span id="invoice_discount_amount">invoice_discount_amount</span>         | 144.58                                      | The total discount amount applied to the invoice.                                                                                                                                                     | numeric      |
+| <span id="category">category</span>                                       | 31-60 days overdue                          | Bucketed system for aging receivables and past-due invoices. "Current" for non-due invoices, with past-due invoices grouped based on overdue duration.                                                | string       |
+| <span id="invoice_credits">invoice_credits</span>                         | 144.58                                      | The amount of credits applied to the invoice.                                                                                                                                                         | numeric      |
+| <span id="invoice_balance">invoice_balance</span>                         | 50.25                                       | The invoice's outstanding balance. **This column will be null until the Recurly's Credit Invoices feature is enabled on your site.**                                                                  | numeric      |
+| <span id="invoice_balance_modified_at">invoice_balance_modified_at</span> | 2016-05-18 11:17:07 UTC                     | The last change date of the invoice balance due to a transaction or credit payment. **This column will be null until the Recurly's Credit Invoices feature is enabled on your site.**                 | timestamp    |
+| <span id="business_entity_code">business_entity_code</span>               | 123456789                                   | Identifier for business entity code.                                                                                                                                                                  | string       |
+| invoice_api_id                                                            | e28zov4fw0v2                                | Invoice API ID                                                                                                                                                                                        | string       |
+
+# Version Changelog
+
+### Version 3 - 2/5/25
+
+Addition of `invoice_api_id` column.
+
+### Version 2 - 3/15/2023
+
+Addition of `business_entity_code` column.
+
+The Accounts Receivable export identifies customers who have not paid their invoices, as well as the aging of all outstanding receivables.

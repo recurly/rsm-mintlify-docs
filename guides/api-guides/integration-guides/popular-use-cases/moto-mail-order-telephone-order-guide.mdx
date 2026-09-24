@@ -1,0 +1,205 @@
+---
+title: MOTO (Mail Order / Telephone Order) guide
+---
+
+# Overview
+
+This guide shows you how to use the <Anchor label="Purchase endpoint" target="_blank" href="https://developers.recurly.com/api/latest/#tag/purchase">Purchase endpoint</Anchor> to create new card transactions using the MOTO indicator via API. 
+
+### Prerequisites & limitations
+
+* Familiarity with Recurly’s API or Merchant UI.
+* If integrating via API:
+  * <Anchor label="Completed the Quickstart Guide" target="_blank" href="https://docs.recurly.com/recurly-subscriptions/docs/quick-start-guide#/">Completed the Quickstart Guide</Anchor>
+* If running MOTO transactions via the UI:
+  * [Invoice Management](/guides/recurring-billing/invoices-1/invoice-management#/)
+* A MOTO supported gateway account with Cards enabled
+* Ensure you've spoken with your gateway and have enabled MOTO at that level
+
+***
+
+# Definition
+
+**Creating Purchases** refers to the process of generating new customer accounts alongside subscriptions in a single, consolidated call to the Recurly Purchase endpoint. This streamlines checkout experiences by bundling all required resources into one request.
+
+**MOTO** refers to a "mail order' or "telephone' order style purchase where the customers has called into a business and the merchant employee submits a payment on the customers behalf, such as paying a bill.
+
+***
+
+# Creating purchases
+
+## Step 1: Setup your purchase request
+
+When attempting to use MOTO, the only thing you need to add to your payload is the `transaction_type` parameter, and send your value as `moto`. 
+
+**Send** a request to the `create_purchase` method on Recurly’s API, including:
+
+* **Customer account data** (e.g., code, name, billing info, phone number, email address)
+* **Line Items** (with item codes or specific information)
+* **Transaction Type** of payment method. In this case, `moto`.
+* **Omit** Subscription codes. These should not be handles as MOTO where possible.
+
+Below are example calls in different languages:
+
+```ruby
+purchase = {
+  currency: "USD",
+  transaction_type: "moto",
+  account: {
+    code: "Account-Code"
+  },
+  line_items: [
+    <line item details>
+  ]
+}
+invoice_collection = @client.create_purchase(body: purchase)
+```
+```javascript
+let purchaseReq = {
+  currency: "BRL",
+  account: {
+    code: "bdumonde",
+    first_name: "Benjamin",
+    last_name: "Du Monde",
+    email: "bdumonde@example.com",
+    billing_info: {
+			address: {
+        street1: "Avenida Nipo-brasileira 1007",
+        city: "Braganca Paulista",
+        region: "BR",
+        postal_code: "123456",
+        country: "BR",
+        phone: "1234679099"
+			}
+    },
+    type: "mercadopago"
+  },
+  subscriptions: [
+    { plan_code: "coffee-monthly" }
+  ]
+};
+let invoiceCollection = await client.createPurchase(purchaseReq)
+```
+```python
+purchase = {
+    "currency": "BRL",
+    "account": {
+        "code": "bdumonde",
+        "first_name": "Benjamin",
+        "last_name": "Du Monde",
+        "email": "bdumonde@example.com",
+        "billing_info": {
+						"address":{
+              "street1": "Avenida Nipo-brasileira 1007",
+              "city": "Braganca Paulista",
+              "region": "BR",
+              "postal_code": "123456",
+              "country": "BR",
+              "phone": "1234679099"
+						}
+        },
+        "type": "mercadopago"
+    },
+    "subscriptions": [
+        {"plan_code": "coffee-monthly"}
+    ]
+}
+invoice_collection = client.create_purchase(purchase)
+```
+```java
+PurchaseCreate purchase = new PurchaseCreate();
+purchase.setCurrency("BRL");
+
+AccountPurchase account = new AccountPurchase();
+account.setCode("bdumonde");
+account.setFirstName("Benjamin");
+account.setLastName("Du Monde");
+account.setEmail("bdumonde@example.com");
+account.setType("mercadopago");
+
+BillingInfoCreate billing = new BillingInfoCreate();
+billing.setStreet1("Avenida Nipo-brasileira 1007");
+billing.setCity("Braganca Paulista");
+billing.setRegion("BR");
+billing.setPostalCode("123456");
+billing.setCountry("BR");
+billing.setPhone("1234679099");
+
+List<SubscriptionPurchase> subs = new ArrayList<>();
+SubscriptionPurchase sub = new SubscriptionPurchase();
+sub.setPlanCode("coffee-monthly");
+subs.add(sub);
+purchase.setSubscriptions(subs);
+
+InvoiceCollection collection = client.createPurchase(purchase);
+```
+```csharp
+var purchaseReq = new PurchaseCreate()
+{
+    Currency = "BRL",
+    Account = new AccountPurchase()
+    {
+        Code = "bdumonde",
+        FirstName = "Benjamin",
+        LastName = "Du Monde",
+        Email = "bdumonde@example.com",
+        BillingInfo = new BillingInfoCreate()
+        {
+            Street1 = "Avenida Nipo-brasileira 1007",
+            City = "Braganca Paulista",
+            Region = "BR",
+            PostalCode = "123456",
+            Country = "BR",
+            Phone = "1234679099"
+        },
+        Type = "mercadopago"
+    },
+    Subscriptions = new List<SubscriptionPurchase>()
+    {
+        new SubscriptionPurchase() { PlanCode = "coffee-monthly" }
+    }
+};
+
+InvoiceCollection collection = client.CreatePurchase(purchaseReq);
+```
+
+> **Tip:** Many more parameters are available. See the <Anchor label="Create Purchase" target="_blank" href="https://developers.recurly.com/api/latest/#operation/create_purchase">Create Purchase</Anchor> reference to learn more.
+
+<br />
+
+You JSON payload may look like this:
+
+```json
+{
+  "currency": "USD",
+  "account": {
+    "code": "<account-code>"
+  },
+  "line_items": [
+    {
+      "unit_amount": "7.00",
+      "quantity": 1,
+      "description": "CIT Physical Charge + Tax",
+      "type": "charge",
+      "tax_code": "physical",
+      "product_code": "1001",
+      "tax_exempt": false
+    }
+  ],
+  "transaction_type": "moto"
+}
+```
+
+***
+
+## Step 2: Verify and finish
+
+After a successful purchase, you can confirm the details via the Recurly Admin UI or by calling Recurly’s API to list your new account, subscription, or invoice.
+
+***
+
+## Next steps
+
+Now that you can create new MOTO transaction, ensure your gateway is set up to properly enable MOTO transactions. You will need to reach out to your specific gateway's support team to ensure that MOTO is enabled for your account.
+
+<br />

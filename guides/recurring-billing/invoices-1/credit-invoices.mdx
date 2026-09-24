@@ -1,0 +1,261 @@
+---
+title: Credit invoices
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Credit invoices give every credit its own distinct invoice — separate from charge invoices. Whether it's a promotional credit, a prorated refund from a subscription change, or a write-off on a failed invoice, each credit gets a clean record with a clear origin, full audit trail, and webhook notifications to keep your systems in sync.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">1</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#issue-a-standalone-credit-invoice"><span className="rp-toc-num">3</span>Issue a credit invoice</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Recurly sites created after May 8, 2018 UTC have the Credit Invoices feature enabled by default. If your site was created before that date and Credit Invoices were never activated, additional setup steps apply — contact <a href="mailto:support@recurly.com">support@recurly.com</a> for guidance.</div>
+</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-file-invoice" aria-hidden="true"></i></div>
+    <strong>Clear financial records</strong>
+    <span>Credits get their own distinct invoices, keeping your financial reporting clean and accurate.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-check" aria-hidden="true"></i></div>
+    <strong>Enhanced customer understanding</strong>
+    <span>Straightforward, separate credit invoices reduce confusion and potential disputes with customers.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+    <strong>Tax compliance support</strong>
+    <span>Separating credits from charges helps businesses meet tax compliance requirements more reliably.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Streamlined operations</strong>
+    <span>Credit invoices are generated automatically — saving time and reducing the risk of manual errors.</span>
+  </div>
+</div>
+
+# Key details
+
+## Credit invoice types
+
+Credit invoices come in three types, each serving a distinct purpose.
+
+### Credit
+
+A credit invoice that isn't linked to any specific charge or invoice — typically a custom or promotional credit. Because it isn't tied to a charge, it doesn't reverse discounts or taxes. When issued, a **New Credit Invoice** email is sent to the customer.
+
+
+<Image src="https://files.readme.io/7a0ef3b-closed-credit-invoice.png" align="center" width="75%" border={true} />
+
+
+### Refund
+
+A credit invoice that reverses previously issued charges. Generated when a subscription changes immediately with prorated credits, or when an invoice is directly refunded. The email sent depends on the event that triggered the refund.
+
+Refund invoices use the billing and shipping information from the original invoice, even if the current account address has been updated.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Avoid over-crediting</strong>Recurly ensures credits issued against a charge never exceed the original charge amount. This prevents double-crediting scenarios — for example, a subscription downgrade following a refund.</div>
+</div>
+
+
+<Image src="https://files.readme.io/263e692-refund-with-discounts-and-tax.png" align="center" width="75%" border={true} />
+
+
+### Write-off
+
+A credit invoice that offsets charges on a corresponding failed invoice. When Credit Invoices is enabled, every failed invoice is automatically paired with a write-off credit invoice to balance it to zero.
+
+
+<Image src="https://files.readme.io/c959776-write-off-invoice.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/d34d120-failed-invoice.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Credit payments
+
+When a credit invoice's balance pays off a charge invoice, a credit payment records the amount that reduced both balances. Credit payments appear on the invoice and can be exported for a detailed audit trail.
+
+
+<Image src="https://files.readme.io/2dfa6c3-charge-invoice-with-credit-payment.png" align="center" width="75%" border={true} />
+
+
+Credit payment actions track the application or removal of credit balances — including applying an open credit balance to a charge invoice, recording balance write-offs, removing credit balances, and refunding a credit payment as a cash transaction. These actions are available in the Credit Payments export or via the API.
+
+***
+
+## Invoice origins
+
+The **origin** attribute on an invoice identifies the event that created it, providing context for reporting and reconciliation. You can view an invoice's origin on the Invoice Details page, filter by it on the Invoices Index page, and access it in exports, the API, and webhooks.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>In some exports, this attribute is referred to as <strong>invoice_type</strong>.</div>
+</div>
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Origin display</td><td>Origin code</td><td>Description</td></tr>
+  <tr><td>Purchase</td><td><code>purchase</code></td><td>A charge invoice from a subscription purchase or one-time purchase, including gift card purchases. Legacy invoices not related to refunds also fall under this origin.</td></tr>
+  <tr><td>Renewal</td><td><code>renewal</code></td><td>A charge invoice from a subscription renewal, applicable at each billing cycle.</td></tr>
+  <tr><td>Immediate Change</td><td><code>immediate_change</code></td><td>A charge or credit invoice issued for an immediate subscription change.</td></tr>
+  <tr><td>Termination</td><td><code>termination</code></td><td>A credit invoice for a refund during subscription termination, or a charge invoice for final usage-based billing in termination.</td></tr>
+  <tr><td>Refund</td><td><code>refund</code></td><td>A credit invoice created from directly refunding a charge invoice.</td></tr>
+  <tr><td>Posted Credit</td><td><code>credit</code></td><td>A custom credit invoice not linked to a specific charge invoice.</td></tr>
+  <tr><td>Gift Card Redemption</td><td><code>gift_card</code></td><td>A credit invoice for redeeming a Recurly or external gift card. Gift card purchases are categorized as "purchase."</td></tr>
+  <tr><td>Write-Off</td><td><code>write_off</code></td><td>A credit invoice for writing off a failed charge invoice as bad debt.</td></tr>
+  <tr><td>Prepayment</td><td><code>prepayment</code></td><td>A charge invoice for a specific dollar amount and a corresponding credit invoice for an equivalent credit amount.</td></tr>
+  <tr><td>External Refund</td><td><code>external_refund</code></td><td>A credit invoice due to a chargeback from the Check Commerce ACH gateway.</td></tr>
+  <tr><td>Carryforward Credit</td><td><code>carryforward_credit</code></td><td>A credit invoice for transferring carryforward credits to the new format upon enabling Credit Invoices. Represents previously issued credits.</td></tr>
+  <tr><td>Carryforward Gift Credit</td><td><code>carryforward_gift_credit</code></td><td>Similar to Carryforward Credit, but specific to transferring gift card credits to the new format.</td></tr>
+  <tr><td>Usage Correction</td><td><code>usage_correction</code></td><td>A credit invoice for correcting net-negative usage in usage-based add-ons.</td></tr>
+  <tr><td>Line Item Refund</td><td><code>line_item_refund</code></td><td>A credit invoice for refunding specific line items on a legacy invoice. Supported refund types: quantity, specific amount, and quantity.</td></tr>
+  <tr><td>Open Amount Refund</td><td><code>open_amount_refund</code></td><td>A credit invoice for refunding a specific dollar amount on a legacy invoice.</td></tr>
+</table>
+
+***
+
+## Subscription changes and credit invoices
+
+Immediate subscription changes — both upgrades and downgrades — separate credits from charges. A single subscription change can result in a charge invoice, a credit invoice, or both.
+
+For example, changing from a Silver plan to a Gold plan generates a credit invoice for the remaining Silver balance and a separate charge invoice for the Gold upgrade. Only one **Subscription Change** email is sent to the customer. If PDF attachments are enabled on your Recurly emails, the customer receives two invoice PDFs — one for each invoice.
+
+***
+
+## Refund capabilities
+
+Refunding an invoice creates a refund credit invoice with credit adjustments. If the original invoice was paid with credit, the refunded amount transfers as part of the credit balance on the new refund credit invoice.
+
+**Example:** An original invoice of $100 — paid with $20 credit and an $80 credit card transaction — refunded entirely to credit produces a refund credit invoice with a total of ($100), no refund transactions, and a credit balance of ($100).
+
+### Advanced refund options
+
+#### Prorated refund
+
+If you issue a prorated refund, you can later refund the remaining amount on the original invoice. This option is available for refund credit invoices issued after Credit Invoices was enabled. Legacy refund invoices don't support this option.
+
+#### Refund to credit balance
+
+Instead of refunding to the original payment method, you can refund to the customer's credit balance. This is useful when the customer has future purchases, since the balance will automatically be applied as payment.
+
+
+<Image src="https://files.readme.io/d5ccf16-refund-to-credit.png" align="center" width="40%" border={true} />
+
+
+#### Refund credit payment to original payment method
+
+If an invoice was paid with a credit payment that originated from a refundable transaction, the credit payment can be refunded as a transaction — keeping a clean audit trail.
+
+
+<Image src="https://files.readme.io/d414de3-refund-back-to-cash.png" align="center" width="40%" border={true} />
+
+
+#### Handling failed refunds
+
+If a refund transaction declines, Recurly creates a refund credit invoice by default and retains the transaction amount as part of the credit balance on the invoice. You can also choose to block all declined refunds, retry the refund transaction, record an external refund transaction, or void the credit invoice — depending on your business needs.
+
+***
+
+## Write-offs
+
+When a charge invoice fails — either directly or at the end of the dunning cycle — a write-off credit invoice is generated automatically. This invoice zeroes out the failed invoice's balance by creating credit adjustments that mirror the original charges, including descriptions, taxes, and discounts. These adjustments carry a credit reason code of `write_off`, and the credit invoice itself has an origin of `write_off` for easy identification.
+
+The write-off invoice's balance is immediately applied to the failed invoice via a credit payment labeled `write_off`, closing the write-off credit invoice on creation.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Legacy invoices (created before Credit Invoices was enabled) won't generate a write-off credit invoice when failed. After enabling Credit Invoices, manually collected failed invoices can't be reopened — but manually collected paid invoices can still be reopened.</div>
+</div>
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Failing an invoice with a credit payment</strong>Failing an invoice that has a credit payment will void the credit payment and reopen the originating credit invoice. This triggers an account activity notification and a webhook alert.</div>
+</div>
+
+***
+
+## Voiding credit invoices and balances
+
+If a credit was issued in error, its balance can be voided — maintaining the audit trail while removing the credit.
+
+**Full credit invoice voiding:** If a credit invoice still has its full original balance (no credit payments or refund transactions have reduced it), the entire invoice can be voided. The invoice moves to a **voided** state, and the credit balance is removed via a credit payment labeled `reduction`.
+
+
+<Image src="https://files.readme.io/68e7e9f-voided-credit.png" align="center" width="75%" border={true} />
+
+
+**Partial credit balance voiding:** If only a portion of the credit invoice's balance remains, the full invoice can't be voided. The remaining balance can still be removed, which creates a credit payment labeled `reduction` and closes the credit invoice.
+
+To track removed credit balances, use the Credit Payments export filtered by the `reduction` action.
+
+***
+
+## Credit limitations
+
+Each credit is associated with its originating charge to ensure accurate reversal of discounts and taxes. The total of all credits against a charge can never exceed the original charge amount.
+
+***
+
+## Tax implications
+
+Refund and write-off credit invoices reverse taxes if the original charge invoice collected them. One-off credit invoices don't reverse taxes, since they aren't linked to specific charges.
+
+**Avalara AvaTax:** Recurly commits every credit invoice to AvaTax on issuance. If a credit balance is voided, the committed document is also voided in AvaTax. If the credit invoice's balance is removed but the invoice remains closed (not voided), the AvaTax document is not voided.
+
+**EU transactions:** Credit invoices won't display VAT Reverse Charge Notes if the original invoice was a reverse charge. The credit invoice references the original invoice, which contains the VAT Reverse Charge Notes.
+
+***
+
+## Email template updates
+
+Enabling Credit Invoices affects several email templates.
+
+**Payment Confirmation** — Sent when a charge invoice is fully settled with a credit payment.
+
+**Payment Refunded** — Sent when a refund is entirely credited to a credit balance.
+
+**Subscription Change** — Sent immediately upon request. If the change results in both charges and credits and your site has PDF attachments enabled, the email includes two PDFs — one for the credit invoice and one for the charge invoice.
+
+**New Credit Invoice** — Sent whenever a one-off credit invoice is issued. This doesn't apply to write-off credits, refunds, or subscription change credits. Customize this template to match your brand and messaging.
+
+# Issue a standalone credit invoice
+
+One-off credit invoices can be issued directly from a customer's account in the Admin Console.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the customer's account</h4><p>Navigate to the customer's account in the Admin Console.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Click Add Credit</h4><p>Select <strong>Add Credit</strong> on the account page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Configure the credit</h4><p>Fill in the relevant options for the credit invoice.</p></div>
+  </div>
+</div>
+
+Available options when adding a credit:
+
+- **Note to Customer** — Add a message for the customer that appears on the credit invoice
+- **Reason Code** — Categorize the credit as general, service, or promotional to track its purpose
+- **Add Another Credit Adjustment** — Define multiple credit adjustments at once
+- **Account Note** — Add an internal note to the account before posting the invoice
+
+You can preview the credit invoice or post it directly to the account.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> API-created credits</strong>Uninvoiced credit adjustments created via the Adjustments API endpoint won't be invoiced immediately. They must be invoiced via the API, or will be invoiced automatically during the next billing event. Uninvoiced credits aren't applied to charge invoices until they've been invoiced.</div>
+</div>
+
+<br />

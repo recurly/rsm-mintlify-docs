@@ -1,0 +1,348 @@
+---
+title: Subscription management guide
+---
+
+# Overview
+
+This guide covers various approaches to **managing existing subscriptions** in Recurly, such as upgrading or downgrading subscription plans, postponing billing, pausing subscriptions, and setting subscriptions to expire. Before proceeding, review our documentation on [Subscription Changes](/guides/subscriber-management/subscription-lifecycle/change-subscription), along with the [Quick-start Guide](https://docs.recurly.com/v1.1/docs/quick-start-guide#/) and the [Purchases Guide](https://docs.recurly.com/v1.1/docs/purchases-guide#/).
+
+### Prerequisites & limitations
+
+* A Recurly account with valid API credentials
+* Familiarity with subscription concepts, plan codes, and the Recurly REST API
+* Basic understanding of JSON request/response handling
+* Knowledge of subscription states (active, paused, cancelled, etc.)
+
+***
+
+## Upgrading and downgrading
+
+Subscription upgrades and downgrades involve modifications to the subscription's plan, quantity, price, or included add-ons.
+
+Use the [Create Subscription Change](https://recurly.com/developers/api/v2021-02-25/index.html#operation/create_subscription_change) endpoint to perform all upgrade and downgrade actions. You can specify when the change should occur: immediately, at the next billing cycle, or at the end of the current subscription term.
+
+### Change the subscription plan
+
+To change the subscription plan, pass in the `plan_id` or `plan_code` of the new plan. In the example below, we'll upgrade a customer's existing subscription to a higher-tier plan, effective immediately:
+
+```ruby
+change = @client.create_subscription_change(
+  subscription_id: subscription_id,
+  body: {
+    timeframe: "now",
+    plan_code: new_plan_code
+  }
+)
+puts "Created subscription change: #{change.id}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'now',
+  planCode: newPlanCode
+}
+
+const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+console.log('Created subscription change: ', change.id)
+```
+```python
+sub_change_create = {
+  timeframe: "now",
+  plan_code: new_plan_code
+}
+change = client.create_subscription_change(subscription_id, sub_change_create)
+print("Created subscription change: %s" % change.id)
+```
+```java
+SubscriptionChangeCreate changeCreate = new SubscriptionChangeCreate();
+
+changeCreate.setTimeframe("now");
+changeCreate.setPlanCode(newPlanCode);
+
+SubscriptionChange change = client.createSubscriptionChange(subscriptionId, changeCreate);
+System.out.println("Created subscription change: " + change.getId());
+```
+```csharp
+var changeReq = new SubscriptionChangeCreate()
+{
+    Timeframe = "now",
+    PlanCode = newPlanCode
+};
+SubscriptionChange change = client.CreateSubscriptionChange(subscriptionId, changeReq);
+Console.WriteLine($"Created subscription change: {change.Id}");
+}
+```
+```php
+$change_create = array(
+    "timeframe" => "term_end",
+    "plan_code" => $new_plan_code
+);
+$change = $client->createSubscriptionChange($subscription_id, $change_create);
+echo "Created subscription change: {$change->getId()}" . PHP_EOL;
+```
+
+### Change the subscription price
+
+To change the subscription price, pass in a new `unit_amount` for the subscription. This will override the plan's default unit amount. In the example below, we'll increase the subscription cost to $20 at the end of the current subscription term (`timeframe=term_end`):
+
+```ruby
+change = @client.create_subscription_change(
+  subscription_id: subscription_id,
+  body: {
+    timeframe: "term_end",
+    unit_amount: 20
+  }
+)
+puts "Created subscription change: #{change.id}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'term_end',
+  unit_amount: 20
+}
+
+const change = await client.createSubscriptionChange(subscriptionId, subscriptionChangeCreate)
+console.log('Created subscription change: ', change.id)
+```
+```python
+sub_change_create = {
+  timeframe: "term_end",
+  unit_amount: 20
+}
+change = client.create_subscription_change(subscription_id, sub_change_create)
+print("Created subscription change: %s" % change.id)
+```
+```java
+SubscriptionChangeCreate changeCreate = new SubscriptionChangeCreate();
+
+changeCreate.setTimeframe("term_end");
+changeCreate.setUnitAmount(20);
+
+SubscriptionChange change = client.createSubscriptionChange(subscriptionId, changeCreate);
+System.out.println("Created subscription change: " + change.getId());
+```
+```csharp
+var changeReq = new SubscriptionChangeCreate()
+{
+    Timeframe = "term_end",
+    UnitAmount = 20
+};
+SubscriptionChange change = client.CreateSubscriptionChange(subscriptionId, changeReq);
+Console.WriteLine($"Created subscription change: {change.Id}");
+```
+```php
+$change_create = array(
+    "timeframe" => "term_end",
+    "unit_amount" => 20
+);
+$change = $client->createSubscriptionChange($subscription_id, $change_create);
+echo "Created subscription change: {$change->getId()}" . PHP_EOL;
+```
+
+## Managing add-ons
+
+For detailed information on managing subscription add-ons, refer to the [Subscription Add-Ons](https://docs.recurly.com/v1.1/docs/subscription-add-ons-guide#/) guide.
+
+## Postponing
+
+Subscription postponement involves adjusting your customer's billing cycle, such as changing the next billing date. To learn more about this feature, review the [product documentation](/guides/subscriber-management/subscription-lifecycle/postpone-subscription).
+
+To postpone a subscription using the Recurly API, use the [Modify Subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/modify_subscription) endpoint. In the example below, we'll modify the start date of the next billing period. This is especially useful if you want to adjust a subscription in a trial period, such as extending or shortening the trial:
+
+```ruby
+subscription = @client.modify_subscription(
+  subscription_id: subscription_id,
+  body: {
+    next_bill_date: "2025-12-05"
+  }
+)
+puts "Postponed Subscription #{subscription.uuid}"
+```
+```js Node
+const subscriptionChangeCreate = {
+  timeframe: 'term_end',
+  next_bill_date: '2025-12-05'
+}
+
+const change = await client.modifySubscription(subscriptionId, subscriptionChangeCreate)
+console.log('Postponed subscription: ', change.uuid)
+```
+```python
+sub_change_create = {next_bill_date: "2025-12-05", timeframe: "term_end"}
+change = client.modify_subscription(subscription_id, sub_change_create)
+print("Postponed subscription: %s" % change.uuid)
+```
+```java
+final SubscriptionUpdate subUpdate = new SubscriptionUpdate();
+subUpdate.setNextBillDate("2025-12-05");
+final Subscription subscription = client.modifySubscription(subscriptionId, subUpdate);
+System.out.println("Postponed subscription: " + subscription.getUuid());
+```
+```csharp
+var updateReq = new SubscriptionUpdate()
+{
+    NextBillDate = "2025-12-05"
+};
+Subscription subscription = client.ModifySubscription(subscriptionId, updateReq);
+Console.WriteLine($"Postponed subscription: {subscription.Uuid}");
+```
+```php
+$update_req = array(
+    "next_bill_date" => "2025-12-05"
+);
+
+$subscription = $client->modifySubscription($subscription_id, $update_req);
+echo "Postponed subscription: {$change->getUuid()}" . PHP_EOL;
+```
+
+There are several other modification options available with this endpoint, such as changing the number of remaining billing cycles in the current term or modifying the number of renewal billing cycles. For more details, refer to the [reference documentation](https://recurly.com/developers/api/v2021-02-25/index.html#tag/subscription).
+
+## Pausing
+
+Pausing a subscription with the Recurly API is simple and offers your customers an alternative to outright cancellation. For more details on this feature, refer to our [product documentation](/guides/subscriber-management/subscription-lifecycle/pause-subscription).
+
+To pause a subscription, use the [Pause Subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/pause_subscription) endpoint. This allows you to freeze billing for a specified number of cycles at the next renewal date. In the example below, we pause a subscription for ten billing cycles:
+
+```ruby
+sub = @client.pause_subscription(
+  subscription_id: subscription_id,
+  body: {
+    remaining_pause_cycles: 10
+  }
+)
+puts "Paused subscription: #{sub.uuid}"
+```
+```js Node
+const subscriptionPause = {
+  remaining_pause_cycles: 10
+}
+
+const sub = await client.pauseSubscription(subscriptionId, subscriptionPause)
+console.log('Paused subscription: ', sub.uuid)
+```
+```python
+sub_pause = {remaining_pause_cycles: 10}
+sub = client.pause_subscription(subscription_id, sub_pause)
+print("Paused subscription: %s" % sub.uuid)
+```
+```java
+final SubscriptionPause subPause = new SubscriptionPause();
+subPause.setRemainingPauseCycles(10);
+
+final Subscription sub = client.pauseSubscription(subscriptionId, subPause);
+System.out.println("Paused subscription: " + sub.getUuid());
+```
+```csharp
+var pauseSubReq = new SubscriptionPause()
+{
+    RemainingPauseCycles = 10
+};
+Subscription sub = client.PauseSubscription(subscriptionId, pauseSubReq);
+Console.WriteLine($"Paused subscription {sub.Uuid}");
+```
+```php
+$pause_sub_req = array(
+    "remaining_pause_cycles" => 10
+);
+
+$sub = $client->pauseSubscription($subscription_id, $pause_sub_req);
+echo "Paused subscription: {$sub->getUuid()}" . PHP_EOL;
+```
+
+> **Note**: Expired, cancelled, or failed subscriptions cannot be paused.
+
+## Expiring
+
+A subscription can be marked as expired either through **cancellation** (e.g., the customer ends their subscription at the next billing date or term) or **termination** (e.g., the subscription is ended in the middle of the billing cycle). For more details, refer to our [product documentation](/guides/subscriber-management/subscription-lifecycle/expire-subscription).
+
+### Termination
+
+To terminate a subscription, use the [Terminate Subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/terminate_subscription) endpoint and pass in the ID of the subscription to terminate. You can also specify a type of refund: `full`, `partial`, or `none`. In the example below, we'll terminate a subscription and provide a partial refund to the customer:
+
+```ruby
+sub = @client.terminate_subscription(
+  subscription_id: subscription_id,
+  refund: "partial"
+)
+puts "Terminated subscription: #{sub.uuid}"
+```
+```js Node
+terminateParams = { params: { refund: "none" } }
+const sub = await client.terminateSubscription(subscriptionId, terminateParams)
+console.log('Terminated subscription: ', sub.uuid)
+```
+```python
+sub = client.terminate_subscription(subscription_id, refund="none")
+print("Terminated subscription: %s" % sub)
+```
+```java
+QueryParams queryParams = new QueryParams();
+queryParams.setRefund("partial");
+final Subscription sub = client.terminateSubscription(subscriptionId, queryParams);
+System.out.println("Terminated subscription: " + sub.uuid());
+```
+```csharp
+Subscription sub = client.TerminateSubscription(subscriptionId, "partial");
+Console.WriteLine($"Terminated subscription: {sub.Uuid}");
+```
+```php
+$terminate_sub_req = array(
+    "refund" => "partial"
+);
+
+$sub = $client->terminateSubscription($subscription_id, $terminate_sub_req);
+echo "Terminated subscription: {$sub->getUuid()}" . PHP_EOL;
+```
+
+> **Note:** A terminated subscription is immediately expired and cannot be reactivated.
+
+### Cancellation
+
+To cancel a subscription, use the [Cancel Subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/cancel_subscription) endpoint. Similar to termination, you'll specify the ID of the subscription to cancel. Additionally, you'll need to specify whether the subscription should end at the next billing date or at the end of the term. In the example below, we'll cancel a subscription at the end of the term:
+
+```ruby
+subscription = @client.cancel_subscription(
+  subscription_id: subscription_id
+  body: {
+    timeframe: "term_end"
+  }
+)
+puts "Canceled subscription #{subscription.uuid}"
+```
+```js Node
+const subCancel = {
+  timeframe: "term_end"
+}
+let expiredSub = await client.cancelSubscription(subscriptionId, subCancel)
+console.log('Canceled subscription: ', expiredSub.uuid)
+```
+```python
+sub_cancel = {
+  timeframe: "term_end"
+}
+subscription = client.cancel_subscription(subscription_id, sub_cancel)
+print("Canceled subscription: %s" % subscription.uuid)
+```
+```java
+subCancel = new SubscriptionCancel()
+subCancel.setTimeFrame("term_end")
+final Subscription subscription = client.cancelSubscription(subscriptionId, subCancel);
+System.out.println("Canceled subscription: " + subscription.getUuid());
+```
+```csharp
+var subCancel = new SubscriptionCancel()
+{
+    Timeframe = "term_end"
+};
+Subscription subscription = client.CancelSubscription(subscriptionId, subCancel);
+Console.WriteLine($"Canceled subscription: {subscription.Uuid}");
+```
+```php
+$sub_cancel = array(
+    "timeframe" => "term_end"
+);
+
+$subscription = $client->cancelSubscription($subscription_id, $sub_cancel);
+echo "Canceled subscription: {$change->getUuid()}" . PHP_EOL;
+```
+
+At the end of the specified timeframe, the subscription will move to an expired state. However, you can reactivate the subscription before that time using the [Reactivate Subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/reactivate_subscription) endpoint, which will restore the subscription to its previous state. This is useful if your customer changes their mind and wants to continue with the service.

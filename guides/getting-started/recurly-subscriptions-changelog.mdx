@@ -1,0 +1,286 @@
+---
+title: Recurly Subscriptions Changelog
+rss: true
+---
+
+```html
+<HTMLBlock>{`
+<style>
+  #hub-sidebar, #reference-sidebar, .rm-Sidebar {
+    font-family: var(--recurly-font) !important;
+    background: #fff !important;
+    display: none;
+}
+.rm-Guides #content-head {
+    display: none;
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin: 0 auto;
+    width: 120%;
+}
+  #recurly-changelog-header {
+    background: #080807;
+    border-radius: 22px;
+    padding: 66px 72px 58px !important;
+    margin: 42px 0 34px;
+    color: #d6d1c6;
+    box-sizing: border-box;
+  }
+  #recurly-changelog-header h1 {
+    color: #ffd400;
+    font-size: 48px;
+    line-height: 1.15;
+    font-weight: 800;
+    margin: 0 0 28px;
+    letter-spacing: -0.02em;
+  }
+  #recurly-changelog-header > p:not(.rss-line) {
+    color: #d6d1c6;
+    font-size: 30px;
+    line-height: 1.55;
+    font-weight: 400;
+    margin: 0;
+    max-width: 1720px;
+  }
+  #recurly-changelog-header .rss-line {
+    border-top: 1px solid #32312d;
+    margin: 32px 0 0;
+    padding-top: 32px;
+    color: #d6d1c6;
+    font-size: 27px;
+    line-height: 1.45;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  #recurly-changelog-header .rss-icon {
+    color: #ffd400;
+    font-size: 27px;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+  #recurly-changelog-header .rss-copy {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0 8px;
+    color: #ffd400;
+    font: inherit;
+    font-weight: 800;
+    line-height: inherit;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    cursor: pointer;
+  }
+  #recurly-changelog-header .rss-copy:hover,
+  #recurly-changelog-header .rss-copy:focus {
+    color: #ffe45c;
+  }
+
+  /* ── RSS instructions collapsible ── */
+  #recurly-changelog-header .rss-instructions-wrap {
+    margin-top: 20px;
+  }
+  #recurly-changelog-header .rss-instructions-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid #32312d;
+    border-radius: 40px;
+    padding: 8px 22px 8px 16px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    color: #d6d1c6;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    line-height: 1;
+  }
+  #recurly-changelog-header .rss-instructions-toggle:hover {
+    border-color: #ffd400;
+    color: #ffd400;
+  }
+  #recurly-changelog-header .rss-chevron {
+    font-size: 14px;
+    transition: transform 0.2s ease;
+  }
+  #recurly-changelog-header .rss-instructions-open .rss-chevron {
+    transform: rotate(180deg);
+  }
+  #recurly-changelog-header .rss-instructions-body {
+    margin-top: 20px;
+    padding: 28px 32px;
+    background: rgba(255, 253, 242, 0.04);
+    border-radius: 12px;
+    border: 1px solid #32312d;
+  }
+  #recurly-changelog-header .rss-instructions-body p {
+    font-size: 16px !important;
+    color: #d6d1c6 !important;
+    line-height: 1.65 !important;
+    margin: 0 0 16px !important;
+    opacity: 1 !important;
+  }
+  #recurly-changelog-header .rss-instructions-body p:last-child {
+    margin-bottom: 0 !important;
+  }
+  #recurly-changelog-header .rss-instructions-body ol {
+    margin: 14px 0 18px 0;
+    padding-left: 28px;
+    list-style: decimal;
+  }
+  #recurly-changelog-header .rss-instructions-body ol li {
+    font-size: 22px;
+    color: #d6d1c6;
+    line-height: 1.65;
+    margin-bottom: 10px;
+    opacity: 1;
+  }
+  #recurly-changelog-header .rss-instructions-body ol li:last-child {
+    margin-bottom: 0;
+  }
+  #recurly-changelog-header .rss-instructions-body strong {
+    font-weight: 700;
+    color: rgba(255, 253, 242, 0.92);
+  }
+  #recurly-changelog-header .rss-instructions-body a {
+    color: #ff6b35;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  #recurly-changelog-header .rss-instructions-body a:hover {
+    text-decoration: underline;
+    text-decoration-color: #ff6b35;
+  }
+  #recurly-changelog-header .rss-instructions-tip {
+    margin-top: 18px !important;
+    padding: 16px 18px !important;
+    background: rgba(255, 201, 0, 0.06) !important;
+    border-left: 3px solid #ffd400 !important;
+    border-radius: 0 8px 8px 0 !important;
+    font-size: 16px !important;
+    color: #d6d1c6 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+  }
+  #recurly-changelog-header .rss-instructions-tip > i {
+    display: inline !important;
+    float: none !important;
+    color: #ffd400 !important;
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    flex: 0 0 auto !important;
+  }
+  #recurly-changelog-header .rss-instructions-tip > span {
+    display: block !important;
+    flex: 1 1 auto !important;
+    line-height: 1.65 !important;
+  }
+  #recurly-changelog-header .rss-instructions-tip > span strong {
+    display: inline !important;
+    font-weight: 700 !important;
+    color: rgba(255, 253, 242, 0.92) !important;
+  }
+
+  @media (max-width: 768px) {
+    #recurly-changelog-header {
+      border-radius: 18px;
+      padding: 36px 28px 32px !important;
+      margin: 28px 0;
+    }
+    #recurly-changelog-header h1 {
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+    #recurly-changelog-header > p:not(.rss-line),
+    #recurly-changelog-header .rss-line {
+      font-size: 20px;
+    }
+    #recurly-changelog-header .rss-line {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    #recurly-changelog-header .rss-icon {
+      font-size: 22px;
+      margin-top: 4px;
+    }
+    #recurly-changelog-header .rss-instructions-toggle {
+      font-size: 16px;
+    }
+    #recurly-changelog-header .rss-instructions-body p {
+      font-size: 15px !important;
+    }
+    #recurly-changelog-header .rss-instructions-body ol li {
+      font-size: 17px !important;
+    }
+    #recurly-changelog-header .rss-instructions-tip {
+      font-size: 15px !important;
+    }
+  }
+</style>
+<div id="recurly-changelog-header" class="rm-Markdown markdown-body">
+  <h1>Recurly Subscriptions Management Changelog</h1>
+  <p>
+
+    Discover what's new in Recurly Subscriptions Management. Browse posts by year to see recent launches,
+    enhancements, and behind-the-scenes improvements that keep your platform sharp.
+  </p>
+  <p class="rss-line">
+    <i class="fa-solid fa-rss rss-icon" aria-hidden="true"></i>
+    <span>
+
+      Stay in the loop — copy our
+      <button
+        type="button"
+        class="rss-copy"
+        data-url="https://docs.recurly.com/recurly-subscriptions/changelog.rss"
+      >RSS feed URL</button>
+      and paste it into your favorite RSS reader to get every update the moment it ships.
+    </span>
+  </p>
+  <div class="rss-instructions-wrap">
+    <button type="button" class="rss-instructions-toggle" aria-expanded="false" aria-controls="rss-instructions-body">
+      <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+      How to use this URL
+      <i class="fa-solid fa-chevron-down rss-chevron" aria-hidden="true"></i>
+    </button>
+    <div id="rss-instructions-body" class="rss-instructions-body" hidden>
+      <p>An RSS reader lets you subscribe to the changelog and receive new posts automatically — no need to check back manually. You can usually choose to see posts as a combined feed or read each one in full.</p>
+      <p>We recommend <a href="https://feedly.com" target="_blank" rel="noopener">Feedly</a> or <a href="https://feeder.co" target="_blank" rel="noopener">Feeder</a> — both are free to start, work in your browser, and let you choose how to view updates (summary list or full article view).</p>
+      <ol>
+        <li>Click <strong>RSS feed URL</strong> above to copy the feed address.</li>
+        <li>Open your RSS reader (e.g. <a href="https://feedly.com" target="_blank" rel="noopener">Feedly</a> or <a href="https://feeder.co" target="_blank" rel="noopener">Feeder</a>) and look for an <strong>Add feed</strong> or <strong>Follow</strong> option.</li>
+        <li>Paste the URL you copied and confirm the subscription.</li>
+        <li>New changelog entries will appear in your reader automatically the moment they publish.</li>
+      </ol>
+      <p class="rss-instructions-tip"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i><span><strong>Tip:</strong> Most readers let you switch between a compact list view (titles only) and an expanded view (full post content). Pick whichever fits your workflow.</span></p>
+    </div>
+  </div>
+</div>
+`}</HTMLBlock>
+
+<RecurlyChangelogMount />
+
+<HTMLBlock>{`
+<style>
+.content-toc {
+    display: none;
+  }
+:where(.ThemeContext_spacing_legacy) .rm-Guides .content-body {
+    max-width: 100%;
+    width: 100%;
+}
+</style> 
+`}</HTMLBlock>
+
+<br />
+
+<br />
+```

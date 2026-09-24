@@ -1,0 +1,175 @@
+---
+title: Monthly Recurring Revenue
+---
+
+This dashboard tracks total Monthly Recurring Revenue (MRR) and MRR changes to help you evaluate your businesses’ growth and revenue momentum. The MRR dashboard measures the predictable revenue a business can expect on a monthly basis. MRR is not the same as reportable Generally Accepted Accounting Principles (GAAP) revenue and should not be treated as such.
+
+To maintain access to the most current information, use the widgets on this dashboard to refresh the screen. The data for this dashboard updates multiple times a day. You can verify the time the  last changes were uploaded by checking the widget at the bottom of the dashboard.
+
+# What's included on the dashboard?
+
+The MRR calculation incorporates all invoiced recurring charges, credits, and refunds from active subscriptions. You can tell whether or not a charge has been included in MRR if the line item associated with that charge has a start and end date on the invoice.
+
+Some examples of adjustments that are included:
+
+* Subscription and subscription add-on amounts
+* Manual recurring charges
+* Proration credit from a subscription downgrade/upgrade
+* Refund of a subscription amount
+* Invoiced one-time charges that have a start\_date and end\_date
+
+The following are NOT included in the MRR calculation:
+
+* One-time charges without a start\_date and end\_date
+* One-time credits
+* Taxes
+* Usage based billing amounts
+
+You have the option of whether or not you want to include the following in the MRR calculation:
+
+* Recurring charges from failed invoices
+* Coupon discounts
+
+## Multi-currency support
+
+* Sites that support more than one currency will see a default view that shows total MRR across all currencies, converted to their primary currency and summed.
+* Conversion rates are updated daily (via [https://openexchangerates.org/](https://openexchangerates.org/)) Historical MRR use the conversion rate at time the charge was created and does not change over time for current conversion rates.
+
+## Ways to use this dashboard.
+
+Often considered one of the most valuable metrics for a subscription business, the MRR  data can help answer questions like:
+
+* What revenue should be expected every month? 
+* Is revenue increasing or decreasing each month?
+* Are monthly recurring revenue targets being met?
+
+# Monthly Recurring Revenue Growth
+
+The Monthly Recurring Revenue (MRR) Growth dashboard measures changes to MRR, over a selected time period. These changes are reflected as net positive MRR or net negative MRR and are calculated as: (New MRR + Expansion MRR + Reactivation MRR) - (Churned MRR + Declined MRR).
+
+## What’s included on the dashboard?
+
+Note: the data on this dashboard is calculated on a MONTHLY basis and individual customer events (such as subscription churn) throughout the month may not be immediately reflected until the end of the month.\
+New MRR: MRR contributed by an account in this month when the account contributed $0 last month AND has never contributed MRR in the past.
+
+* **Expansion MRR:** A positive change in an account's contribution to MRR when compared to the previous month. Common reasons for Expansion MRR include: subscription upgrade, a coupon or credit being exhausted that causes the total subscription amount being paid to increase or an account adding a second subscription.
+* **Reactivation MRR:** MRR contributed by an account this month when the account contributed $0 in recurring revenue last month BUT has contributed >$0 some time previous to last month. There must be a gap of at least one month where the account had $0 MRR prior to the reactivation. If a subscription was not added back to the same account, Recurly will not be able to recognize it as "Reactivation."
+* **Contraction MRR:** A negative change in an account's contribution to MRR when compared to the previous month. Common reasons for Contraction MRR include: subscription downgrade, a refund, coupon or credit being applied to bring the subscription amount paid down or an account removing one of their multiple subscriptions.
+* **Churned MRR:** MRR that was contributed by an account LAST month when the account had now contributed $0 this month. This reflects the amount of MRR that was lost. Because we will not know whether an account will contribute MRR or not until the END OF THE MONTH, Churned MRR will not show up until the current month is complete.
+* **Net MRR:** (New MRR + Expansion MRR + Reactivation MRR) - (Churn MRR + Declined MRR).
+
+Note: The MRR Growth section on this dashboard is only available to merchants on Recurly’s Professional, Elite, and Enterprise Plans. Please contact Support if you are interested in access to this section.
+
+# Monthly Recurring Revenue Dashboard
+
+The Monthly Recurring Revenue dashboard includes. Key performance indicator in a totals at-a-glance view, two bar charts, and two status details. 
+
+The widgets on this dashboard’s user interface provide you with access to the following common features:
+
+**Actions** at the top right corner of the dashboard provide the following functionality:
+
+* Reload action: tracks the last time you refreshed your data up to four hours. The counter then resets, beginning with 1m ago. This tells you how current your data is from the last refresh.
+* Hide Filters action: hides the filters that display in the top left corner of the dashboard.
+* Dashboard actions: allow you to either clear the cache and refresh the data; view a Download Dashboard from where you can select a download format, page size, or specify how to arrange downloaded data; or reset filters to their default settings.
+* Open Folders action allows you to open and view contents of folders from the dashboard.
+
+**Filters** in the top left corner of this dashboard provide the following options:
+
+* Select Timeframe filter: allows you to select a daily, weekly, or monthly option for displaying data.
+* Date Range filter: provides dropdown menus where you can choose a timeframe and date range from within the last 18 months to determine the data that displays on the dashboard.
+* Primary Currency filter: allows you to choose the currency type that will display on the dashboard from currencies that you already enabled in the site settings. 
+
+**Multi-Currency support** is available in the Recurly Professional, Elite, and Enterprise plans. You may run transactions in more than one currency through one or more payment gateways that accept the currencies you want to collect. If you choose US dollars, this will be your Primary currency and the default choice. Totals on the dashboard will display in US dollars.
+
+Once Multi Currency support is enabled on your Recurly account, you can then specify which currencies you want to accept for your account. When a currency is added to your accepted list, you may then define pricing for your subscription plans and coupons using the new currency. Then, choose one of the enabled currencies for the dashboard.
+
+* Sites that support more than one currency (the primary currency) will see a default view that shows the total payments, refunds, and net billings across all currencies, converted to their primary currency and summed.
+* View the payments, refunds and net billings processed in each individually supported currency.
+* Conversion rates are updated daily (via [https://openexchangerates.org/](https://openexchangerates.org/)) Historical billings use the conversion rate at time of transaction and do not change over time for current conversion rates.
+
+**Clear Cache options** allow you to clear cache and refresh data in three places on this dashboard:
+
+* Click the vertical ellipse on any of the widgets at the bottom of the dashboard to see the timestamp for the most current version of data on the dashboard.
+* Click the vertical ellipse on any of the widgets within the dashboard to update the selected widget with the most current data available during the session.
+* Click the Actions widget -> vertical ellipse at top right corner of the dashboard to clear the cache and refresh the data. Recurly updates the data multiple times a day, so after a refresh, the most current data available will upload.
+
+**Vertical ellipses** available on widgets for either charts or tables, provide you with a dropdown menu where you can select the following options:
+
+* Click the vertical ellipse on any widget to download data or clear cache and refresh data for that selected widget.
+* Click the vertical ellipse on a column in a table to freeze data, copy values, auto size or reset column widths.
+
+**Charts and legends** display data on this dashboard within widgets in bar, line, and pie charts. This data often includes customer, subscriber, subscription, plans, and revenue totals in increments specified by time and date ranges. If the information on one of these charts is color-coded, there will be a legend on the widget that identifies the value assigned to the color. For example, specific colors are assigned to specific data or totals being tracked, to enable you to read the chart. 
+
+* Click a point in a line chart or a specific color on a bar or pie chart to display the corresponding timeframe and value in hover text. For example, total number of subscribers for a corresponding month.
+* Click the corresponding color in the legend to hide that corresponding line, bar, or pie chart segment from the widget. Click on the color again, to restore the data.
+
+# Monthly Recurring Revenue (MRR)
+
+The MRR dashboard is divided into the following segments:
+
+**MRR Key Performance Indicator:** shows MRR totals at-a-glance view in a widget that includes the current MRR by Plans totals, and totals for last month, previous month, three months ago, and one year ago. 
+
+<Image title="mrr key performance widget.png" alt={2370} src="https://files.readme.io/6929248-mrr_key_performance_widget.png">
+  MRR Key Performance Indicators
+</Image>
+
+**Monthly Recurring Revenue** bar chart calculates the predictable revenue a business can expect on a monthly basis and shows those totals by the selected timeframe.
+
+<Image title="mrr bar chart.png" alt={2372} src="https://files.readme.io/23085f8-mrr_bar_chart.png">
+  MRR Totals
+</Image>
+
+**Monthly Recurring Revenue Growth** bar chart measures the net change to MRR over a selected time period. The net is calculated by summing (New MRR + Expansion MRR + Reactivation MRR) – (Churn MRR + Contraction MRR). 
+
+<Image title="mrr growth bar chart.png" alt={2370} src="https://files.readme.io/52a5c85-mrr_growth_bar_chart.png">
+  MRR Growth Totals
+</Image>
+
+**Total Monthly Recurring Revenue** detail shows a table with the recurring revenue totals by month.
+
+<Image title="mrr totals detail.png" alt={992} src="https://files.readme.io/b2ffc67-mrr_totals_detail.png">
+  Total Monthly Revenues
+</Image>
+
+**Monthly Recurring Revenue** detail status shows the Net MRR calculated by subtracting the Total Loss from the Total Growth. 
+
+<Image title="mrr status detail.png" alt={2364} src="https://files.readme.io/79f049e-mrr_status_detail.png">
+  MRR Detail Status
+</Image>
+
+# Monthly Recurring Revenue (MRR) Drill Down
+
+The MRR drill down feature allows you to view additional details about your accounts from the MRR dashboard widgets. This dashboard tracks totals for Monthly Recurring Revenue and Monthly Recurring Revenue Growth.\
+The MRR drill down, accessible from these charts and details, displays account-level details such as: buckets, accounts, email addresses, date accounts were created, names, and either Total MRR or Delta MRR.
+
+The MRR Accounts Drill for the MRR Totals bar chart and detail status shows the Accounts Total MRR. The MRR Accounts Drill for the MRR Growth bar chart and detail status shows the Delta MRR, which is the net difference total.
+
+The MRR dashboard has two bar charts and two detail statuses, one each for Total MRR and Growth MRR. The following steps tell you how to get to a MRR Account Drill to view your details.
+
+1. To drill down from a bar chart for either MRR Totals or MRR Growth:\
+   a.    Scroll to the desired bar chart on the MRR dashboard.\
+   b.    Click on the bar or specific segment of a specific bar to display the dropdown menu on the chart, as shown in the following screenshot.
+
+<Image title="mrr drill down option.png" alt={2462} src="https://files.readme.io/f5d5ce8-mrr_drill_down_option.png">
+  MRR Drill Down Option
+</Image>
+
+```
+  c. Click the See Accounts option to view the MRR Accounts Drill, as shown in the following screenshot.
+```
+
+<Image title="mrr accounts drill.png" alt={1574} src="https://files.readme.io/b190753-mrr_accounts_drill.png">
+  MRR Accounts Drill
+</Image>
+
+2. To drill down from a detail status for either MRR Totals or MRR Growth:\
+   a.	Scroll to the desired detail status on the MRR dashboard.\
+   b.	Click on the horizontal ellipse in the desired row of the table to display the dropdown menu, as shown in the following screenshot.
+
+<Image title="mrr status detail accoutns drill.png" alt={1310} src="https://files.readme.io/c8df51d-mrr_status_detail_accoutns_drill.png">
+  MRR Growth Drill Down Option
+</Image>
+
+```
+c.  Click the See Accounts option to view the MRR Accounts Drill for these accounts. This drill down will look similar to the MRR Accounts Drill in the previous screenshot.
+```

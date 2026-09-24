@@ -1,0 +1,337 @@
+---
+title: Gift card notifications
+---
+
+Recurly sends a webhook each time a gift card’s state changes—when it’s purchased, canceled, edited, code-regenerated, redeemed, or its balance is updated. These alerts help you keep your systems in sync with gift card activity.
+
+### Prerequisites and limitations
+
+* No special setup is required—these webhooks are enabled by default for any site using gift cards.
+* Only the six event types below are supported.
+
+# Key details
+
+## Purchased gift card
+
+Sent when a gift card is purchased by a gifter.
+
+```json
+{
+  "id": "3591723995699407683",
+  "object_type": "gift_card",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "purchased",
+  "event_time": "2022-07-27T15:14:25Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<purchased_gift_card_notification>
+  <gift_card>
+    <redemption_code>1A5069E266AED435</redemption_code>
+    <id type="integer">2008976331180115114</id>
+    <product_code>gift_card</product_code>
+    <unit_amount_in_cents type="integer">1000</unit_amount_in_cents>
+    <currency>USD</currency>
+    <gifter_account_code>84395</gifter_account_code>
+    <recipient_account_code nil="true"></recipient_account_code>
+    <invoice_number type="integer">1105</invoice_number>
+    <delivery>
+      <method>email</method>
+      <email_address>john@example.com</email_address>
+      <deliver_at nil="true"></deliver_at>
+      <first_name>John</first_name>
+      <last_name>Smith</last_name>
+      <address>
+        <address1 nil="true"></address1>
+        <address2 nil="true"></address2>
+        <city nil="true"></city>
+        <state nil="true"></state>
+        <zip nil="true"></zip>
+        <country nil="true"></country>
+        <phone nil="true"></phone>
+      </address>
+      <gifter_name>Sally</gifter_name>
+      <personal_message>
+        Hi John, Happy Birthday! I hope you have a great day! Love, Sally
+      </personal_message>
+    </delivery>
+    <created_at type="datetime">2016-08-03T20:37:21Z</created_at>
+    <updated_at type="datetime">2016-08-03T20:37:21Z</updated_at>
+    <delivered_at type="datetime" nil="true"></delivered_at>
+    <redeemed_at type="datetime" nil="true"></redeemed_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+  </gift_card>
+</purchased_gift_card_notification>
+```
+
+## Canceled gift card
+
+Sent when a gift card is canceled from the Admin Console.
+
+```json
+{
+  "id": "3591723995699407683",
+  "object_type": "gift_card",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "canceled",
+  "event_time": "2022-07-27T15:15:25Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<canceled_gift_card_notification>
+  <gift_card>
+    <redemption_code>1A5069E266AED435</redemption_code>
+    <id type="integer">2008976331180115114</id>
+    <product_code>gift_card</product_code>
+    <unit_amount_in_cents type="integer">1000</unit_amount_in_cents>
+    <currency>USD</currency>
+    <gifter_account_code>84395</gifter_account_code>
+    <recipient_account_code nil="true"></recipient_account_code>
+    <invoice_number type="integer">1105</invoice_number>
+    <delivery>
+      <method>email</method>
+      <email_address>john@example.com</email_address>
+      <deliver_at nil="true"></deliver_at>
+      <first_name>John</first_name>
+      <last_name>Smith</last_name>
+      <address>
+        <address1 nil="true"></address1>
+        <address2 nil="true"></address2>
+        <city nil="true"></city>
+        <state nil="true"></state>
+        <zip nil="true"></zip>
+        <country nil="true"></country>
+        <phone nil="true"></phone>
+      </address>
+      <gifter_name>Sally</gifter_name>
+      <personal_message>
+        Hi John, Happy Birthday! I hope you have a great day! Love, Sally
+      </personal_message>
+    </delivery>
+    <created_at type="datetime">2016-08-03T20:37:21Z</created_at>
+    <updated_at type="datetime">2016-08-03T22:00:00Z</updated_at>
+    <delivered_at type="datetime">2016-08-03T20:37:22Z</delivered_at>
+    <redeemed_at type="datetime" nil="true"></redeemed_at>
+    <canceled_at type="datetime">2016-08-04T20:30:22Z</canceled_at>
+  </gift_card>
+</canceled_gift_card_notification>
+```
+
+## Updated gift card
+
+Sent when a gift card’s delivery information is edited from the Admin Console.
+
+```json
+{
+  "id": "3591723995699407683",
+  "object_type": "gift_card",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "updated",
+  "event_time": "2022-07-27T15:15:00Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<updated_gift_card_notification>
+  <gift_card>
+    <redemption_code>1A5069E266AED435</redemption_code>
+    <id type="integer">2008976331180115114</id>
+    <product_code>gift_card</product_code>
+    <unit_amount_in_cents type="integer">1000</unit_amount_in_cents>
+    <currency>USD</currency>
+    <gifter_account_code>84395</gifter_account_code>
+    <recipient_account_code nil="true"></recipient_account_code>
+    <invoice_number type="integer">1105</invoice_number>
+    <delivery>
+      <method>email</method>
+      <email_address>john@example.com</email_address>
+      <deliver_at nil="true"></deliver_at>
+      <first_name>John</first_name>
+      <last_name>Smith</last_name>
+      <address>
+        <address1 nil="true"></address1>
+        <address2 nil="true"></address2>
+        <city nil="true"></city>
+        <state nil="true"></state>
+        <zip nil="true"></zip>
+        <country nil="true"></country>
+        <phone nil="true"></phone>
+      </address>
+      <gifter_name>Sally</gifter_name>
+      <personal_message>
+        Hi John, Happy Birthday! I hope you have a great day! Love, Sally
+      </personal_message>
+    </delivery>
+    <created_at type="datetime">2016-08-03T20:37:21Z</created_at>
+    <updated_at type="datetime">2016-08-03T22:00:00Z</updated_at>
+    <delivered_at type="datetime">2016-08-03T20:37:22Z</delivered_at>
+    <redeemed_at type="datetime" nil="true"></redeemed_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+  </gift_card>
+</updated_gift_card_notification>
+```
+
+## Regenerated gift card
+
+Sent when a gift card’s redemption code is regenerated from the Admin Console.
+
+```json
+{
+  "id": "3591723995699407683",
+  "object_type": "gift_card",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "regenerated",
+  "event_time": "2022-07-27T15:14:53Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<regenerated_gift_card_notification>
+  <gift_card>
+    <redemption_code>1A5069E266AED435</redemption_code>
+    <id type="integer">2008976331180115114</id>
+    <product_code>gift_card</product_code>
+    <unit_amount_in_cents type="integer">1000</unit_amount_in_cents>
+    <currency>USD</currency>
+    <gifter_account_code>84395</gifter_account_code>
+    <recipient_account_code nil="true"></recipient_account_code>
+    <invoice_number type="integer">1105</invoice_number>
+    <delivery>
+      <method>email</method>
+      <email_address>john@example.com</email_address>
+      <deliver_at nil="true"></deliver_at>
+      <first_name>John</first_name>
+      <last_name>Smith</last_name>
+      <address>
+        <address1 nil="true"></address1>
+        <address2 nil="true"></address2>
+        <city nil="true"></city>
+        <state nil="true"></state>
+        <zip nil="true"></zip>
+        <country nil="true"></country>
+        <phone nil="true"></phone>
+      </address>
+      <gifter_name>Sally</gifter_name>
+      <personal_message>
+        Hi John, Happy Birthday! I hope you have a great day! Love, Sally
+      </personal_message>
+    </delivery>
+    <created_at type="datetime">2016-08-03T20:37:21Z</created_at>
+    <updated_at type="datetime">2016-08-03T22:00:00Z</updated_at>
+    <delivered_at type="datetime">2016-08-03T20:37:22Z</delivered_at>
+    <redeemed_at type="datetime" nil="true"></redeemed_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+  </gift_card>
+</regenerated_gift_card_notification>
+```
+
+## Redeemed gift card
+
+Sent when a gift card is redeemed by its recipient.
+
+```json
+{
+  "id": "3591723995699407683",
+  "object_type": "gift_card",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "redeemed",
+  "event_time": "2022-07-27T15:15:00Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<redeemed_gift_card_notification>
+  <gift_card>
+    <redemption_code>AB54200960E33C93</redemption_code>
+    <id type="integer">2005384587788419212</id>
+    <product_code>gift_card</product_code>
+    <unit_amount_in_cents type="integer">1000</unit_amount_in_cents>
+    <currency>USD</currency>
+    <gifter_account_code>3543456</gifter_account_code>
+    <recipient_account_code>3547000</recipient_account_code>
+    <invoice_number type="integer">1099</invoice_number>
+    <delivery>
+      <method>email</method>
+      <email_address nil="true"></email_address>
+      <deliver_at nil="true"></deliver_at>
+      <first_name>John</first_name>
+      <last_name>Smith</last_name>
+      <address>
+        <address1 nil="true"></address1>
+        <address2 nil="true"></address2>
+        <city nil="true"></city>
+        <state nil="true"></state>
+        <zip nil="true"></zip>
+        <country nil="true"></country>
+        <phone nil="true"></phone>
+      </address>
+      <gifter_name>Sally</gifter_name>
+      <personal_message>
+        Hi John, Happy Birthday! I hope you have a great day! Love, Sally
+      </personal_message>
+    </delivery>
+    <created_at type="datetime">2016-07-29T21:41:11Z</created_at>
+    <updated_at type="datetime">2016-07-29T21:50:38Z</updated_at>
+    <delivered_at type="datetime">2016-07-29T21:50:38Z</delivered_at>
+    <redeemed_at type="datetime">2016-07-29T21:50:38Z</redeemed_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+  </gift_card>
+</redeemed_gift_card_notification>
+```
+
+## Updated balance gift card
+
+Sent when a gift card’s balance changes—either decreased by redemption or increased by credit return.
+
+```json
+{
+  "id": "3591723995699407683",
+  "object_type": "gift_card",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "balance_updated",
+  "event_time": "2022-07-27T15:15:00Z"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<updated_balance_gift_card_notification>
+  <gift_card>
+    <redemption_code>AB54200960E33C93</redemption_code>
+    <id type="integer">2005384587788419212</id>
+    <product_code>gift_card</product_code>
+    <unit_amount_in_cents type="integer">1000</unit_amount_in_cents>
+    <currency>USD</currency>
+    <gifter_account_code>3543456</gifter_account_code>
+    <recipient_account_code>3547000</recipient_account_code>
+    <invoice_number type="integer">1099</invoice_number>
+    <delivery>
+      <method>email</method>
+      <email_address nil="true"></email_address>
+      <deliver_at nil="true"></deliver_at>
+      <first_name>John</first_name>
+      <last_name>Smith</last_name>
+      <address>
+        <address1 nil="true"></address1>
+        <address2 nil="true"></address2>
+        <city nil="true"></city>
+        <state nil="true"></state>
+        <zip nil="true"></zip>
+        <country nil="true"></country>
+        <phone nil="true"></phone>
+      </address>
+      <gifter_name>Sally</gifter_name>
+      <personal_message>
+        Hi John, Happy Birthday! I hope you have a great day! Love, Sally
+      </personal_message>
+    </delivery>
+    <created_at type="datetime">2016-07-29T21:41:11Z</created_at>
+    <updated_at type="datetime">2016-08-02T23:50:38Z</updated_at>
+    <delivered_at type="datetime">2016-07-29T21:50:38Z</delivered_at>
+    <redeemed_at type="datetime">2016-07-29T21:50:38Z</redeemed_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+    <balance_in_cents type="integer">200</balance_in_cents>
+  </gift_card>
+</updated_balance_gift_card_notification>
+```

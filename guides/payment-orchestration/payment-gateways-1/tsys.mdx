@@ -1,0 +1,87 @@
+---
+title: TSYS
+---
+
+<div className="rp-page">
+  <div className="rp-overview">TSYS Gateway connects merchant banks to Recurly for secure credit card processing across purchases, recurring billing, and MOTO transactions. It's available exclusively to US-based merchants transacting in USD and requires a TSYS Merchant Profile created via your merchant bank on the Host Capture (Summit) platform.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#enable-tsys-in-recurly"><span className="rp-toc-num">3</span>Enable TSYS in Recurly</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>A TSYS Summit Merchant ID / V# and associated configuration information from your merchant bank.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Available to US-based merchants only.</li>
+  <li>Supports transactions in US dollars only. To accept additional currencies, integrate with other gateways.</li>
+  <li>Your merchant bank must share the required credentials with Recurly.</li>
+  <li>TSYS Sierra (Terminal Settlement) Merchant IDs are not supported — only the Summit (Host Capture) platform is supported.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">TSYS Gateway is a payment gateway that connects US-based merchant banks to Recurly for credit card processing. It supports purchases, recurring billing, and MOTO transactions in USD. Integration requires a TSYS Merchant Profile established by your merchant bank on the Host Capture (Summit platform) for Recurly, version 1.0.</div>
+
+# Key details
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Feature</td><td>Details</td></tr>
+  <tr><td>Services that work with Recurly</td><td>Purchases, recurring billing, <a href="/guides/subscriber-management/transactions/moto-transactions#/" target="_blank">MOTO</a> processing</td></tr>
+  <tr><td>Supported operations</td><td>Purchase, Refund, Void</td></tr>
+  <tr><td>Supported payment types</td><td>Credit cards</td></tr>
+  <tr><td>Supported card brands</td><td>Visa, Mastercard, American Express, Discover, JCB, Diners Club</td></tr>
+  <tr><td>Gateway-specific 3DS2 supported</td><td>No</td></tr>
+  <tr><td>Card on file supported</td><td>Yes</td></tr>
+  <tr><td>Regions</td><td>United States (processes credit cards globally)</td></tr>
+  <tr><td>Currencies</td><td>USD</td></tr>
+</table>
+
+## DBA name requirement
+
+If your Recurly site subdomain is fewer than five characters (e.g., `abc.recurly.com`), you must set a DBA (Doing Business As) name of at least five characters in your Recurly site settings before configuring TSYS. TSYS requires at least five characters in certain fields — without this, all transactions will fail.
+
+A common approach is to append a legal business type to your name (e.g., "Acme, Inc" rather than "Acme").
+
+## Address and CVV requirements
+
+TSYS does not impose minimum address requirements and does not require Card Security Code (CSC/CVV) configuration. This simplifies recurring billing setup for most merchants.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> If your business address or contact details change, notify your merchant account provider promptly to keep your TSYS merchant profile current and avoid service interruptions.</div>
+</div>
+
+# Enable TSYS in Recurly
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Establish your TSYS Merchant Profile</h4><p>Work with your merchant bank to create a TSYS Merchant Profile using Host Capture (Summit platform) for Recurly, version 1.0.</p><ul><li><strong>New merchant accounts</strong> — Log in to Recurly, navigate to <strong>Configuration → Payment Gateways → TSYS</strong>, and click <strong>Apply</strong> to apply for a new merchant account directly. Once you have credentials, proceed to Step 2.</li><li><strong>Existing merchant accounts</strong> — Contact your merchant bank to create the profile, then proceed to Step 2.</li></ul></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Gather your credentials</h4><p>After the merchant profile is created, collect your <strong>POS ID</strong>, <strong>Authentication Code</strong>, and <strong>Zip Code</strong>. If you have a V# (may start with "7"), have that ready as well.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Set your DBA name (if required)</h4><p>If your Recurly site subdomain is fewer than five characters, go to your Recurly site settings and set a DBA name of at least five characters before continuing. See <a href="#dba-name-requirement">DBA name requirement</a> above.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Configure the gateway in Recurly</h4><p>In Recurly, go to <strong>Configuration → Payment Gateways → Add a Payment Gateway</strong> and select <strong>TSYS</strong>. Enter your POS ID, Authentication Code, Zip Code, and V# (if applicable). Optionally check <strong>Exclude from Gateway Failover</strong> if you don't want TSYS included in failover logic. Select the card types you have enabled at TSYS under <strong>Accepted Credit Card Types</strong>, then save your gateway settings.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong> TSYS supports USD only. To accept additional currencies, pair it with other gateways in your Recurly configuration.</div>
+</div>
+
+<br />

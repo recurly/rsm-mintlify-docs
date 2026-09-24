@@ -1,0 +1,83 @@
+---
+title: Analytics settings
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Analytics Settings lets you customize how Recurly Analytics calculates and displays your subscription metrics — including time zone, MRR treatment of coupons and failed charges, industry benchmarking, and back-to-back subscription handling. Getting these right ensures your analytics reflect your actual business operations.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">1</span>Key details</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Permissions</strong>Users must have the Analytics user role permission to access Analytics Settings.</div>
+</div>
+
+# Key details
+
+## Time zone
+
+Recurly records all transactions in UTC as the underlying billing timezone. Analytics then aligns displayed calculations with the time zone specified in your site settings. This means billing events are consistently tracked in UTC, while your analytics, reports, and metrics are shown in the local time most relevant to your business.
+
+
+<Image src="https://files.readme.io/68f8f91-image.png" align="center" width="75%" border={true} />
+
+
+***
+
+## MRR calculations
+
+Configure how Recurly Analytics processes factors that affect Monthly Recurring Revenue (MRR) — including coupon discounts and failed charges.
+
+
+<Image src="https://files.readme.io/df2c11a-image.png" align="center" width="75%" border={true} />
+
+
+### Coupon discounts
+
+Choose how coupon discounts are reflected in MRR:
+
+- **Include the discount value of coupons in MRR (recommended)** — MRR reflects the actual revenue received. For example, a $100 service with a $25 coupon applied is reported as $75 MRR.
+- **Exclude the discount value of coupons from MRR** — MRR uses the original service price, ignoring the discount. The same $100 service would remain at $100 MRR regardless of the $25 coupon.
+
+### Failed charges
+
+Choose how failed recurring charges are treated in MRR:
+
+- **Keep all recurring charges in MRR (recommended)** — All anticipated recurring charges are included in MRR, regardless of payment success or failure. This maintains a consistent revenue outlook.
+- **Remove failed recurring charges from MRR** — MRR excludes revenues from failed charges, which may give a more conservative view of actual earnings.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Retroactive impact</strong>Changing how failed charges are treated in MRR will retroactively affect historical MRR and Lifetime Value (LTV) reports.</div>
+</div>
+
+***
+
+## Benchmarking
+
+Select the industry category that most accurately represents your business to enable benchmarking. This compares your performance metrics against standards in your industry, highlighting your competitive position and identifying growth opportunities.
+
+
+<Image src="https://files.readme.io/de57084-image.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/e077bd2-image.png" align="center" width="40%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Benchmark percentiles take effect one day after the request. Benchmark quartiles take effect immediately.</div>
+</div>
+
+***
+
+## Back-to-back subscriptions
+
+Use this setting to control how the Hourly Activations and Churn dashboard handles subscribers who start a new subscription immediately after a previous one expires. When enabled, these are counted as one continuous subscription — ensuring activations and churn are measured accurately for your business model.
+
+
+<Image src="https://files.readme.io/6d3975e-Screen_Shot_2024-06-20_at_3.03.28_PM.png" align="center" width="75%" border={true} />
+
+
+<br />

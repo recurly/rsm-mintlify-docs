@@ -1,0 +1,21 @@
+---
+title: 3DS2 Related Transaction Data
+---
+
+### Using Recurly Exports to Track 3DS2 Authentication Failures and Successes
+
+#### Failures
+
+When a transaction is challenged for 3DS2 authentication, it will be declined with a 3DS2 decline failure &lt;INSERT ERROR CODE / MESSAGE&gt;. Since the transaction is being declined, you can track these failures using our transactions export. They can be identified by the failure type, &lt;DECLINE CODE&gt;, under column &lt;COLUMN&gt;.
+
+#### Successes
+
+To track customers who ultimately succeed 3DS2 authentication, you'll want to use our transactions export in conjunction with our &lt;INVOICE&gt; export. The steps to do this with Microsoft Excel are listed below:
+
+1. Use our transactions export to identify any transactions declined due to &lt;3DS2 DECLINE CODE&gt;. These are transaction attempts challenged for 3DS2 authentication.
+2. Use our &lt;INVOICE&gt; export to join the data from the transactions export using Excel’s VLOOKUP command.
+3. Use the most recent transaction status to identify if 3DS2 authentication was completed
+
+* Success: Customer successfully completed authentication and processed a payment.
+* 3DS2 decline: Customer did not complete authentication.
+* Other decline: Customer successfully completed authentication, but did not process a payment due to a legitimate decline.

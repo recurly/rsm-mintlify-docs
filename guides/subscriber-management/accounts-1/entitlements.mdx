@@ -1,0 +1,197 @@
+---
+title: Entitlements
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Entitlements let you define and control which features or content a subscriber can access based on what they've purchased. Link entitlements to plans or items — when a customer subscribes, access is granted automatically. Changes to entitlements take effect immediately and are reflected in all subsequent API calls.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Entitlements are granular access rights that define which features or services a subscriber can use. They are linked to recurring products — plans or items — and are granted automatically when a customer purchases a subscription. Entitlements can be applied across platforms (web, mobile, and app stores) and checked in real time via the Recurly API.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-lock-open" aria-hidden="true"></i></div>
+    <strong>Controlled access</strong>
+    <span>Define exactly which features each subscriber tier can access, creating differentiated experiences across your product.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+    <strong>Cross-platform consistency</strong>
+    <span>Configure and apply entitlements across web, mobile, and app stores from a single interface.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-dollar-sign" aria-hidden="true"></i></div>
+    <strong>Enhanced monetization</strong>
+    <span>Gate premium features or content behind paywalls to drive revenue from tiered subscription offerings.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-infinity" aria-hidden="true"></i></div>
+    <strong>Unlimited flexibility</strong>
+    <span>Create as many entitlements as your product needs, each linkable to multiple plans or items.</span>
+  </div>
+</div>
+
+# Key details
+
+## Entitlement attributes
+
+Each entitlement is defined by four attributes:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Attribute</td><td>Description</td></tr>
+  <tr><td>Name</td><td>A concise label summarizing the entitlement's function. Does not appear on subscriber invoices, Checkout, or Hosted Payment Pages. 255-character limit.</td></tr>
+  <tr><td>Code</td><td>A unique identifier within Recurly used to link the entitlement to specific features or functionality in your application, such as feature flags.</td></tr>
+  <tr><td>Description</td><td>A detailed explanation of what the entitlement provides — useful for internal reference and customer-facing context.</td></tr>
+  <tr><td>Grantors</td><td>The recurring products (plans or items) that grant the entitlement upon subscription purchase. An entitlement can be linked to multiple products, and a single product can correspond to multiple entitlements.</td></tr>
+</table>
+
+## Create an entitlement
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Navigate to Entitlements</h4><p>Log in to the Recurly Admin UI and go to the Entitlements section.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/a27e3418d1c785fe38623167fbcb01816c93d3569a252f6faf9a2bbff59b35ee-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Start a new entitlement</h4><p>Click Create your first entitlement.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/38e1b03-image.png" align="center" width="65%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Define the attributes</h4><p>Enter the Name, Code, Description, and Grantors for the entitlement. See the attribute reference table above for field details.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Save</h4><p>Click Create Entitlement to save. The entitlement is available immediately.</p></div>
+  </div>
+</div>
+
+## Assign an entitlement to a plan or item
+
+Entitlements can be assigned to plans or items during creation or by editing an existing entitlement.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the entitlement</h4><p>Navigate to the Entitlements section and select the entitlement you want to assign.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/5c40763-image.png" align="center" width="65%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Click Edit Entitlement</h4></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/83ec1b0-image.png" align="center" width="65%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Add an assignment</h4><p>Click Add Assignment and choose Plan or Item.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/23fac5a-image.png" align="center" width="65%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Select from the list</h4><p>Choose the plan or item to link to this entitlement.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/2886755-image.png" align="center" width="65%" border={true} />
+
+
+
+<Image src="https://files.readme.io/3a4c308-image.png" align="center" width="65%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Save changes</h4></div>
+  </div>
+</div>
+
+## Update an entitlement
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the entitlement</h4><p>Navigate to the Entitlements section and select the entitlement to update.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Make changes</h4><p>Update any attributes or grantor assignments as needed.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Save</h4><p>Changes take effect immediately and are reflected in all subsequent API calls.</p></div>
+  </div>
+</div>
+
+## Delete an entitlement
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Deletion is immediate and permanent</strong> Deleting an entitlement removes it from the system instantly. Ensure no active subscriptions or features depend on the entitlement before proceeding.</div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the entitlement</h4><p>Navigate to the Entitlements section and select the entitlement to delete.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/5c40763-image.png" align="center" width="65%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Delete and confirm</h4><p>Click Delete, then Confirm. The entitlement is removed immediately.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/83ec1b0-image.png" align="center" width="65%" border={true} />
+
+
+<br />

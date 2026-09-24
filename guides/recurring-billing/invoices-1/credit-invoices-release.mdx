@@ -1,0 +1,50 @@
+---
+title: Credit Invoices for Recurly sites created before 2018
+---
+
+# Overview
+
+### Required plan
+
+Elevate your billing experience with Recurly's Credit Invoice feature. Streamline your credit adjustments, ensure clarity in financial records, and enhance customer satisfaction.
+
+# Definition
+
+Recurly's Credit Invoice is a specialized feature designed to separate credit adjustments from charge adjustments. This ensures that any credit issued to a customer is provided its own distinct invoice, offering clear financial records for both businesses and their customers.
+
+# Key details
+
+This page is for customers that have accounts opened prior to 2018 and never enabled Credit Invoices. For an in-depth look at the Credit Invoices feature, visit our Credit invoices page. Before diving in, ensure you've met the prerequisites and are familiar with the associated changes.
+
+> 🚧 **Prerequisites for enabling credit invoices**
+>
+> * Ensure your Recurly site has the [**Only Bill What Changed**](/guides/subscriber-management/subscription-lifecycle/change-subscription#section-only-bill-what-changed-release) feature activated.
+> * For those using our NetSuite integration, reach out to Recurly Support for assistance in updating your integration in production mode.
+> * If you're using a third-party integration not developed by Recurly, review it for potential impacts from the changes below. Consult the third party regarding any necessary upgrades.
+> * Familiarize yourself with this guide and the [**Go Live checklist**](#section-go-live-with-credit-invoices-checklist).
+>
+> **Note:** Recurly sites established after May 8, 2018 UTC (May 7, 2018 5pm PT) will have the Credit Invoices feature enabled by default. If that is NOT you, read through these directions.
+
+## Preparing to go live with credit invoices
+
+Before activating the Credit Invoices feature on your main Recurly site, ensure you've:
+
+* Reviewed this guide thoroughly.
+* Activated the [Only Bill What Changed feature](/guides/subscriber-management/subscription-lifecycle/change-subscription#rebills), a necessary step for Credit Invoices.
+* Tested the Credit Invoices feature on a sandbox site, examining your billing processes and reports.
+* **Updated your Recurly integration** to accommodate the required [API](https://recurly.com/developers/guides/quickstart.html) and [Webhook](https://recurly.com/developers/reference/webhooks/#credit-invoice-notifications) changes. Specifically, merchants need to:
+  * Listen for [Credit Invoice-related webhooks](https://recurly.com/developers/reference/webhooks/#credit-invoice-notifications).
+  * Check API responses for values that clarify the type of invoice as "Credit", which be wrapped in `<charge_invoice>` or `<credit_invoice>`.
+* When creating credit invoices via the API, pass the type as “credit” to create credit invoices.\
+  These changes are backwards compatible, ensuring seamless integration with existing systems.
+* Adjusted your internal reporting to reflect [Export changes](https://docs.recurly.com/docs/data-imports-and-exports) and understand how [existing uninvoiced carryforward credits will transition](/guides/recurring-billing/invoices-1/credit-invoices#enhanced-invoice-origins).
+* Prepared for the [new email templates and logic changes](https://docs.recurly.com/docs/email-templates).
+* Once ready, activate the Credit Invoices feature on your main site.
+
+> 🚧 **Invoice number jump**
+>
+> Activating Credit Invoices might cause a leap in invoice numbers. This is due to Recurly transitioning any uninvoiced carryforward credits to new credit invoices with the origin of carryforward\_credit.
+
+### Transitioning existing carryforward credits
+
+Before the Credit Invoices feature, Recurly issued credits on the same invoice as charges. If the entire credit wasn't used, a new uninvoiced credit was created. With Credit Invoices if the entire credit isn't used, these "carryforward" credits are automatically transitioned to the new credit invoice structure. These invoices, marked with an origin of **carryforward\_credit**, represent already issued credits and aren't emailed to customers.

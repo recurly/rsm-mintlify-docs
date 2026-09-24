@@ -1,0 +1,118 @@
+---
+title: Customizing Elements
+---
+
+Since Recurly.js Elements are rendered within iframes, any style properties must be applied directly to the Element configuration. This guide explains how to configure and customize the appearance of your Elements, ensuring they align with your website’s design.
+
+### Prerequisites & limitations
+
+* Ensure you have a working Recurly.js integration.
+* Basic knowledge of CSS and JavaScript.
+* Familiarity with HTML and Markdown syntax.
+* Custom styling only affects the Elements themselves; the outer form must be styled separately.
+
+***
+
+When you instantiate an Element, you can pass a style configuration as part of its options. For example:
+
+```javascript
+const cardElement = elements.CardElement({
+  inputType: 'mobileSelect',
+  style: {
+    fontSize: '1em',
+    placeholder: {
+      color: 'gray !important',
+      fontWeight: 'bold',
+      content: {
+        number: 'Card number',
+        cvv: 'CVC'
+      }
+    },
+    invalid: {
+      fontColor: 'red'
+    }
+  }
+});
+```
+
+## Styling the card element
+
+Below are the options available when styling the card element:
+
+| Property                             | Default             | Description                                                                                                                                                                                                                                                       |
+| ------------------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **displayIcon**                      | `true`              | If false, the card brand icon will be hidden.                                                                                                                                                                                                                     |
+| **inputType**                        | `'text'`            | Modifies the input type of the card field. Options include: \<br /> - `text`: text input for all fields. \<br /> - `mobileSelect`: shows a native expiry select interface on mobile devices. \<br /> - `select`: displays a select field for expiration on all devices. |
+| **style**                            | `{}`                | An object containing common field style properties (see section below).                                                                                                                                                                                           |
+| **style.fontColor**                  | `'#545457'`         | Font color for each input element.                                                                                                                                                                                                                                |
+| **style.fontFamily**                 | `'Source Sans Pro'` | Font family for each input element.                                                                                                                                                                                                                               |
+| **style.fontSize**                   | `'16px'`            | Font size for each input element.                                                                                                                                                                                                                                 |
+| **style.fontWeight**                 | `700`               | Font weight for each input element.                                                                                                                                                                                                                               |
+| **style.placeholder**                | `{}`                | An object for placeholder styling.                                                                                                                                                                                                                                |
+| **style.placeholder.color**          | `'#a3a3a7'`         | Font color for placeholder text.                                                                                                                                                                                                                                  |
+| **style.placeholder.content**        | `{}`                | Object to define specific placeholder content.                                                                                                                                                                                                                    |
+| **style.placeholder.content.number** | `'Card number'`     | Placeholder for the card number input.                                                                                                                                                                                                                            |
+| **style.placeholder.content.expiry** | `'MM / YY'`         | Placeholder for the expiry input.                                                                                                                                                                                                                                 |
+| **style.placeholder.content.cvv**    | `'CVV'`             | Placeholder for the CVV input.                                                                                                                                                                                                                                    |
+| **style.invalid**                    | `{}`                | Object for styling input elements when they have invalid data.                                                                                                                                                                                                    |
+| **style.invalid.fontColor**          | `'#a3a3a7'`         | Font color applied when input is invalid.                                                                                                                                                                                                                         |
+| **tabIndex**                         | *(none)*            | Applies the `tabindex` attribute to the outer iframe.                                                                                                                                                                                                             |
+
+## Styling the individual card elements
+
+These options apply specifically to individual card fields:
+
+| Property                      | Default  | Description                                                                                                                                                                                                      |
+| ----------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **format**                    | `true`   | Enables contextual formatting, like adding spaces based on the card brand and enforcing numeric input on expiry and CVV fields.                                                                                  |
+| **inputType**                 | `text`   | Modifies the input type for expiry fields. Options include: \<br /> - `text`: normal text input. \<br /> - `mobileSelect`: native select interface on mobile devices. \<br /> - `select`: select field on all devices. |
+| **style**                     | `{}`     | An object for common field style properties (see below).                                                                                                                                                         |
+| **style.padding**             | *(none)* | Padding for the element.                                                                                                                                                                                         |
+| **style.placeholder.color**   | *(none)* | Placeholder text color.                                                                                                                                                                                          |
+| **style.placeholder.content** | `''`     | Default placeholder content, for example, `'Card number'` or `'CVV'`.                                                                                                                                            |
+| **tabIndex**                  | *(none)* | Applies the `tabIndex` attribute to the outer iframe.                                                                                                                                                            |
+
+## Common field style properties
+
+These are the default style properties available for all Recurly.js Elements:
+
+| Property                      | Default       | Reference                                                                                       |
+| ----------------------------- | ------------- | ----------------------------------------------------------------------------------------------- |
+| **style.fontColor**           | `'black'`     | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color)                                 |
+| **style.fontFamily**          | `'Helvetica'` | [font-family](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)                     |
+| **style.fontFeatureSettings** | `'normal'`    | [font-feature-settings](https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings) |
+| **style.fontKerning**         | `'auto'`      | [font-kerning](https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning)                   |
+| **style.fontSize**            | `'normal'`    | [font-size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)                         |
+| **style.fontSmoothing**       | `'normal'`    | [font-smoothing](https://developer.mozilla.org/en-US/docs/Web/CSS/font-smoothing)               |
+| **style.fontStretch**         | `'normal'`    | [font-stretch](https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch)                   |
+| **style.fontStyle**           | `'normal'`    | [font-style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)                       |
+| **style.fontVariant**         | `'normal'`    | [font-variant](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant)                   |
+| **style.fontWeight**          | `'normal'`    | [font-weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)                     |
+| **style.letterSpacing**       | `'normal'`    | [letter-spacing](https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing)               |
+| **style.lineHeight**          | `'normal'`    | [line-height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height)                     |
+| **style.textAlign**           | *(none)*      | [text-align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)                       |
+| **style.textDecoration**      | *(none)*      | [text-decoration](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration)             |
+| **style.textRendering**       | `'auto'`      | [text-rendering](https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering)               |
+| **style.textShadow**          | `'none'`      | [text-shadow](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow)                     |
+| **style.textTransform**       | `'none'`      | [text-transform](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform)               |
+
+## CSS classes
+
+Recurly.js Elements come with default CSS classes to help you achieve a look that matches your billing form. Use these classes to fine-tune the appearance:
+
+* **recurly-element**: Base styling for all Element containers.
+* **recurly-element-focus**: Applied when an Element is focused.
+* **recurly-element-invalid**: Applied when input is invalid.
+* **recurly-element-card**: Styles for the combined card Element container.
+* **recurly-element-number**: Styles for the card number input container.
+* **recurly-element-month**: Styles for the expiry month input container.
+* **recurly-element-year**: Styles for the expiry year input container.
+* **recurly-element-cvv**: Styles for the CVV input container.
+
+## Custom fonts
+
+Custom fonts are sourced from [Google Web Fonts](https://fonts.google.com/) . Simply specify the font name as it appears on the Google Web Fonts site.
+
+## Responsive styles
+
+All built-in Element CSS classes support media queries for responsiveness. You can call `Element.configure` on an individual Element to adjust style properties dynamically, ensuring the Elements blend seamlessly into your payment form at any screen size.

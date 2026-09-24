@@ -1,0 +1,95 @@
+---
+title: 3D secure
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+3D Secure (3DS) is an additional security layer for online credit and debit card transactions. It comes in two versions: 3DS 1.0 and 3DS 2.0. While 3DS 1.0 had issues with checkout conversion rates, 3DS 2.x offers a more streamlined user experience. It helps in complying with PSD2 regulation by providing multi-factor authentication for online transactions where a consumer is in session. 3DS is only available when a customer is in session when signing up, or changing their billing information on file.
+
+# Key benefits
+
+* **Enhanced online security**: Adopting 3DS 2.x provides a robust layer of security that can significantly reduce fraudulent transactions.
+* **Boosted customer confidence**: The added layer of authentication and security can assure customers of a safer online shopping experience, fostering trust.
+* **Streamlined shopping experience**: While bolstering security, 3DS 2.x also considers the importance of user experience, ensuring that authentication processes are seamless and don't deter customers.
+
+## Limitations
+
+3D Secure redirects won’t occur for payments created directly in the Recurly Dashboard. Instead, use your integration’s own frontend or an API call. This is especially important for customers and merchants located in the UK and the EU where PSD2 and SCA are enforced.
+
+# Exploring the Depths of 3D Secure
+
+3D Secure (3DS), an additional layer of security for online credit and debit card transactions, has had two major versions - 3DS 1.0, the original 3D Secure, and the more streamlined 3DS 2.x. Currently, version 2.2 is the most up to date and compliant version of 3DS available.
+
+**3DS 1.0** is the older version of the protocol, designed to add an extra layer of security to online transactions by requiring cardholders to complete an additional verification step with the card issuer when making purchases. The primary reason for the limited adoption of 3DS 1.0 was its potential adverse impact on checkout conversion rates. 
+
+While it helped protect against fraudulent transactions, the added friction in the checkout process often resulted in increased shopping cart abandonment by redirecting valid consumers to a page that forced them to enroll in 3DS and provide a password. This redirection could be perceived as confusing or suspicious, leading the customer to abandon their purchase.
+
+As such, 3DS 1.0 has been phased out by the Card Networks and is no longer available as a choice in the majority of countries. While a few countries were granted an extension to use 3DS 1.0 until late 2023, businesses should transition to 3DS 2.2 for their operations moving forward.
+
+**3DS 2.x**, on the other hand, came into existence alongside the introduction of the PSD2. It’s a much more refined and user-friendly version of the protocol that offers a smoother, more seamless user experience without compromising security. 3DS 2.x uses a risk-based approach, meaning that it requires additional authentication only for transactions deemed high-risk, while low-risk transactions are allowed to go through with using a frictionless flow.
+
+> ***For example***, a customer shopping on a site that uses 3DS 2.2 might be allowed to complete their purchase without any additional steps if their transaction is deemed low-risk. However, for a high-risk transaction, a customer might be asked to authenticate their identity through their mobile banking app or via a text message code. This balance between user convenience and transaction security is a significant improvement over 3DS 1.0 and has led to wider adoption of 3DS 2.x.
+
+There are also certain payment methods that have already incorporated robust multi-factor authentication layers, making them exempt from additional 3DS authentication while also complying with PSD2 measures. Examples of these include **PayPal**, **Amazon Pay**, and **Apple Pay**, which have their in-built security mechanisms such as password logins and biometric data. Additionally, alternative payment methods, such as **iDEAL** and **SOFORT**, are also exempt from 3DS due to their inherent secure design.
+
+## Best Practices
+
+Declines related to 3D-Secure are frustrating, so it's important to ensure Recurly and you, via your integrations, are operating at their best. There are a few things you can do as a merchant to ensure the best possible outcomes.
+
+* Ensure your customers who might be impacted by 3DS are using a 3DS supported Recurly feature. This includes our hosted pages, as well as Recurly.js. 
+* Customer data should not be entered via the API only, or the the Recurly admin UI if the card could be subject to SCA compliance. Future payments could be rejected by the bank due to lack of customer authentication.
+* Use a gateway that supports 3DS on the Recurly platform. You can [check if your gateway supports 3DS ](https://docs.recurly.com/docs/payment-gateways-1) through Recurly via the specific gateway integration. If Recurly supports 3DS through your gateway, talk to your account manager at Recurly and at the gateway to ensure it's properly enabled.
+* When customers are in session, do not use the `moto` flag via API. MOTO transactions are typically driven by a Merchant through customer request, but since these types of transactions are typically not directly driven by a customer, typical CIT (Customer Initiated) features such as 3D-Secure cannot occur.
+* Provide as much detail about your customer as possible, including full name, address, phone number, email details. Certain card brands now require this data to ensure they're making the best possible decision. If your integration to Recurly does not capture these details, we recommend updating it.
+* When sending customer details to Recurly, ensure you are not sending "dummy" data, such as fake emails, or a static phone number. Static or fake information can cause declines. Always ensure you are capturing the data from your customer directly.
+* Advise your customers to not block pop ups and modals in their browser -- Recurly.js may display challenge windows for 3DS authentication. If customers are blocking these modals, they may struggle to pass their 3DS challenges, which can cause declines.
+* Explore how the Dunning Setup for 3D Secure 2 Declines can aid in revenue recovery for failed Merchant Initiated Transactions (MITs) under the PSD2 Mandate, improving customer authentication processes and reducing transaction failures.
+
+# Helpful resources
+
+* <a href="https://www.adyen.com/blog/psd2-understanding-strong-customer-authentication" target="_blank">Adyen</a>: Dive deeper into understanding PSD2 and its implications with Adyen.
+* <a href="https://www.braintreepayments.com/resources/psd2-strong-customer-authentication-explained" target="_blank">Braintree</a>: Navigate your preparations for PSD2 with this comprehensive guide from Braintree.
+* <a href="https://stripe.com/guides/strong-customer-authentication" target="_blank">Stripe</a>: Explore Stripe's detailed guide on Strong Customer Authentication under PSD2.
+* <a href="https://www.worldpay.com/en-au/insights/article/psd2-keeping-you-updated" target="_blank">WorldPay</a>: WorldPay's resource on PSD2 provides a global perspective on this regulation.
+* <a href="https://www.cybersource.com/en-us/solutions/fraud-and-risk-management/3d-secure-and-psd2.html" target="_blank">Cybersource</a>: Learn about the intersection of 3D Secure and PSD2 with Cybersource.
+
+# FAQs
+
+**Q: Do I need to worry about PSD2?**\
+A: If your business bank or payment provider is in the European Economic Area (EEA) and you have customers there too, then yes, you need to get ready for PSD2 and make sure you have Strong Customer Authentication (SCA) in place. If either you or your customers are outside the EEA, then you don't need to worry about SCA.
+
+**Q: Where can I find more technical information on preparing for PSD2?**\
+A: You can find all the technical details you need in our integration guide <a href="https://dev.recurly.com/page/recurly-3d-secure-2-integration-guide" target="_blank">here</a>.
+
+**Q: Will my checkout conversions change because of 3DS?**\
+A: While the first version of 3DS could lead to a drop in checkout conversions between 3-15%, don't worry! 3DS version 2.x aims to limit this to a maximum of 5%. But remember, these numbers can change depending on your country. (Statistics provided by WorldPay)
+
+**Q: What's the effect of 3DS on authorization rates?**\
+A: If you're new to 3DS, you can expect your authorization rates to go up from about 84% to near 95% with 3DS v 2.x. (Statistics provided by WorldPay)
+
+**Q: Can 3DS help me reduce fraud?**\
+A: Absolutely. According to statistics from WorldPay, businesses that didn't utilize 3DS experienced fraud rates of approximately 0.29%. With the introduction of 3DS 1.0, this rate decreased to 0.12%. The second version of 3DS aims to further diminish this rate to an estimated 0.05%. However, it's essential to note that 3DS 1.0 is no longer a feasible choice for the majority of businesses.
+
+**Q: Will 3DS slow down my transactions?**\
+A: Generally, using 3DS could add up to 10 seconds to your transaction time. If an exemption is rejected and SCA is enforced, this could add another 1-2 seconds. (Statistics provided by WorldPay)
+
+**Q: Who can I turn to if I have more questions about PSD2, SCA, or 3DS?**\
+A: While we're always here to help, your payment gateway should be your go-to resource for these kinds of questions. They'll be up to speed on how PSD2 and SCA might affect you and your customers.
+
+**Q: What about PayPal transactions?**\
+A: No extra work needed here! PayPal will take care of Strong Customer Authentication in their "Pay with PayPal" process. We ensure our integration can handle recurring PayPal payments.
+
+**Q: Could 3DS be triggered on recurring payments that I initiate, especially if the value changes?**\
+A: Yes, it's possible. Card issuers can challenge a transaction for any reason. Because of this, we've developing a "3DS dunning flow" to help you manage transactions that fail due to SCA and need to be re-authenticated by your customer.
+
+**Q: Will SCA be needed every time I re-bill a customer on a usage-based plan?**\
+A: As long as the transaction is flagged as being started by the merchant (that's you), most re-bills shouldn't need SCA, even if the amount varies. But remember, card issuers have the final say and can ask for SCA on any transaction.
+
+**Q: I have a fixed subscription but the first month is prorated. Will the full charge in the second month need SCA?**\
+A: Ideally, you should authenticate the full subscription amount when the customer signs up, even if the first month is prorated. After that, re-bills should generally not need SCA, as long as they're flagged as merchant-initiated. We'll take care of this for you.

@@ -1,0 +1,82 @@
+---
+title: Reach integration
+---
+
+# Overview
+
+### Required plan
+
+This feature **may not be included** in the Starter or Pro plans. If you are interested, please contact [Recurly Sales](https://recurly.com/demo/contact-sales/) to discuss upgrade options.
+
+### Prerequisites & limitations
+
+* **Minimum annual volume:** Reach is best suited for merchants processing at least $10 million+ in annual revenue. This threshold allows Reach to negotiate and provision localized acquiring relationships with tier-1 processors on your behalf.
+* **Reach contract:** You must sign a master agreement directly with Reach to establish your merchant-of-record relationship. Once executed, Reach will generate the necessary credentials for:
+
+  * One or more payment gateways (commonly Adyen, PayPal Complete, or Stripe)
+  * Avalara for tax calculation and remittance
+
+# Definition
+
+Reach is a merchant of record (MoR) and payment orchestration platform that helps you sell subscriptions in global markets. As the MoR, Reach manages localized payment processing, tax compliance and remittance, fraud management, and chargeback risk.
+
+Through Recurly’s partnership with Reach, you can connect Reach-provided payment gateways, such as Adyen or PayPal Complete, and Avalara tax credentials directly to your Recurly subscription flow. This setup lets you offer a localized checkout experience while Reach handles the merchant-of-record responsibilities (<a href="https://recurly.com/partner/expand-globally-with-recurly-reach/" target="_blank">recurly.com</a>, <Anchor label="withreach.com" target="_blank" href="https://www.withreach.com/solutions/for-digital-saas?utm_source=partner&utm_medium=referral&utm_campaign=partnertechdocs&utm_content=recurly">withreach.com</Anchor>).
+
+# Key benefits
+
+* **Accelerate global expansion:** Eliminate the need to set up multiple international merchant accounts—Reach provides localized acquiring in 60+ markets, reducing time-to-market and operational overhead.
+* **Simplified tax compliance:** Automated, real-time tax calculation and remittance through Avalara ensure you stay compliant in every jurisdiction Reach supports—without managing separate tax registrations or manual returns.
+
+# Key details
+
+## Obtaining Reach-issued credentials
+
+1. **Payment gateway credentials**: After contract execution, Reach will provision and provide API keys (or equivalent credentials) for one or more local payment processors—typically Adyen or PayPal Complete (sometimes Stripe)—depending on your target markets and preferred payment rails. These credentials ensure that Recurly routes authorizations through Reach’s acquiring relationships in each region.
+
+2. **Tax engine credentials (Avalara)**: Reach will issue a set of Avalara API credentials (Account Number and License Key) scoped to your Reach account. These credentials enable Recurly to invoke Avalara’s rates-and-rules engine for accurate, real-time tax calculation and automated remittance across multiple jurisdictions.
+
+## Configuring Recurly
+
+Once you have your Reach-provided credentials, follow these steps within the Recurly admin console:
+
+1. **Configure payment gateways**
+
+   * Navigate to **Billing → Payment Gateways**.
+   * Select the processor matching your Reach credentials (e.g., **Adyen** or **PayPal**).
+   * Enter the API credentials supplied by Reach (e.g., API Key, Merchant Account, Client ID/Secret).
+   * Enable any region-specific settings (currencies, settlement schedules) as instructed by Reach.
+   * Save and verify that the gateway status is **Active** (<a href="/guides/payment-orchestration/gateway-configuration-and-features/gateway-merchant-account-overview" target="_blank">docs.recurly.com</a>, <a href="https://recurly.com/integrations" target="_blank">recurly.com</a>).
+
+2. **Enable Avalara for tax calculation**
+
+   * Go to **Billing → Taxes** in Recurly.
+   * Choose **Avalara** as your tax engine.
+   * Input the Avalara **Account Number** and **License Key** provided by Reach.
+   * Configure any Nexus settings or tax jurisdictions if needed (Reach may pre-configure these based on your contract).
+   * Click **Save**, then run a test invoice to confirm that Avalara returns correct tax amounts for various jurisdictions (<a href="/guides/payment-orchestration/gateway-configuration-and-features/gateway-merchant-account-overview" target="_blank">docs.recurly.com</a>, <a href="https://recurly.com/integrations" target="_blank">recurly.com</a>).
+
+## Testing and verification
+
+1. **Test transactions**
+
+   * Process a series of sandbox transactions across target regions (e.g., EU, APAC, LATAM) to confirm:
+
+     * **Routing:** Payments route through Reach’s acquiring relationships (e.g., Adyen or PayPal) and settle in the correct local currency.
+     * **Tax Calculation:** Avalara returns accurate sales tax, VAT, or GST for each jurisdiction.
+
+2. **Review settlement reports**
+
+   * In Recurly, verify that settled transactions appear with Reach’s acquiring entity (e.g., “Reach via Adyen”) in the **Billing → Transactions** report.
+   * Check that settlement amounts and remittance schedules align with the terms negotiated by Reach.
+
+3. **Monitor chargebacks and disputes**
+
+   * Confirm that any test chargeback flows (e.g., a disputed payment) route through Reach’s dispute process. Reach assumes liability for chargebacks and will handle retrieval requests; these should not flow directly to your legal team unless escalated.
+
+<Callout icon="💡" theme="default">
+  **Fraud Management**
+
+  Merchants can leverage the fraud prevention Reach provides through its PSP integrations.
+</Callout>
+
+<br />

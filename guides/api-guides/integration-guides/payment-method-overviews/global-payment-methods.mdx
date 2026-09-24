@@ -1,0 +1,59 @@
+---
+title: Global Payment Methods
+---
+
+# Overview
+
+<br />
+
+# Key Details
+
+There are several gateways and payment methods that support the LATAM region including Adyen, Ebanx, WorldPay, and Braintree.
+
+**Payment Methods and Gateways:**
+
+* **[Cards](/guides/payment-orchestration/payment-methods/credit-cards#/)**: PSD2 Compliant support on Stripe, Adyen, Braintree, WorldPay, and Cybersource.
+* Apple Pay
+* Google Pay
+* Amazon Pay
+* PayPal 
+
+# Payment Methods
+
+## Credit Cards
+
+Generally speaking, when processing cards in the EMEA region, you can follow standard guides (see below), however these countries require authenticating the consumer via 3DS. We offer 3DS on our most popular gateways for both new customers and stored billing information for return customers.
+
+You can find this information separately in our [3DS Integration Guide](/guides/api-guides/integration-guides/popular-use-cases/3d-secure-20-integration-guide#/). For verifying or using Stored Billing Information with 3DS, see our [Stored billing information guide](/guides/api-guides/integration-guides/popular-use-cases/using-3d-secure-with-stored-billing-information#/).
+
+## Mobile Wallets
+
+### Apple Pay
+
+Integration with Apple Pay on Recurly is mostly agnostic, with the exception of Braintree. Due to Braintree's unique ephemeral nonce requirement, if you are using the Braintree gateway, there is a separate integration method. Apple Pay, like Google Pay, requires a cryptogram derived from the consumer's device to be present on all customer initiated payments. This requires the use of Recurly.js, even for return customers. You'll want to use stored billing information guides to ensure billing info ID presence in Recurly.js for return Apple Pay customers.
+
+Please see our documentation for Apple Pay in the following two documentation guides: 
+
+* [Apple Pay on the Web](/guides/payment-orchestration/payment-methods/apple-pay-on-the-web#/)
+* [Apple Pay via Recurly.js ](/guides/recurly-js/apple-pay#/)
+* [Return Customers via Recurly.js](/guides/api-guides/integration-guides/popular-use-cases/using-3d-secure-with-stored-billing-information#/)
+
+### Google Pay
+
+<br />
+
+### Amazon Pay
+
+<br />
+
+### PayPal
+
+<br />
+
+# Recommended Webhooks
+
+In the EMEA region, some payment methods are synchronous and some are Asynchronous. You can find our dedicated webhooks recommendations using the Best Practices guide below:
+
+It is recommended to listen for all webhooks given that some payment methods are asynchronous (they update hours or days later with an official status), and some are synchronous (the payment status is known immediately).
+
+* [Webhooks Best Practices](https://docs.recurly.com/recurly-subscriptions/docs/best-practices#/)

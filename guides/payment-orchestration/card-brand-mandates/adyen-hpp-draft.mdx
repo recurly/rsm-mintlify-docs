@@ -1,0 +1,238 @@
+---
+title: Adyen HPP DRAFT
+---
+
+With Recurly's integration with Adyen's Hosted Payment Pages (HPP), you gain the ability to accept all globally preferred payment methods currently available on Adyen’s hosted pages for subscription and one-time purchases through Recurly. We have done the work of integrating with Adyen's HPP for you, so all you need to do is make one simple update to your Recurly integration in order to get access to all of the local payment methods your customers want to use. If you are interested in using Adyen's HPP through Recurly, please contact Recurly Support. 
+
+NOTE: Adyen's HPP supports [a long list of payment methods](https://docs.adyen.com/developers/payment-methods/payment-methods-overview). Please let us know which payment methods you want to use when you contact [Support](https://support.recurly.com/). 
+
+# How it works
+
+## From a customer perspective
+
+From a customer perspective, when paying with a payment method available through the Adyen HPP, the experience is similar to paying with PayPal where the customer is redirected from your checkout page to a new page hosted by Adyen where they select which payment method they want to use, and then they visit the appropriate page to enter their payment info. When they are done entering their payment info, they return to your checkout page. In an upcoming release, Recurly will allow you to select the payment method directly on your own checkout page, simplifying the checkout experience even further.
+
+You can customize the Adyen hosted pages so that it looks and feels like your own checkout page. Review the [Adyen HPP skin documentation](https://docs.adyen.com/developers/features/hosted-payment-pages/skin) for information on how to set up and configure their hosted pages.  
+
+## From a merchant perspective
+
+From a merchant perspective, when the customer lands on your checkout page and indicates that they want to purchase using one of the payment methods available on via the Adyen HPP, you make an API call to Recurly with some details about the customer. We calculate the amount due and pass that along to Adyen when you redirect the customer to the Adyen HPP. When the customer completes the purchase, Adyen provides Recurly with the payment details, and we use the information to update our systems with a record of what happened. For more detailed information on the API integration, please refer to the [API integration section of this page](https://docs.recurly.com/v1.0/docs/adyen-hpp-draft#section-api-integration-with-recurly). 
+
+After your customer completes their purchase, the information about the customer, subscription, invoice and payment is available in Recurly (since Recurly records the payment method returned from Adyen), via the API, and is included in our webhooks. With this information, you can see which payment methods are performing best, and adjust your business accordingly.   
+
+For example, on the /transactions page you'll see the payment method used for payments captured via the Adyen HPP listed alongside the payments captured through Recurly.js. This same data appears in the transactions export, the relevant Recurly APIs, and in the relevant Recurly webhooks.
+
+![1666](https://files.readme.io/b697cbc-Screen_Shot_2017-11-07_at_8.41.53_PM.png "Screen Shot 2017-11-07 at 8.41.53 PM.png")
+
+## For refunds / voids
+
+Refunds and voids work the same way as other payments captured through Recurly.js
+
+## A note about asynchronous payment methods
+
+Some of the payment methods available via the Adyen HPP, like SEPA, are asynchronous - i.e. they take several days for the payment to settle. Because of this nature, purchases made with a payment method that is asynchronous are handled slightly differently in Recurly: 
+
+* The subscription is marked as "active" as soon as your customer successfully completes their purchase, but since the payment hasn't actually been approved by the customer's bank, the invoice and it's related transaction remain in a "processing" state until Adyen confirms that the payment has been approved.
+
+* At that time, Recurly will issue a "processing payment" webhook to any endpoints you have configured in Recurly.
+
+* At that time, Recurly will also issue a "payment processing" email to your customer (if you have enabled that email).
+
+* **Until we receive confirmation from Adyen that the asynchronous payment was actually approved, Adyen will not successfully process any additional payment requests against that billing information.** 
+
+* Adyen returns a token for Recurly to use for subsequent purchases as soon as the billing information is successfully entered, but the token is in an "unverified" state because the payment hasn't actually been approved by the customer's bank.
+
+* Within 48 hours, Adyen receives confirmation from the customer's bank that the payment has been approved by the customer's bank. When Adyen gets that confirmation, they issue a notification to Recurly that alerts us to the fact that the token is now "verified."
+
+* **Only when the token is "verified," can additional purchases and subscription renewals be made against the stored billing information on the account. Before the token is confirmed as being "verified" additional purchases attempted will fail.**
+
+* When Adyen receives confirmation from the bank that the payment has been approved:
+
+* Adyen issues a notification to Recurly that the transaction has been approved. At that time, Recurly will update the status of the transaction and invoice in our system with the appropriate status. 
+
+* At that time, Recurly will issue you the appropriate webhook (e.g. successful payment & closed invoice, or failed payment and past due invoice).
+
+* At that time, Recurly will also issue the appropriate email to your customer (if you have enabled the email) (e.g. payment confirmation, or payment declined).
+
+* Dunning and retries: 
+
+* Invoices paid for with an asynchronous payment method that enter dunning must also be treated differently than invoices paid for with a synchronous payment method. Refer to the [description of PayPal eChecks](/guides/payment-orchestration/payment-methods/paypal-payments#section-paypal-echecks-and-recurly-dunning-and-retries) for an example showing the sequence of events and what happens in each step to the invoice and transaction.   
+
+* Configuring Adyen to send Recurly the status updates
+
+* In order to correctly reflect the Adyen HPP transaction status in Recurly, it is important that you configure Adyen to send the appropriate notifications and reports to Recurly. Please refer to the "[Configuration](https://docs.recurly.com/v1.0/docs/adyen-hpp-draft#section-configure-adyen-to-send-notifications-to-recurly)" section below for details:
+
+# Configuration
+
+## Enable payment methods
+
+Adyen's HPP supports [a long list of payment methods](https://docs.adyen.com/developers/payment-methods/payment-methods-overview). Contact Adyen and ask them to enable their HPP for the payment methods you are interested in.\
+*NOTE: Be sure that Recurly Support is aware of the payment methods that you want to process before you start processing payments.*
+
+* Please note that some of these payment methods available on Adyen's HPP are suitable for recurring payments, and some are not. Look at the "Recurring" column of the tables on the Adyen site. If Recurring = "Yes" then Recurly can use that payment method for subscription purchases and one-time purchases. If Recurring = "No" then Recurly can only use the payment method for one-time purchases. 
+
+![776](https://files.readme.io/a7ad316-Screen_Shot_2017-11-01_at_10.21.08_AM.png "Screen Shot 2017-11-01 at 10.21.08 AM.png")
+
+* If you are accepting credit / debit cards (e.g. Visa, Mastercard, JCB, Diners), these payment methods should be used with the standard Recurly.js implementation. This ensures that Recurly vaults the card information and can provide you with the benefit of using Recurly's Account Updater service should an payment be declined. 
+
+## Set up a skin code for new purchases
+
+1. In the Adyen portal, navigate to Skins
+2. Add a new skin, and give it a description that makes it clear that the skin will be used for the Recurly / Adyen HPP integration
+3. In the skin configurations, click the button to "Generate new HMAC key" and copy / paste that value into the "HMAC KEY" field on the Adyen gateway configuration page in Recurly
+
+* Use the "Test Platform" HMAC key for your Recurly sandbox or dev site
+* Use the "Live Platform" HMAC key for your Recurly production or live site 
+
+4. Enter the "Payment results URL" - the page to which you want to redirect customers when they have successfully completed entering their payment details on the Adyen HPP
+5. Click "Payment options" and enable the payment methods that you want customers to be able to choose. If you don't see a payment method that you want to enable on your HPP, contact Adyen and ask them to make the payment method available. 
+6. Complete any other configuration you want to make of your skin, and be sure to save all changes
+
+## Set up a skin code for payment info updates (e.g. HAM)
+
+You need to set up at least 2 skin codes. The one above is used for your checkout page. The second skin you need to configure is for when your customer wants to update his/her billing information. Repeat the same steps as above, but with the following differences: 
+
+1. The skin description should make it clear that this skin is to be used for billing info updates for the Recurly / Adyen HPP integration
+2. In the skin configurations, click the button to "Generate new HMAC key" and copy / paste that value into the "HMAC KEY BILLING UPDATES field on the Adyen gateway configuration page in Recurly
+
+* Use the "Test Platform" HMAC key for your Recurly sandbox or dev site
+* Use the "Live Platform" HMAC key for your Recurly production or live site 
+
+4. Enter the "Payment results URL" - the page to which you want to redirect customers when they have successfully completed entering their payment details on the Adyen HPP
+
+## Configure the "report credentials"
+
+1. Log into the Adyen portal, select "settings" and "users" 
+
+![1017](https://files.readme.io/f8153c1-Screen_Shot_2017-11-07_at_2.59.14_PM.png "Screen Shot 2017-11-07 at 2.59.14 PM.png")
+
+2. If you don't yet have a "reporting user" create a new user and select "Report User" for the "User Type": 
+
+![2028](https://files.readme.io/a54bad6-Screen_Shot_2017-11-07_at_3.35.52_PM.png "Screen Shot 2017-11-07 at 3.35.52 PM.png")
+
+3. Enter the report user name in the "REPORTS USERNAME" field in Recurly ... and the password in the "REPORTS PASSWORD" field in Recurly 
+
+![2191](https://files.readme.io/817be7d-Screen_Shot_2017-11-07_at_3.57.20_PM.png "Screen Shot 2017-11-07 at 3.57.20 PM.png")
+
+## Subscribe to the Payment Accounting Report
+
+1. Navigate to Reports, and scroll down to the "Finance" section of the page
+2. Click the "Subscribe" button for the Payment Accounting Report
+
+![2256](https://files.readme.io/f633c73-Screen_Shot_2017-11-08_at_9.07.55_AM.png "Screen Shot 2017-11-08 at 9.07.55 AM.png")
+
+3. Select "comma-separated value", and click save to subscribe to the report 
+
+## Configure Adyen to send notifications to Recurly
+
+1. In the Adyen portal, navigate to Settings / Server Communication
+
+![2536](https://files.readme.io/5b7d2b8-Screen_Shot_2017-11-07_at_9.18.01_PM.png "Screen Shot 2017-11-07 at 9.18.01 PM.png")
+
+2. Add the notifications listed below. 
+
+* In the configuration setting, enter the URL to which the notifications should be sent as follows: [https://callbacks.recurly.com/adyen/\[YourRecurlySiteDomain\]](https://callbacks.recurly.com/adyen/\[YourRecurlySiteDomain]) ... for example [https://callbacks.recurly.com/adyen/kalekrate](https://callbacks.recurly.com/adyen/kalekrate). 
+
+![1204](https://files.readme.io/6137214-Screen_Shot_2017-11-07_at_9.28.10_PM.png "Screen Shot 2017-11-07 at 9.28.10 PM.png")
+
+* There are 4 notifications that you need to add in Adyen to ensure that Recurly receives all of the updates we need: 
+* Direct-Debit Pending Notification
+* Generic Pending Notification
+* Report Notification - NOTE: be sure to select "Report Available"
+* Standard Notification - NOTE: be sure to select "Authorisation":
+
+![1232](https://files.readme.io/27878fa-Screen_Shot_2017-11-07_at_9.28.32_PM.png "Screen Shot 2017-11-07 at 9.28.32 PM.png")
+
+# API Integration with Recurly
+
+The normal flow for registering a purchase using Recurly.js begins with  Normally with a payment natively handled by Recurly, i.e. through Recurly.js, the customer enters their billing information first, and then ... when we have authorized the billing info and know that it's valid, then, you create the subscription on the account and we charge the billing information on the account for the purchase. When using the Adyen HPP, however, there is no separate authorization of the billing information separate from the purchase of the subscription or one-time product. Instead, by the time the customer finishes interacting with the Adyen HPP, the payment has already been sent  billing information has been saved with Adyen and the charge has been made. Therefore, in Recurly we need to record the fact that the charge has already happened.  
+
+The recommended API integration flow for the Adyen HPP is as follows: 
+
+1. Create Pending Purchase using the /purchases endpoint
+
+* Send an API request to `v2/purchases/pending` with a subscriptions payload. The API request needs to include the new data element " \<external\_hpp\_type>adyen\</external\_hpp\_type>"
+
+* On success, the subscription\_UUID will be returned and used in subsequent steps. 
+
+* The configurations described above are required in order to have a successful response.
+
+* Here is an example of the API request payload - note the new field "\<external\_hpp\_type>adyen\</external\_hpp\_type>"
+
+```
+<purchase>
+  <collection_method>automatic</collection_method>
+  <currency>USD</currency>
+  <customer_notes>Some notes for the customer.</customer_notes>
+  <terms_and_conditions>Our company terms and conditions.</terms_and_conditions>
+  <vat_reverse_charge_notes>Vat reverse charge notes.</vat_reverse_charge_notes>
+  <account>
+    <account_code>tuesday@tuesday.com</account_code>
+    <email>tuesday@tuesday.com</email>
+    <billing_info>
+      <first_name>andy</first_name>
+      <external_hpp_type>adyen</external_hpp_type>
+    </billing_info>
+  </account>
+  <adjustments>
+    <adjustment>
+      <product_code>4549449c-5870-4845-b672-1d07f15e87dd</product_code>
+      <quantity>1</quantity>
+      <revenue_schedule_type>at_invoice</revenue_schedule_type>
+      <unit_amount_in_cents>1000</unit_amount_in_cents>
+    </adjustment>
+  </adjustments>
+  <subscriptions>
+    <subscription>
+        <plan_code>basic</plan_code>
+        <quantity>1</quantity>
+    </subscription>
+    <subscription>
+        <plan_code>sobasic</plan_code>
+        <quantity>1</quantity>
+    </subscription>
+  </subscriptions>
+  <coupon_codes>
+    <coupon_code>coupon1</coupon_code>
+  </coupon_codes>
+</purchase>
+```
+
+* This will create a record in the Recurly database with serialized information around the account, subscription, invoice, and billing\_info. This table is called pending\_purchases. This table is invisible to you, as it only serves as a placeholder while we wait for your customer to complete the purchase.  
+
+2. Capture & Activate Pending Subscriptions
+
+* Invoke the Adyen HPP Modal by passing in the invoice\_uuid and skinCode. Recurly will pass along the amount of the purchase, along with the desired currency and other information that Adyen needs in order to know how much to charge the customer. 
+* Your customer will then enter his/her billing information in order to complete their purchase.  
+* After a successful capture, Adyen returns an API response to Recurly, confirming that the customer completed the HPP form successfully, how much they were charged, the currency etc... When we get confirmation from Adyen that the customer completed the purchase, we create the account and its associated billing info. In addition, in Recurly App you will now see:
+
+For synchronous transactions:
+
+* An active Subscription
+* A successful Transaction with a completed state and appropriate payment logo
+* A paid Invoice that is closed
+* Saved Billing Information 
+
+For asynchronous transactions:
+
+* An active subscription
+* A "processing" Transaction with the appropriate payment method logo
+* A "processing" Invoice that is open
+* Saved Billing Information
+
+# Final considerations / notes: 
+
+* Since Adyen is capturing the billing information, Recurly doesn't vault the payment details for invoices paid for via the Adyen HPP. As a result, subsequent renewals are excluded from the Account Updater service. They are, however, included in any retries should the renewal payment fail with a soft decline reason code. 
+
+# Limitations:
+
+* **As mentioned above, asynchronous payment methods take up to 48 hours to confirm that the billing information on the account can be used for subsequent payments. Until the account's billing info is verified by Adyen, any payment requests sent to Adyen for subsequent charges and/or new subscriptions on the account will be declined.** 
+* **Purchases routed through the Adyen HPP will always result in new accounts being created in Recurly. Existing accounts in Recurly will need to continue using the payment methods available natively in Recurly (e.g. Credit Cards, PayPal, ACH, Amazon Pay etc...).**  
+* **Credit and debit card transactions should be processed using RJS and / or the Recurly API, as the Adyen HPP integration does not currently support credit and debit cards.**
+
+# WHAT STILL NEEDS TO BE DOCUMENTED:
+
+* How it works for billing info updates
+* Describe updates to HAM and Edit Billing Info
+* Describe the new payment & subsequent void 
+* Need to explain that the merchant needs to configure a skin for the updates

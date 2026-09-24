@@ -1,0 +1,99 @@
+---
+title: Renewal benchmarks
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Renewal Benchmarks give you insight into your overall renewal invoice performance, along with detail into why renewal invoices decline. Compare your results against industry peers to see where your renewal strategy stands.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">4</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have Analytics user role permission.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Renewal Benchmarks give you insight into your overall renewal invoices, along with detail into why renewal invoices decline.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Industry comparison</strong>
+    <span>Compare key subscription metrics with industry benchmarks to see how you stack up against peers, and spot your strengths and weaknesses.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Competitive insights</strong>
+    <span>See how competitors are performing on the same subscription metrics, and find areas where you can differentiate and improve.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Informed decision-making</strong>
+    <span>Make decisions based on real-world data to set realistic goals for subscription growth and customer retention.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Forecasting and planning</strong>
+    <span>Enable more accurate forecasting and long-term planning, so you can set reachable growth targets and allocate resources effectively.</span>
+  </div>
+</div>
+
+# Key details
+
+## General filters (top left corner)
+
+<ul className="rp-list">
+  <li><strong>Invoice date range</strong>: Specify the time period of invoices to review.</li>
+  <li><strong>Industry</strong>: Switch between industries to review benchmark information. Defaults to your configured industry.</li>
+</ul>
+
+## Renewal invoice benchmarks
+
+Renewal Invoice Benchmarks give you insight into the performance of your renewal invoices — both those that are paid successfully and those that fail on the first transaction attempt.
+
+Your ranking is shown as a percentile, comparing your performance to peers in your industry. Track your percentile trend over time to see how your renewal strategy performs relative to industry standards.
+
+
+<Image src="https://files.readme.io/7b3d6b10e20db9201dcb63f4f28bde9ff4e3f0e88205af002741e30f27eb1b13-image.png" align="center" width="75%" border={true} />
+
+
+#### Renewal invoice paid rate calculation
+
+This calculation shows the percentage of renewal invoices created within a period that are successfully paid, out of the total number of renewal invoices issued.
+
+<ul className="rp-list">
+  <li><strong>Example</strong>: In April, if 1,000 renewal invoices are issued and 750 are paid, the initial paid rate is 75%. If another 150 invoices are settled through dunning over the following two weeks, the revised paid rate reaches 90%.</li>
+</ul>
+
+Calculations are based on the invoice creation date, to keep results consistent.
+
+
+<Image src="https://files.readme.io/a6561f42cabc0c5694f5333b856d14e4c652986c4e6d53442f688d65de7b3714-image.png" align="center" width="75%" border={true} />
+
+
+#### Renewal decline rate calculation
+
+This calculation shows the percentage of renewal invoices that aren't successfully paid on the first attempt.
+
+<ul className="rp-list">
+  <li><strong>Initial transactions</strong>: The first attempt to process payment on an invoice — the interaction this metric focuses on.</li>
+  <li><strong>Why we focus on the first transaction</strong>: It keeps the comparison fair across businesses, regardless of how aggressively they retry failed payments.</li>
+</ul>
+
+The evaluation period is based on the date of the invoice's initial transaction. Your position is shown as a percentile within your industry — track it over time to see how your renewal process compares and evolves.
+
+# FAQs
+
+<Accordion title="What is a renewal invoice?">
+  A renewal invoice is an invoice issued as part of a subscription's regular renewal process. This includes invoices generated at set intervals after the initial sign-up, or the first invoice after a trial period. Renewal invoices represent the recurring billing side of a subscription, excluding the initial acquisition or trial conversion invoices.
+</Accordion>

@@ -1,0 +1,554 @@
+---
+title: 'Pricing & plans 201: Price segmentation'
+---
+
+```html
+<HTMLBlock>{`
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* HOST-THEME BACKGROUND OVERRIDE */
+body { background: #ffffff !important; }
+
+/* ── GLOBAL CSS IMMUNITY BLOCK ── */
+.rc-guide h1 { border-bottom: none !important; padding-bottom: 0 !important; }
+.rc-guide, .rc-guide * { font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important; }
+/* FA6 font restore — (0,0,2,0) beats wildcard (0,0,1,0) */
+.rc-guide [class^="fa-"],
+.rc-guide [class*=" fa-"] { font-family: "Font Awesome 6 Free" !important; }
+.rc-guide .fa-brands,
+.rc-guide [class*="fa-brands"] { font-family: "Font Awesome 6 Brands" !important; }
+
+/* ── NAVIGATE MASTER ARMOR ── */
+.rm-Markdown.markdown-body .rc-guide a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a,
+.rc-guide a:link,
+.rc-guide a:visited,
+.rc-guide a:active {
+  color: #008CFF !important;
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: unset !important;
+  border-bottom: 0 !important;
+}
+.rc-guide a:hover {
+  color: #0067BE !important;
+  text-decoration: underline !important;
+  text-decoration-color: #008CFF !important;
+  text-underline-offset: 2px !important;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+.rc-guide {
+  --yellow:     #FFD706;
+  --blue:       #008CFF;
+  --blue-tint1: #D5EAFF;
+  --blue-tint2: #96C8FF;
+  --offblack:   #0D0D0B;
+  --darkgray:   #32312D;
+  --gray:       #807D75;
+  --lightgray:  #D1CFC4;
+  --brightgray: #F2F1EA;
+  --offwhite:   #FCFBF7;
+  --warning-fg: #FFD706;
+  --warning-bg: #FFFECB;
+  --error-fg:   #FF5126;
+  --error-bg:   #FFEEE9;
+  --success-fg: #5DC32E;
+  --success-bg: #EFFAEA;
+  --info-fg:    #008CFF;
+  --info-bg:    #E5F3FF;
+  font-family: "Figtree", "Helvetica Neue", Helvetica, arial, sans-serif !important;
+  color: #32312D !important;
+  background: #ffffff;
+}
+.rc-guide * { box-sizing: border-box; }
+
+/* FA icon helpers */
+.rc-fa-section { color: var(--offblack); font-size: 1rem; }
+.rc-fa-announce { color: var(--offblack); font-size: 1rem; flex-shrink: 0; }
+
+/* Layout */
+.rc-top-nav { padding: 20px 40px 16px; max-width: 1200px; margin: 0 auto; }
+.rc-content-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* Inline Body Links */
+.rm-Markdown.markdown-body .rc-guide a.rc-inline-link:not([class*="Button"]):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-inline-link {
+  color: #008CFF !important; font-weight: 600; border-bottom: 0 !important; text-decoration: none !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-inline-link:not([class*="Button"]):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-inline-link:hover {
+  color: #0067BE !important; text-decoration: underline !important; text-decoration-color: #008CFF !important; text-underline-offset: 2px !important;
+}
+
+/* Back link */
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-back-link {
+  color: #807D75 !important; font-weight: 700; font-size: .9rem;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: color .2s; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-back-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-back-link:hover { color: #008CFF !important; text-decoration: none !important; }
+
+/* Announcement bar */
+.rc-announce-bar {
+  display: none; background: var(--yellow); color: var(--offblack);
+  align-items: center; justify-content: space-between;
+  padding: 10px 20px; font-size: .88rem; font-weight: 600;
+  border-radius: 10px; margin-bottom: 16px; gap: 12px; line-height: 1.4;
+}
+.rc-announce-bar.rc-active { display: flex; }
+.rc-announce-inner { display: flex; align-items: center; gap: 10px; flex: 1; flex-wrap: wrap; }
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-announce-link {
+  color: #0D0D0B !important; font-weight: 800; white-space: nowrap;
+  padding: 4px 12px; background: rgba(0,0,0,0.10); border-radius: 6px;
+  transition: background 0.2s; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-announce-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-announce-link:hover { background: rgba(0,0,0,0.20); color: #0D0D0B !important; text-decoration: none !important; }
+
+/* Hero */
+.rc-hero {
+  background: linear-gradient(rgba(13,13,11,0.82), rgba(13,13,11,0.82)),
+    url('https://files.readme.io/7a74d62bff1d532ca5adc49ae3d1c7d39a9703386b62fa98835df5c47a5f84b1-Topo_for_Black_Background_2.png') no-repeat center center;
+  background-color: var(--offblack); background-size: cover;
+  color: #fff; padding: 52px 40px 48px; text-align: center;
+  border-radius: 16px; margin-bottom: 0;
+}
+.rc-lp-pillar-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,215,6,0.20); border: 1px solid rgba(255,215,6,0.45);
+  color: #FFD706; font-size: .75rem; font-weight: 800;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.rc-lp-pillar-tag img { width: 13px; height: 13px; object-fit: contain; }
+.rc-lp-hero-title { text-align: center; margin: 0 0 14px; }
+.rc-lp-hero-title h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; color: #FCFBF7; margin: 0; }
+.rc-hero > p { font-size: 1rem; max-width: 640px; margin: 0 auto; color: #D1CFC4; line-height: 1.6; }
+
+/* Nav — non-sticky, open */
+details.rc-sticky-nav-wrap {
+  position: relative;
+  background-color: var(--yellow);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin: 24px 0 48px 0; border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08); overflow: hidden;
+}
+details.rc-sticky-nav-wrap > summary {
+  list-style: none; display: flex; align-items: center;
+  padding: 15px 24px; cursor: pointer; user-select: none;
+}
+details.rc-sticky-nav-wrap > summary::-webkit-details-marker { display: none; }
+details.rc-sticky-nav-wrap > summary::marker { display: none; }
+.rc-nav-toggle-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 800; font-size: .88rem; letter-spacing: 0.6px;
+  text-transform: uppercase; color: var(--offblack);
+}
+.rc-nav-chevron { font-size: .72rem; color: var(--offblack); opacity: 0.55; line-height: 1; transition: transform 0.25s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-chevron { transform: rotate(180deg); }
+.rc-nav-drawer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+details.rc-sticky-nav-wrap[open] .rc-nav-drawer { grid-template-rows: 1fr; }
+.rc-nav-drawer-inner { overflow: hidden; border-top: 1px solid rgba(0,0,0,0.10); }
+.rc-nav-links { display: flex; flex-wrap: wrap; gap: 6px 4px; padding: 12px 20px 18px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link {
+  color: #0D0D0B !important; font-weight: 700; font-size: .83rem;
+  letter-spacing: 0.4px; text-transform: uppercase; padding: 7px 14px;
+  border-radius: 7px; transition: all .18s; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; text-decoration: none !important; }
+.rc-sticky-link img { width: 15px; height: 15px; object-fit: contain; }
+.rc-step-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--offblack); color: var(--yellow);
+  font-size: .65rem; font-weight: 800; flex-shrink: 0; line-height: 1;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-sticky-link-active { font-weight: 800; color: #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-sticky-link-active:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-sticky-link-active:hover { background: rgba(0,0,0,0.10); color: #0D0D0B !important; text-decoration: none !important; }
+
+/* Sections */
+.rc-lp-section { margin-bottom: 48px; }
+.rc-lp-section h2 {
+  font-size: 1.5rem; font-weight: 800; margin: 0 0 20px;
+  color: var(--offblack); display: flex; align-items: center; gap: 12px;
+}
+.rc-lp-section h2::after { content: ""; flex-grow: 1; height: 1px; background: var(--lightgray); }
+.rc-lp-section p { font-size: .95rem; line-height: 1.65; color: var(--darkgray); margin: 0 0 16px; }
+.rc-lp-section p:last-child { margin-bottom: 0; }
+
+/* Callouts */
+.rc-callout { border-radius: 10px; padding: 16px 20px; margin: 20px 0; display: flex; gap: 14px; align-items: flex-start; }
+.rc-callout + .rc-callout { margin-top: 12px; }
+.rc-callout-icon { font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; }
+.rc-callout-body { flex: 1; }
+.rc-callout-body > strong { font-size: .88rem; font-weight: 800; display: block; margin-bottom: 4px; }
+.rc-callout-body p { font-size: .9rem; line-height: 1.55; margin: 0; color: var(--darkgray); }
+.rc-callout-tip { background: var(--brightgray); border-left: 4px solid var(--offblack); }
+.rc-callout-tip .rc-callout-body > strong { color: var(--offblack); }
+.rc-callout-warning { background: rgba(255,215,6,0.12); border-left: 4px solid var(--yellow); }
+.rc-callout-warning .rc-callout-body > strong { color: var(--darkgray); }
+.rc-callout-caution { background: var(--warning-bg); border-left: 4px solid var(--warning-fg); }
+.rc-callout-caution .rc-callout-body > strong { color: var(--darkgray); }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide .rc-callout-body a { color: #008CFF !important; font-weight: 600; border-bottom: 0 !important; }
+.rm-Markdown.markdown-body .rc-guide .rc-callout-body a:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide .rc-callout-body a:hover { text-decoration: underline !important; text-decoration-color: #008CFF !important; text-underline-offset: 2px !important; }
+
+/* Stat strip */
+.rc-stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; overflow: hidden; margin: 0 0 32px; }
+.rc-stat-tile { padding: 24px 20px; text-align: center; }
+.rc-stat-tile + .rc-stat-tile { border-left: 1px solid var(--lightgray); }
+.rc-stat-tile-num { font-size: 1.8rem; font-weight: 800; color: var(--yellow); line-height: 1; margin-bottom: 4px; }
+.rc-stat-tile-label { font-size: .7rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; }
+.rc-stat-tile-context { font-size: .8rem; color: var(--darkgray); line-height: 1.5; padding-top: 10px; border-top: 1px solid var(--brightgray); }
+
+/* Compare grid */
+.rc-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 32px; }
+.rc-compare-card { border-radius: 12px; padding: 24px; border: 1px solid var(--lightgray); background: var(--offwhite); }
+.rc-compare-card h4 { font-size: 1rem; font-weight: 800; color: var(--offblack); margin: 0 0 16px; }
+.rc-compare-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.rc-compare-card ul li { font-size: .88rem; color: var(--darkgray); line-height: 1.5; padding-left: 20px; position: relative; }
+.rc-compare-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--yellow); font-weight: 800; font-size: .8rem; }
+.rc-compare-label { display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+.rc-compare-label-problem { background: var(--error-bg); color: var(--error-fg); }
+.rc-compare-label-solution { background: var(--success-bg); color: var(--success-fg); }
+
+/* Card grid */
+.rc-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 32px; }
+.rc-feature-card { background: var(--offwhite); border: 1px solid var(--lightgray); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 8px; transition: all .2s ease; }
+.rc-feature-card:hover { border-color: #FFD706; box-shadow: 0 4px 16px rgba(255,215,6,0.15); transform: translateY(-2px); }
+.rc-feature-icon { font-size: 1.4rem; line-height: 1; color: var(--offblack); }
+.rc-feature-card h4 { font-size: .98rem; font-weight: 800; color: var(--offblack); margin: 0; }
+.rc-feature-card p { font-size: .88rem; color: var(--gray); line-height: 1.55; margin: 0; flex-grow: 1; }
+.rc-feature-tag { display: inline-block; margin-top: 4px; padding: 3px 10px; border-radius: 20px; font-size: .7rem; font-weight: 700; letter-spacing: .5px; background: var(--offblack); color: var(--yellow); width: fit-content; }
+.rc-feature-card code { background: var(--brightgray); color: var(--offblack); padding: 1px 6px; border-radius: 4px; font-size: .8rem; }
+
+/* Path nav */
+.rc-lp-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 40px 0 16px; }
+.rc-lp-nav-indicator { font-size: .8rem; font-weight: 600; color: var(--lightgray); letter-spacing: .5px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-prev {
+  background: transparent; color: #0D0D0B !important; text-decoration: none !important;
+  padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: .9rem;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 2px solid #D1CFC4 !important; border-bottom: 2px solid #D1CFC4 !important; transition: all .2s;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-prev:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-prev:hover { border: 2px solid #0D0D0B !important; border-bottom: 2px solid #0D0D0B !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-btn-path {
+  background: var(--yellow); color: #0D0D0B !important; text-decoration: none !important;
+  padding: 13px 28px; border-radius: 10px; font-weight: 800; font-size: .95rem;
+  display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-btn-path:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-btn-path:hover {
+  background: transparent !important; color: #0D0D0B !important;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+
+/* OH CTA */
+.rc-oh-cta { background: #0D0D0B !important; border: 2px solid #FFD706 !important; border-radius: 14px; padding: 32px 36px; margin: 32px 0; }
+.rc-oh-cta h4 { color: #FFD706 !important; font-size: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px; display: block; }
+.rc-oh-cta p { color: #D1CFC4 !important; font-size: .95rem; line-height: 1.6; margin: 0 0 20px; }
+.rc-oh-cta p strong { color: #FFFDF2 !important; }
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-oh-btn {
+  background: #FFD706 !important; color: #0D0D0B !important; text-decoration: none !important;
+  padding: 12px 24px; border-radius: 10px; font-weight: 800; font-size: .9rem;
+  display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-oh-btn:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-oh-btn:hover {
+  background: transparent !important; color: #FFD706 !important;
+  border: 2px solid #FFD706 !important; border-bottom: 2px solid #FFD706 !important;
+}
+
+/* Resources */
+.rc-resources { background: var(--brightgray); border-left: 4px solid var(--yellow); border-radius: 10px; padding: 20px 24px; margin: 32px 0 0; }
+.rc-resources h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .9px; color: var(--gray); margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+.rc-resource-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-resource-link {
+  color: #807D75 !important; text-decoration: underline !important;
+  text-underline-offset: 3px; text-decoration-color: #D1CFC4 !important;
+  font-weight: 500; font-size: .88rem; transition: all .18s;
+  display: inline-flex; align-items: center; gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-resource-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-resource-link:hover {
+  color: #0D0D0B !important; text-decoration: underline !important;
+  text-underline-offset: 3px; text-decoration-color: #FFD706 !important;
+}
+
+/* Footer */
+.rc-footer-nav { border-top: 1px solid var(--lightgray); padding-top: 40px; margin-top: 48px; padding-bottom: 48px; }
+.rc-footer-links { display: flex; flex-direction: column; gap: 16px; }
+.rc-footer-section { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+.rc-footer-label { font-weight: 800; font-size: .75rem; text-transform: uppercase; letter-spacing: .8px; color: var(--darkgray); background: var(--brightgray); padding: 4px 10px; border-radius: 6px; margin-right: 4px; }
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn),
+.rc-guide a.rc-footer-link {
+  color: #807D75 !important; font-weight: 600; font-size: .88rem;
+  transition: color .2s ease; display: inline-flex; align-items: center;
+  gap: 6px; border-bottom: 0 !important;
+}
+.rm-Markdown.markdown-body .rc-guide a.rc-footer-link:not([class*="Button"]):not(.rp-anchor):not(.rp-toc-pill):not(.rp-btn):hover,
+.rc-guide a.rc-footer-link:hover { color: #008CFF !important; text-decoration: none !important; }
+.rc-footer-link img { width: 14px; height: 14px; object-fit: contain; opacity: 0.5; transition: opacity .2s ease; }
+.rc-footer-link:hover img { opacity: 1; }
+.rc-footer-utility { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--brightgray); }
+
+/* Responsive */
+@media(max-width:768px){
+  .rc-content-wrap { padding: 0 20px; }
+  .rc-top-nav { padding: 16px 20px; }
+  .rc-hero { padding: 36px 20px 36px; }
+  .rc-lp-hero-title h1 { font-size: 1.8rem; }
+  .rc-compare-grid { grid-template-columns: 1fr; }
+  .rc-card-grid { grid-template-columns: 1fr; }
+  .rc-stat-strip { grid-template-columns: 1fr; }
+  .rc-lp-nav { flex-wrap: wrap; justify-content: center; }
+  .rc-lp-nav-indicator { width: 100%; text-align: center; }
+  .rc-oh-cta { padding: 24px 20px; }
+}
+</style>
+
+<div class="rc-guide">
+
+  <!-- Back link -->
+  <div class="rc-top-nav">
+    <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire" class="rc-back-link">← Back to Acquire</a>
+  </div>
+
+  <div class="rc-content-wrap">
+
+    <!-- Announcement bar (hidden) -->
+    <div class="rc-announce-bar" id="rcAnnounce">
+      <div class="rc-announce-inner">
+        <i class="fa-regular fa-calendar-days rc-fa-announce"></i>
+        <strong>Upcoming:</strong> Join our CSMs for a live pricing Q&amp;A — bring your advanced billing questions.
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-announce-link">Register now →</a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="rc-hero">
+      <div class="rc-lp-pillar-tag">
+        <img src="https://files.readme.io/d92be816a9e838fb46356e2547d5f8bb663dddb7b4a77cac37434efbd825e216-Acquire-icon-white.png" alt="Acquire"> Acquire · Pricing &amp; Plans 201
+      </div>
+      <div class="rc-lp-hero-title">
+        <h1>Price segmentation</h1>
+      </div>
+      <p>Your plan structure shouldn't multiply every time you enter a new market or test a new price point. Price segments let you serve different subscriber groups at different price points — from a single plan.</p>
+    </div>
+
+    <!-- Nav — Page 1 active -->
+    <details class="rc-sticky-nav-wrap" open>
+      <summary>
+        <span class="rc-nav-toggle-label">Navigation Menu <i class="fa-solid fa-chevron-up rc-nav-chevron"></i></span>
+      </summary>
+      <div class="rc-nav-drawer"><div class="rc-nav-drawer-inner"><div class="rc-nav-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-sticky-link">
+          <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201" class="rc-sticky-link">Path Overview</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-segmentation" class="rc-sticky-link rc-sticky-link-active">
+          <img src="https://files.readme.io/070e914d23dead09604d5f96b8769c88b8aae704ebd4505415e5854011030110-Black_Navigate_Home_Pin_1.png" alt=""> Price segmentation
+        </a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-hierarchy" class="rc-sticky-link"><span class="rc-step-badge">2</span> Account hierarchy</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-usage-billing" class="rc-sticky-link"><span class="rc-step-badge">3</span> Usage billing</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-models" class="rc-sticky-link"><span class="rc-step-badge">4</span> Advanced pricing models</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-currency" class="rc-sticky-link"><span class="rc-step-badge">5</span> Advanced currency</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-analytics" class="rc-sticky-link"><span class="rc-step-badge">6</span> Advanced analytics</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-review" class="rc-sticky-link"><span class="rc-step-badge">7</span> Review &amp; resources</a>
+       
+      </div></div></div>
+    </details>
+
+    <!-- What are price segments -->
+    <div class="rc-lp-section" id="what-are-segments">
+      <h2><i class="fa-solid fa-tag rc-fa-section"></i> What are price segments?</h2>
+      <p>A price segment is a named price point within a plan that you assign to a subscriber at the moment their subscription is created. When Recurly calculates what that subscriber owes each billing period, it uses the price tied to their segment code — not the plan's default price.</p>
+      <p>Everything else about the subscription stays the same regardless of segment. <strong>Segments change what a subscriber pays. They don't change how the subscription is structured.</strong></p>
+      <p><strong>Segments are available on all Recurly plans.</strong></p>
+
+      <div class="rc-stat-strip">
+        <div class="rc-stat-tile">
+          <div class="rc-stat-tile-num">Plan-level</div>
+          <div class="rc-stat-tile-label">Where segments live</div>
+          <div class="rc-stat-tile-context">Segments are configured on the plan itself, alongside the default price. Any number of segments can be added to a single plan.</div>
+        </div>
+        <div class="rc-stat-tile">
+          <div class="rc-stat-tile-num">At creation</div>
+          <div class="rc-stat-tile-label">When the code is assigned</div>
+          <div class="rc-stat-tile-context">The segment code drives your internal selection logic. When creating the subscription or purchase, your application passes the chosen segment's price via the Recurly API or Recurly.js.</div>
+        </div>
+        <div class="rc-stat-tile">
+          <div class="rc-stat-tile-num">Per-currency</div>
+          <div class="rc-stat-tile-label">How prices are set</div>
+          <div class="rc-stat-tile-context">Each segment must have a price set for each of your plan's enabled currencies — Recurly does not auto-convert between currencies.</div>
+        </div>
+      </div>
+
+   
+    <!-- Plan sprawl -->
+    <div class="rc-lp-section" id="plan-sprawl">
+      <h2><i class="fa-solid fa-layer-group rc-fa-section"></i> The problem segments solve: plan sprawl</h2>
+      <p>Without segments, every distinct price point requires a separate plan. A business serving four geographic markets at different prices needs four plans — even if the only difference is the number on the invoice. Multiply that by billing intervals and product tiers, and you accumulate dozens of functionally identical plans that are expensive to maintain, hard to analyze, and increasingly fragile to manage.</p>
+
+      <div class="rc-compare-grid">
+        <div class="rc-compare-card">
+          <div class="rc-compare-label rc-compare-label-problem">Without segments</div>
+          <h4>One plan per price point</h4>
+          <ul>
+            <li>US, EU, UK, and APAC markets each need a separate plan, even when everything except price is identical</li>
+            <li>An A/B price test requires two plans and split traffic routing</li>
+            <li>Grandfathered subscribers need their own plan to preserve their legacy price</li>
+            <li>Churn-by-plan analytics become meaningless when one "plan" is actually fifteen</li>
+            <li>Adding a new market means creating, configuring, and maintaining another plan</li>
+          </ul>
+        </div>
+        <div class="rc-compare-card">
+          <div class="rc-compare-label rc-compare-label-solution">With segments</div>
+          <h4>One plan, multiple price points</h4>
+          <ul>
+            <li>One plan with segment codes: <code>us</code>, <code>eu</code>, <code>uk</code>, <code>apac</code> — each with its own price</li>
+            <li>A/B test runs on the same plan — pass <code>price-a</code> or <code>price-b</code> at subscription creation</li>
+            <li>Grandfathered subscribers keep their original segment code; new subscribers get the current one</li>
+            <li>Dunning, trials, add-ons, and billing interval are configured once and shared</li>
+            <li>Adding a new market means adding one segment and a price — nothing else changes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Four use cases -->
+    <div class="rc-lp-section" id="use-cases">
+      <h2><i class="fa-solid fa-bullseye rc-fa-section"></i> Four use cases where segments earn their complexity</h2>
+      <p>Price segments add a configuration layer that's worth managing in four specific situations. Outside these, the plan's default price — or a separate plan — is usually simpler.</p>
+
+      <div class="rc-card-grid">
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-earth-europe"></i></div>
+          <h4>Geographic pricing</h4>
+          <p>Charge $12/month in the US, €9.99/month in Germany, and £8.99/month in the UK — all on the same plan. Each segment carries its own currency-specific price. Your application detects the subscriber's location (via geo-IP or user input) and passes the correct segment code via the API or Recurly.js at checkout.</p>
+          <span class="rc-feature-tag">Geographic pricing</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-flask"></i></div>
+          <h4>A/B price testing</h4>
+          <p>Test $29/month against $39/month without creating a second plan or splitting reporting between two plan codes. Route new subscribers to <code>price-a</code> or <code>price-b</code> at subscription creation, track conversion and retention externally by segment code, and roll out the winner by updating which code your checkout passes going forward.</p>
+          <span class="rc-feature-tag">Price testing</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-lock"></i></div>
+          <h4>Grandfathered pricing</h4>
+          <p>When you raise prices for new subscribers, existing subscribers keep their original price by retaining their original segment code. New subscribers are created with the current segment. No plan migration, no versioning complexity — the same plan accommodates both cohorts simultaneously.</p>
+          <span class="rc-feature-tag">Grandfathered pricing</span>
+        </div>
+        <div class="rc-feature-card">
+          <div class="rc-feature-icon"><i class="fa-solid fa-bullhorn"></i></div>
+          <h4>Channel-specific pricing</h4>
+          <p>Offer a promotional price through a specific acquisition channel — a partnership deal, a reseller, a conference promotion — without a public-facing coupon. Assign a segment code to subscribers coming through that channel at checkout. When the promotion ends, new subscribers default to the standard segment; existing ones keep their negotiated price.</p>
+          <span class="rc-feature-tag">Channel pricing</span>
+        </div>
+      </div>
+      
+      <div class="rc-callout rc-callout-tip">
+        <div class="rc-callout-icon"><i class="fa-solid fa-code-branch"></i></div>
+        <div class="rc-callout-body">
+          <strong>Segment codes cannot be changed after creation, but you can add segments to existing plans at any time</strong>
+          <p> Plan ahead with a clear, consistent naming convention.</p>
+        </div>
+      </div>
+
+
+      <div class="rc-callout rc-callout-caution">
+        <div class="rc-callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="rc-callout-body">
+          <strong>No native segment analytics in Recurly</strong>
+          <p>Recurly's built-in analytics and dashboards do not filter by segment code. If you're running an A/B price test or measuring performance by geography, you need to capture the segment code alongside subscription data in an external analytics tool or data warehouse. Set this up before activating segments — a test you can't measure isn't a test.</p>
+        </div>
+      </div>
+
+      <div class="rc-callout rc-callout-tip">
+        <div class="rc-callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="rc-callout-body">
+          <strong>Segment reporting is available in exports and Explore</strong>
+          <p>The <code>price_segment_code</code> and <code>price_segment_id</code> fields are available in the Recurly Subscriptions export and in Analytics Explore (Elite plan). These are the primary mechanisms for tracking segment performance in external BI tools or Explore reporting.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Office Hours CTA -->
+    <div class="rc-oh-cta">
+      <h4><i class="fa-regular fa-calendar-days rc-fa-dark"></i> Questions about your segmentation setup?</h4>
+      <p>Bring your segment taxonomy questions, A/B test design, or plan consolidation questions to <strong>Global Office Hours</strong> — our CSMs can help you think through the right structure before you start creating segments in production.</p>
+      <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-oh-btn">Register for Office Hours →</a>
+    </div>
+
+    <!-- Path nav -->
+    <div class="rc-lp-nav">
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201" class="rc-btn-prev">← Path Overview</a>
+      <span class="rc-lp-nav-indicator">1 of 7</span>
+      <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-hierarchy" class="rc-btn-path">Next: Account hierarchy →</a>
+    </div>
+
+    <!-- Resources -->
+    <div class="rc-resources">
+      <h3><i class="fa-solid fa-book-open rc-fa-section"></i> Resources</h3>
+      <div class="rc-resource-links">
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/plans" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Plans (price segments section)</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/subscriptions-exports" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Subscriptions export</a>
+        <a href="https://docs.recurly.com/recurly-subscriptions/docs/change-subscription" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-regular fa-file-lines"></i> Recurly Docs: Change subscription</a>
+        <a href="https://recurly.com/blog/product-announcement-segmented-pricing-one-plan-for-multiple-price/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-solid fa-globe"></i> Recurly Blog: Segmented pricing announcement</a>
+        <a href="https://navigate.recurly.com/global-office-hours/" target="_blank" rel="noopener noreferrer" class="rc-resource-link"><i class="fa-solid fa-globe"></i> Global Office Hours</a>
+        <a href="mailto:support@recurly.com" class="rc-resource-link"><i class="fa-solid fa-headset"></i> Contact Recurly Support</a>
+      </div>
+    </div>
+
+    <!-- Footer — Course pattern 19c -->
+    <div class="rc-footer-nav">
+      <div class="rc-footer-links">
+        <div class="rc-footer-section">
+          <span class="rc-footer-label">Pricing &amp; Plans 201</span>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201" class="rc-footer-link">Path overview</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-segmentation" class="rc-footer-link">1. Price segmentation</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-hierarchy" class="rc-footer-link">2. Account hierarchy</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-usage-billing" class="rc-footer-link">3. Usage billing</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-models" class="rc-footer-link">4. Advanced pricing models</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-currency" class="rc-footer-link">5. Advanced currency</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-advanced-analytics" class="rc-footer-link">6. Advanced analytics</a>
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-acquire-pricing-plans-201-review" class="rc-footer-link">7. Review &amp; resources</a>
+        </div>
+        <div class="rc-footer-utility">
+          <a href="https://docs.recurly.com/recurly-subscriptions/docs/navigate-home" class="rc-footer-link">
+            <img src="https://files.readme.io/105d407afb9e682bd60fbc60587b3da1cfb3d09be95148d71529b20fb286aadf-Home_icon_2.png" alt=""> Navigate Home
+          </a>
+          <a href="mailto:support@recurly.com" class="rc-footer-link">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+`}</HTMLBlock>
+
+<br />
+</div>
+```

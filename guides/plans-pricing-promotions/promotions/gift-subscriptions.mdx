@@ -1,0 +1,101 @@
+---
+title: Gift subscriptions
+---
+
+<div className="rp-page">
+  <div className="rp-overview">
+    Recurly supports two approaches to gift subscriptions: gift cards, which are purchased by the giver and redeemed by the recipient on their own timeline, and gift plans, which start immediately at purchase and are managed by you for delivery and messaging. Both approaches are flexible and can be tailored to your business model.
+  </div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#gift-cards-vs-gift-plans"><span className="rp-toc-num">3</span>Gift cards vs. gift plans</a>
+    <a className="rp-toc-pill" href="#configuring-gift-plans"><span className="rp-toc-num">4</span>Configuring gift plans</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">
+  Gift subscriptions let existing customers purchase a subscription as a gift for someone else. Recurly supports two implementation methods: gift cards, where the recipient redeems the gift on their own schedule, and gift plans, where the subscription starts at the time of purchase and you handle delivery and communications outside of Recurly.
+</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-plus" aria-hidden="true"></i></div>
+    <strong>Acquisition and retention</strong>
+    <span>Gift subscriptions bring in new subscribers through the people who know your product best — your existing customers.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-money-bill-trend-up" aria-hidden="true"></i></div>
+    <strong>Additional revenue streams</strong>
+    <span>Tap into gift-giving occasions — holidays, birthdays, milestones — to open purchase channels that sit outside the standard subscription funnel.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Flexibility for different use cases</strong>
+    <span>Choose between gift cards and gift plans depending on your fulfillment model, customer experience goals, and whether you want Recurly or your own system to handle recipient communications.</span>
+  </div>
+</div>
+
+# Gift cards vs. gift plans
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-gift" aria-hidden="true"></i></div>
+    <strong>Gift cards</strong>
+    <span>Purchased on the giver's account and redeemed by the recipient when they're ready. Recurly handles the full gift checkout, redemption flow, and automated emails to both the giver and recipient. See <a href="/guides/plans-pricing-promotions/promotions/gift-cards" target="_blank">Gift cards</a> for setup details.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-calendar-check" aria-hidden="true"></i></div>
+    <strong>Gift plans</strong>
+    <span>A subscription purchased upfront for a specific period that starts immediately at the time of purchase. You handle messaging, delivery to the recipient, and end-of-gift communications outside of Recurly.</span>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Gift plans: what Recurly doesn't handle</strong>
+  Recurly does not support collecting gift recipient information, custom gift messages, or email communications with the recipient for gift plans. You'll need to collect recipient details at checkout and manage all gift-related emails in an external system.
+</div>
+
+# Configuring gift plans
+
+## Choose a plan structure
+
+Gift plans can be set up as non-recurring or recurring, depending on the experience you want to offer.
+
+**Non-recurring gift plans** — Create a new plan with **1** billing cycle and set the recurring cycle length to the duration of the gift. The subscription ends automatically after that period.
+
+**Recurring gift plans** — Either use your existing plans, or create a separate plan set to **Auto renew until canceled**. A dedicated gift plan makes it easier to track which subscriptions were originally purchased as gifts.
+
+<span id="rp-close"></span>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/ef06d61-image.png" alt="Plan billing cycle configuration for a gift plan in Recurly" className="rp-zoom-img" /> </a>
+  <a id="zoom-ef06d61" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/ef06d61-image.png" alt="" /> </a>
+</span>
+
+## Set up gift delivery
+
+Since Recurly doesn't collect recipient information or send gift-specific emails for gift plans, you'll need to handle this outside of Recurly:
+
+<div className="rp-list">
+  <ul>
+    <li>Collect the recipient's name, email address, and any custom gift message in your own checkout flow.</li>
+    <li>Send automated gift delivery and confirmation emails through your external email system.</li>
+  </ul>
+</div>
+
+## Handle end-of-gift messaging
+
+For non-recurring gift plans, the subscription expires at the end of its billing cycle. The only email Recurly sends at expiry is the standard Subscription Expired email, which goes to the account holder's email address — not the recipient's. Because this template is shared across all plans, it can't carry gift-specific messaging without affecting non-gift plans.
+
+Recurly recommends handling end-of-gift communications externally using the `expired_subscription_notification` webhook. When this webhook fires for a gift plan, use it to trigger your own end-of-gift email to upsell the recipient or follow up with the gifter.
+
+<div className="rp-callout rp-callout-tip">
+  <strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong>
+  Filtering on the plan code in your webhook handler lets you identify gift plan expirations specifically and trigger the right message — without affecting your standard subscription expiry flow.
+</div>

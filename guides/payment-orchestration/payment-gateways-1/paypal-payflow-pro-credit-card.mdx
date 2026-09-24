@@ -1,0 +1,97 @@
+---
+title: PayPal Payflow Pro (credit card)
+---
+
+> ❗️ For internal use only. Do not share with merchants.
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+### Prerequisites
+
+To integrate PayPal Payflow Pro with Recurly, you will need to have the following details that are used to access [PayPal Manager](https://manager.paypal.com/):
+
+* Vendor (Merchant Login)
+* Password
+* User (Merchant Login)
+* Partner (This is optional; PayPal might provide you with this information.)
+
+#### Limitations
+
+* **Limited Payment Methods**: The gateway facilitates only credit card payments.
+* **Dedicated Payflow Pro Account Needed**: Users must have a distinct Payflow Pro account, as standard PayPal account details or API credentials are not applicable here.
+
+# Definition
+
+PayPal Payflow Pro is a specialized payment gateway product that works exclusively with Recurly to enable credit card payments in the US, UK, Canada, and Australia. This system requires credentials from your Payflow Pro account, rather than your standard PayPal account, to ensure a secure and streamlined payment process.
+
+> **Note**: Visit our guide on testing your gateway configurations in Recurly to ensure your payment processes are set up correctly.
+
+# Key details
+
+| Feature                         | Description               |
+| ------------------------------- | ------------------------- |
+| Services that work with Recurly | N/A                       |
+| Supported operations            | N/A                       |
+| Supported payment types         | Credit card payments      |
+| Supported card brands           | N/A                       |
+| Gateway Specific 3DS2 Supported | N/A                       |
+| Populate MIT GSF Support        | N/A                       |
+| Regions                         | US, UK, Canada, Australia |
+| Currencies                      | N/A                       |
+
+## Integration Details
+
+The PayPal Payflow Pro is exclusively a payment gateway product that is proficiently backed by Recurly, facilitating credit card payments in specific regions including the US, UK, Canada, and Australia. To leverage the functionalities of this payment gateway, the following details that pertain to [PayPal Manager](https://manager.paypal.com/) need to be at your disposal:
+
+* **Vendor**: This refers to the Merchant Login utilized to access the [PayPal Manager](https://manager.paypal.com/).
+* **Password**: The secure keyword that is used alongside the vendor details to log in to the [PayPal Manager](https://manager.paypal.com/).
+* **User**: Often synonymous with the Vendor, this is the Merchant Login used to facilitate access to the [PayPal Manager](https://manager.paypal.com/).
+* **Partner**: This is an optional field and PayPal might provide you with this specific detail.\
+  To note distinctly, the credentials required here are not associated with your standard PayPal account details (like your email) or the API credentials that you might be familiar with. It is paramount to use the credentials specific to the Payflow Pro account to enable this integration successfully.\
+  Understanding the specificity of the required credentials is vital to seamlessly enjoy the seamless payment processing solutions brought to you by the collaborative forces of Recurly and PayPal Payflow Pro.
+
+### Step-by-Step Process to Enable Gateway
+
+To seamlessly enable the PayPal Payflow Pro gateway on Recurly, follow the detailed step-by-step guide below:
+
+1. **Create a PayPal Payflow Pro Account**: If you don't have a PayPal Payflow Pro account already, create one by visiting the [PayPal Payflow Pro page](https://www.paypal.com/us/webapps/mpp/payflow-payment-gateway).
+
+2. **Gather the Necessary Credentials**: Once you have a Payflow Pro account, gather your Vendor (Merchant Login), Password, and User information. Note down the Partner detail if PayPal has provided it to you.
+
+3. **Login to Recurly**: Open your browser and log in to your [Recurly account](https://www.recurly.com/login/).
+
+4. **Navigate to Payment Gateways**: From the Recurly dashboard, move to the “Configuration” section and select "Payment Gateways" from the dropdown menu.
+
+5. **Choose PayPal Payflow Pro**: In the list of available payment gateways, find and select “PayPal Payflow Pro”.
+
+6. **Enter the Required Details**: In the specified fields, enter your Vendor, Password, User, and optionally, the Partner details.
+
+7. **Save Your Settings**: After entering all the necessary details, click "Save Changes" to apply the settings.
+
+8. **Verification Process**: Allow Recurly to verify the entered credentials to ensure a correct setup.
+
+9. **Completion**: Once verification is successful, a message will be displayed indicating the successful enablement of the PayPal Payflow Pro gateway.
+
+10. **Test the Gateway**: Conduct a few test transactions to ensure that the setup is functioning as expected.
+
+### Settings on the Gateway Side
+
+To guarantee a seamless and secure transaction experience, it's vital to correctly set up the PayPal Payflow Pro settings on your account. Here is how you can do it:
+
+1. **Login to PayPal Manager**: Sign in to your account on the [PayPal Manager portal](https://manager.paypal.com/).
+
+2. **Access Security Settings**: Head over to the security settings section to manage various settings related to transaction safety.
+
+3. **Configure Transaction Settings**: Set up the necessary transaction settings which include setting up payment methods, specifying accepted card brands, and determining transaction limits to align with your business requirements.
+
+4. **API Credentials**: Ensure the API settings are correctly configured to facilitate a smooth integration process with Recurly.
+
+5. **Test Your Settings**: Before going live, test the settings to ensure that transactions can be processed smoothly without any glitches.
+
+6. **Save Your Settings**: After configuring all the settings correctly, don't forget to save them to apply the changes successfully.
+
+7. **Customer Support**: In case you encounter any issues or have queries during the setup, reach out to [PayPal support](https://www.paypal.com/us/smarthelp/home) for assistance.

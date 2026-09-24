@@ -1,0 +1,149 @@
+---
+title: Edit invoice
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Invoices don't always come out perfect the first time — and Recurly's Edit Invoice feature makes it easy to fix that. Update Bill To details, PO numbers, due dates, notes, and more after an invoice is generated, with full audit logging and webhook notifications to keep everything in sync.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#edit-an-invoice-in-the-admin-console"><span className="rp-toc-num">4</span>Edit in Admin Console</a>
+    <a className="rp-toc-pill" href="#edit-an-invoice-via-api"><span className="rp-toc-num">5</span>Edit via API</a>
+    <a className="rp-toc-pill" href="#resend-an-updated-invoice"><span className="rp-toc-num">6</span>Resend updated invoice</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">7</span>FAQs</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Edit Invoice lets merchants modify specific attributes of an invoice after it's been generated. You can update Bill To details, PO numbers, due dates, notes, terms and conditions, and VAT reverse charge notes — without affecting the integrity of the original invoice record or triggering automatic customer notifications.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-pen-to-square" aria-hidden="true"></i></div>
+    <strong>Flexibility when you need it</strong>
+    <span>Adapt to changing business requirements or customer details with ease, so invoices always stay accurate and relevant after they're issued.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Compliance and accuracy</strong>
+    <span>Maintain precise and compliant billing records by editing invoice attributes as needed, without disrupting previously issued invoices.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-rotate" aria-hidden="true"></i></div>
+    <strong>Keeps integrated systems in sync</strong>
+    <span>Every edit triggers a webhook notification and syncs with connected platforms like Salesforce, QuickBooks, and NetSuite during their regular update cycles.</span>
+  </div>
+</div>
+
+# Key details
+
+## Editable attributes
+
+Recurly lets you modify a range of invoice attributes after generation:
+
+- **Bill To details** — Update the customer's billing name, company, and address (subject to tax restrictions — see FAQs)
+- **PO number** — Add or change the purchase order number associated with the invoice
+- **Due date** — Adjust the payment due date on charge invoices
+- **Customer notes** — Add or update customer-visible notes on the invoice
+- **Terms and conditions** — Edit payment terms, legal notes, or other contractual information
+- **VAT reverse charge notes** — Update EU reverse charge tax language
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Historical record integrity</strong>Modifications to an account's name or company details won't retroactively alter previously issued invoices. Earlier invoices preserve their original data, keeping your audit trail clean.</div>
+</div>
+
+## Access controls
+
+Only administrators with explicit edit permissions in the Customers section can modify invoices. Users with read-only permissions can view invoice details but cannot make changes.
+
+## Activity logging
+
+Every edit is recorded in Recurly's activity log, detailing which invoice attributes were changed. This gives you a reliable audit trail for every modification, no matter how minor.
+
+## Webhook notifications
+
+Every time an invoice is edited, Recurly sends a webhook notification that includes the changes. The notification type varies based on the nature of the edited invoice, keeping integrated systems and stakeholders up to date in real time.
+
+## Platform integrations
+
+Invoice edits sync automatically with Salesforce, QuickBooks, and NetSuite during their regular update cycles. Note that Xero requires manual adjustments for changes to take effect — check the specific integration documentation for your platform.
+
+## Customer communication
+
+Recurly doesn't automatically send an email when an invoice is edited. If you want to notify your customer, you can manually trigger a resend of the updated invoice from the Invoice Details page. See [Resend an updated invoice](#resend-an-updated-invoice) below.
+
+# Edit an invoice in the Admin Console
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the Customers section</h4><p>Navigate to the <strong>Customers</strong> section in the Admin Console and find the invoice you want to edit.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Open Invoice Actions</h4><p>On the Invoice Details page, click the <strong>Invoice Actions</strong> dropdown at the top right.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Select Edit Invoice</h4><p>Choose <strong>Edit Invoice</strong> — this opens the edit page where you can make your changes.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Save your changes</h4><p>After making all desired changes, click <strong>Save Changes</strong>.</p></div>
+  </div>
+</div>
+
+# Edit an invoice via API
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Review the API documentation</h4><p>Refer to the Recurly API documentation for the <code>put_invoice</code> operation and confirm you have all required parameters.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Make the API request</h4><p>Send the API request with your updated invoice attributes.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Confirm the update</h4><p>On a successful response, the invoice is updated with the modifications provided.</p></div>
+  </div>
+</div>
+
+# Resend an updated invoice
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the Invoice Details page</h4><p>Navigate to the Invoice Details page for the edited invoice in the Admin Console.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Resend the last email</h4><p>Select <strong>Resend Last Email</strong>. The email pulls the latest invoice information and sends it to the customer.</p></div>
+  </div>
+</div>
+
+# FAQs
+
+<Accordion title="Will editing an invoice trigger an email to the customer?">
+  No. Modifications to an invoice don't automatically send an email notification to the customer. If you want to notify them, you can manually resend the latest invoice from the Invoice Details page in the Admin Console.
+</Accordion>
+
+<Accordion title="Why can't I edit the Bill To address?">
+  The Bill To address is tied to tax calculations. If your Recurly site has taxes enabled — or if the invoice previously had taxes applied when it was posted — the Bill To address is locked to preserve tax accuracy. Changing the address could alter the tax amount due to different regional tax rules, or move the invoice into a taxable jurisdiction. If you need to update the address, contact [Recurly Support](https://support.recurly.com/).
+</Accordion>
+
+<Accordion title="Why can't I edit the Ship To address?">
+  Ship To editing wasn't included in the initial release of invoice editing. Changing a Ship To address has downstream implications — including logistics, delivery timelines, and costs — so Recurly omitted it to prevent unintentional disruptions. If you have a specific business need to adjust the Ship To details, contact [Recurly Support](https://support.recurly.com/) to discuss options.
+</Accordion>
+
+<Accordion title="I need to edit something that isn't currently supported. What should I do?">
+  Reach out to [Recurly Support](https://support.recurly.com/) with your requirement and the business rationale behind it. User feedback like this directly informs future feature development, so sharing the details helps ensure the platform evolves to meet your needs.
+</Accordion>
+
+<br />

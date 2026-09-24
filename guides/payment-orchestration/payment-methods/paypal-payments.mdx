@@ -1,0 +1,114 @@
+---
+title: PayPal
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly supports PayPal payments via PayPal Complete and Braintree, giving customers a familiar checkout option using their existing PayPal account. Support includes Express Checkout, One Touch, and automatic shipping and billing address collection to reduce friction at checkout.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#checkout-flows"><span className="rp-toc-num">3</span>Checkout flows</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">4</span>FAQs</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Approval for PayPal's <strong>Reference Transactions</strong> feature through either <a href="/guides/payment-orchestration/payment-gateways-1/paypal-complete#/" target="_blank">PayPal Complete</a> or <a href="https://docs.recurly.com/docs/braintree" target="_blank">Braintree</a>. Reference Transactions are generally reserved for merchants with an established PayPal operational history.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>PayPal checkout requires Recurly.js, Checkout, or Hosted Payment Pages</strong> — The Recurly API does not support PayPal checkouts. PayPal Complete is only available via Recurly.js.</li>
+  <li><strong>PayPal Business Account is a legacy platform</strong> — Recurly no longer supports new configurations for this gateway. If the gateway tile is not available on your production site, the mechanism has been disabled. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> for further instructions.</li>
+  <li><strong>Checkout parameters are not retained on cancellation</strong> — If a customer cancels mid-checkout and starts a new signup, details such as the account code from the initial attempt will not be carried over.</li>
+  <li><strong>Address information is not automatically retrieved from PayPal</strong> — If you're not using the "Collect PayPal Shipping Address" feature, collect address information outside the PayPal checkout form. Note that PayPal uses the billing address in their system for payment processing, while Recurly uses the internally stored address for tax calculations.</li>
+  <li><strong>VAT compliance</strong> — For guidance on collecting VAT when processing PayPal payments, see the <a href="/guides/recurring-billing/taxes/vat-number-validation" target="_blank">VAT documentation</a>.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Recurly supports PayPal as a payment method via PayPal Complete and Braintree. Customers pay using their PayPal account through Recurly.js, Recurly Checkout, or Hosted Payment Pages. Recurly supports Express Checkout and One Touch experiences to speed up payment and reduce friction. Customers can also manage billing agreements through their PayPal account, or you can terminate subscriptions directly from Recurly.</div>
+
+# Key details
+
+<div className="rp-card">
+
+### Use cases
+
+**Familiar payment options** — Offer PayPal to increase customer trust and accommodate customers who prefer not to enter card details.
+
+**Express Checkout and One Touch** — Give customers a faster checkout experience using stored PayPal credentials, reducing steps and improving conversion.
+
+**Flexible billing management** — Allow customers to manage billing agreements directly through PayPal, or handle subscription termination from within Recurly.
+
+</div>
+
+# Checkout flows
+
+## PayPal Complete
+
+PayPal Complete is PayPal's current payments solution, available to all merchants using the latest version of Recurly.js. It allows customers to securely save their payment information on your site for future purchases, reducing checkout friction and improving conversion rates. See the <a href="/guides/payment-orchestration/payment-gateways-1/paypal-complete#/" target="_blank">PayPal Complete documentation</a> for setup details.
+
+## Express Checkout and One Touch™
+
+Recurly supports Express Checkout and One Touch™ for all customers using the latest version of Recurly.js.
+
+**Express Checkout** opens a PayPal modal on desktop browsers so customers complete payment without leaving your checkout page. On tablets and smartphones, the PayPal screens appear in full-page mode.
+
+
+<Image src="https://files.readme.io/1de4d4b-uk-ec-step3.png" align="center" width="35%" />
+
+
+**One Touch™** lets customers stay logged into PayPal for up to 6 months. After logging in once, they can check out on return visits without re-entering their password or payment details.
+
+<a href="https://www.paypal.com/mu/webapps/mpp/express-checkout" target="_blank">Learn more about Express Checkout and One Touch</a>
+
+## Collect PayPal shipping and billing addresses
+
+Recurly can retrieve shipping and billing addresses stored in a customer's PayPal profile using PayPal's **Express Checkout Shortcut** feature. When enabled, customers skip the address entry steps on your site — Recurly captures the address from PayPal directly, simplifying checkout and improving conversion.
+
+### Standard PayPal checkout flow
+
+
+<Image src="https://files.readme.io/cf2e7de-ec-page-flow.png" align="center" width="75%" border={true} />
+
+
+### PayPal Express Checkout Shortcut flow
+
+
+<Image src="https://files.readme.io/f79a756-ec-page-shortcut-flow.png" align="center" width="75%" border={true} />
+
+
+In the Shortcut flow, the buyer is redirected to PayPal from the shopping cart page — no shipping or payment detail pages on your site are required. For more details, see <a href="https://www.paypal.com/ie/enterprise/campaigns/express#:~:text=PayPal%20Express%20Checkout%20is%20a,the%20PayPal%20Express%20Checkout%20button." target="_blank">PayPal Express Checkout Shortcut</a> and the <a href="https://www.paypalobjects.com/webstatic/en_US/developer/docs/pdf/pp_ecplacement_guide.pdf?ref=fin.plaid.com" target="_blank">PayPal Interface Standards</a>.
+
+# FAQs
+
+<Accordion title="How does One Touch™ work?">
+  One Touch™ keeps customers logged into PayPal, storing their payment and account details securely. On return visits, they can complete checkout without re-entering their password or payment information — making subsequent purchases faster.
+</Accordion>
+
+<Accordion title="Can I choose not to collect shipping addresses?">
+  Yes — in the PayPal Express Checkout Shortcut settings in Recurly, you can choose whether or not to collect shipping addresses from customers.
+</Accordion>
+
+<Accordion title="Are there any security concerns with using PayPal?">
+  PayPal protects sensitive information using advanced encryption. Recurly also complies with industry security standards, ensuring a secure checkout process end to end.
+</Accordion>
+
+<Accordion title="Can customers pay with PayPal without a PayPal account?">
+  Yes — customers can use the guest checkout option in PayPal Express Checkout to pay with a credit or debit card without creating a PayPal account.
+</Accordion>
+
+<Accordion title="The PayPal option isn't showing during checkout. What should I do?">
+  Confirm that PayPal is correctly configured as a payment option in your Recurly settings. If the issue persists, check the Recurly documentation or contact Recurly Support for assistance.
+</Accordion>
+
+<Accordion title="One Touch™ isn't working as expected. What should I do?">
+  Verify that One Touch™ is enabled in your PayPal settings and correctly configured in Recurly. If needed, consult the PayPal One Touch™ documentation for additional guidance.
+</Accordion>
+
+<br />

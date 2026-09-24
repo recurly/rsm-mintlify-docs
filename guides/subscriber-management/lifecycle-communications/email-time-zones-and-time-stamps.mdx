@@ -1,0 +1,276 @@
+---
+title: Email timezones and timestamps
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly's email timezone feature ensures every subscriber sees timestamps in their local time — not yours. Set a site-wide default timezone for all outgoing emails, override it for individual customer accounts, and use timezone-aware parameters in your email templates to surface accurate subscription and transaction times for every recipient.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#configure-via-admin-console"><span className="rp-toc-num">4</span>Configure via Admin Console</a>
+    <a className="rp-toc-pill" href="#configure-via-api"><span className="rp-toc-num">5</span>Configure via API</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Recurly's email timezone feature lets you control the timezone used for timestamps displayed in customer emails. Set a default timezone at the site level, or assign a specific timezone to individual accounts so each subscriber's emails reflect their local time accurately.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Personalized timestamps</strong>
+    <span>Display email timestamps in each subscriber's local timezone rather than a fixed server time, making communications feel relevant and accurate.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Reduced confusion</strong>
+    <span>Eliminate timezone-related misunderstandings by ensuring renewal dates, trial endings, and transaction times always reflect the recipient's local time.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-globe" aria-hidden="true"></i></div>
+    <strong>Site and account flexibility</strong>
+    <span>Apply a timezone globally across your site or override it for specific accounts — whichever level of granularity fits your business.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-code" aria-hidden="true"></i></div>
+    <strong>API configuration</strong>
+    <span>Set account-specific email timezones programmatically through the Recurly API using standard IANA timezone values.</span>
+  </div>
+</div>
+
+# Key details
+
+The email timezone feature adjusts the timezone displayed in email content — it does not change the actual time the email is sent.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Timezone display only</strong>This feature controls the timezone shown in email timestamps. It does not affect when Recurly schedules or delivers the email itself.</div>
+</div>
+
+**Example:** A merchant based in New York has a subscriber, Alex Smith, located in London. With a London timezone set on Alex's account, all of Alex's subscription emails — renewal reminders, trial endings, transaction confirmations — display timestamps in London local time, eliminating any date or time confusion.
+
+## Timezone-aware email parameters
+
+Add the following parameters to your email templates via **Email Templates** in the Admin Console to surface timezone-adjusted dates and times:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Parameter</td><td>What it does</td></tr>
+  <tr><td><code>subscription_current_period_ends_at_with_time</code></td><td>Shows the adjusted date and time when the current subscription period ends.</td></tr>
+  <tr><td><code>transaction_date_and_time</code></td><td>Reflects the transaction date and time adjusted for the account's timezone.</td></tr>
+  <tr><td><code>transaction_declined?</code></td><td>Indicates whether the transaction was declined.</td></tr>
+  <tr><td><code>transaction_success?</code></td><td>Indicates whether the transaction was successful.</td></tr>
+  <tr><td><code>transaction_voided?</code></td><td>Indicates whether the transaction was voided.</td></tr>
+  <tr><td><code>subscription_expires_at_with_time</code></td><td>Shows the adjusted date and time when a canceled subscription will expire.</td></tr>
+  <tr><td><code>subscription_trial_ends_at_with_time</code></td><td>Shows the adjusted end date and time for the current subscription trial.</td></tr>
+</table>
+
+# Configure via Admin Console
+
+## Site-level timezone
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Site Settings</h4><p>In the Admin Console, navigate to <strong>Site Settings</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Go to Email Settings</h4><p>Scroll to the <strong>Email Settings</strong> section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Set the default timezone</h4><p>At the bottom of the Email Settings section, use the dropdown to select your preferred timezone. The default is UTC. This setting applies to all emails sent site-wide unless overridden at the account level.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/838b688-Screen_Shot_2022-06-21_at_12.58.48_PM.png" align="center" width="75%" border={true} />
+
+
+## Account-level timezone
+
+Account-level settings override the site-wide timezone for that specific customer's emails.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the customer account</h4><p>Navigate to the desired customer account page in the Admin Console.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Set the account timezone</h4><p>Use the timezone dropdown to select the appropriate timezone for this customer.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Revert to site default (optional)</h4><p>To remove the account-level override and use the site-wide setting, select <strong>Site Settings (Default)</strong> from the dropdown and save.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/b3705f0-Screen_Shot_2022-06-21_at_2.33.52_PM.png" align="center" width="75%" border={true} />
+
+
+# Configure via API
+
+Set account-specific email timezones programmatically using the `preferred_time_zone` field on the Account API. Use the IANA timezone values listed below.
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Admin Console label</td><td>API IANA value</td></tr>
+  <tr><td>(GMT-12:00) International Date Line West</td><td><code>Etc/GMT+12</code></td></tr>
+  <tr><td>(GMT-11:00) American Samoa</td><td><code>Pacific/Pago_Pago</code></td></tr>
+  <tr><td>(GMT-11:00) Midway Island</td><td><code>Pacific/Midway</code></td></tr>
+  <tr><td>(GMT-10:00) Hawaii</td><td><code>Pacific/Honolulu</code></td></tr>
+  <tr><td>(GMT-09:00) Alaska</td><td><code>America/Juneau</code></td></tr>
+  <tr><td>(GMT-08:00) Pacific Time (US &amp; Canada)</td><td><code>America/Los_Angeles</code></td></tr>
+  <tr><td>(GMT-08:00) Tijuana</td><td><code>America/Tijuana</code></td></tr>
+  <tr><td>(GMT-07:00) Arizona</td><td><code>America/Phoenix</code></td></tr>
+  <tr><td>(GMT-07:00) Mazatlan</td><td><code>America/Mazatlan</code></td></tr>
+  <tr><td>(GMT-07:00) Mountain Time (US &amp; Canada)</td><td><code>America/Denver</code></td></tr>
+  <tr><td>(GMT-06:00) Central America</td><td><code>America/Guatemala</code></td></tr>
+  <tr><td>(GMT-06:00) Central Time (US &amp; Canada)</td><td><code>America/Chicago</code></td></tr>
+  <tr><td>(GMT-06:00) Chihuahua</td><td><code>America/Chihuahua</code></td></tr>
+  <tr><td>(GMT-06:00) Guadalajara</td><td><code>America/Mexico_City</code></td></tr>
+  <tr><td>(GMT-06:00) Mexico City</td><td><code>America/Mexico_City</code></td></tr>
+  <tr><td>(GMT-06:00) Monterrey</td><td><code>America/Monterrey</code></td></tr>
+  <tr><td>(GMT-06:00) Saskatchewan</td><td><code>America/Regina</code></td></tr>
+  <tr><td>(GMT-05:00) Bogota</td><td><code>America/Bogota</code></td></tr>
+  <tr><td>(GMT-05:00) Eastern Time (US &amp; Canada)</td><td><code>America/New_York</code></td></tr>
+  <tr><td>(GMT-05:00) Indiana (East)</td><td><code>America/Indiana/Indianapolis</code></td></tr>
+  <tr><td>(GMT-05:00) Lima</td><td><code>America/Lima</code></td></tr>
+  <tr><td>(GMT-05:00) Quito</td><td><code>America/Lima</code></td></tr>
+  <tr><td>(GMT-04:00) Atlantic Time (Canada)</td><td><code>America/Halifax</code></td></tr>
+  <tr><td>(GMT-04:00) Caracas</td><td><code>America/Caracas</code></td></tr>
+  <tr><td>(GMT-04:00) Georgetown</td><td><code>America/Guyana</code></td></tr>
+  <tr><td>(GMT-04:00) La Paz</td><td><code>America/La_Paz</code></td></tr>
+  <tr><td>(GMT-04:00) Puerto Rico</td><td><code>America/Puerto_Rico</code></td></tr>
+  <tr><td>(GMT-04:00) Santiago</td><td><code>America/Santiago</code></td></tr>
+  <tr><td>(GMT-03:30) Newfoundland</td><td><code>America/St_Johns</code></td></tr>
+  <tr><td>(GMT-03:00) Brasilia</td><td><code>America/Sao_Paulo</code></td></tr>
+  <tr><td>(GMT-03:00) Buenos Aires</td><td><code>America/Argentina/Buenos_Aires</code></td></tr>
+  <tr><td>(GMT-03:00) Greenland</td><td><code>America/Godthab</code></td></tr>
+  <tr><td>(GMT-03:00) Montevideo</td><td><code>America/Montevideo</code></td></tr>
+  <tr><td>(GMT-02:00) Mid-Atlantic</td><td><code>Atlantic/South_Georgia</code></td></tr>
+  <tr><td>(GMT-01:00) Azores</td><td><code>Atlantic/Azores</code></td></tr>
+  <tr><td>(GMT-01:00) Cape Verde Is.</td><td><code>Atlantic/Cape_Verde</code></td></tr>
+  <tr><td>(GMT+00:00) Casablanca</td><td><code>Africa/Casablanca</code></td></tr>
+  <tr><td>(GMT+00:00) Dublin</td><td><code>Europe/Dublin</code></td></tr>
+  <tr><td>(GMT+00:00) Edinburgh</td><td><code>Europe/London</code></td></tr>
+  <tr><td>(GMT+00:00) Lisbon</td><td><code>Europe/Lisbon</code></td></tr>
+  <tr><td>(GMT+00:00) London</td><td><code>Europe/London</code></td></tr>
+  <tr><td>(GMT+00:00) Monrovia</td><td><code>Africa/Monrovia</code></td></tr>
+  <tr><td>(GMT+00:00) UTC</td><td><code>Etc/UTC</code></td></tr>
+  <tr><td>(GMT+01:00) Amsterdam</td><td><code>Europe/Amsterdam</code></td></tr>
+  <tr><td>(GMT+01:00) Belgrade</td><td><code>Europe/Belgrade</code></td></tr>
+  <tr><td>(GMT+01:00) Berlin</td><td><code>Europe/Berlin</code></td></tr>
+  <tr><td>(GMT+01:00) Bern</td><td><code>Europe/Zurich</code></td></tr>
+  <tr><td>(GMT+01:00) Bratislava</td><td><code>Europe/Bratislava</code></td></tr>
+  <tr><td>(GMT+01:00) Brussels</td><td><code>Europe/Brussels</code></td></tr>
+  <tr><td>(GMT+01:00) Budapest</td><td><code>Europe/Budapest</code></td></tr>
+  <tr><td>(GMT+01:00) Copenhagen</td><td><code>Europe/Copenhagen</code></td></tr>
+  <tr><td>(GMT+01:00) Ljubljana</td><td><code>Europe/Ljubljana</code></td></tr>
+  <tr><td>(GMT+01:00) Madrid</td><td><code>Europe/Madrid</code></td></tr>
+  <tr><td>(GMT+01:00) Paris</td><td><code>Europe/Paris</code></td></tr>
+  <tr><td>(GMT+01:00) Prague</td><td><code>Europe/Prague</code></td></tr>
+  <tr><td>(GMT+01:00) Rome</td><td><code>Europe/Rome</code></td></tr>
+  <tr><td>(GMT+01:00) Sarajevo</td><td><code>Europe/Sarajevo</code></td></tr>
+  <tr><td>(GMT+01:00) Skopje</td><td><code>Europe/Skopje</code></td></tr>
+  <tr><td>(GMT+01:00) Stockholm</td><td><code>Europe/Stockholm</code></td></tr>
+  <tr><td>(GMT+01:00) Vienna</td><td><code>Europe/Vienna</code></td></tr>
+  <tr><td>(GMT+01:00) Warsaw</td><td><code>Europe/Warsaw</code></td></tr>
+  <tr><td>(GMT+01:00) West Central Africa</td><td><code>Africa/Algiers</code></td></tr>
+  <tr><td>(GMT+01:00) Zagreb</td><td><code>Europe/Zagreb</code></td></tr>
+  <tr><td>(GMT+01:00) Zurich</td><td><code>Europe/Zurich</code></td></tr>
+  <tr><td>(GMT+02:00) Athens</td><td><code>Europe/Athens</code></td></tr>
+  <tr><td>(GMT+02:00) Bucharest</td><td><code>Europe/Bucharest</code></td></tr>
+  <tr><td>(GMT+02:00) Cairo</td><td><code>Africa/Cairo</code></td></tr>
+  <tr><td>(GMT+02:00) Harare</td><td><code>Africa/Harare</code></td></tr>
+  <tr><td>(GMT+02:00) Helsinki</td><td><code>Europe/Helsinki</code></td></tr>
+  <tr><td>(GMT+02:00) Jerusalem</td><td><code>Asia/Jerusalem</code></td></tr>
+  <tr><td>(GMT+02:00) Kaliningrad</td><td><code>Europe/Kaliningrad</code></td></tr>
+  <tr><td>(GMT+02:00) Kyiv</td><td><code>Europe/Kiev</code></td></tr>
+  <tr><td>(GMT+02:00) Pretoria</td><td><code>Africa/Johannesburg</code></td></tr>
+  <tr><td>(GMT+02:00) Riga</td><td><code>Europe/Riga</code></td></tr>
+  <tr><td>(GMT+02:00) Sofia</td><td><code>Europe/Sofia</code></td></tr>
+  <tr><td>(GMT+02:00) Tallinn</td><td><code>Europe/Tallinn</code></td></tr>
+  <tr><td>(GMT+02:00) Vilnius</td><td><code>Europe/Vilnius</code></td></tr>
+  <tr><td>(GMT+03:00) Baghdad</td><td><code>Asia/Baghdad</code></td></tr>
+  <tr><td>(GMT+03:00) Istanbul</td><td><code>Europe/Istanbul</code></td></tr>
+  <tr><td>(GMT+03:00) Kuwait</td><td><code>Asia/Kuwait</code></td></tr>
+  <tr><td>(GMT+03:00) Minsk</td><td><code>Europe/Minsk</code></td></tr>
+  <tr><td>(GMT+03:00) Moscow</td><td><code>Europe/Moscow</code></td></tr>
+  <tr><td>(GMT+03:00) Nairobi</td><td><code>Africa/Nairobi</code></td></tr>
+  <tr><td>(GMT+03:00) Riyadh</td><td><code>Asia/Riyadh</code></td></tr>
+  <tr><td>(GMT+03:00) St. Petersburg</td><td><code>Europe/Moscow</code></td></tr>
+  <tr><td>(GMT+03:00) Volgograd</td><td><code>Europe/Volgograd</code></td></tr>
+  <tr><td>(GMT+03:30) Tehran</td><td><code>Asia/Tehran</code></td></tr>
+  <tr><td>(GMT+04:00) Abu Dhabi</td><td><code>Asia/Muscat</code></td></tr>
+  <tr><td>(GMT+04:00) Baku</td><td><code>Asia/Baku</code></td></tr>
+  <tr><td>(GMT+04:00) Muscat</td><td><code>Asia/Muscat</code></td></tr>
+  <tr><td>(GMT+04:00) Samara</td><td><code>Europe/Samara</code></td></tr>
+  <tr><td>(GMT+04:00) Tbilisi</td><td><code>Asia/Tbilisi</code></td></tr>
+  <tr><td>(GMT+04:00) Yerevan</td><td><code>Asia/Yerevan</code></td></tr>
+  <tr><td>(GMT+04:30) Kabul</td><td><code>Asia/Kabul</code></td></tr>
+  <tr><td>(GMT+05:00) Ekaterinburg</td><td><code>Asia/Yekaterinburg</code></td></tr>
+  <tr><td>(GMT+05:00) Islamabad</td><td><code>Asia/Karachi</code></td></tr>
+  <tr><td>(GMT+05:00) Karachi</td><td><code>Asia/Karachi</code></td></tr>
+  <tr><td>(GMT+05:00) Tashkent</td><td><code>Asia/Tashkent</code></td></tr>
+  <tr><td>(GMT+05:30) Chennai</td><td><code>Asia/Kolkata</code></td></tr>
+  <tr><td>(GMT+05:30) Kolkata</td><td><code>Asia/Kolkata</code></td></tr>
+  <tr><td>(GMT+05:30) Mumbai</td><td><code>Asia/Kolkata</code></td></tr>
+  <tr><td>(GMT+05:30) New Delhi</td><td><code>Asia/Kolkata</code></td></tr>
+  <tr><td>(GMT+05:30) Sri Jayawardenepura</td><td><code>Asia/Colombo</code></td></tr>
+  <tr><td>(GMT+05:45) Kathmandu</td><td><code>Asia/Kathmandu</code></td></tr>
+  <tr><td>(GMT+06:00) Almaty</td><td><code>Asia/Almaty</code></td></tr>
+  <tr><td>(GMT+06:00) Astana</td><td><code>Asia/Dhaka</code></td></tr>
+  <tr><td>(GMT+06:00) Dhaka</td><td><code>Asia/Dhaka</code></td></tr>
+  <tr><td>(GMT+06:00) Urumqi</td><td><code>Asia/Urumqi</code></td></tr>
+  <tr><td>(GMT+06:30) Rangoon</td><td><code>Asia/Rangoon</code></td></tr>
+  <tr><td>(GMT+07:00) Bangkok</td><td><code>Asia/Bangkok</code></td></tr>
+  <tr><td>(GMT+07:00) Hanoi</td><td><code>Asia/Bangkok</code></td></tr>
+  <tr><td>(GMT+07:00) Jakarta</td><td><code>Asia/Jakarta</code></td></tr>
+  <tr><td>(GMT+07:00) Krasnoyarsk</td><td><code>Asia/Krasnoyarsk</code></td></tr>
+  <tr><td>(GMT+07:00) Novosibirsk</td><td><code>Asia/Novosibirsk</code></td></tr>
+  <tr><td>(GMT+08:00) Beijing</td><td><code>Asia/Shanghai</code></td></tr>
+  <tr><td>(GMT+08:00) Chongqing</td><td><code>Asia/Chongqing</code></td></tr>
+  <tr><td>(GMT+08:00) Hong Kong</td><td><code>Asia/Hong_Kong</code></td></tr>
+  <tr><td>(GMT+08:00) Irkutsk</td><td><code>Asia/Irkutsk</code></td></tr>
+  <tr><td>(GMT+08:00) Kuala Lumpur</td><td><code>Asia/Kuala_Lumpur</code></td></tr>
+  <tr><td>(GMT+08:00) Perth</td><td><code>Australia/Perth</code></td></tr>
+  <tr><td>(GMT+08:00) Singapore</td><td><code>Asia/Singapore</code></td></tr>
+  <tr><td>(GMT+08:00) Taipei</td><td><code>Asia/Taipei</code></td></tr>
+  <tr><td>(GMT+08:00) Ulaanbaatar</td><td><code>Asia/Ulaanbaatar</code></td></tr>
+  <tr><td>(GMT+09:00) Osaka</td><td><code>Asia/Tokyo</code></td></tr>
+  <tr><td>(GMT+09:00) Sapporo</td><td><code>Asia/Tokyo</code></td></tr>
+  <tr><td>(GMT+09:00) Seoul</td><td><code>Asia/Seoul</code></td></tr>
+  <tr><td>(GMT+09:00) Tokyo</td><td><code>Asia/Tokyo</code></td></tr>
+  <tr><td>(GMT+09:00) Yakutsk</td><td><code>Asia/Yakutsk</code></td></tr>
+  <tr><td>(GMT+09:30) Adelaide</td><td><code>Australia/Adelaide</code></td></tr>
+  <tr><td>(GMT+09:30) Darwin</td><td><code>Australia/Darwin</code></td></tr>
+  <tr><td>(GMT+10:00) Brisbane</td><td><code>Australia/Brisbane</code></td></tr>
+  <tr><td>(GMT+10:00) Canberra</td><td><code>Australia/Melbourne</code></td></tr>
+  <tr><td>(GMT+10:00) Guam</td><td><code>Pacific/Guam</code></td></tr>
+  <tr><td>(GMT+10:00) Hobart</td><td><code>Australia/Hobart</code></td></tr>
+  <tr><td>(GMT+10:00) Melbourne</td><td><code>Australia/Melbourne</code></td></tr>
+  <tr><td>(GMT+10:00) Port Moresby</td><td><code>Pacific/Port_Moresby</code></td></tr>
+  <tr><td>(GMT+10:00) Sydney</td><td><code>Australia/Sydney</code></td></tr>
+  <tr><td>(GMT+10:00) Vladivostok</td><td><code>Asia/Vladivostok</code></td></tr>
+  <tr><td>(GMT+11:00) Magadan</td><td><code>Asia/Magadan</code></td></tr>
+  <tr><td>(GMT+11:00) New Caledonia</td><td><code>Pacific/Noumea</code></td></tr>
+  <tr><td>(GMT+11:00) Solomon Is.</td><td><code>Pacific/Guadalcanal</code></td></tr>
+  <tr><td>(GMT+11:00) Srednekolymsk</td><td><code>Asia/Srednekolymsk</code></td></tr>
+  <tr><td>(GMT+12:00) Auckland</td><td><code>Pacific/Auckland</code></td></tr>
+  <tr><td>(GMT+12:00) Fiji</td><td><code>Pacific/Fiji</code></td></tr>
+  <tr><td>(GMT+12:00) Kamchatka</td><td><code>Asia/Kamchatka</code></td></tr>
+  <tr><td>(GMT+12:00) Marshall Is.</td><td><code>Pacific/Majuro</code></td></tr>
+  <tr><td>(GMT+12:00) Wellington</td><td><code>Pacific/Auckland</code></td></tr>
+  <tr><td>(GMT+12:45) Chatham Is.</td><td><code>Pacific/Chatham</code></td></tr>
+  <tr><td>(GMT+13:00) Nuku'alofa</td><td><code>Pacific/Tongatapu</code></td></tr>
+  <tr><td>(GMT+13:00) Samoa</td><td><code>Pacific/Apia</code></td></tr>
+  <tr><td>(GMT+13:00) Tokelau Is.</td><td><code>Pacific/Fakaofo</code></td></tr>
+</table>
+
+<br />

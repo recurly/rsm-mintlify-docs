@@ -1,0 +1,184 @@
+---
+title: Churn analysis (legacy)
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Churn Analysis dashboard tracks subscription losses over a selected timeframe, broken down by voluntary and involuntary reasons. Use it to understand why subscribers leave and to build strategies that improve retention.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#churn-analysis-dashboards"><span className="rp-toc-num">2</span>Churn analysis dashboards</a>
+    <a className="rp-toc-pill" href="#churn-analysis-workflow"><span className="rp-toc-num">3</span>Churn analysis workflow</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Users must have the Analytics user role permission</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">The Churn Analysis dashboard monitors subscription losses over a specified timeframe, split by voluntary and involuntary reasons. Voluntary churn measures when a subscriber chooses to cancel their subscription. Involuntary churn happens when a subscription ends for any other reason, such as a failed payment.</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>A single subscriber can hold multiple active subscriptions, but this dashboard counts individual subscribers, not the number of subscriptions they hold. For additional guidance on navigating and using filter tools, see <a href="https://docs.recurly.com/docs/recurly-analytics-overview#navigation-features" target="_blank">Recurly Analytics overview</a>.</div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Drills</strong>Drills are available in the Subscription Churn Reasons, Subscription Churn Reasons (%), and Churn Analysis widgets:<ol><li>Account code</li><li>First name</li><li>Last name</li><li>Email</li><li>Activated date</li><li>Expiration date</li><li>Expiration reason</li><li>Churn count</li></ol></div>
+</div>
+
+# Churn analysis dashboards
+
+## Voluntary vs. involuntary churn rate
+
+
+<Image src="https://files.readme.io/7d9e199-Vol_vs_invol_churn_analysis.png" align="center" width="75%" border={true} />
+
+
+This line chart tracks the number of active subscriptions that churned during a selected time frame, split by voluntary or involuntary reason. Use it to spot patterns and understand why customers are leaving, so you can build tailored retention strategies.
+
+**Voluntary churn reasons**
+
+<ul className="rp-list">
+  <li><strong>Non-renewing:</strong> The subscription expired after a fixed number of billing cycles and was not renewed</li>
+  <li><strong>Account closed:</strong> The subscription churned because its linked account was manually closed</li>
+  <li><strong>Canceled:</strong> The customer initiated the cancellation</li>
+  <li><strong>Trial ended:</strong> A cardless free trial ended without billing information added</li>
+  <li><strong>Gift ended:</strong> The gift card amount was exhausted without billing information added before the next renewal</li>
+</ul>
+
+**Involuntary churn reasons**
+
+<ul className="rp-list">
+  <li><strong>Non-payment:</strong> The subscription churned due to a failed transaction and an unrecovered invoice</li>
+  <li><strong>Invalid tax location:</strong> The subscription churned due to a failed EU or NZ GST tax validation check</li>
+</ul>
+
+### Subscription churn reasons
+
+
+<Image src="https://files.readme.io/f5c0506-subscription_churn_reason.png" align="center" width="75%" border={true} />
+
+
+This color-coded bar chart shows the reasons for subscription churn over a selected time frame, making it easy to compare and spot trends. Select any data point to drill down into the accounts tied to that churn reason, revealing individual account behavior and potential areas for intervention.
+
+### Subscription churn reasons %
+
+
+<Image src="https://files.readme.io/f1b892c-subscription_churn_reasons_.png" align="center" width="75%" border={true} />
+
+
+This bar chart shows total churn with each reason represented as a percentage, so you can compare which reasons have the most impact on your overall churn. Identifying the most prominent causes helps you prioritize your efforts and allocate resources effectively.
+
+<div className="rp-card">
+
+### Key metrics
+
+- **Active subscriptions:** Any subscription that hasn't expired, giving you a clear view of your potential revenue sources. For monthly or weekly intervals, this value represents the total number of subscriptions at the start of the month or week, helping you track the health of your subscription base over time.
+- **% Churn:** Total subscriptions churned over the selected interval, divided by total active subscriptions at the beginning of the interval. It offers a quick view of your business's health and reflects the effectiveness of your retention strategies.
+
+</div>
+
+### Churn analysis detail
+
+
+<Image src="https://files.readme.io/68883ec-churn_analysis_detail.png" align="center" width="75%" border={true} />
+
+
+This section provides a detailed breakdown of churn rates by reason for active subscribers. Select any non-percentage value to drill down into specific accounts, helping you pinpoint problem areas and take action.
+
+# Churn analysis workflow
+
+## Understanding churn rates
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Locate the chart</h4><p>Under Churn Analysis, find the Voluntary vs. Involuntary Churn Rate line chart.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Review the trend</h4><p>Check the number of active subscriptions that churned during the selected time frame, split by voluntary or involuntary reason.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Apply the insight</h4><p>Use the patterns you find to inform your customer retention strategy.</p></div>
+  </div>
+</div>
+
+## Classifying churn reasons
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Review the reasons</h4><p>Look at the listed voluntary and involuntary churn reasons to understand why subscribers might be leaving.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Guide your strategy</h4><p>Use these reasons to shape intervention strategies that improve the user experience and reduce churn.</p></div>
+  </div>
+</div>
+
+## Analyzing subscription churn reasons
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>View the chart</h4><p>Open the Subscription Churn Reasons bar chart to see churn reasons represented visually over a set time frame.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Drill down</h4><p>Select any data point to view the specific accounts tied to that churn reason.</p></div>
+  </div>
+</div>
+
+## Reviewing churn percentage
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the chart</h4><p>View the Subscription Churn Reasons % bar chart, which shows total churn with each reason as a percentage.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Prioritize by impact</h4><p>Use this view to identify the most significant churn factors and prioritize how you address them.</p></div>
+  </div>
+</div>
+
+## Monitoring active subscriptions
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Track your base</h4><p>Keep track of all active subscriptions, including those in trial, canceled, or paused, to maintain a clear view of your potential revenue sources.</p></div>
+  </div>
+</div>
+
+## Calculating churn percentage
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Understand the formula</h4><p>% Churn is calculated as total subscriptions churned over the selected interval, divided by total active subscriptions at the start of the interval.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Use it as an indicator</h4><p>Treat this metric as a signal of customer satisfaction and the effectiveness of your retention strategies.</p></div>
+  </div>
+</div>
+
+## Detailed churn analysis
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the detail view</h4><p>Check the Churn Analysis Detail section for a comprehensive view of churn rates among active subscribers.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Drill into accounts</h4><p>Select any non-percentage value to view the specific accounts tied to that churn reason and identify intervention strategies.</p></div>
+  </div>
+</div>

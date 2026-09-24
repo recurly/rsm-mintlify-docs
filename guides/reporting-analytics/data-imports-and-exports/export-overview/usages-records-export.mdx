@@ -1,0 +1,91 @@
+---
+title: Subscriptions — usage records - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The Subscriptions Usage Records Export allows you to acquire individual usage records associated with your customer’s usage-based subscription add-ons. This data is crucial for your finance team to report on pre-billed revenue and enables product and marketing teams to scrutinize customer usage patterns. Note that for an accurate revenue reflection, discounts applied at the invoice level should be reviewed in the Adjustments export as they are not depicted here.
+
+Access the detailed usage records through the <a href="http://app.recurly.com/go/exports">Exports</a> page found under the "Reports" section on your Recurly site.
+
+# Filters
+
+<Image border={false} src="https://files.readme.io/c0ce3edb9e01f25133e9df2aece8184b85bf5c1565eea65a93fc4b46e184c2f9-image.png" />
+
+### **Versions Filter**
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Plan Filter
+
+*  **All Plans** : Get data on all plans with usage-based add-ons.
+* **[Specific] Usage Plan**: Choose to export usage details of a specific plan’s usage-based add-ons.
+
+### Usage-Based Add-On Filter
+
+*  **All Usage-Based Add-Ons**: Export records for all associated usage-based add-ons for a chosen plan.
+* **[Specific] Add-On**: Refine your export to records of a singular usage-based add-on in a selected plan.
+
+### Export On Filters
+
+* **Created**: Extract records created in Recurly in your preferred time span.
+* **Modified**: Attain records of updates done in Recurly in a chosen time window.
+* **Usage Timestamp**: To understand the utilization in a period, pull records based on usage timestamps.
+* **Recording Timestamp**: Retrieve records documented in your system within a selected time frame.
+* **Billed**: Gain insights into the usage records billed in a particular duration.
+
+### **Time Range Filter**
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| Column Name                                                                 | Example                             | Description                                                                                                                      |        |
+| --------------------------------------------------------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | :----- |
+| <span id="usage_id">usage_id</span>                                         | 400527199884543703                  | Unique ID of the usage record.                                                                                                   |        |
+| <span id="account_code">account_code</span>                                 | 239485723046981734                  | Account code of the associated customer.                                                                                         |        |
+| <span id="subscription_id">subscription_id</span>                           | 3598f5c395fc7e2f4a4eaa4888b9784b    | ID representing the relevant usage-based add-on subscription.                                                                    |        |
+| <span id="plan_code">plan_code</span>                                       | mega_video                          | Code of the associated subscription plan.                                                                                        |        |
+| <span id="add_on_code">add_on_code</span>                                   | video_streaming                     | Code identifying the subscription add-on that the usage record belongs to.                                                       |        |
+| <span id="subscription_currency">subscription_currency</span>               | USD                                 | Currency used in the subscription and for denoting the unit_amount_in_cents for the add-on.                                      |        |
+| <span id="usage_type">usage_type</span>                                     | price, percentage                   | The pricing model of the usage-based add-on: either "price per unit" or "percentage of an amount".                               |        |
+| <span id="unit_amount_in_cents">unit_amount_in_cents</span>                 | 60                                  | For "price" usage type, indicates the price per usage unit in cents.                                                             |        |
+| <span id="usage_percentage">usage_percentage</span>                         | 4.5                                 | For "percentage" usage type, shows the percentage of the billed monetary amount.                                                 |        |
+| <span id="measured_unit_internal_name">measured_unit_internal_name</span>   | bandwith_streaming                  | Internal name of the applicable measured unit.                                                                                   |        |
+| <span id="measured_unit_display_name">measured_unit_display_name</span>     | GB                                  | Display name of the applicable measured unit, describing the "amount" column value.                                              |        |
+| <span id="amount">amount</span>                                             | 5                                   | Units used, represented in cents for "percentage" usage type.                                                                    |        |
+| <span id="merchant_tag">merchant_tag</span>                                 | "Rate Lookup ID: 45768456845683435" | Custom field to store any relevant information for the usage record.                                                             |        |
+| <span id="usage_timestamp">usage_timestamp</span>                           | 2016-04-18 17:00:08 UTC             | Timestamp of when the units were used, crucial for revenue recognition as it determines the line item date range on the invoice. |        |
+| <span id="recording_timestamp">recording_timestamp</span>                   | 2016-04-18 17:00:08 UTC             | The time the usage was recorded in your system; defaults to the usage timestamp if not specified differently.                    |        |
+| <span id="created_at">created_at</span>                                     | 2016-04-18 17:00:08 UTC             | The creation time of the usage record in Recurly.                                                                                |        |
+| <span id="modified_at">modified_at</span>                                   | 2016-04-18 17:00:08 UTC             | The modification time in Recurly, possibly when the record was billed or updated before billing.                                 |        |
+| <span id="billed_at">billed_at</span>                                       | 2016-04-18 17:00:08 UTC             | When the usage was billed in an invoice.                                                                                         |        |
+| <span id="tier_type">tier_type</span>                                       | flat                                | Subscription tier type.                                                                                                          |        |
+| <span id="unit_amount_in_decimal_cents">unit_amount_in_decimal_cents</span> | 12345                               | Unit amount in decimal cents.                                                                                                    |        |
+| sub_usage_api_id                                                            | e28zov4fw0v2                        | Subscription Usage API ID                                                                                                        | String |
+
+# Version changelog
+
+### Version 4 - 2/5/2025
+
+Addition of `sub_usage_api_id`.
+
+### Version 3 - 1/22/2022
+
+The addition of column unit_amount_in_decimal_cents.
+
+### Version 2 - 1/19/2020
+
+Addition of column tier_type.

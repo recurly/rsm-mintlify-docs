@@ -1,0 +1,147 @@
+---
+title: Dunning Effectiveness
+---
+
+Dunning management is part of Recurly’s revenue recovery support. The Dunning Effectiveness dashboard tracks the dunning recovery rate, amount of revenue recovered, and number of subscriptions saved for invoices that go past due. Dunning is set up on the account’s Configuration menu. For sites with multiple dunning campaigns enabled, it's possible to view the data for all dunning campaigns or for a specific dunning campaign and version on this dashboard. The ability to create multiple dunning campaigns is available to merchants on Pro and Elite plans.
+
+# What's included in the dashboard?
+
+* Each dashboard view has three methods for evaluating dunning effectiveness: Invoices Recovered (Recovery Rate), Revenue Recovered, and Subscriptions Saved.
+* All dashboard views include a section for dunning Recovery Over Time. The Individual Dunning Campaign views also include a section for Dunning Lifecycle.
+* This dashboard only includes automatic invoices. Manual invoices and manual invoice dunning settings are excluded from this report at this time.
+
+Using the Dunning Effectiveness dashboard, you can:
+
+* Monitor dunning recovery over time and identify changes to recovery when dunning settings are modified.
+* Determine the effectiveness of your current or past dunning settings and make corresponding changes to length, number of emails sent, etc., based on this information.
+* View data for individual dunning campaigns or all dunning campaigns collectively.
+
+To maintain access to the most current information  you can  refresh the data in the widgets. The data for this dashboard updates multiple times a day. You can verify the time the last changes were uploaded by checking the widget at the bottom of the dashboard.
+
+# Dunning Effectiveness Dashboard
+
+The Dunning Effectiveness dashboard is divided into key performance indicator widgets, bar charts, and status detail views.  
+
+The widgets on this dashboard’s user interface provide you with access to the following common features:
+
+**Actions** at the top right corner of the dashboard provide the following functionality:
+
+* Reload action tracks the last time you refreshed your data up to four hours. The counter then resets, beginning with 1m ago This tells you how current your data is from the last refresh.
+* Hide Filters action hides those filters that display in the top left corner of the dashboard.
+* Dashboard actions allow you to either clear the cache and refresh the data, view a Download Dashboard from where you can select a download format, page size, or specify how to arrange downloaded data, or reset filters to their default settings.
+* Open Folders action allows you to open and view contents of folders from the dashboard.
+
+**Filters** in the top left corner of this dashboard provide the following options:
+
+* Date Range filter provides dropdown menus where you can choose a timeframe and date range from within the last 18 months to determine the data that displays on the dashboard.
+
+* Primary Currency filter allows you to choose the currency type that will display on the dashboard from currencies that you already enabled in the site settings. 
+
+* Dunning Campaign filter specifies which version of your preconfigured dunning campaigns will be applied.\
+   If you only have configured one campaign, apply this as your default choice. However, if you have enabled and configured multiple dunning campaigns, on the Individual Dunning Campaigns views, you can choose from those additional campaigns in the Version filter. 
+
+* Version filter provides a dropdown list of additional dunning campaigns from which you choose.
+
+**Multiple Currency support** is available in the Recurly Professional, Elite, and Enterprise plans. You may run transactions in more than one currency through one or more payment gateways that accept the currencies you want to collect. If you choose US dollars, this will be your Primary currency and the default choice. Totals on the dashboard will display in US dollars.
+
+Once Multiple Currency support is enabled on your Recurly account, you can then specify which currencies you want to accept. When a currency is added to your accepted list, you may then define pricing for your subscription plans and coupons using the new currency. Then, choose one of the enabled currencies for the dashboard.
+
+* Sites that support more than one currency (the primary currency) will see a default view that shows the total payments, refunds, and net billings across all currencies, converted to their primary currency and summed.
+* You can also view the payments, refunds and net billings processed in each individually supported currency.
+* Conversion rates are updated daily (via [https://openexchangerates.org/](https://openexchangerates.org/)) Historical billings use the conversion rate at time of transaction and do not change over time for current conversion rates.
+
+**Clear Cache options** allow you to clear cache and refresh data in three places on this dashboard:
+
+* Click the vertical ellipse on any of the widgets, at the bottom of the dashboard to see the timestamp for the most current version of data on the dashboard.
+* Click the vertical ellipse on any of the widgets within the dashboard to update the selected widget with the most current data available during the session.
+* Click the Actions widget -> vertical ellipse at top right corner of the dashboard to clear the cache and refresh the data. Recurly updates the data multiple times a day, so after a refresh, the most current data available will upload.
+
+**Vertical ellipses** available on widgets for either charts or tables, provide you with a dropdown menu where you can select the following options:
+
+* Click the vertical ellipse on any widget to download data or clear cache and refresh data for that selected widget.
+* Click the vertical ellipse on a column in a table to freeze data, copy values, auto size or reset column widths.
+
+**Charts and legends** display data in this dashboard’s widgets in bar, line, and pie charts. This data often includes customer, subscriber, subscription, plans, and revenue totals in increments specified by time and date ranges. If the information on one of these charts is color-coded, there will be a legend on the widget that identifies the value assigned to the color. For example, specific colors are assigned to specific data or totals being tracked, to enable you to read the chart. 
+
+* Click a point in a line chart or a specific color on a bar or pie chart to display the corresponding timeframe and value in hover text. For example, total number of subscribers for a corresponding month.
+* Click the corresponding color in the legend to hide that corresponding line, bar, or pie chart segment from the widget. Click on the color again, to restore the data.
+
+# Dunning Effectiveness Summary
+
+The Dunning Effectiveness Summary section has two campaign types: All Dunning Campaigns and Individual Dunning Campaigns. 
+
+On the Dunning Effectiveness dashboard, each of these campaign types have three views: invoice, revenue, and subscription. This document includes full descriptions and screenshots for only one view per campaign type, invoice. The other two view types are just described.
+
+## All Dunning Campaign Views
+
+All Dunning Campaigns widget links you to its invoices, revenue, and subscriptions views. These views track the combined effectiveness of all current and past dunning settings, across your dunning campaigns. Only automatic invoices are included in this data.
+
+Clicking one of the links for the **All Dunning Campaigns** displays a dashboard with details specific to that selected view. For example, individual filters, a key performance indicator widget, bar chart, and detail status with information for invoices, revenue, or subscriptions. The following widgets and screenshots show details for the “all dunning campaigns” invoices view. revenue and subscription links provide similar information.
+
+**Invoice Key Performance Indicators:** shows the past due invoice totals along with recovery rate, previous month, three months ago, and one year ago percentage rates in a view-at-a-glance widget. 
+
+<Image title="dunning past due invoices kip .png" alt={2372} src="https://files.readme.io/b04bc48-dunning_past_due_invoices_kip_.png">
+  Dunning Effectiveness Key Performance Indicators
+</Image>
+
+The up arrow under a total indicates the difference between the additional invoice totals, shown in percentages, compared to the past due invoices total.
+
+**Recovery Rate chart:** a bar chart that shows the recovery rate of invoices that went past due during the selected date range. 
+
+<Image title="dunning recovery rate bar chart.png" alt={2374} src="https://files.readme.io/66febd7-dunning_recovery_rate_bar_chart.png">
+  Dunning Effectiveness Recovery Rate
+</Image>
+
+**Recovery Rate details:** a status that shows the past due invoices total minus the total invoices recovered and not recovered.
+
+<Image title="dunning recovery rate.png" alt={2374} src="https://files.readme.io/22b8440-dunning_recovery_rate.png">
+  Dunning Effectiveness Recovery Rate Detail
+</Image>
+
+**All Dunning Campaigns – Revenue** provides details of past due revenue and recovered revenue in a bar chart and status detail. Invoices created during a selected interval - show the total billed invoices that were recovered during the dunning cycle via successful retry attempts or customer updates.  
+
+**All Dunning Campaigns – Subscriptions** provide details of past due subscriptions and subscriptions saved in a bar chart and status detail. Invoices created for a selected interval- shows the total number of subscriptions associated with those invoices that were recovered during the dunning cycle.
+
+## Individual Dunning Campaign Views
+
+Individual Dunning Campaigns widget links you to its invoices, revenue, and subscriptions views. These views track recovery rates and dunning lifecycle details. the combined effectiveness of all current and past dunning settings, across your dunning campaigns. Only automatic invoices are included in this data. 
+
+Clicking one of the links for the **Individual Dunning Campaigns** displays a dashboard with details specific to that selected view. For example, individual filters, recovery rate bar chart, and detail status. Also, it includes a dunning lifecycle bar chart and detail status with information for each view. The following widgets and screenshots show details for the “individual dunning campaigns” invoices view. Revenue and subscription links provide similar information.
+
+**Recovery Rate chart** a bar chart that depicts the recovery rate of invoices that went past due during the selected date range.
+
+<Image title="duning individual campaign recovery rate bar chart.png" alt={2344} src="https://files.readme.io/d43c30f-duning_individual_campaign_recovery_rate_bar_chart.png">
+  Dunning Effectiveness Recovery Rates
+</Image>
+
+**Recovery Rate detail** a status detail that shows the total number of invoices recovered, total number still past due, and the total number not recovered.
+
+<Image title="dunning individual recovery rate detail.png" alt={2378} src="https://files.readme.io/75f9ae1-dunning_individual_recovery_rate_detail.png">
+  Individual Recovery Rate Details
+</Image>
+
+**Dunning Lifecycle** chart is a bar chart that tracks the efficiency of your current and past dunning settings by evaluating when in the dunning lifecycle recovery happens.
+
+<Image title="dunning lifecycle individual bar chart.png" alt={2370} src="https://files.readme.io/41366f5-dunning_lifecycle_individual_bar_chart.png">
+  Dunning Lifecycle Effectiveness
+</Image>
+
+**Dunning Lifecycle detail** a status detail that shows the recovered totals.
+
+<Image title="Dunning individual lifecycle detail.png" alt={2370} src="https://files.readme.io/aafa5bb-Dunning_individual_lifecycle_detail.png">
+  Dunning Lifecycle Effectiveness Detail
+</Image>
+
+## **Individual Dunning Campaigns – Revenue** provides data on the following
+
+* The Revenue Recovered bar chart shows invoices created during a selected interval, including the total billed on invoices that were recovered during the dunning cycle via successful retry attempts or customer updates.
+* The Revenue Recovered status detail shows the total number of recovered, still past due, and not recovered revenue by a selected timeframe.
+* The Dunning Lifecycle bar chart shows efficiency (recovered revenue percentage) rates of the current and past dunning settings. Recurly monitors these rates by evaluating when in the dunning lifecycle recovery happens.
+* The Dunning Lifecycle status detail tracks the cumulative recovered revenue total from the beginning of the selected timeframe. For example, day 1 total, day 1 and 2 total, etc.
+
+## **Individual Dunning Campaigns - Subscription** provides data on the following:
+
+* The Subscriptions Save bar chart shows the total number of subscriptions associated with invoices created during a selected interval, that were recovered during the dunning cycle. 
+* The Subscriptions Save status detail, shows subscriptions saved, still past due, churned, and non-paying active totals.
+* The Dunning Lifecycle bar chart shows efficiency (subscription revenue percentage) rates of the current and past dunning settings. Recurly monitors these rates by evaluating when in the dunning lifecycle recovery happens. 
+* The Dunning Lifecycle status detail tracks the cumulative subscription total from the beginning of the selected timeframe. For example, day 1 total, day 1 and 2 total, etc.

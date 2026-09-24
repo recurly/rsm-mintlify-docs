@@ -1,0 +1,165 @@
+---
+title: Renewal reminder and trial ending notifications
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly's renewal reminder and trial ending notifications keep subscribers informed at every critical moment — before a billing cycle renews, before a trial expires, and when a payment method needs attention. Configure timing, customize templates by plan, and extend notifications to webhooks to trigger actions across your broader system.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#renewal-reminder-emails"><span className="rp-toc-num">3</span>Renewal reminder emails</a>
+    <a className="rp-toc-pill" href="#trial-ending-emails"><span className="rp-toc-num">4</span>Trial ending emails</a>
+    <a className="rp-toc-pill" href="#pre-renewal-webhook-notifications"><span className="rp-toc-num">5</span>Pre-renewal webhook notifications</a>
+    <a className="rp-toc-pill" href="#faqs"><span className="rp-toc-num">6</span>FAQs</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Renewal reminder and trial ending notifications are automated emails sent to subscribers ahead of upcoming subscription renewals, trial period endings, and payment method expirations. These notifications help maintain transparency with customers, support compliance with payment brand and regional regulations, and reduce involuntary churn caused by missed renewals or expired payment methods.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-envelope-open-text" aria-hidden="true"></i></div>
+    <strong>Improved customer engagement</strong>
+    <span>Timely reminders increase transparency and trust, keeping subscribers informed about their subscription status before anything changes.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+    <strong>Compliance adherence</strong>
+    <span>Meets legal and payment brand requirements for subscription renewal notifications across various regions and card networks.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-trend-down" aria-hidden="true"></i></div>
+    <strong>Reduced churn</strong>
+    <span>Proactive communication helps prevent service interruptions and prompts customers to act on expiring payment methods before billing fails.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-check" aria-hidden="true"></i></div>
+    <strong>Personalized experience</strong>
+    <span>Customizable templates let you align notification content and timing with your brand voice and each customer's specific situation.</span>
+  </div>
+</div>
+
+# Renewal reminder emails
+
+Renewal reminders can be enabled across all plans, with the option to disable them for specific plans as needed. You can schedule these emails anywhere from one to 180 days before a subscription renews.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Changing the reminder date affects all subscriptions</strong>Adjusting the renewal reminder window in your site settings applies globally. If you extend the period — for example, from five to 15 days — subscriptions renewing sooner than the new window may not receive a reminder. For those subscriptions, Recurly recommends contacting affected customers directly to reduce potential churn.</div>
+</div>
+
+## Renewal reminder types
+
+### Term Renewal Reminder
+
+Notifies customers of an upcoming subscription renewal. Lead time is configurable from one to 180 days. Sending this reminder may be required by regional law or card brand agreements.
+
+### Bill Date Reminder
+
+Reminds customers of their next billing date. Like the Term Renewal Reminder, this can be scheduled one to 180 days in advance and may be legally required in certain jurisdictions.
+
+### Annual Reminder
+
+Sent once per year from the start of the customer's subscription. Particularly relevant for subscriptions with term lengths under one year, and required in regions with annual notification mandates.
+
+### Mastercard Reminder
+
+Applies exclusively to customers paying with Mastercard, and must comply with Mastercard's specific content and timing guidelines. When configuring this template:
+
+- You can schedule the email to send a set number of days before the customer's bill date.
+- The email must include clear instructions for how the customer can cancel their subscription.
+
+If multiple renewal reminders are scheduled for the same day, the Mastercard template takes precedence over other renewal reminder templates.
+
+### Ramp Price Change Renewal Notification
+
+Notifies customers of an upcoming price change at the start of a new ramp interval. This template can be customized to include the start date and price of the next ramp interval. If scheduled on the same day as other reminders, it is prioritized.
+
+## Payment method-specific reminders
+
+### SEPA Payment Method
+
+Sent ahead of the bill date for customers using SEPA as their payment method. Content and timing adhere to SEPA's specific requirements.
+
+### BACS Payment Method
+
+Sent ahead of the bill date for customers using BACS as their payment method. Content and timing adhere to BACS requirements.
+
+### Expired Credit Card
+
+Alerts customers when their credit card on file has expired or will expire before the next billing cycle, prompting them to update their payment information.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Template prioritization</strong>When both a general Renewal Reminder and a payment method-specific template (Expired Card, SEPA, or BACS) are enabled, Recurly sends whichever email prompts the most immediate customer action. If an expired payment method is on file, or a SEPA or BACS method is in use, the corresponding template is sent instead of the standard renewal reminder — prioritizing the action the customer needs to take to avoid a service interruption.</div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Adyen Hosted Payment Pages</strong>If you use Adyen Hosted Payment Pages (HPP), Recurly cannot access certain required information such as the mandate ID. You'll need to manage renewal reminder emails for these customers independently to meet any applicable requirements.</div>
+</div>
+
+# Trial ending emails
+
+Trial ending emails notify customers when their free trial is approaching its end, giving them time to decide whether to continue with a paid plan. This feature is activated per subscription plan, so reminders only go out where they're relevant.
+
+## Activation and configuration
+
+- To enable trial ending emails, select the **Send Trial Ending Emails?** option when creating or editing a subscription plan.
+- Recurly automatically sends the trial ending email three days before the trial ends. For custom trial periods, the trial must be at least four days long to trigger the email.
+- The **Trial Ending** email template is fully customizable in the Email Templates section of the Admin Console, allowing you to align messaging with your brand voice.
+
+# Pre-renewal webhook notifications
+
+Pre-renewal webhook notifications extend renewal reminders beyond email, allowing each notification type to also trigger a webhook. Use these to initiate actions in your broader system — such as sending emails through an external provider or triggering other events tied to an upcoming renewal.
+
+Each webhook notification type can be configured with a default lead time, specified in days before a subscription's renewal, and those defaults apply across all endpoints using pre-renewal notification events.
+
+## Configure pre-renewal webhook notifications
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open webhook notification settings</h4><p>In the Recurly Admin Console, navigate to the webhook notification configuration section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Adjust pre-renewal defaults</h4><p>Configure the default timing for each pre-renewal notification type. These settings apply globally across all endpoints using pre-renewal events.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/1c1469c-Prerenewal_Default_Webhook_Configuration.png" align="center" width="50%" border={true} />
+
+
+
+<Image src="https://files.readme.io/b8d7cb2-Prerenewal_Notification_Events.png" align="center" width="50%" border={true} />
+
+
+For full details on implementing pre-renewal webhook notifications, see the <a href="https://recurly.com/developers/reference/webhooks/#prerenewal-notifications" target="_blank">webhook developer documentation</a>.
+
+# FAQs
+
+<Accordion title="What happens when the trial_ends_at date is extended via API?">
+  If you update `trial_ends_at` through the API to extend the trial period and the new end date is more than three days away, the trial ending email won't send until the subscription is within the three-day reminder window. This ensures reminders stay timely and relevant to the updated trial end date.
+</Accordion>
+
+<Accordion title="Will renewal reminders be sent for subscriptions with a future start date?">
+  Yes. Renewal reminders will be sent for subscriptions with a future start date, as long as that date is set at least two days in advance. This gives customers adequate notice about upcoming renewals even for subscriptions not yet active.
+</Accordion>
+
+<Accordion title="What happens if there is no email address on file for a customer?">
+  If no email address is on file, Recurly falls back to the site's default email settings. As a best practice, always collect and pass the customer's email address to Recurly. You can configure both the "email to" and "CC email to" addresses in the Email Templates section to ensure communications reach the right recipients.
+</Accordion>
+
+<Accordion title="Can renewal reminders and trial ending emails be configured via API?">
+  Not currently. Renewal reminders and trial ending emails can only be configured via the Admin Console. API-based management of these settings is under consideration for a future release.
+</Accordion>
+
+<Accordion title="Will disabling an email template stop those emails from going out?">
+  Yes. Disabling an email template in the Email Templates section stops Recurly from sending that notification entirely.
+</Accordion>
+
+<br />

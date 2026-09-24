@@ -1,0 +1,118 @@
+---
+title: Level 2 and Level 3 / CEDP
+---
+
+# Overview
+
+This guide shows you how to send Level 2 and Level 3 card data using the [Purchase endpoint](https://developers.recurly.com/api/latest/#tag/purchase), and covers best practices for qualifying for the Visa CEDP program.
+
+### Prerequisites and limitations
+
+* Familiarity with Recurly’s V3 API, and basic REST concepts
+* Familiarity with Recurly's line item catalog, shipping addresses, and shipping methods and fees behavior.
+* Familiarity with Recurly's taxation offerings:
+  * [Avalara](/guides/partner-integrations/accounting-fraud-and-taxes/avalara)
+  * [Vertex](/guides/partner-integrations/accounting-fraud-and-taxes/vertex)
+  * [Recurly Tax Settings](https://docs.recurly.com/recurly-subscriptions/docs/taxes)
+* [Completed the Quickstart Guide](https://docs.recurly.com/recurly-subscriptions/docs/quick-start-guide#/)
+* [Completed the Coupons and discounts guide](/guides/api-guides/pricing-and-billing-guides/coupons-and-discounts-guide)
+* Reviewed best practices for descriptions and naming in our [Line Items guide](/guides/plans-pricing-promotions/plan-structure/catalog/line-items)
+* A supported gateway account. Check your individual gateway for L2/3 Support.
+  * [Adyen](/guides/payment-orchestration/payment-gateways-1/adyen) and [Stripe](/guides/payment-orchestration/payment-gateways-1/stripe) have support for Level 3 data.
+
+## Definition
+
+**Creating purchases** refers to the process of generating new customer accounts alongside subscriptions in a single, consolidated call to the Recurly Purchase endpoint. This streamlines checkout experiences by bundling all required resources into one request.
+
+**Creating subscriptions** refers to the process of generating new customer accounts and subscriptions using the `subscriptions` endpoint in Recurly's V3 API. This endpoint can't be used for one-time transactions, but also supports the relevant fields.
+
+## Level 2 requirements
+
+<Callout icon="🚧" theme="warn">
+  Level 2 Interchange program is sunsetting in April of 2026 for Visa Cards, and the CEDP program will be preferred. Level 3 data will be desired after that point. For Visa cards, see Level 3 requirements and speak to your gateway about qualification.
+</Callout>
+
+Level 2 Data generally consists of tax information and a purchase order number (PO Number), in addition to baseline Level 1 data, which consists of the consumer's billing information at a minimum. To reduce the risk of transaction downgrades, ensure you're passing AVS data (address data) for all transactions.
+
+Recurly supports passing tax information and a PO number on all supported gateways. To pass tax information, you can use a supported tax integration or set up taxes inside your Recurly site. To pass a PO number in purchases or subscriptions, include the `po_number` field in your payload when creating subscriptions and purchases.
+
+Because Level 2 requires a minimum tax percentage, tax-exempt businesses generally don’t qualify for Level 2 Interchange programs. The minimum and maximum tax thresholds typically fall between 0.1 percent and 31 percent of the total amount.
+
+```json
+{
+  "currency": "USD",
+  "account": {
+    "code": "{{customer-account-code}}" // Account with Billing Information + Card on File
+  },
+  "line_items": [ // You may also supply Recurly item codes
+    {
+      "unit_amount": "10.00",
+      "quantity": 2,
+      "description": "Custom 4x4 Art Print",
+      "type": "charge",
+      "tax_code": "physical",
+      "product_code": "100B",
+      "tax_exempt": false,
+    }
+  ],
+  "po_number": "123456", // Purchase Order Number 
+  "gateway_code": "{{gateway-code}}"
+}
+```
+
+## Level 3 requirements
+
+Level 3 data consists of Level 1 and Level 2 data, plus additional details such as line items and shipping information. Ensure you're passing Level 1 data (name and address information) and Level 2 data (taxes or tax exempt status, plus a PO number), in addition to the following:
+
+* **Line Items**: Ensure you're sending high-quality line item data, not generic values. Visa evaluates data quality, not just quantity. For CEDP considerations, see our [Line Item](/guides/plans-pricing-promotions/plan-structure/catalog/line-items) documentation. You can pass line items by setting up your catalog in Recurly or passing the data dynamically via API.
+  * Include product code, description, quantity, and, if needed, the HS/Commodity Code value. **You can't pass all zeroes**, and it's recommended to use HS/Commodity Code values from a tax integration like Avalara or Vertex, or reference an authoritative HS/Commodity Code list.
+
+  * HS Codes are supported on line item add-ons and plans:
+
+    * [Add-Ons](https://docs.recurly.com/recurly-subscriptions/docs/add-ons)
+    * [Plans](/guides/plans-pricing-promotions/plan-structure/plans)
+* **Shipping Costs**: See [Shipping Fees](/guides/recurring-billing/billing-preferences/shipping) documentation for how to pass shipping costs.
+* **Shipping Address** for the consumer: See [Shipping Addresses](/guides/subscriber-management/accounts-1/shipping-addresses) documentation for how to pass shipping addresses.
+* All other required data is derived from your Recurly account or line item catalog setup.
+
+```json
+{
+  "currency": "USD",
+  "account": {
+    "code": "{{customer-account-code}}" // Account with Billing Information + Card on File
+  },
+  "line_items": [ // You may also supply Recurly item codes
+    {
+      "unit_amount": "10.00",
+      "quantity": 2,
+      "description": "Custom 4x4 Art Print",
+      "type": "charge",
+      "tax_code": "physical",
+      "product_code": "100B",
+      "tax_exempt": false,
+      "harmonized_system_code": "456789" // HS Code, Commodity Code
+    }
+  ],
+  "shipping": {
+    "address": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "phone": "1234567890",
+      "street1": "201 main St",
+      "city": "Los Angeles",
+      "region": "CA",
+      "postal_code": "12345",
+      "country": "US"
+    },
+    "fees": {
+      "method_code": "{{method-code}}",
+      "amount": "5.00" // Shipping Freight Amount
+    }
+  },
+  "po_number": "123456", // Purchase Order Number 
+  "coupon_codes": [
+    "15percent"
+  ],
+  "gateway_code": "{{gateway-code}}"
+}
+```

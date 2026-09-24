@@ -1,0 +1,104 @@
+---
+title: Billings
+---
+
+The Billings dashboard calculates the total amount of successful payments, refunds and the net of the two over a selected time period. Each category is separated into payments, refunds and net billings from new versus renewing customers. 
+
+# What's included on this dashboard?
+
+* New payments are the sum of all successful first time payments on an account.
+* Renewing payments are the sum of all successful payments where the payment is not the first transaction on an account.
+* New refunds are the sum of all refunds of new payments. Correspondingly, renewing refunds are the sum of all refunds on renewing payments.
+* The new versus renewing categories are NOT based on the subscription, but rather on the account.
+* Voids and $1 authorizations are not included.
+* Net Billings = payments – refunds.
+
+To maintain access to the most current information, use the widgets on this dashboard to refresh the screen.  The data for this dashboard updates multiple times a day. You can verify the time the last changes were uploaded by checking the widget at the bottom of the dashboard.
+
+# Billings Dashboard
+
+The Billings dashboard tracks the total payments, refunds and net cash received from billed adjustments over time. The Billings dashboard is divided into a view of the totals at-a-glance, a bar chart, details status, and two maps.  
+
+The widgets on this dashboard’s user interface provide you with access to the following common features:
+
+**Actions** at the top right corner of the dashboard provide the following functionality:
+
+* Reload action tracks the last time you refreshed your data up to four hours. The counter then resets, beginning with 1m ago This tells you how current your data is from the last refresh.
+* Hide Filters action hides filters that display in the top left corner of the dashboard.
+* Dashboard actions allow you to either clear the cache and refresh the data, view a Download Dashboard option from where you can select a download format, page size, or choose a downloaded data arrangement, or reset filters to default settings.
+* Open Folders action allows you to open and view contents of folders from the dashboard.
+
+**Filters** in the top left corner of both parts of this dashboard provide the following options:
+
+* Timeframe filter allows you to select a daily, weekly, or monthly option for displaying subscriber data.
+* Metric filter allows you to choose a metric type (either payments, refunds, or net) from the Metric dropdown menu.
+* Date filter provides dropdown menus where you can choose a timeframe and date range from within the last 18 months to specify the data that displays on the dashboard.
+* Primary Currency filter allows you to choose the currency type that will display on the dashboard from currencies that you already enabled in the site settings. 
+
+**Multi-Currency** support is available in the Recurly Professional, Elite, and Enterprise plans. You may run transactions in more than one currency through one or more payment gateways that accept the currencies you want to collect. If you choose US dollars, this will be your Primary currency and the default choice. Totals on the dashboard will display in US dollars.
+
+Once Multi Currency support is enabled on your Recurly account, you can then specify which currencies you want to accept for your account. When a currency is added to your accepted list, you may then define pricing for your subscription plans and coupons using the new currency. Then, choose one of the enabled currencies for the dashboard.
+
+* Sites that support more than one currency (the primary currency) will see a default view that shows the total payments, refunds and net billings across all currencies, converted to their primary currency and summed.
+* Users can also view the payments, refunds and net billings processed in each individually supported currency on their site.
+* Conversion rates are updated daily (via [https://openexchangerates.org/](https://openexchangerates.org/)) Historical billings use the conversion rate at time of transaction and do not change over time for current conversion rates.
+
+**Clear Cache options** allow you to clear cache and refresh data in three places on this dashboard:
+
+* Click the vertical ellipse on any of the widgets, at the bottom of the dashboard to see the timestamp for the most current version of data on the dashboard.
+* Click the vertical ellipse on any of the widgets within the dashboard to update the selected widget with the most current data available during the session.
+* Click the Actions widget -> vertical ellipse at top right corner of the dashboard to clear the cache and refresh the data. Recurly updates the data multiple times a day, so after a refresh, the most current data available will upload.
+
+**Vertical ellipses** available on widgets for either charts or tables, provide you with a dropdown menu where you can select the following options:
+
+* Click the vertical ellipse on a widget to download data or clear cache and refresh data for a selected widget.
+* Click the vertical ellipse on a column in a table to download data or clear the cache and refresh the data on display and also to either auto size or resize columns.
+
+**Charts and legends** display data on this dashboard in bar, line, and pie charts. This data often includes customer, subscriber, subscription, plans, and revenue totals in increments specified by time and date ranges. If the information on one of these charts is color-coded, there will be a legend on the widget that identifies the value assigned to each color. For example, specific colors are assigned to specific data or totals being tracked, to enable you to read the chart. 
+
+* Click a point in a line chart or a specific color on a bar or pie chart to display the corresponding timeframe and value in hover text. For example, total number of subscribers for a designated month.
+* Click the corresponding color in the legend to hide that corresponding line, bar, or pie chart segment from the widget. Click on the color again, to restore the data.
+
+# Billings Section
+
+The Billings section includes a view of the billing key performance indicators, a net billings bar chart, a new versus renewing detail chart, a billings by state map, and a billings by country map. 
+
+**Billing Key Performance Indicators:** shows the payments to date totals in a view-at-a-glance widget that includes the current payment amount totals, and totals for last month, previous month, three months ago, and one year ago.
+
+<Image title="billings totals overview.png" alt={2604} src="https://files.readme.io/4bab8ad-billings_totals_overview.png">
+  Billings Key Performance Indicators
+</Image>
+
+The up arrowheads under each total indicate the difference between the additional payment totals and the “to-date” payment total.
+
+**Net Billings:** calculate the total amount of new and renewing customer payments, refunds and the net of the two over the selected date range and display the data in a bar chart as shown in the following screenshot:  
+
+<Image title="billing net billings bar chart.png" alt={2616} src="https://files.readme.io/999163b-billing_net_billings_bar_chart.png">
+  Neet Billings Totals
+</Image>
+
+**New vs Renewing Detail:** compares the New Payments minus the New Refunds to determine the Net New and the Renewing Payments minus the Renewing Refunds to determine the Net Renewing. The New Net is then added to the Net Renewings to calculate the Total Net Billings as shown in the following screenshot.
+
+<Image title="billing new vs renewing detail .png" alt={2606} src="https://files.readme.io/d5c64f4-billing_new_vs_renewing_detail_.png">
+  New vs Renewing Billing Details
+</Image>
+
+**Billings By State:** shows the payment amounts on the “By State” map, as shown in the following screenshot. 
+
+* Click an individual state on the map to see the totals for that state in hover text.
+* View the mapped and unmapped amounts in the two boxes below the By State map.
+* The Amount Unmapped box indicates transactions with no assigned state. 
+
+<Image title="billing by state map.png" alt={1290} src="https://files.readme.io/bc5aaeb-billing_by_state_map.png">
+  Billings by State Map
+</Image>
+
+**Billings By Country:** shows the payment amounts in the “By Country” map, as shown in the following screenshot. 
+
+* Click an individual country on the map to see the totals for that country in hover text.
+* View the mapped and unmapped amounts in the two boxes below the By Country map.
+* The Amount Unmapped box indicates transactions with no country assigned.
+
+<Image title="billings by country map.png" alt={1278} src="https://files.readme.io/6f58cee-billings_by_country_map.png">
+  by Country MApBillings
+</Image>

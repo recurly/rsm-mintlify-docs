@@ -1,0 +1,30 @@
+---
+title: Transparent Post
+---
+
+Recurly's Transparent Post API allows you to host a <a href="/guides/security-compliance/transparent-post-subscription">subscription signup</a>, <a href="/guides/security-compliance/transparent-post-transactions">transaction</a>, and <a href="/guides/security-compliance/transparent-post-update-billing-info">update billing information</a> page on your website and still be PCI compliant with minimal work. When the customer submits the credit card form, the sensitive information is submitted directly to Recurly for processing. When the transaction completes, the user is redirected back to your site and you retrieve the results securely using a standard API call.
+
+<p>Your users will not see Recurly's website, you control the look and feel of your own signup pages, and you benefit from a reduced PCI compliance scope. Because credit card numbers do not pass through your network, your PCI compliance scope is dramatically reduced.</p>
+
+![582](https://files.readme.io/8AZmOPayQluQCU06CywT_transparent_post.png "transparent_post.png")
+
+<p>Transparent Post is not supported by the API v2 and v2 client libraries. Please consider using <a href="/guides/recurly-js/overview-recurlyjs">Recurly.js</a> for easier integration and better error validation. Please contact support if you wish to enable transparent post for your account.</p>
+
+<h2>Implementation Steps</h2>
+<h3>Step 1: Build a form that submits to Recurly</h3>
+<p>First, create a standard HTML form that submits results to Recurly. This form is hosted on your website. At a minimum, an uniquely identify account code and redirect URL is specified in a hidden form field. The Transparent Post API uses a private key to protect key information from being tampered with by the user. With the Recurly API, it is easy to pass additional information in the protected field.</p>
+<p>Because the submission to Recurly only happens over HTTPS, the credit card data is fully encrypted by the user's browser. We recommend hosting your page on an HTTPS enabled web page. Modern web browsers will warn the user when a secure page submits to a non-secure page.</p>
+<h3>Step 2: Recurly processes the transaction</h3>
+<p>When the form is submitted to Recurly, Recurly will validate the input and submit the credit card authorization or transaction to your payment gateway. When the transaction completes, Recurly will redirect the user's browser to a page of your choosing. The URL will contain a result key and a confirmation key to verify that the user did not tamper with the result.</p>
+<h3>Step 3: Use the API to securely lookup the Result</h3>
+<p>After receiving the result key, use the Recurly API to <a href="/guides/security-compliance/transparent-post-retrieving-results">lookup the result</a> of the transaction. Upon success, the result code will be 200 and the result will contain the typical transaction results. Upon failure, the results will contain the failure error message(s) and the original form values (excluding full credit card number and CVV). This allows you to re-populate your HTML form if the transaction failed.</p>
+
+<h2>Configuration</h2>
+<p>The Recurly Transparent Post API uses a private key to verify that the data passed between your website and Recurly is legitimate and has not been tampered with. The Recurly Transparent Post API also uses a Recurly <a href="/guides/integration-methods/api-keys">API key</a> to securely lookup the results of the original request.</p>
+<p>To setup your private key, log into your Recurly account and visit the 'Transparent Post' configuration section under the "Developer" options in the left navigation.</p>
+
+<h2>Demo Applications</h2>
+<p>Please see our <a href="https://github.com/recurly/recurly-client-ruby-transparent-demo">Rails Demo App</a> for a Rails example application using our Transparent Post API.</p>
+
+<h2>Client Library Support</h2>
+<p>The Transparent Post API client library support is currently limited to API v1 and the earlier PHP and Ruby client libraries.</p>

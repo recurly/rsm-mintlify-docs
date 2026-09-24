@@ -1,0 +1,203 @@
+---
+title: Backup payment method
+---
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Additional cost</strong> There are additional fees to use the Wallet feature required by Backup Payment Method. Contact your Account Manager, Account Executive, or Recurly Support to learn more.</div>
+</div>
+
+<div className="rp-page">
+  <div className="rp-overview">Backup Payment Method lets subscribers designate an alternate payment method to be used automatically when their primary payment fails. When a renewal declines, Recurly switches to the backup — reducing involuntary churn without any manual intervention.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#setup"><span className="rp-toc-num">4</span>Setup</a>
+    <a className="rp-toc-pill" href="#testing"><span className="rp-toc-num">5</span>Testing</a>
+    <a className="rp-toc-pill" href="#considerations"><span className="rp-toc-num">6</span>Considerations</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>The <a href="https://docs.recurly.com/docs/wallet" target="_blank">Wallet</a> feature must be enabled on your account.</li>
+  <li>Be aware of the additional fees associated with Wallet.</li>
+  <li>Subscriber consent is required before setting a payment method as a backup.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Backup Payment Method is a Recurly feature that allows subscribers to designate an alternative payment method to be used automatically when their primary payment method fails during a transaction. It requires the <a href="https://docs.recurly.com/docs/wallet" target="_blank">Wallet</a> feature, which lets subscribers store multiple payment methods. When a primary payment declines, Recurly switches to the backup automatically — reducing payment failures and involuntary churn.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-check" aria-hidden="true"></i></div>
+    <strong>Reduced churn</strong>
+    <span>Lower the risk of involuntary churn by ensuring a backup payment option is available when the primary method fails.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+    <strong>Uninterrupted service</strong>
+    <span>Subscribers keep access to their services without needing to intervene when a payment fails.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+    <strong>Increased revenue recovery</strong>
+    <span>Improve successful transaction rates for recurring payments by adding a second attempt path.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-gears" aria-hidden="true"></i></div>
+    <strong>Automated payment handling</strong>
+    <span>The switch to the backup method happens automatically, with no manual intervention required.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-globe" aria-hidden="true"></i></div>
+    <strong>Flexibility</strong>
+    <span>Supports a wide range of payment methods across different regions.</span>
+  </div>
+</div>
+
+# Key details
+
+## Wallet integration
+
+Subscribers can store multiple payment methods using the Wallet feature. Backup Payment Method extends this by letting one stored method be designated as the backup. When the primary method is declined, Recurly automatically switches to the backup.
+
+
+<Image src="https://files.readme.io/db76b76-Screen_Recording_2021-03-29_at_02.50_PM.gif" alt="Backup payment method in action" align="center" />
+
+
+## Backup payment method usage
+
+The backup method is used for failed subscription renewals — specifically for invoices entering dunning. It is **not** applied for purchase requests or subscription changes unless the backup is explicitly specified in the purchase request.
+
+## Payment method response times
+
+For payment methods with immediate responses (most credit cards, debit cards, digital wallets), Recurly switches to the backup instantly on decline. For delayed-response methods (direct debit), Recurly waits for the initial decline confirmation before initiating the backup attempt.
+
+## Retry mechanism
+
+If both the primary and backup transactions decline, Recurly retries them during the dunning process — alternating between primary and backup, waiting for a decline before each next attempt. If a hard decline occurs on either method, that method will not be retried for that invoice.
+
+## Analytics
+
+Recurly's Recovered Revenue and Dunning Effectiveness reports include recoveries from backup payment methods. For detailed insights, use the <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/billing-info-export" target="_blank">billing\_info v5</a> and <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/transaction-export" target="_blank">transactions v5</a> exports.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Reports</h4><p>In the Recurly Admin Console, navigate to <strong>Reports</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>View recovery reports</h4><p>Open the <strong>Recovered Revenue</strong> and <strong>Dunning Effectiveness</strong> reports to see recoveries attributed to backup payment methods.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Download export data</h4><p>For more detail, download the <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/billing-info-export" target="_blank">billing_info v5</a> and <a href="/guides/reporting-analytics/data-imports-and-exports/export-overview/transaction-export" target="_blank">transactions v5</a> exports.</p></div>
+  </div>
+</div>
+
+# Setup
+
+## Set a backup via Admin Console
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscriber account</h4><p>In the Recurly Admin Console, navigate to <strong>Subscribers</strong> and select the desired account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select the backup method</h4><p>Under <strong>Billing Information</strong>, find the list of stored payment methods. Choose the desired method and click <strong>Set as Backup</strong>.</p></div>
+  </div>
+</div>
+
+## Set a backup via API
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Choose your API version</h4><p>Use either <a href="https://developers.recurly.com/api/v2021-02-25/index.html#operation/create_billing_info" target="_blank">API V3</a> or <a href="https://developers.recurly.com/api-v2/v2.29/index.html#operation/createAccountsBillingInfoCreditCard" target="_blank">API V2</a>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Make the request</h4><p>POST to the <a href="https://developers.recurly.com/api/v2021-02-25/index.html#operation/create_billing_info" target="_blank">/billing_infos</a> endpoint with the subscriber's account ID, payment method details, and the parameter indicating it should be set as the backup. You can also set the backup via the <a href="https://developers.recurly.com/api/v2021-02-25/index.html#operation/create_subscription" target="_blank">/subscriptions</a> and <a href="https://developers.recurly.com/api/v2021-02-25/index.html#operation/create_purchase" target="_blank">/purchases</a> endpoints.</p></div>
+  </div>
+</div>
+
+## Integration requirements
+
+Update your integration to support <a href="https://docs.recurly.com/docs/wallet" target="_blank">Wallet</a> and ensure you obtain subscriber consent before setting a backup payment method. Provide subscribers with a UI to manage their stored payment methods and designate a backup.
+
+# Testing
+
+Test Backup Payment Method in development mode against your gateway to simulate both declined and successful scenarios. You can also test using Recurly's sandbox with <a href="/guides/payment-orchestration/gateway-configuration-and-features/test" target="_blank">test card numbers</a>.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Set your site to development mode</h4><p>Confirm your Recurly site is in <strong>Development mode</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Create a subscription with a decline card</h4><p>Use a test card number that simulates a declined transaction as the primary payment method.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Set a success card as backup</h4><p>Use a test card number that simulates a successful transaction as the backup payment method.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Initiate a transaction</h4><p>The primary method should decline and Recurly should automatically attempt the backup.</p></div>
+  </div>
+</div>
+
+# Considerations
+
+## Subscriber consent
+
+Always obtain subscriber consent before setting a backup payment method. Compliance requirements are each merchant's responsibility to define and adhere to.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Update terms and conditions</h4><p>Add a clause about using a backup payment method to your terms and conditions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Display a consent checkbox</h4><p>When subscribers add or update a payment method, show a checkbox with language such as: "I authorize [Your Company] to use this as a backup payment method in case of transaction failures."</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Default to unchecked</h4><p>The consent checkbox must be unchecked by default — subscribers must actively opt in.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Store consent securely</h4><p>Record and store the subscriber's consent choice securely for future reference.</p></div>
+  </div>
+</div>
+
+## Handling communication errors
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Warning</strong> Communication errors with a gateway will prevent backup attempts from being initiated.</div>
+</div>
+
+If a communication error occurs during a transaction, monitor the transaction status in the Admin Console or via API responses. If the status remains pending or unclear, do not manually initiate a backup attempt — wait for confirmation from Recurly or the gateway before taking further action.
+
+## Additional considerations
+
+<ul className="rp-list">
+  <li>If the primary payment method is also set as the backup, only the primary method will be used for retries.</li>
+  <li>Custom Gateway Routing rules apply to backup payment methods.</li>
+  <li>Using two ACH payment methods as primary and backup is not recommended.</li>
+  <li>Only one backup payment method can be set per account.</li>
+  <li>Backup payment method is not used for purchase requests or subscription changes unless explicitly specified.</li>
+</ul>
+
+<br />

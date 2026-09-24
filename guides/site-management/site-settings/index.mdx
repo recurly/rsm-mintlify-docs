@@ -1,0 +1,191 @@
+---
+title: Site settings
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Site Settings is the central place in Recurly for managing your account configuration, company profile, and site customizations. From here you can fine-tune technical settings, control email communications, and personalize how the platform looks and behaves for your team.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Language support</strong>The Recurly Admin UI supports English natively. Localization and multi-language support are available only for email templates. See <a href="/guides/subscriber-management/lifecycle-communications/email-template-languages#/" target="_blank">Email Language Support</a> for details.</div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Site Settings is where you manage your Recurly account configuration, company profile, and site customizations. It brings together technical settings, email preferences, address requirements, and appearance options in one place — making administration straightforward and consistent.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Centralized configuration</strong>
+    <span>Manage all key site configurations from one location, keeping administration consistent across your team.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-paintbrush" aria-hidden="true"></i></div>
+    <strong>Tailored user experience</strong>
+    <span>Customize the platform's appearance and behavior to match your brand and business requirements.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-envelope" aria-hidden="true"></i></div>
+    <strong>Optimized communication</strong>
+    <span>Control email settings to ensure customers receive timely, accurate communications from the right sender address.</span>
+  </div>
+</div>
+
+# Key details
+
+## Clear test data
+
+The **Clear Test Data** button removes all test data from your Recurly sandbox site — including all test accounts, their associated subscriptions, and transactions — giving you a clean slate for further testing.
+
+
+<Image src="https://files.readme.io/20e4e0f9e33ae567afbdb2aba218a16a1496113afbbf24b1ade6acf7b1ec36d5-image.png" align="center" width="75%" border={true} />
+
+
+This action does **not** affect configuration elements like subscription plans, coupons, or email templates. However, it **does** remove third-party integrations (such as Xero and QuickBooks Online) and any configured webhook endpoints.
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> This action is irreversible</strong>Clear Test Data permanently removes all test accounts, subscriptions, and transactions from your sandbox. Use with caution.</div>
+</div>
+
+***
+
+## Site details
+
+Site Details is where you manage your company's core information and profile.
+
+### Account information
+
+Update the following fields under **Account Information**:
+
+- Site Name
+- Recurly Subdomain
+- Company DBA Name
+- Website URL
+- Time Zone
+
+
+<Image src="https://files.readme.io/9b17c2c3e398108fe192a2efdee0b27154975883a3ef0321fb1b67bd254a9975-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Subdomain changes affect integrations</strong>Changing your subdomain affects webhooks, Checkout, Hosted Payment Pages (HPP), Hosted Account Management (HAM), and API calls. Review and update all integrations after making this change to avoid disruptions.</div>
+</div>
+
+### Company profile
+
+In **Company Profile**, provide additional details about your business including your industry and estimated annual revenue.
+
+
+<Image src="https://files.readme.io/eac1ce76eb47a99d904583ebbda98c9a1dfc14d050907a73508f7d2c7aedca88-image.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Advanced settings
+
+Advanced Settings is where you configure technical and communication settings for your site — including email preferences, address requirements, IP allowlisting, order number prefixes, and site customizations.
+
+### Email settings
+
+Manage your contact and technical email configuration from this section:
+
+- Choose whether optional email copies are sent as CC or BCC
+- Set the default timezone for dates and timestamps in emails
+
+See the <a href="https://docs.recurly.com/docs/email-templates" target="_blank">Email Templates</a> documentation for more on managing email copies and templates.
+
+**Billing Contact Email**
+
+The Billing Contact Email is the default "from" address for all customer communications and the address displayed on Recurly receipts. Keeping this accurate ensures consistent, professional correspondence with your customers. You can override this default for specific accounts on their individual account pages.
+
+If you're on the Recurly Elite plan with multiple business entities configured, you can set a unique billing contact email for <a href="/guides/site-management/business-entities/multiple-business-entities#entity-specific-merchant-email-addresses" target="_blank">each alternate entity</a>. If no entity-specific addresses are set, all entities — including the Site Default Entity — fall back to the address entered here.
+
+
+<Image src="https://files.readme.io/ffe009dadb54d4ac3371771be36f61fbf6d113739d0dabb8b29d16087211d357-image.png" align="center" width="75%" border={true} />
+
+
+**SendGrid API key**
+
+Recurly integrates with SendGrid to give you greater control over email deliverability and analytics. Connecting via SendGrid's SMTP relay ensures your messages reach customers reliably and lets you track performance in detail.
+
+
+<Image src="https://files.readme.io/6a13e3d3eb088628fab2063761faa0a13cb29e3574acb05509b054d1960e0dd5-image.png" align="center" width="75%" border={true} />
+
+
+See the <a href="/guides/partner-integrations/sales-marketing-and-services/sendgrid" target="_blank">SendGrid integration documentation</a> to set this up for your site.
+
+**Debt collection email notifications**
+
+The federal Fair Debt Collection Practices Act (FDCPA) restricts debt collector contact with customers about money owed — communications between 9 PM and 8 AM are prohibited.
+
+To help you stay compliant, Recurly can limit payment-related emails to a 2:00–4:00 PM ET daily window. Enable this by checking **"Send payment collection emails between 2:00–4:00 PM ET"** in your email settings.
+
+
+<Image src="https://files.readme.io/f471ac6b5f46f923964b88a5dfa9ec60a437d7a983e9ef6a45494c24b69dac91-Image_10-3-24_at_3.18_PM.jpeg" align="center" width="75%" border={true} />
+
+
+### Address requirements
+
+Configure the minimum fields required for customer billing addresses. These requirements should align with the Address Validation Service (AVS) rules for your payment gateway.
+
+
+<Image src="https://files.readme.io/cda62865c79c165ac21f9ec86449a4cdb1e3931e1e3e8087eed0d89d6469a84c-image.png" align="center" width="75%" border={true} />
+
+
+Gateway-specific minimums:
+
+- **Most gateways** — Street Address and Postal Code
+- **PayPal** — Full address
+- **Beanstream** — Full address and phone number
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Recommendation</strong>Recurly recommends collecting postal code at a minimum for all customers.</div>
+</div>
+
+### Allowlist IP addresses
+
+Designate a public IP address or range to bypass Recurly's fraud checks — useful when manually processing transactions on behalf of customers.
+
+
+<Image src="https://files.readme.io/35a9aadfb9b5295e74584ae21eb4346f347459593374713836cee1375766207d-image.png" align="center" width="75%" border={true} />
+
+
+Accepted formats:
+
+- **Single IP:** `192.168.0.1`
+- **IP range:** `192.168.12.0/24` — the range must be narrower than /24
+
+### Order number prefix
+
+If you consolidate multiple billing systems into a single gateway account, an Order Number Prefix lets you identify Recurly transactions in your payment gateway's virtual terminal.
+
+
+<Image src="https://files.readme.io/e8a399246d084e824eae630b4f17de007446ee7dbbaba24d37cff02b4c95c7dc-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>The order number prefix is used on the backend only — it won't appear on invoices. PayPal and Stripe do not support invoice prefixing.</div>
+</div>
+
+### Site customizations
+
+Personalize the Recurly sidebar by choosing a sidebar theme that fits your brand. Select from the available style options to create a consistent visual experience for your team.
+
+
+<Image src="https://files.readme.io/1e05d6c9206082e45c2107b20223a7d0f25b3dcf4aec4f64186b1b65495738d8-image.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Additional subdomain
+
+Merchants looking to expand their online presence can add an extra subdomain through Recurly. This dedicated space also lets you allocate Total Processed Volume (TPV) from another existing subscriber account, offering more flexibility in managing your billing operations.

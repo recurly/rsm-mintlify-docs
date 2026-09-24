@@ -1,0 +1,64 @@
+---
+title: Recurly.js
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly.js is a browser JavaScript library that handles your customers' sensitive payment details securely — without exposing that data to your servers. It gives you full control over your checkout's look and feel while keeping your PCI scope to a minimum.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Moderate understanding of JavaScript</li>
+  <li>An active Recurly account</li>
+  <li>Familiarity with payment gateway integrations</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Recurly.js is a browser JavaScript library that securely transmits payment details from your checkout directly to Recurly's servers — where they're encrypted and stored. In return, your application receives a token you can use for any API operation that requires payment details. You never handle sensitive payment data directly, which keeps your PCI scope significantly reduced.</div>
+
+# Key benefits
+
+<div className="rp-benefits rp-benefits-2x2">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Reduced PCI scope</strong>
+    <span>Payment data goes directly to Recurly — your servers never touch it, significantly reducing your PCI compliance obligations.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-paintbrush" aria-hidden="true"></i></div>
+    <strong>Full customizability</strong>
+    <span>Build a checkout experience that matches your brand's look and feel — Recurly.js doesn't constrain your UI.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-code-branch" aria-hidden="true"></i></div>
+    <strong>Open source</strong>
+    <span>Recurly.js is open-source — view, modify, and contribute to the code on GitHub to adapt it to your needs.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-plug" aria-hidden="true"></i></div>
+    <strong>Flexible integration</strong>
+    <span>Works alongside other Recurly features and third-party applications without requiring a hosted payment page.</span>
+  </div>
+</div>
+
+# Key details
+
+## PCI compliance with Elements
+
+Recurly.js includes **Elements** — secure payment fields that embed directly into your checkout form. Elements handle the sensitive input on Recurly's infrastructure while remaining visually indistinguishable from your own UI, helping you qualify for reduced PCI scope without sacrificing design control.
+
+## How the token flow works
+
+When a customer submits their payment details, Recurly.js transmits that data directly to Recurly — encrypted and stored on Recurly's servers. Your application receives a token in return. Use that token in any Recurly API call that requires payment details. Because your servers never see or store the raw card data, your PCI exposure is minimized.
+
+## Developer documentation
+
+For full implementation details, code examples, and integration guidance, see the <a href="https://docs.recurly.com/recurly-subscriptions/v1.2/docs/overview-recurlyjs#/" target="_blank">Recurly.js developer documentation</a>.

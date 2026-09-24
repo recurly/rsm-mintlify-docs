@@ -1,0 +1,148 @@
+---
+title: Multi-item upload guide
+---
+
+# Overview
+
+**Multi-item Upload** is a process for bulk-importing items from an external source (like a product database) into the Recurly Item Catalog. This guide shows how to structure your CSV data and use Recurly’s Python client to create items efficiently.
+
+### Prerequisites & limitations
+
+* **CSV file** containing item data
+* **Python 3**
+* **Text editor** for modifying the script
+* **Recurly Python client library** (`pip install --upgrade recurly`)
+* **API key** from [Recurly’s API Credentials page](https://app.recurly.com/go/integrations/api_keys)
+
+***
+
+## Multi-item upload guide
+
+This guide walks you through importing existing items into **Recurly's Item Catalog**. If you already manage items in another database, you can avoid manual entry by following these steps or using the included script at the end of this guide.
+
+### Reference Documentation
+
+* **Create Item** (v3 API) – [Docs](https://recurly.com/developers/api/latest/index.html#operation/create_item)
+* **Python client** – [Docs](https://recurly-client-python.readthedocs.io/en/latest/)
+* **Item Catalog** – [Docs](https://docs.recurly.com/docs/catalog)
+
+***
+
+## Data preparation
+
+Export or compile your item data into a CSV file with these columns:
+
+| Column                  | Required? | Type    | Description                                                                              |
+| ----------------------- | --------- | ------- | ---------------------------------------------------------------------------------------- |
+| `code`                  | Yes       | String  | Unique code (max 50 chars).                                                              |
+| `name`                  | Yes       | String  | Item name (max 255 chars).                                                               |
+| `description`           | No        | String  | Optional. Not displayed to customers.                                                    |
+| `external_sku`          | No        | String  | Optional stock keeping unit (max 50 chars).                                              |
+| `accounting_code`       | No        | String  | Optional. Only `[a-z 0-9 @ - _ .]` allowed (max 20 chars).                               |
+| `revenue_schedule_type` | No        | String  | How revenue is recognized. Options: `never`, `evenly`, `at_range_start`, `at_range_end`. |
+| `tax_exempt`            | No        | Boolean | `true` = exempt from tax; `false` = applies tax.                                         |
+| `tax_code`              | No        | String  | Used by Avalara, Vertex, or Recurly’s EU VAT. (max 50 chars).                            |
+| `default_price`         | No        | Number  | Default item price in your site’s default currency.                                      |
+| `currency`              | Yes\*     | String  | Currency code (e.g., USD, EUR, AUD). Required only if `default_price` is set.            |
+
+**Sample CSV:**
+
+```csv
+code,name,description,external_sku,accounting_code,tax_exempt,tax_code,default_price,currency
+code1,name1,This is an item.,sku1,acc1,true,,12.99,USD
+code2,name2,This is another item.,sku2,acc2,true,,150.00,USD
+code3,name3,This is a taxable item.,sku3,acc3,false,taxme,250.00,USD
+code4,name4,This is an item but with no default price.,sku4,acc4,true,,,
+```
+
+***
+
+## Step-by-step data import
+
+1. **Install** the Recurly Python client:
+
+```bash
+pip install --upgrade recurly
+```
+
+2. **Obtain** your private API key from [Recurly’s API Credentials page](https://app.recurly.com/go/integrations/api_keys).
+3. **Export** your item data into a CSV with the fields shown above.
+4. **Create** a Python client:
+
+```python
+import recurly
+api_key = 'your_api_key'
+client = recurly.Client(api_key)
+```
+
+5. **Iterate** over your CSV and call [Create Item](https://recurly.com/developers/api/latest/index.html#operation/create_item):
+
+```python
+import csv
+file = open('items.csv')
+csv_file = csv.DictReader(file)
+
+for item in csv_file:
+    currency = item.pop('currency', 'USD')
+    unit_amount = item.pop('default_price', None)
+    if unit_amount is not "":
+        item['currencies'] = [{'currency': currency, 'unit_amount': unit_amount}]
+    try:
+        created_item = client.create_item(item)
+        print("Created Item %s" % created_item)
+    except recurly.ApiError as e:
+        print("Could not create item:", item)
+        print(e)
+```
+
+6. **Verify** your import:
+
+```python
+items = client.list_items().items()
+for i in items:
+    print(i.code)
+```
+
+Check the [Recurly Admin UI](https://app.recurly.com/go/items) to confirm your items appear correctly.
+
+***
+
+## Complete upload script
+
+Run:
+
+```bash
+chmod +x ./upload_items.py
+./upload_items.py <api_key> <input_csv_file>
+```
+
+**Script contents:**
+
+```python
+#!/usr/bin/env python3
+
+# Usage: upload_items.py api_key input.csv
+import sys
+import csv
+import recurly
+
+api_key = sys.argv[1]
+file = open(sys.argv[2])
+client = recurly.Client(api_key)
+
+csv_file = csv.DictReader(file)
+
+for item in csv_file:
+    currency = item.pop('currency', 'USD')
+    unit_amount = item.pop('default_price', None)
+    if unit_amount is not "":
+        item['currencies'] = [{'currency': currency, 'unit_amount': unit_amount}]
+    try:
+        created_item = client.create_item(item)
+        print("Created Item %s" % created_item)
+    except recurly.ApiError as e:
+        print("Could not create item:", item)
+        print(e)
+```
+
+This script reads your CSV line by line, transforms the data, and calls `create_item`. Adjust as needed for your workflow.

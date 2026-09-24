@@ -1,0 +1,137 @@
+---
+title: Upgrade to API V3
+---
+
+# Overview
+
+This guide helps you transition from Recurly API version 2 to version 3. It covers crucial differences in how v3 handles authentication, data formats, and client library design, ensuring a smoother, more transparent integration.
+
+### Prerequisites & limitations
+
+* Familiarity with Recurly API v2 and your current integration
+* Basic understanding of RESTful APIs and JSON
+* Access to Recurly with valid API credentials
+* Awareness that v3 is fully JSON-based (no XML)
+
+***
+
+# Definition
+
+**API v3 Upgrade** refers to the process of adapting your existing API v2 integration to Recurly’s redesigned v3, which emphasizes JSON-based requests, explicit resource management, site scoping, and explicit client initialization. This shift provides clearer, more predictable network operations and helps avoid v2’s hidden complexity.
+
+***
+
+## HTTP API differences
+
+### Authentication
+
+V3 Clients still authenticate using an API key with HTTP basic auth. However, there is no longer a need for a subdomain, as the site must now be specified per request. For more details, see [Scoping by Site](#scoping-by-site).
+
+### JSON
+
+A significant change in V3 is that the transport layer is now entirely JSON-based. XML is no longer supported, and we no longer use "links."
+
+### Versioning
+
+The API is now versioned by date, replacing the previous `major.minor` format. The version date typically corresponds to the general availability (GA) release date, using the format `vYYYY-MM-DD`, e.g., `v2018-08-09`.
+
+### Breaking changes
+
+In V2, versioning was conservative due to ecosystem constraints, and changes didn't always result in version bumps. In V3, versions will only change when breaking changes are required. Additionally, we will provide a clear policy outlining our definition of breaking changes. This approach offers more flexibility, reducing the need for forced upgrades for customers.
+
+### Identifiers
+
+In V3, "links" are no longer used in resources, so it's important to be aware of which identifiers to use when interacting with the API. There are two types of identifiers in V3:
+
+1. **Druuids**: A Druuid is a base36-encoded integer used as the internal identifier for a resource.
+
+2. **Friendly IDs**: A Friendly ID is a unique, often human-readable, external identifier for a resource. It is frequently provided by you and can also be used to identify resources.
+
+An example, consider a `Site` resource:
+
+```json
+{
+  "id": "3w5e11264sgsg",
+  "subdomain": "mysite",
+  // ...
+}
+```
+
+You can use one of the two formats anywhere a site can be referenced. Consider the endpoint to fetch a Site:
+
+`GET /sites/{site_id}`
+
+You can use the Druuid (id):
+
+`GET /sites/3w5e11264sgsg`
+
+or a friendly id (use format `{property_name}-{property_value}`)
+
+`GET /sites/subdomain-mysite`
+
+All ids are interchangeable, but we recommend you use a friendly id wherever possible as it is often the identifier you\
+will store on your system. The Druuid can be useful for debugging or transient usage.
+
+### Scoping by site
+
+In V3, the API no longer assumes that a client will handle only one site. While the client libraries provide abstractions to maintain this approach if your system is designed that way, at the API level, all URLs must now be scoped by the site you intend to operate on. For example:
+
+`GET /sites/subdomain-mysite/accounts/code-myaccountcode`
+
+This approach is particularly useful if you manage multiple sites, as it allows you to reuse a single TCP connection to perform operations across different sites.
+
+## Client library differences
+
+### Explicitly managed clients
+
+In V2, client instances were globally and statically initialized for convenience, under the assumption that a single client would operate on a single site. Additionally, the connection and the request/response cycle were abstracted from the developer. Example with the V2 ruby client:
+
+```ruby
+# client initialized globally for the whole process
+Recurly.subdomain = "mysite"
+Recurly.api_key   = "fad7b04dc787ab7809e8d90e9df73cf7"
+
+# client, request, and response are hidden from the programmer
+account = Recurly::Account.find('myaccountcode')
+account.first_name = "Benjamin"
+account.save!
+```
+
+This design in V2 led to a few unintended consequences:
+
+1. **Hidden network calls**: Since network calls were abstracted, it could unintentionally lead to performance issues and make testing more difficult.
+2. **Distributed network calls**: Network requests were spread across different objects and modules, complicating debugging and tracing.
+3. **Thread safety issues**: Changing the site in V2 was not thread-safe, which could result in race conditions or inconsistent states.
+
+In V3, developers must explicitly initialize and manage the client, which resolves these issues. This approach provides more control over network operations, improves performance awareness, and ensures thread safety when working with multiple sites.
+
+```ruby
+# you must explicitly create and manage this connection now
+client = Recurly::Client.new(api_key: "fad7b04dc787ab7809e8d90e9df73cf7")
+
+id = "code-myaccountcode"
+account = client.get_account(account_id: id)
+# overwrite the account with new account
+account = client.update_account(account_id: id, body: { first_name: "Benjamin" })
+```
+
+### Inert resources
+
+In V2, the mixing of data and behavior introduced several challenges:
+
+1. **Opaque network calls**: It was difficult to predict the contents of network requests, making it harder to debug and understand what data was being sent or received.
+2. **State tracking issues**: Internal state tracking was required to build up requests, which often led to subtle bugs and inconsistencies.
+
+In V3, the resources returned from the server are inert—they contain no behavior, only properties. Instead of mutating resources locally and "syncing" their state back to the server, you must explicitly send a request to the server and receive a fresh resource in return.
+
+Consider the account example again:
+
+```ruby
+id = "code-myaccountcode"
+account = client.get_account(account_id: id)
+# If i want to change the first name, ask the server to
+# change it and get back a new copy of what is on the server
+account = client.update_account(account_id: id, body: { first_name: "Benjamin" })
+```
+
+This new approach makes it much clearer what the underlying JSON request will look like, as each request is explicit. It also eliminates the state tracking bugs that you may have encountered with the previous method, as there is no longer any implicit synchronization of resource state between the client and the server.

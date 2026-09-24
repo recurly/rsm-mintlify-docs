@@ -1,0 +1,757 @@
+---
+title: Subscription notifications
+---
+
+Keep your systems in sync by receiving webhook notifications whenever a subscription is created, modified, or enters a new state. Each event delivers the subscription’s UUID and metadata so you can react accordingly.
+
+### Prerequisites and limitations
+
+* You must subscribe your endpoint to the desired subscription events in your Webhooks settings.
+* XML webhooks include additional add-on attributes (`add_on_type`, `usage_percentage`, `measured_unit_id`) and shipping address fields when applicable.
+* Events are sent as separate notifications; you will receive one webhook per event type.
+
+# Subscription notifications
+
+When using XML webhooks, subscriptions will return an array of add-ons if the subscription includes add-ons. If you have a plan on your site with a usage-based add-on, you will start seeing these additional add-on attributes when add-ons are returned:
+
+* add\_on\_type
+* usage\_percentage
+* measured\_unit\_id
+
+In addition, Subscription notifications will include information about shipping addresses when applicable:
+
+* id
+* nickname
+* first\_name
+* last\_name
+* company\_name
+* vat\_number
+* street1
+* street2
+* city
+* state
+* zip
+* country
+* email
+* phone
+* external\_sku
+* tier\_type
+
+## New subscription
+
+Sent when a new subscription is created.
+
+```json
+{
+  "id": "ra8foq26o2dt",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "created",
+  "event_time": "2022-07-26T22:01:56Z",
+  "uuid": "63ab531e1d5b1d47eaf1ef44eeb853c3"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_subscription_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true">verena</username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true">Company, Inc.</company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>bronze</plan_code>
+      <name>Bronze Plan</name>
+    </plan>
+    <uuid>8047cb4fd5f874b14d713d785436ebd3</uuid>
+    <state>active</state>
+    <quantity type="integer">2</quantity>
+    <total_amount_in_cents type="integer">17000</total_amount_in_cents>
+    <subscription_add_ons type="array">
+      <subscription_add_on>
+        <add_on_code>premium_support</add_on_code>
+        <name>Premium Support</name>
+        <quantity type="integer">1</quantity>
+        <unit_amount_in_cents type="integer">15000</unit_amount_in_cents>
+        <external_sku>pre-123</external_sku>
+        <add_on_type>fixed</add_on_type>
+        <usage_percentage nil="true"></usage_percentage>
+        <measured_unit_id nil="true"></measured_unit_id>
+        <tier_type>flat</tier_type>
+      </subscription_add_on>
+      <subscription_add_on>
+        <add_on_code>email_blasts</add_on_code>
+        <name>Email Blasts</name>
+        <quantity type="integer">1</quantity>
+        <external_sku>email-123</external_sku>
+        <unit_amount_in_cents type="integer">50</unit_amount_in_cents>
+        <add_on_type>usage</add_on_type>
+        <usage_percentage nil="true"></usage_percentage>
+        <measured_unit_id type="integer">394681687402874853</measured_unit_id>
+        <tier_type>flat</tier_type>
+      </subscription_add_on>
+      <subscription_add_on>
+        <add_on_code>donations</add_on_code>
+        <name>Donations</name>
+        <quantity type="integer">1</quantity>
+        <unit_amount_in_cents nil="true"></unit_amount_in_cents>
+        <add_on_type>usage</add_on_type>
+        <usage_percentage>0.6</usage_percentage>
+        <measured_unit_id type="integer">394681920153192422</measured_unit_id>
+        <tier_type>flat</tier_type>
+      </subscription_add_on>
+      <subscription_add_on>
+        <add_on_code>translation_assistance</add_on_code>
+        <name>Translation Assistance</name>
+        <quantity type="integer">1</quantity>
+        <unit_amount_in_cents nil="true"></unit_amount_in_cents>
+        <add_on_type>fixed</add_on_type>
+        <usage_percentage nil="true"></usage_percentage>
+        <measured_unit_id nil="true"></measured_unit_id>
+        <tier_type>tiered</tier_type>
+      </subscription_add_on>
+    </subscription_add_ons>
+    <activated_at type="datetime">2009-11-22T13:10:38Z</activated_at>
+    <canceled_at type="datetime"></canceled_at>
+    <expires_at type="datetime"></expires_at>
+    <current_period_started_at type="datetime">2009-11-22T13:10:38Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2009-11-29T13:10:38Z</current_period_ends_at>
+    <trial_started_at type="datetime">2009-11-22T13:10:38Z</trial_started_at>
+    <trial_ends_at type="datetime">2009-11-29T13:10:38Z</trial_ends_at>
+    <collection_method>automatic</collection_method>
+  </subscription>
+</new_subscription_notification>
+```
+
+## Updated subscription
+
+Sent when a subscription is upgraded, downgraded, or the renewal date is updated. The notification is sent after the modification is performed. If you modify a subscription and it takes place immediately, the notification will also be sent immediately. If the subscription change takes effect at renewal, then the notification will be sent when the subscription renews. For a notification of an upcoming change, see [Scheduled Subscription Update](https://docs.recurly.com/v1.3/docs/subscription-notifications#scheduled-subscription-update).
+
+```json
+{
+  "id": "r77d8unmt1tt",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "updated",
+  "event_time": "2022-07-27T00:17:45Z",
+  "uuid": "635c9e549909a5c509bfbb4f55b953da"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<updated_subscription_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>1dpt</plan_code>
+      <name>Subscription One</name>
+    </plan>
+    <uuid>292332928954ca62fa48048be5ac98ec</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">200</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2010-09-23T22:12:39Z</activated_at>
+    <canceled_at nil="true" type="datetime"></canceled_at>
+    <expires_at nil="true" type="datetime"></expires_at>
+    <current_period_started_at type="datetime">2010-09-23T22:03:30Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2010-09-24T22:03:30Z</current_period_ends_at>
+    <trial_started_at nil="true" type="datetime">
+    </trial_started_at>
+    <trial_ends_at nil="true" type="datetime">
+    </trial_ends_at>
+  </subscription>
+</updated_subscription_notification>
+```
+
+## Canceled subscription
+
+Sent when a subscription is canceled.  This means the subscription will not renew. The subscription state is set to canceled but the subscription is still valid until the `expires_at` date. The next notification is sent when the subscription is completely terminated.
+
+```json
+{
+  "id": "ra8foq26o2dt",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "canceled",
+  "event_time": "2022-07-26T22:01:58Z",
+  "uuid": "63ab531e1d5b1d47eaf1ef44eeb853c3"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<canceled_subscription_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>1dpt</plan_code>
+      <name>Subscription One</name>
+    </plan>
+    <uuid>dccd742f4710e78515714d275839f891</uuid>
+    <state>canceled</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">200</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2010-09-23T22:05:03Z</activated_at>
+    <canceled_at type="datetime">2010-09-23T22:05:43Z</canceled_at>
+    <expires_at type="datetime">2010-09-24T22:05:03Z</expires_at>
+    <current_period_started_at type="datetime">2010-09-23T22:05:03Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2010-09-24T22:05:03Z</current_period_ends_at>
+    <trial_started_at nil="true" type="datetime"></trial_started_at>
+    <trial_ends_at nil="true" type="datetime"></trial_ends_at>
+  </subscription>
+</canceled_subscription_notification>
+```
+
+## Expired subscription
+
+Sent when a subscription is no longer valid. This can happen if a canceled subscription expires or if an active subscription is refunded (and terminated immediately). If you receive this message, the account no longer has a subscription.
+
+```json
+{
+  "id": "radnhqhifyql",
+  "object_type": "subscription",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "expired",
+  "event_time": "2022-07-27T15:39:17Z",
+  "uuid": "63af16e00c35a96baaa9a147d984bb33"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<expired_subscription_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>1dpt</plan_code>
+      <name>Subscription One</name>
+    </plan>
+    <uuid>d1b6d359a01ded71caed78eaa0fedf8e</uuid>
+    <state>expired</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">200</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2010-09-23T22:05:03Z</activated_at>
+    <canceled_at type="datetime">2010-09-23T22:05:43Z</canceled_at>
+    <expires_at type="datetime">2010-09-24T22:05:03Z</expires_at>
+    <current_period_started_at type="datetime">2010-09-23T22:05:03Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2010-09-24T22:05:03Z</current_period_ends_at>
+    <trial_started_at nil="true" type="datetime">
+    </trial_started_at><trial_ends_at nil="true" type="datetime"></trial_ends_at>
+  </subscription>
+</expired_subscription_notification>
+```
+
+## Renewed subscription
+
+Sent whenever a subscription renews. This notification is sent regardless of a successful payment being applied to the subscription---it indicates the previous term is over and the subscription is now in a new term. If you are performing metered or usage-based billing, use this notification to reset your usage stats for the current billing term.
+
+```json
+{
+  "id": "qlm81nq1drd0",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "renewed",
+  "event_time": "2022-07-27T15:43:04Z",
+  "uuid": "612bcf671a227b272b753a487fb6576a"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<renewed_subscription_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>bootstrap</plan_code>
+      <name>Bootstrap</name>
+    </plan>
+    <uuid>6ab458a887d38070807ebb3bed7ac1e5</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">9900</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2010-07-22T20:42:05Z</activated_at>
+    <canceled_at nil="true" type="datetime"></canceled_at>
+    <expires_at nil="true" type="datetime"></expires_at>
+    <current_period_started_at type="datetime">2010-09-22T20:42:05Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2010-10-22T20:42:05Z</current_period_ends_at>
+    <trial_started_at nil="true" type="datetime"></trial_started_at>
+    <trial_ends_at nil="true" type="datetime"></trial_ends_at>
+
+  </subscription>
+</renewed_subscription_notification>
+```
+
+### Reactivated subscription
+
+Sent when a subscription is reactivated after having been canceled.
+
+```json
+{
+  "id": "radoktyw8ge4",
+  "object_type": "subscription",
+  "site_id": "radmlv3z8vl6",
+  "event_type": "reactivated",
+  "event_time": "2022-07-27T15:41:18Z",
+  "uuid": "63af1c72afe86fec35530a4a8aa70f71"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<reactivated_account_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>bootstrap</plan_code>
+      <name>Bootstrap</name>
+    </plan>
+    <uuid>6ab458a887d38070807ebb3bed7ac1e5</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">9900</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2010-07-22T20:42:05Z</activated_at>
+    <canceled_at nil="true" type="datetime"></canceled_at>
+    <expires_at nil="true" type="datetime"></expires_at>
+    <current_period_started_at type="datetime">2010-09-22T20:42:05Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2010-10-22T20:42:05Z</current_period_ends_at>
+    <trial_started_at nil="true" type="datetime"></trial_started_at>
+    <trial_ends_at nil="true" type="datetime"></trial_ends_at>
+  </subscription>
+</reactivated_account_notification>
+```
+
+## Paused subscription
+
+Sent when a subscription moves from state of active to paused, meaning that the subscription is now paused.
+
+```json
+{
+  "id": "radqtk7scy9u",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "paused",
+  "event_time": "2022-07-27T16:10:32Z",
+  "uuid": "63af27f8b037a8052b530b4bae858dc1"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<subscription_paused_notification>
+  <account>
+    <account_code>1</account_code>
+    <username>test-user</username>
+    <email>test+2605@recurly.com</email>
+    <first_name>test</first_name>
+    <last_name>test-last</last_name>
+    <company_name>Recurly, Inc.</company_name>
+    <phone>555-1212</phone>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>daily_plan</plan_code>
+      <name>daily_plan</name>
+    </plan>
+    <uuid>437a818b9dba81065e444448de931842</uuid>
+    <state>paused</state>
+    <quantity type="integer">10</quantity>
+    <total_amount_in_cents type="integer">10000</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2018-03-09T17:01:59Z</activated_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+    <expires_at type="datetime" nil="true"></expires_at>
+    <current_period_started_at type="datetime">2018-03-10T22:12:08Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2018-03-11T22:12:08Z</current_period_ends_at>
+    <trial_started_at type="datetime" nil="true"></trial_started_at>
+    <trial_ends_at type="datetime" nil="true"></trial_ends_at>
+    <paused_at type="datetime">2018-03-10T22:12:08Z</paused_at>
+    <resume_at type="datetime">2018-03-20T22:12:08Z</resume_at>
+    <remaining_pause_cycles type="integer">9</remaining_pause_cycles>
+  </subscription>
+</subscription_paused_notification>
+```
+
+## Resumed subscription
+
+Sent when a subscription moves from state of paused to active, meaning that the subscription is successfully renewed and a new billing cycle has started.
+
+```json
+{
+  "id": "radqtk7scy9u",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "resumed",
+  "event_time": "2022-07-27T16:11:40Z",
+  "uuid": "63af27f8b037a8052b530b4bae858dc1"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<subscription_resumed_notification>
+  <account>
+    <account_code>1</account_code>
+    <username>test-user</username>
+    <email>test+2605@recurly.com</email>
+    <first_name>test</first_name>
+    <last_name>test-last</last_name>
+    <company_name>Recurly, Inc.</company_name>
+    <phone>555-1212</phone>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>daily_plan</plan_code>
+      <name>daily_plan</name>
+    </plan>
+    <uuid>437a818b9dba81065e444448de931842</uuid>
+    <state>active</state>
+    <quantity type="integer">10</quantity>
+    <total_amount_in_cents type="integer">10000</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2018-03-09T17:01:59Z</activated_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+    <expires_at type="datetime" nil="true"></expires_at>
+    <current_period_started_at type="datetime">2018-03-20T17:50:27Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2018-03-21T17:50:27Z</current_period_ends_at>
+    <trial_started_at type="datetime" nil="true"></trial_started_at>
+    <trial_ends_at type="datetime" nil="true"></trial_ends_at>
+    <paused_at type="datetime" nil="true"></paused_at>
+    <resume_at type="datetime" nil="true"></resume_at>
+    <remaining_pause_cycles nil="true"></remaining_pause_cycles>
+  </subscription>
+</subscription_resumed_notification>
+```
+
+## Scheduled subscription pause
+
+Sent when an active and eligible subscription is scheduled to pause using the API or through the Admin UI. The `paused_at`, `resumed_at` and `remaining_pause_cycles` fields will now contain information on when the subscription will become paused, when it will resume, and how many pause cycles are left respectively.
+
+```json
+{
+  "id": "ra8ggigeveo0",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "pause.scheduled",
+  "event_time": "2022-07-27T00:22:26Z",
+  "uuid": "63ab5718be89b4f20a27714a8395ec2f"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<scheduled_subscription_pause_notification>
+  <account>
+    <account_code>1</account_code>
+    <username>test-user</username>
+    <email>test+2605@recurly.com</email>
+    <first_name>test</first_name>
+    <last_name>test-last</last_name>
+    <company_name>Recurly, Inc.</company_name>
+    <phone>555-1212</phone>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>4ec9adacbc37be072f0d6e2d1affc538</plan_code>
+      <name>Aut Fugiat Officia 6eae19a51 plan</name>
+    </plan>
+    <uuid>437b9def1c442e659f90f4416086dd66</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">709</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2018-03-09T22:12:36Z</activated_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+    <expires_at type="datetime" nil="true"></expires_at>
+    <current_period_started_at type="datetime">2018-03-09T22:12:36Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2019-03-09T22:12:36Z</current_period_ends_at>
+    <trial_started_at type="datetime" nil="true"></trial_started_at>
+    <trial_ends_at type="datetime" nil="true"></trial_ends_at>
+    <paused_at type="datetime">2019-03-09T22:12:36Z</paused_at>
+    <resume_at type="datetime">2024-03-09T22:12:36Z</resume_at>
+    <remaining_pause_cycles type="integer">5</remaining_pause_cycles>
+  </subscription>
+</scheduled_subscription_pause_notification>
+```
+
+## Scheduled subscription update
+
+Sent when a subscription change is scheduled to take effect at a future date (e.g. renewal). For a notification when update is applied, see [Updated Subscription](/guides/webhooks/notifications/subscription-notifications).
+
+```json
+{
+  "id": "radqtk7scy9u",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "pending_change.scheduled",
+  "event_time": "2022-07-27T16:12:59Z",
+  "uuid": "63af27f8b037a8052b530b4bae858dc1"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<scheduled_subscription_update_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>1dpt</plan_code>
+      <name>Subscription One</name>
+    </plan>
+    <uuid>292332928954ca62fa48048be5ac98ec</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">200</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2010-09-23T22:12:39Z</activated_at>
+    <canceled_at nil="true" type="datetime"></canceled_at>
+    <expires_at nil="true" type="datetime"></expires_at>
+    <current_period_started_at type="datetime">2010-09-23T22:03:30Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2010-09-24T22:03:30Z</current_period_ends_at>
+    <trial_started_at nil="true" type="datetime">
+    </trial_started_at>
+    <trial_ends_at nil="true" type="datetime">
+    </trial_ends_at>
+  </subscription>
+</scheduled_subscription_update_notification>
+```
+
+## Subscription paused modified
+
+Sent when a subscription's pause duration is modified. The `resume_at` and `remaining_pause_cycles` fields will change to reflect the new date at which the subscription will resume and how many pause cycles are left.
+
+```json
+{
+  "id": "ra8ggigeveo0",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "pause.modified",
+  "event_time": "2022-07-27T00:22:50Z",
+  "uuid": "63ab5718be89b4f20a27714a8395ec2f"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<subscription_pause_modified_notification>
+  <account>
+    <account_code>1</account_code>
+    <username>test-user</username>
+    <email>test+2605@recurly.com</email>
+    <first_name>test</first_name>
+    <last_name>test-last</last_name>
+    <company_name>Recurly, Inc.</company_name>
+    <phone>555-1212</phone>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>4ec9adacbc37be072f0d6e2d1affc538</plan_code>
+      <name>Aut Fugiat Officia 6eae19a51 plan</name>
+    </plan>
+    <uuid>437a818b9dba81065e444448de931842</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">709</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2018-03-09T17:01:59Z</activated_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+    <expires_at type="datetime" nil="true"></expires_at>
+    <current_period_started_at type="datetime">2018-03-09T13:33:09Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2018-03-09T13:38:22Z</current_period_ends_at>
+    <trial_started_at type="datetime" nil="true"></trial_started_at>
+    <trial_ends_at type="datetime" nil="true"></trial_ends_at>
+    <paused_at type="datetime">2018-03-09T13:38:22Z</paused_at>
+    <resume_at type="datetime">2023-03-09T13:38:22Z</resume_at>
+    <remaining_pause_cycles type="integer">5</remaining_pause_cycles>
+  </subscription>
+</subscription_pause_modified_notification>
+```
+
+## Paused subscription renewal
+
+Sent when a subscription’s renewal/billing cycle is skipped because it is paused. The `remaining_pause_cycles` value will decrement by 1 after each pause cycle.
+
+```json
+{
+  "id": "qlm81nq1drd0",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "renewal.skipped",
+  "event_time": "2022-07-27T15:43:04Z",
+  "uuid": "612bcf671a227b272b753a487fb6576a"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<paused_subscription_renewal_notification>
+  <account>
+    <account_code>1</account_code>
+    <username>test-user</username>
+    <email>test+2605@recurly.com</email>
+    <first_name>test</first_name>
+    <last_name>test-last</last_name>
+    <company_name>Recurly, Inc.</company_name>
+    <phone>555-1212</phone>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>daily_plan</plan_code>
+      <name>daily_plan</name>
+    </plan>
+    <uuid>437a818b9dba81065e444448de931842</uuid>
+    <state>paused</state>
+    <quantity type="integer">10</quantity>
+    <total_amount_in_cents type="integer">10000</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2018-03-09T17:01:59Z</activated_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+    <expires_at type="datetime" nil="true"></expires_at>
+    <current_period_started_at type="datetime">2018-03-18T17:50:27Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2018-03-19T17:50:27Z</current_period_ends_at>
+    <trial_started_at type="datetime" nil="true"></trial_started_at>
+    <trial_ends_at type="datetime" nil="true"></trial_ends_at>
+    <paused_at type="datetime">2018-03-10T22:12:08Z</paused_at>
+    <resume_at type="datetime">2018-03-20T17:50:27Z</resume_at>
+    <remaining_pause_cycles type="integer">1</remaining_pause_cycles>
+  </subscription>
+</paused_subscription_renewal_notification>
+```
+
+## Subscription pause canceled
+
+Sent whenever a scheduled pause is canceled. The `paused_at`, `resume_at` and `remaining_pause_cycles` will now be nil as the pause has been canceled.
+
+```json
+{
+  "id": "ra8ggigeveo0",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "pause.canceled",
+  "event_time": "2022-07-27T00:22:56Z",
+  "uuid": "63ab5718be89b4f20a27714a8395ec2f"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<subscription_pause_canceled_notification>
+  <account>
+    <account_code>1</account_code>
+    <username>test-user</username>
+    <email>test+2605@recurly.com</email>
+    <first_name>test</first_name>
+    <last_name>test-last</last_name>
+    <company_name>Recurly, Inc.</company_name>
+    <phone>555-1212</phone>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>4ec9adacbc37be072f0d6e2d1affc538</plan_code>
+      <name>Aut Fugiat Officia 6eae19a51 plan</name>
+    </plan>
+    <uuid>437b9def1c442e659f90f4416086dd66</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">2000</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2018-03-09T22:12:36Z</activated_at>
+    <canceled_at type="datetime" nil="true"></canceled_at>
+    <expires_at type="datetime" nil="true"></expires_at>
+    <current_period_started_at type="datetime">2018-03-09T22:12:36Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2019-03-09T22:12:36Z</current_period_ends_at>
+    <trial_started_at type="datetime" nil="true"></trial_started_at>
+    <trial_ends_at type="datetime" nil="true"></trial_ends_at>
+    <paused_at type="datetime" nil="true"></paused_at>
+    <resume_at type="datetime" nil="true"></resume_at>
+    <remaining_pause_cycles nil="true"></remaining_pause_cycles>
+  </subscription>
+</subscription_pause_canceled_notification>
+```
+
+## Low balance gift card
+
+Sent when a gift card balance is low; the subscription is sent as payload.
+
+```json
+{
+  "id": "qlm81nq1drd0",
+  "object_type": "subscription",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "low_balance",
+  "event_time": "2022-07-27T15:43:04Z",
+  "uuid": "612bcf671a227b272b753a487fb6576a"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<low_balance_gift_card_notification>
+  <account>
+    <account_code>1</account_code>
+    <username nil="true"></username>
+    <email>verena@example.com</email>
+    <first_name>Verena</first_name>
+    <last_name>Example</last_name>
+    <company_name nil="true"></company_name>
+  </account>
+  <subscription>
+    <plan>
+      <plan_code>1dpt</plan_code>
+      <name>Subscription One</name>
+    </plan>
+    <uuid>292332928954ca62fa48048be5ac98ec</uuid>
+    <state>active</state>
+    <quantity type="integer">1</quantity>
+    <total_amount_in_cents type="integer">200</total_amount_in_cents>
+    <subscription_add_ons type="array"/>
+    <activated_at type="datetime">2010-09-23T22:12:39Z</activated_at>
+    <canceled_at nil="true" type="datetime"></canceled_at>
+    <expires_at nil="true" type="datetime"></expires_at>
+    <current_period_started_at type="datetime">2010-09-23T22:03:30Z</current_period_started_at>
+    <current_period_ends_at type="datetime">2010-09-24T22:03:30Z</current_period_ends_at>
+    <trial_started_at nil="true" type="datetime">
+    </trial_started_at>
+    <trial_ends_at nil="true" type="datetime">
+    </trial_ends_at>
+  </subscription>
+</low_balance_gift_card_notification>
+```

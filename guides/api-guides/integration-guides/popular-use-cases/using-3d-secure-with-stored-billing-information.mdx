@@ -1,0 +1,121 @@
+---
+title: 3D secure 2.0 with stored Billing Information
+---
+
+# Overview
+
+This guide shows you how to use the Verification Endpoints to reverify card details already stored in Recurly for new subscriptions using cards stored on file, such as prior to resuming or reactivating a subscription. We’ll also illustrate how to integrate [Recurly.js](/guides/recurly-js/3d-secure#re-authenticating-existing-billing-information) for secure tokenization where required.
+
+There are several reasons to use customer authentication or reverification flows outside of subscription lifecycle management. You may use this guide as a way to accomplish reverification of consumer card details for items such as:
+
+- Regulatory 3DS requirements when unpausing or resuming a subscription, signing up for a new subscription with stored card information, or making a one time purchase with stored card information.
+- Combat account takeover in scenarios such as stale accounts, suspected fraud, and more.
+- Acquire a new NTID after a card brand change from Account Updater
+
+<br />
+
+## Prerequisites & limitations
+
+- Familiarity with Recurly’s API and basic REST concepts including:
+  - Verify without CVV:  [Verify an account's credit card billing info](https://recurly.com/developers/api/v2021-02-25/index.html#operation/verify_billing_info)
+  - Verify with CVV:  [Verify an account's credit card billing cvv](https://recurly.com/developers/api/v2021-02-25/index.html#operation/verify_billing_info_cvv)
+  - Purchase Endpoint: [Run a customer initiated transaction via API](https://recurly.com/developers/api/v2021-02-25/#operation/create_purchase) (one time or subscriptions)
+- [Completed the Quickstart Guide](https://docs.recurly.com/v1.1/docs/quick-start-guide#/) and [3DS integration guide](https://docs.recurly.com/v1.1/docs/3d-secure-20-integration-guide#/versions)
+- Conditional usage of [Recurly.js](https://docs.recurly.com/v1.2/docs/3d-secure#/re-authenticating-existing-billing-information) depending on your supported gateway:
+  - Cybersource, WorldPay, Chase, Nuvei, Braintree, and Checkout gateways require use of Recurly.js to complete this integration guide.
+  - Other gateways _may_ trigger 3DS on stored billing info, which will also make use of Recurly.js. Only gateways that use redirect methods for 3DS support a lack of pre-tokenization (Stripe, Adyen).
+
+***
+
+# Definition
+
+**Stored Billing Information** refers to card data stored in Recurly's systems and referenced via API by sending in an account code, or specify a billing ID when using Recurly Wallet.
+
+**PSD2** refers to the EU mandate for SCA, or Strong Customer Authentication, and is applicable to EU merchants mostly. Read more about [PSD2 in our compliance documentation](https://docs.recurly.com/docs/revised-payment-services-directive-psd2#/) for 3DS, SCA, and PSD2.
+
+**Reactivating** a cancelled Subscription is referring to the API path in Recurly APIs where a customer's cancelled subscription is reactivated and resumes renewal billing again. You can view documentation on [reactivating a cancelled subscription via API](https://recurly.com/developers/api/v2021-02-25/index.html#operation/reactivate_subscription) in our developer hub.
+
+**Resuming** a paused Subscription is referring to the API path in Recurly APIs where a customer's paused subscription is resumed and starts billing again. You can view documentation on [resuming a paused subscription via API](https://recurly.com/developers/api/v2021-02-25/index.html#operation/resume_subscription) in our developer hub.
+
+**Account Takeover** describes a process where a bad actor acquires credentials to an account they do not own and attempts to abuse the information stored within it, such as payment information. To avoid usage of stored payment details by a fraudulent user, you can use these flows to require entry of a CVV or 3DS Authentication, which the fraudster is unlikely to complete successfully.
+
+**"Warming" a MID** refers to a process where after an account migration, such as from another provider, you acclimate the issuers of your current customer base to your new Merchant ID. This can help reduce churn related to issuers declining renewals post-import. You may handle this process in any way you wish, but the ultimate goal will be to have the customer re-enter session if their subscription has experienced a few declines post-import.
+
+**Customer Authentication** can have many avenues -- this can mean 3DS, it can also mean Apple and Google Pay verifications. This can also be used as an avenue for consumers to verify their info after a card brand update, if 3DS declines start happening during renewals, or in rare cases, when Account Updater returns a brand new card from an entirely different card network!
+
+**Regional requirements** can require 3DS authentication when a customer is initiating a payment, whether the card is on file or not. For example, all CIT transactions in Brazil require 3DS when using a credit card, thus even when a consumer has their billing info stored at Recurly, a simple API call without 3DS involvement is not enough and payments can be declined.
+
+***
+
+# Re-Authenticate Stored Card Details
+
+## Submit a Verification Request via API (No Recurly.js)
+
+### Use Case: Re-authentication of Cardholder Data via API Only (No Recurly.js)
+
+You can pre-verify card data in advance of in one of two ways depending on your preference:
+
+- With CVV: [Verify an account's credit card billing cvv](https://recurly.com/developers/api/v2021-02-25/index.html#operation/verify_billing_info_cvv)
+- Without CVV: [Verify an account's credit card billing information](https://recurly.com/developers/api/v2021-02-25/index.html#operation/verify_billing_info)
+
+You can also run a purchase using tokenized billing info IDs to present 3DS options to the consumer.&#x20;
+
+- [Purchase Endpoint (with or without CVV)](https://recurly.com/developers/api/v2021-02-25/#operation/create_purchase)
+
+Once you've done this, if 3DS challenge is required, you will receive a `three_d_secure_action_token_id` as documented in the [3DS integration guide](https://docs.recurly.com/v1.1/docs/3d-secure-20-integration-guide#/versions). From here, follow the flows outlined in the [3DS integration guide](/guides/recurly-js/3d-secure#/) to complete 3DS for re-verification.
+
+Use [Recurly.js](https://docs.recurly.com/v1.2/docs/3d-secure#/re-authenticating-existing-billing-information) to submit the 3DS action token and resubmit the verification using the action result token. Please note, that not all gateways support API only 3DS redirection. See below for special cases.
+
+### Use Case: Re-authentication of Cardholder Data via Recurly.js
+
+**Note:** If you are using [Cybersource](/guides/payment-orchestration/payment-gateways-1/cybersource#/) or [WorldPay](/guides/payment-orchestration/payment-gateways-1/worldpaydlocal-latam-support#/), you will want to _start_ this process with Recurly.js and pass in the billing info ID or account code to Recurly.js and pass in a `token_id` to one of the above two endpoints. This is because Cybersource and WorldPay require a data collector to capture consumer information for 3DS to function properly on those platforms.
+
+- For Cybersource and WorldPay, you'll need to configure your risk options to include a `billingInfoId`.
+- If passing the CVV, tokenizing the cvv element will also be required.
+
+See more detailed information for supporting known billing infos in Recurly.js  in our development hub.
+
+- [CVV Element Tokenization](https://docs.recurly.com/v1.2/docs/elements)
+- [Billing Info ID Tokenization](https://docs.recurly.com/recurly-subscriptions/v1.2/docs/3d-secure#/)
+
+Once tokenized, you may pass the Recurly.js token into any API that supports it in order to process new transactions, verify billing info, or let consumer sign up for new subscriptions with their stored data.
+
+#### Handling Re-verification and 3DS Authentication Failures
+
+Consumers can fail SCA for a multitude of reasons including cancelling out of the challenge window, browsers blocking pop-up modals, account takeover / fraudulent attempts, and more. You may offer consumers multiple chances to resume their subscription as per your own business needs. It is recommended to request new billing information after a few attempts to reverify existing billing information.
+
+If you only needed to authentication a consumer for a new subscription, or verification for non-subscription changes, you're done! If you need to resume or reactivate a subscription, see the next steps.
+
+### Use Case: Resume or Reactivate a Subscription
+
+Once you have successfully reauthenticated a consumer's card, you can unpause or reactivate subscriptions using the below documented endpoints.
+
+**Resuming a Paused Subscription**: If successful, you can [resume the paused subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/resume_subscription) by implementing the Resume Subscription endpoint and reference the subscription ID in your path.
+
+Read more about subscription lifecycles in our dedicated [Subscription lifecycle documentation](https://docs.recurly.com/docs/subscription-lifecycle#/).
+
+**Reactivating a Cancelled Subscription** If successful, you can [reactivate the cancelled subscription](https://recurly.com/developers/api/v2021-02-25/index.html#operation/reactivate_subscription) by implementing the Reactivate Subscription endpoint and reference the subscription ID in your path.
+
+Read more about subscription lifecycles in our dedicated [Subscription lifecycle documentation](https://docs.recurly.com/docs/subscription-lifecycle#/).
+
+### Use Case: Signing up for a new subscription with On-File Data
+
+Depending on the action you wish to take, signing up for a new subscription with stored card details, or letting consumers make one time purchases using their stored data, you may do so using the above logic, though you will use different endpoints in our API.
+
+For subscription signups, you can use the `/subscription` endpoint, or you may use the `/purchase` endpoint in our APIs, however it is best practice to use Recurly.js if you have a gateway that requires data collection / browser data to trigger 3D Secure Challenges for SCA or fraud-reduction purposes.
+
+Gateways that require Recurly.js to tokenize billing infos are:
+
+- Cybersource
+- WorldPay
+- Chase Orbital&#x20;
+- Braintree (for Proactive 3DS)
+- Nuvei and Checkout.com&#x20;
+
+<br />
+
+***
+
+## Next steps
+
+Now that you can reverify billing information and manage paused or cancelled subscriptions, explore the [Subscription Management](https://docs.recurly.com/v1.1/docs/managing-subscription-methods-guides#/) guide to learn additional methods to modify subscriptions after the initial purchase.

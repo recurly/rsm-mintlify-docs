@@ -1,0 +1,354 @@
+---
+title: 'Bank accounts: US, IBAN, BACS, BECS'
+---
+
+Recurly.js lets you gather bank-account information directly on your checkout page—no hosted iframes required—and swap it for a temporary Recurly token. The workflow is identical across regions: build a simple HTML form, call `recurly.bankAccount.token`, receive the token, and submit it to any v3 endpoint that accepts `billing_info`. The sections below show the exact inputs and token calls for:
+
+* **U.S. ACH**
+* **IBAN / SEPA**
+* **UK Bacs**
+* **Australia Becs**
+
+# Key details
+
+### US bank accounts
+
+Tokenize your users' bank account information
+
+Just as with a card form, use the `data-recurly` attribute to identify fields to Recurly.js. Since Recurly.js does not need to inject fields for bank accounts, all fields may be displayed as inputs on your payment form.
+
+```html
+<form>
+  <input type="text" data-recurly="routing_number">
+  <input type="text" data-recurly="account_number">
+  <input type="text" data-recurly="account_number_confirmation">
+  <input type="text" data-recurly="account_type">
+  <input type="text" data-recurly="name_on_account">
+  <input type="hidden" name="recurly-token" data-recurly="token">
+  <button>submit</button>
+</form>
+```
+
+#### US bank account inputs
+
+| Field Name                    | Example                 | Description                               |
+| :---------------------------- | :---------------------- | :---------------------------------------- |
+| routing\_number               | `123456789`             | Routing number. **Required**              |
+| account\_number               | `987654321`             | Account number. **Required**              |
+| account\_number\_confirmation | `987654321`             | Account number confirmation. **Required** |
+| account\_type                 | `checking` or `savings` | Account type. **Required**                |
+| name\_on\_account             | `Pat Smith`             | Full name on account. **Required**        |
+
+#### Getting a token
+
+##### <span className="heading-tag heading-tag--fn">fn</span> recurly.bankAccount.token
+
+You may call `recurly.bankAccount.token` with a form element:
+
+```js
+recurly.bankAccount.token(document.querySelector('form'), tokenHandler);
+```
+
+Or with an Object:
+
+```js
+const billingInfo = {
+  // required attributes
+  routing_number: '123456780',
+  account_number: '111111111',
+  account_number_confirmation: '111111111',
+  account_type: 'checking',
+  name_on_account: 'Pat Smith',
+
+  // optional attributes
+  address1: '123 Main St.',
+  address2: 'Unit 1',
+  city: 'Hope',
+  state: 'WA',
+  postal_code: '98552',
+  country: 'US',
+  vat_number: 'SE0000'
+};
+
+recurly.bankAccount.token(billingInfo, tokenHandler);
+```
+
+Both methods require using a handler function like this one:
+
+```js
+function tokenHandler (err, token) {
+  if (err) {
+    // handle error using err.code and err.fields
+  } else {
+    // handle success using token.id
+  }
+}
+```
+
+This sends bank account billing information to Recurly to store as a token, returning that token id back to you via callback.
+
+***
+
+### International bank accounts (IBAN)
+
+Tokenize your users' International Bank Account (IBAN) information in\
+order to process SEPA transactions.
+
+Similar to configuring a card form, use the `data-recurly` attribute to\
+identify IBAN specific inputs. Since Recurly.js does not need to inject fields for bank accounts, all fields may be displayed as inputs on your payment form.
+
+```html
+<form>
+  <input type="text" data-recurly="name_on_account">
+  <input type="text" data-recurly="iban">
+  <input type="text" data-recurly="country">
+  <input type="hidden" name="recurly-token" data-recurly="token">
+  <button>submit</button>
+</form>
+```
+
+#### IBAN inputs
+
+| Field Name        | Example                  | Description                                                                                                                                                                                                                                                                                                                         |
+| :---------------- | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name\_on\_account | `Pat Smith`              | Full name on account. **Required**                                                                                                                                                                                                                                                                                                  |
+| iban              | `GB33BUKB20201555555555` | The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number), up to 34 alphanumeric characters comprising a country code, two check digits, and a number that includes the domestic bank account number, branch identifier, and potential routing information. (SEPA only) **Required** |
+| country           | `FR`                     | ISO 3166 two-letter country code. This code must match a country in the European Union (EU) **Required**                                                                                                                                                                                                                            |
+
+#### Getting a token
+
+##### <span className="heading-tag heading-tag--fn">fn</span> recurly.bankAccount.token
+
+You may call `recurly.bankAccount.token` with a form element:
+
+```js
+recurly.bankAccount.token(document.querySelector('form'), tokenHandler);
+```
+
+Or with an Object:
+
+```js
+const ibanBillingInfo = {
+  name_on_account: 'Pat Smith',
+  iban: 'GB33BUKB20201555555555',
+  country: 'GB'
+};
+
+recurly.bankAccount.token(ibanBillingInfo, tokenHandler);
+```
+
+Both methods require using a handler function like this one:
+
+```js
+function tokenHandler (err, token) {
+  if (err) {
+    // handle error using err.code and err.fields
+  } else {
+    // handle success using token.id
+  }
+}
+```
+
+This sends IBAN information to Recurly to store as a token, returning that token id back to you via callback.
+
+### UK bank accounts (BACS)
+
+Tokenize your users' UK based Bank Account (Bacs) information in\
+order to process Bacs transactions.
+
+Similar to configuring a card form, use the `data-recurly` attribute to\
+identify Bacs specific inputs. Since Recurly.js does not need to inject fields for bank accounts, all fields may be displayed as inputs on your payment form.
+
+```html
+<form>
+  <input type="text" data-recurly="sort_code">
+  <input type="text" data-recurly="account_number">
+  <input type="text" data-recurly="account_number_confirmation">
+  <input type="hidden" name="type" value="bacs" data-recurly="type">
+  <input type="text" data-recurly="name_on_account">
+  <input type="hidden" name="recurly-token" data-recurly="token">
+  <button>submit</button>
+</form>
+```
+
+### UK bank account (BACS) inputs
+
+| Field Name                    | Example          | Description                               |
+| :---------------------------- | :--------------- | :---------------------------------------- |
+| sort\_code                    | `200000`         | UK Sort Code. **Required**                |
+| account\_number               | `55779911`       | Account number. **Required**              |
+| account\_number\_confirmation | `55779911`       | Account number confirmation. **Required** |
+| type                          | `bacs`           | Account type. **Required**                |
+| name\_on\_account             | `Charles George` | Full name on account. **Required**        |
+
+#### Getting a token
+
+##### <span className="heading-tag heading-tag--fn">fn</span> recurly.bankAccount.token
+
+You may call `recurly.bankAccount.token` with a form element:
+
+```js
+recurly.bankAccount.token(document.querySelector('form'), tokenHandler);
+```
+
+Or with an Object:
+
+```js
+const bacsBillingInfo = {
+  name_on_account: 'Charles George',
+  account_number: '55779911',
+  account_number_confirmation: '55779911',
+  sort_code: '200000',
+  type: 'bacs'
+};
+
+recurly.bankAccount.token(bacsBillingInfo, tokenHandler);
+```
+
+Both methods require using a handler function like this one:
+
+```js
+function tokenHandler (err, token) {
+  if (err) {
+    // handle error using err.code and err.fields
+  } else {
+    // handle success using token.id
+  }
+}
+```
+
+This sends Bacs information to Recurly to store as a token, returning that token id back to you via callback.
+
+#### Arguments (form)
+
+| Param    | Type              | Description                                    |
+| :------- | :---------------- | :--------------------------------------------- |
+| form     | `HTMLFormElement` | Parent form containing `data-recurly` fields   |
+| callback | `Function`        | Callback function to accept the returned token |
+
+Alternatively, you can call `recurly.bankAccount.token` with a plain JavaScript object. This allows a more direct interface to the payment flow, eliminating any need to use the DOM.
+
+#### Arguments (object)
+
+| Param    | Type       | Description                                                                     |
+| :------- | :--------- | :------------------------------------------------------------------------------ |
+| options  | `Object`   | An object with billing information properties matching those \[outlined above]. |
+| callback | `Function` | Callback function to accept the returned token                                  |
+
+A callback is always required
+
+#### Callback arguments
+
+| Param      | Type                     | Description                                              |
+| :--------- | :----------------------- | :------------------------------------------------------- |
+| err        | `RecurlyError` or `null` | A `RecurlyError` if an error occurred; otherwise `null`. |
+| token      | `Object`                 | An object containing a token id.                         |
+| token.type | `String`                 | 'bank\_account'                                          |
+| token.id   | `String`                 | A token id.                                              |
+
+#### Returns
+
+Nothing.
+
+***
+
+### Australian bank accounts (BECS)
+
+Tokenize your users' Australian based Bank Account (Becs) information in\
+order to process Becs transactions.
+
+Similar to configuring a card form, use the `data-recurly` attribute to\
+identify Becs specific inputs. Since Recurly.js does not need to inject fields for bank accounts, all fields may be displayed as inputs on your payment form.
+
+```html
+<form>
+  <input type="text" data-recurly="bsb_code">
+  <input type="text" data-recurly="account_number">
+  <input type="text" data-recurly="account_number_confirmation">
+  <input type="hidden" name="type" value="becs" data-recurly="type">
+  <input type="text" data-recurly="name_on_account">
+  <input type="hidden" name="recurly-token" data-recurly="token">
+  <button>submit</button>
+</form>
+```
+
+#### Australian bank account (BECS) inputs
+
+| Field Name                    | Example          | Description                               |
+| :---------------------------- | :--------------- | :---------------------------------------- |
+| bsb\_code                     | `082902`         | Australian BSB Code. **Required**         |
+| account\_number               | `55779911`       | Account number. **Required**              |
+| account\_number\_confirmation | `55779911`       | Account number confirmation. **Required** |
+| type                          | `becs`           | Account type. **Required**                |
+| name\_on\_account             | `Charles George` | Full name on account. **Required**        |
+
+#### Getting a token
+
+##### <span className="heading-tag heading-tag--fn">fn</span> recurly.bankAccount.token
+
+You may call `recurly.bankAccount.token` with a form element:
+
+```js
+recurly.bankAccount.token(document.querySelector('form'), tokenHandler);
+```
+
+Or with an Object:
+
+```js
+const becsBillingInfo = {
+  name_on_account: 'Charles George',
+  account_number: '55779911',
+  account_number_confirmation: '55779911',
+  bsb_code: '082902',
+  type: 'becs'
+};
+
+recurly.bankAccount.token(becsBillingInfo, tokenHandler);
+```
+
+Both methods require using a handler function like this one:
+
+```js
+function tokenHandler (err, token) {
+  if (err) {
+    // handle error using err.code and err.fields
+  } else {
+    // handle success using token.id
+  }
+}
+```
+
+This sends Becs information to Recurly to store as a token, returning that token id back to you via callback.
+
+#### Arguments (form)
+
+| Param    | Type              | Description                                    |
+| :------- | :---------------- | :--------------------------------------------- |
+| form     | `HTMLFormElement` | Parent form containing `data-recurly` fields   |
+| callback | `Function`        | Callback function to accept the returned token |
+
+Alternatively, you can call `recurly.bankAccount.token` with a plain JavaScript object. This allows a more direct interface to the payment flow, eliminating any need to use the DOM.
+
+#### Arguments (object)
+
+| Param    | Type       | Description                                                                     |
+| :------- | :--------- | :------------------------------------------------------------------------------ |
+| options  | `Object`   | An object with billing information properties matching those \[outlined above]. |
+| callback | `Function` | Callback function to accept the returned token                                  |
+
+A callback is always required
+
+#### Callback arguments
+
+| Param      | Type                     | Description                                              |
+| :--------- | :----------------------- | :------------------------------------------------------- |
+| err        | `RecurlyError` or `null` | A `RecurlyError` if an error occurred; otherwise `null`. |
+| token      | `Object`                 | An object containing a token id.                         |
+| token.type | `String`                 | 'bank\_account'                                          |
+| token.id   | `String`                 | A token id.                                              |
+
+#### Returns
+
+Nothing.
+
+***

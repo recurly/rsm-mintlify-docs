@@ -1,0 +1,155 @@
+---
+title: Audience segmentations
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Audience segmentation lets you send tailored email content to specific subsets of your customers — defined by billing or account country code — without changing the default template everyone else receives. Use it to meet regional compliance requirements, improve engagement, and deliver the right message in the right language.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Requires an Elite plan and enablement by Recurly Support — contact <a href="mailto:support@recurly.com" target="_blank">support@recurly.com</a> to get started</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#create-an-alternate-template"><span className="rp-toc-num">4</span>Create an alternate template</a>
+    <a className="rp-toc-pill" href="#add-audience-criteria"><span className="rp-toc-num">5</span>Add audience criteria</a>
+    <a className="rp-toc-pill" href="#upload-a-pdf-attachment"><span className="rp-toc-num">6</span>Upload a PDF attachment</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Audience segmentation is a feature that lets merchants create alternate versions of the Payment Confirmation and New Subscription email templates, each targeting a defined audience based on billing or account country codes. When a customer matches the segment criteria, they receive the alternate template; everyone else gets the default.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-bullseye" aria-hidden="true"></i></div>
+    <strong>Targeted messaging</strong>
+    <span>Segment your audience by billing or account country code and deliver content that speaks directly to each group.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+    <strong>Stay compliant</strong>
+    <span>Communicate country- or region-specific regulatory requirements to the right customers, keeping you aligned with compliance mandates.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-envelope-open-text" aria-hidden="true"></i></div>
+    <strong>Higher engagement</strong>
+    <span>Personalized emails drive better open rates and stronger connections with your audience.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-language" aria-hidden="true"></i></div>
+    <strong>Built-in multi-locale support</strong>
+    <span>Set up your segment once, then customize content per locale — Recurly handles routing the right language to the right audience automatically.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Flexible template management</strong>
+    <span>Modify, rename, delete, or add alternate templates at any time, giving you an agile communication toolkit as your business evolves.</span>
+  </div>
+</div>
+
+# Key details
+
+## Supported templates
+
+Audience segmentation works with exactly two email templates: **New Subscription** and **Payment Confirmation**. Each has a default version that all customers receive unless they match an alternate template's audience criteria.
+
+## How audience criteria work
+
+Audience criteria determine which customers receive an alternate template instead of the default. A few rules govern how they behave:
+
+- You must define at least one criterion in the **Audience** section for an alternate template to activate.
+- Criteria use **OR logic** — a customer who matches any one criterion qualifies for the alternate template.
+- Customers who don't match any criterion continue to receive the default template.
+
+## Locale support
+
+Alternate templates support all Recurly locales. After defining your audience segment, you can customize the email content for each locale independently.
+
+For example, if your segment targets customers in the UK, Italy, and Sweden:
+
+1. Customize the content for the UK audience in English.
+2. Use locale support to add Italian and Swedish translations.
+3. Recurly routes the alternate template to customers in those countries, in the language set for their region.
+
+## PDF attachments
+
+You can attach a PDF to an alternate template. Each locale on an alternate template supports its own unique PDF attachment, keeping your message consistent across languages.
+
+## Managing your alternate templates
+
+After creation, your alternate template appears in the **Email Templates** section. From there you can preview the HTML, edit content, rename, or delete the template.
+
+
+<Image src="https://files.readme.io/a922248-Screen_Shot_2022-12-05_at_3.58.28_PM.png" align="center" width="75%" border={true} />
+
+
+### Renaming a template
+
+Hover over the ellipsis next to the alternate template and select **Rename**. Save your changes when done.
+
+
+<Image src="https://files.readme.io/c0e4aa6-Screen_Shot_2022-12-05_at_9.07.12_PM.png" align="center" width="40%" border={true} />
+
+
+# Create an alternate template
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Navigate to the template header</h4><p>Go to the Payment Confirmation or New Subscription email template in your Recurly account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Create a new template</h4><p>Select the <strong>Options</strong> button, then choose <strong>New Email Template</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Name your template</h4><p>Assign a unique name to the alternate template and save.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Customize the template</h4><p>Edit the subject line, email body, and audience criteria. The template won't activate until at least one criterion is defined in the Audience section.</p></div>
+  </div>
+</div>
+
+# Add audience criteria
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Add an attribute</h4><p>Select <strong>Add Attribute</strong> near the bottom of the screen.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Choose your attributes</h4><p>Select the attributes you want to use for this segment — billing country code, account country code, or both.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Define your country criteria and save</h4><p>Set the specific country values and save your changes. Once saved, the segment is active and the alternate template is ready to send.</p></div>
+  </div>
+</div>
+
+# Upload a PDF attachment
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the PDF section</h4><p>In the alternate template editor, locate the PDF section and select <strong>Choose File</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Upload your document</h4><p>Select the PDF you want to attach. The file must be 512 KB or smaller.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Activate the template</h4><p>Once the template is active, the attached PDF will be included in every email sent to customers in the defined audience segment.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> Each locale on an alternate template supports its own PDF attachment. If you've configured multiple locales, upload the appropriate PDF for each one to keep your messaging consistent across languages.</div>
+</div>
+
+<br />

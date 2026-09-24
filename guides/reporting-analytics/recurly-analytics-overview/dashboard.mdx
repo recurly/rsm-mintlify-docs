@@ -1,0 +1,117 @@
+---
+title: Dashboard
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Analytics Dashboard gives you a real-time view of your subscription business across three sections — Customers, Subscriptions, and Revenue. Each section contains interactive widgets with drill-down capabilities, chart interactions, and export options so you can explore the data behind every metric.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">1</span>Key details</a>
+    <a className="rp-toc-pill" href="#customers"><span className="rp-toc-num">2</span>Customers</a>
+    <a className="rp-toc-pill" href="#subscriptions"><span className="rp-toc-num">3</span>Subscriptions</a>
+    <a className="rp-toc-pill" href="#revenue"><span className="rp-toc-num">4</span>Revenue</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Permissions</strong>Users must have the Analytics user role permission to access the Analytics Dashboard.</div>
+</div>
+
+# Key details
+
+## Widget interactions
+
+Every widget on the dashboard shares the same set of interaction tools.
+
+**Vertical ellipsis menu** — Available on both widgets and tables. Click to access:
+
+- **Ask a follow-up question** — Type a question to drill into subsets, re-aggregate data, or get an AI-generated summary without opening a new report.
+- **Download** — Export the tile's query results as CSV, PDF, or PNG.
+- **Data timestamp** — See when the data in that widget was last updated.
+
+**Charts and legends** — Widgets use bar, line, and pie charts to display customer, subscriber, subscription, plan, and revenue metrics over time.
+
+- Hover over a chart element (a point, bar, or segment) to see the value and timeframe for that item.
+- Click a color in the legend to toggle that data series on or off. Click again to restore it.
+
+# Customers
+
+The Customers section provides a view of subscriber metrics across five widgets.
+
+
+<Image src="https://files.readme.io/f5ec79fc04b242ef7739324634c95924708206e178d749fc4bb4e86cefc9c1c0-image.png" align="center" width="75%" border={true} />
+
+
+## Total active subscribers
+
+The count of unique subscriptions with at least one active subscriber — including subscribers in a trial and those who have canceled but not yet churned.
+
+## Average churn rate
+
+The percentage of subscribers who churned in the last month, calculated against the number of active subscribers at the start of that month.
+
+## Subscriber Lifetime Value (LTV)
+
+An estimate of the lifetime value of each subscriber based on discounted cash flows, accounting for future revenue risks and the time value of money.
+
+**Formula:** Subscriber LTV = ARPS × (1 + d) / (d + Churn Rate)
+
+- **ARPS** (Average Revenue Per Subscriber) = MRR at end of month ÷ number of active subscribers at end of month
+- **Churn rate** = as calculated above
+- **d** (discount rate) = 1% — a generally accepted constant for SaaS companies that reflects market and financial risk and the time value of money
+
+**Example:** Company X has MRR of $555,000, 5,000 subscribers, and a 3.5% churn rate at end of August.
+
+Subscriber LTV = ($555,000 / 5,000) × (1 + 0.01) / (0.01 + 0.035) ≈ **$904**
+
+## Subscriber growth
+
+Net subscriber change over time, calculated as: new subscribers + returning subscribers + churned subscribers. Click any point on the line to see net totals for that timeframe in hover text. Click any bar segment to see totals for the selected period.
+
+## Subscriber churn rate (detailed)
+
+Churn rate over a selected date range. Churn rate is not calculated for periods shorter than one full month. Click any point on the line to see the churn rate for that timeframe.
+
+# Subscriptions
+
+The Subscriptions section provides insights into your top subscription plans through three widgets.
+
+
+<Image src="https://files.readme.io/a377dac5eef53338000bd59ccba87794dfb5632bf59e37d2478524e9c58c4ab8-image.png" align="center" width="75%" border={true} />
+
+
+## Total subscriptions
+
+The total number of subscriptions across your top five plans as of the most recent data update. Toggle the arrow in the first column to sort ascending or descending. Click the vertical ellipsis in the second column for column options (freeze, copy, resize).
+
+## Top five plans by subscriptions (pie chart)
+
+Distribution of subscriptions across your top five plans over the last six months. Click a segment to exclude that plan from the view or to see the total subscription count in hover text.
+
+## Top five plans — last six months (line chart)
+
+Subscription trend for your top five plans over the last six months. Click any point on a line to see total subscriptions for that timeframe in hover text.
+
+# Revenue
+
+The Revenue section captures four metrics covering different dimensions of your revenue performance.
+
+
+<Image src="https://files.readme.io/3b8a8b39615a8c117d887d836a18853ceb297a211c4c90f8736abd73640c89d9-image.png" align="center" width="75%" border={true} />
+
+
+## Average revenue per customer
+
+The average revenue per customer — calculated by dividing the total billings (recurring and non-recurring) in the previous month by the number of unique paying customers.
+
+## Current Monthly Recurring Revenue (MRR)
+
+Expected monthly revenue calculated by summing charges from active subscriptions and adjusting for the month. Displayed in your site's primary currency.
+
+## Recovered revenue
+
+Revenue recovered by Recurly that would otherwise have been lost to failed credit card transactions.
+
+## Net billings month to date
+
+A comparison of net billings for the current month against the previous month. Click any point on a line to see billing details for that timeframe. Toggle legend colors to show or hide the current and previous month lines.

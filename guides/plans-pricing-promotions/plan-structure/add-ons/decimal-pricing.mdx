@@ -1,0 +1,149 @@
+---
+title: Decimal pricing
+---
+
+<span id="rp-close"></span>
+
+<div className="rp-page">
+<div className="rp-overview">
+
+Decimal pricing lets you set prices with up to nine decimal places on items, item-backed add-ons, usage and non-usage add-ons — using any <a href="https://docs.recurly.com/recurly-subscriptions/docs/add-ons#key-benefits" target="_blank">pricing model</a> — so businesses charging fractions of a cent per unit can bill accurately without rounding errors at the unit level.
+
+</div>
+<div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i>&nbsp; Available on all Recurly plans</div>
+<div className="rp-toc">
+  <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span> Definition</a>
+  <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span> Key benefits</a>
+  <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span> Key details</a>
+  <a className="rp-toc-pill" href="#set-up-decimal-pricing"><span className="rp-toc-num">4</span> Set up decimal pricing</a>
+  <a className="rp-toc-pill" href="#integration-support"><span className="rp-toc-num">5</span> Integration support</a>
+</div>
+</div>
+
+# Definition
+
+<div className="rp-definition">
+
+Decimal pricing is a pricing method for businesses that need non-integer unit prices. Instead of rounding prices to the nearest cent at configuration time, you define a precise per-unit cost — up to nine decimal places — on items, item-backed add-ons, usage and non-usage add-ons, and Recurly calculates the invoice total by multiplying usage by that unit price, rounding only the final line item to the currency's supported precision. For example, a video streaming company charging $0.005 per GB sets that exact price, and the total is computed correctly regardless of how much data a customer consumes.
+
+</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-bullseye" aria-hidden="true"></i></div>
+    <strong>Precise, flexible pricing</strong>
+    <span>Support diverse consumption patterns with fractional unit prices — so every customer is charged accurately for exactly what they use.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-receipt" aria-hidden="true"></i></div>
+    <strong>Accurate charge calculation</strong>
+    <span>Rounding happens at the invoice line item total, not the unit price — keeping calculations transparent and correct for both customers and finance teams.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-plug" aria-hidden="true"></i></div>
+    <strong>Broad integration compatibility</strong>
+    <span>Decimal pricing works across fixed, tiered, volume, and stairstep pricing models — for add-ons, Items, and item-backed add-ons alike — and passes through to supported integration partners.</span>
+  </div>
+</div>
+
+# Key details
+
+## Plans and subscriptions
+
+Decimal pricing is available on usage and non-usage add-ons, as well as on Items — including item-backed add-ons — through the Admin Console and the <a href="https://developers.recurly.com/api/v2021-02-25/index.html" target="_blank">V3 API (2021-02-25)</a>. However, the <a href="https://recurly.com/developers/api-v2/v2.29/#tag/subscription-usage-records" target="_blank">V2 API</a> only supports decimal pricing on usage based add-ons at this time.
+
+When setting pricing via the API, use the `unit_amount_decimal` field. Decimal pricing supports up to nine decimal places across fixed, tiered, volume, and stairstep pricing models. This applies whether the price is set directly on an add-on or on an Item — item-backed add-ons inherit their decimal pricing from the item they reference. When `unit_amount_decimal` is provided, `unit_amount` is automatically set to null. A plan's predefined prices are used by default when creating a subscription, but you can override them per subscription as needed.
+
+## Invoices
+
+Invoice line item totals are rounded to the decimal precision supported by the currency. The `unit_amount_decimal` value is displayed on the invoice. In API responses, the decimal price is stored in `unit_amount_decimal` — `unit_amount` will be null.
+
+## Refunds
+
+Recurly limits refunds to the invoice amount to prevent over-refunding. Line-item refunds are recommended for clarity on which products are being refunded. For open-amount refunds with decimal pricing, Recurly rounds the amount and refundable quantity to stay within the remaining refundable amount — this may cause minor per-unit discrepancies, but prevents over-refunding.
+
+## Emails
+
+The `unit_amount_decimal` value is automatically mapped to the `unit_amount` parameter in email templates. If your templates already display invoice line items, they'll work correctly with decimal pricing without any changes.
+
+## Exports
+
+The following exports include a `unit_amount_decimal` column when decimal pricing is in use:
+
+- Subscription Add-Ons
+- Subscription Add-Ons History
+- Subscription Add-Ons Usage
+
+## Webhooks
+
+Subscription notifications include a `unit_amount_in_decimal_cents` value when decimal pricing is active. The `unit_amount` field will be null in these cases.
+
+# Set up decimal pricing
+
+<div className="rp-callout rp-callout-note">
+<strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Legacy site requirement</strong>
+
+If your Recurly site was created on or before May 7, 2018, you must enable Credit Invoices and Only Bill What Changed before using decimal pricing. Both settings are available on the Invoice Settings page.
+
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div>
+      <h4>Enable required features (legacy sites only)</h4>
+      <p>For sites created on or before May 7, 2018: navigate to Invoice Settings and enable Credit Invoices and Only Bill What Changed.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div>
+      <h4>Create an add-on or item</h4>
+      <p>In the Admin Console or via the V3 API, create the add-on or item where you want to apply decimal pricing. If you're pricing an item-backed add-on, set the decimal price on the item — the add-on inherits it.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div>
+      <h4>Set the decimal unit price</h4>
+      <p>When configuring pricing via the API, use the <code>unit_amount_decimal</code> parameter to specify your per-unit price. The <code>unit_amount</code> field will be set to null automatically.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div>
+      <h4>Confirm plan prices</h4>
+      <p>Review the plan's predefined prices and adjust any subscription-level overrides as needed.</p>
+    </div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div>
+      <h4>Monitor and refine</h4>
+      <p>After go-live, review invoices and exports to confirm charges are calculating as expected. Adjust unit prices based on usage analytics and customer feedback.</p>
+    </div>
+  </div>
+</div>
+
+# Integration support
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row">
+    <td>Integration</td>
+    <td>Decimal support</td>
+  </tr>
+  <tr>
+    <td>Xero</td>
+    <td>Supports up to four decimal places for unit price. Prices may round to two decimal places in Xero's display, but the line item total charge is always correct.</td>
+  </tr>
+  <tr>
+    <td>QuickBooks Online</td>
+    <td>Supports up to seven decimal places. The line item total charge is always correct, though the displayed unit price is limited by QuickBooks Online's precision.</td>
+  </tr>
+  <tr>
+    <td>NetSuite</td>
+    <td>Does not currently support decimal pricing. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> if this is a requirement for your business.</td>
+  </tr>
+</table>

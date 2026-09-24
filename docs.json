@@ -1,0 +1,1196 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Recurly Docs",
+  "theme": "mint",
+  "colors": {
+    "primary": "#0D0D0B",
+    "light": "#FFD706",
+    "dark": "#0D0D0B"
+  },
+  "appearance": {
+    "default": "light"
+  },
+  "fonts": {
+    "family": "Figtree"
+  },
+  "background": {
+    "color": {
+      "light": "#FCFBF7",
+      "dark": "#0D0D0B"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "guides/getting-started/getting-started-recurly",
+              "guides/getting-started/go-live",
+              "guides/getting-started/sandbox-features-to-discover",
+              "guides/getting-started/recurly-subscriptions-changelog",
+              "guides/getting-started/browser-support",
+              "guides/getting-started/do-you-need-help",
+              {
+                "group": "Professional Services",
+                "pages": [
+                  "guides/getting-started/professional-services/index",
+                  "guides/getting-started/professional-services/managed-services"
+                ]
+              },
+              "guides/getting-started/customer-success-manager"
+            ]
+          },
+          {
+            "group": "Plans, Pricing & Promotions",
+            "pages": [
+              "guides/plans-pricing-promotions/overview",
+              {
+                "group": "Plan Structure",
+                "pages": [
+                  "guides/plans-pricing-promotions/plan-structure/index",
+                  "guides/plans-pricing-promotions/plan-structure/plans",
+                  {
+                    "group": "Add Ons",
+                    "pages": [
+                      "guides/plans-pricing-promotions/plan-structure/add-ons/index",
+                      "guides/plans-pricing-promotions/plan-structure/add-ons/decimal-pricing"
+                    ]
+                  },
+                  {
+                    "group": "Catalog",
+                    "pages": [
+                      "guides/plans-pricing-promotions/plan-structure/catalog/index",
+                      "guides/plans-pricing-promotions/plan-structure/catalog/line-items"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Billing Models",
+                "pages": [
+                  "guides/plans-pricing-promotions/billing-models/index",
+                  "guides/plans-pricing-promotions/billing-models/fixed-recurring-pricing",
+                  "guides/plans-pricing-promotions/billing-models/ramp-pricing",
+                  "guides/plans-pricing-promotions/billing-models/one-time-pricing",
+                  "guides/plans-pricing-promotions/billing-models/usage-based-billing",
+                  "guides/plans-pricing-promotions/billing-models/quantity-based-pricing",
+                  {
+                    "group": "Hybrid Pricing",
+                    "pages": [
+                      "guides/plans-pricing-promotions/billing-models/hybrid-pricing/index",
+                      "guides/plans-pricing-promotions/billing-models/hybrid-pricing/-tiered-stairstep-and-volume-pricing"
+                    ]
+                  },
+                  "guides/plans-pricing-promotions/billing-models/prepaid-account-balance",
+                  "guides/plans-pricing-promotions/billing-models/currencies"
+                ]
+              },
+              {
+                "group": "Promotions",
+                "pages": [
+                  "guides/plans-pricing-promotions/promotions/index",
+                  "guides/plans-pricing-promotions/promotions/free-trial-management",
+                  {
+                    "group": "Coupons",
+                    "pages": [
+                      "guides/plans-pricing-promotions/promotions/coupons/index",
+                      "guides/plans-pricing-promotions/promotions/coupons/bulk-unique-coupons",
+                      "guides/plans-pricing-promotions/promotions/coupons/multiple-coupons-per-account"
+                    ]
+                  },
+                  "guides/plans-pricing-promotions/promotions/gift-subscriptions",
+                  "guides/plans-pricing-promotions/promotions/gift-cards",
+                  "guides/plans-pricing-promotions/promotions/gift-cards-dashboard"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Subscriber Management",
+            "pages": [
+              "guides/subscriber-management/overview-5",
+              {
+                "group": "Accounts 1",
+                "pages": [
+                  "guides/subscriber-management/accounts-1/index",
+                  "guides/subscriber-management/accounts-1/accounts-dashboard",
+                  "guides/subscriber-management/accounts-1/account-acquisition-data",
+                  "guides/subscriber-management/accounts-1/accounts",
+                  "guides/subscriber-management/accounts-1/account-hierarchy-1",
+                  "guides/subscriber-management/accounts-1/ah-invoice-rollup",
+                  "guides/subscriber-management/accounts-1/countries-provinces-and-states",
+                  "guides/subscriber-management/accounts-1/shipping-addresses",
+                  "guides/subscriber-management/accounts-1/shipping-address-per-line-item",
+                  {
+                    "group": "Wallet",
+                    "pages": [
+                      "guides/subscriber-management/accounts-1/wallet/index",
+                      "guides/subscriber-management/accounts-1/wallet/wallet-implementation-guide"
+                    ]
+                  },
+                  "guides/subscriber-management/accounts-1/entitlements"
+                ]
+              },
+              {
+                "group": "Subscription Lifecycle",
+                "pages": [
+                  "guides/subscriber-management/subscription-lifecycle/index",
+                  "guides/subscriber-management/subscription-lifecycle/subscription-dashboard",
+                  "guides/subscriber-management/subscription-lifecycle/create-subscription",
+                  "guides/subscriber-management/subscription-lifecycle/change-subscription",
+                  "guides/subscriber-management/subscription-lifecycle/pause-subscription",
+                  "guides/subscriber-management/subscription-lifecycle/postpone-subscription",
+                  "guides/subscriber-management/subscription-lifecycle/expire-subscription",
+                  "guides/subscriber-management/subscription-lifecycle/multiple-subscriptions"
+                ]
+              },
+              {
+                "group": "Lifecycle Communications",
+                "pages": [
+                  "guides/subscriber-management/lifecycle-communications/index",
+                  {
+                    "group": "Email Templates",
+                    "pages": [
+                      "guides/subscriber-management/lifecycle-communications/email-templates/index",
+                      "guides/subscriber-management/lifecycle-communications/email-templates/alternate-email-templates"
+                    ]
+                  },
+                  "guides/subscriber-management/lifecycle-communications/email-template-languages",
+                  "guides/subscriber-management/lifecycle-communications/email-time-zones-and-time-stamps",
+                  "guides/subscriber-management/lifecycle-communications/renewal-reminder"
+                ]
+              },
+              {
+                "group": "Transactions",
+                "pages": [
+                  "guides/subscriber-management/transactions/index",
+                  "guides/subscriber-management/transactions/transactions-dashboard",
+                  "guides/subscriber-management/transactions/auth-and-capture",
+                  "guides/subscriber-management/transactions/moto-transactions",
+                  "guides/subscriber-management/transactions/refund-transaction"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Hosted Pages",
+            "pages": [
+              "guides/hosted-pages/hosted-pages",
+              {
+                "group": "Checkout",
+                "pages": [
+                  "guides/hosted-pages/checkout/index",
+                  "guides/hosted-pages/checkout/checkout-dashboard"
+                ]
+              },
+              "guides/hosted-pages/hosted-payment-pages",
+              "guides/hosted-pages/hosted-account-management"
+            ]
+          },
+          {
+            "group": "Payment Orchestration",
+            "pages": [
+              "guides/payment-orchestration/overview-4",
+              "guides/payment-orchestration/payment-settings",
+              {
+                "group": "Payment Gateways 1",
+                "pages": [
+                  "guides/payment-orchestration/payment-gateways-1/index",
+                  "guides/payment-orchestration/payment-gateways-1/adyen",
+                  "guides/payment-orchestration/payment-gateways-1/authorizenet",
+                  "guides/payment-orchestration/payment-gateways-1/amazon-pay-v2",
+                  "guides/payment-orchestration/payment-gateways-1/braintree-rd",
+                  "guides/payment-orchestration/payment-gateways-1/chase-paymentech-orbital",
+                  "guides/payment-orchestration/payment-gateways-1/check-commerce",
+                  "guides/payment-orchestration/payment-gateways-1/checkoutcom",
+                  "guides/payment-orchestration/payment-gateways-1/commerce-hub",
+                  "guides/payment-orchestration/payment-gateways-1/cybersource",
+                  "guides/payment-orchestration/payment-gateways-1/ebanx-gateway",
+                  "guides/payment-orchestration/payment-gateways-1/freedompay",
+                  "guides/payment-orchestration/payment-gateways-1/gocardless",
+                  "guides/payment-orchestration/payment-gateways-1/nuvei",
+                  "guides/payment-orchestration/payment-gateways-1/paypal-complete",
+                  "guides/payment-orchestration/payment-gateways-1/stripe",
+                  "guides/payment-orchestration/payment-gateways-1/tsys",
+                  "guides/payment-orchestration/payment-gateways-1/vantiv",
+                  "guides/payment-orchestration/payment-gateways-1/worldpaydlocal-latam-support"
+                ]
+              },
+              {
+                "group": "Payment Methods",
+                "pages": [
+                  "guides/payment-orchestration/payment-methods/index",
+                  "guides/payment-orchestration/payment-methods/credit-cards",
+                  "guides/payment-orchestration/payment-methods/prepaid-and-gift-cards",
+                  "guides/payment-orchestration/payment-methods/apple-pay-on-the-web",
+                  "guides/payment-orchestration/payment-methods/google-pay",
+                  "guides/payment-orchestration/payment-methods/paypal-payments",
+                  "guides/payment-orchestration/payment-methods/amazon-pay",
+                  "guides/payment-orchestration/payment-methods/cash-app-pay",
+                  "guides/payment-orchestration/payment-methods/pay-with-venmo",
+                  "guides/payment-orchestration/payment-methods/ach-bank-payments",
+                  "guides/payment-orchestration/payment-methods/sepa-direct-debit",
+                  "guides/payment-orchestration/payment-methods/bacs",
+                  "guides/payment-orchestration/payment-methods/becs",
+                  "guides/payment-orchestration/payment-methods/klarna-bnpl-pay-now-pay-later",
+                  "guides/payment-orchestration/payment-methods/ideal",
+                  "guides/payment-orchestration/payment-methods/mercadopago",
+                  "guides/payment-orchestration/payment-methods/pix-automatico",
+                  "guides/payment-orchestration/payment-methods/upi-autopay",
+                  "guides/payment-orchestration/payment-methods/revolut",
+                  "guides/payment-orchestration/payment-methods/paypay",
+                  "guides/payment-orchestration/payment-methods/stripe-link-pay",
+                  "guides/payment-orchestration/payment-methods/sofort",
+                  "guides/payment-orchestration/payment-methods/boleto"
+                ]
+              },
+              {
+                "group": "Gateway Configuration And Features",
+                "pages": [
+                  "guides/payment-orchestration/gateway-configuration-and-features/index",
+                  "guides/payment-orchestration/gateway-configuration-and-features/gateway-merchant-account-overview",
+                  "guides/payment-orchestration/gateway-configuration-and-features/payment-gateways",
+                  "guides/payment-orchestration/gateway-configuration-and-features/gateway-configuration",
+                  "guides/payment-orchestration/gateway-configuration-and-features/gateway-token-support",
+                  "guides/payment-orchestration/gateway-configuration-and-features/custom-gateway-routing-configuration",
+                  "guides/payment-orchestration/gateway-configuration-and-features/gateway-failover",
+                  "guides/payment-orchestration/gateway-configuration-and-features/nacha-verification",
+                  "guides/payment-orchestration/gateway-configuration-and-features/currency-support-by-gateway",
+                  "guides/payment-orchestration/gateway-configuration-and-features/fraud-management",
+                  "guides/payment-orchestration/gateway-configuration-and-features/chargeback-management-for-cards",
+                  "guides/payment-orchestration/gateway-configuration-and-features/payment-descriptors",
+                  "guides/payment-orchestration/gateway-configuration-and-features/gateway-specific-information-for-invoice-numbers",
+                  "guides/payment-orchestration/gateway-configuration-and-features/sepa-retries",
+                  "guides/payment-orchestration/gateway-configuration-and-features/how-to-test-your-gateway",
+                  "guides/payment-orchestration/gateway-configuration-and-features/test"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Churn Management",
+            "pages": [
+              "guides/churn-management/overview-1",
+              {
+                "group": "Involuntary Churn",
+                "pages": [
+                  "guides/churn-management/involuntary-churn/index",
+                  "guides/churn-management/involuntary-churn/account-updater",
+                  "guides/churn-management/involuntary-churn/static-retries",
+                  "guides/churn-management/involuntary-churn/retry-logic",
+                  "guides/churn-management/involuntary-churn/dunning-management",
+                  "guides/churn-management/involuntary-churn/expired-card-management",
+                  "guides/churn-management/involuntary-churn/backup-payment-method"
+                ]
+              },
+              {
+                "group": "Voluntary Churn",
+                "pages": [
+                  "guides/churn-management/voluntary-churn/index"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Recurring Billing",
+            "pages": [
+              "guides/recurring-billing/overview-2",
+              {
+                "group": "Invoices 1",
+                "pages": [
+                  "guides/recurring-billing/invoices-1/index",
+                  "guides/recurring-billing/invoices-1/invoices",
+                  "guides/recurring-billing/invoices-1/invoice-management",
+                  "guides/recurring-billing/invoices-1/edit-invoice",
+                  "guides/recurring-billing/invoices-1/credit-invoices"
+                ]
+              },
+              {
+                "group": "Invoice Configuration",
+                "pages": [
+                  "guides/recurring-billing/invoice-configuration/index",
+                  "guides/recurring-billing/invoice-configuration/invoice-settings",
+                  "guides/recurring-billing/invoice-configuration/automatic-invoicing-terms",
+                  "guides/recurring-billing/invoice-configuration/manual-payments",
+                  "guides/recurring-billing/invoice-configuration/invoice-customization",
+                  "guides/recurring-billing/invoice-configuration/adjustments",
+                  "guides/recurring-billing/invoice-configuration/chargebacks-for-direct-debit"
+                ]
+              },
+              {
+                "group": "Billing Preferences",
+                "pages": [
+                  "guides/recurring-billing/billing-preferences/index",
+                  "guides/recurring-billing/billing-preferences/subscription-terms",
+                  "guides/recurring-billing/billing-preferences/calendar-billing",
+                  "guides/recurring-billing/billing-preferences/shipping",
+                  "guides/recurring-billing/billing-preferences/verify-stored-billing-info-endpoint"
+                ]
+              },
+              {
+                "group": "Taxes",
+                "pages": [
+                  "guides/recurring-billing/taxes/index",
+                  {
+                    "group": "Tax",
+                    "pages": [
+                      "guides/recurring-billing/taxes/tax/index",
+                      "guides/recurring-billing/taxes/tax/tax-inclusive-pricing"
+                    ]
+                  },
+                  "guides/recurring-billing/taxes/tax-location-validation",
+                  "guides/recurring-billing/taxes/vat-gst-support",
+                  "guides/recurring-billing/taxes/eu-vat-2015",
+                  "guides/recurring-billing/taxes/vat-number-validation"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Recurly Compass",
+            "pages": [
+              {
+                "group": "Recurly Compass",
+                "pages": [
+                  "guides/recurly-compass/recurly-compass/index",
+                  "guides/recurly-compass/recurly-compass/compass-assistant",
+                  "guides/recurly-compass/recurly-compass/compass-public-mcp-server",
+                  "guides/recurly-compass/recurly-compass/compass-skills"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "App Management",
+            "pages": [
+              "guides/app-management/app-management-overview",
+              {
+                "group": "App Management",
+                "pages": [
+                  "guides/app-management/app-management/index",
+                  "guides/app-management/app-management/step-by-step-process",
+                  "guides/app-management/app-management/api-support-and-webhooks",
+                  "guides/app-management/app-management/using-app-management",
+                  "guides/app-management/app-management/integration-best-practices"
+                ]
+              },
+              "guides/app-management/sell-and-manage-apple-subscriptions-through-recurly"
+            ]
+          },
+          {
+            "group": "Site Management",
+            "pages": [
+              {
+                "group": "Business Entities",
+                "pages": [
+                  "guides/site-management/business-entities/index",
+                  "guides/site-management/business-entities/multiple-business-entities"
+                ]
+              },
+              {
+                "group": "Site Settings",
+                "pages": [
+                  "guides/site-management/site-settings/index",
+                  "guides/site-management/site-settings/user-roles-and-permissions",
+                  "guides/site-management/site-settings/two-factor-authentication",
+                  "guides/site-management/site-settings/single-sign-on"
+                ]
+              },
+              "guides/site-management/profile",
+              {
+                "group": "Custom Fields",
+                "pages": [
+                  "guides/site-management/custom-fields/index",
+                  "guides/site-management/custom-fields/custom-fields-legacy-api-content"
+                ]
+              },
+              "guides/site-management/account-activities-export",
+              "guides/site-management/site-activities-export",
+              "guides/site-management/users-export",
+              "guides/site-management/your-recurly-account",
+              "guides/site-management/data-retention"
+            ]
+          },
+          {
+            "group": "Integration Methods",
+            "pages": [
+              "guides/integration-methods/integration-paths",
+              "guides/integration-methods/api-keys",
+              "guides/integration-methods/recurlyjs",
+              "guides/integration-methods/stripe-payment-elements",
+              "guides/integration-methods/adyen-web-components",
+              "guides/integration-methods/webhooks",
+              "guides/integration-methods/native-mobile-sdks"
+            ]
+          },
+          {
+            "group": "Reporting & Analytics",
+            "pages": [
+              {
+                "group": "Recurly Analytics Overview",
+                "pages": [
+                  "guides/reporting-analytics/recurly-analytics-overview/index",
+                  "guides/reporting-analytics/recurly-analytics-overview/analytics-settings",
+                  "guides/reporting-analytics/recurly-analytics-overview/built-in-benchmarks",
+                  "guides/reporting-analytics/recurly-analytics-overview/dashboard"
+                ]
+              },
+              {
+                "group": "Recurly Builder",
+                "pages": [
+                  "guides/reporting-analytics/recurly-builder/index",
+                  "guides/reporting-analytics/recurly-builder/explore-invoices",
+                  "guides/reporting-analytics/recurly-builder/explore-transactions-workbook-agent"
+                ]
+              },
+              "guides/reporting-analytics/business-entities-overview",
+              {
+                "group": "Subscriber Management Analytics",
+                "pages": [
+                  "guides/reporting-analytics/subscriber-management-analytics/index",
+                  "guides/reporting-analytics/subscriber-management-analytics/subscriber-benchmarks",
+                  "guides/reporting-analytics/subscriber-management-analytics/subscribers-new",
+                  "guides/reporting-analytics/subscriber-management-analytics/subscriber-metrics",
+                  "guides/reporting-analytics/subscriber-management-analytics/hourly-activation-churn",
+                  "guides/reporting-analytics/subscriber-management-analytics/signup-declines",
+                  "guides/reporting-analytics/subscriber-management-analytics/signup-declines-trendalyzer",
+                  "guides/reporting-analytics/subscriber-management-analytics/trial-performance",
+                  "guides/reporting-analytics/subscriber-management-analytics/subscriber-retention",
+                  "guides/reporting-analytics/subscriber-management-analytics/accounts-analytics"
+                ]
+              },
+              {
+                "group": "Recurring Billing Analytics",
+                "pages": [
+                  "guides/reporting-analytics/recurring-billing-analytics/index",
+                  "guides/reporting-analytics/recurring-billing-analytics/monthly-recurring-revenue",
+                  "guides/reporting-analytics/recurring-billing-analytics/billings"
+                ]
+              },
+              {
+                "group": "Plans Pricing And Promotions Analytics",
+                "pages": [
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/index",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/plan-performance",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/plans-legacy",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/plans-1",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/churn-trends-by-plan",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/retention-by-plan",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/movement-by-plan",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/trials-by-plan",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/mmr-by-plan",
+                  "guides/reporting-analytics/plans-pricing-and-promotions-analytics/ltv-by-plan"
+                ]
+              },
+              {
+                "group": "Churn Management Analytics",
+                "pages": [
+                  "guides/reporting-analytics/churn-management-analytics/index",
+                  "guides/reporting-analytics/churn-management-analytics/subscriber-churn-benchmarks",
+                  "guides/reporting-analytics/churn-management-analytics/subsciber-churn-analysis",
+                  "guides/reporting-analytics/churn-management-analytics/renewal-benchmarks",
+                  "guides/reporting-analytics/churn-management-analytics/renewal-invoices",
+                  "guides/reporting-analytics/churn-management-analytics/renewal-invoices-trendalyzer",
+                  "guides/reporting-analytics/churn-management-analytics/recovered-revenue",
+                  "guides/reporting-analytics/churn-management-analytics/renewal-declines",
+                  "guides/reporting-analytics/churn-management-analytics/renewal-declines-trendalyzer"
+                ]
+              },
+              {
+                "group": "Dunning Campaigns Overview",
+                "pages": [
+                  "guides/reporting-analytics/dunning-campaigns-overview/index",
+                  "guides/reporting-analytics/dunning-campaigns-overview/dunning-effectiveness",
+                  "guides/reporting-analytics/dunning-campaigns-overview/dunning-benchmarks",
+                  "guides/reporting-analytics/dunning-campaigns-overview/dunning-summary"
+                ]
+              },
+              {
+                "group": "Payments Hub",
+                "pages": [
+                  "guides/reporting-analytics/payments-hub/index",
+                  "guides/reporting-analytics/payments-hub/payments-hub-overview",
+                  "guides/reporting-analytics/payments-hub/payments-hub-payment-processing",
+                  "guides/reporting-analytics/payments-hub/payments-hub-account-updater",
+                  "guides/reporting-analytics/payments-hub/payments-hub-payment-retry-recovery",
+                  "guides/reporting-analytics/payments-hub/payments-hub-fraud-prevention"
+                ]
+              },
+              {
+                "group": "Data Imports And Exports",
+                "pages": [
+                  "guides/reporting-analytics/data-imports-and-exports/index",
+                  "guides/reporting-analytics/data-imports-and-exports/customer-imports",
+                  {
+                    "group": "Export Overview",
+                    "pages": [
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/index",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/automated-exports",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/custom-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/account-activities-export-an",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/account-notes-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/accounts-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/adjustments-exports",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/adjustments-coupons",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/adjustments-taxes-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/billing-info-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/coupons-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/coupons-redemption",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/coupons-bulk-unique-codes",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/credit-payments-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/gift-cards-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/accounts-receivable-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/invoices-external",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/invoices-summary",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/invoices-unused-numbers",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/items-associated-plans",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/items-associated-subscriptions",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/products-catalog-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/site-activities-export-an",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscriptions-exports",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscription-add-ons-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscriptions-add-ons-history-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscriptions-churned",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscriptions-external",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscription-history-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscriptions-pending-changes-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/subscription-ramp-pricing-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/usages-records-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/transaction-export",
+                      "guides/reporting-analytics/data-imports-and-exports/export-overview/users-export-an"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Partner Integrations",
+            "pages": [
+              {
+                "group": "Integrations",
+                "pages": [
+                  "guides/partner-integrations/integrations/index",
+                  "guides/partner-integrations/integrations/justtai"
+                ]
+              },
+              {
+                "group": "Accounting Fraud And Taxes",
+                "pages": [
+                  "guides/partner-integrations/accounting-fraud-and-taxes/index",
+                  "guides/partner-integrations/accounting-fraud-and-taxes/avalara",
+                  "guides/partner-integrations/accounting-fraud-and-taxes/afc",
+                  "guides/partner-integrations/accounting-fraud-and-taxes/vertex",
+                  "guides/partner-integrations/accounting-fraud-and-taxes/xero",
+                  "guides/partner-integrations/accounting-fraud-and-taxes/quickbooks",
+                  "guides/partner-integrations/accounting-fraud-and-taxes/kount",
+                  "guides/partner-integrations/accounting-fraud-and-taxes/recurly-for-oracle-netsuite"
+                ]
+              },
+              {
+                "group": "Sales Marketing And Services",
+                "pages": [
+                  "guides/partner-integrations/sales-marketing-and-services/index",
+                  "guides/partner-integrations/sales-marketing-and-services/braze-integration",
+                  "guides/partner-integrations/sales-marketing-and-services/mailchimp",
+                  "guides/partner-integrations/sales-marketing-and-services/sendgrid",
+                  "guides/partner-integrations/sales-marketing-and-services/recurly-for-zendesk",
+                  "guides/partner-integrations/sales-marketing-and-services/salesforce-recurly",
+                  "guides/partner-integrations/sales-marketing-and-services/recurly-engage-integration"
+                ]
+              },
+              {
+                "group": "Data And Analytics",
+                "pages": [
+                  "guides/partner-integrations/data-and-analytics/index",
+                  "guides/partner-integrations/data-and-analytics/snowflake-integration"
+                ]
+              },
+              {
+                "group": "Merchant Of Record",
+                "pages": [
+                  "guides/partner-integrations/merchant-of-record/index",
+                  "guides/partner-integrations/merchant-of-record/reach-integration"
+                ]
+              },
+              {
+                "group": "Workflow Automation",
+                "pages": [
+                  "guides/partner-integrations/workflow-automation/index",
+                  "guides/partner-integrations/workflow-automation/zapier",
+                  "guides/partner-integrations/workflow-automation/trayio-integration"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Security & Compliance",
+            "pages": [
+              {
+                "group": "Security",
+                "pages": [
+                  "guides/security-compliance/security/index",
+                  "guides/security-compliance/security/data-hosting",
+                  "guides/security-compliance/security/pgp-encryption",
+                  "guides/security-compliance/security/ip-allowlist"
+                ]
+              },
+              {
+                "group": "Compliance",
+                "pages": [
+                  "guides/security-compliance/compliance/index",
+                  "guides/security-compliance/compliance/pci-dss-compliance",
+                  {
+                    "group": "Revised Payment Services Directive Psd2",
+                    "pages": [
+                      "guides/security-compliance/compliance/revised-payment-services-directive-psd2/index",
+                      "guides/security-compliance/compliance/revised-payment-services-directive-psd2/-strong-customer-authentication",
+                      "guides/security-compliance/compliance/revised-payment-services-directive-psd2/-3d-secure",
+                      "guides/security-compliance/compliance/revised-payment-services-directive-psd2/dunning-configuration-for-3ds-2-declines"
+                    ]
+                  },
+                  "guides/security-compliance/compliance/card-on-file",
+                  "guides/security-compliance/compliance/hipaa-guidelines",
+                  "guides/security-compliance/compliance/ccpa",
+                  "guides/security-compliance/compliance/gdpr",
+                  "guides/security-compliance/compliance/rbi-regulations-update"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "API Guides",
+            "pages": [
+              {
+                "group": "Integration Guides",
+                "pages": [
+                  {
+                    "group": "Quick Start Guide",
+                    "pages": [
+                      "guides/api-guides/integration-guides/quick-start-guide/index"
+                    ]
+                  },
+                  "guides/api-guides/integration-guides/upgrade-to-api-v3",
+                  "guides/api-guides/integration-guides/multi-item-upload-guide",
+                  "guides/api-guides/integration-guides/pagination-guide",
+                  {
+                    "group": "Popular Use Cases",
+                    "pages": [
+                      "guides/api-guides/integration-guides/popular-use-cases/index",
+                      "guides/api-guides/integration-guides/popular-use-cases/purchases-guide",
+                      "guides/api-guides/integration-guides/popular-use-cases/3d-secure-20-integration-guide",
+                      "guides/api-guides/integration-guides/popular-use-cases/using-3d-secure-with-stored-billing-information",
+                      "guides/api-guides/integration-guides/popular-use-cases/send-cvv-for-return-customers",
+                      "guides/api-guides/integration-guides/popular-use-cases/using-gateway-tokens-and-external-ntids-with-recurly-apis",
+                      "guides/api-guides/integration-guides/popular-use-cases/dynamic-transaction-statement-descriptor-guide",
+                      "guides/api-guides/integration-guides/popular-use-cases/level-2-and-level-3-cedp-guide",
+                      "guides/api-guides/integration-guides/popular-use-cases/kount-360-review-webhook-guide",
+                      "guides/api-guides/integration-guides/popular-use-cases/free-trial-gateway-routing-continuity",
+                      "guides/api-guides/integration-guides/popular-use-cases/third-party-checkout",
+                      "guides/api-guides/integration-guides/popular-use-cases/third-party-checkout-guide-adyen-components",
+                      "guides/api-guides/integration-guides/popular-use-cases/moto-mail-order-telephone-order-guide",
+                      "guides/api-guides/integration-guides/popular-use-cases/co-badged-cards-guide"
+                    ]
+                  },
+                  {
+                    "group": "Latam Payment Methods",
+                    "pages": [
+                      "guides/api-guides/integration-guides/latam-payment-methods/index",
+                      "guides/api-guides/integration-guides/latam-payment-methods/pix-automatico-integration-guide",
+                      "guides/api-guides/integration-guides/latam-payment-methods/mercado-pago-integration-guide"
+                    ]
+                  },
+                  {
+                    "group": "Apac Payment Methods",
+                    "pages": [
+                      "guides/api-guides/integration-guides/apac-payment-methods/index",
+                      "guides/api-guides/integration-guides/apac-payment-methods/e-mandates-with-cards-in-india",
+                      "guides/api-guides/integration-guides/apac-payment-methods/upi-autopay-integration-guide",
+                      "guides/api-guides/integration-guides/apac-payment-methods/paypay-integration-guide"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks Use Case Guides",
+                    "pages": [
+                      "guides/api-guides/integration-guides/webhooks-use-case-guides/index",
+                      "guides/api-guides/integration-guides/webhooks-use-case-guides/synchronous-payments-guides",
+                      "guides/api-guides/integration-guides/webhooks-use-case-guides/asynchronous-payments-guides"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Pricing And Billing Guides",
+                "pages": [
+                  "guides/api-guides/pricing-and-billing-guides/coupons-and-discounts-guide",
+                  "guides/api-guides/pricing-and-billing-guides/quantity-based-pricing-guide",
+                  "guides/api-guides/pricing-and-billing-guides/usage-based-pricing-guide"
+                ]
+              },
+              {
+                "group": "Subscription Management Guides",
+                "pages": [
+                  "guides/api-guides/subscription-management-guides/managing-subscription-methods-guides",
+                  "guides/api-guides/subscription-management-guides/subscription-add-ons-guide"
+                ]
+              },
+              {
+                "group": "Troubleshooting",
+                "pages": [
+                  "guides/api-guides/troubleshooting/api-transaction-errors"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "guides/webhooks/overview-webhooks",
+              {
+                "group": "Notifications",
+                "pages": [
+                  "guides/webhooks/notifications/account-notifications",
+                  "guides/webhooks/notifications/subscription-notifications",
+                  "guides/webhooks/notifications/prerenewal-notifications",
+                  "guides/webhooks/notifications/usage-notifications",
+                  "guides/webhooks/notifications/gift-card-notifications",
+                  "guides/webhooks/notifications/charge-invoice-notifications",
+                  "guides/webhooks/notifications/credit-invoice-notifications",
+                  "guides/webhooks/notifications/invoice-notifications",
+                  "guides/webhooks/notifications/payment-notifications",
+                  "guides/webhooks/notifications/credit-payment-notifications",
+                  "guides/webhooks/notifications/dunning-events-notifications",
+                  "guides/webhooks/notifications/item-notifications",
+                  "guides/webhooks/notifications/external-subscription-notifications"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Recurly.Js",
+            "pages": [
+              "guides/recurly-js/getting-started",
+              "guides/recurly-js/overview-recurlyjs",
+              "guides/recurly-js/styling-elements",
+              "guides/recurly-js/getting-a-token",
+              "guides/recurly-js/using-a-token",
+              "guides/recurly-js/events",
+              "guides/recurly-js/elements",
+              "guides/recurly-js/apple-pay",
+              "guides/recurly-js/google-pay-tm",
+              "guides/recurly-js/bank-accounts-us-iban-bacs-becs",
+              "guides/recurly-js/boleto-ideal-sofort-and-cashapp",
+              "guides/recurly-js/paypal",
+              "guides/recurly-js/venmo",
+              "guides/recurly-js/amazon-pay-v2-js",
+              "guides/recurly-js/pricing",
+              "guides/recurly-js/3d-secure",
+              "guides/recurly-js/fraud",
+              "guides/recurly-js/engage",
+              "guides/recurly-js/validation",
+              "guides/recurly-js/errors",
+              "guides/recurly-js/examples",
+              "guides/recurly-js/react-typescript-support",
+              "guides/recurly-js/upgrading",
+              "guides/recurly-js/support"
+            ]
+          },
+          {
+            "group": "About",
+            "pages": [
+              "guides/about/open-source-attribution-1"
+            ]
+          },
+          {
+            "group": "Recurly Navigate",
+            "pages": [
+              "guides/recurly-navigate/navigate-home",
+              {
+                "group": "Navigate Launch",
+                "pages": [
+                  "guides/recurly-navigate/navigate-launch/index",
+                  {
+                    "group": "Navigate Intro",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-launch/navigate-intro/index",
+                      "guides/recurly-navigate/navigate-launch/navigate-intro/navigate-intro-flywheel",
+                      "guides/recurly-navigate/navigate-launch/navigate-intro/navigate-intro-home",
+                      "guides/recurly-navigate/navigate-launch/navigate-intro/navigate-intro-expect"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Launch Resource Library",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-resource-library/index",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-resource-library/navigate-home-monthly-calendar"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Launch Launchpad Phase One",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-launchpad-phase-one/index",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-launchpad-phase-one/navigate-launch-launchpad-phase-one-production-testing",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-launchpad-phase-one/navigate-launch-launchpad-phase-one-dunning",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-launchpad-phase-one/navigate-launch-launchpad-phase-one-account-updater",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-launchpad-phase-one/navigate-launch-launchpad-phase-one-branding",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-launchpad-phase-one/navigate-launch-launchpad-phase-one-gateway-failover",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-launchpad-phase-one/navigate-launch-launchpad-phase-one-review"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Launch Phase Two",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-phase-two/index",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-phase-two/navigate-launch-phase-two-benchmarks-dashboard",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-phase-two/navigate-launch-phase-two-acquisition-metrics",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-phase-two/navigate-launch-phase-two-churn-metrics",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-phase-two/navigate-launch-phase-two-retention-metrics",
+                      "guides/recurly-navigate/navigate-launch/navigate-launch-phase-two/navigate-launch-phase-two-review"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Navigate Acquire",
+                "pages": [
+                  "guides/recurly-navigate/navigate-acquire/index",
+                  {
+                    "group": "Navigate Acquire Plan Price Increase",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-plan-price-increase/index",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-plan-price-increase/navigate-acquire-plan-price-increase-use-case",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-plan-price-increase/navigate-acquire-plan-price-increase-considerations",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-plan-price-increase/navigate-acquire-plan-price-increase-communicate",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-plan-price-increase/navigate-acquire-plan-price-increase-tracking",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-plan-price-increase/navigate-acquire-plan-price-increase-review"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Acquire Pricing Plans 101",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/index",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/navigate-acquire-pricing-plans-101-plans",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/navigate-acquire-pricing-plans-101-add-ons",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/navigate-acquire-pricing-plans-101-currency",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/navigate-acquire-pricing-plans-101-pricing-models",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/navigate-acquire-pricing-plans-101-trials",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/navigate-acquire-pricing-plans-101-analytics",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-101/navigate-acquire-pricing-plans-101-review"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Acquire Pricing Plans 201",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/index",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/navigate-acquire-pricing-plans-201-segmentation",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/navigate-acquire-pricing-plans-201-hierarchy",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/navigate-acquire-pricing-plans-201-usage-billing",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/navigate-acquire-pricing-plans-201-advanced-models",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/navigate-acquire-pricing-plans-201-advanced-currency",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/navigate-acquire-pricing-plans-201-advanced-analytics",
+                      "guides/recurly-navigate/navigate-acquire/navigate-acquire-pricing-plans-201/navigate-acquire-pricing-plans-201-review"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Navigate Retain",
+                "pages": [
+                  "guides/recurly-navigate/navigate-retain/index",
+                  {
+                    "group": "Navigate Retain Account Updater",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-account-updater/index",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-account-updater/navigate-retain-account-updater-benefits",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-account-updater/navigate-retain-account-updater-considerations",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-account-updater/navigate-retain-account-updater-enable",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-account-updater/navigate-retain-account-updater-data",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-account-updater/navigate-retain-account-updater-use-case"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Retain Subscription Pause",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-subscription-pause/index",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-subscription-pause/navigate-retain-subscription-pause-why-it-matters",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-subscription-pause/navigate-retain-subscription-pause-considerations",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-subscription-pause/navigate-retain-subscription-pause-how-to-enable",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-subscription-pause/navigate-retain-subscription-pause-tracking",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-subscription-pause/navigate-retain-subscription-pause-review"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Retain Dunning 101",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/index",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-dunning-windows",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-window-configuration",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-email-branding",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-email-configuration",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-email-messaging",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-multiple-campaigns",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-campaigns-configure",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-analytics",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-dunning-101/navigate-retain-dunning-101-review"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Retain Payment Banners",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-payment-banners/index",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-payment-banners/navigate-retain-payment-banners-why",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-payment-banners/navigate-retain-payment-banners-implementation",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-payment-banners/navigate-retain-payment-banners-strategy",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-payment-banners/navigate-retain-payment-banners-tracking",
+                      "guides/recurly-navigate/navigate-retain/navigate-retain-payment-banners/navigate-retain-payment-banners-review"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Navigate Scale",
+                "pages": [
+                  "guides/recurly-navigate/navigate-scale/index",
+                  {
+                    "group": "Navigate Scale Payments Hub",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-payments-hub/index",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-payments-hub/navigate-scale-payments-hub-overview",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-payments-hub/navigate-scale-payments-hub-payment-processing",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-payments-hub/navigate-scale-payments-hub-account-updater",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-payments-hub/navigate-scale-payments-hub-payment-retries",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-payments-hub/navigate-scale-payments-hub-fraud-prevention",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-payments-hub/navigate-scale-payments-hub-review-resources"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Scale Benchmarks 101",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-benchmarks-101/index",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-benchmarks-101/navigate-scale-benchmarks-101-reading",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-benchmarks-101/navigate-scale-benchmarks-101-subscriber",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-benchmarks-101/navigate-scale-benchmarks-101-churn",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-benchmarks-101/navigate-scale-benchmarks-101-renewal-dunning",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-benchmarks-101/navigate-scale-benchmarks-101-review"
+                    ]
+                  },
+                  {
+                    "group": "Navigate Scale Compass Agents",
+                    "pages": [
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/index",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/navigate-scale-compass-agents-knowledge",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/navigate-scale-compass-agents-code",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/navigate-scale-compass-agents-configuration",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/navigate-scale-compass-agents-data",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/navigate-scale-compass-agents-retention",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/navigate-scale-compass-agents-assistant",
+                      "guides/recurly-navigate/navigate-scale/navigate-scale-compass-agents/navigate-scale-compass-agents-review"
+                    ]
+                  }
+                ]
+              },
+              "guides/recurly-navigate/event-page-test"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference"
+            ]
+          },
+          {
+            "group": "Recurly V2 API",
+            "pages": [
+              {
+                "group": "Accounts",
+                "pages": [
+                  "reference/recurly-v2-api/accounts/listaccounts",
+                  "reference/recurly-v2-api/accounts/createanaccount",
+                  "reference/recurly-v2-api/accounts/getaccount",
+                  "reference/recurly-v2-api/accounts/closeaccount",
+                  "reference/recurly-v2-api/accounts/updateaccount",
+                  "reference/recurly-v2-api/accounts/reopenaccount",
+                  "reference/recurly-v2-api/accounts/listaccountnotes"
+                ]
+              },
+              {
+                "group": "Adjustments",
+                "pages": [
+                  "reference/recurly-v2-api/adjustments/listanaccountsadjustments",
+                  "reference/recurly-v2-api/adjustments/createachargeorcredit",
+                  "reference/recurly-v2-api/adjustments/getanadjustment",
+                  "reference/recurly-v2-api/adjustments/deleteanadjustment"
+                ]
+              },
+              {
+                "group": "Billing Info",
+                "pages": [
+                  "reference/recurly-v2-api/billing-info/lookupanaccountsbillinginfo",
+                  "reference/recurly-v2-api/billing-info/createanaccountsbillinginfotoken",
+                  "reference/recurly-v2-api/billing-info/updateanaccountsbillinginfotoken",
+                  "reference/recurly-v2-api/billing-info/clearanaccountsbillinginfo"
+                ]
+              },
+              {
+                "group": "Coupons",
+                "pages": [
+                  "reference/recurly-v2-api/coupons/listactivecoupons",
+                  "reference/recurly-v2-api/coupons/createcoupon",
+                  "reference/recurly-v2-api/coupons/lookupacoupon",
+                  "reference/recurly-v2-api/coupons/deactivatecoupon"
+                ]
+              },
+              {
+                "group": "Coupon Redemptions",
+                "pages": [
+                  "reference/recurly-v2-api/coupon-redemptions/lookupacouponredemptiononanaccount",
+                  "reference/recurly-v2-api/coupon-redemptions/removeacouponfromanaccount",
+                  "reference/recurly-v2-api/coupon-redemptions/lookupacouponredemptiononaninvoice",
+                  "reference/recurly-v2-api/coupon-redemptions/redeemacouponbeforeorafterasubscription"
+                ]
+              },
+              {
+                "group": "Invoices",
+                "pages": [
+                  "reference/recurly-v2-api/invoices/listinvoices",
+                  "reference/recurly-v2-api/invoices/listanaccountsinvoices",
+                  "reference/recurly-v2-api/invoices/postaninvoiceinvoicependingchargesonanaccount",
+                  "reference/recurly-v2-api/invoices/lookupinvoicedetails",
+                  "reference/recurly-v2-api/invoices/previewaninvoice",
+                  "reference/recurly-v2-api/invoices/markaninvoiceaspaidsuccessfully",
+                  "reference/recurly-v2-api/invoices/markaninvoiceasfailedcollection",
+                  "reference/recurly-v2-api/invoices/lineitemrefunds",
+                  "reference/recurly-v2-api/invoices/enteranofflinepaymentforamanualinvoicebeta"
+                ]
+              },
+              {
+                "group": "Plans",
+                "pages": [
+                  "reference/recurly-v2-api/plans/listplans",
+                  "reference/recurly-v2-api/plans/createplan",
+                  "reference/recurly-v2-api/plans/lookupplandetails",
+                  "reference/recurly-v2-api/plans/updateplan",
+                  "reference/recurly-v2-api/plans/deleteplan"
+                ]
+              },
+              {
+                "group": "Plan Add Ons",
+                "pages": [
+                  "reference/recurly-v2-api/plan-add-ons/listaddonsforaplan",
+                  "reference/recurly-v2-api/plan-add-ons/createanaddon",
+                  "reference/recurly-v2-api/plan-add-ons/lookupanaddon",
+                  "reference/recurly-v2-api/plan-add-ons/updateanaddon",
+                  "reference/recurly-v2-api/plan-add-ons/deleteanaddon"
+                ]
+              },
+              {
+                "group": "Subscriptions",
+                "pages": [
+                  "reference/recurly-v2-api/subscriptions/listsubscriptions",
+                  "reference/recurly-v2-api/subscriptions/createsubscription",
+                  "reference/recurly-v2-api/subscriptions/listaccountssubscriptions",
+                  "reference/recurly-v2-api/subscriptions/lookupsubscriptiondetails",
+                  "reference/recurly-v2-api/subscriptions/updatesubscription",
+                  "reference/recurly-v2-api/subscriptions/previewsubscription",
+                  "reference/recurly-v2-api/subscriptions/updatesubscriptionnotes",
+                  "reference/recurly-v2-api/subscriptions/previewsubscriptionchange",
+                  "reference/recurly-v2-api/subscriptions/cancelsubscription",
+                  "reference/recurly-v2-api/subscriptions/reactivatecanceledsubscription",
+                  "reference/recurly-v2-api/subscriptions/terminatesubscription",
+                  "reference/recurly-v2-api/subscriptions/postponesubscription"
+                ]
+              },
+              {
+                "group": "Transactions",
+                "pages": [
+                  "reference/recurly-v2-api/transactions/listtransactions",
+                  "reference/recurly-v2-api/transactions/createtransaction",
+                  "reference/recurly-v2-api/transactions/listaccountstransactions",
+                  "reference/recurly-v2-api/transactions/lookuptransaction"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Resources",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "resources"
+            ]
+          },
+          {
+            "group": "Recipes",
+            "pages": [
+              "recipes/configuration",
+              "recipes/define-payment-methods",
+              "recipes/define-request-templates",
+              "recipes/define-response-templates"
+            ]
+          },
+          {
+            "group": "More",
+            "pages": [
+              "custom-pages/open-source-attribution"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "api": {
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": [
+        "curl",
+        "javascript",
+        "python"
+      ]
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "assistant",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "grok",
+      "aistudio",
+      "devin",
+      "windsurf",
+      "mcp",
+      "add-mcp",
+      "cursor",
+      "vscode",
+      "devin-mcp"
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Recurly",
+        "href": "https://recurly.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Open Recurly",
+      "href": "https://app.recurly.com"
+    }
+  }
+}

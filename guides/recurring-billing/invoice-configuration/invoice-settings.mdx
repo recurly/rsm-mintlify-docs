@@ -1,0 +1,228 @@
+---
+title: Automated invoicing
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Recurly automatically creates, sends, and collects invoices whenever a customer subscribes or a charge is invoiced. The Invoice Settings page gives you control over how those invoices look and behave — from default terms and notes to email attachments, Bill To address logic, and rules for subscription upgrades and downgrades.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#configure-automated-invoicing"><span className="rp-toc-num">4</span>Configure automated invoicing</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Automated invoicing in Recurly handles the full billing cycle without manual intervention — generating invoices on subscription creation, attempting collection using the payment method on file, and sending invoice emails to customers. Site-level defaults for terms, notes, and address settings apply to all invoices and can be overridden per invoice via the Admin Console or API.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-clock" aria-hidden="true"></i></div>
+    <strong>Efficiency and time savings</strong>
+    <span>Eliminates manual invoicing work and reduces the risk of errors, so your team can focus on higher-value tasks.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-palette" aria-hidden="true"></i></div>
+    <strong>Customization and professionalism</strong>
+    <span>Extensive customization options let you maintain a consistent, on-brand appearance across all customer billing communications.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+    <strong>Compliance and tax management</strong>
+    <span>Supports EU VAT and other tax regulations with configurable tax notes and address settings, helping your invoicing stay aligned with relevant laws.</span>
+  </div>
+</div>
+
+# Key details
+
+## Default values
+
+Site-level defaults apply to all automatic and manual invoices. These can be overridden with invoice-specific messages when generating an invoice through the Admin Console or API.
+
+The default payment term for all invoices is **On Receipt**, meaning invoices are due immediately upon creation. For automatic invoices, collection is attempted immediately using the payment method on file. For manual invoices, the invoice becomes past due immediately upon creation.
+
+
+<Image src="https://files.readme.io/07fcb4bb45a2522d031fdf5cccb6922925a0e2274bc6a674248d5955b4fbcd4c-Screenshot_2025-07-18_at_2.33.30_PM.png" align="center" width="75%" border={true} />
+
+
+### Note to customer
+
+The Customer Notes field lets you add any details you'd like to surface to the customer — invoice-specific information, a thank-you message, or anything else relevant to the billing interaction. This section only appears on an invoice if it contains text. It doesn't display a section title and is rendered at the bottom of the invoice in a larger font than Terms and Conditions.
+
+### Terms and conditions
+
+The Terms and Conditions field is available for payment terms, contract notes, or other legal information. The section title ("Terms and Conditions") can't be customized. Like Customer Notes, this section only appears on an invoice if it contains text.
+
+### Terms
+
+Terms configuration applies to all invoices. Learn more about <a href="/guides/recurring-billing/invoice-configuration/manual-payments" target="_blank">terms for manual invoices</a> and <a href="/guides/recurring-billing/invoice-configuration/automatic-invoicing-terms#collection-terms" target="_blank">terms for automatic invoicing</a>.
+
+### Upgrades, downgrades, and subscription edits
+
+Choose whether to send paid invoices when a subscription is upgraded or downgraded, and configure how proration is handled when a subscription is edited. Options include all proration, partial proration, or no proration or credits.
+
+
+<Image src="https://files.readme.io/186cacb8e9962582ec06cb1bfc7cc53cbbd39249e350a287095c462a3368457f-Screenshot_2025-07-18_at_2.34.35_PM.png" align="center" width="75%" border={true} />
+
+
+### Subscription alignment
+
+When enabled, the **Subscription Alignment** setting clears the Account Bill Date once the last subscription on an account expires. If a new subscription is later created on that account with no other active subscriptions, the Account Bill Date is updated to the new subscription's creation date.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>This setting is only available if the Aligning Renewals feature is enabled on your site.</div>
+</div>
+
+
+<Image src="https://files.readme.io/c912fc471e38e359a94b5ad993419a1050f33f79294b8d8f1fe5f63f9001bfec-Screenshot_2025-07-18_at_2.40.42_PM.png" align="center" width="75%" border={true} />
+
+
+### Refunds
+
+Configure how Recurly handles declined refund transactions. The default behavior is **Issue Credit**, which retains the refund amount as a credit balance. Alternatively, **Block** prevents the credit from being issued when a refund transaction declines.
+
+
+<Image src="https://files.readme.io/0ef34920bc3f69e20cd9d49864f3f3de51405baca1e012a24cb944b7f8bb8ad5-Screenshot_2025-07-18_at_2.44.20_PM.png" align="center" width="75%" border={true} />
+
+
+### VAT reverse charge notes
+
+If you're using Recurly's EU VAT feature, a **VAT Reverse Charge Notes** section appears on invoices when a customer provides a valid VAT number and is located in a different country than your own. The field is pre-filled with a general statement that no VAT was applied and the customer may be responsible for VAT. You can customize this default message — or override it per invoice. To edit the default, go to **Configuration → Taxes → Tax Settings**.
+
+***
+
+## Email settings
+
+Invoices are delivered in the body of Recurly's email templates. You can enable PDF invoice attachments per template by editing the template and enabling **Attach PDF** in the Attachments section at the bottom of the edit page.
+
+The following email templates support PDF invoice attachments:
+
+- New Subscription
+- New Invoice (Manual Invoice feature only)
+- Invoice Past Due (Manual Invoice feature only)
+- Payment Confirmation
+- Payment Declined
+- Payment Refunded
+- Payment Voided
+
+
+<Image src="https://files.readme.io/2c2422e-Screenshot_2024-08-05_at_9.21.28_AM.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Bill to address
+
+By default, the Bill To address on an invoice comes from the customer's billing information. To force all invoices to use the Account Info address instead, enable **Use Account Information Address for all Invoices** under **Configuration → Taxes → Tax Settings**. The Bill To address appears on the invoice and is used for tax calculations.
+
+
+<Image src="https://files.readme.io/1AemwLZGSD2cK2sdH0jS_invoice-bill-to.png" align="center" width="75%" border={true} />
+
+
+This setting is useful when you need to display a shipping or mailing address on the invoice, or calculate taxes based on a shipping or mailing address.
+
+When Account Info address doesn't exist:
+
+- **Automatic collection invoices** default back to Billing Info, including the billing address, name, and VAT number
+- **Manual collection invoices** still use Account Info, resulting in no address on the invoice
+
+***
+
+## Example invoice
+
+The following example shows an invoice with Invoice Settings configurations applied.
+
+
+<Image src="https://files.readme.io/c76b922-Screen_Shot_2022-04-04_at_5.37.43_PM.png" align="center" width="75%" border={true} />
+
+
+***
+
+## Modification enforcement
+
+Some merchants require customers to be current on all payments before allowing subscription changes. Two enforcement options are available on the Invoice Settings page.
+
+### Require paid invoice and successful transaction on upgrades
+
+When enabled, Recurly checks for any past due automatic collection invoices on the account before processing an upgrade. An upgrade is defined as any increase in subscription price — including changes to the base price, quantity, add-ons, or plan.
+
+If past due invoices exist, Recurly attempts to collect them first. If collection fails, the upgrade is blocked and the customer sees: _"Your account is currently past due, please update your billing information before changing your subscription."_ If past due invoices are collected successfully, Recurly then attempts to collect the upgrade invoice. If that transaction also declines, the upgrade is blocked.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> API tip</strong>If you're using the API, make sure your integration provides customers a way to update their billing information when an upgrade is blocked so they can proceed.</div>
+</div>
+
+### Require paid invoice to downgrade
+
+When enabled, all invoices on the account must be paid before a downgrade can be processed. A downgrade is defined as any decrease in subscription price — including changes to the base price, quantity, add-ons, or plan. If any invoice is past due, the subscription stays on the original plan and the customer sees: _"Your account is currently past due, please update your billing information before changing your subscription."_
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Both enforcement settings apply only to immediate upgrades and downgrades. Changes applied at the bill date or term renewal are allowed even if the account has unpaid invoices.</div>
+</div>
+
+***
+
+## Integration notes
+
+<div className="rp-card">
+
+### API integration
+
+Recurly's API supports full programmatic control over invoice creation and management. Review the <a href="https://developers.recurly.com/" target="_blank">Recurly API documentation</a> for setup details. When integrating, ensure your system handles errors gracefully — for example, retrying failed API calls or logging errors for manual review. Use HTTPS for all API calls and store API keys securely using environment variables or a secrets manager.
+
+</div>
+
+<div className="rp-card">
+
+### Webhooks
+
+Recurly sends webhook notifications when invoice events occur (e.g., a new invoice is generated). Set up webhooks to sync invoice data between Recurly and your internal systems in real time. See the <a href="https://developers.recurly.com/" target="_blank">API documentation</a> for available webhook events.
+
+</div>
+
+<div className="rp-card">
+
+### Rate limits and testing
+
+Be mindful of API rate limits when building your integration. Before going live, test thoroughly in Recurly's <a href="/guides/getting-started/sandbox-features-to-discover" target="_blank">sandbox environment</a> to validate all invoice configurations end-to-end.
+
+</div>
+
+# Configure automated invoicing
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Invoice Settings</h4><p>In the Admin Console, go to <strong>Configuration → Invoice Templates → Invoice Settings</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Set default values</h4><p>In the <strong>Charge Invoice Defaults</strong> section, set your preferred <strong>Terms</strong>, and enter any default text for <strong>Terms and Conditions</strong> and <strong>Customer Notes</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Configure upgrade and downgrade behavior</h4><p>Under <strong>Upgrades, Downgrades, and Subscription Edits</strong>, choose your proration settings and enable any modification enforcement options.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Configure VAT reverse charge notes (if applicable)</h4><p>If you're using EU VAT, customize the <strong>VAT Reverse Charge Notes</strong> default message under <strong>Configuration → Taxes → Tax Settings</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Enable PDF attachments</h4><p>Go to <strong>Configuration → Email Templates</strong>, open each relevant template, and enable <strong>Attach PDF</strong> in the Attachments section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">6</div>
+    <div><h4>Configure Bill To address</h4><p>If needed, go to <strong>Configuration → Taxes → Tax Settings</strong> and enable <strong>Use Account Information Address for all Invoices</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">7</div>
+    <div><h4>Save and test</h4><p>Click <strong>Save Changes</strong> at the bottom of the Invoice Settings page. Generate a test invoice in the sandbox environment to confirm everything looks correct before going live.</p></div>
+  </div>
+</div>
+
+<br />

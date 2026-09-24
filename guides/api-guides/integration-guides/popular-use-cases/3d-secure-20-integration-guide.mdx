@@ -1,0 +1,205 @@
+---
+title: 3D secure 2.0 integration guide
+---
+
+# Overview
+
+The purpose of this guide is to provide you with the information needed to fully implement Strong Customer Authentication (SCA) using the 3-D Secure (3DS) protocol, in accordance with Payment Services Directive 2 (PSD2). If you haven't already, we recommend reading more about PSD2, 3DS, and SCA [here](https://docs.recurly.com/docs/revised-payment-services-directive-psd2) before proceeding with this guide. You can also refer to the [Glossary](#glossary) section to refresh your memory on important terms.
+
+While SCA largely involves an integration effort between you and your configured payment gateway(s), Recurly, as your billing solutions provider, has made key updates to help facilitate SCA requirements under PSD2. This document provides a high-level understanding of SCA, the Recurly solution, and a step-by-step guide to help you complete the integration.
+
+**Estimated completion time:** 3 hours
+
+### Prerequisites & limitations
+
+**Gateway-Specific Requirements**
+
+* Certain gateways (e.g., SagePay, Cybersource, Wirecard, Worldpay) may require credit card tokenization or additional device fingerprint calls.
+* Always confirm your gateway’s specific limitations before deploying.
+
+***
+
+# Definition
+
+In the context of PSD2, **Strong Customer Authentication (SCA)** is a mandate requiring multi-factor authentication for electronic payments. **3-D Secure (3DS)** is the protocol used to implement these requirements, with **3DS 2.0** being the newest version. Recurly’s solution abstracts away much of the complexity, offering you a simpler, MPI-agnostic approach that works with multiple gateways.
+
+***
+
+**Merchant Initiated Transactions (MIT) and Dunning**
+
+For recurring, merchant-initiated transactions (MIT), SCA is generally not required. However, there may be scenarios where an issuing bank still requests an SCA challenge.
+
+To assist with recovering revenue from failed MITs, Recurly supports a flow to complete the SCA challenge for re-authentication. See setup instructions for our fully hosted dunning solution [here](/guides/security-compliance/compliance/revised-payment-services-directive-psd2/dunning-configuration-for-3ds-2-declines).
+
+If you prefer to implement your own dunning solution, you can listen for the [dunning event webhook](https://developers.recurly.com/api/latest/index.html#webhooks-dunning-event-notifications), which is sent when a recurring payment fails due to an issuer’s request for 3DS2 authentication. The payload will indicate that the failure type is `three_d_secure_action_required` and provide the relevant invoice number. The [Collect Invoice](https://developers.recurly.com/api/latest/index.html#operation/collect_invoice) endpoint can then be used to finalize the transaction. Refer to [Step 2](https://docs.recurly.com/v1.1/docs/3d-secure-20-integration-guide#step-2-submit-a-transaction-request) of the integration guide for more detail.
+
+The 3DS2 dunning flow, whether hosted or custom, can be tested using the following test credit card: `4000008400001629`.
+
+***
+
+**PSD2 Exemptions for MOTO (Mail Order / Telephone Order) Transactions**
+
+This guide focuses on 3DS2 integrations for scenarios where customers are “in session” and directly interacting with the transaction flow online. For call center agent scenarios (MOTO transactions), 3DS2 / SCA may be bypassed because these transactions are exempt from PSD2. You can set this exemption by passing an exemption flag via the Recurly API. See the [API reference](https://developers.recurly.com/api/latest/index.html#operation/update_billing_info) for details.
+
+**Note:** Some payment gateways require extra configuration for MOTO exemptions. See our [gateway-specific documentation](/guides/security-compliance/gateway-specific-updates) for more details.
+
+***
+
+## Glossary
+
+* **Access Control Server (ACS)**: A service hosted by or related to the issuing bank. Responsible for issuing challenge URLs, generating device fingerprints, and verifying that the cardholder is legitimate.
+
+* **Merchant Plug-in (MPI)**: A module designed to facilitate 3-D Secure verification and prevent payment card fraud. Typically provided by your payment gateway, it verifies the card number with the issuing bank and checks if it’s enrolled in the 3-D Secure program. The Recurly SCA framework wraps the MPI functionality for various gateways.
+
+* **Strong Customer Authentication (SCA)**:A requirement in the European Economic Area (EEA) ensuring electronic payments are performed with multi-factor authentication. See [our docs](https://docs.recurly.com/docs/revised-payment-services-directive-psd2#section-strong-customer-authentication-sca) for more details.
+
+* **3-D Secure (3DS)**:An e-commerce authentication protocol implementing SCA. There are two versions in effect: 3DS 2.0 (latest) and 3DS 1.0 (fallback until fully retired).
+
+* **Payment Services Directive 2 (PSD2)**: A directive in the EEA requiring SCA since September 14, 2019. More details can be found in [our docs](https://docs.recurly.com/docs/revised-payment-services-directive-psd2#section-strong-customer-authentication-sca).
+
+***
+
+## Understanding the SCA flows
+
+SCA can be subdivided into different flows, each requiring varying degrees of engagement from customers and extra implementation steps.
+
+### Frictionless
+
+Requires minimal effort from both you and your customers, seamlessly processing authentication if the issuing bank deems it has sufficient information to confirm the transaction. Any customer or browser data you provide (via Recurly.js or other means) can help increase frictionless approvals.
+
+### Fingerprint
+
+Sometimes the issuing bank may request a device fingerprint before authorizing the transaction. Though invisible to your customer, you must complete specific technical steps (detailed in the integration guide) to collect and pass this device data.
+
+### Challenge
+
+In certain cases, the issuer requests direct interaction with the customer (e.g., entering a one-time password or responding to a bank app prompt). This is considered a challenge flow and is the most interactive SCA scenario.
+
+***
+
+## The Recurly SCA solution
+
+Recurly’s SCA solution aims to **simplify complexity** and remain **MPI-agnostic**, providing high-level abstractions so you don’t need to manage multiple gateway-specific implementations.
+
+***
+
+## Required components and Prerequisites
+
+### Recurly.js
+
+* **Recurly.js version 4** is required for 3DS2 / SCA. This updated library handles device fingerprinting and challenge flows on the client side, wrapping the lower-level gateway MPI libraries.
+* If you’re not using Recurly.js yet, check out the [Recurly.js reference](https://developers.recurly.com/reference/recurly-js#getting-started).
+
+> **Additional Info:** [Recurly.js 3-D Secure documentation](https://developers.recurly.com/reference/recurly-js#3d-secure) provides a complete reference on SCA-related methods.
+
+### Recurly API / Client Libraries
+
+* Use **API v2.21 or higher** or **API v3** to ensure compatibility with 3DS2 / SCA.
+* If you’re just getting started, see our [Quickstart Guide](https://docs.recurly.com/v1.1/docs/quick-start-guide#/).
+* If upgrading from older versions, see our [v3 upgrade guide](https://docs.recurly.com/v1.1/docs/upgrade-to-api-v3#/).
+
+***
+
+## Key Objects & Parameters
+
+* **Credit Card Token**: A secure token (generated by Recurly.js) encapsulating sensitive billing data (e.g., card number) plus any additional customer/browser info for SCA.
+
+* **3-D Secure Action Token**: Generated by the Recurly API, encapsulating details needed by Recurly.js to initiate the client-side authentication (e.g., device fingerprint or challenge).
+
+* **3-D Secure Action Result Token**: Generated by Recurly.js, encapsulating data captured after the ACS challenge or device fingerprint. Sent back to Recurly to finalize authentication.
+
+* **Recurly.js ThreeDSecure Class**: A class for handling SCA-related client-side tasks like rendering challenges.
+
+***
+
+## Integration Guide
+
+### Step 1: Collect Payment Data with Recurly.js
+
+Using Recurly.js to tokenize credit cards is optional for SCA unless you’re integrating with Wirecard, Sagepay, Cybersource, or Worldpay (in these cases, tokenization is required). Tokenization helps gather additional data to improve the chance of a frictionless flow.
+
+> **Warning:**
+>
+> * If you’re using Cybersource or Worldpay, an extra API call for device data collection is required, which can slow the checkout experience. If you disable this call, a 3DS2 challenge may fail.
+
+### Step 2: Submit a Transaction Request
+
+Send the tokenized card or raw billing info to the appropriate Recurly API endpoint:
+
+* [Create Purchase](https://developers.recurly.com/api/latest/index.html#operation/create_purchase)
+* [Create Subscription](https://developers.recurly.com/api/latest/index.html#operation/create_subscription)
+* [Collect Invoice](https://developers.recurly.com/api/latest/index.html#operation/collect_invoice)
+
+Ensure you’ve upgraded to **API v2.21+** (or **API v3**). If additional SCA action is needed, Recurly will respond with a `three_d_secure_action_required` error code and a `three_d_secure_action_token_id`.
+
+### Step 3: Process the Response
+
+If no further authentication is required, you’ll receive a success response. If the gateway demands more steps (e.g., fingerprint or challenge), the response includes:
+
+```
+<errors>
+  <transaction_error>
+    <error_code>three_d_secure_action_required</error_code>
+    <three_d_secure_action_token_id>ABCDEFGHIJKL012345</three_d_secure_action_token_id>
+    ...
+  </transaction_error>
+  <transaction href="..." type="credit_card">
+    ...
+  </transaction>
+</errors>
+```
+
+Send `three_d_secure_action_token_id` to the client, instantiate a `ThreeDSecure` object in Recurly.js, and handle the next steps.
+
+### Step 4: Set Up Event Handlers (Fingerprint / Challenge)
+
+Attach event handlers to your Recurly.js `ThreeDSecure` instance to manage success or failure of the fingerprint/challenge flow:
+
+```js
+threeDSecure.on('token', token => {
+  // token.id is the three_d_secure_action_result_token_id
+  // send this to your server to re-attempt the transaction
+});
+```
+
+### Step 5: Initiate the Fingerprint / Challenge
+
+Begin the flow by assigning an HTML container for Recurly.js to inject UI elements (3DS frames). On success, your `token` event handler will fire.
+
+> **Warning:**
+>
+> * We recommend a minimum container size of 250px x 400px.
+> * Certain gateways (like Stripe) may render challenges as modals, so avoid placing the container inside your own modal.
+
+### Step 6: Submit a New Purchase Request
+
+Use the `three_d_secure_action_result_token_id` from Step 4 in a new API call (e.g., [Create Purchase](https://developers.recurly.com/api/latest/index.html#operation/create_purchase)) to finalize authentication.\
+The account/billing info must match the original request. Changing these details may cause a token mismatch error.
+
+### Step 7: Testing
+
+Use the **Recurly Test Gateway** with the following test cards:
+
+| Card Number        | Behavior                                                     |
+| ------------------ | ------------------------------------------------------------ |
+| `4000000000003220` | Challenge flow                                               |
+| `4000000000003063` | Device fingerprint flow                                      |
+| `4222222222222220` | Approved fraud review (frictionless flow)                    |
+| `4000008400001629` | 3DS2 challenge for any recurring transaction (e.g., dunning) |
+
+> **Note:**
+>
+> * For real gateway testing, contact Recurly Support to enable Development mode and obtain test cards from your gateway.
+> * Some gateways (e.g., SagePay) do not support Development mode. Testing may require a Production environment setup.
+> * Braintree requires an amount of `2099.00` to trigger the 3DS2 challenge.
+>
+> **Warning:**\
+> When updating subscriptions, ensure the following is enabled:
+> **Configuration > Invoice Templates > Invoice Settings > Upgrades and Downgrades > “Upgrades require paid invoice and successful transaction”**
+> Without this, a success response may occur even if a 3DS challenge was needed.
+
+***
+
+## Additional Support
+
+If you need more help with your SCA integration, please [contact Recurly Support](https://support.recurly.com).

@@ -1,0 +1,154 @@
+---
+title: Site activities export
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Site Activities export logs changes and actions made to your Recurly site — plan modifications, site setting updates, user management, gateway changes, and more. Unlike the Account Activities export, which captures customer account-level actions, Site Activities focuses on the configuration and operation of the site itself.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on Elite plans for users with an Admin role or Admin permission. Also available as an optional add-on for Starter and Professional plans — contact <a href="mailto:support@recurly.com">support@recurly.com</a> or your CSM for details.</div>
+</div>
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Important notes before enabling</strong>The Site Activities export only displays data from activities conducted after the feature flag is enabled on your site — historical events prior to activation are not included. Data is retained for 12 months. After that, entries are no longer accessible in this export. If you require longer retention, back up your data in your own system.</div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Recurly Revenue Recognition</strong>Site Activities does not log RevRec activity. No revenue recognition-related data is included in this export.</div>
+</div>
+
+# Access the export
+
+Go to **Admin → Admin Exports → Site Activities**.
+
+
+<Image src="https://files.readme.io/e5df84fdf53a75223a38673c220185784c0cc6748427ba15b680f0dba6e48f78-image.png" align="center" width="75%" border={true} />
+
+
+***
+
+# Explore interface
+
+The Explore interface provides an interactive query builder for analyzing site activity data. It's divided into two panels:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Panel</td><td>Description</td></tr>
+  <tr><td><strong>Left — Workbook</strong></td><td>Ask natural-language questions about your site activity data. The Workbook Agent suggests fields and runs queries on your behalf.</td></tr>
+  <tr><td><strong>Center — Field picker</strong></td><td>Browse and search the full field catalog, grouped by topic. Click any field to add it to your active query. Use the In-use filter to see only selected fields.</td></tr>
+</table>
+
+
+<Image src="https://files.readme.io/ef44d9d824e787df7921eee54598bb2844a4af227d5ea719a4f5d9b8c9049047-image.png" align="center" width="75%" border={true} />
+
+
+## Pre-built sample queries
+
+Two sample queries are available to get started quickly:
+
+- **List of site activities** — Returns a row-level list of all site activity events within the active date scope, including actor, action type, affected object, and timestamp.
+- **Count of site activities** — Returns a grouped count of site activity events broken down by activity type, providing a quick summary of the most common actions across your site.
+
+## Workbook Agent
+
+The Workbook Agent is the fastest way to start an analysis. Type a question in the text box at the bottom of the left panel and press Enter (or click the send icon).
+
+**Example prompts:**
+
+- "Show me all activity on account ABC123 in the last 14 days"
+- "Which actors made the most changes to accounts this month?"
+- "List all subscription cancellations performed via API in the past 30 days"
+- "Count account activities by type for the current revenue period"
+- "Show me all activities where the acted-upon object is a billing info record"
+
+## Build a report
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Select fields</h4><p>Browse the field catalog and click any field to add it to your query. Use the <strong>In-use</strong> filter to see only selected fields.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Apply filters</h4><p>Drag and drop any field into the Filters section, or click the dropdown/actions menu next to a field header and select <strong>Filter</strong>. To create a measure tied to a specific dimension, build a pivot table and right-click the measure under a pivot value to select <strong>Create filtered measure</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/c9c6cc6ed76b747ad36ebf7b8dcbfc671d465913f74963e969242f2ef9ca02a1-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Visualize and review</h4><p>Toggle between Results (table view), Chart (visualization), or both. Use the <strong>Options</strong> tab to configure axes, grouping, and chart type.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Download your data</h4><p>From the menu, select <strong>Tab → Download</strong> and choose your preferred format: CSV, Excel, or JSON.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/5aa93a8e225a22e569fb3a8783b6d661992709e84c8174b4956266cfaa70e175-image.png" align="center" width="30%" border={true} />
+
+
+
+<Image src="https://files.readme.io/4e2e34d9b6f474f1bdb99ef5d92c8be32a1ea64d7777f67023eac0e4d51fc555-image.png" align="center" width="40%" border={true} />
+
+
+***
+
+# Export fields
+
+| Id                                                                              | Example                              | Description                                                                               | Data type (max size) |
+| :------------------------------------------------------------------------------ | :----------------------------------- | :---------------------------------------------------------------------------------------- | :------------------- |
+| <span id="event">event</span>                                                   | `plan`                               | The type of event that triggered the entry in the audit log.                              | string               |
+| <span id="resource_identifier">resource\_identifier</span>                      | `druuid-1234...`                     | The external UUID of the record that was audited. Typically the druuid of the record\_id. | string               |
+| <span id="resource_type">resource\_type</span>                                  | `plan`                               | The external type of the record that was audited.                                         | string               |
+| <span id="target_resource_identifier">target\_resource\_identifier</span>       | `druuid-5678...`                     | The external UUID of the target of the record.                                            | string               |
+| <span id="target_resource_type">target\_resource\_type</span>                   | `site`                               | The external type of the target of the record.                                            | string               |
+| <span id="principal_resource_identifier">principal\_resource\_identifier</span> | `user@example.com` or `api-key-name` | The external identifier of the principal — the user email or API key name/masked value.   | string               |
+| <span id="principal_resource_type">principal\_resource\_type</span>             | `user` or `api_key`                  | The external type of the principal.                                                       | string               |
+
+***
+
+# Logged events
+
+The table below lists every object and action that Recurly logs in the Site Activities export. Recurly continues to expand coverage — contact your CSM if you need activity logging for an object not listed here.
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Event</td><td>Actions</td><td>Trigger</td></tr>
+  <tr><td><code>login</code></td><td>success</td><td>Successful user login to the merchant site.</td></tr>
+  <tr><td><code>user</code></td><td>create, delete, update</td><td>A user is added, their role is updated, or they are removed from the site.</td></tr>
+  <tr><td><code>role</code></td><td>create, update, delete</td><td>A role is created, updated, or removed from the site.</td></tr>
+  <tr><td><code>account_updater</code></td><td>enable, disable, update</td><td>Account Updater settings are changed.</td></tr>
+  <tr><td><code>analytics_settings</code></td><td>update</td><td>Analytics dashboard settings are updated.</td></tr>
+  <tr><td><code>coupon_settings</code></td><td>update</td><td>Site-wide coupon settings are updated.</td></tr>
+  <tr><td><code>currency_settings</code></td><td>update</td><td>Enabled currencies are updated.</td></tr>
+  <tr><td><code>hosted_page_settings</code></td><td>update</td><td>Site-wide Hosted Payment Page (HPP) settings are updated.</td></tr>
+  <tr><td><code>hosted_account_management_settings</code></td><td>update</td><td>Site-wide Hosted Account Management (HAM) settings are updated.</td></tr>
+  <tr><td><code>invoice_settings</code></td><td>update</td><td>Site-wide invoice settings are updated.</td></tr>
+  <tr><td><code>tax_settings</code></td><td>update</td><td>Site-wide tax settings are updated.</td></tr>
+  <tr><td><code>custom_field_definition</code></td><td>create, update, delete</td><td>A custom field definition is added, updated, or removed.</td></tr>
+  <tr><td><code>avalara_credentials</code></td><td>create, update, delete</td><td>Avalara credentials are added, updated, or removed. User updates only — excludes system-level invalidation.</td></tr>
+  <tr><td><code>plan</code></td><td>create, update, delete</td><td>A plan is added, updated, or removed. Supported in Admin UI and API v3. Excludes plan email configuration.</td></tr>
+  <tr><td><code>add_on</code></td><td>create, update, delete</td><td>An add-on is added to, updated on, or removed from a plan. Supported in Admin UI and API v3.</td></tr>
+  <tr><td><code>measured_unit</code></td><td>create, update, delete</td><td>A measured unit is added, updated, or removed.</td></tr>
+  <tr><td><code>coupon</code></td><td>create, update, expire, restore, generate_codes</td><td>A coupon is added, updated, expired, restored, or additional unique codes are generated. Admin UI only.</td></tr>
+  <tr><td><code>unique_coupon_code</code></td><td>expire, restore</td><td>A unique coupon code is manually expired or restored. Admin UI only.</td></tr>
+  <tr><td><code>email_settings</code></td><td>update</td><td>Email settings for a template are updated.</td></tr>
+  <tr><td><code>email_templates</code></td><td>create, update, delete, reset</td><td>Email templates are created, updated, deleted, or reset. Excludes audience selector and attachment changes.</td></tr>
+  <tr><td><code>payment_gateways</code></td><td>create, update, delete</td><td>A payment gateway is created, updated, or removed. Excludes default gateway changes.</td></tr>
+  <tr><td><code>dunning_campaign</code></td><td>create, update, disable, enable</td><td>A dunning campaign is added, updated, disabled, or re-enabled. Admin UI only. Excludes plan dunning campaign ID changes.</td></tr>
+  <tr><td><code>dunning_campaign_settings</code></td><td>update</td><td>Site-wide dunning campaign settings are updated. Admin UI only.</td></tr>
+  <tr><td><code>item</code></td><td>create, update, disable, enable</td><td>An item is created, updated, disabled, or re-enabled. Supported in Admin UI and API v3.</td></tr>
+  <tr><td><code>entitlement</code></td><td>create, update, delete</td><td>An entitlement configuration is created, updated, or removed.</td></tr>
+  <tr><td><code>business_entity</code></td><td>create, update, delete</td><td>A business entity is created, updated, or removed. Admin UI only. Excludes RevRec GL accounting code creation.</td></tr>
+  <tr><td><code>site_settings</code></td><td>update</td><td>General site configuration settings are updated.</td></tr>
+  <tr><td><code>invoice_template</code></td><td>create, update</td><td>An invoice template is created or updated.</td></tr>
+  <tr><td><code>webhook_endpoint</code></td><td>create, update, delete, pause, resume</td><td>A webhook notification endpoint is created, updated, deleted, paused, or resumed. Excludes pre-renewal webhook setting changes.</td></tr>
+  <tr><td><code>api_key</code></td><td>create, view, update, regenerate, delete</td><td>A private API key is added, viewed, updated, regenerated, or deleted.</td></tr>
+  <tr><td><code>public_key</code></td><td>regenerate</td><td>The public key is regenerated.</td></tr>
+  <tr><td><code>shipping_method</code></td><td>create, update, delete</td><td>A shipping method is created, updated, or deleted. Admin UI only. Excludes RevRec fields.</td></tr>
+  <tr><td><code>apple_pay_settings</code></td><td>update</td><td>Apple Pay configuration settings are updated. Excludes managed Apple Pay domain changes.</td></tr>
+</table>
+
+<br />

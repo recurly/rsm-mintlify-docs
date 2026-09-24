@@ -1,0 +1,114 @@
+---
+title: AH Invoice Rollup - Early Access
+---
+
+> ❗️ This feature should **not** be used in conjunction with Recurly sites running in **production mode** until it reaches General Availability. Feature should only be used in "Sandbox" and "Development" mode sites in order to preview the functionality
+
+> 🚧 All available functionality listed is subject to change leading up to General Availability
+
+## Current Milestone: 4
+
+<span style="color:green">READY FOR PREVIEW</span> 
+
+# Available Functionality
+
+### Core
+
+*New functionality that is core to the feature, with significant changes to existing application functions*
+
+* Ability to use Account Hierarchy in conjunction with [Calendar Billing - Aggregation](/guides/recurring-billing/billing-preferences/calendar-billing#section-aggregate-invoices). Charges from Child Accounts will consolidate onto one invoice, billed to a common Parent Account so long as the the Child Accounts bill to the Parent Account and all other \[ conditions of Calendar Billing - Aggregation]
+* Ability to use Account Hierarchy in conjunction with Calendar Billing - Alignment. Charges from Child Accounts will consolidate onto one invoice, billed to a common Parent Account so long as the following conditions are met.([https://docs.recurly.com/docs/calendar-billing#section-eligible-subscriptions](/guides/recurring-billing/billing-preferences/calendar-billing#section-eligible-subscriptions)) are met.
+* One-time charges on an Account are included in the consolidated invoice along with any recurring charges if they exist on the Account prior to an invoicing event.
+* Support for refunds of consolidated invoices: full, partial, line item, and prorated
+* Gift Card redemptions on accounts within a hierarchy
+* Ability to retrieve an Invoice via API v3. New field added indicating the Account from where a charge was billed from.
+* Ability to retrieve Invoice Line Items via API v3. New field added indicating the Account from where the charge was billed from
+
+<hr />
+
+### Tangential
+
+*Existing functionality that this is not new to the feature, but interacts in some way with the new functionality.  These features have been tested in conjunction with new changes to ensure backward compatibility and lack of unintended side effects*
+
+* Ability to create new subscriptions (immediate or future dated) using API v3 endpoints
+
+<hr />
+
+### Interface Updates
+
+*Updates to various aspects of the user interface to support the new, core functionality introduced with the feature*
+
+* PDF representation of the Invoice will reflect charges consolidated from multiple Accounts. Charges are grouped by the Accounts from which they originate and information about the Account is displayed on the Invoice.
+
+# Instructions for Use
+
+#### Configuration and  Setup
+
+A new feature flag has been created called 'Account Hierarchy - Invoice Rollup'. In order to use the functionality listed above, this flag must be enabled on your non-production Recurly site, in conjunction with both the 'Account Hierarchy' and 'Calendar Billing - Aggregation' flags. These flags can be enabled by contacting your Customer Success Manager (CSM).
+
+Additionally, you will need to complete the following:
+
+* Assign one or more child Accounts to a parent Account. See [here](/guides/subscriber-management/accounts-1/account-hierarchy-1#section-assign-a-parent-account) for more details.
+* Set the child Accounts to bill to the parent Account. See [here](/guides/subscriber-management/accounts-1/account-hierarchy-1#section-child-account-that-bills-to-parent) for more details
+
+<hr />
+
+#### Consolidation of recurring charges
+
+1. Create one or more subscriptions on Child Account A using the [Purchase](https://developers.recurly.com/api/v2021-02-25/index.html#tag/purchase) or [New Subscription](https://developers.recurly.com/api/v2021-02-25/index.html#operation/create_subscription) endpoints. Alternatively, you can use the Recurly UI to create a subscription on the Account.
+
+2. Create one or more subscriptions on Child Account B that share the same bill date (down to the second) as the subscription(s) on Child Account A
+
+3. When the invoicing event occurs (ie.  common bill date on the subscriptions is reached), the recurring charges from the subscription(s) on Child Account A will be invoiced together with the recurring charges from the subscription(s) on Child Account B, **and you should be able to observe the following:**
+
+* The PDF representation of the consolidated invoice will display the charges, grouped by the Accounts from which they originated, along with the Account Code, and the Name and Company (if they are populated on the Account). The PDF can be seen as an attachment on invoicing related emails, and accessed through the hosted pages and Invoices detail page in Recurly App.
+
+* View the consolidated invoice and line items using the V3 API.
+
+**Note:** *Parent Account subscriptions can also be aligned with with subscriptions on their children, which will enable the related charges to also be included in the consolidated invoice.*
+
+<hr />
+
+#### Consolidation of recurring charges with one-time charges on an Account
+
+1. Create a one-time charge on Child Account A. This should be a one-time charge that bills at next invoice date and **not** an immediately invoiced one-time charge.
+
+2. Complete steps 1 and 2 from above
+
+3. Same as 3 above, but the one-time charge on Child Account A will also be included
+
+<hr />
+
+#### Mix and Match
+
+Time to get creative! It's entirely possible to create various 'billing batches' by aligning subscriptions on various groups of Accounts within an Account Hierarchy. For example, you can set the subscriptions on Child Accounts A and B to bill on the same date, and the subscriptions on the Parent, and Child Accounts C and D to bill on the same date, to get two different sets of consolidated invoices.
+
+## Upcoming Functionality
+
+<span style="color:orange">IN DEVELOPMENT</span>
+
+*Doesn’t include any functionality listed in the subsequent releases. While it may be possible to use some of the functionality listed in those releases, there could be unintended side effects*
+
+### Core
+
+* Taxation support at both Parent and Child level
+* Coupon redemptions at both subscription and account level
+
+### Tangential
+
+* Ability to create new subscriptions (immediate or future dated) in a hierarchy using the Recurly UI
+* Downgrade / Upgrade subscriptions in a hierarchy at next bill date
+* Downgrade / Upgrade subscriptions in a hierarchy immediately
+* Postpone a subscription within a hierarchy
+* Pause and resume subscriptions in a hierarchy
+* Cancellation, reactivation, and expiration of subscriptions in a hierarchy
+* Change billing period on a subscription within a hierarchy
+* Support for trial subscriptions in a hierarchy
+* Support for application of manual credits to consolidated invoices
+
+### Interface Updates
+
+* All invoice related emails will reflect charges consolidated from multiple Accounts within a hierarchy. Viewable as part of the inline HTML / Text representation of the invoice. Charges will not be grouped by the Account from which they originated, but email templates can be modified to show the Account information at the line item level
+* Consolidated charges from from multiple Accounts will be reflected in the following areas: Hosted Invoices, the Invoices Show page in Recurly App
+* Printable version of consolidated invoice
+* Recurly UI enhancements to support clearer distinction of Parent vs Child Accounts and ability to filter based on Account type

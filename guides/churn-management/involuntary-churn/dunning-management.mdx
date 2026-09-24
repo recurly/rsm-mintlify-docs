@@ -1,0 +1,367 @@
+---
+title: Dunning campaigns
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Dunning Management controls how Recurly handles failed payments — what emails are sent, when retries occur, and what happens if a subscriber never pays. Every site has a default dunning campaign, and merchants on Professional and Elite plans can create up to 50 targeted campaigns for different customer segments or plans.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Dunning Management is available on all plans. Multiple dunning campaigns require Professional or Elite — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#dunning-campaigns-1"><span className="rp-toc-num">3</span>Dunning campaigns</a>
+    <a className="rp-toc-pill" href="#dunning-configuration"><span className="rp-toc-num">4</span>Configuration</a>
+    <a className="rp-toc-pill" href="#email-template-configuration"><span className="rp-toc-num">5</span>Email templates</a>
+    <a className="rp-toc-pill" href="#multiple-dunning-campaigns"><span className="rp-toc-num">6</span>Multiple campaigns</a>
+    <a className="rp-toc-pill" href="#dunning-best-practices"><span className="rp-toc-num">7</span>Best practices</a>
+    <a className="rp-toc-pill" href="#dunning-notifications-via-webhooks"><span className="rp-toc-num">8</span>Webhooks</a>
+    <a className="rp-toc-pill" href="#transitioning-from-sandbox-to-production"><span className="rp-toc-num">9</span>Sandbox to production</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>An active Recurly account.</li>
+  <li>Configuration user access.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Dunning settings are versioned — changes to a campaign won't affect invoices already in dunning.</li>
+  <li>Maximum of 50 dunning campaigns for eligible merchants.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Dunning Management refers to the strategies and communications used to prompt subscribers for payment after an initial failure, and the duration allowed for recovery attempts. Dunning activates when an automatic invoice (credit card, ACH, direct debit) fails its initial payment attempt, when a manual invoice (check, wire) exceeds its net terms, and when a trial subscription attempts to convert to paid but the payment fails.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Customized collection strategies</strong>
+    <span>Create targeted dunning campaigns for specific customer cohorts and track which customers received which campaign and email via the Account Activities export.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-envelope" aria-hidden="true"></i></div>
+    <strong>Enhanced subscriber communication</strong>
+    <span>Send targeted emails at each dunning step to inform subscribers of payment failures and prompt action.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-calendar-days" aria-hidden="true"></i></div>
+    <strong>Flexible dunning cycles</strong>
+    <span>Choose from automatic, manual, and post-trial dunning cycles, each with its own emails and schedules.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+    <strong>Improved revenue recovery</strong>
+    <span>Longer dunning windows consistently produce higher payment recovery rates.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-chart-bar" aria-hidden="true"></i></div>
+    <strong>Analytical insights</strong>
+    <span>Track dunning versions and measure their effectiveness over time using <a href="/guides/reporting-analytics/dunning-campaigns-overview/dunning-effectiveness" target="_blank">Dunning Campaign analytics</a>.</span>
+  </div>
+</div>
+
+# Dunning campaigns
+
+Recurly's Dunning Management lets you create multiple collection strategies for different customer groups. Every account has a default dunning campaign. Merchants with access can create additional campaigns targeted at specific plans or accounts.
+
+Navigate to **Configuration → Dunning Management** to access and manage your campaigns.
+
+## Default dunning campaign
+
+Every site has one default dunning campaign, used for all invoices that don't have a separate campaign assigned at the account or plan level. The default campaign represents your standard collection process.
+
+For sites with multiple dunning campaigns, you can change the default using the **Campaign Actions** button on the campaign details page. All plans and accounts currently set to the default will automatically switch to the new default.
+
+# Dunning configuration
+
+
+<Image src="https://files.readme.io/6b6d8fb1be05d3823ae962899ddf1a8d59e2db2ff6043c3841d116a6bdcb5aaa-Screenshot_2025-12-23_at_10.48.21_AM.png" align="center" width="75%" border={true} />
+
+
+## Modify the default dunning campaign
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Select the campaign</h4><p>From the Dunning Management page, select the campaign you want to edit.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Open Campaign Actions</h4><p>Click the <strong>Campaign Actions</strong> dropdown and select <strong>Edit Campaign</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Make your changes and save</h4><p>Update the settings as needed, then click <strong>Save</strong>.</p></div>
+  </div>
+</div>
+
+## Campaign details
+
+The Campaign Name is visible when selecting dunning campaigns on Plan and Account pages in the Admin Console. The Campaign Code may only contain numbers, lowercase letters, dashes, pluses, and underscores.
+
+## Dunning cycles
+
+Dunning cycles are categorized by invoice collection method:
+
+- **Payment Declined** — for automatic invoices
+- **Invoice Past Due** — for manual invoices
+- **Post-Trial Payment Declined** — for invoices (automatic or manual) that fail after a free trial
+
+Each dunning campaign can include all three cycle types, each with distinct email templates and schedules.
+
+### Automatic invoice dunning cycle
+
+For automatic invoice failures, Recurly sends a **Payment Declined** email and retries on the schedule you configure. You can add, remove, or modify steps, and link each step to a specific email template.
+
+
+<Image src="https://files.readme.io/f5b1c8a9e01993a1b6e799a08c31612d00cd084969f8e14eec8c32212a2c6b70-Screenshot_2025-12-23_at_10.49.30_AM.png" align="center" width="75%" border={true} />
+
+
+### Manual invoice dunning cycle
+
+Manual invoice dunning works the same as automatic, but uses the **Invoice Past Due** email templates.
+
+
+<Image src="https://files.readme.io/49337dad91cc78a1f6731f766ed6779adf34e691ed967810079b4a1a2d474516-Screenshot_2025-12-23_at_10.50.37_AM.png" align="center" width="75%" border={true} />
+
+
+Users with authority to modify the Customer section can reopen failed manual invoices. If a failed manual invoice is reopened, dunning **will not** resume — no dunning emails are sent and the linked subscription is unaffected. A reopened manual invoice remains in an Open state until manually closed and marked paid or failed.
+
+### Trial dunning cycle
+
+For invoices that remain unpaid after converting from a free trial to paid, Recurly can send a **Post-Trial Payment Declined** email. This cycle can be limited to automatic invoices or extended to both automatic and manual.
+
+
+<Image src="https://files.readme.io/98f1098cbfc37b489506545065fabce21d20eac4c81f081bef9052189b5125db-Screenshot_2025-12-23_at_10.51.55_AM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> The trial dunning cycle only activates for subscriptions with a free trial applied via the plan or a coupon. Plans that start at $0 and increase after the first billing cycle do not activate the trial dunning cycle.</div>
+</div>
+
+### End of dunning cycle
+
+For each dunning cycle, you can set what happens to the invoice and subscription if the customer doesn't pay by the end of the cycle. You can also customize the final email sent when a subscription expires.
+
+
+<Image src="https://files.readme.io/320af569973b7a0cb7611e1537766536b5f067a49d553af1730af81dd57d94ad-Screenshot_2025-12-23_at_10.52.58_AM.png" align="center" width="75%" border={true} />
+
+
+By default, Recurly marks an invoice as failed at the end of the cycle if unpaid. A failed invoice is written off as bad debt, removing the balance from the customer's account. You can configure dunning to never auto-fail the invoice, leaving it overdue indefinitely.
+
+If invoices remain overdue after dunning, two actions will send all overdue invoices on an account back into collections:
+
+- The customer updates their billing details.
+- A new subscription is added to the account (resubscribe).
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> If <a href="/guides/churn-management/involuntary-churn/account-updater" target="_blank">Account Updater</a> is active, Recurly continuously runs it on accounts with overdue invoices and attempts collection indefinitely.</div>
+</div>
+
+## Stop dunning
+
+To pause dunning for a subscriber who needs a few extra days, open the overdue invoice and click **Stop Dunning** in Invoice Actions. The invoice remains in **Past Due** state, but retry attempts stop, dunning emails stop, and the End of Dunning Cycle action won't execute. Account Updater continues to run if active.
+
+## Stop collection & mark paid
+
+To end the entire collection process for a past-due invoice, open the invoice and click either **Stop Collection** (marks the invoice failed) or **Mark Paid** (used when payment was received outside Recurly). Both options close the invoice, stop retry attempts, stop dunning emails, and bypass End of Dunning Cycle actions.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> Stopping collection on an invoice does not automatically cancel the related subscription. Cancel the subscription separately to prevent it from renewing. Subscriptions are only automatically canceled when an invoice fails dunning — and only if your dunning settings are configured to expire subscriptions at the end of the dunning cycle.</div>
+</div>
+
+# Email template configuration
+
+Dunning email templates are managed under **Configuration → Email Templates**. All dunning-related templates are at the bottom of the Email Templates page. Access requires the Configuration user role.
+
+For full email template editing details, see the <a href="https://docs.recurly.com/docs/email-templates" target="_blank">email templates documentation</a>.
+
+## Create a new dunning email template
+
+Navigate to the Dunning Management section of Email Templates. Template types available:
+
+- **Payment Declined Templates** — for automatic invoices
+- **Invoice Past Due Templates** — for manual invoices
+- **Subscription Expired for Non-Payment Templates** — for subscriptions unpaid at the end of any dunning cycle
+- **Payment Declined Due to 3DS2** — for 3DS2-related declines
+
+Click **New Email Template**, select a base template to start from, and give the template a name. The name is referenced when linking the template to dunning steps.
+
+
+<Image src="https://files.readme.io/f5f646b-903fe6e-Email_Templates__Recurly.png" align="center" width="50%" />
+
+
+
+<Image src="https://files.readme.io/276a9f6-98375c0-Screen_Shot_2018-02-06_at_3.01.10_PM.png" align="center" width="50%" />
+
+
+Each dunning email shares the same aesthetic as other Recurly email templates but can have distinct content at each step. Escalating urgency through messaging at each step is an effective way to prompt subscriber action.
+
+After creating a template, link it to dunning steps on the Dunning Management page. Once linked, the association is noted on the Email Templates page under each dunning email.
+
+## Delete a dunning email template
+
+Before deleting a template, confirm it isn't linked to any dunning step. Navigate to Dunning Management, remove the template from any campaign steps, then return to Email Templates. If the template shows "Not being sent by any current Dunning Campaigns," it can be deleted. The base Payment Declined, Invoice Past Due, Post-Trial Payment Declined, and Subscription Expired for Non-Payment templates cannot be deleted.
+
+## Updating billing info
+
+The default Payment Declined email includes a direct link to the customer's hosted account management page for billing updates. You can add this link to your own site using the `hosted_login_token` parameter from the <a href="https://dev.recurly.com/docs/list-accounts" target="_blank">Accounts API</a>, or modify the template to link to your own billing update form.
+
+When billing details are updated, Recurly retries collection on all overdue invoices for that account. Automated updates via <a href="/guides/churn-management/involuntary-churn/account-updater" target="_blank">Account Updater</a> also trigger a collection attempt.
+
+# Multiple dunning campaigns
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Plan requirement</strong> Multiple dunning campaigns are not available on Starter or Pro plans. Contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade.</div>
+</div>
+
+You can create up to 50 dunning campaigns for different scenarios. Your existing configuration becomes the Default campaign. On Starter plans, all overdue invoices follow the single default campaign.
+
+## Create a new dunning campaign
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Start a new campaign</h4><p>From the Dunning Management page, click <strong>Create Campaign</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Fill in campaign details</h4><p>Enter a name and reference code in the <strong>Campaign Details</strong> section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Assign to plans (optional)</h4><p>Configure <strong>Plan Selection</strong> to assign this campaign to specific subscription plans.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Set up dunning cycles</h4><p>Configure collection methods, email schedules, and end-of-cycle behavior.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Save</h4><p>Click <strong>Save</strong> to activate the campaign.</p></div>
+  </div>
+</div>
+
+## Assign a campaign to a plan or account
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the plan or account</h4><p>Navigate to the desired <strong>Plan</strong> or <strong>Account</strong> page in the Recurly Admin Console.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select a dunning campaign</h4><p>Locate the <strong>Dunning Campaign</strong> dropdown and select the desired campaign.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Save</h4><p>Save the changes. You can also assign campaigns in bulk via the <a href="https://developers.recurly.com/api/" target="_blank">Recurly API</a> bulk update endpoint.</p></div>
+  </div>
+</div>
+
+## Edit dunning campaigns
+
+Changes to a campaign — or reassigning a different campaign to a plan or account — only affect new invoices entering dunning. Invoices already in dunning continue using the settings that were active when they became overdue.
+
+## Disable dunning campaigns
+
+Redundant campaigns can be deactivated and won't count toward your 50-campaign limit. The default campaign cannot be deactivated — set another campaign as default first if needed.
+
+When a campaign is deactivated, it no longer appears in the dropdown on Plan and Account pages, and any plans or accounts using it will revert to the default campaign.
+
+
+<Image src="https://files.readme.io/71c62c3-aca5887-Dunning_Management__Recurly.png" align="center" width="50%" border={true} />
+
+
+## Campaign priority
+
+When multiple campaigns could apply, Recurly uses this priority order: **Account → Plan → Default**.
+
+Additional priority rules:
+
+- If no additional campaigns exist, the default applies to all invoices.
+- If a campaign is assigned to a plan, it applies to all overdue invoices for that plan's subscribers.
+- If a campaign is assigned to an account, it applies to all past-due invoices for that account.
+- For bundled subscriptions on a single invoice: if no account-level campaign applies and multiple subscriptions use different campaigns, the campaign of the oldest subscription is used.
+- For Account Hierarchy: if the billed account (parent or child) has a campaign assigned, that campaign is used. Dunning settings on the unbilled account are ignored.
+
+# Dunning best practices
+
+See <a href="https://recurly.com/blog/improve-your-dunning-emails-for-subscription-billing/" target="_blank">tips for improving your dunning emails</a>.
+
+- Extended dunning windows produce better recovery rates.
+- For monthly subscriptions, limit dunning to 27 days to avoid billing overlap in February and to maximize <a href="/guides/churn-management/involuntary-churn/retry-logic" target="_blank">Intelligent Retry</a> attempts.
+- Direct debit payments can take 3+ days for a response — factor this into dunning window length.
+- For high-value subscribers, most merchants prefer to keep the subscription active and invoice open rather than auto-expiring.
+- Use different campaign messages and durations for different plan types. For example: 27 days for monthly plans, up to 60 days for quarterly, semi-annual, and annual plans.
+
+## Review settings history
+
+Every invoice follows the dunning configuration that was active when it entered dunning. To review past configurations, click **Settings History** on any dunning campaign.
+
+
+<Image src="https://files.readme.io/c7f6f37-0b5407f-Settings_History__Recurly_1.png" align="center" width="50%" border={true} />
+
+
+For analytics on each dunning version, click **View Analytics** on the Settings History page. Analytics role required. Analytics are currently available for automatic payment invoices only. See the <a href="https://docs.recurly.com/docs/dunning-effectiveness-report" target="_blank">dunning effectiveness report documentation</a> for details.
+
+## Test dunning behavior
+
+To accelerate the dunning process in sandbox mode for testing webhooks and email delivery:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Register with a success card</h4><p>Create an account using the test card <code>4111-1111-1111-1111</code>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Update to a "fail but save" card</h4><p>Update the account's billing details to <code>4000-0000-0000-0341</code>. The card will be stored despite appearing to fail — this is expected.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Accelerate the renewal</h4><p>Click <strong>Change</strong> next to the Current Period on the subscription page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Set the renewal date</h4><p>Set the next renewal date to 1 hour ahead, then confirm.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Wait for dunning to trigger</h4><p>Within the hour, the subscription will renew and dunning will begin.</p></div>
+  </div>
+</div>
+
+# Dunning notifications via webhooks
+
+Use webhooks to synchronize your service with collection activity in Recurly. See the <a href="/guides/integration-methods/webhooks" target="_blank">Webhooks documentation</a> for full details.
+
+- `new_dunning_event` — Sent when invoices enter and remain in dunning. Use this to send custom emails or reach customers through other channels (SMS, in-app notifications, etc.).
+- `failed_payment` — Sent after each failed payment. Use this to flag a user as overdue in your system.
+- `successful_payment` — Sent after a successful payment. Use this to restore a previously overdue user to good standing.
+- `subscription_expired` — Sent when Recurly expires a subscription due to non-payment or cancellation. Act on this immediately to terminate access in your system.
+
+# Transitioning from sandbox to production
+
+Multiple dunning campaigns can be created and tested in sandbox or development mode, but are only accessible in production on Professional or Elite plans.
+
+When transitioning a sandbox site to production under a Starter plan, all non-default dunning campaigns are deactivated. These campaigns are locked from editing and cannot be reactivated. Any plans assigned to a non-default campaign during testing revert to the default dunning campaign.
+
+## Transactions that won't retry
+
+If your first dunning email for failed automatic invoices is scheduled after the first payment attempt, Recurly handles the following non-retryable transactions separately:
+
+- Hard decline transactions
+- Transactions failing due to incorrect billing details
+
+Since these won't succeed without a billing info update, Recurly skips the retry schedule and waits for customer action.
+
+## Plan selection
+
+After creating multiple dunning campaigns, you can assign specific campaigns to subscription plans in the plan details section. If an account has its own dunning campaign assigned, that takes priority over the plan's campaign.

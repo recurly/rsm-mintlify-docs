@@ -1,0 +1,828 @@
+---
+title: Adyen
+---
+
+<div className="rp-page">
+<div className="rp-overview">Recurly's integration with Adyen gives you access to an enterprise-grade payment processor with extensive worldwide coverage. Configure credit and debit card processing, bank debit methods, digital wallets, and regional payment options — all managed through your Recurly dashboard.</div>
+<div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+<div className="rp-toc">
+<a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+<a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+<a className="rp-toc-pill" href="#payment-method-specifics"><span className="rp-toc-num">3</span>Payment method specifics</a>
+<a className="rp-toc-pill" href="#gateway-feature-support"><span className="rp-toc-num">4</span>Gateway feature support</a>
+<a className="rp-toc-pill" href="#troubleshooting"><span className="rp-toc-num">5</span>Troubleshooting</a>
+</div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+<li>Your Business Entity Merchant Category Code must be filled in</li>
+<li>Adyen webhooks, user permissions, and Response settings must be configured correctly in your Adyen gateway account — incorrect setup will cause renewals and asynchronous payment methods to fail</li>
+<li>Certain features require Adyen's V71 Checkout version, which is feature-flagged in Recurly's system. This requires CVV capture from returning customers via API or Recurly.js — contact <a href="mailto:support@recurly.com">support@recurly.com</a> for details</li>
+</ul>
+
+### Limitations
+
+<div className="rp-callout rp-callout-important">
+<div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Minimum processing requirements</strong>Adyen has minimum processing requirements and business models they do not support. Visit <a href="https://www.adyen.com/legal/list-restricted-prohibited" target="_blank">Adyen's website</a> to confirm your business qualifies. For questions about minimum processing requirements, contact Adyen directly.</div>
+</div>
+
+<ul className="rp-list">
+<li>Asynchronous payment methods may take 48 hours or more for confirmation, depending on the payment method</li>
+<li>Use Recurly.js or the Recurly API for credit and debit card transactions</li>
+<li>SEPA supports EUR payments only — ensure all SEPA transactions are denominated in EUR</li>
+<li>Certain features are unavailable until your account is migrated to the latest version of Adyen — contact <a href="mailto:support@recurly.com">support@recurly.com</a> about enabling V71</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Adyen is a global payment company that processes credit and debit cards, bank debit methods, digital wallets, and regional payment options across markets worldwide. Recurly's Adyen integration handles tokenization, recurring billing, and webhook-driven status updates so your subscription lifecycle runs reliably regardless of payment method.</div>
+
+<div className="rp-callout rp-callout-note">
+<div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Before going live, visit the <a href="/guides/payment-orchestration/gateway-configuration-and-features/how-to-test-your-gateway" target="_blank">guide on testing your gateway configurations</a> in Recurly to confirm your payment processes are set up correctly.</div>
+</div>
+
+# Key details
+
+<table className="rp-gw-table">
+<tr className="rp-thead-row"><td>Feature</td><td>Details</td></tr>
+<tr><td>Services that work with Recurly</td><td>Credit/Debit cards, Recurring, Adyen Web Components, <a href="/guides/payment-orchestration/payment-gateways-1/adyen#adyen-network-tokens" target="_blank">Adyen-derived Network Tokens</a>, <a href="/guides/payment-orchestration/payment-gateways-1/adyen#revenue-protect-and-protect-premium" target="_blank">Revenue Protect / Protect Premium</a>, <a href="/guides/subscriber-management/transactions/moto-transactions" target="_blank">MOTO Processing</a>, <a href="/guides/api-guides/integration-guides/popular-use-cases/level-2-and-level-3-cedp-guide" target="_blank">Level 2/3 Processing</a></td></tr>
+<tr><td>Supported operations</td><td>Authorize &amp; Capture, Purchase, Refund, Verify, Void</td></tr>
+<tr><td>Supported payment types</td><td>Credit/Debit cards, ACH, Boleto, iDEAL, Klarna Debit Risk (existing merchants only), SEPA, Google Pay, Apple Pay, Cash App Pay, and PayPay wallet. Note: Klarna Debit Risk and Boleto are not supported in the new Adyen Components Recurly.js integration.</td></tr>
+<tr><td>Supported card brands</td><td>Visa, Mastercard, American Express, Discover, JCB, Diners Club, China Union Pay, ELO (BRL only), Hipercard (BRL only), Cartes Bancaires, Dankort, Bancontact</td></tr>
+<tr><td>Gateway-specific 3DS2 supported</td><td>Yes</td></tr>
+<tr><td>Card on file supported</td><td>Yes</td></tr>
+<tr><td>Regions</td><td>Global</td></tr>
+<tr><td>Currencies</td><td><a href="/guides/payment-orchestration/gateway-configuration-and-features/currency-support-by-gateway" target="_blank">All available</a>, with special behavior for ISK and CLP. IDR and CVE are not supported.</td></tr>
+<tr><td>Gateway features</td><td><a href="/guides/api-guides/integration-guides/popular-use-cases/level-2-and-level-3-cedp-guide" target="_blank">Level 2 and Level 3 Data</a>, <a href="/guides/payment-orchestration/payment-gateways-1/adyen#adyen-network-tokens" target="_blank">Network Token usage awareness</a>, <a href="/guides/payment-orchestration/payment-gateways-1/adyen#revenue-protect-and-protect-premium" target="_blank">Revenue Protect / Protect Premium</a>, <a href="/guides/subscriber-management/transactions/moto-transactions" target="_blank">MOTO Processing</a>, <a href="/guides/payment-orchestration/payment-gateways-1/adyen#adyen-real-time-account-updater-rtau" target="_blank">Realtime Account Updater</a>, <a href="/guides/payment-orchestration/payment-gateways-1/adyen#adyen-intelligent-routing-" target="_blank">Adyen Intelligent Debit Routing</a></td></tr>
+</table>
+
+## Setting up Adyen with Recurly
+
+### Step 1 — Configure Adyen account credentials
+
+<div className="rp-callout rp-callout-note">
+<div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Two settings require a support request to Adyen</strong> <ul style={{margin:"8px 0 0", paddingLeft:"20px"}}> <li><strong>API PCI Payments role</strong> for your web services user (step 11a below)</li> <li><strong>Skip CVC</strong> for your Merchant Account (step 11b below)</li> </ul></div>
+</div>
+
+<div className="rp-callout rp-callout-important">
+<div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Ensure Adyen V71 is enabled at Recurly</strong>Adyen V71 API requirements mean a CVV must be sent on customer-initiated transactions that use stored billing info. You may need to update your Recurly integration or configure the Skip CVC setting with Adyen. Certain upcoming features will not be available without these changes.</div>
+</div>
+
+Ensure a `webservice` user is set up in Adyen so Recurly can dispatch transactions to your gateway.
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">1</div>
+<div><h4>Access the Adyen dashboard</h4><p>Log in to your Adyen account.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">2</div>
+<div><h4>Navigate to API Credentials</h4><p>Go to Developers → API Credentials.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">3</div>
+<div><h4>Create a new credential</h4><p>Click Create new credential.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">4</div>
+<div><h4>Select Web service user</h4><p>In the modal that appears, select Web service user under Credential Type.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">5</div>
+<div><h4>Name your credential</h4><p>Enter a username and an optional description — for example, "Recurly Adyen Credentials."</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/0958525-Screenshot_2023-10-26_at_1.45.41_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">6</div>
+<div><h4>Enable the Merchant Recurring Role</h4><p>Ensure the Merchant Recurring Role checkbox is checked — without this, recurring transactions using stored cards will fail.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/47ce985afb27f46153651193d5dd02935a1c3a28c3fd4b64c724d175cc8a33a8-Screenshot_2025-02-07_at_9.45.08_AM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">7</div>
+<div><h4>Record your password immediately</h4><p>Your new credential is created and your password is available under Server settings → Authentication → Basic auth. You cannot access this password after leaving this page — record it now. If you miss it, you'll need to regenerate the password from this page.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">8</div>
+<div><h4>Save your credentials</h4><p>Record the auto-generated username and password for later use in Recurly, then click Save changes.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/748ce08-Screenshot_2023-10-26_at_1.46.10_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">9</div>
+<div><h4>Configure Dynamic 3DS</h4><p>In the Risk section under Dynamic 3D Secure, set the Dynamic 3DS setting to "prefer no" — unless you specifically want to always require 3DS. Do not enable this on a gateway instance where recurring billing is running.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">10</div>
+<div><h4>Follow PSD2 guidelines if applicable</h4><p>If you are subject to the <a href="https://docs.recurly.com/docs/revised-payment-services-directive-psd2" target="_blank">PSD2 Mandate</a>, follow Recurly's <a href="/guides/security-compliance/gateway-specific-updates#section-adyen" target="_blank">Adyen-specific PSD2 guidelines</a>.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">11</div>
+<div><h4>Submit requests to Adyen support</h4><p>Contact Adyen support to complete two critical configurations.</p></div>
+</div>
+</div>
+
+- **11a — API PCI Payments role:** Request that Adyen activate the API PCI Payments role for your web services user. This is not active by default — without it, payments using a raw card number will fail.
+- **11b — Disable CVC requirement:** If you don't collect CVV codes from returning customers, request that Adyen disable the CVC requirement on your Merchant Account. If you do collect CVV on all customer-initiated transactions, ensure your integration captures and passes the code to Recurly via API when using V71.
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">12</div>
+<div><h4>Enable Acquirer Result fields</h4><p>Ensure that Acquirer Result and Raw Acquirer Result are enabled in your API responses.</p></div>
+</div>
+</div>
+
+### Step 2 — Configure Adyen webhooks
+
+Accurate webhook configuration is required for Recurly to receive transaction status updates, metadata updates, recurring tokens, and other critical information. Incorrect setup **will** cause renewals and asynchronous payment methods to fail.
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">1</div>
+<div><h4>Navigate to Webhooks</h4><p>In Adyen, go to Developer → Webhooks.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">2</div>
+<div><h4>Add a Standard webhook</h4><p>Click + Webhook, find Standard webhook, and click Add.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">3</div>
+<div><h4>Set the callback URL</h4><p>Under Server configuration, click the pencil icon. Enter the URL below, replacing YOUR_RECURLY_SUBDOMAIN with your Recurly site's actual subdomain, then click Apply.</p></div>
+</div>
+</div>
+
+```
+https://callbacks.recurly.com/adyen/YOUR_RECURLY_SUBDOMAIN
+```
+
+<div className="rp-callout rp-callout-note">
+<div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> EU data center</strong>If your Recurly site is hosted in Recurly's European Union (EU) data centers, use <code>callbacks.eu.recurly.com</code> in place of <code>callbacks.recurly.com</code>.</div>
+</div>
+
+
+<Image src="https://files.readme.io/fc70703-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">4</div>
+<div><h4>Add the required webhook types</h4><p>Add these four webhook types in addition to any payment method-specific events noted below: Direct-Debit Pending, Generic Pending, Recurring Token Lifecycle events, and Standard webhook.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">5</div>
+<div><h4>Enable required event codes</h4><p>Confirm the following event codes are enabled across your webhooks.</p></div>
+</div>
+</div>
+
+- `RECURRING_CONTRACT` — Required for tokenized payment methods to function properly
+- `REPORT_AVAILABLE` — Required for notifying when Adyen reports (such as settlement reports for Revenue Recognition) are available
+- `EXPIRE` — Required for proper Authorize and Capture behavior; ensures report syncing when pending authorizations expire before capture
+- `CAPTURE_FAILED` — Required for proper transaction handling, especially when Authorize and Capture are in use
+- `OFFER_CLOSED` — Required when using the iDEAL payment method
+- **iDEAL details webhook** — Required when using iDEAL; see <a href="https://docs.adyen.com/development-resources/webhooks/webhook-types/#other-webhooks" target="_blank">Adyen's webhook types documentation</a> for details
+- `recurring.token.created`**&#x20;/&#x20;**`recurring.token.updated`**&#x20;/&#x20;**`recurring.token.deleted` — Required when using Adyen gateway tokens to ensure Recurly receives timely metadata updates when a token changes outside of Recurly
+
+Adyen documents event codes in two places — configure both or webhooks may not fire:
+
+- <a href="https://docs.adyen.com/development-resources/webhooks/webhook-types/#standard-webhook-page" target="_blank">Standard Webhooks page</a>
+- <a href="https://docs.adyen.com/development-resources/webhooks/webhook-types/#webhooks-settings-page" target="_blank">Webhooks Settings page</a>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">6</div>
+<div><h4>Enable the webhook</h4><p>Ensure the Enabled toggle is set as shown, then click Save changes.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/1a31b55-image.png" align="center" width="75%" border={true} />
+
+
+### Step 3 — Adyen additional data configuration
+
+Navigate to **Developers → Additional Data** in Adyen for all settings in this step. You can configure everything at once. To automatically receive new features in the future, enable all of these fields for a "set it and forget it" approach. If you prefer more control, enable only what's documented here and monitor this page and the Recurly changelog for future updates.
+
+#### Activation of response fields via API
+
+To enable card data to appear when a token is received via webhook, enable response fields from Adyen. Once a token is received, Adyen returns extra data to populate card brand metadata — including the BIN, last four digits, and expiration date. Enable the following fields:
+
+- Card bin
+- Card Summary
+- Expiry date
+- Payment Account Reference
+
+#### Activation of 3DS results data
+
+To populate 3DS results data in Recurly, enable all four 3DS response detail settings in **Developers → Additional Data**. This ensures your transaction detail page populates correctly.
+
+#### Activation of Network Transaction Reference and recurring details
+
+To successfully process Merchant-Initiated Transactions (MIT) across all payment methods — including Google Pay, Apple Pay, and cards — activate **Network transaction reference** in your Adyen Merchant Account settings. For payment methods that require tokenization, also enable **Recurring Details** in the same settings area.
+
+Once activated, Adyen generates a unique Network Transaction ID (NTID) and a reusable token (if applicable) for direct integrations. Note that this ID is not visible in Recurly.
+
+## Adding Adyen to your Recurly site
+
+### Step 1 — Add Adyen in Payment Gateway configuration
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">1</div>
+<div><h4>Add the Adyen gateway</h4><p>Go to Configuration → Payment Gateways → Add New Gateway in your Recurly Admin.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">2</div>
+<div><h4>Enter your Adyen credentials</h4><p>Provide the username, password, and merchant account details from your Adyen configuration.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">3</div>
+<div><h4>Set the custom endpoint</h4><p>Enter only the specific portion of the endpoint provided by Adyen — not the full URL. While testing, you can use a placeholder, but update it before going to production.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">4</div>
+<div><h4>Select Zero Dollar Authorization</h4><p>Select Zero Dollar Authorization for all card types.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">5</div>
+<div><h4>Enable NACHA Verification (if using ACH)</h4><p>If you are using Giact for ACH Verification, enable this setting for NACHA compliance.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">6</div>
+
+<div><h4>Allow Gateway Controlled Network Routing
+</h4><p>If you are using Adyen's intelligent debit routing, you will need to enable this setting to allow Adyen's routing to take over from Recurly.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">7</div>
+<div><h4>Save your Adyen configuration</h4><p>Click Save to complete the gateway setup.</p></div>
+</div>
+</div>
+
+<div className="rp-callout rp-callout-important">
+<div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Network Transaction Reference required</strong>Enabling Network Transaction Reference in Adyen is required for successful MIT exemptions and payment processing across all methods — including Google Pay, Apple Pay, and cards. Transactions may fail even if all other Adyen settings are correct if this setting is not enabled.</div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+<div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Non-card payment method setup</strong>For payment methods that require non-standard gateway setup, see the payment method-specific sections in Payment method specifics below.</div>
+</div>
+
+## Special considerations
+
+### Payment methods
+
+<table className="rp-gw-table">
+<tr className="rp-thead-row"><td>Payment method</td><td>Currency</td><td>Recurrence</td><td>Key notes</td></tr>
+<tr><td>Credit/Debit cards</td><td>Multi</td><td>Native</td><td>Dual-badge support for Cartes Bancaires, Dankort, and Bancontact. Raw PAN storage supported when not using Third Party Checkout.</td></tr>
+<tr><td>ACH</td><td>USD</td><td>Native</td><td>Requires GIACT/NACHA verification and report credentials. Raw bank/routing storage supported when not using Third Party Checkout. Requires status update webhooks. First/last name on checks must not be sent as dashes ( - ) — this causes immediate declines.</td></tr>
+<tr><td>SEPA</td><td>EUR only</td><td>Native</td><td>Recurly handles customer renewal notifications automatically. Raw IBAN storage supported when not using Third Party Checkout. Requires status update webhooks.</td></tr>
+<tr><td>BACS</td><td>GBP</td><td>Native</td><td>Token-based only; Recurly.js required for enrollment. Requires status update webhooks.</td></tr>
+<tr><td>iDEAL</td><td>EUR</td><td>Converts to SEPA</td><td>First payment via iDEAL; all renewals via SEPA Direct Debit. Requires several webhooks — see webhook configuration steps above.</td></tr>
+<tr><td>Boleto</td><td>BRL</td><td>Invoice-based</td><td>Async; renewals generate a new invoice each cycle. Requires a Boleto-specific email template.</td></tr>
+<tr><td>Klarna Debit Risk (Sofort)</td><td>EUR, CHF, GBP</td><td>Converts to SEPA</td><td>Existing merchants only — new sign-ups unavailable. Requires both <code>RECURRING_CONTRACT</code> and <code>recurring.token.created</code> webhooks. Requires status update webhooks.</td></tr>
+<tr><td>Cash App Pay</td><td>USD only</td><td>Native</td><td>US only. Requires both <code>RECURRING_CONTRACT</code> and <code>recurring.token.created</code> webhooks.</td></tr>
+</table>
+
+### Currencies — ISK and CLP
+
+ISK and CLP are zero-decimal currencies, meaning they cannot have partial amounts in cents. Adyen does not handle this automatically, so Recurly appends the necessary `00` decimal places when sending these transactions to Adyen. Do not add the `00` yourself — doing so will overcharge your customers.
+
+**Example:** If you send an amount of `23`, Recurly sends `2300` to Adyen. Whether the plan amount is set to `23` or `23.00`, Recurly sends `2300` to Adyen.
+
+### Address accuracy
+
+Recurly supports sending shipping addresses to Adyen, but Adyen requires a full, complete address to avoid errors. Recurly will not send partial addresses. If you use Adyen's reporting or fraud services and rely on shipping address data, ensure the customer's shipping address includes all five fields: street address, city, state, country, and postal code. If any field is absent, Recurly omits the entire shipping address.
+
+### New MasterCard and ELO Customer Authentication Compliance
+
+MasterCard is implementing additional customer authentication requirements that will require merchants to enforce supplying customer data including:&#x20;
+
+- **At least one contact detail**: cardholder name, email address or phone number
+- **At least one address**: billing address or shipping address
+- The **customer’s IP address**
+
+Additionally, ELO in Brazil is implementing requirements to pass along the following:&#x20;
+
+- Customer **Email address**, **Telephone number**, and **Address** information
+- **Browser/device** information
+
+For both card brand requirements, Recurly supports sending the required customer data via several integration paths, and Recurly.js is specifically built to capture customer IP and browser data by design. Consider a move to Recurly.js if you are under the jurisdiction of the above card brand compliance mandates.
+
+# Payment method specifics
+
+## ACH and SEPA reporting setup
+
+Recurly provides an integrated solution for ACH and SEPA transactions through Adyen. Both methods require a special report to be configured.
+
+To initiate the ACH gateway, set it up as an "Adyen ACH" gateway on the Add Payment Gateway page. For SEPA, use the standard Adyen gateway.
+
+### Setting up report credentials
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">1</div>
+<div><h4>Navigate to API credentials in Adyen</h4><p>Log in to Adyen and go to Developers → API credentials.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/0e9f446-Screenshot_2023-10-26_at_2.32.53_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">2</div>
+<div><h4>Create a reporting user</h4><p>If no reporting user exists, create one and designate it as a Report service user.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">3</div>
+<div><h4>Save the generated password</h4><p>Save the password generated under Server settings → Authentication → Basic auth before saving changes — you cannot retrieve it after navigating away.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">4</div>
+<div><h4>Enter credentials in Recurly</h4><p>Enter the reporting username and password in Recurly under Reports Username and Reports Password.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/0ad6c72-image.png" align="center" width="75%" border={true} />
+
+
+### Subscribing to the Payment Accounting report for ACH
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">1</div>
+<div><h4>Locate the Payment Accounting report</h4><p>In Adyen, go to Reports. In the Finance section, click Payment Accounting, then Manage report. If automatic generation has never been enabled, it will appear as Off.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/d471c36-image.png" align="center" width="75%" border={true} />
+
+
+<br />
+
+
+<Image src="https://files.readme.io/f40b511-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">2</div>
+<div><h4>Enable automatic generation</h4><p>Select Automatic, toggle automatic generation to On, and set the file type to CSV. Click X to close the dialog.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/cbce972-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">3</div>
+<div><h4>Confirm automatic generation is active</h4><p>Click Manage report again to verify that automatic generation is now on.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">4</div>
+<div><h4>Subscribe to the report</h4><p>Actively subscribe to the Payment Accounting report. A detailed walkthrough is available <a href="/guides/payment-orchestration/payment-gateways-1/adyen#subscribing-to-the-payment-accounting-report-for-ach" target="_blank">here</a>.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">5</div>
+<div><h4>Set immediate capture</h4><p>Within Adyen, set your transaction capture setting to immediate capture.</p></div>
+</div>
+</div>
+
+### Enabling NACHA verification
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">1</div>
+<div><h4>Enable GIACT in Adyen</h4><p>In Adyen, confirm that GIACT is enabled for NACHA verification.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">2</div>
+<div><h4>Enable NACHA verification in Recurly</h4><p>In your Adyen gateway configuration in Recurly, check the NACHA verification box at the bottom of the page and save your configuration.</p></div>
+</div>
+</div>
+
+
+<Image src="https://files.readme.io/f49c57dc1b942f81b5044b7538580f260cb01da28a09a610e597a359ddfef0c7-Screenshot_2025-07-29_at_4.11.19_PM.png" align="center" width="75%" border={true} />
+
+
+## BACS (United Kingdom)
+
+Bankers' Automated Clearing Services (BACS) Direct Debit is a widely used payment method in the United Kingdom, supporting one-time and recurring transactions. Because of chargeback risks, late failure risks, and the asynchronous nature of Direct Debit payments, BACS is not recommended for one-time charges where physical goods are being shipped.
+
+BACS on Adyen runs on Adyen gateway tokens — Recurly does not have access to the underlying payment details. One-time and recurring charges can still occur via Recurly.js and APIs. Creating a BACS Adyen gateway token is only possible via Recurly.js.
+
+### BACS compliance
+
+When using Recurly.js, you are responsible for obtaining consent and displaying appropriate regulatory information to the consumer on your website. The consumer must be informed of the amount, due date of future charges, frequency, and your merchant business name at the time of sign-up. Note that Adyen's name will appear on bank statements as "ADYEN RE \[Merchant Name]."
+
+## SEPA (European Union)
+
+Single Euro Payments Area (SEPA) Direct Debit is a predominant payment method across the EU, facilitating one-time or recurring euro payments using the customer's name and bank account number (IBAN format). It's a strong option for merchants expanding their market reach within the EU.
+
+As required by the SEPA Direct Debit rulebook, merchants must notify customers each time an account debit is made. Recurly automatically dispatches this notification email on your behalf. For details, see the <a href="/guides/subscriber-management/lifecycle-communications/renewal-reminder#sepa-payment-method" target="_blank">SEPA renewal reminder documentation</a>.
+
+Recurly also supports automated retries for SEPA payments on Adyen. <a href="/guides/payment-orchestration/gateway-configuration-and-features/sepa-retries" target="_blank">Learn more about SEPA retries.</a>
+
+### Direct Debit — Recurly configuration
+
+- Integrate Adyen as your gateway
+- Select the BACS checkbox under APMs in Adyen
+- Enable EUR currency for SEPA and GBP currency for BACS — see <a href="/guides/plans-pricing-promotions/billing-models/currencies" target="_blank">currency addition documentation</a>
+
+### Direct Debit — Adyen configuration
+
+- Activate SEPA and/or BACS as needed
+- Ensure EUR is available for SEPA transactions and GBP for BACS transactions
+- Enable `RECURRING_CONTRACT` webhooks — a guide is available <a href="https://docs.adyen.com/development-resources/webhooks/webhook-types/" target="_blank">on Adyen's site</a>
+
+## Regional cards — dual-badge support (France, Belgium, Denmark)
+
+Recurly supports three dual-badged card types on Adyen: **Cartes Bancaires** (France), **Dankort** (Denmark, DKK only), and **Bancontact** (Belgium). Dual-badge cards give customers a choice of which network to use — the major network (Visa or Mastercard) or the regional network.
+
+Dual-badge compliance has two requirements: the customer must be given a choice between networks, and the card field must be labeled "Card" (not "Credit card" or "Debit card") since the card field must accept both types without distinction. If you use Recurly.js elements, this is handled automatically. If you're building your own UI, keep these regulations in mind.
+
+To enable Cartes Bancaires, Dankort, or Bancontact:
+
+1. In your Adyen gateway settings, check the card payment methods you want to accept (Cartes Bancaires, Dankort, and/or Bancontact)
+2. Integrate Recurly.js using either the `cardElement` or `cardNumberElement` parameters — see the <a href="https://recurly.com/developers/reference/recurly-js/#elements" target="_blank">Recurly.js documentation</a> and the <a href="/guides/api-guides/integration-guides/popular-use-cases/co-badged-cards-guide" target="_blank">Dual/Co-Badged Cards guide</a>
+3. For Bancontact: also enable SEPA, since Bancontact transactions convert to SEPA for recurring payments. Additional notes:
+   - Bancontact cards do not have or require CVV codes
+   - Bancontact always requires 3D Secure — ensure this is enabled in your Adyen account and Recurly.js integrations
+   - Bancontact does not support separate Authorize and Capture
+4. For Dankort: enable the DKK currency in both Adyen and Recurly, as Dankort is only accepted in DKK
+
+**Additional notes:**
+
+- Cartes Bancaires transactions experience fewer declines when the cardholder's billing address is submitted — ensure your integration captures this for Cartes Bancaires customers
+- Bancontact requires SEPA to be enabled at both Adyen and Recurly — see the SEPA setup steps above
+- Dankort requires DKK currency to be enabled at both Adyen and Recurly
+
+### Indian cards (INR)
+
+Regional mandates in India are not supported on the Adyen gateway. See Recurly's RBI documentation for more information.
+
+## Adyen Cash App Pay
+
+Cash App Pay is a US-only digital wallet that lets customers make purchases using their Cash App balance or a linked card or bank account. At checkout, customers select Cash App Pay, scan a QR code, and authorize the payment through the Cash App on their phone. Cash App Pay through Adyen supports USD transactions only.
+
+Cash App Pay requires Adyen's `RECURRING_CONTRACT` webhooks — see the webhook configuration steps above or <a href="https://docs.adyen.com/development-resources/webhooks/webhook-types/#webhooks-settings-page" target="_blank">Adyen's documentation</a> for details.
+
+### Recurly configuration
+
+- Integrate Adyen as your gateway using <a href="https://recurly.com/developers/reference/recurly-js/#alternative-payment-methods" target="_blank">Recurly.js Alternative Payment Methods</a>
+- Enable USD currency — see <a href="/guides/plans-pricing-promotions/billing-models/currencies" target="_blank">currency addition documentation</a>
+- Check Cash App Pay in your Adyen Payment Gateway settings in Recurly under Alternative Payment Methods
+
+### Adyen configuration
+
+- Activate Cash App Pay
+- Ensure USD currency is available
+- Enable all applicable webhooks — see the webhook configuration steps in Step 2 above
+
+## Adyen iDEAL | Wero
+
+iDEAL | Wero is a widely used banking payment option in the Netherlands. During a transaction, customers select their bank from an accessible list of iDEAL | Wero-affiliated banks and are redirected to a unified interface to complete payment.
+
+The initial subscription payment uses iDEAL | Wero; all subsequent recurring payments use SEPA Direct Debit, since iDEAL | Wero does not support recurring payments natively. Communicate this clearly to customers at the point of sign-up.
+
+### Recurly configuration
+
+- Integrate Adyen as your gateway
+- Activate SEPA for recurring and periodic payments
+- Ensure EUR currency is configured
+- Refer to the <a href="https://recurly.com/developers/reference/recurly-js/#alternative-payment-methods" target="_blank">Recurly.js Alternative Payment Methods guide</a>
+
+### Adyen configuration
+
+- Activate SEPA for recurring and periodic payments
+- Ensure EUR currency is configured
+- Enable all applicable webhooks — see the webhook configuration steps above
+- Add iDEAL | Wero details webhooks — steps are available <a href="https://docs.adyen.com/development-resources/webhooks/webhook-types/#other-webhooks" target="_blank">on Adyen's site</a>
+
+### Restrictions and guidelines
+
+- Free trials via iDEAL | Wero are not permitted due to inherent iDEAL constraints — use SEPA Direct Debit for free trial offers
+- iDEAL | Wero cannot be used for subscriptions with a deferred start date
+- Chargebacks cannot be managed through iDEAL | Wero
+- Recurly's Checkout and Hosted Payment Pages do not support iDEAL | Wero
+
+## Adyen Sofort (Klarna Debit Risk)
+
+<div className="rp-callout rp-callout-warning">
+<div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Existing merchants only</strong>Only merchants with an existing Sofort/Klarna Debit Risk account with Adyen may use this payment method. New sign-ups are not available.</div>
+</div>
+
+Sofort (Klarna Debit Risk) is an online banking payment method used in Germany, Austria, Switzerland, and Belgium, supporting EUR, CHF, and GBP currencies. For recurring transactions, Sofort is not viable — SEPA is used instead.
+
+<div className="rp-callout rp-callout-note">
+<div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Sofort rebranding</strong>Sofort is being phased out by Klarna and replaced by Klarna Debit Risk behind the scenes at Adyen. Merchants will see branding and UI changes. Adyen has confirmed no major technical changes are required, but it is important to pass the Country Code for proper routing — update your Recurly.js implementations if you are not currently passing this field. Note that Sofort/Klarna Debit Risk is not the same as Klarna's BNPL (Buy Now Pay Later) product.</div>
+</div>
+
+### Recurly configuration
+
+- Initiate the Adyen gateway
+- Activate SEPA for subsequent payments
+- Ensure EUR currency is operational
+
+### Adyen configuration
+
+- Ensure the relevant currencies are active
+- Add the `OFFER_CLOSED` event to your Standard webhook — guidance is available <a href="https://docs.adyen.com/development-resources/webhooks/webhook-types/#standard-webhook-page" target="_blank">on Adyen's site</a>
+
+### Restrictions and guidelines
+
+- Free trials are not supported — use SEPA Direct Debit instead
+- Sofort (Klarna Debit Risk) cannot be used for subscriptions with a deferred start date
+- Chargebacks cannot be managed through Sofort (Klarna Debit Risk)
+- Recurly's Hosted Payment Pages do not support Sofort (Klarna Debit Risk)
+
+## Adyen Boleto
+
+Boleto Bancário (Boleto) is a popular payment method in Brazil, commonly used by customers without bank accounts. It supports BRL currency. Because Boleto does not support direct recurring transactions, Recurly implements a specialized renewal process.
+
+### Recurly configuration
+
+- Activate Brazilian Real (BRL) currency
+- Integrate Adyen as your gateway
+- Use Recurly.js to add the Boleto payment option to your checkout page
+- Create a Boleto-specific email template for recurring payments — this template notifies customers about upcoming payments and provides a link to download the Boleto invoice
+
+### Adyen configuration
+
+- Contact your Adyen representative to confirm your account is aligned with a Brazilian entity
+- Enable the Boleto payment method in your Adyen account settings
+- Ensure Brazilian Real (BRL) is activated in your Adyen account
+
+### How Boleto renewals work
+
+1. For each renewal, Recurly automatically generates a recurring invoice. The invoice initially appears as Past Due to account for Boleto processing time.
+2. Recurly communicates with the gateway to issue a new Boleto invoice for the renewal amount.
+3. The Boleto email template notifies the customer and provides a download link.
+4. Once the customer pays the Boleto, the invoice status in Recurly updates to Paid.
+
+## Adyen PayPay
+
+PayPay is a popular QR-code based wallet and payment method available primarily in Japan, commonly used by customers to sign up for subscriptions or make purchases. It supports JOY currency and is supported in Recurly.js natively and via Adyen Components. PayPay requires specific Adyen webhooks enabled -- please follows webhook configuration instructions to avoid missing transaction status updates and token lifecycle events.
+
+### Recurly configuration
+
+- Activate Japanese Yen (JPY) currency
+- Integrate Adyen as your gateway
+- Use Recurly.js to add the PayPay payment option to your checkout page
+- View our [integration guide](/guides/api-guides/integration-guides/apac-payment-methods/paypay-integration-guide) and [Recurly.js documentation](/guides/recurly-js/boleto-ideal-sofort-and-cashapp) for details.
+
+# Gateway feature support
+
+## Adyen Intelligent Routing&#x20;
+
+Adyen's Intelligent Payment Routing feature for US debit transactions automatically selects the most cost-effective and reliable network to boost performance and save merchant's on transaction processing costs. The product delivers "an average of 26% in cost reductions and a 0.22% increase in authorization rates" for merchants ([source](https://www.adyen.com/press-and-media/adyens-intelligent-payment-routing-usdebit)). You can enable Adyen's Intelligent Routing by speaking to your gateway contacts, and enabling a checkbox in your Recurly Adyen gateway configuration.&#x20;
+
+## Adyen Real Time Account Updater (RTAU)
+
+Adyen Real Time Account Updater (RTAU) updates card details and expiration dates in real time during a transaction, which can improve authorization rates and keep renewals running when a customer's card details change.
+
+Adyen returns PCI card data encrypted to Recurly. To process these encrypted updates, you must generate an RSA key in Recurly and provide the public key to Adyen.
+
+Before you start, confirm with Adyen that RTAU is enabled for your account and that you've completed any required agreements.
+
+### Eligibility requirements
+
+<ul className="rp-list">
+<li>You're only using Adyen as your gateway provider, and do have have multi-gateway partners set up</li>
+<li>You're using raw cards with Adyen as your only gateway through a supported Recurly API or Recurly.js (not Adyen Web Components)</li>
+<li>You're not using Adyen gateway tokens or network tokens</li>
+<li>You're not using Adyen Third Party Checkout or components through Recurly.js or are otherwise sending Recurly Adyen tokens</li>
+</ul>
+
+### Recurly configuration — RSA key
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">1</div>
+<div><h4>Navigate to your Adyen gateway</h4><p>Go to Configuration → Payment Gateways.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">2</div>
+<div><h4>Open Manage Keys</h4><p>On your Adyen gateway, select Options, then select Manage Keys.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">3</div>
+<div><h4>Add or reuse an RSA key</h4><p>If no key exists, select Add a Real Time Account Updater Key. If you have multiple Adyen gateway instances pointing to the same Adyen account, you can share an existing RSA key instead of generating a new one.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">4</div>
+<div><h4>Generate or select a key</h4><p>Select Generate New Key to create one, or select Use Existing Key to reuse a key across multiple Adyen instances.</p></div>
+</div>
+</div>
+
+<div className="rp-steps">
+<div className="rp-step">
+<div className="rp-step-num">5</div>
+<div><h4>Add the key</h4><p>Select Add Key to save.</p></div>
+</div>
+</div>
+
+### Adyen configuration — RSA key and RTAU enablement
+
+The RSA key cannot be configured directly in the Adyen dashboard. Copy the public key from Recurly and provide it to Adyen via a support ticket, including the public key exactly as shown in Recurly. Once Adyen applies the key, RTAU starts working automatically.
+
+### How Adyen RTAU works with Recurly Account Updater
+
+If both services are enabled, card updates that arrive through Adyen RTAU will not be sent to Recurly Account Updater. Adyen RTAU supports Visa, Mastercard, and regional American Express only. To continue receiving Discover and additional American Express updates, keep Recurly Account Updater enabled alongside Adyen RTAU.
+
+Adyen RTAU updates may include:
+
+- **Card PAN changes** — Recurly decrypts the PAN (when an RSA key is set up) and updates the billing information on the account. Because RTAU runs in real time, if Adyen returns a full card update, Adyen uses the updated card to complete the current transaction and Recurly saves it for future use.
+  - _Example:_ Visa ending in 1234 is sent for authorization → Adyen attempts Visa 1234, it declines → Adyen requests a real-time update and receives Visa 4567 → Adyen attempts Visa 4567, it approves → Adyen returns the approval and encrypted Visa 4567 for future use.
+- **Card expiration date changes** — Recurly updates the expiration date on file
+- **Closed account notices** — Recurly invalidates the billing information for the account
+- **Contact customer notices** — Recurly does not update billing information but logs the response in Account Activities when a transaction declines
+
+### Disabling RSA keys for Adyen RTAU
+
+To stop using Adyen RTAU, revoke the RSA key on each Adyen gateway where it's enabled:
+
+1. Go to Configuration → Payment Gateways
+2. On the Adyen gateway, select Options → Manage Keys
+3. Revoke the RSA key
+
+Also contact Adyen to disable RTAU on their side. If Recurly Account Updater is enabled, it resumes processing updates for supported card brands after RTAU is disabled.
+
+## Adyen Network Tokens
+
+If Adyen is enabled to create network tokens for your merchant account (cards only), Recurly surfaces whether a network token was used on each transaction. If you're using Adyen Third Party Checkout, you'll get network token behavior by default.
+
+You can find this information in:
+
+- Transaction details in the Recurly Admin UI
+- Gateway parameter responses through the API
+
+Recurly displays this as a boolean field called **Third Party Network Token Used**:
+
+- `false` — a raw Primary Account Number (PAN) or card data was used
+- `true` — a network token was used
+
+If network tokens aren't enabled in your Adyen account, this value will always be `false`. Token usage is determined by Adyen, not Recurly — contact Adyen support with questions about why a network token was or wasn't used.
+
+**Important:** Adyen uses network tokenization only for tokenized payment methods. Recurly supports tokenizing cards only when you use Adyen Web Components through Recurly.js.
+
+## Revenue Protect and Protect Premium
+
+If you use Revenue Protect or Protect Premium with Adyen, Recurly supports sending the data Adyen needs to evaluate risk and apply your rules.
+
+### Protect Premium — custom risk profiles
+
+If you have a paid subscription to Adyen Protect Premium, you can create custom risk profiles in Adyen and pass the profile ID to Recurly when creating subscriptions or one-time charges through the V3 API.
+
+- V3 field: `billing_info.adyen_risk_profile_reference_id`
+- Adyen reference: <a href="https://docs.adyen.com/risk-management/create-and-use-risk-profiles/" target="_blank">Create Risk Profiles</a>
+
+### Data Recurly sends to support risk decisions
+
+- **Billing and shipping address data** — See <a href="/guides/subscriber-management/accounts-1/shipping-addresses" target="_blank">Shipping addresses</a> for setup guidance
+- **Shipping method and amount** — Recurly sends the invoice shipping amount and the shipping method Name value to Adyen — see <a href="/guides/recurring-billing/billing-preferences/shipping#/shipping-methods" target="_blank">Shipping methods</a>
+- **Browser information** — Sent when the shopper is routed through 3D Secure; Revenue Protect can evaluate browser-based rules at the gateway
+- **Shopper data** — Email address, phone number, name, IP address (in-session only), and shopper reference. IP addresses are not sent to Adyen on renewals. If shopper details aren't present on the account, they won't be sent.
+- **Acquisition date** — Send account acquisition dates using `acquisition.acquired_at` in the V3 API. Existing accounts can be backfilled. See the <a href="https://recurly.com/developers/api/v2021-02-25/#operation/create_purchase" target="_blank">V3 acquired_at field documentation</a>.
+
+### Limitations
+
+- **Review rules** are not supported for Adyen Protect (new risk engine) when using Purchase transactions. If you need Review, use an Authorize and Capture flow where your system controls capture. When using Purchases, use only Allow, Block, or Check for 3DS actions.
+
+## Important notes
+
+- Follow customer notification requirements (for example, SEPA renewal notices)
+- Recurly can export billing information from Adyen for SEPA subscription renewals
+- Recurly sends purchase transactions to Adyen with a capture flag, overriding your Adyen settings
+
+### How asynchronous payments work
+
+After a successful purchase with an asynchronous payment method:
+
+1. The subscription is marked Active, but the invoice and transaction remain in Processing until Adyen confirms payment approval
+2. Recurly sends a "processing payment" webhook to configured endpoints and a "payment processing" email to customers (if enabled)
+3. Adyen's initial return token is "unverified" while the bank confirms the payment
+4. Within 48 hours, the token becomes "verified" and additional transactions can proceed
+5. Recurly updates the transaction and invoice status based on Adyen's feedback, and sends the relevant webhooks and emails
+
+**Dunning and retries:** Asynchronous payments require special handling in dunning — see the PayPal eChecks guidance in <a href="/guides/payment-orchestration/payment-methods/paypal-payments#paypal-echecks" target="_blank">PayPal payments</a>.
+
+### Asynchronous payment methods and webhook reliance
+
+Because asynchronous payment methods such as SEPA and Boleto can take several days to settle, payment processing in Recurly behaves differently than for card payments. Ensure webhooks are configured correctly to avoid stale transaction and invoice statuses.
+
+### Billing information updates
+
+Direct customers to Recurly Hosted Pages or build your own API connection for billing information updates. Recurly charges the new billing information a small amount or a zero-dollar verification (depending on your gateway setup). After Adyen approves the authorization or verification, Recurly automatically issues a refund.
+
+### IP address allowlist
+
+In some scenarios, Adyen may use additional IP addresses that must be allowlisted in Recurly. Contact <a href="mailto:support@recurly.com">[support@recurly.com](mailto:support@recurly.com)</a> before moving to production.
+
+### API integration with Recurly
+
+In a standard Recurly.js flow, Recurly handles payment authorization. The customer enters billing details first; after authorization, you create the subscription and process the charge.
+
+# Troubleshooting
+
+<Accordion title="A tokenized payment method isn't allowing conversions, or subscriptions are failing — what can I do?">
+  Confirm you've enabled the required webhooks. `RECURRING_CONTRACT` webhooks are critical for all non-card payment methods — see the webhook configuration steps in Step 2 above.
+</Accordion>
+
+<Accordion title="My customer got a decline from Adyen at checkout — what happened?">
+  Start with the decline code shown in the Recurly Admin UI for the transaction. If the decline is related to 3DS, confirm 3DS is enabled and configured in both Adyen and your Recurly.js implementation. If 3DS is already enabled, the customer may not have completed the 3DS challenge successfully, and the decline is expected.
+</Accordion>

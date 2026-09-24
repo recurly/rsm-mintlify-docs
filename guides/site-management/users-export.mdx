@@ -1,0 +1,109 @@
+---
+title: Users export
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Users export gives administrators a full report of every user who currently has access to their Recurly site — including name, email, permissions, role, and the date they were added. Use it to audit access, review permission assignments, and monitor user activity.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+</div>
+
+<div className="rp-card">
+
+### Limitations
+
+- The Users report only includes users who have current access to the site during the selected dates. Deleted users are excluded.
+- For the most accurate snapshot of user access history, run this report regularly — each export reflects access as it stands at the time of the report.
+
+</div>
+
+# Access the export
+
+Go to **Admin → Admin Exports → Users**.
+
+
+<Image src="https://files.readme.io/cf686844ae85d399335ac290c89bbdbcb4689628b53de0ead7ea74367f7a7eb7-image.png" align="center" width="75%" border={true} />
+
+
+***
+
+# Explore interface
+
+The Explore interface provides an interactive query builder for analyzing user data. It's divided into three panels:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Panel</td><td>Description</td></tr>
+  <tr><td><strong>Left — Workbook</strong></td><td>Ask natural-language questions about your user data. The Workbook Agent suggests fields and runs queries on your behalf.</td></tr>
+  <tr><td><strong>Center — Field picker</strong></td><td>Browse and search the full field catalog, grouped by topic. Click any field to add it to your active query. Use the In-use filter to see only selected fields.</td></tr>
+  <tr><td><strong>Right — Results area</strong></td><td>Toggle between Results (table view), Chart (visualization), or both. Use the Options tab to configure axes, grouping, and chart type. Click Preview to run a sample query before committing.</td></tr>
+</table>
+
+
+<Image src="https://files.readme.io/b14849b0185ddbdd34596936d16adf5a7d73a6fb11baae37a842dc3c7616288f-image.png" align="center" width="75%" border={true} />
+
+
+## Pre-built sample queries
+
+Two sample queries are available to get started quickly:
+
+- **List of users (v1)** — A comprehensive report of all site users including first name, last name, email, user access, and date added.
+- **List of users (v2)** — The same report as v1 with the addition of the user role field.
+
+
+<Image src="https://files.readme.io/3ceeaf7681e6988fc9e83a9f517a887d40a1df14b0809ae1f829e6367cf86ae0-image.png" align="center" width="40%" border={true} />
+
+
+## Workbook Agent
+
+The Workbook Agent is the fastest way to start an analysis. Type a question in the text box at the bottom of the left panel and press Enter (or click the send icon).
+
+**Example prompts:**
+
+- "How many admins have each role type? Give me a breakdown"
+- "Which users have admin access but no MFA enabled?"
+- "Show me all users with billing permissions"
+
+## Available fields
+
+- **Email** — Filter users by email address
+- **Name** — Filter users by first and last name
+- **User Access** — View the list of permissions assigned to each user
+- **Date Added Time** — Filter users by the date they accepted their invitation to the site
+- **User Role** — Filter users by their assigned role
+
+## Build a report
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Select fields</h4><p>Browse the field catalog and click any field to add it to your query. Use the <strong>In-use</strong> filter to see only selected fields.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Apply filters</h4><p>Drag and drop any field into the Filters section, or click the dropdown/actions menu next to a field header and select <strong>Filter</strong>. To create a measure tied to a specific dimension, build a pivot table and right-click the measure under a pivot value to select <strong>Create filtered measure</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/1ba5f548916b68fb496637523d03fa69b0884d6f4777b8dd4a1cc5a136e9e363-image.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Visualize and review</h4><p>Toggle between Results (table view), Chart (visualization), or both. Use the <strong>Options</strong> tab to configure axes, grouping, and chart type.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Download your data</h4><p>From the menu, select <strong>Tab → Download</strong> and choose your preferred format: CSV, Excel, or JSON.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/bbf4a79f307a7e268318352d2b6046a6a297587b4729e4a0147a74220c6bd7b3-image.png" align="center" width="40%" border={true} />
+
+
+
+<Image src="https://files.readme.io/9727ad37879c86cdf6a7f77e9689f41e48e0d5a9a80c6443c1c337f11a68da86-image.png" align="center" width="40%" border={true} />
+
+
+<br />

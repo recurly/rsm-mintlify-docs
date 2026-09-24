@@ -1,0 +1,57 @@
+---
+title: Usage notifications
+---
+
+Usage notifications inform you whenever Recurly generates a usage record on your behalf in scenarios such as refunds or subscription terminations. These webhooks let you stay in sync with any adjustments to usage-based billing.
+
+### Prerequisites and limitations
+
+* No special configuration is required—Usage notifications are sent automatically.
+* Only “created” events are supported for usage records.
+
+# Usage notifications
+
+## New usage
+
+Sent when we create a usage record on your behalf in a refund or terminate scenario.
+
+```json
+{
+  "id": "qlm81nq1drd0",
+  "object_type": "usage",
+  "site_id": "qc326l1hl8k9",
+  "event_type": "created",
+  "event_time": "2022-07-27T15:43:04Z",
+  "subscription_uuid": "612bcf671a227b272b753a487fb6576a",
+  "add_on_code": "basic-add-on"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<new_usage_notification>
+  <account>
+    <account_code>923845792374</account_code>
+    <username></username>
+    <email></email>
+    <first_name></first_name>
+    <last_name></last_name>
+    <company_name></company_name>
+  </account>
+  <usage>
+    <id type="integer">394729929104688227</id>
+    <subscription_id>35cda8d4ae0a214f69779e4ddbbc2ebd</subscription_id>
+    <add_on_code>video_storage</add_on_code>
+    <measured_unit_id type="integer">394681920153192422</measured_unit_id>
+    <amount type="integer">-40</amount>
+    <merchant_tag nil="true"></merchant_tag>
+    <recording_timestamp type="datetime">2016-04-28T21:57:53+00:00</recording_timestamp>
+    <usage_timestamp type="datetime">2016-04-28T21:57:53+00:00</usage_timestamp>
+    <created_at type="datetime">2016-04-28T21:57:54+00:00</created_at>
+    <modified_at type="datetime" nil="true"></modified_at>
+    <billed_at type="datetime">2016-04-28T21:57:54+00:00</billed_at>
+    <usage_type>PRICE</usage_type>
+    <unit_amount_in_cents nil="true">50</unit_amount_in_cents>
+    <usage_percentage type="float"></usage_percentage>
+  </usage>
+</new_usage_notification>
+```

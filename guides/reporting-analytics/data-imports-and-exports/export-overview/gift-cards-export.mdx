@@ -1,0 +1,81 @@
+---
+title: Gift cards - export
+---
+
+# Overview
+
+### Required plan
+
+This feature or setting is available to all customers on any Recurly subscription plan.
+
+# Definition
+
+The Gift Cards export includes a row for every purchased gift card on your site. Here you can see what gift card amounts are most popular, who is purchasing the most gift cards, who is redeeming gift cards, and what gift cards haven't been redeemed or still have remaining balances. To access the Gift Cards export, visit the <a href="http://app.recurly.com/go/exports">Exports</a> page under Reports in your Recurly site.
+
+<Image border={false} src="https://files.readme.io/7b215180f668abd5b6e64b9464cea56d74221bad7bd6816e194e6af55c7b3570-image.png" />
+
+# Filters
+
+### Versions Filter
+
+* The Versions filter allows you to select the version that is most appropriate for your needs. This is based on the version changelog at the bottom of this page.
+
+### Export On Filters
+
+* **Created** - shows all gift cards purchased during the selected time range. Uses the "created_at" field from this export.
+* **Modified** - shows all gift cards changed during the selected time range. Changes could be triggered by a resent email, edited delivery information, regenerated redemption code, cancelation, redemption, or change in balance. Uses the "updated_at" field from this export.
+* **Redeemed** - shows all gift cards redeemed on an account during the selected time range. Uses the "redeemed_at" field from this export.
+* **Delivered** - shows all gift cards delivered during the selected time range. Delivery indicates the last time Recurly sent the Gift Card Delivery email to the delivery email address. Uses the "delivered_at" field from this export.
+* **Canceled** - shows all gift cards canceled during the selected time range. Uses the "canceled_at" field from this export.
+
+### Time range filters
+
+* The Time range filter (dropdown) allows you to view data within a specific period such as last month, year to date or a custom date range. The Start Date and End Date will automatically update based on the value selected in the Time range filter. You can also choose "Between..." in the dropdown, which will allow you to enter a customized date range.
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+To help you identify and organize information effectively, the export provides a structured table that contains the following columns:
+
+| ID                                                                    | **Example**                                                       | **Description**                                                                                                                                                                            | Data type (max size) |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------- |
+| <span id="id">id</span>                                               | 2003020297591186183                                               | The unique ID of the gift card.                                                                                                                                                            | string               |
+| <span id="redemption_code">redemption_code</span>                     | 518822D87268C142                                                  | The redemption code, which the recipient uses to redeem the gift card credit.                                                                                                              | varchar(255)         |
+| <span id="amount">amount</span>                                       | 50.00                                                             | The amount of the gift card.                                                                                                                                                               | numeric              |
+| <span id="balance">balance</span>                                     | 40.00                                                             | The remaining balance of the gift card. Will be empty if `redeemed_at` is null. Will be 0.00 if gift card credit has been completely used up.                                              | numeric              |
+| <span id="currency">currency</span>                                   | USD                                                               | The currency of the `amount` and `balance`.                                                                                                                                                | varchar(3)           |
+| <span id="gifter_account_code">gifter_account_code</span>             | 3345634                                                           | The account code of the gifter's account.                                                                                                                                                  | varchar(50)          |
+| <span id="purchase_invoice_number">purchase_invoice_number</span>     | 1001                                                              | The invoice number of the gift card purchase on the gifter's account.                                                                                                                      | string               |
+| <span id="purchase_adjustment_uuid">purchase_adjustment_uuid</span>   | 385a6a380e8228b298d8d7414183a8e1                                  | The unique id of the gift card charge on the purchase invoice.                                                                                                                             | varchar(32)          |
+| <span id="recipient_account_code">recipient_account_code</span>       | 3345700                                                           | The account code of the recipient's account.                                                                                                                                               | varchar(50)          |
+| <span id="recipient_adjustment_uuid">recipient_adjustment_uuid</span> | 387fbbdcdbd2473d4f6a3e480cb6f966                                  | The unique id of the gift card redemption credit. This is the original gift card credit.                                                                                                   | varchar(32)          |
+| <span id="created_at">created_at</span>                               | 2016-09-02 15:53:18 UTC                                           | The date the gift card was purchased by the gifter.                                                                                                                                        | timestamp            |
+| <span id="updated_at">updated_at</span>                               | 2016-09-02 15:53:18 UTC                                           | The date the gift card was last modified. Will equal `created_at` at initial creation.                                                                                                     | timestamp            |
+| <span id="delivered_at">delivered_at</span>                           | 2016-09-02 15:53:18 UTC                                           | The last date Recurly sent the Gift Card Delivery email to the email address in the gift card's delivery information.                                                                      | timestamp            |
+| <span id="redeemed_at">redeemed_at</span>                             | 2016-09-02 15:53:18 UTC                                           | The date the gift card was redeemed on the recipient's account.                                                                                                                            | timestamp            |
+| <span id="canceled_at">canceled_at</span>                             | 2016-09-02 15:53:18 UTC                                           | The date the gift card was canceled. If empty, the gift card has not been canceled.                                                                                                        | timestamp            |
+| <span id="delivery_method">delivery_method</span>                     | email, post                                                       | The method of delivery, either `email` or `post`.                                                                                                                                          | varchar(255)         |
+| <span id="delivery_first_name">delivery_first_name</span>             | John                                                              | The first name of the recipient.                                                                                                                                                           | varchar(255)         |
+| <span id="delivery_last_name">delivery_last_name</span>               | Smith                                                             | The last name of the recipient.                                                                                                                                                            | varchar(255)         |
+| <span id="delivery_email_address">delivery_email_address</span>       | [john@example.com](mailto:john@example.com)                       | The email address of the recipient.                                                                                                                                                        | varchar(255)         |
+| <span id="delivery_deliver_at">delivery_deliver_at</span>             | 12/05/2020                                                        | Will have a value if a future delivery date was specified. This feature is not yet supported, so it will be empty always.                                                                  | timestamp            |
+| <span id="delivery_address1">delivery_address1</span>                 | 123 Main Street                                                   | The first street address of the recipient.                                                                                                                                                 | string               |
+| <span id="delivery_address2">delivery_address2</span>                 | Apt 100                                                           | The second street address of the recipient.                                                                                                                                                | string               |
+| <span id="delivery_city">delivery_city</span>                         | San Francisco                                                     | The city of the recipient.                                                                                                                                                                 | string               |
+| <span id="delivery_state">delivery_state</span>                       | CA                                                                | The state/province of the recipient.                                                                                                                                                       | string               |
+| <span id="delivery_zip">delivery_zip</span>                           | 94110                                                             | The zip/postal code of the recipient.                                                                                                                                                      | string               |
+| <span id="delivery_country">delivery_country</span>                   | US                                                                | The country of the recipient.                                                                                                                                                              | string               |
+| <span id="delivery_phone">delivery_phone</span>                       | 8003334444                                                        | The phone number of the recipient.                                                                                                                                                         | string               |
+| <span id="delivery_gifter_name">delivery_gifter_name</span>           | Sally                                                             | The gifter's name, if provided.                                                                                                                                                            | varchar(255)         |
+| <span id="delivery_personal_message">delivery_personal_message</span> | Hi John, Happy Birthday! I hope you have a great day! Love, Sally | The personal message from the gifter to the recipient.                                                                                                                                     | string               |
+| <span id="redemption_invoice_number">redemption_invoice_number</span> | 1001                                                              | If the Credit Invoices feature is enabled, this is the credit invoice issued when the gift card was redeemed. Credit Invoices is currently in beta. Contact Recurly Support to learn more. | string               |
+| gift_card_api_id                                                      | e28zov4fw0v2                                                      | Gift Card API ID                                                                                                                                                                           | string               |
+
+# Changelog
+
+### Version 2
+
+* Addition of `gift_card_api_id`.

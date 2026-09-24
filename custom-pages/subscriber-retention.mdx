@@ -1,0 +1,96 @@
+---
+title: Subscriber Retention
+---
+
+The Subscriber Retention dashboard uses cohort analysis to evaluate paid subscriber retention and churn rates over a specified timeframe for each group of paying subscribers. 
+
+To maintain access to the most current information, use the widgets on this dashboard to refresh the screen.  The data for this dashboard updates multiple times a day. You can verify the time the last changes were uploaded by checking the widget at the bottom of the dashboard.
+
+# Subscriber Retention Dashboard
+
+The Subscriber Retention dashboard is divided into two parts: Subscriber Retention and Subscriber Retention by Plan. The Subscriber Retention part is divided into a line chart and a spreadsheet. The Subscriber Retention by Plan part is divided into a spreadsheet and two details volumes.
+
+The widgets on this dashboard’s user interface provide you with access to the following common features:
+
+**Actions** at the top right corner of the dashboard provide the following functionality:
+
+* Reload action tracks the last time you refreshed your data up to four hours. The counter then resets, beginning with 1m ago This tells you how current your data is from the last refresh.
+* Hide Filters action hides filters that display in the top left corner of the dashboard.
+* Dashboard actions allow you to clear the cache and refresh the data, view a  Download Dashboard menu from where you can select the download format, page size, or downloaded data arrangement, or reset the filters.
+* Open Folders action allows you to open/close folders from the dashboard.
+
+**Filters** in the top left corner of both parts of this dashboard provide the following options:
+
+## Subscriber Retention Filters
+
+* Select Metric Type filter to view retention by percent, active timeframe, or churned data.
+* Date filter provides dropdown menus where you choose a timeframe and date range from within the last 18 months to determine the data that displays on the dashboard.
+
+## Subscriber Retention by Plan Filters
+
+* Month filter provides dropdown menus where you can choose a timeframe and date range from within the last 18 months to determine the data that displays on the dashboard.
+* Select Plans filter allows you to click a dropdown menu to select a set of top plans or all plans. This filter is linked to the Plan Name filter. When you make your Select Plans choice, this narrows the filter options available from the Plan Name filter. For example, if you select Top 5 plans, the Plan Name filter will display a dropdown menu listing only your Top 5 plans.
+* Plan Name filter provides a list of all plans that are selected, based on your choice in the Select Plans filer.
+
+**Clear Cache options** allow you to clear cache and refresh data in three places on this dashboard:
+
+* Click the vertical ellipse on any of the widgets, at the bottom of the dashboard to see the timestamp for the most current version of data on the dashboard.
+* Click the vertical ellipse on any of the widgets within the dashboard to update the selected widget with the most current data available during the session.
+* Click the Actions widget -> vertical ellipse at top right corner of the dashboard to clear the cache and refresh the data. Recurly updates the data multiple times a day, so after a refresh, the most current data available will upload.
+
+**Vertical ellipses** available on both widgets and tables, provide you with a dropdown menu where you can select the following options:
+
+* Click the vertical ellipse on a widget to download data or clear cache & and refresh data for a selected widget.
+* Click the vertical ellipse on a column in a table to download data or clear the cache and refresh the data on display, but also to auto size or resize columns.
+
+**Charts and legends** display data on this dashboard within widgets in bar, line, and pie charts. This data often includes customer, subscriber, subscription, plans, and revenue totals in increments specified by time and date ranges. If the information on one of these charts is color-coded, there will be a legend on the widget that identifies the value assigned to the color. For example, specific colors are assigned to specific data or totals being tracked, to enable you to read the chart. 
+
+* Click a point in a line chart or a specific color on a bar or pie chart to display the corresponding timeframe and value in hover text. For example, total number of subscribers for a corresponding month.
+* Click the corresponding color in the legend to hide that corresponding line or bar or pie chart segment from the widget. Click on the color again, to restore the data.
+
+# Subscriber Retention Section
+
+The Subscriber Retention section includes a Subscriber Cohort Descent line chart and a cohort analysis detail.
+
+* The sign-up month is the month in which a NEW subscriber has an invoice paid >$0. A subscriber with a $0 subscription invoice OR whose first invoice >$0 is past due will not be included. In other words, the customer must have successfully paid their invoice for the subscription for them to be counted in the "Paying Subscriber" cohort.
+* Subscriptions in trial or subscriptions that have been paid for by a previously purchased gift card are NOT included in this data.
+* If an existing subscriber purchases a new subscription, it will not impact this data.
+* A subscriber is considered retained if they are still an active subscriber with at least one subscription. Conversely, a customer is considered churned when their only or last subscription has expired. A paused subscription is NOT considered churned.
+* A subscriber is counted in the retention for month 0 if they have remained a customer for one full month from the date of sign up. For example, if a subscriber signs up on November 14th and leaves before December 14th, he is counted as churning in Month 0.
+* Subsequently, a subscriber who signs up on November 14th and leaves before January 14th is counted as having churned in Month 1.
+
+**Subscriber Cohort Descent:** is a line chart that shows the subscriber retention rate for the designated metric type: percent, active, or churned, by the selected timeframe.
+
+<Image title="subscriber cohort decent.png" alt={2600} src="https://files.readme.io/5596be4-subscriber_cohort_decent.png">
+  Subscriber Retention Cohort Decent
+</Image>
+
+**Cohort Analysis Detail:** is a cohort analysis of retention count for paying subscribers that sign up in a designated month.  The example in the following screenshot shows the percentage of paying subscribers by month.
+
+<Image title="cohort analysis detail.png" alt={2598} src="https://files.readme.io/3be94c9-cohort_analysis_detail.png">
+  Subscriber Retention Cohort Analysis Detail
+</Image>
+
+# Subscriber Retention by Plan Section
+
+The Subscriber Retention by Plan section is a details status of active and churned volumes.
+
+* The Subscriber Retention by Plan total does not include reactivations, BUT Subscriber Retention, across all plans, does include reactivations. See the Subscribers dashboard topic for information about returning subscribers.
+
+**Subscriber Retention by Plan Status:** When this report is filtered by Plan, the data shown is the retention of a subscriber whose first subscription was part of that Plan. If subscribers change plans at a later date or add another subscription those changes will not impact this status.
+
+<Image title="subscriber retention by plan.png" alt={2598} src="https://files.readme.io/5a99f1e-subscriber_retention_by_plan.png">
+  Subscriber Retention by Plan Status
+</Image>
+
+**Subscriber Retention by Plan Active Volume:** shows the number of active subscribers signed up by the specified timeframe for selected plans.
+
+<Image title="subscriber retention by plan active volume.png" alt={2584} src="https://files.readme.io/54332e8-subscriber_retention_by_plan_active_volume.png">
+  Subscriber Retention Plan Active Volume
+</Image>
+
+**Subscriber Retention by Plan Churn Volume:** shows the number of subscribers that churned by the specified timeframe for selected plans.
+
+<Image title="subscriber retention by plan churn volume.png" alt={2586} src="https://files.readme.io/af091de-subscriber_retention_by_plan_churn_volume.png">
+  Subscriber Retention Plan Churn Volume
+</Image>

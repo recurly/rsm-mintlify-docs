@@ -1,0 +1,305 @@
+---
+title: Subscription billing terms
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Subscription billing terms let you bind customers to a commitment length that can span multiple billing periods — like an annual subscription billed quarterly, or a one-year term that shifts to monthly billing after the first year. You control the billing interval, term length, renewal behavior, and when changes take effect.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#change-a-subscription"><span className="rp-toc-num">4</span>Change a subscription</a>
+    <a className="rp-toc-pill" href="#cancel-a-subscription"><span className="rp-toc-num">5</span>Cancel a subscription</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Subscription billing terms let you define a commitment length that can contain one or more billing periods, setting billing intervals independently of the overall subscription duration. End-of-term behavior — whether subscriptions auto-renew or expire — is configured at the plan level and can be overridden per subscription.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-file-contract" aria-hidden="true"></i></div>
+    <strong>Clarity in subscription management</strong>
+    <span>A detailed, predictable billing structure helps both merchants and customers understand exactly how and when charges occur throughout a subscription term.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrows-split-up-and-left" aria-hidden="true"></i></div>
+    <strong>Tailored business strategies</strong>
+    <span>Flexibly modify, extend, or cancel subscriptions at the right moment — enabling upsell opportunities and reducing churn with term-aware billing logic.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
+    <strong>Operational efficiency</strong>
+    <span>Automate term renewals and change timing, reducing manual intervention and keeping billing accurate across complex subscription lifecycles.</span>
+  </div>
+</div>
+
+# Key details
+
+## Billing structure for plans
+
+Every plan has two key billing settings that work together to define the subscription's payment structure.
+
+**Billing period** — The recurring interval at which the customer is charged (e.g., monthly, quarterly, annually). The billing period is set at plan creation and cannot be changed afterward, as doing so would affect the term length of active subscriptions. If you need a different billing period, create a new plan.
+
+**Subscription term** — The overall commitment length, which may contain one or more billing periods. For example, an annual subscription billed quarterly has a one-year term with four billing periods. The term can be adjusted during subscription creation or editing, even if it differs from the plan default.
+
+
+<Image src="https://files.readme.io/b0a3676-Billing_Period_And_Price_Per_Billing_Period.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/62a7d19-Subscription_Billing_Term_Length.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Month-to-month subscriptions</strong>For businesses relying primarily on monthly, auto-renewing plans, use a monthly billing period with a term length of one billing cycle.</div>
+</div>
+
+***
+
+## End-of-term behavior
+
+Every plan requires a renewal behavior setting that determines what happens when a subscription term ends.
+
+
+<Image src="https://files.readme.io/9da2dd2-End_of_Billing_Term_Behavior.png" align="center" width="75%" border={true} />
+
+
+- **Auto-renew** — The subscription automatically starts a new term at the end of the current one. Ideal for recurring services like streaming platforms where minimizing churn is a priority.
+- **Expire** — The subscription ends when the term completes without renewal. Useful for installment-based billing, such as device payment plans that end once all installments are paid.
+
+***
+
+## Adding a subscription
+
+When you add a subscription to an account, the plan's term settings are applied by default. You can override them during creation.
+
+
+<Image src="https://files.readme.io/5a493f0-Screen_Shot_2018-06-05_at_9.28.50_AM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Price per billing period</strong>"Price per Billing Period" refers to the recurring charge for each billing interval. The default price and quantity can be overridden at subscription creation or when editing an existing subscription.</div>
+</div>
+
+### Timing
+
+You can set a subscription to start immediately or schedule it to begin on a specific date.
+
+
+<Image src="https://files.readme.io/de09aa30d62445d0bb29151bd72e6cf5dd99ebd3d7c3c476ba13ddf0ca6566a0-StartSubPastDate_1.png" align="center" width="75%" border={true} />
+
+
+### Subscription details
+
+The subscription details view includes the following term-related fields:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Field</td><td>Description</td></tr>
+  <tr><td>Current Period</td><td>The ongoing billing cycle.</td></tr>
+  <tr><td>Current Term</td><td>The start and end dates of the active subscription term.</td></tr>
+  <tr><td>Remaining Periods</td><td>Outstanding billing cycles within the current term.</td></tr>
+  <tr><td>Term Balance</td><td>Estimated outstanding billable amounts for the term.</td></tr>
+  <tr><td>Renews On</td><td>The renewal date for subscriptions set to auto-renew.</td></tr>
+  <tr><td>Ends On</td><td>The expiry date for subscriptions set to expire at term end.</td></tr>
+  <tr><td>Started On</td><td>The date the subscription was activated.</td></tr>
+</table>
+
+
+<Image src="https://files.readme.io/18d6c96-FireShot_Capture_35_-_Internal__Subscription_Terms_-_Google___-_https___docs.google.com_document_d.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/914c3ae-FireShot_Capture_36_-_Internal__Subscription_Terms_-_Google___-_https___docs.google.com_document_d.png" align="center" width="75%" border={true} />
+
+
+# Change a subscription
+
+Subscription changes — upgrades, downgrades, or invoicing method updates — can be applied at three points in time. Choose the timing that fits the nature of the change and your customer relationship.
+
+## Timing options
+
+**Immediately** — The change takes effect right away and generates an invoice. If automatic collection is enabled, a transaction is attempted using the billing information on file. If it fails, the invoice and subscription enter the dunning process.
+
+**At next bill date** — Recurly stores the change and applies it on the customer's next invoice. The customer continues on the current plan until the end of the billing cycle.
+
+**At term renewal** — Recurly stores the change and applies it when the subscription term renews. No proration is needed — the subscription is adjusted and the customer is invoiced at the new amount on the renewal invoice.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> One change request at a time</strong>Recurly retains only one pending change request per subscription. If a second change request is submitted before the first takes effect, the first request is discarded. The new request is applied at its specified time.</div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Term-only changes</strong>Changing only the subscription's term length (with no other modifications) doesn't generate an invoice.</div>
+</div>
+
+## Apply an immediate change
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscription</h4><p>In the Admin Console, navigate to the customer's subscription.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Change Subscription</h4><p>Choose <strong>Change Subscription</strong> from the subscription actions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose Immediate Change</h4><p>Select <strong>Immediate Change</strong> to apply changes right away.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Update subscription details</h4><p>Modify the plan, add-ons, or other subscription attributes as needed.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Review the invoice impact</h4><p>Check how the change affects current billing, then confirm to apply immediately.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/2344d3d-2019-09-04_1129.png" align="center" width="75%" border={true} />
+
+
+For a full breakdown of proration logic for immediate changes, see <a href="/guides/subscriber-management/subscription-lifecycle/change-subscription#section-immediate-changes" target="_blank">Change Subscription</a>.
+
+## Apply a change at the next bill date
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscription</h4><p>In the Admin Console, navigate to the customer's subscription.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Change Subscription</h4><p>Choose <strong>Change Subscription</strong> from the subscription actions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose At Next Bill Date</h4><p>Select <strong>At Next Bill Date</strong> to apply the change at the next billing cycle.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Make your changes and save</h4><p>Adjust the plan, add-ons, or other details, then save. The change will be applied on the next billing date.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/ece1cd8-2019-09-04_1233.png" align="center" width="75%" border={true} />
+
+
+## Apply a change at term renewal
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscription</h4><p>In the Admin Console, navigate to the customer's subscription.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Change Subscription</h4><p>Choose <strong>Change Subscription</strong> from the subscription actions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose At Term Renewal</h4><p>Select <strong>At Term Renewal</strong> to apply the change when the subscription term renews.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Make your changes and save</h4><p>Update the subscription attributes, then save. The change will take effect at the start of the next term.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/579cbf6-2019-09-04_1233.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Expiring subscriptions set to renew at term end</strong>If a subscription is set to expire at the term's end and you save a change to apply at renewal, Recurly will automatically update the subscription to renew at the term's end and apply the pending change.</div>
+</div>
+
+## Plan term transitions
+
+When changing a subscription to a different plan, Recurly handles term continuity based on whether the billing structure changes.
+
+**Same billing period and term length** — Recurly preserves the remaining billing periods and applies standard proration rules. You can also choose to modify the term length if needed.
+
+**Different billing period or term length** — The subscription term restarts and new charges aren't prorated.
+
+For more details, see <a href="/guides/subscriber-management/subscription-lifecycle/change-subscription#section-plan-period-changes" target="_blank">Change Subscription — plan period changes</a>.
+
+# Cancel a subscription
+
+Canceling ends a subscription at a future date — the customer continues billing until the chosen cutoff. Terminating ends it immediately, mid-cycle. Once a subscription expires, it can't be reactivated. A canceled (but not yet expired) subscription can be reactivated if the customer changes their mind before the renewal date.
+
+
+<Image src="https://files.readme.io/fc695d5-2019-09-04_1238.png" align="center" width="75%" border={true} />
+
+
+## Terminate immediately
+
+Ends the subscription now, shifting its status from active to expired. If termination occurs mid-cycle, you can choose to refund the customer for any upfront fixed fees or bill them for any unbilled usage.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscription</h4><p>In the Admin Console, navigate to the customer's subscription.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Cancel Subscription</h4><p>Choose <strong>Cancel Subscription</strong> from the subscription actions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose Terminate Immediately</h4><p>Select <strong>Terminate Immediately</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Determine refunds or charges</h4><p>Decide whether to refund the customer for fixed fees or charge for any unbilled usage, then confirm.</p></div>
+  </div>
+</div>
+
+## Cancel at the next billing date
+
+The subscription continues until the current billing period ends, then expires. No further invoice is generated after cancellation takes effect.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscription</h4><p>In the Admin Console, navigate to the customer's subscription.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Cancel Subscription</h4><p>Choose <strong>Cancel Subscription</strong> from the subscription actions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose At Next Bill Date</h4><p>Select <strong>At Next Bill Date</strong>. The subscription runs through the current period and then expires.</p></div>
+  </div>
+</div>
+
+## Cancel at the term's end
+
+The subscription continues billing for the remainder of the term, then expires when the term end date is reached.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the subscription</h4><p>In the Admin Console, navigate to the customer's subscription.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select Cancel Subscription</h4><p>Choose <strong>Cancel Subscription</strong> from the subscription actions.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Choose End of Term</h4><p>Select <strong>End of Term</strong>. The subscription bills through the full term and then expires.</p></div>
+  </div>
+</div>
+
+<br />

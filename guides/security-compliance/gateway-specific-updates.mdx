@@ -1,0 +1,83 @@
+---
+title: Gateway specific updates (PSD2)
+---
+
+To properly support the upcoming PSD2 Mandate, there may be changes required with your payment gateway's configuration. We've called out the changes needed as communicated to us per gateway on this page.
+
+## Adyen
+
+#### Enable "Network Transaction Reference" Value Support
+
+In order to properly support merchant-initiated transaction (MIT) exemptions, please be sure to enable support for "Network Transaction Reference" values within your Adyen Merchant Account configuration. This can be done under the "Acquirer" heading via the following: Developers→Additional Data Settings
+
+Once enabled, a new transaction ID value will be returned by Adyen when processing transaction requests, which you may see if you have a direct integration with Adyen (this new value will not be visible within Recurly).
+
+#### Enable Generic Browser Info
+
+You will also need to enable Adyen to append generic browser info to your auth requests. You can reach out to Adyen support to have the "Generic Browser Info" enabled. If this is not enabled you will not see SCA challenges even when using 3DS specific cards. The account data property you need is populatebrowserinfofor3ds
+
+#### Enable Authentication on ZDA (optional, recommended)
+
+If you would like to force SCA on zero dollar authorizations, Adyen has an account data setting available for that. You will need to reach out to [support@adyen.com](mailto:support@adyen.com), or your Adyen account manager to get this enabled. 
+
+If you're not able to access these settings please contact [support@adyen.com](mailto:support@adyen.com) and they can enable them on your behalf. 
+
+#### Enable 3D Secure 2 Support on Recurly
+
+In addition to enabling support for 3D Secure challenges on your Adyen account, you will also need to have this feature enabled for your Recurly site. Contact Recurly Support to get this enabled. 
+
+## Braintree
+
+#### Ensure 3D Secure 2 Support is Live on Braintree
+
+Braintree should enable 3DS for any EU-domiciled account, but for accounts outside of the EU you will need to ensure that your merchant accounts are set up to utilize 3DS. To do this, follow the instructions on this [Braintree 3DS support article](https://developer.paypal.com/braintree/articles/guides/fraud-tools/3d-secure#setup).
+
+## Cybersource
+
+#### Enable 3D Secure 2 Support on Cybersource
+
+Cybersource is partnering with Cardinal Commerce for 3D Secure challenges. This will need to be configured for your Cybersource account. Please contact your account manager or Cybersource's support team for assistance with getting this enabled for your gateway account. 
+
+#### Enable 3D Secure 2 Support on Recurly
+
+In addition to enabling support for 3D Secure challenges on your Cybersource account, you will also need to have this feature enabled for your Recurly site. Contact Recurly Support to get this enabled. 
+
+**Note: You must have 3D Secure set up in your Cybersource merchant account first. Failure to do this will result in transaction failures.**
+
+#### Tokenize Credit Card Information with Recurly.js
+
+Cybersource requires credit card tokenization via Recurly.js to ensure that the appropriate device data is pass along to your gateway. For more information, please be sure to review our [documentation](https://dev.recurly.com/docs/recurlyjs) for more information on how to build the appropriate card form. 
+
+#### Enable Support for MOTO Indicators
+
+If your agents process billing information updates or submissions on behalf of your customers (such as billing info updates through the Recurly admin console), you will need to enable support for "MOTO" transaction indicators for your Cybersource merchant account. Please contact your Cybersource account manager or Cybersource Support for assistance with enabling this feature on your Cybersource account. Additional configuration in Recurly will also be required.
+
+## Stripe
+
+#### Disable 3DS Settings for Stripe Radar
+
+**For merchants out of scope of the PSD2 Mandate**, you will need to disable 3DS settings within your Radar configuration. This can be done via the following steps:
+
+1. From the Stripe portal home page, select "Radar".
+2. Under "Radar", select "Rules".
+3. For sections referencing "3D Secure", disable any options for enabled 3D Secure features.
+
+![1274](https://files.readme.io/6782aae-radar_config.gif "radar config.gif")
+
+## WorldPay
+
+#### Enable 3D Secure 2 Support
+
+WorldPay is partnering with Cardinal Commerce for 3D Secure challenges. This will need to be configured for your WorldPay account. Please contact your account manager or WorldPay's support team for assistance with getting this enabled for your gateway account. 
+
+#### Tokenize Credit Card Information with Recurly.js
+
+WorldPay requires credit card tokenization via Recurly.js to ensure that the appropriate device data is pass along to your gateway. For more information, please be sure to review our [documentation](https://dev.recurly.com/docs/recurlyjs) for more information on how to build the appropriate card form.
+
+#### Enable Order Notifications
+
+WorldPay will provide enhanced order notifications to keep transaction statuses in Recurly up-to-date. You will need to enable these within your WorldPay account. Information on how to do this can be seen in [WorldPay's documentation](https://beta.developer.worldpay.com/docs/wpg/manage/ordernotifications) or by contacting your WorldPay account manager. 
+
+#### Enable Flexible Account Variables (Dynamic Interaction Type - MOTO)
+
+If your agents process billing information updates or submissions on behalf of your customers (such as billing info updates through the Recurly admin console), you will need to enable "Flexible Account Variables" for your WorldPay merchant account and ensure that the "[Dynamic Interaction Type](https://beta.developer.worldpay.com/docs/wpg/directintegration/paymentrequests#flexible-account-variables)" field supports the "MOTO" value. Please contact your WorldPay account manager or WorldPay Support for assistance with enabling this feature. Additional [configuration](/guides/subscriber-management/transactions/moto-transactions#section-configuration) in Recurly will also be required.

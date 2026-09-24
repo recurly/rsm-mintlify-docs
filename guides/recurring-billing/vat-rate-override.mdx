@@ -1,0 +1,128 @@
+---
+title: Tax/VAT Rate Override
+---
+
+<div className="rp-page">
+  <div className="rp-overview">The Tax/VAT Rate Override lets you apply one fixed tax rate to every transaction on your site — no regional tax configuration required. The rate you set is applied to all invoices regardless of your merchant address or customer location. You're responsible for maintaining and updating this rate as your business needs change.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">1</span>Key details</a>
+    <a className="rp-toc-pill" href="#enable-the-tax-rate-override"><span className="rp-toc-num">2</span>Enable the override</a>
+    <a className="rp-toc-pill" href="#edit-the-tax-rate"><span className="rp-toc-num">3</span>Edit the tax rate</a>
+    <a className="rp-toc-pill" href="#disable-the-tax-rate-override"><span className="rp-toc-num">4</span>Disable the override</a>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Feature flag required</strong>The Tax/VAT Rate Override must be enabled by Recurly Support before it's available on your site. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> to request activation.</div>
+</div>
+
+# Key details
+
+## What changes when you enable the override
+
+When the tax rate override is active, Recurly no longer uses regional tax configuration. Instead, the rate you specify is applied to every invoice generated on your site — regardless of your merchant address or your customers' locations.
+
+There is no integration with a tax service when using this feature. By enabling it, you take responsibility for setting the correct rate and updating it as needed.
+
+Key behavioral changes:
+
+- **No regional configuration needed.** You don't need to enable or configure individual tax regions. The override rate applies globally.
+- **No country prefix on invoices.** Because the rate isn't tied to a specific country, invoices display tax as "VAT X%: $ Amount" without a country code prefix.
+- **Reverse VAT rules are ignored.** All future transactions have the override rate applied. Customers who believe they shouldn't be charged VAT must request a reverse-charge adjustment directly from you.
+- **Tax-exempt accounts are still honored.** Accounts marked as **Tax Exempt** won't have any tax applied to their invoices, consistent with standard Recurly tax behavior.
+
+## Plan tax collection still required
+
+The override rate only applies to invoices for plans that have **Collect Tax** enabled. If a plan doesn't have this checked, invoices generated from that plan won't include any tax — regardless of the override setting.
+
+
+<Image src="https://files.readme.io/d428d1f-Screenshot_2023-06-01_at_9.00.50_PM.png" align="center" width="75%" border={true} />
+
+
+## Tax-exempt accounts
+
+Accounts with the **Tax Exempt** option enabled won't have tax applied to their invoices. Tax-exempt organizations typically include non-profits, charities, religious organizations, and educational institutions — but you decide which accounts to mark as exempt. If you want tax applied to these accounts, don't check the Tax Exempt option.
+
+
+<Image src="https://files.readme.io/faa9be8-Screenshot_2023-06-01_at_9.29.12_PM.png" align="center" width="75%" border={true} />
+
+
+# Enable the tax rate override
+
+Once Recurly Support has enabled the feature flag, a **Tax Rate Override** box with an **Enable** button appears on the right side of your Taxes page.
+
+
+<Image src="https://files.readme.io/ee75793-Screenshot_2023-06-01_at_4.14.46_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Accept the enablement terms</h4><p>Click <strong>Enable</strong> in the Tax Rate Override box and accept the terms.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter the tax rate</h4><p>Input the desired tax rate. You can enter whole percentages or decimals up to four decimal places.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Confirm</h4><p>Click <strong>Enable</strong>. The fixed rate is applied to your site and the Taxes page updates to show only the Tax Rate Override option.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/23659cb-Screenshot_2023-06-01_at_8.42.36_PM.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/1ebc800-Screenshot_2023-06-01_at_8.43.50_PM.png" align="center" width="75%" border={true} />
+
+
+# Edit the tax rate
+
+You can update the tax rate override at any time.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the Tax Rate Override settings</h4><p>Navigate to the Taxes page and click into the Tax Rate Override section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter the new rate</h4><p>Update the rate field with the new value and save.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/f4d1bc5-Screenshot_2023-06-01_at_8.45.51_PM.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong>Only future transactions use the updated rate. Existing invoices retain the rate that was applied when they were generated.</div>
+</div>
+
+# Disable the tax rate override
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the Tax Rate Override settings</h4><p>Navigate to the Taxes page and open the Tax Rate Override section.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Disable the override</h4><p>Click <strong>Disable</strong> and confirm.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/567a899-Screenshot_2023-06-01_at_8.47.08_PM.png" align="center" width="75%" border={true} />
+
+
+Once disabled, your Taxes page returns to its standard state with all regional tax options available for configuration.
+
+
+<Image src="https://files.readme.io/d1018e2-Screenshot_2023-06-01_at_8.47.56_PM.png" align="center" width="75%" border={true} />
+
+
+<br />

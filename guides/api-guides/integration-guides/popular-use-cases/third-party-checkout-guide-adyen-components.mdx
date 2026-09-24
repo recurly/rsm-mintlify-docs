@@ -1,0 +1,208 @@
+---
+title: 'Third-party checkout guide: Adyen Web Components'
+---
+
+<div className="rp-page">
+  <div className="rp-overview">This guide walks you through connecting your Adyen Web Components integration to Recurly using the V3 API and Recurly.js. You'll configure Adyen's Web Components, tokenize payments with Recurly.js, and make purchase requests against the Recurly API.</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-concepts"><span className="rp-toc-num">2</span>Key concepts</a>
+    <a className="rp-toc-pill" href="#integration-guide"><span className="rp-toc-num">3</span>Integration guide</a>
+    <a className="rp-toc-pill" href="#error-handling-and-troubleshooting"><span className="rp-toc-num">4</span>Error handling</a>
+    <a className="rp-toc-pill" href="#webhooks"><span className="rp-toc-num">5</span>Webhooks</a>
+    <a className="rp-toc-pill" href="#testing-your-integration"><span className="rp-toc-num">6</span>Testing</a>
+    <a className="rp-toc-pill" href="#whats-next"><span className="rp-toc-num">7</span>What's next</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>A working Adyen Web Components implementation using the <strong>Advanced Flow</strong> (Cards, Cash App Pay, Google Pay, Apple Pay, ACH, SEPA, BACS, iDEAL, and Bancontact). You don't need to send state data to Adyen.</li>
+  <li>Recurly.js loaded on your page and initialized per the <a href="/guides/recurly-js/overview-recurlyjs" target="_blank">Recurly.js documentation</a>.</li>
+  <li>Access to your Recurly V3 API credentials and a Recurly site configured to accept payments.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>100% coupons and account credits aren't supported. Since communication with the gateway is required during initial setup, offer a free trial instead to avoid future payment failures.</li>
+  <li>Adyen's Sessions flow isn't supported — only the Advanced Flow.</li>
+</ul>
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Important</strong>You must follow the <a href="/guides/payment-orchestration/payment-gateways-1/adyen#/" target="_blank">Adyen setup guide</a>, including the webhooks configuration in Adyen. Without proper webhooks configuration, recurring token usage and async status updates won't function correctly.</div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Adyen Web Components let you build a custom checkout UI while Adyen collects and tokenizes payment details client-side. This guide covers connecting that Advanced Flow integration to Recurly using Recurly.js and the V3 API.</div>
+
+# Key concepts
+
+<div className="rp-card">
+
+### Supported payment methods
+
+**Cards** — Visa, Mastercard, Discover, Diners, JCB, UnionPay, American Express, Cartes Bancaires, and Bancontact (requires SEPA for renewals)
+
+**Wallets** — Apple Pay, Google Pay, Cash App Pay, and PayPay
+
+**Direct debit** — ACH, SEPA, BACS, and iDEAL (requires SEPA for renewals)
+
+</div>
+
+# Integration guide
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Important</strong>Don't write code to create, update, or otherwise process transactions or tokens with Adyen directly. You only create the state data, then pass it to Recurly using the steps below.</div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Build your Adyen components and Recurly.js integration</h4><p>Follow Adyen's Advanced Flow docs to render Web Components for each payment method you support.</p></div>
+  </div>
+</div>
+
+<ul className="rp-list">
+  <li>Cards: <a href="https://docs.adyen.com/payment-methods/cards/web-component/?tab=advanced-requirements_2" target="_blank">Card Web Component</a> (<a href="https://docs.adyen.com/payment-methods/bancontact/bancontact-card/web-component/" target="_blank">Bancontact card component</a>)</li>
+  <li>Cash App Pay: <a href="https://docs.adyen.com/payment-methods/cash-app-pay/web-component/?tab=advanced-requirements_2" target="_blank">Cash App Pay Component</a></li>
+  <li>Google Pay: <a href="https://docs.adyen.com/payment-methods/google-pay/web-component/" target="_blank">Google Pay Component</a> (<a href="https://docs.adyen.com/payment-methods/google-pay/web-component/express-checkout/" target="_blank">Express checkout</a>)</li>
+  <li>Apple Pay: <a href="https://docs.adyen.com/payment-methods/apple-pay/web-component/?tab=advanced-requirements_2" target="_blank">Apple Pay Component</a> (<a href="https://docs.adyen.com/payment-methods/apple-pay/web-component/express-checkout/" target="_blank">Express checkout</a>)</li>
+  <li>ACH: <a href="https://docs.adyen.com/payment-methods/ach-direct-debit/web-component/?flow=Advanced+flow&integration=Component&version=6.19.0" target="_blank">ACH Direct Debit Component</a></li>
+  <li>SEPA: <a href="https://docs.adyen.com/payment-methods/sepa-direct-debit/web-component/?tab=advanced-requirements_2" target="_blank">SEPA Direct Debit Component</a></li>
+  <li>BACS: <a href="https://docs.adyen.com/payment-methods/bacs/web-component/?tab=advanced-requirements_2" target="_blank">BACS Direct Debit</a></li>
+  <li>iDEAL: <a href="https://docs.adyen.com/payment-methods/ideal/web-component/?tab=advanced-requirements_2" target="_blank">iDEAL Web Component</a></li>
+  <li>PayPay wallet: <a href="https://docs.adyen.com/payment-methods/paypay/web-component?flow=Advanced+flow&integration=Component&version=6.41.1" target="_blank">Adyen PayPay Web Component</a></li>
+</ul>
+
+Before rendering, fetch your supported methods via Adyen's API and pass the `paymentMethodsResponse` into the Components configuration. Only include methods your Recurly site supports.
+
+```json
+"paymentMethodsResponse": {
+  "paymentMethods": [
+    {
+      "brands": [
+        "amex",
+        "cup",
+        "diners",
+        "discover",
+        "mc",
+        "visa"
+      ],
+      "name": "Cards",
+      "type": "scheme"
+    }
+  ]
+}
+```
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Tokenize Adyen components with Recurly.js</h4><p>Use an <code>onSubmit</code> handler in your checkout to generate a Recurly.js token from the component state, then send it to your server to complete the purchase via Recurly's API.</p></div>
+  </div>
+</div>
+
+```javascript
+const onSubmit = async (state, component, actions) => {
+  try {
+    let payload = {
+      type: 'adyen_component_state',
+      adyen_component_state_context: state
+    };
+
+    recurly.token(payload, (error, token) => {
+      if (error) {
+        actions.reject();
+        return;
+      }
+      // Send token.nonce to your backend to create a purchase via Recurly API
+      actions.resolve();
+    });
+  } catch (error) {
+    actions.reject();
+  }
+};
+
+const adyenCheckout = await AdyenWeb.AdyenCheckout({
+  onSubmit
+});
+```
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Configure Adyen component best practices</h4><p>Set the following options for reliable tokenization and renewals.</p></div>
+  </div>
+</div>
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Option</td><td>Recommended setting</td><td>Notes</td></tr>
+  <tr><td><code>storePaymentMethod</code></td><td><code>true</code></td><td>Required for tokenization. If omitted or <code>false</code>, no vault token is issued and renewals fail with <code>no_billing_information</code> errors.</td></tr>
+  <tr><td><code>enableStoreDetails</code></td><td>omit</td><td>Avoid using — allows the user to opt out of vaulting tokens, which can break renewals with <code>no_billing_information</code> errors.</td></tr>
+  <tr><td><code>hideCVC</code></td><td>conditional</td><td>Set to <code>true</code> unless your Adyen setup explicitly supports CVC bypass on return customers.</td></tr>
+  <tr><td><code>maskSecurityCode</code></td><td><code>true</code></td><td>Masking the CVV field enhances security and user trust.</td></tr>
+  <tr><td><code>hasHolderName</code></td><td>omit</td><td>Not supported — use Recurly.js name elements instead.</td></tr>
+  <tr><td><code>billingAddressRequired</code></td><td>omit</td><td>Not supported — use Recurly.js address elements if you need AVS.</td></tr>
+  <tr><td><code>addressSearchDebounceMs</code></td><td>omit</td><td>Not supported — Recurly doesn't process Adyen address search elements.</td></tr>
+  <tr><td><code>installmentOptions</code></td><td>omit</td><td>Recurly doesn't support Adyen installment features.</td></tr>
+  <tr><td><code>showInstallmentAmounts</code></td><td>omit</td><td>Recurly doesn't display installment breakdowns — handle this in your own UI if needed.</td></tr>
+</table>
+
+For full Adyen Advanced Flow guidance, see the <a href="https://docs.adyen.com/online-payments/build-your-integration/advanced-flow/?platform=Web&integration=Components&version=6.5.1" target="_blank">Advanced flow integration guide</a>.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Create a purchase via the Recurly API</h4><p>Once you have a valid Recurly.js token from the component data, call the Purchase endpoint. For example, to subscribe to a plan:</p></div>
+  </div>
+</div>
+
+```http
+POST https://v3.recurly.com/purchases
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+
+{
+	"currency": "USD",
+  "account": {
+	"code": "GoldCard",
+	"email":"brianadams@example.com",
+  "billing_info": {
+  "token_id":"kejCaCCHNIH5bDZx47f7Xw" // Adyen Component State Recurly.js Token
+		}
+	},
+	"gateway_code":"1234567890", // Adyen Gateway Account code
+	"subscriptions": [{
+		"plan_code": "goldplan", // Plan ID for Subscription
+	}]
+}
+```
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Handle the purchase response</h4><p>Check the response to confirm the purchase succeeded or handle any follow-up action.</p></div>
+  </div>
+</div>
+
+<ul className="rp-list">
+  <li>On success, Recurly returns an <code>InvoiceCollection</code> containing any charge or credit invoices created.</li>
+  <li>On error, inspect the response code and message for validation or gateway issues, and surface them to the user.</li>
+  <li>For PayPay specifically, inspect the response and handle the <code>action_result</code> by following the standard <a href="https://docs.recurly.com/recurly-subscriptions/docs/boleto-ideal-sofort-and-cashapt" target="_blank">Recurly.js alternative payment method flow</a>.</li>
+</ul>
+
+# Webhooks
+
+Adyen returns recurring token usage and async status updates to Recurly through webhooks, as configured in the <a href="/guides/payment-orchestration/payment-gateways-1/adyen#/" target="_blank">Adyen setup guide</a>.
+
+# What's next
+
+- <a href="https://recurly.com/developers/api/v2021-02-25/index.html" target="_blank">Full API reference</a> — Complete endpoint documentation for all Recurly resources
+- <a href="/guides/api-guides/subscription-management-guides/managing-subscription-methods-guides#/" target="_blank">Subscription management</a> — Update, cancel, or migrate subscriptions after the initial purchase
+
+<br />
+
+<br />

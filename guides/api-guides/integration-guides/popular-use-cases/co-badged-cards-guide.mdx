@@ -1,0 +1,83 @@
+---
+title: Co-badged cards guide
+---
+
+# Overview
+
+### Prerequisites & limitations
+
+* Supported on Adyen
+* You must have a working **Recurly.js** card integration to use this guide effectively.
+* See [Recurly.js documentation](https://recurly.com/developers/reference/recurly-js/#getting-started) for setup details.
+* For more information on co-badged card compliance, refer to our [Recurly Docs](https://docs.recurly.com/recurly-subscriptions/credit-cards#dual--co-badged-card-support).
+
+***
+
+This guide explains how to support co-badged cards in a Recurly.js environment, allowing customers to choose which network to use at checkout.
+
+***
+
+## Step 1: Listen for the `coBadge` Event
+
+Set up an event listener for **`coBadge`** on your Recurly.js `CardElement`. For more on handling events, see the [Recurly.js events documentation](https://recurly.com/developers/reference/recurly-js/#events).
+
+```js
+const elements = recurly.Elements();
+const cardElement = elements.CardElement();
+
+cardElement.on('coBadge', handleCoBadgeEvent);
+
+function handleCoBadgeEvent(payload) {
+  // handle event, e.g., show selection UI if coBadgeSupport is true
+}
+```
+
+***
+
+## Step 2: Handle the `coBadge` Event Payload
+
+When the `coBadge` event fires, you’ll receive a payload with:
+
+| **Field**         | **Type**  | **Description**                                                                                                         |
+| ----------------- | --------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `coBadgeSupport`  | `Boolean` | Indicates whether the card supports co-badged options.                                                                  |
+| `supportedBrands` | `Array`   | List of brands the customer can choose from (e.g., `["visa", "cartes_bancaires"]`). Empty if `coBadgeSupport` is false. |
+
+***
+
+## Step 3: Display Brand Selection to the Customer
+
+Use the `supportedBrands` array to present a UI that allows the customer to select one brand. This could be radio buttons, a dropdown, or a toggle.
+
+Include the `data-recurly="card_network_preference"` attribute so Recurly.js can capture the customer’s selection:
+
+```html
+<div id="co-badge-div">
+  <input
+    type="radio"
+    value="brand1"
+    id="co-badge-id-0"
+    name="co-badge"
+    data-recurly="card_network_preference"
+  />
+  <label for="co-badge-id-0">brand1</label>
+
+  <input
+    type="radio"
+    value="brand2"
+    id="co-badge-id-1"
+    name="co-badge"
+    data-recurly="card_network_preference"
+  />
+  <label for="co-badge-id-1">brand2</label>
+</div>
+```
+
+> **Warning**  
+> Ensure the customer **chooses a brand** before you proceed to tokenize or submit the form.
+
+***
+
+## Step 4: Tokenize the Payment Information
+
+After the customer selects a brand, follow the [Getting a Token](https://recurly.com/developers/reference/recurly-js/#getting-a-token) guide to tokenize their card details with Recurly.js. The card network preference is automatically included during tokenization, allowing Recurly to process the customer’s chosen brand.

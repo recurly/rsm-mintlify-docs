@@ -1,0 +1,197 @@
+---
+title: Commerce Hub by Fiserv
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Commerce Hub is Fiserv's full-service payment management platform, replacing the legacy First Data and Payeezy gateways. Integrating it with Recurly lets you securely process card payments, Apple Pay, Google Pay, and network tokens globally. This guide covers credential setup in Commerce Hub's Developer Studio, configuration in Recurly, and migration from First Data or Payeezy.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">2</span>Key details</a>
+    <a className="rp-toc-pill" href="#configuring-commerce-hub-in-recurly"><span className="rp-toc-num">3</span>Configuring Commerce Hub in Recurly</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Your Commerce Hub Merchant Account must have <strong>Multi-Use Public Key Encryption (MUPK)</strong> enabled, set to recycle every 10 days at minimum. This is not enabled by default — contact Fiserv to configure it.</li>
+  <li>Your <strong>Business Entity Merchant Category Code</strong> must be filled in correctly on your Commerce Hub account.</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li><strong>No lifecycle or post-auth webhooks</strong> — Recurly does not support lifecycle or post-auth webhooks from Commerce Hub. If you're using gateway-level fraud review systems, gateway tokens, or processing transaction actions directly at the gateway, Recurly and Commerce Hub can fall out of sync. Always capture, void, and process refunds from Recurly rather than directly in the gateway.</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Commerce Hub is a full-service payment management platform developed by Fiserv (formerly First Data). It replaces the legacy First Data and Payeezy gateways and supports a broad range of payment types, currencies, and transaction categories including ecommerce, recurring billing, and MOTO processing. You'll need your Commerce Hub Developer Studio credentials to enable the integration.</div>
+
+# Key details
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Feature</td><td>Details</td></tr>
+  <tr><td>Services that work with Recurly</td><td>Payment processing, recurring billing</td></tr>
+  <tr><td>Supported operations</td><td>Verify, Purchase, Authorize and Capture, Void, Refund (full and partial)</td></tr>
+  <tr><td>Supported payment types</td><td>Credit/debit card, Apple Pay, Google Pay, network tokens</td></tr>
+  <tr><td>Supported card brands</td><td>Visa, Mastercard, American Express, Discover, Diners Club, JCB, Union Pay</td></tr>
+  <tr><td>Gateway-specific 3DS2 supported</td><td>No</td></tr>
+  <tr><td>Card on file supported</td><td>Yes</td></tr>
+  <tr><td>Regions</td><td>Global</td></tr>
+  <tr><td>Currencies</td><td><a href="/guides/payment-orchestration/gateway-configuration-and-features/currency-support-by-gateway#/" target="_blank">All ISO standard currencies</a></td></tr>
+  <tr><td>Transaction categories</td><td>Ecommerce, recurring, MOTO</td></tr>
+  <tr><td>Additional feature support</td><td><a href="/guides/subscriber-management/transactions/moto-transactions#/" target="_blank">MOTO</a> processing, billing and shipping information, Level 2 data, Visa trial descriptors, AVS / CVV checks, Fiserv Transarmor gateway tokens, omnichannel point-of-sale subscriptions, VAT and line item passthrough</td></tr>
+</table>
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong> Before going live, see Recurly's <a href="/guides/payment-orchestration/gateway-configuration-and-features/how-to-test-your-gateway" target="_blank">guide to testing gateway configurations</a> to verify your payment setup is working correctly.</div>
+</div>
+
+## Migrating from First Data and Payeezy
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Important</strong> First Data and Payeezy gateways will be deprecated at the end of Q3 2025, as mandated by Fiserv. Onboard Commerce Hub and complete your integration testing before that date to avoid payment interruptions.</div>
+</div>
+
+To migrate, follow these steps:
+
+1. Onboard Commerce Hub in your Recurly site.
+2. If your integration uses the `gateway_code` value, update it in your code to avoid routing transactions to the wrong gateway.
+3. You can migrate gradually — update the `gateway_code` for new transactions and existing subscriptions over time at your own pace.
+
+### Feature parity with First Data and Payeezy
+
+Recurly has built Commerce Hub to reach full feature parity with the previous gateways and has certified the platform with Fiserv. Transactions that worked on First Data and Payeezy will work on Commerce Hub.
+
+### Existing subscriptions
+
+First Data and Payeezy merchants have already been migrated to Commerce Hub behind the scenes via a Fiserv emulation rule — existing subscriptions have been processing on Commerce Hub without any action required. To keep subscriptions processing after the deprecation date, update the `gateway_code` each subscription is pointed at in Recurly.
+
+For new subscribers, update the `gateway_code` value in your API transactions before you disable your First Data or Payeezy gateway instances in Recurly.
+
+## Address Verification System (AVS) settings
+
+Commerce Hub merchants can configure Address Verification System (AVS) and CVV (Card Verification Value) checks through the **Payment Settings** page in Recurly — unlike the previous First Data and Payeezy implementations. Learn more about <a href="/guides/payment-orchestration/payment-settings#/enabling-cvv-checks" target="_blank">gateway-agnostic AVS / CVV rules</a>.
+
+# Configuring Commerce Hub in Recurly
+
+## Step 1: Access Commerce Hub Developer Studio
+
+Log in to your Commerce Hub Developer Studio. If you don't have an account, sign up through Commerce Hub and acquire a Corporate Merchant Account.
+
+If you already have a Fiserv Corporate Merchant account where Merchant ID access codes are created, you can use that. Contact Fiserv directly if you need help with the dashboard.
+
+## Step 2: Generate your Commerce Hub credentials
+
+### Create or navigate to your workspace
+
+- **New merchants** — Work with your Fiserv merchant representative to create a Workspace and ensure your sandbox or production Merchant ID is associated with it.
+- **Migrating merchants** — You'll already have an existing Workspace with your production Merchant ID and existing API keys.
+
+### Add your Merchant IDs
+
+Click **Credentials** and verify your Merchant IDs are present. If any are missing, add them using the **Add Merchant ID** button.
+
+
+<Image src="https://files.readme.io/6beec713ce23e2045a422037bdd9856d1bc00fba79580dbcdd9263db26ee6f7e-Add_Merchant_ID_Step_1.png" align="center" width="75%" border={true} />
+
+
+You'll need an **Access Code** from Fiserv to add Production Merchant IDs.
+
+- **Production MID** — Select the **Production** environment when adding. You don't need a Certification MID.
+- **Sandbox MID** — Click **Add Merchant ID**, select **Create new Sandbox Merchant Id**, and follow the prompts.
+
+
+<Image src="https://files.readme.io/d55d2e81ab2674a345d10ab92633880734f72cc124bbdd030f8fab0502d8a936-Add_Merchant_ID_Step_2_-_Access_Code.png" align="center" width="75%" border={true} />
+
+
+### Create API keys
+
+API keys in Commerce Hub are per Merchant ID. Create separate keys for sandbox and production environments, and make sure you're entering the correct credentials in the corresponding Recurly site.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Add a new API key</h4><p>Click <strong>Add API Key</strong> and select the Merchant ID from the dropdown.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Name the key</h4><p>Give it a clear name such as <code>Recurly-Sandbox</code> or <code>Recurly-Production</code>. Names may only contain letters, numbers, underscores, and hyphens.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Enable all features and save</h4><p>Check <strong>All Features</strong>, then click <strong>Add Key</strong>.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/5851e1561b0333b8968e438191d8d25249230646e28fdc1ef57557ce20073984-Add_API_Key.png" align="center" width="75%" border={true} />
+
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Warning</strong> When your API key is created, a pop-up modal appears with your <strong>API Key</strong> and <strong>API Secret</strong>. Do not navigate away — this is the only time these values are shown. Copy and store them somewhere safe before closing the modal.</div>
+</div>
+
+You'll also need the following to complete the Recurly setup:
+
+- Fiserv Merchant ID
+- Terminal ID
+- Service Entitlement Number (former Payeezy merchants only, for descriptors)
+
+Optionally, if you have more than one site ID or store ID and want to route by them:
+
+- Store ID
+- Site ID
+
+## Step 3: Enter credentials in Recurly
+
+<div className="rp-callout rp-callout-important">
+  <div><strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Important</strong> Always match credentials to their environment — sandbox credentials go in your Recurly sandbox site, production credentials go in your production site. Mixing them will cause payment failures.</div>
+</div>
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Payment Gateways</h4><p>In Recurly, navigate to <strong>Payment Gateways</strong> and click <strong>Add a New Gateway</strong>, then select <strong>Commerce Hub</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enter your credentials</h4><p>Fill in your Fiserv Merchant ID, Terminal ID, API Key, and API Secret. If routing by store or site ID, also enter your Store ID and Site ID.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Enter your Service Entitlement Number (former Payeezy merchants)</h4><p>If you're migrating from Payeezy, enter your Service Entitlement Number. If you don't have one, contact your Fiserv representative.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Note</strong> Zero-dollar verifications are available by default and don't require any additional configuration.</div>
+</div>
+
+## Step 4: Set accepted card types
+
+Under **Accepted Card Types**, enable only the card brands and payment methods that are active on your Commerce Hub Merchant ID.
+
+## Step 5: Enable currencies
+
+USD is enabled by default. Use the currency selection tool to add or remove currencies based on what your Commerce Hub gateway accepts.
+
+## Step 6: Save and enable the gateway
+
+Click **Add Payment Gateway**. Commerce Hub will appear in your Production Gateways list in Recurly with a status of **Enabled**.
+
+## Step 7: Test the configuration
+
+Run a test transaction to confirm the integration is working correctly. Use your Recurly sandbox site in development mode before moving to a live environment.
+
+## Step 8: Go live
+
+Once testing passes, you're ready to accept live payments through Commerce Hub.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong> Keep your Commerce Hub credentials secure and limit access to authorized personnel only. Consult your Commerce Hub account representative to confirm your account is in good standing and compliant with all relevant regulations.</div>
+</div>
+
+<br />

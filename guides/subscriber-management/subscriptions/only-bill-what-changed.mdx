@@ -1,0 +1,309 @@
+---
+title: Only Bill What Changed Feature
+---
+
+On June 30, 2017 UTC (June 29, 2017 PT), Recurly released the Only Bill What Changed feature. This feature is on all new Recurly sites by default.
+
+*Note that if existing customers create a new Recurly site after June 30, 2017, the Only Bill What Changed feature will be enabled on the new site by default, even if their existing site does not have the feature enabled.*
+
+# Feature Overview
+
+Prior to this release, Recurly only offered the option to <a href="/guides/subscriber-management/subscription-lifecycle/change-subscription#section-charges-and-credits">rebill the entire subscription in an immediate downgrade or upgrade</a>. This created unnecessary charges and credits if the underlying plan did not change. With the "Only Bill What Changed" feature, Recurly will only bill the difference in the change event when the underlying plan isn't changed. This provides a clearer invoice for:
+
+* Quantity changes
+* Price changes
+* Adding or removing add-ons
+
+# Important Feature Call-outs
+
+* Once enabled, existing subscriptions where the last invoice was an immediate change invoice will still rebill everything if the next invoice is also an immediate change. The following invoices will only bill what changed. <a href="#section-existing-subscriptions">Learn more</a>
+* Any immediate change where the plan is changed will still rebill everything, even if there is an add-on with the same add-on code across plans. <a href="#section-plan-change">Learn more</a>
+* Quantity changes will create a charge or credit for the quantity difference. <a href="#section-quantity-change">Learn more</a>
+* Price changes will create a charge or credit for the price difference. <a href="#section-price-change">Learn more</a>
+* Changing quantity and price for a single product will rebill the product. <a href="#section-change-quantity-and-price">Learn more</a>
+* Any decrease requiring a credit will create a credit with a quantity of 1. <a href="#section-credit-quantity-is-1">Learn more</a>
+* A credit's original charge won't necessarily be on the last invoice of the subscription anymore. <a href="#section-a-credit-s-original-charge">Learn more</a>
+* There may now be two credits for the same product on the change invoice. <a href="#section-multiple-credits-for-one-product">Learn more</a>
+* Single use discounts will now not be reversed in an upgrade where we only bill what changed.
+* Mid-cycle coupon redemptions will now apply to only the difference of an upgrade that only bills what changed instead of the full new version of the subscription. <a href="#section-mid-cycle-redemptions-and-upgrade-discounts">Learn more</a>
+
+# How To Enable Only Bill What Changed
+
+If your Recurly site was created before June 30, 2017, you will see an option called "Only Bill What Changed" at the bottom of the Invoice Settings page under the Configuration section. Click the "Enable" button to turn on Only Bill What Changed.
+
+> 🚧 Only Bill What Changed Cannot Be Disabled
+>
+> Once you enable the Only Bill What Changed feature, it cannot be disabled. Please review our documentation before enabling the feature.
+
+<Image title="obwc-disabled.png" alt={1732} width="80%" border={true} src="https://files.readme.io/4a0dea3-obwc-disabled.png">
+  Option to enable Only Bill What Changed
+</Image>
+
+<Image title="obwc-enabled.png" alt={1730} width="80%" border={true} src="https://files.readme.io/86a1edf-obwc-enabled.png">
+  After Only Bill What Changed is enabled
+</Image>
+
+# Existing Subscriptions
+
+Some subscriptions currently in a billing cycle when the feature is added will still rebill everything in their next immediate change, but all immediate changes after the initial one will start only billing what changed. This is required because we need to fill new database tables with data about the subscription cycle before we can correctly bill only what changed.
+
+### What Subscriptions Will Rebill On The Next Invoice?
+
+If an existing subscription's last invoice, prior to the Only Bill What Changed feature being enabled, was a **renewal invoice**, Recurly will only bill what changed in any immediate change that comes through. 
+
+If the existing subscription's last invoice, prior to the Only Bill What Changed feature being enabled, was an **immediate subscription change invoice**, Recurly needs an invoicing event in the old format before it can only bill what changed moving forward. 
+
+* If the next invoice is a renewal, then any following immediate change will only bill what changed. 
+* If the next invoice is an immediate change, the fact that the last invoice was also an immediate change **will require Recurly to rebill everything** following the old change logic. Any immediate change after that will only bill what changed. 
+
+### How Do I Identify Subscriptions That Will Rebill On The Next Invoice?
+
+Once Only Bill What Changed is enabled on your Recurly site, you can tell if a subscription will rebill everything in the next immediate change by looking at the Subscription Details page or the Edit Subscription page. You will see this yellow alert banner:
+
+<Image className="border" width="80%" border={true} src="https://files.readme.io/644b2a5-yellow-alert.png" />
+
+As soon as the existing subscription has an invoicing event, the yellow banner will disappear and the subscription will only bill what changed on any future invoices. If your subscriptions are all monthly, a month after enabling the feature all subscriptions will be able to bill only what changed. If your subscriptions are yearly, you may have some existing subscriptions in this scenario for up to a year. All new subscriptions created after you enable Only Bill What Changed will not have this banner and will always only bill what changed.
+
+# Types of Subscription Changes
+
+In an immediate subscription change, Recurly will now check to see if the underlying plan has changed (e.g. - Silver to Gold). If it has not, it will look at each product in the change and create charges for what is new and credits for what was removed. Below are examples of each type of change.
+
+## Plan Change
+
+If the subscription's plan is changed, for example Silver to Gold, Recurly will still rebill everything. Charges will be issued for the new version of the subscription, Gold, and credits will be issued for the old version of the subscription, Silver, that was paid for and will not be used.
+
+If you are using add-ons with the same add-on code across different plans, Recurly will still rebill the add-on when the plan changes for the subscription. This is due to the fact that Recurly does not know the add-ons are the same. While they have the same add-on code, their underlying id's are different.
+
+### Plan Change Example
+
+Subscription is changed from Silver at $50/month with the Premium Support add-on at $20/month to Gold at $70/month, also with its own Premium Support add-on at $20/month.
+
+<Image width="80%" src="https://files.readme.io/0801006-DOCS_-_Plan_Change.jpg" />
+
+## Quantity Change
+
+If a plan fee or add-on's quantity is increased or decreased, we will create a charge or credit for the quantity difference. 
+
+* For quantity increases, the charge quantity will reflect the additional quantity.
+* For quantity decreases, the quantity will always be 1 and the price will reflect the removed quantity value.
+
+### Quantity Increase Example
+
+A subscription to Gold with 5 users is increased to 7 users.
+
+<Image width="80%" src="https://files.readme.io/9ebfba3-DOCS_-_Product_Quantity_Increase.jpg" />
+
+We get a charge with **2 x $5.00** by:
+
+* 7 Qty - 5 Qty is 2 Qty
+* Normal price is $10.00
+* Proration is 50%
+* Price prorated is $10.00 x 50% =  $5.00
+* 2 Qty x $5.00 Prorated Price = $10.00
+
+### Quantity Decrease Example
+
+A subscription to Gold with 5 users is decreased to 3 users.
+
+<Image width="80%" src="https://files.readme.io/4ee7750-DOCS_-_Product_Quantity_Decrease.jpg" />
+
+We get a credit with **1 x ($10.00)** by:
+
+* 5 Qty - 3 Qty is 2 Qty
+* Normal price is $10.00
+* Proration is 50%
+* Price prorated is $10.00 x 50% =  $5.00
+* 2 Qty x $5.00 Prorated Price = $10.00 
+* Make it negative and you have ($10.00) as the credited price
+
+## Price Change
+
+If a plan fee or add-on's price is increased or decreased, we will create a charge or credit for the price difference. 
+
+* For price increases, the charge quantity will match the current product's quantity in the subscription and the price will be the difference between the previous price and the new price, then multiplied by the proration percentage.
+* For price decreases, the quantity will always be 1 and the price will reflect the price difference prorated and multiplied by the current quantity of the product in the subscription.
+
+### Price Increase Example
+
+Subscription price is increased from $50/month to $70/month.
+
+<Image width="80%" src="https://files.readme.io/e77cd7c-DOCS_-_Product_Price_Increase.jpg" />
+
+We get a charge with **1 x $10.00** by:
+
+* Current Qty is 1
+* $70.00 New Price - $50.00 Old Price = $20.00 price difference on the invoice
+* Proration is 50%
+* Price prorated is $20.00 x 50% =  $10.00
+* 1 Qty x $10.00 Prorated Price = $10.00
+
+### Price Decrease Example
+
+Subscription price is decreased from $70/month to $50/month.
+
+<Image width="80%" src="https://files.readme.io/34b687b-DOCS_-_Product_Price_Decrease.jpg" />
+
+We get a credit with **1 x ($10.00)** by:
+
+* Current Qty is 1
+* $50.00 New Price - $70.00 Old Price = ($20.00) price difference on the invoice
+* Proration is 50%
+* Price prorated is ($20.00) x 50% =  ($10.00)
+* 1 Qty x ($10.00) Prorated Price = ($10.00)
+
+## Add or Remove Add-on
+
+If an add-on is added or removed, we will create a charge or credit for just that add-on that was changed.
+
+### Add-on Example
+
+Subscription starts with the Emails add-on for $10/month, but then removes the Emails add-on and adds the Text Messaging add-on for $15/month.
+
+<Image width="80%" src="https://files.readme.io/24c9a81-DOCS_-_Add-on_Change.jpg" />
+
+Notice that the Gold plan fee is not shown on the change invoice because it didn't change. Similarly, if there was another add-on on the first invoice that did not change, it would also not show on the change invoice.
+
+## Change Quantity and Price
+
+When both quantity and price are changed at the same time for a plan fee or add-on, we will rebill that product. 
+
+### Rebill Product Example
+
+Subscription to Gold has 5 users at $10/month. Users are increased to 7 and the price is decreased to $8/month.
+
+<Image width="80%" src="https://files.readme.io/6d86284-DOCS_-_Rebill_Product.jpg" />
+
+# A Credit's Original Charge
+
+Every credit line item on a subscription change invoice is against a specific charge line item on a past invoice from the same billing cycle. Previously you could rely on the last invoice for the subscription having a charge line item for each product in the subscription you might need to credit. Now that we are only billing what changed, the last invoice might not have the last charge for the product. Additionally, if more than one product is being credited, their credits may link back to charges on different invoices.
+
+Today we don't show you which charge line item the credit line item is from. For example in the Line Items export we don't provide the uuid of the charge the credit was against. This is still the case, but later this year we will be revealing the link in the exports and API. For now, if you want to see which invoice has the charge line item the credit line item is from, you need to look at the credit's invoice itself to see the display we've added to help you and your customers.
+
+<Image width="80%" src="https://files.readme.io/b9cb04e-DOCS_-_credit_link.png" />
+
+# Multiple Credits for One Product
+
+A credit line item must always link back to one charge line item. This is important because any discounts or taxes reversed would be unclear in your reporting if there was one large credit linking to two or more charges. Due to the one-to-one credit-to-charge relationship, it is possible to get a subscription change invoice with two credits for the same product. Each credit line item will link back to a charge line item on a different invoice.  The invoice display will show the different invoices. See the example above of the invoice reference.
+
+### Multiple Credit Example
+
+5 users of Gold at $10/user/month are purchased. Then 2 more users are added mid-cycle to bring the users up to 7. Then, with a quarter of the cycle left, 3 users are removed to bring the users back down to 4.
+
+<Image width="80%" src="https://files.readme.io/d54ef41-DOCS_-_Multiple_Credits.jpg" />
+
+In the last invoice, #3, we want to credit the customer for 3 users, which would be 3 x $10 = $30. Since only 25% of the cycle is left, we only want to give back 25% of $30, which is $7.50. 
+
+While the charge on invoice #2 has $10.00 that can be credited, the charge only represents 2 users and we are crediting 3, so we instead find the correct charges to credit before we apply proration. Since we want to credit $30 before proration, we need to find $30 worth of charges pre-proration. The charge on invoice #2 is $20 before proration. The charge on invoice #1 is $50, and was never prorated. Since we work our way back, we need the full charge on invoice #2 and only $10 of the charge on invoice #1.
+
+* Credit remaining for Gold (from invoice #2): 1 x ($20)
+* Credit remaining for Gold (from invoice #1): 1 x ($10)
+
+Then we prorate by 25% to get:
+
+* Credit remaining for Gold (from invoice #2): 1 x ($5)
+* Credit remaining for Gold (from invoice #1): 1 x ($2.50)
+
+For a total credit of ($7.50)
+
+# Credit Quantity Is 1
+
+Credits created in a subscription change event will now always have a quantity of 1. Custom credits and refunds can still have a non-one quantity. We made this change because quantity can become confusing on subscription change credits. Customers of Recurly have the flexibility to change price and quantity. When you consider more complex combinations of changes in a single billing cycle, you can end up with two credits for the same product that have quantities and prices that are not clear. Instead of having special rules depending on the type of change that you might have to explain to your customer, we decided that it would be less confusing to explain that quantity is always 1.
+
+### Confusing Quantity Example
+
+5 users of Gold at $10/user/month are purchased. Then 2 more users are added a quarter into the cycle to bring the users up to 7. At mid-cycle, the price per user is raised from $10 to $15. Then, with a quarter of the cycle left, 3 users are removed to bring the users back down to 4, still at $15/user.
+
+<Image width="80%" src="https://files.readme.io/f5a4405-DOCS_-_Confusing_Quantity.jpg" />
+
+Invoice #4A shows what the invoice would look like if we did not force quantity to 1. The removal of 3 users is showing a credit with quantity of 7 and a credit with quantity of 2, which have nothing to do with 3 users. Invoice #4B shows the credit quantity forced to 1, to direct the customer's attention to the amounts being credited from the two past invoices for Gold in the billing cycle.
+
+To dig into the details, we know we want to credit 3 users at $15/user, or $45. But with only 25% left in the cycle, we really want to credit only 25% x $45, which is $11.25.
+
+We start by grabbing needed charges pre-proration, so we need $45 worth of charges. The charge on invoice #3 is $35 pre-proration. That leaves $10 needed from the charge on invoice #2, which has a total of $20 pre-proration.
+
+From invoice #3 we can grab the "7 x $5.00" charge and prorate the price by 25% to "7 x $1.25".
+
+Then from invoice #2 we can grab the "2 x $10.00" charge, but we only need $10.00 pre-proration, so do we reduce the price to $5.00 before prorating or do we reduce the quantity to 1? In this case we left quantity at 2 and cut the price in half before prorating by 25% to get "2 x $1.25".
+
+As you can see with referencing a portion of the charge on invoice #2, it is debatable whether the charge should be cut by quantity or price, and changing method for a product price change vs. a product quantity change can lead to confusing rules for your customers. Due to this, we opted to force quantity to 1 on credits like the result in invoice #4B.
+
+# Discounts
+
+With only billing what changed, we have adjusted our discounting logic. Please read the below details for what has changed.
+
+## Single Use Coupons
+
+Single use coupons only discount charges on one invoice. This has caused problems in the past where a customer changes their subscription and by rebilling the subscription, a portion of the previously given discount is reversed and lost. This has been fixed. Now that we only bill what changed, if the product that was discounted is not being changed, we will not rebill it and reverse part of the discount.
+
+### Single Use Coupon Example
+
+A subscription to Gold with 5 users is increased to 7 users. Customer was given a single use coupon for $20 off on the initial 5 user purchase.
+
+<Image width="80%" src="https://files.readme.io/baa8d26-DOCS_-_Single_Use_Coupon.jpg" />
+
+Invoice #2A shows what we do today where the coupon redemption is not applied to new charges because it was already used, and then we reverse the discount on the credit to respect that the discount was on the original charge. Now that we are only billing what changed, we can make sure that the additional 2 quantities are not discounted, like invoice #2B.
+
+## Fixed Amount and Long Duration Coupons
+
+Recurly's fixed amount coupons that have a limited time or forever duration are meant to be a fixed amount off for the billing cycle. This is why we prorate fixed amount discounts in an immediate subscription change event. Now that Recurly is only billing what changed, we also track what discount amount is remaining for a coupon redemption for the subscription's billing cycle. For example, if a $50 off coupon redemption is completely used on a renewal invoice, we will make sure no more of the discount is applied in an immediate change, even if the type of product in the change is eligible.
+
+### Fixed Amount Coupon Nothing Remaining Example
+
+A subscription to Gold with 5 users is increased to 7 users. Customer was given a 1-month duration coupon for $20 off on the initial 5 user purchase.
+
+<Image width="80%" src="https://files.readme.io/406f29b-DOCS_-_Fixed_Amount_Coupon.jpg" />
+
+You may not be aware, but Recurly's discounting does allow a remaining amount to be applied later in the billing cycle if it is not consumed on the renewal. This is more of an edge case. For example, if only $40 of the $50 discount is used on the renewal, we will track that a $10 discount amount is still available in the billing cycle. But since the $50 is per cycle, we will prorate the $10 if applied in an upgrade to reflect that time has passed.
+
+### Fixed Amount Coupon With Discount Remaining Example
+
+A subscription to Gold with 5 users is increased to 7 users. Customer was given a 1-month duration coupon for $60 off on the initial 5 user purchase.
+
+<Image width="80%" src="https://files.readme.io/0659ed4-DOCS_-_Fixed_Amount_Coupon_Remaining.jpg" />
+
+## Mid-Cycle Redemptions and Upgrade Discounts
+
+Today, if you redeem a new coupon on an account in the middle of the customer's subscription cycle, any immediate changes will rebill everything and the discount will apply to the new version of the subscription, not just the additional quantities or add-ons. Many customers prefer that Recurly only applies the discount to the difference. Now with Only Bill What Changed, mid-cycle new redemptions will only apply to the difference. Note that this does introduce an area where the net-discount result is different when you compare how Recurly applies discounts today with Only Bill What Changed.
+
+### Coupon For Upgrade Example
+
+A subscription to Gold with 5 users is increased to 7 users. Customer was given a Single Use coupon for 10% off on the upgrade.
+
+<Image width="80%" src="https://files.readme.io/4849286-DOCS_-_Mid-Cycle_Coupon.png" />
+
+## Discount Reversals on Credits From Split Charges
+
+Before it was possible to only bill what changed, any credit in an immediate subscription change was always against the full amount of the previous invoice's charge for that product. That made discount reversals easy because we could apply all of the charge's discounts to the credit and then prorate the discount amount along with the credit. 
+
+Now that we are only billing the difference, sometimes we need to reverse only a portion of the charge we are referencing. This means we have to decide whether to favor the merchant and reverse as much discount as possible first, favor the customer and reverse as little discount as possible first, or divide the discount and risk rounding issues on later partial credits. **We have decided to favor the customer and reverse as little discount as possible, providing a larger credit amount to the customer.**
+
+### Discount Reversal Example
+
+A subscription to Gold with 5 users is decreased to 3 users. Customer was given a 1-month duration coupon for $35 off on the initial 5 user purchase.
+
+<Image width="80%" src="https://files.readme.io/3a67deb-DOCS_-_Discounts_on_Credits.jpg" />
+
+Notice that in both the old change invoice and new change invoice we credit the customer $7.50. Even though the customer only took away 2 users, they are getting half their money back. This is due to the fact that the customer is favored in the discount reversal.
+
+We knew we needed to credit the customer for 2 users, which was 2 x $10 or $20, but since it was half way through the cycle, we only needed to credit them $10. We could have favored the merchant and reversed $10 of the $35 discount as well, resulting in a $0 credit to the customer. We also could have found the discount percentage in order to divide the discount evenly. For example, $35/$50 is 70%. 70% of $10 is $7, so we could have reversed a $7 discount netting in $3 back to the customer. We felt that favoring the customer provided the least confusing result and avoided rounding issues with trying to evenly divide the discount.
+
+# Taxes on Credits
+
+Now that we are only billing what changed and there could be credits on a change invoice from different charge invoices, there could also be different tax rates and addresses affecting the tax reversals. For example, a customer may have moved between subscription changes and one credit links back to the old address and another credit links back to the new address. Recurly will calculate the tax reversal on the credit using the correct original address, even though the invoice itself will show the current address of the customer.
+
+In the event of mixed tax rates on the invoice, Recurly will display the tax rate at the line item level and the invoice level display will only say "Taxes". Here is an example of a customer that started in Australia, then moved to Israel and upgraded, and then finally downgraded creating two credits with different tax rates.
+
+<Image className="border" width="80%" border={true} src="https://files.readme.io/5d0f79b-DOCS_-_mixed-tax-rates.png" />
+
+# Terminate and Refund
+
+Recurly provides the option to refund a customer when terminating their subscription. This refund only refund's the last invoice of the subscription. The last invoice might be the most recent renewal, or an immediate change invoice from the current cycle. For merchants who allow immediate subscription changes, a refund due to a termination can be confusing because only the charges from the last subscription change are refunded, not the full cycle's charges. This confusion will continue a little longer with only billing what changed. We still only refund the subscription's last invoice in a refund due to a termination. Potentially more confusing, the last invoice may not have all products for the subscription, only the last ones changed. Or the last invoice might have only had credits and is not refundable; therefore, the refund request is ignored.
+
+# Usage-Based Billing
+
+Now that we are only billing what changed, usage-based add-ons will also only show up if they are changed. Here are the main changes:
+
+* If a usage-based add-on is not changed, it will not show up on the change invoice and any unbilled usage will remain unbilled.
+* If a usage-based add-on is removed, price changed, or percentage changed, it will create a charge for any current usage that hadn't been billed yet.
+* If a usage-based add-on is added and that is the only change, no invoice will be created for the immediate change.
+* If a usage-based add-on has unbilled corrections logged against a past cycle, those will not be invoiced in the immediate change unless the add-on is being changed. If the add-on is not being changed, the corrections will be invoiced at the next renewal.

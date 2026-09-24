@@ -1,0 +1,10 @@
+---
+title: 'Transparent Post: Retrieving Results'
+---
+
+<p>The Transparent Post API redirects the user back to your website after the transaction completes. The redirect URL contains several parameters regarding the status and authenticity of the result. The complete details of the transaction can be queried using the API. The return details will tell you status of the transaction, error details (if any), and the original form values so you may repopulate the form (minus any PCI sensitive information).</p>
+<p>The result of the transparent post API will be a subscription, transaction, or billing info object populated with the original values from the form submission.</p>
+`GET` `/transparent/results/:result`
+<h2>Result URL Query String</h2>
+<p>If you are using a client library, the results are automatically validated. The result URL query string contains 4 components:</p><dl><dt>type</dt><dd>The result type: `subscription`, `transaction`, or  `billing_info`</dd><dt>result</dt><dd>The result key used to lookup the actual results of the transaction.</dd><dt>status</dt><dd>The HTTP status code of the transaction. 200 indicates success, 422 indicates a validation failure or declined transaction.</dd><dt>confirm</dt><dd>A validation hash of the result key and other parameters to verify that the result was not tampered with. Automatically validated by client libraries.</dd></dl>
+<p>If you specify other URL parameters in the confirmation URL, they will be preserved in the redirect back to your site.</p>

@@ -1,0 +1,90 @@
+---
+title: Trial Performance
+---
+
+The Trial Performance Dashboard tracks the performance of your subscription trials and monitors the conversion rates from trial to active subscriptions. To maintain access to the most current information, you can use widgets on this dashboard to refresh the screen.  The data for this dashboard updates multiple times a day. You can verify the time the last changes were uploaded by checking the widget at the bottom of the dashboard.
+
+Note: This dashboard is only available to merchants on Recurly’s Professional, Elite, and Enterprise Plans. Please contact Recurly Support if you are interested in access to this dashboard.
+
+# Trial Performance Dashboard
+
+The Trial Performance Dashboard is divided into four sections: totals at-a-glance view, two charts, and a details table. 
+
+The widgets on this dashboard’s user interface provide you with access to the following common features:
+
+**Actions** at the top right corner of the dashboard provide the following functionality:
+
+* Reload action tracks the last time you refreshed your data up to four hours. The counter then resets, beginning with 1m ago This tells you how current your data is from the last refresh.
+* Hide Filters action hides filters that display in the top left corner of the dashboard.
+* Dashboard actions allow you to either clear the cache and refresh the data or view a Download Dashboard from where you can select a download format, page size, or choose how to arrange downloaded data or reset the filters.
+* Open Folders action allows you to open/close folders from the dashboard.
+
+Once Multi Currency support is enabled on your Recurly account, you can then specify which currencies you want to accept for your account. When a currency is added to your accepted list, you may then define pricing for your subscription plans and coupons using the new currency. Then, choose one of the enabled currencies for the dashboard.
+
+* Sites that support more than one currency (the primary currency) will see a default view that shows the total payments, refunds, and net billings across all currencies, converted to their primary currency and summed.
+* You can also view the payments, refunds and net billings processed in each individually supported currency.
+* Conversion rates are updated daily (via [https://openexchangerates.org/](https://openexchangerates.org/)) Historical billings use the conversion rate at time of transaction and do not change over time for current conversion rates.
+
+**Clear Cache options** allow you to clear cache and refresh data in three places on this dashboard:
+
+* Click the vertical ellipse on any of the widgets, at the bottom of the dashboard to see the timestamp for the most current version of data on the dashboard.
+* Click the vertical ellipse on any of the widgets within the dashboard to update the selected widget with the most current data available during the session.
+* Click the Actions widget -> vertical ellipse at top right corner of the dashboard to clear the cache and refresh the data. Recurly updates the data multiple times a day, so after a refresh, the most current data available will upload.
+
+**Vertical ellipses** available on both widgets and tables, provide you with a dropdown menu where you can select the following options:
+
+* Click the vertical ellipse on a widget to download data or clear cache and refresh data for a selected widget.
+* Click the vertical ellipse on a column in a table to download data or clear the cache and refresh the data on display, but also to auto size or resize columns.
+
+**Charts and legends** display data on this dashboard within widgets in bar, line, and pie charts. This data often includes customer, subscriber, subscription, plans, and revenue totals in increments specified by time and date ranges. If the information on one of these charts is color-coded, there will be a legend on the widget that identifies the value assigned to the color. For example, specific colors are assigned to specific plans or totals being tracked, to enable you to read the chart. 
+
+* Click a point in a line chart or a specific color on a bar or pie chart to display the corresponding timeframe and value in hover text. For example, total number of subscribers for a corresponding month.
+* Click the corresponding color in the legend to hide that corresponding line, bar, or pie chart segment from the widget. Click on the color again, to restore the data.
+
+# Trial Performance Section
+
+This Dashboard is divided into the following sections: overview of trial performance key performance indicators widget, trial conversion rate line chart, trial subscription status bar chart, and trial subscription status details. 
+
+**Trial Performance Key Performance Indicator Totals:** This trial performance totals view at-a-glance view is a widget that includes the current Trials Started totals, and totals for last month, previous month, three months ago, and one year ago. 
+
+<Image title="trial performance overview totals.png" alt={2158} src="https://files.readme.io/6c56fcb-trial_performance_overview_totals.png">
+  Trial Performance  Key Performance Indicators
+</Image>
+
+The up arrow under each total indicates the difference between that timeframe and the Total Started value.
+
+**Trial Conversion Rate:** Line chart that shows the conversion rate for trial subscriptions that converted to paid at any time during the selected date range) \* 100.
+
+* Converted means the subscription moved from a free trial to a paid subscription. For example, a free trial period ends, the subscription remains active, and your customer pays an amount greater than $0. Set up fees, which are charges while the customer is in trial, are not included in this consideration for converted.
+* This dashboard does not track the state of the subscription after conversion.
+* The date range and interval picker impact the date the subscription started in trial.
+
+Note: that the trial conversion rate for a month does not mean that all subscriptions in trial converted to paid in that month, it simply means that the denominator of the equation is all subscriptions that started in trial in that month.
+
+<Image title="trial conversion rate.png" alt={2320} src="https://files.readme.io/2c0e218-trial_conversion_rate.png">
+  Trial Performance Rates
+</Image>
+
+**Trial Subscription Status:** Tracks the current state of subscriptions that started as trials during the selected date range. Only subscriptions that started with a trial are included in this chart. Those subscriptions may be in one of the following states:
+
+* Converted: The subscription ended trial and successfully converted to paid.
+* Canceled: The subscription was canceled.
+* No Billing Info: The customer never entered billing information.
+* Payment Failed: Customer entered billing information, and the trial churned after failing to collect payment.
+* Pending: A temporary state of subscriptions that started in trial and have not yet converted or churned. This includes subscriptions that are still in trial, subscriptions that have an invoice "in dunning" after trial and those that have been billed but are paying $0 and thus have not converted to "Paid" (For example: subscriptions with a 100% coupon or paying with a gift card).
+
+<Image title="trial subscription status bar chart.png" alt={2322} src="https://files.readme.io/95c32ff-trial_subscription_status_bar_chart.png">
+  Trial Performance Subscription Status
+</Image>
+
+**Trial Subscription Status:** tracks the trials subscriptions by the following status for a selected date range:
+
+* Trials started 
+* Converted
+* Canceled
+* Payment failed
+* Pending
+
+<Image title="trial Subscription status detail.png" alt={2386} src="https://files.readme.io/c9cf2e1-trial_Subscription_status_detail.png">
+  Trial Performance Subscription Status Detail
+</Image>

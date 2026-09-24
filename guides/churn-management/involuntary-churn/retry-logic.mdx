@@ -1,0 +1,125 @@
+---
+title: Intelligent retries
+---
+
+<div className="rp-page">
+  <div className="rp-overview">When a recurring credit card payment fails, timing is everything. Intelligent Retries analyzes billions of transaction data points to find the best moment to re-attempt a charge — so you recover more revenue automatically, without lifting a finger.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Not included in Starter or Pro — contact <a href="https://recurly.com/demo/contact-sales/" target="_blank">Recurly Sales</a> to upgrade</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#direct-debit-payments"><span className="rp-toc-num">4</span>Direct debit payments</a>
+    <a className="rp-toc-pill" href="#complementary-revenue-recovery"><span className="rp-toc-num">5</span>Complementary revenue recovery</a>
+  </div>
+</div>
+
+<div className="rp-card">
+
+### Prerequisites
+
+- An active Recurly account in production mode
+- Recurring credit card payment setup
+- Access to the Recurly dashboard and configurations
+
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Limitations</strong>Intelligent Retries applies to soft declines only — hard declines are not retried unless specific conditions are met (see Key details below). Direct debit payment methods (ACH, SEPA) are not included. Retries won't exceed 20 total transaction attempts or 60 days from the invoice creation date.</div>
+</div>
+
+# Definition
+
+<div className="rp-definition">Intelligent Retries is Recurly's machine learning–powered retry engine for declined recurring credit card payments. Rather than applying a fixed retry schedule to every failed charge, it analyzes vast transaction data to determine the optimal moment to re-attempt each individual payment — increasing the likelihood of success and keeping subscribers active.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-brain" aria-hidden="true"></i></div>
+    <strong>Data-driven decisions</strong>
+    <span>Machine learning informed by billions of transactions determines the best retry schedule for each declined payment — no manual configuration needed.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+    <strong>Enhanced revenue recovery</strong>
+    <span>Optimized retry timing increases the chances of successful payment collection, recovering revenue that would otherwise be lost.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-users" aria-hidden="true"></i></div>
+    <strong>Reduced subscriber churn</strong>
+    <span>By resolving payment failures before they escalate, Intelligent Retries minimizes involuntary churn and keeps subscriptions active.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-sliders" aria-hidden="true"></i></div>
+    <strong>Adaptable retry logic</strong>
+    <span>The retry schedule is tailored per transaction and continuously refined over time — not a one-size-fits-all approach.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+    <strong>Comprehensive coverage</strong>
+    <span>Works alongside other revenue recovery strategies like Dunning to give you layered, end-to-end payment failure protection.</span>
+  </div>
+</div>
+
+# Key details
+
+## How Intelligent Retries works
+
+Intelligent Retries draws on data from billions of transactions to build a customized retry schedule for each declined charge. Instead of retrying on a fixed cadence, the system finds the most favorable window for each payment — factoring in transaction attributes, decline reasons, and historical patterns. The result is a dynamic, per-transaction retry strategy that improves over time as more data flows through the system.
+
+## Soft declines and machine learning
+
+Soft declines — those caused by temporary conditions like insufficient funds or issuer holds — are the primary candidates for Intelligent Retries. The machine learning engine analyzes patterns across your transaction history and adapts the retry timing to maximize the chance of a successful charge on the same payment method.
+
+## Hard declines
+
+Hard declines are generally considered final and aren't retried automatically. There are three exceptions:
+
+- **Exception A:** An immediate retry is triggered if Account Updater or the customer updates their billing information.
+- **Exception B:** A hard decline may convert to a soft decline during the dunning cycle after a billing information update.
+- **Exception C:** Forced collection can be initiated outside the typical recurring schedule.
+
+## Handling gateway payment declines
+
+Different gateway errors follow specific retry schedules:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Gateway error type</td><td>Retry schedule</td></tr>
+  <tr><td>Try Again / Gateway Error</td><td>Every two days</td></tr>
+  <tr><td>Issuer or Processor Unavailable</td><td>Every three days</td></tr>
+  <tr><td>Communication / Configuration Error</td><td>Up to two retries, four hours apart → six retries, one day apart → retries through the end of the dunning cycle, three days apart</td></tr>
+</table>
+
+## Manual retry and forced collection
+
+For more control over a specific invoice, you can trigger a forced collection attempt directly from the Recurly dashboard.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open the invoice</h4><p>Navigate to the pending or past due invoice's details page.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Attempt collection</h4><p>Select the <strong>Attempt Collection Now</strong> button to trigger an immediate retry.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/50e0c55-9c0e247-forcecollect.png" align="center" width="35%" border={true} />
+
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Heads up</strong>Excessive manual retries can exhaust the allowed transaction count for automated retries. Use this feature judiciously. Forced collection is also available via the Recurly API.</div>
+</div>
+
+# Direct debit payments
+
+Intelligent Retries doesn't apply to direct debit payment methods like ACH and SEPA. For situations that require a retry — such as an invoice correction or update — static and manual retries are available through the Admin Console or via the Recurly API.
+
+Recurly has implemented a static retry feature specifically for direct debit. See the <a href="/guides/payment-orchestration/gateway-configuration-and-features/sepa-retries" target="_blank">Direct Debit Retries</a> page for details.
+
+# Complementary revenue recovery
+
+Intelligent Retries works alongside Dunning to give you a complete payment recovery strategy. While Intelligent Retries handles the timing and mechanics of re-attempting charges, Dunning manages customer communications throughout the process. See the <a href="https://docs.recurly.com/v1.0/docs/dunning-management" target="_blank">Dunning Management</a> page for a full walkthrough.

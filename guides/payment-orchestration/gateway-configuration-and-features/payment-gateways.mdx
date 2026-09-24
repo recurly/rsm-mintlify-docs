@@ -1,0 +1,128 @@
+---
+title: Gateways & payment methods configuration
+---
+
+<div className="rp-page">
+  <div className="rp-overview">This page covers how to add and configure payment gateways in Recurly — including credential setup, card type selection, Zero Dollar Authorizations, payment routing, gateway failover, and switching gateways.</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#gateway-configuration"><span className="rp-toc-num">1</span>Gateway configuration</a>
+    <a className="rp-toc-pill" href="#test-configuration"><span className="rp-toc-num">2</span>Test configuration</a>
+    <a className="rp-toc-pill" href="#enablingdisabling-a-gateway"><span className="rp-toc-num">3</span>Enabling/disabling a gateway</a>
+    <a className="rp-toc-pill" href="#payment-routing"><span className="rp-toc-num">4</span>Payment routing</a>
+    <a className="rp-toc-pill" href="#switching-gateways"><span className="rp-toc-num">5</span>Switching gateways</a>
+    <a className="rp-toc-pill" href="#gateway-downtime"><span className="rp-toc-num">6</span>Gateway downtime</a>
+    <a className="rp-toc-pill" href="#zero-dollar-authorizations-zda"><span className="rp-toc-num">7</span>Zero Dollar Authorizations</a>
+    <a className="rp-toc-pill" href="#validations"><span className="rp-toc-num">8</span>Validations</a>
+    <a className="rp-toc-pill" href="#fraud-velocity-checks"><span className="rp-toc-num">9</span>Fraud velocity checks</a>
+  </div>
+</div>
+
+# Gateway configuration
+
+If you don't yet have a gateway, visit <a href="https://recurly.com/gateways" target="_blank">recurly.com/gateways</a> to explore supported options. When choosing a gateway, consider: the region your company is based in, the regions where your customers are, and your customers' payment preferences.
+
+Once you have a gateway, follow these steps to add it to Recurly:
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Payment Gateways</h4><p>From your <a href="https://app.recurly.com/go/configuration/payment_gateways" target="_blank">gateway configuration page</a>, click <strong>Add Gateway</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Select your gateway</h4><p>Choose your payment gateway from the list. If you don't see the right gateways for your location, check your company country settings in your <a href="https://app.recurly.com/go/configuration/edit" target="_blank">Business Entity</a>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Enter your credentials</h4><p>Input your gateway credentials. These are typically API credentials, not your virtual terminal login. See the <a href="https://docs.recurly.com/docs/additional" target="_blank">gateway-specific documentation</a> for details.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Set accepted card types</h4><p>Select the card types you want to accept. Confirm the same card types are also supported and enabled on your gateway account.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">5</div>
+    <div><h4>Configure Zero Dollar Authorization (ZDA) settings</h4><p>If your gateway supports ZDA, configure which card types use it. Test billing info updates for every accepted card type after enabling ZDA. Not all gateways require this setting — ZDA support is implied on some gateways and doesn't require configuration.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">6</div>
+    <div><h4>Add Recurly IPs to your gateway allowlist (if required)</h4><p>If your gateway requires IP allowlisting, see the <a href="/guides/security-compliance/security/ip-allowlist" target="_blank">IP Allowlist documentation</a> for the full list of IPs to supply.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">7</div>
+    <div><h4>Set up webhooks (if required)</h4><p>If your gateway requires webhooks, follow your gateway's individual configuration instructions to ensure transactions are updated correctly.</p></div>
+  </div>
+</div>
+
+# Test configuration
+
+Once a gateway is configured, use the **Test Configuration** option for a basic verification check. When your site is in production mode, Recurly recommends running a test transaction (and then voiding it) to fully validate the gateway setup before going live.
+
+# Enabling/disabling a gateway
+
+A gateway can be enabled or disabled at any time to control which gateway receives transactions. In the gateway edit page, toggle **Gateway Status** between Enabled and Disabled. Gateways are set to Enabled by default when first added.
+
+
+<Image src="https://files.readme.io/cfee537-Screen_Shot_2019-06-19_at_3.36.49_PM.png" align="center" width="75%" border={true} />
+
+
+# Payment routing
+
+For accounts with multiple gateways, Recurly routes transactions based on accepted card type and currency. Beyond that, Recurly sends transactions to the gateway added first. To specify a gateway per transaction, use Recurly's <a href="/guides/payment-orchestration/gateway-configuration-and-features/custom-gateway-routing-configuration" target="_blank">Custom Gateway Routing</a>.
+
+# Switching gateways
+
+Because Recurly stores customer credit card data, you can switch payment gateways at any time. Disable or delete the old gateway, enable the new one, and Recurly will automatically route transactions to the new gateway — as long as it supports the same card types and currencies as the previous one.
+
+Note that not all payment data migrates easily, especially tokenized payment instruments. Contact Recurly Support before switching if you have a specific migration use case.
+
+<div className="rp-callout rp-callout-warning">
+  <div><strong><i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Refunds process through the original gateway</strong> Refunds always process through the gateway that handled the original charge. Keep your old gateway account active in Recurly — but disabled for new transactions — until you no longer need to issue refunds for transactions it processed, or until the maximum refund window has elapsed.</div>
+</div>
+
+# Gateway downtime
+
+If a payment gateway is unreachable, Recurly automatically retries recurring transactions every 2–4 hours until the gateway responds or a maximum of 20 payment failures is reached.
+
+# Zero Dollar Authorizations (ZDA)
+
+Zero Dollar Authorizations let you verify a customer's payment method without placing a temporary hold on their card. This reduces customer support inquiries around unexplained card charges.
+
+**Prerequisite:** ZDA must be enabled on your payment gateway account. Contact your gateway provider to confirm support and activate the feature before enabling it in Recurly.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Payment Gateways</h4><p>In Recurly, navigate to <strong>Configuration → Payment Gateways</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Open the gateway edit page</h4><p>Locate the gateway you want to configure and select <strong>Options → Edit Gateway</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">3</div>
+    <div><h4>Enable ZDA per card brand</h4><p>Find the <strong>Zero Dollar Authorizations (Advanced)</strong> section and check the box for each card brand you want to enable ZDA for.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">4</div>
+    <div><h4>Save your changes</h4><p>Click <strong>Save Changes</strong>.</p></div>
+  </div>
+</div>
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> How ZDA works</strong> To verify a card, gateways like Stripe send an authorization request to the issuing bank. Enabling ZDA instructs the gateway to send this request for $0 instead of a higher amount.</div>
+</div>
+
+# Validations
+
+Recurly runs the following validations before passing a transaction to your gateway:
+
+1. Credit card number passes the Luhn check
+2. CVV format matches the selected card type
+3. Expiration date is in the future and in the correct format
+4. Zip code format is valid (when a country code is supplied, for supported countries)
+5. Address information is present based on your site-level address requirements
+
+# Fraud velocity checks
+
+All transactions pass through a fraud velocity filter before reaching your payment gateway. See the <a href="/guides/payment-orchestration/gateway-configuration-and-features/fraud-management#fraud-velocity-rules" target="_blank">transactions documentation</a> for details on the fraud check system and how to configure it.

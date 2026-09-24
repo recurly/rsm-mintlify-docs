@@ -1,0 +1,57 @@
+---
+title: Validation
+---
+
+`recurly.bankAccount.bankInfo()` lets you ping Recurly’s validation service with a U.S. routing number and instantly receive:
+
+* **Bank name** (e.g., “Wells Fargo Bank, N.A.”)
+* An error response if the routing number is structurally invalid or unknown
+
+Because the lookup happens in-browser, you can surface friendly, real-time feedback (or disable the **Submit** button) without making your own server call. Recurly.js also runs this check automatically during tokenization, but exposing it in your UI helps customers fix typos earlier in the flow.
+
+***
+
+## Prerequisites and limitations
+
+* Works only with **nine-digit U.S. ABA routing numbers.** No IBAN, Bacs, or Becs support.
+* Requires that Recurly.js is already configured on the page (`recurly.configure(...)`).
+* Intended for **informational use**—it does **not** guarantee that subsequent ACH debits will succeed.
+* Subject to the same network latency/failures as any client-side API call; always perform robust server-side validation before creating charges.
+
+# Key details
+
+Recurly.js bundles a few helpful methods for validating payment information prior to processing. These methods are used when generating tokens, but you can also use them to enhance your form validations and checkout flow.
+
+### Reference
+
+### recurly.bankAccount.bankInfo
+
+Retrieves bank info based from a given routing number.
+
+```js
+recurly.bankAccount.bankInfo({ routingNumber: '123456780' }, function (err, bankInfo) {
+  if (err) {
+    // err.code, err.message
+  } else {
+    // bankInfo.bank_name
+  }
+});
+```
+
+### Arguments
+
+| Param                 | Type     | Description                                     |
+| :-------------------- | :------- | :---------------------------------------------- |
+| options               | `Object` |                                                 |
+| options.routingNumber | `String` | The routing number for a bank (ex: '123456780') |
+| callback              | Function |                                                 |
+
+### Callback signature
+
+| Param               | Type                          | Description                                   |
+| :------------------ | :---------------------------- | :-------------------------------------------- |
+| err                 | `RecurlyError` or `undefined` | Error. Usually `invalid-routing-number`       |
+| bankInfo            | `Object`                      |                                               |
+| bankInfo.bank\_name | `String`                      | Bank institution name (ex: `Bank of Recurly`) |
+
+***

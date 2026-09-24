@@ -1,0 +1,274 @@
+---
+title: Tax location validation
+---
+
+<div className="rp-page">
+  <div className="rp-overview">Tax location validation ensures compliance with digital services tax regulations in specific regions by automatically verifying a customer's country through two independent pieces of evidence before tax is applied. When validation fails, sign-ups and subscription changes are blocked, and renewals expire — keeping your tax collection accurate and compliant.</div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
+    <a className="rp-toc-pill" href="#enable-tax-location-validation"><span className="rp-toc-num">4</span>Enable tax location validation</a>
+    <a className="rp-toc-pill" href="#identify-and-fix-invalid-accounts"><span className="rp-toc-num">5</span>Identify and fix invalid accounts</a>
+    <a className="rp-toc-pill" href="#testing"><span className="rp-toc-num">6</span>Testing</a>
+  </div>
+</div>
+
+### Prerequisites
+
+<ul className="rp-list">
+  <li>Integration with Recurly's API or select client libraries</li>
+  <li>Subscription to Recurly's built-in tax solution or direct integration with Avalara AvaTax or Vertex</li>
+</ul>
+
+### Limitations
+
+<ul className="rp-list">
+  <li>Manual collection invoices are not supported for tax location validation</li>
+  <li>Certain payment methods may not support BIN country lookup</li>
+</ul>
+
+# Definition
+
+<div className="rp-definition">Tax location validation ensures compliance with digital services tax regulations in Australia, the European Union, New Zealand, and the United Kingdom by verifying the customer's country through two independent pieces of location evidence before tax is collected. Validation is triggered automatically when a customer's taxable address is added or updated, and the outcome determines whether sign-ups, subscription changes, and renewals can proceed.</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-rotate" aria-hidden="true"></i></div>
+    <strong>Automated compliance</strong>
+    <span>Location validation runs automatically on address updates and sign-ups — no manual review required to stay compliant with regional digital services tax regulations.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-crosshairs" aria-hidden="true"></i></div>
+    <strong>Enhanced accuracy</strong>
+    <span>Two independent pieces of evidence are required to confirm a customer's location, reducing the risk of tax being applied based on incorrect or fraudulent address data.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-earth-europe" aria-hidden="true"></i></div>
+    <strong>Multi-region support</strong>
+    <span>Covers Australia, the European Union, New Zealand, and the United Kingdom — regions with specific regulatory requirements for digital services taxation.</span>
+  </div>
+</div>
+
+# Key details
+
+## Supported regions
+
+Tax location validation is available for the following regions:
+
+- **Australia**
+- **European Union** (inclusive of the United Kingdom through December 31, 2021)
+- **New Zealand**
+- **United Kingdom** (effective January 1, 2021)
+
+***
+
+## How validation works
+
+Validation is triggered the moment a customer's taxable address is added or updated. By the time an invoice is generated, Recurly checks the account's validation status — if valid, the invoice posts; if invalid, invoice generation is blocked.
+
+Which address is treated as the taxable address depends on your **Tax Settings**:
+
+- If **Use Account Info Address on all Invoices** is **disabled** → the Billing Address is the taxable address
+- If **Use Account Info Address on all Invoices** is **enabled** → the Account Address is the taxable address
+
+This setting is located at **Configuration → Taxes → Tax Settings**.
+
+<div className="rp-callout rp-callout-note">
+  <div><strong><i className="fa-solid fa-circle-info" aria-hidden="true"></i> Manual invoices</strong>Manual collection invoices always use the Account Address as the taxable address and are not compatible with tax location validation. See <a href="#manual-invoices-not-supported">Manual invoices not supported</a> below.</div>
+</div>
+
+Validation activates for any taxable address update where the country falls within an enabled validation region, provided the account doesn't have a VAT number that qualifies for an exemption (for Australia, a GST-registered ABN also exempts the account).
+
+The validation process cross-references one additional piece of country evidence against the country of the taxable address. If the two pieces don't match, validation fails and the account is marked as invalid — but the address update itself is not blocked.
+
+### Evidence checked when the Billing Address is the taxable address
+
+1. Account Address country
+2. IP Address country
+3. Credit card BIN country
+
+### Evidence checked when the Account Address is the taxable address
+
+1. Billing Address country
+2. IP Address country
+3. Credit card BIN country
+
+***
+
+## Location evidence types
+
+### Billing address
+
+The Billing Address serves as either the primary taxable address or a supplementary piece of evidence, depending on your Tax Settings. It's populated when a customer uses a credit card, PayPal, or Amazon as their payment method.
+
+For PayPal transactions via Recurly's Hosted Payment Pages, the customer's country is provided automatically. For PayPal transactions via Recurly.js, collect the country separately from the customer and make a second Update Billing Info API call to store it before finalizing the subscription.
+
+### Account address
+
+The Account Address serves as either the primary taxable address or supplementary evidence. It typically records a customer's shipping or mailing address. For Pay with Amazon, you can replicate the returned address into the Account Address.
+
+### IP address
+
+The IP address associated with the customer's Billing Information acts as supplementary evidence. Recurly captures and stores the IP address whenever a customer interacts with a Hosted Page (Hosted Payment Pages or Hosted Account Management) for adding or updating billing info, or when actions are taken via Recurly.js. You can also pass your own collected IP address through the Billing Info API.
+
+<div className="rp-callout rp-callout-tip">
+  <div><strong><i className="fa-solid fa-lightbulb" aria-hidden="true"></i> Tip</strong>IP address-based location can occasionally be inaccurate. When the Credit Card BIN isn't available (e.g., for PayPal or Amazon), collect both the Billing Address and Account Address from the customer to maximize evidence reliability.</div>
+</div>
+
+### Credit card BIN
+
+The Bank Identification Number (BIN) of the customer's credit card identifies the issuing bank's country, which typically aligns with the cardholder's billing address country. When the two don't match, it can be an indicator of fraudulent activity. Recurly performs a BIN lookup every time location validation runs, and the BIN and returned country are displayed on the account's Billing Info under the **BIN** field.
+
+PayPal and Amazon don't support BIN lookup since Recurly doesn't have access to the underlying card number for those payment methods.
+
+***
+
+## Subscription sign-ups
+
+If a sign-up triggers location validation and validation fails, the purchase is blocked and the customer sees one of the following errors:
+
+```xml EU
+<errors>
+  <error field="invoice.base" symbol="tax_invalid_location">You are located in the European Union but your country cannot be verified for VAT. Please try again or contact the merchant.</error>
+</errors>
+```
+```xml NZ
+<errors>
+  <error field="invoice.base" symbol="tax_invalid_location">You are located in New Zealand but your country cannot be verified for GST. Please try again or contact the merchant.</error>
+</errors>
+```
+
+Recurly doesn't send an email to your Billing Contact when a sign-up is blocked by validation. If you're using the API and want to track these failures, listen for the `tax_invalid_location` error and log the relevant details on your end.
+
+***
+
+## Subscription renewals
+
+At renewal, Recurly checks the account's validation status:
+
+- **Valid** — Invoice generation proceeds and the subscription renews
+- **Invalid** — Renewal is aborted and the subscription expires
+- **Not yet validated** — Validation runs, the account is marked, and the subscription renews or expires based on the outcome
+
+When a subscription expires due to failed location validation, the expiration reason is recorded as `Tax Location Invalid`. This is visible in the Subscriptions — Churned export and the Churn Analysis report.
+
+***
+
+## Subscription modifications
+
+If an upgrade or downgrade triggers location validation and validation fails, the modification is blocked. The customer and the Admin Console both see the same error message as displayed during sign-ups.
+
+***
+
+## Invoice evidence
+
+When an invoice is generated for an account that passed validation, the two matching pieces of evidence are stored and available in the **Invoices — Summary** export under the `invoice_country` and `evidence_matched` columns.
+
+
+<Image src="https://files.readme.io/801c7f7-location-validation-invoice-export.png" align="center" width="75%" border={true} />
+
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Column</td><td>Example</td><td>Description</td></tr>
+  <tr><td><code>invoice_country</code></td><td>FR</td><td>The EU or NZ country code of the customer's address on the invoice. Corresponds to the <code>evidence_matched</code> column. Visible only when EU VAT or NZ GST Location Validation is enabled.</td></tr>
+  <tr><td><code>evidence_matched</code></td><td>Account Info Country, Billing Info Country</td><td>The two pieces of evidence that matched when the invoice was generated. Visible only when EU VAT or NZ GST Location Validation is enabled.</td></tr>
+</table>
+
+See the <a href="https://docs.recurly.com/docs/export-overview#section-invoices-summary" target="_blank">Invoices — Summary export documentation</a> for full details.
+
+***
+
+## Manual invoices not supported
+
+Tax location validation only applies to automatically collected invoices. Manual collection invoices are excluded because they always use the Account Address as the taxable address and often don't include billing information — meaning the other three evidence options (Billing Address, IP Address, Credit Card BIN) aren't available. For manual invoices, it's your responsibility to collect a second piece of location evidence and record it in one of the invoice notes sections before posting.
+
+If your Tax Settings are configured to use the Account Info Address for all invoices, you may see validation notices on accounts with Manual Collection subscriptions — these can be safely disregarded. A failed validation notice won't cancel a manual collection subscription.
+
+***
+
+## Accounts export columns
+
+When tax location validation is enabled for Australia, the EU, or New Zealand, the Accounts export includes two additional columns:
+
+<table className="rp-gw-table">
+  <tr className="rp-thead-row"><td>Column</td><td>Example</td><td>Description</td></tr>
+  <tr><td><code>tax_location_valid</code></td><td>TRUE, FALSE</td><td>Indicates whether the account has passed tax location validation. Visible only when EU VAT or NZ GST Location Validation is enabled.</td></tr>
+  <tr><td><code>location_validation_tax_type</code></td><td>eu, nz</td><td>The region where validation was run on the account. <code>eu</code> = European Union, <code>nz</code> = New Zealand. Visible only when EU VAT or NZ GST Location Validation is enabled.</td></tr>
+</table>
+
+See the <a href="https://docs.recurly.com/docs/export-overview#section-accounts" target="_blank">Accounts export documentation</a> for full details.
+
+# Enable tax location validation
+
+Navigate to **Configuration → Taxes → Tax Settings** in the Admin Console.
+
+<div className="rp-steps">
+  <div className="rp-step">
+    <div className="rp-step-num">1</div>
+    <div><h4>Open Tax Settings</h4><p>Go to <strong>Configuration → Taxes → Tax Settings</strong>.</p></div>
+  </div>
+  <div className="rp-step">
+    <div className="rp-step-num">2</div>
+    <div><h4>Enable the relevant region</h4><p>For <strong>Australia</strong>: enable <strong>GST Location Validation</strong> under Australia Settings. For the <strong>European Union</strong>: enable <strong>VAT Location Validation</strong> under European Union VAT Settings. For <strong>New Zealand</strong>: enable <strong>GST Location Validation</strong> under New Zealand Settings.</p></div>
+  </div>
+</div>
+
+
+<Image src="https://files.readme.io/b331d07-vat-location-validation.png" align="center" width="75%" border={true} />
+
+
+Once enabled, Recurly runs validation on all existing accounts that have an active or future subscription, have a taxable address in the activated region, and have no qualifying VAT, GST, or ABN exemption number on file.
+
+If you later change the **Tax Calculation Address** setting (by enabling or disabling **Use Account Info Address on all Invoices**), Recurly re-runs validation on all eligible accounts using the alternate address as the taxable address.
+
+Recurly sends a notification to your Billing Contact email for each account that fails validation after this re-run.
+
+# Identify and fix invalid accounts
+
+## Email notifications
+
+When an address update results in an account being marked as invalid, Recurly sends an email to your Billing Contact with the affected account code. You'll need to work with the customer to add a matching second piece of location evidence before their subscription renews — otherwise the subscription expires at renewal.
+
+
+<Image src="https://files.readme.io/f7f7a73-eu-email.png" align="center" width="40%" border={true} />
+
+
+
+<Image src="https://files.readme.io/239df9d-nz-email.png" align="center" width="40%" border={true} />
+
+
+## Admin Console
+
+Invalid accounts display a red banner at the top of the account page in the Admin Console. This banner doesn't appear on the Hosted Account Management page.
+
+Every validation attempt — successful or failed — is logged in the account's **Activities** section. A successful validation shows the two matching pieces of evidence; a failed attempt lists all four options, making it clear what was missing or mismatched.
+
+
+<Image src="https://files.readme.io/70e453a-nz-failed-activity.png" align="center" width="75%" border={true} />
+
+
+
+<Image src="https://files.readme.io/9b436bd-nz-passed-activity.png" align="center" width="75%" border={true} />
+
+
+## How to fix an invalid account
+
+Check the activity log to identify which pieces of evidence were inconsistent. Remember: the taxable address is the primary address — you need two pieces of evidence that match against it specifically. A match between two non-primary address fields isn't enough to validate the account.
+
+If the Billing Address is the taxable address, confirm with the customer that their physical location matches their billing country, then update the Account Address to reflect that same country.
+
+# Testing
+
+Tax location validation can be fully tested in sandbox mode before going live.
+
+**Set up validation:** Go to **Configuration → Taxes → Tax Settings**, select the desired region, and enable the corresponding Location Validation option.
+
+**Test invalid accounts:** Use accounts with mismatched address evidence to trigger a failed validation. Identify the invalid state via the red banner or the account's activity log, then update the address evidence to revalidate.
+
+**Test subscription renewals:** Set an account to invalid status and trigger a renewal to confirm the subscription expires. Set it to valid status and confirm the renewal proceeds and the invoice is posted.
+
+**Test sign-up blocking:** Attempt a sign-up with mismatched address evidence to confirm the purchase is blocked and the correct error message is displayed.

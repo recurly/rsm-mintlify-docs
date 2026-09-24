@@ -1,0 +1,153 @@
+---
+title: Braze integration
+---
+
+# Overview
+
+### Required plan
+
+This feature **may not be included** in the Starter or Pro plans. If you are interested, please contact [Recurly Sales](https://recurly.com/demo/contact-sales/) to discuss upgrade options.
+
+### Prerequisites
+
+* Enrollment in the Recurly Elite plan is required.
+* Activation of credit invoices is necessary.
+* An operational and active Braze account is required before synchronization can be enabled.
+* Possession of the Braze API key and access to a sandbox for testing are essential.
+
+# Definition
+
+Braze provides a leading customer engagement platform that enables and automates personalized cross-channel communications to enhance subscriber engagement, drive retention, and improve the user experience.
+
+Our Braze Integration allows Recurly users to effortlessly feed subscription information into Braze for targeted customer communication.
+
+# Key benefits
+
+* **Enhanced engagement**: Personalized communication with real-time data.
+* **Real-time synchronization**: Ensures up-to-date subscriber information flow.
+* **Scalable marketing**: Supports advanced, data-driven marketing strategies.
+
+# Getting started with Braze and Recurly
+
+Integrating Braze with Recurly simplifies the process of sharing subscription data with Braze, enabling targeted communication with customers.
+
+### Integration steps
+
+To begin, ensure you have active accounts on both Braze and Recurly.\
+Follow these steps after setting up your Braze account:
+
+1. **Access Recurly**: **Navigate** to the Integrations section in your Recurly account and select Braze.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/fb381db-image.png" />
+
+2. **Establish connection with Braze**: **Enter** your Braze API key to connect. **Select** from the dropdown, the URL of your Braze instance. For instance, your URL might look like: 
+
+```
+<https://dashboard-03.braze.com/dashboard/app_usage?locale=en>
+```
+
+2. **Complete the setup**: **Click on** 'Connect to Braze' to finalize the integration process.
+
+### Braze Profiles
+
+Recurly will create profiles in Braze using the Recurly account\_code, which will be sent over as the external\_id to Braze. 
+
+If you wish to send Recurly account data to Braze, then enable the "Share profile attributes with Braze" checkbox during configuration. This will keep Recurly account data in sync on the Braze profile. 
+
+By disabling this configuration, only the custom event and subscription attributes will be sent to Braze, and linked to the Braze external\_id. 
+
+### Configuring custom events in Braze
+
+For effective customer engagement, configuring custom events in Braze to utilize Recurly data is crucial.
+
+### Steps to configure custom events
+
+1. **Access custom events in braze**: **Sign into Braze**, **navigate** to “Data Settings,” and **select** “Custom Events” to initiate the setup.
+2. **Incorporate Recurly events**: **Choose** “Add Custom Event” to start adding Recurly's events. **Ensure** to include each event from Recurly for thorough data integration. These events can also be tracked within Braze analytics.
+
+<Image align="center" width="75% " src="https://files.readme.io/da51958-image.png" />
+
+> **Tip**: Always **check** the “raw data” from test users when setting up your Recurly integration. This data aids in further customer segmentation within Braze.
+
+### Custom event notifications
+
+| Custom Event                         | Description                                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| **Recurly New Account**              | Triggered when an account is created                                                             |
+| **Recurly Updated Account**          | Triggered when an account is updated                                                             |
+| **Recurly Closed Account**           | Triggered when an account is closed                                                              |
+| **Recurly Closed Reopened**          | Triggered when an account is reopened                                                            |
+| **Recurly New Subscription**         | Triggered when a subscription is created                                                         |
+| **Recurly Renewed Subscription**     | Triggered when a subscription renews                                                             |
+| **Recurly Updated Subscription**     | Triggered when a subscriptions attributes change (Plan change, price change, or quantity change) |
+| **Recurly Canceled Subscription**    | Triggered when a subscription is canceled                                                        |
+| **Recurly Reactivated Subscription** | Triggered when a canceled subscription is reactivated                                            |
+| **Recurly Paused Subscription**      | Triggered when a subscription is set to be paused                                                |
+| **Recurly Resumed Subscription**     | Triggered when a subscription unpauses                                                           |
+| **Recurly Subscription Expired**     | Triggered when a subscription expires                                                            |
+| **Recurly Invoice Created**          | Triggered when an invoice is created                                                             |
+| **Recurly Successful Payment**       | Triggered when an invoice is successfully collected                                              |
+| **Recurly Refund Issued**            | Triggered when a refund is issued                                                                |
+| **Recurly Failed Recurring Payment** | Triggered when an invoice fails for a subscription renewal                                       |
+
+### Configuring campaigns in Braze
+
+Within Braze, navigate to “Messaging” and select “Campaigns”. Here you will configure the customer communication that will be sent to your customers across different channels. 
+
+> **Note:** Please note that while merchants can create numerous campaigns in Braze, not all of them will be driven by Recurly events
+
+1. **Sign into Braze**: **Navigate** to the Data Settings and **select** Custom Events to begin configuring a new campaign.
+2. **Schedule delivery**: When on this step, **select** Action Based delivery type, and specify the New Trigger Action to be based on one of the Recurly Custom Events. 
+3. **Specify values**: Custom event values can also be included as additional property filters for granular message configuration.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/6a2f81d-image.png" />
+
+### Configuring Segments and Canvases in Braze using Custom Attributes
+
+Braze allows you to create deep segmentation within Braze to craft automatic communications throughout the entire subscriber lifecycle to create dynamic and personalized journeys that adapt to individual preferences and behaviors.\
+Recurly will send two types of Custom Attributes to Braze: 
+
+1. **Account Custom Attributes**: Recurly will send account custom attributes to Braze to update the primary Braze account data, and store as a custom attribute on the user. 
+2. **Subscription Custom Attributes**: Recurly will save subscription custom attributes on the Braze user, including multiple subscriptions.
+
+> **Note:** When account or subscription data is updated, Recurly will only transmit the new or changed account or subscription information to Braze. This method is designed to conserve data points, which are a component of merchants' contracts with Braze. By only sending updated values, our integration aims to be mindful of costs and avoid unnecessary expenditure on data points.
+
+**Segments**
+
+Power your segmentation efforts using Recurly subscriber data. You can use the custom attribute information including top-level custom attribute data or nested objects to build out your customer segments. This will help you to better customize messaging for each segment like lapsed users, loyal users, users on specific plans, or target users with a failed payment for example.
+
+<Image align="center" className="border" width="75% " border={true} src="https://files.readme.io/0714917-image.png" />
+
+**Canvases**
+
+Leverage your segments in Braze’s canvas functionality to create customer journey communication. Canvases include the ability to create a series of communications across different channels with a predefined cadence. With Canvases you can:
+
+* Create campaigns to invite past subscribers back with appealing offers.
+* Reward loyal subscribers with discounts as a gesture of appreciation.
+* Offer guidance and tips to users who engage less frequently, highlighting new or upcoming features they might enjoy.
+* Provide new subscribers with easy-to-follow guides to enhance their experience from the start.
+* For any issues with payment failures, send friendly reminders to update payment methods to ensure uninterrupted access.
+
+<Image align="center" className="border" width="80% " border={true} src="https://files.readme.io/e38d28d-image.png" />
+
+**Dunning Guide**
+
+Targeting subscribers with a failed payment with specific messaging is a great way to ensure that you’ll recover unpaid invoices, decrease involuntary churn, and increase subscriber LTV.
+
+Build out canvases that can be triggered by the custom event: "Recurly Failed Recurring Payment" so the canvas will be triggered any time that event is logged to a user profile. To  target an audience of a specific plan, then use "Add property filters" in the triggering section to only trigger for  "Recurly Failed Recurring Payment" events with the associated plan. This is also true for the exception event, when a customer will exit the Dunning canvas.
+
+Utilize Braze to enhance dunning communications by engaging customers through their preferred channels. Integrating both email and SMS messaging strategies allows for a more dynamic reach, ensuring messages are seen by customers. Additionally, incorporating in-app content cards presents the message prominently upon application login, keeping it top of mind for users. When planning to send messages via multiple channels simultaneously, Braze simplifies the process. Instead of setting up separate message steps for each channel, you can easily add multiple channels within a single step using the "+" icon. This approach streamlines the setup and ensures a cohesive communication strategy across platforms.
+
+# Testing your Braze integration
+
+To test your Braze integration, follow the <a href="https://www.braze.com/docs/user_guide/administrative/app_settings/internal_groups_tab/#creating-a-group" target="_blank">steps</a> outlined by Braze to create test user groups, and test users. Once you have added test users, you will be able to see their data appear in the **event user log** outlined in the <a href="https://www.braze.com/docs/user_guide/administrative/app_settings/event_user_log_tab/?redirected=true" target="_blank">Braze documentation</a>. With these steps, you can identify the values and payloads being sent from Recurly to Braze, which you can then utilize in your segmentation, canvases, and campaigns.
+
+# Recurly data sync
+
+Custom Attribute data will sync to Braze as Custom Events are triggered. For example, for each monthly subscription renewal, custom attribute data will be populated in Braze, and these subscriber accounts will be “backfilled” over the course of one calendar month. Whereas annual subscriptions will take a full calendar year to have custom attribute data populated in Braze. To have manually kickoff a sync, please reachout to support.
+
+# FAQ
+
+Q: Do I need to disable Recurly emails if I want to utilize Braze? 
+
+A: For any overlapping messages with what is configured in Recurly and Braze, ensure that one system is disabled for that message so that customers do not receive multiple messages for the same event.

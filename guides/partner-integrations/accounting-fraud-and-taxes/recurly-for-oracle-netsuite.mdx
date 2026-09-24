@@ -1,0 +1,211 @@
+---
+title: Oracle NetSuite integration
+---
+
+# Overview
+
+### Required plan
+
+This feature **may not be included** in the Starter or Pro plans. If you are interested, please contact [Recurly Sales](https://recurly.com/demo/contact-sales/) to discuss upgrade options.
+
+### Prerequisites
+
+* Integration supports Oracle NetSuite OneWorld or Oracle NetSuite Standard accounts
+* Must have _Credit Invoices_ and _Only Bill What Changed_ configured in your Recurly site.
+* Unique codes for each plan, add-on, or item in Recurly.
+* An unused API key in Recurly for the integration setup.
+* An Oracle NetSuite Sandbox account for User Acceptance Testing.
+
+### Limitations
+
+* The integration is a one-way synchronization from Recurly to Oracle NetSuite.
+* Custom fields in Recurly need to be agreed upon for mapping in Oracle NetSuite.
+* Hierarchical structures, if present in Recurly accounts, need to be retained during data mapping.
+
+# Definition
+
+Oracle NetSuite Integration with Recurly offers businesses a streamlined approach to synchronize their subscription billing data from Recurly with the comprehensive financial and accounting data in Oracle NetSuite. This integration ensures that recurring revenue data is accurately reflected, managed, and reported within a leading cloud-based business software environment.
+
+# Key benefits
+
+* **Unified data management**: Centralize subscription billing and financial data in one integrated platform for streamlined operations.
+* **Enhanced financial reporting**: Utilize Oracle NetSuite's GAAP-compliant revenue recognition and standard financial reporting tailored for subscription-based businesses.
+* **Automated synchronization**: Minimize manual efforts with hourly automatic data transfers from Recurly to Oracle NetSuite, ensuring timely data updates.
+* **Accurate revenue management**: Maintain accurate and up-to-date recurring revenue data in Oracle NetSuite for reliable financial tracking.
+* **Custom data mapping**: Adapt the integration to your specific needs by mapping custom fields and unique item codes for a tailored data management experience.
+
+# Key details
+
+Recurly's integration with Oracle NetSuite is designed to provide businesses with a robust solution for managing their subscription billing and financial data in harmony. By leveraging this integration, businesses can ensure that their financial reporting adheres to compliance guidelines while also gaining insights from customer-centric data.
+
+To optimize your subscription business and get the most out of your customer data and other metrics, you need strong financial reporting that adheres to compliance guidelines. Financial reporting for subscription based-businesses presents unique requirements as these metrics have an emphasis on customer-centric data such as customer renewal rates, churn and lifetime value.
+
+The Recurly for Oracle NetSuite implementation captures your customer-centric data and retains it in your Recurly plan until it is successfully transferred into your Oracle NetSuite environment where you can effectively manage the revenue.
+
+Using this integration, Recurly can seamlessly integrate your Recurly billing and subscription data to your accounting and financial data within Oracle NetSuite, a leading cloud-based business software for accounting and Enterprise Resource Planning (ERP). Through this integration, you can effectively and accurately manage recurring revenue data using Oracle NetSuite’s automatic, Generally Accepted Accounting Principles (GAAP)-compliant revenue recognition and standard financial reporting.
+
+The integration process is divided into five stages, ensuring a comprehensive and thorough approach to onboarding. Each stage involves close collaboration between the merchant and Recurly to ensure a seamless integration experience.
+
+![](https://files.readme.io/45b8717288958837b4fd87f1006cc4bcef33424e0f7f8592ebd102a38fb08341-Oracle_Netsuite-01_2.png)
+
+## Rules of integration
+
+The integration follows specific rules to ensure data integrity and compliance:
+
+* It offers a one-way synchronization, moving transaction details from Recurly to Oracle NetSuite.
+* The integration adheres to Generally Accepted Accounting Principles (GAAP).
+* Data mapping ensures that items in Recurly correspond to the appropriate records in Oracle NetSuite, retaining any hierarchical structures.
+
+## Data mapping and synchronization
+
+Data mapping is a crucial part of the integration process. It ensures that data from Recurly can be accurately transferred to Oracle NetSuite. This mapping involves items, customer accounts, invoices, transactions, credits, and any custom fields. The goal is to ensure that the data structures in both platforms align perfectly.
+
+## Timeframes for integration
+
+The onboarding process is detailed and can take between six to eight weeks, depending on the project's complexity. Once onboarding is complete, the synchronization process runs hourly, ensuring that the most recent data is always available in Oracle NetSuite.
+
+## Onboarding process
+
+The onboarding process is divided into five stages:
+
+1. **Preparation:** This involves initial discussions, data mapping, creating a joint project timeline and other preparatory tasks.
+2. **Implementation:** Here, the actual integration setup takes place, with Recurly assisting in the Oracle NetSuite environment setup.
+3. **User acceptance:** Merchants test the integration in their Oracle NetSuite sandbox, ensuring everything works as expected.
+4. **Production:** After successful testing, the integration is moved to the production environment.
+5. **Project completion:** Final steps include deploying the integration to the merchant's Oracle NetSuite production environment and backfilling data.
+
+# Oracle NetSuite integration with Recurly
+
+### Step 1: Preparation
+
+1. **Kick-off Meeting:** Initiate a kick-off meeting between Recurly and the merchant to discuss the Oracle NetSuite integration project's objectives and expectations.
+2. **Oracle NetSuite Sandbox Setup:** Prepare the Oracle NetSuite Sandbox environment for the integration process.
+3. **Provide Access:** Grant Recurly access to the Oracle NetSuite Sandbox to facilitate the integration setup.
+4. **Data Mapping Session:** Collaborate with Recurly's Enablement Manager and a Solution Engineer to map data between Recurly and Oracle NetSuite, ensuring alignment and considering any custom fields.
+5. **Finalize Data Mapping:** Complete the data mapping process, ensuring all fields and structures are correctly aligned.
+
+### Step 2: Implementation
+
+1. **API Key Creation:** Create and provide Recurly with an API key specific to the integration.
+2. **Integration Setup:** With Recurly's assistance, set up the integration within the Oracle NetSuite Sandbox environment.
+3. **YAML File Creation:** Recurly will build a YAML file based on the values specified during the data mapping session. This file will be used to create the configuration file.
+4. **External ID Exercise:** Collaborate with Recurly to conduct an External ID exercise to minimize the risk of duplicating records in Oracle NetSuite.
+5. **Initial QA Audit:** Recurly will conduct a Quality Assurance audit of the data transferred to the Oracle NetSuite sandbox to ensure accuracy.
+6. **Integration Sync Activation:** Turn the auto-sync on. Data will begin to flow into the merchant's NetSuite sandbox account.
+7. **Prepare for UAT:** As a merchant, prepare for the User Acceptance Testing (UAT) phase.
+
+### Step 3: User Acceptance
+
+1. **UAT Execution:** Perform end-to-end User Acceptance Testing in the Oracle NetSuite sandbox to ensure the integration works seamlessly.
+2. **Issue Resolution:** Collaborate with Recurly to address and resolve any issues identified during UAT.
+3. **UAT Sign-off:** Once satisfied with the UAT results, approve and sign off on the integration.
+
+### Step 4: Production
+
+1. **YAML File Check:** Recurly will compare the sandbox YAML File version against the PROD version.
+2. **YAML File Approval:** Approve the YAML file to ensure it aligns with the production requirements.
+3. **Lock YAML File:** Recurly will lock the YAML file to prevent further changes.
+4. **Cutover Plan:** Discuss cutover plan with Recurly
+5. **Integration Record:** Create Integration Record in Merchant's NetSuite Production Instance
+6. **Integration Deployment:** Recurly will deploy the finalized integration to the merchant's Oracle NetSuite PROD environment.
+7. **Data Backfill:** Recurly will backfill the merchant's current data to the integration start date, ensuring all historical data is captured.
+
+### Step 5: Project Completion
+
+1. **Post Go Live Support:** Recurly’s professional services team provides support through the merchant's month end.
+2. **Transition to Recurly Support:** Transition to Recurly's Support for ongoing support of the integration.  
+   By following these step-by-step processes, merchants can ensure a smooth and efficient integration of Recurly with Oracle NetSuite, enabling them to manage their subscription billing and financial data seamlessly.
+
+# Troubleshooting
+
+Should any issues arise post-implementation, merchants can contact Recurly Support for issues related to data mismatches or other integration-specific problems. For data synchronization issues, the Recurly Netsuite Integration portal will provide a view of these sync errors as well as ways to remediate (see Synchronization Management). For issues related to the Oracle NetSuite sandbox or other Oracle NetSuite-specific problems, contacting Oracle NetSuite directly is recommended.
+
+## Synchronization Management
+
+In Recurly **Integrations - NetSuite**, you can identify, investigate and resolve synchronization errors to ensure financial data remains consistent across systems.
+
+<Image align="center" border={true} width="-1px" src="https://files.readme.io/bdc52078546492c9448ce296fea15e50431da2c37223055a701a2bd6ac20c286-image.png" className="border" />
+
+<br />
+
+### View and Investigate Sync Errors
+
+* **Current Errors** will show the total number of sync errors for your integration. Click on "View All" to see a complete list of current sync errors
+
+<Image align="center" border={true} width="76% " src="https://files.readme.io/1881cf059ecbdb89ad506571d610d6402ee5114208d9af0b36a0d4ddc0b136e5-image.png" className="border" />
+
+<br />
+
+* The dashboard below provides a high-level overview of failed sync errors.
+
+  **NetSuite Type** - filter on the left menu to narrow down issues by specific NetSuite object types:
+
+  * **Customers** - customer accounts that are synced into NetSuite
+  * **Invoices** - invoices that are synced into NetSuite
+  * **Credit memos** - credit invoices that are synced into NetSuite
+  * **Customer payments** - payment transactions that are synced into NetSuite
+  * **Customer refunds** - refund that are synced into NetSuite
+  * **Non inventory sales items** - Recurly catalog including plans, add-ons, and items that are synced into NetSuite
+* Sync error details will include:
+  * **Object ID** - depending on the object type, this may be either an account code, invoice number, transaction uuid, plan name, or add-on/item name
+  * **Object type** - NetSuite type such as the customer account, invoice, transaction, plan, add-on, item or credit memo
+  * **Last updated** - timestamp of the last attempted sync
+  * **Error message**  - NetSuite specific error message or explanation of the sync error
+  * **External ID** - reference ID for the NetSuite internal ID
+
+<Image align="center" border={true} width="120% " src="https://files.readme.io/2ccf437d64af1d0fb2a018bdcc54b691695da3fcd1108ef239cca88543688e95-image.png" className="border" />
+
+<br />
+
+**Drill down into the sync attempts of the error** - drill down to view the sync attempts by clicking on the error line, any field except for the Object ID. Clicking on the Object ID will navigate back to the original NetSuite object type, e.g. customer account, invoice, plan, etc.
+
+In the **NetSuite Sync Errors - Sync Attempts** dashboard, all sync attempts for the particular sync error will be listed in chronological order from the most recent attempt to the earliest attempt to sync.
+
+<Image align="center" border={true} src="https://files.readme.io/5d9285c2042cfc88262fa8a964b0915526fa2b9ea858a24a08d27cb6352dc55c-image.png" className="border" />
+
+<br />
+
+### Resolving Errors
+
+Once the underlying issue is fixed (either in the Recurly platform or within your NetSuite instance), you can re-attempt the synchronization.
+
+**Selective Re-sync or Ignore Error**
+
+* **Re-Sync** - within the specific sync error record, click the Re-sync button in the upper right corner to attempt to push the updated data to NetSuite and the record will be queued for the next sync.
+* **Ignore** - if a failed sync does not need to be pushed to NetSuite, you can choose to ignore and the sync error.
+
+<Image align="center" border={true} src="https://files.readme.io/6ddb2059f31cbc3ceef49ddddea4ed81fdf2c9013ad26e5439df8703b43fc5eb-image.png" className="border" />
+
+<br />
+
+# FAQs
+
+### Q: How does the sync process work? Please go into detail.
+
+**A:** The integration follows a structured 3-step approach: Plans, Accounts, & Transactions.
+Initially, we synchronize the plans. This step is crucial because it inserts the necessary details into the relevant transactions. It is also within these records that we persist the essential revenue recognition data.
+
+Next, we synchronize the accounts to ensure that your customer data is prepared and ready for the upcoming transactions.
+
+Lastly, we synchronize the transactions to ensure that your financial data aligns accurately with your billing system.
+For a deeper dive or more specific questions, please contact your CSM/AM to obtain our data sheet.
+
+### Q: What is the cadence of the syncs?
+
+**A:** The synchronization is scheduled to occur every 5-10 minutes. For a more comprehensive understanding or specific details, please reach out to [support@recurly.com](mailto:support@recurly.com).
+
+### Q: Do you sync over parent accounts as customers as well?
+
+**A:** Yes, we certainly do.
+
+### Q: Can we use serialized inventory items as the destination for plans/items?
+
+**A:** Currently, we do not support serialized inventory items for this purpose. We only cater to non-inventory items.
+
+### Q: How do we manage external ids among customers, plans & transactions?
+
+**A:** We offer multiple strategies to manage your external id for customers. One method is leveraging our out-of-the-box account id. Alternatively, you can create a unique account code or insert a new id value into our custom fields. However, a limitation with this approach is that ensuring uniqueness and preventing collisions becomes the merchant's responsibility. This method is also not suitable for parent-child account setups.
+
+For plans and items, you can make use of the out-of-the-box ids (like plan id or item id). Another option is to use the plan code or item code, but this requires the merchant to ensure the uniqueness of these values. For add-ons, it's mandatory to use a distinct add-on code.
+
+For transactions, we consistently use the associated id for that specific record (for instance, the invoice id for invoices) to insert the value into NetSuite's external id field.

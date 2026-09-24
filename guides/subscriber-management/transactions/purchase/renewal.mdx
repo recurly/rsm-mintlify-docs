@@ -1,0 +1,70 @@
+---
+title: Renewals
+---
+
+# Overview
+
+Subscription renewals in Recurly automatically generate new invoices and trigger recurring **purchase** attempts through the configured payment gateway. Each renewal maintains billing continuity for ongoing subscriptions and ensures customers are charged based on their active plan or billing cycle with the known payment method or gateway token on file.
+
+### Required plan
+
+These features are available to all customers on any Recurly subscription plan.
+
+### Prerequisites & limitations
+
+* **Prerequisites:** Active subscription, valid payment method, and a configured payment gateway.
+* **Limitations:**
+  * **Boleto payments** do not support direct recurring transactions.
+  * **Gateway delays** or **network timeouts** may temporarily mark an transaction as **Pending** until confirmation. Communication Errors between Recurly and Gateways can occur. When this happens, we will continuously retry the payment behind-the-scenes and update the transaction/invoice upon receipt of a final decision.
+  * Prerenewal email notifications are only sent if **External Subscription Notifications** are enabled on your site.
+  * Card and certain gateway token renewals require an NTID to be successful.
+  * Renewals will only use a "**Purchase**" transaction type and do not support separate Auth and Capture.
+
+# Definition
+
+A renewal represents the automatic continuation of a subscription term. When a renewal occurs, Recurly generates a new invoice, processes payment through the gateway, and updates the subscription term and invoice status accordingly.
+
+# Key benefits
+
+* **Automatic billing:** Recurly manages renewals without manual intervention.
+* **Gateway integration:** Payments are processed seamlessly using the customer’s saved payment method.
+* **Lifecycle visibility:** Notifications track every step—renewal, upgrade, downgrade, and expiration.
+* **Localized options:** For payment methods like **Boleto**, Recurly adapts invoice handling automatically.
+
+# Key details
+
+## Renewal process
+
+1. **Detect** an active subscription approaching its renewal date.
+   1. If **Account Updater** is active, a pre-renewal update will occur if applicable to avoid renewal failures.
+   2. Depending on the payment method, a pre-renewal push notification (UPI), or renewal reminder email will be sent to the customer's email on file. Ensure you have a valid customer email on file at all times. 
+2. **Generate** a new recurring invoice based on the subscription plan, billing cycle, and add-ons.
+3. **Communicate** with the configured payment gateway to **process the payment** automatically on the bill date or appropriate date per Net-Terms settings.
+4. **Update** the invoice and subscription status accordingly:
+   1. **Paid:** The renewal succeeded and payment was confirmed. The subscription remains **active**.
+   2. **Past Due:** Payment failed or has a payment-method-specific caveat (e.g., Boleto). The Invoice will enter dunning to collect on the past due amount. Subscription remains **active**.
+   3. **Pending**: Payment is asynchronous and has not received a status update yet (e.g. ACH, SEPA, UPI). Subscription remains **active.**
+   4. **Failed:** Retries have failed to collect on the invoice and the invoice has moved into a Failed state. Dunning settings will determine the subscription's final state.
+
+## Example: Prerenewal workflow
+
+| Step | Action                           | Description                                                                            |
+| ---- | -------------------------------- | -------------------------------------------------------------------------------------- |
+| 1    | **Prerenewal notification sent** | Alerts your system or customer of an upcoming renewal.                                 |
+| 2    | **Invoice generated**            | Recurly creates a new invoice and attempts to charge the saved payment method.         |
+| 3    | **Transaction created**          | Payment gateway processes the transaction.                                             |
+| 4    | **Invoice updated**              | Recurly updates the invoice to **Paid** or **Past Due** depending on gateway response. |
+
+## Monitoring renewals
+
+* Use the **Invoices** section to **track renewal invoices** and statuses.
+* Use the **Subscriptions** section to **view renewal history** and upcoming renewal dates.
+* Enable **Webhooks** or **External Subscription Notifications** to integrate renewals into your own system.
+
+## Troubleshooting
+
+* **Invoice stuck as Past Due:** For Boleto, wait for the customer to pay; for card or ACH payments, check gateway or bank response.
+* **Payment declined:** Ensure the payment method is valid and retry the charge manually if needed.
+* **No renewal triggered:** Confirm subscription status is active and next renewal date is set.
+
+<br />

@@ -1,0 +1,46 @@
+---
+title: Users - export
+---
+
+# Overview
+
+The User export lets administrators download a comprehensive report of every user with access to their Recurly site. The report includes each user's name, email address, access permissions, creation date, and assigned role — everything you need to audit and manage your team's access in one place.
+
+### Required plan
+
+This feature is available to all merchants on an Elite Recurly plan with an Admin and Integrations role, or a role that includes Admin and Integrations permissions. To enable this feature on your Elite site, create a support request or contact your CSM. This export is also available as an optional add-on for customers on Recurly's Starter and Professional plans — reach out to Support or your CSM for more information.
+
+### Prerequisites and limitations
+
+The User export only includes users who had and continue to have access during the selected date range. Deleted users are excluded from the report.
+
+## Filters
+
+<Image align="center" border={true} width="75%" src="https://files.readme.io/324cd97bdefde1113752271d8329fedfee486dbdef5b62c9818068a4671665d7-image.png" className="border" />
+
+Use these filters to narrow down the users displayed in your export:
+
+* **Versions**: Select the export version that best fits your needs. Versions are based on the changelog at the bottom of this page
+* **Export on**: Defaults to the creation date and time of each user
+* **Time range**: Defaults to yesterday, capturing all users created on that day in your site's default time zone
+
+# Exports table
+
+
+[Download our complete export schema](https://docs.google.com/spreadsheets/d/1U0_Wl_NMScJqKBZoBKMmQnybmLEr0gFi6r7dfNiP9Qc/export?format=xlsx)
+
+
+| Id                                        | Example                                               | Description                                                                | Data type |
+| :---------------------------------------- | :---------------------------------------------------- | :------------------------------------------------------------------------- | :-------- |
+| <span id="email">email</span>             | [john_doe@recurly.com](mailto:john_doe@recurly.com)   | The email address of the user.                                             | string    |
+| <span id="first_name">first_name</span>   | John                                                  | The first name of the user.                                                | string    |
+| <span id="last_name">last_name</span>     | Doe                                                   | The last name of the user.                                                 | string    |
+| <span id="user_access">user_access</span> | customers,analytics,configurations,integrations,admin | A comma-delimited list of permissions assigned to the user.                | string    |
+| <span id="date_added">date_added</span>   | 2026-01-01 10:00:00 PST                               | The timestamp when the user accepted their invitation to the Recurly site. | timestamp |
+| <span id="user_role">user_role</span>     | Site Admin                                            | The role assigned to the user.                                             | string    |
+
+# Version changelog
+
+### Version 2
+
+* Addition of `user_role` column

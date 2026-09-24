@@ -1,0 +1,113 @@
+---
+title: Prepaid account balance
+---
+
+<div className="rp-page">
+  <div style={{position:"relative",paddingTop:"56.25%",marginBottom:"28px",borderRadius:"10px",overflow:"hidden"}}>
+    <iframe src="https://www.youtube.com/embed/nVnGfZmoTRE" title="Prepayments: Demo" frameBorder="0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowFullScreen style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"none"}}></iframe>
+  </div>
+  <div className="rp-overview">
+    Prepaid account balance lets your customers pay ahead of time — the amount they pay is added to their account balance and automatically applied to future subscription renewals and one-time purchases until it runs out.
+  </div>
+  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true"></i> Available on all Recurly plans</div>
+  <div className="rp-callout rp-callout-important">
+    <strong><i className="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Prerequisites</strong>
+    The <strong>Credit Invoices</strong> and <strong>Only Bill What Changed</strong> features must both be enabled on your site before you can use prepaid account balance. Contact <a href="mailto:support@recurly.com">support@recurly.com</a> or your CSM if either setting isn't active.
+  </div>
+  <div className="rp-toc">
+    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
+    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
+    <a className="rp-toc-pill" href="#setting-up-a-prepaid-account-balance"><span className="rp-toc-num">3</span>Setting up a prepaid balance</a>
+    <a className="rp-toc-pill" href="#considerations"><span className="rp-toc-num">4</span>Considerations</a>
+    <a className="rp-toc-pill" href="#refunds"><span className="rp-toc-num">5</span>Refunds</a>
+  </div>
+</div>
+
+# Definition
+
+<div className="rp-definition">
+  Prepaid account balance is a feature that lets customers pay in advance. The prepaid amount is credited to their account balance and automatically applied to settle future subscription and one-time purchase invoices — no manual intervention needed.
+</div>
+
+# Key benefits
+
+<div className="rp-benefits">
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-money-bill-trend-up" aria-hidden="true"></i></div>
+    <strong>Immediate cash flow</strong>
+    <span>Collect payment upfront before the subscription period begins, improving your financial predictability and stability.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-user-plus" aria-hidden="true"></i></div>
+    <strong>Higher acquisition and conversion</strong>
+    <span>Offer discounts on prepaid amounts to make your plans more attractive and give customers a reason to commit early.</span>
+  </div>
+  <div className="rp-benefit">
+    <div className="rp-benefit-icon"><i className="fa-solid fa-circle-minus" aria-hidden="true"></i></div>
+    <strong>Lower transaction costs</strong>
+    <span>When subscribers pay from their account balance, there are no transaction fees or interchange charges — reducing your per-invoice processing costs.</span>
+  </div>
+</div>
+
+# Setting up a prepaid account balance
+
+You can create a prepaid account balance via API v3, API v2, or the Admin Console.
+
+## Via API v3
+
+Send a <a href="https://docs.recurly.com/recurly-subscriptions/v2021-02-25/reference/create_purchase" target="_blank">Purchase</a> request containing a `line_item` with `"origin": "prepayment"`.
+
+## Via API v2
+
+Send a <a href="https://docs.recurly.com/recurly-subscriptions/v2021-02-25/reference/create_purchase" target="_blank">Purchase</a> request for a charge adjustment with `"origin": "prepayment"`.
+
+## Via the Admin Console
+
+Create a charge with an immediate time frame. Select **Prepaid Account Balance**, enter an amount, and preview the charge before confirming.
+
+<span id="rp-close"></span>
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/0de698f-2021-03-04_1351.png" alt="Prepaid account balance charge creation in the Admin Console" className="rp-zoom-img" /> </a>
+  <a id="zoom-0de698f" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/0de698f-2021-03-04_1351.png" alt="" /> </a>
+</span>
+
+## What happens after a successful purchase
+
+Once the purchase is processed, the transaction amount is added to the account balance. All future subscription renewals and one-time purchases are automatically deducted from that balance until it's depleted.
+
+If a purchase transaction fails, the invoice is marked as failed and enters the dunning process for collection.
+
+<span className="rp-zoom">
+  <a className="rp-zoom-label" href="#rp-close"> <img src="https://files.readme.io/267de5a-Image_2020-09-15_at_3.33.44_PM.png" alt="Hosted Account Management page showing account balance, active subscriptions, and associated invoices" className="rp-zoom-img" /> </a>
+  <a id="zoom-267de5a" className="rp-zoom-overlay" href="#rp-close"> <img src="https://files.readme.io/267de5a-Image_2020-09-15_at_3.33.44_PM.png" alt="" /> </a>
+</span>
+
+The Hosted Account Management page displays the account balance, active subscriptions, and all associated invoices — giving subscribers full visibility into their account.
+
+## Manual collection
+
+For accounts using manual collection, the account balance stays in a processing state until the manual payment is collected.
+
+## Asynchronous payment methods
+
+Prepayments made through ACH, other direct debit methods, or the UI will not fund the prepaid balance until Recurly receives a successful transaction notification from the payment provider.
+
+# Considerations
+
+Keep the following in mind when using prepaid account balances:
+
+<div className="rp-list">
+  <ul>
+    <li>Prepaid balances should be tax-exempt. Taxes are applied on the invoice when the actual product or service is sold.</li>
+    <li>Do not mix prepaid account balance line items with other line items in the same purchase request.</li>
+    <li>Prepaid account balance purchases must be invoiced immediately — not at renewal.</li>
+    <li>A prepaid account balance cannot be used to fund another prepaid account balance. Subsequent prepayment purchases will not draw from the existing balance.</li>
+    <li>Revenue recognition for account balances must be managed by you, the merchant.</li>
+    <li>See <a href="/guides/recurring-billing/invoice-configuration/adjustments#section-invoice-custom-credits" target="_blank">Adjustments</a> for details on how credits and account balances are applied to invoices.</li>
+  </ul>
+</div>
+
+# Refunds
+
+Prepaid account balances that haven't been used can be refunded. The refund is returned to the original payment method used for the prepayment.
