@@ -1118,6 +1118,13 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "API v2021-02-25",
+            "openapi": {
+              "source": "openapi/v2021-02-25.yaml",
+              "directory": "reference/v2021-02-25"
+            }
           }
         ]
       },
