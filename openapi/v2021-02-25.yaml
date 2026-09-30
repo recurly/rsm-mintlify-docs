@@ -472,7 +472,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const sites = client.listSites({ params: { limit: 200 } })
@@ -633,7 +633,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -862,7 +862,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const accounts = client.listAccounts({ params: { limit: 200 } })
@@ -1039,7 +1039,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -1494,7 +1494,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -1723,7 +1723,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -2006,7 +2006,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -2228,7 +2228,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/acquisition":
     parameters:
     - "$ref": "#/components/parameters/account_id"
@@ -2251,7 +2251,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -2473,7 +2473,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -2757,7 +2757,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -2974,7 +2974,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -3185,7 +3185,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -3399,7 +3399,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -3643,7 +3643,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorMayHaveTransaction"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -3901,7 +3901,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -4124,7 +4124,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorMayHaveTransaction"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -4352,7 +4352,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/billing_infos":
     get:
       tags:
@@ -4386,7 +4386,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - Billing Infos
@@ -4445,7 +4445,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorMayHaveTransaction"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/billing_infos/{billing_info_id}":
     get:
       tags:
@@ -4468,7 +4468,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - Billing Infos
@@ -4528,7 +4528,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorMayHaveTransaction"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Billing Infos
@@ -4557,7 +4557,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/billing_infos/{billing_info_id}/verify":
     post:
       tags:
@@ -4600,7 +4600,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorMayHaveTransaction"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/billing_infos/{billing_info_id}/verify_cvv":
     post:
       tags:
@@ -4648,7 +4648,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/coupon_redemptions":
     get:
       tags:
@@ -4683,7 +4683,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const redemptions = client.listAccountCouponRedemptions(accountId, { params: { limit: 200 } })
@@ -4844,7 +4844,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const redemptions = await client.listActiveCouponRedemptions(accountId, { params: { limit: 200 } })
@@ -5000,7 +5000,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Python
         source: |
           try:
@@ -5218,7 +5218,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -5428,7 +5428,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Coupon Redemption
@@ -5463,7 +5463,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/credit_payments":
     get:
       tags:
@@ -5504,7 +5504,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const payments = client.listAccountCreditPayments(accountId, { params: { limit: 200 } })
@@ -5685,7 +5685,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - External Account
@@ -5727,7 +5727,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/external_accounts/{external_account_id}":
     parameters:
     - "$ref": "#/components/parameters/account_id"
@@ -5768,7 +5768,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - External Account
@@ -5810,7 +5810,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - External Account
@@ -5847,7 +5847,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/external_invoices":
     parameters:
     - "$ref": "#/components/parameters/account_id"
@@ -5881,7 +5881,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/invoices":
     get:
       tags:
@@ -5925,7 +5925,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const invoices = client.listAccountInvoices(accountId, { params: { limit: 200 } })
@@ -6102,7 +6102,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -6403,7 +6403,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -6703,7 +6703,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const lineItems = client.listAccountLineItems(accountId, { params: { limit: 200 } })
@@ -6877,7 +6877,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -7173,7 +7173,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const notes = client.listAccountNotes(accountId, { params: { limit: 200 } })
@@ -7339,7 +7339,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/notes/{account_note_id}":
     get:
       tags:
@@ -7368,7 +7368,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -7585,7 +7585,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/shipping_addresses":
     get:
       tags:
@@ -7621,7 +7621,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const addresses = client.listShippingAddresses(accountId, { params: { limit: 200 } })
@@ -7792,7 +7792,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -8128,7 +8128,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -8365,7 +8365,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -8640,7 +8640,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -8870,7 +8870,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const subscriptions = client.listAccountSubscriptions(accountId, { params: { limit: 200 } })
@@ -9045,7 +9045,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const transactions = client.listAccountTransactions(accountId, { params: { limit: 200 } })
@@ -9223,7 +9223,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Python
         source: |
           params = {"limit": 200}
@@ -9346,7 +9346,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const acquisitions = client.listAccountAcquisition({ params: { limit: 200 } })
@@ -9513,7 +9513,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const coupons = client.listCoupons({ params: { limit: 200 } })
@@ -9690,7 +9690,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -10035,7 +10035,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -10266,7 +10266,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -10513,7 +10513,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -10727,7 +10727,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/coupons/{coupon_id}/generate_sync":
     post:
       tags:
@@ -10776,7 +10776,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/coupons/{coupon_id}/restore":
     put:
       tags:
@@ -10824,7 +10824,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/coupons/{coupon_id}/unique_coupon_codes":
     get:
       tags:
@@ -10861,7 +10861,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/credit_payments":
     get:
       tags:
@@ -10901,7 +10901,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const payments = client.listCreditPayments({ params: { limit: 200 } })
@@ -11063,7 +11063,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/custom_field_definitions":
     get:
       tags:
@@ -11115,7 +11115,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const definitions = client.listCustomFieldDefinitions({ params: { limit: 200 } })
@@ -11278,7 +11278,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -11489,7 +11489,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     get:
       tags:
       - General Ledger Account
@@ -11516,7 +11516,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/general_ledger_accounts/{general_ledger_account_id}":
     get:
       tags:
@@ -11538,7 +11538,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - General Ledger Account
@@ -11565,7 +11565,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/performance_obligations/{performance_obligation_id}":
     get:
       tags:
@@ -11587,7 +11587,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/performance_obligations":
     get:
       tags:
@@ -11607,7 +11607,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/invoice_templates/{invoice_template_id}/accounts":
     get:
       tags:
@@ -11652,7 +11652,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/items":
     get:
       tags:
@@ -11694,7 +11694,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const items = client.listItems({ params: { limit: 200 } })
@@ -11870,7 +11870,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -12241,7 +12241,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -12471,7 +12471,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -12751,7 +12751,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -12970,7 +12970,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -13189,7 +13189,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - Measured Unit
@@ -13232,7 +13232,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/measured_units/{measured_unit_id}":
     get:
       tags:
@@ -13260,7 +13260,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - Measured Unit
@@ -13305,7 +13305,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Measured Unit
@@ -13333,7 +13333,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_products":
     get:
       tags:
@@ -13363,7 +13363,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - External Product
@@ -13400,7 +13400,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_products/{external_product_id}":
     parameters:
     - "$ref": "#/components/parameters/external_product_id"
@@ -13428,7 +13428,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - External Product
@@ -13459,7 +13459,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - External Product
@@ -13485,7 +13485,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_products/{external_product_id}/external_product_references":
     parameters:
     - "$ref": "#/components/parameters/external_product_id"
@@ -13518,7 +13518,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - External Product Reference
@@ -13549,7 +13549,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_products/{external_product_id}/external_product_references/{external_product_reference_id}":
     parameters:
     - "$ref": "#/components/parameters/external_product_id"
@@ -13578,7 +13578,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - External Product Reference
@@ -13603,7 +13603,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_subscriptions":
     post:
       tags:
@@ -13642,7 +13642,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     get:
       tags:
       - External Subscription
@@ -13671,7 +13671,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_subscriptions/{external_subscription_id}":
     get:
       parameters:
@@ -13706,7 +13706,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       parameters:
       - "$ref": "#/components/parameters/external_subscription_id"
@@ -13752,7 +13752,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_subscriptions/{external_subscription_id}/external_invoices":
     parameters:
     - "$ref": "#/components/parameters/external_subscription_id"
@@ -13786,7 +13786,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - External Invoice
@@ -13824,7 +13824,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/invoices":
     get:
       tags:
@@ -13867,7 +13867,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const invoices = client.listInvoices({ params: { limit: 200 } })
@@ -14028,7 +14028,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -14246,7 +14246,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -14517,7 +14517,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -14781,7 +14781,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -15009,7 +15009,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -15231,7 +15231,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -15454,7 +15454,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -15680,7 +15680,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -15901,7 +15901,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -16092,7 +16092,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -16182,7 +16182,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const lineItems = client.listInvoiceLineItems(invoiceId, { params: { limit: 200 } })
@@ -16356,7 +16356,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const redemptions = client.listInvoiceCouponRedemptions(invoiceId, { params: { limit: 200 } })
@@ -16520,7 +16520,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const invoices = client.listRelatedInvoices(invoiceId, { params: { limit: 200 } })
@@ -16692,7 +16692,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -16986,7 +16986,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/line_items":
     get:
       tags:
@@ -17030,7 +17030,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const lineItems = client.listLineItems({ params: { limit: 200 } })
@@ -17195,7 +17195,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -17409,7 +17409,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -17636,7 +17636,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const plans = client.listPlans({ params: { limit: 200 } })
@@ -17806,7 +17806,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -18161,7 +18161,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -18385,7 +18385,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -18629,7 +18629,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -18853,7 +18853,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const addOns = client.listPlanAddOns(planId, { params: { limit: 200 } })
@@ -19023,7 +19023,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -19375,7 +19375,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -19604,7 +19604,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -19839,7 +19839,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -20053,7 +20053,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/price_segments/{price_segment_id}":
     get:
       tags:
@@ -20081,7 +20081,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/add_ons":
     get:
       tags:
@@ -20123,7 +20123,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const addOns = client.listAddOns({ params: { limit: 200 } })
@@ -20280,7 +20280,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -20506,7 +20506,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const methods = client.listShippingMethods({ params: { limit: 200 } })
@@ -20678,7 +20678,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/shipping_methods/{shipping_method_id}":
     get:
       tags:
@@ -20706,7 +20706,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - Shipping Method
@@ -20751,7 +20751,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Shipping Method
@@ -20780,7 +20780,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/subscriptions":
     get:
       tags:
@@ -20822,7 +20822,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const subscriptions = client.listSubscriptions({ params: { limit: 200 } })
@@ -20993,7 +20993,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -21306,7 +21306,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -21525,7 +21525,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -21835,7 +21835,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -22084,7 +22084,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -22315,7 +22315,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -22553,7 +22553,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -22816,7 +22816,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -23047,7 +23047,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/subscriptions/{subscription_id}/preview_renewal":
     get:
       tags:
@@ -23084,7 +23084,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -23314,7 +23314,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -23555,7 +23555,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -23823,7 +23823,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -24051,7 +24051,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/subscriptions/{subscription_id}/invoices":
     get:
       tags:
@@ -24095,7 +24095,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const invoices = client.listSubscriptionInvoices(subscriptionId, { params: { limit: 200 } })
@@ -24272,7 +24272,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const lineItems = client.listSubscriptionLineItems(subscriptionId, { params: { limit: 200 } })
@@ -24439,7 +24439,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const redemptions = client.listSubscriptionCouponRedemptions(subscriptionId, { params: { limit: 200 } })
@@ -24601,7 +24601,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Coupon Redemption
@@ -24636,7 +24636,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/subscriptions/{subscription_id}/add_ons/{add_on_id}/usage":
     get:
       tags:
@@ -24678,7 +24678,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - Usage
@@ -24724,7 +24724,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/usage/{usage_id}":
     get:
       tags:
@@ -24758,7 +24758,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - Usage
@@ -24803,7 +24803,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Usage
@@ -24838,7 +24838,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/transactions":
     get:
       tags:
@@ -24881,7 +24881,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           const transactions = client.listTransactions({ params: { limit: 200 } })
@@ -25042,7 +25042,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -25255,7 +25255,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Unique Coupon Code
@@ -25288,7 +25288,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/unique_coupon_codes/{unique_coupon_code_id}/restore":
     parameters:
     - "$ref": "#/components/parameters/unique_coupon_code_id"
@@ -25322,7 +25322,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/purchases":
     post:
       tags:
@@ -25363,7 +25363,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -25809,7 +25809,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -26252,7 +26252,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -26753,7 +26753,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/purchases/{transaction_id}/capture":
     post:
       tags:
@@ -26797,7 +26797,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/purchases/{transaction_id}/cancel/":
     parameters:
     - "$ref": "#/components/parameters/transaction_id"
@@ -26835,7 +26835,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/export_dates":
     get:
       tags:
@@ -26869,7 +26869,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -27066,7 +27066,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples:
+      x-codeSamples:
       - lang: Node.js
         source: |
           try {
@@ -27257,7 +27257,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - Dunning Campaigns
@@ -27313,7 +27313,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/dunning_campaigns/{dunning_campaign_id}":
     parameters:
     - "$ref": "#/components/parameters/dunning_campaign_id"
@@ -27347,7 +27347,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     put:
       tags:
       - Dunning Campaigns
@@ -27405,7 +27405,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     delete:
       tags:
       - Dunning Campaigns
@@ -27443,7 +27443,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/dunning_campaigns/email_templates":
     get:
       tags:
@@ -27476,7 +27476,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/dunning_campaigns/{dunning_campaign_id}/bulk_update":
     parameters:
     - "$ref": "#/components/parameters/dunning_campaign_id"
@@ -27515,7 +27515,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/invoice_templates":
     get:
       tags:
@@ -27545,7 +27545,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/invoice_templates/{invoice_template_id}":
     parameters:
     - "$ref": "#/components/parameters/invoice_template_id"
@@ -27579,7 +27579,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_invoices":
     get:
       tags:
@@ -27611,7 +27611,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_invoices/{external_invoice_id}":
     parameters:
     - "$ref": "#/components/parameters/external_invoice_id"
@@ -27645,7 +27645,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_subscriptions/{external_subscription_id}/external_payment_phases":
     parameters:
     - "$ref": "#/components/parameters/external_subscription_id"
@@ -27679,7 +27679,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/external_subscriptions/{external_subscription_id}/external_payment_phases/{external_payment_phase_id}":
     parameters:
     - "$ref": "#/components/parameters/external_subscription_id"
@@ -27708,7 +27708,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/entitlements":
     parameters:
     - "$ref": "#/components/parameters/account_id"
@@ -27737,7 +27737,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/accounts/{account_id}/external_subscriptions":
     parameters:
     - "$ref": "#/components/parameters/account_id"
@@ -27769,7 +27769,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/business_entities/{business_entity_id}":
     parameters:
     - "$ref": "#/components/parameters/business_entity_id"
@@ -27797,7 +27797,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/business_entities":
     get:
       tags:
@@ -27823,7 +27823,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/gift_cards":
     get:
       tags:
@@ -27849,7 +27849,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
     post:
       tags:
       - Gift Cards
@@ -27886,7 +27886,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/gift_cards/{gift_card_id}":
     parameters:
     - "$ref": "#/components/parameters/gift_card_id"
@@ -27914,7 +27914,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/gift_cards/preview":
     post:
       tags:
@@ -27952,7 +27952,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/gift_cards/{redemption_code}/redeem":
     parameters:
     - "$ref": "#/components/parameters/redemption_code"
@@ -27992,7 +27992,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
   "/business_entities/{business_entity_id}/invoices":
     get:
       tags:
@@ -28036,7 +28036,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-      x-code-samples: []
+      x-codeSamples: []
 servers:
 - url: https://v3.recurly.com
 - url: https://v3.eu.recurly.com
