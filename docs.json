@@ -1118,7 +1118,12 @@
                 ]
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "V3 API reference",
+        "groups": [
           {
             "group": "API v2021-02-25",
             "openapi": {
