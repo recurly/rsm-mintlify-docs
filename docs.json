@@ -1144,6 +1144,15 @@
             "pages": [
               "custom-pages/open-source-attribution"
             ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              {
+                "group": "Getting Started",
+                "pages": []
+              }
+            ]
           }
         ]
       }
@@ -1192,5 +1201,11 @@
       "label": "Open Recurly",
       "href": "https://app.recurly.com"
     }
+  },
+  "styling": {
+    "eyebrows": "section"
+  },
+  "metadata": {
+    "timestamp": true
   }
 }
