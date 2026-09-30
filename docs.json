@@ -1178,7 +1178,12 @@
       "languages": [
         "curl",
         "javascript",
-        "python"
+        "python",
+        "csharp",
+        "ruby",
+        "go",
+        "php",
+        "java"
       ]
     }
   },
