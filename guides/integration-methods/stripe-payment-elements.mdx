@@ -2,20 +2,30 @@
 title: Stripe Payment Elements
 ---
 
-<div className="rp-page">
-  <div className="rp-overview">Stripe Payment Elements and Express Checkout Elements let you build a fully branded checkout experience using Stripe's components. Pass the resulting confirmation token to Recurly's v3 API to process payments, store reusable billing details, and support both one-time and recurring charges.</div>
-  <div className="rp-plan"><i className="fa-solid fa-key" aria-hidden="true" /> Available on all Recurly plans</div>
+# Overview 
 
-  <div className="rp-toc">
-    <a className="rp-toc-pill" href="#definition"><span className="rp-toc-num">1</span>Definition</a>
-    <a className="rp-toc-pill" href="#key-benefits"><span className="rp-toc-num">2</span>Key benefits</a>
-    <a className="rp-toc-pill" href="#key-details"><span className="rp-toc-num">3</span>Key details</a>
-  </div>
-</div>
+Build a fully branded checkout UI with Stripe Payment Elements, then pass a confirmation token to Recurly's v3 API to process payments and store reusable billing details.
 
-### Definition
+## Definition
+
+Stripe Payment Elements and Express Checkout Elements let you build a fully branded checkout experience using Stripe's components. Pass the resulting confirmation token to Recurly's v3 API to process payments, store reusable billing details, and support both one-time and recurring charges.
+
+<Note>
+  **Available on all Recurly plans**
+</Note>
 
 ### Prerequisites and limitations
+
+- Requires a working Recurly v3 API integration and Recurly.js setup
+- Some Stripe payment methods and APMs are restricted by merchant country — if a method doesn't appear in your Stripe Dashboard, your account's country may not qualify (e.g., Revolut is available in the UK and EU only)
+- Stripe Payment Links, Stripe Checkout, and Radar are not supported through this integration
+- 100% coupons and account credits: because gateway communication is required during initial setup, free trials are recommended in these cases to avoid future payment failures
+
+# Definition
+
+<Info>
+  Stripe Payment Elements lets you build a fully branded checkout UI using Stripe's components, then pass a confirmation token to Recurly's v3 API to process payments and store reusable payment details. Upon approval, Recurly returns a gateway token for processing renewals and future charges — for both one-time and recurring billing.
+</Info>
 
 <ul className="rp-list">
   <li>Requires a working Recurly v3 API integration and Recurly.js setup</li>
@@ -24,49 +34,63 @@ title: Stripe Payment Elements
   <li>100% coupons and account credits: because gateway communication is required during initial setup, free trials are recommended in these cases to avoid future payment failures</li>
 </ul>
 
-# Definition
+# Key Benefits
 
-<div className="rp-definition">Stripe Payment Elements lets you build a fully branded checkout UI using Stripe's components, then pass a confirmation token to Recurly's v3 API to process payments and store reusable payment details. Upon approval, Recurly returns a gateway token for processing renewals and future charges — for both one-time and recurring billing.</div>
+<Check>
+  **Customizable checkout**
 
-# Key benefits
+  Design your own checkout UI with Stripe Payment Elements. Use Stripe's pre-built themes or build a fully custom experience with the Stripe customization APIs.
+</Check>
 
-<div className="rp-benefits">
-  <div className="rp-benefit">
-    <div className="rp-benefit-icon"><i className="fa-solid fa-paintbrush" aria-hidden="true"></i></div>
-    <strong>Customizable checkout</strong>
-    <span>Design your own checkout UI with Stripe Payment Elements. Use Stripe's pre-built themes or build a fully custom experience with the Stripe customization APIs.</span>
-  </div>
-  <div className="rp-benefit">
-    <div className="rp-benefit-icon"><i className="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
-    <strong>Secure tokenization</strong>
-    <span>Pass Stripe confirmation tokens to Recurly for PCI-compliant payment processing — a gateway token is returned for renewals and future charges.</span>
-  </div>
-  <div className="rp-benefit">
-    <div className="rp-benefit-icon"><i className="fa-solid fa-credit-card" aria-hidden="true"></i></div>
-    <strong>Wide payment support</strong>
-    <span>Accept cards, wallets, direct debit options, and select APMs — all within your custom checkout flow.</span>
-  </div>
-</div>
+<Check>
+  **Secure tokenization**
 
-# Key details
+  Pass Stripe confirmation tokens to Recurly for PCI-compliant payment processing — a gateway token is returned for renewals and future charges.
+</Check>
+
+<Check>
+  **Wide payment support**
+
+  Accept cards, wallets, direct debit options, and select APMs — all within your custom checkout flow.
+</Check>
+
+# Key Details
 
 ## Supported features
 
 Build a checkout solution with Stripe Payment Elements or Express Checkout Elements and pass the resulting confirmation token to Recurly via the v3 API. Customers can also update their billing information through Stripe Elements or existing Recurly solutions — Checkout, Hosted Payment Pages, or Recurly.js.
 
-
-
-Preview Stripe Elements capabilities on <a href="https://checkout.stripe.dev/elements" target="_blank">Stripe's demo site</a>. For full implementation details, see the <a href="/guides/api-guides/integration-guides/popular-use-cases/third-party-checkout#/" target="_blank">Developer Hub guide</a>.
+Preview Stripe Elements capabilities on [Stripe's demo site](https://checkout.stripe.dev/elements). For full implementation details, see the [Developer Hub guide](https://docs.recurly.com/recurly-subscriptions/docs/third-party-checkout#/).
 
 ***
 
 ## Supported payment methods
 
-<table className="rp-gw-table">
-  <tr className="rp-thead-row"><td>Category</td><td>Payment methods</td></tr>
-  <tr><td>Cards and wallets</td><td>Cards, Link by Stripe, Apple Pay, Google Pay, Cash App Pay</td></tr>
-  <tr><td>Direct debit</td><td>ACH, SEPA, BACS, iDEAL, BECS. ACH requires <a href="https://stripe.com/financial-connections" target="_blank">Financial Connections</a> for NACHA compliance.</td></tr>
-  <tr><td>APMs</td><td>Klarna Recurring (Pay Now, Pay Later, BNPL), Revolut (UK/EU only)</td></tr>
+<table>
+  <colgroup>
+    <col width="177" />
+    <col width="498" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Payment methods</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cards and wallets</td>
+      <td>Cards, Link by Stripe, Apple Pay, Google Pay, Cash App Pay</td>
+    </tr>
+    <tr>
+      <td>Direct debit</td>
+      <td>ACH, SEPA, BACS, iDEAL, BECS. ACH requires <a href="https://stripe.com/financial-connections" target="_blank">Financial Connections</a> for NACHA compliance.</td>
+    </tr>
+    <tr>
+      <td>APMs</td>
+      <td>Klarna Recurring (Pay Now, Pay Later, BNPL), Revolut (UK/EU only)</td>
+    </tr>
+  </tbody>
 </table>
 
 <br />
