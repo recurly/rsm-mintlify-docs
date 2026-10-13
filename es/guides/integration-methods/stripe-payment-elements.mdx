@@ -1,0 +1,96 @@
+---
+title: Stripe Payment Elements
+---
+
+# Descripción general 
+
+Crea una interfaz de pago totalmente personalizada con tu marca usando Stripe Payment Elements y, luego, envía un token de confirmación a la API v3 de Recurly para procesar pagos y almacenar datos de facturación reutilizables.
+
+## Definición
+
+Stripe Payment Elements y Express Checkout Elements te permiten crear una experiencia de pago totalmente personalizada con tu marca usando los componentes de Stripe. Envía el token de confirmación resultante a la API v3 de Recurly para procesar pagos, almacenar datos de facturación reutilizables y admitir cargos únicos y recurrentes.
+
+<Note>
+  **Disponible en todos los planes de Recurly**
+</Note>
+
+### Requisitos previos y limitaciones
+
+- Requiere una integración funcional con la API v3 de Recurly y una configuración de Recurly.js
+- Algunos métodos de pago y APM de Stripe están restringidos según el país del comercio. Si un método no aparece en tu Stripe Dashboard, es posible que el país de tu cuenta no cumpla los requisitos (por ejemplo, Revolut solo está disponible en el Reino Unido y la UE)
+- Stripe Payment Links, Stripe Checkout y Radar no son compatibles con esta integración
+- Cupones del 100 % y créditos de cuenta: como se requiere comunicación con la pasarela durante la configuración inicial, se recomiendan las pruebas gratuitas en estos casos para evitar fallos de pago futuros
+
+# Definición
+
+<Info>
+  Stripe Payment Elements te permite crear una interfaz de pago totalmente personalizada con tu marca usando los componentes de Stripe y, luego, enviar un token de confirmación a la API v3 de Recurly para procesar pagos y almacenar datos de pago reutilizables. Tras la aprobación, Recurly devuelve un token de pasarela para procesar renovaciones y cargos futuros, tanto para facturación única como recurrente.
+</Info>
+
+<ul className="rp-list">
+  <li>Requiere una integración funcional con la API v3 de Recurly y una configuración de Recurly.js</li>
+  <li>Algunos métodos de pago y APM de Stripe están restringidos según el país del comercio. Si un método no aparece en tu Stripe Dashboard, es posible que el país de tu cuenta no cumpla los requisitos (por ejemplo, Revolut solo está disponible en el Reino Unido y la UE)</li>
+  <li>Stripe Payment Links, Stripe Checkout y Radar no son compatibles con esta integración</li>
+  <li>Cupones del 100 % y créditos de cuenta: como se requiere comunicación con la pasarela durante la configuración inicial, se recomiendan las pruebas gratuitas en estos casos para evitar fallos de pago futuros</li>
+</ul>
+
+# Beneficios clave
+
+<Check>
+  **Checkout personalizable**
+
+  Diseña tu propia interfaz de pago con Stripe Payment Elements. Usa los temas prediseñados de Stripe o crea una experiencia totalmente personalizada con las API de personalización de Stripe.
+</Check>
+
+<Check>
+  **Tokenización segura**
+
+  Envía los tokens de confirmación de Stripe a Recurly para un procesamiento de pagos conforme con PCI. Recurly devuelve un token de pasarela para renovaciones y cargos futuros.
+</Check>
+
+<Check>
+  **Amplia compatibilidad de pagos**
+
+  Acepta tarjetas, billeteras digitales, opciones de débito directo y APM seleccionados, todo dentro de tu flujo de pago personalizado.
+</Check>
+
+# Detalles clave
+
+## Funciones compatibles
+
+Crea una solución de pago con Stripe Payment Elements o Express Checkout Elements y envía el token de confirmación resultante a Recurly mediante la API v3. Los clientes también pueden actualizar su información de facturación a través de Stripe Elements o de las soluciones existentes de Recurly: Checkout, Hosted Payment Pages o Recurly.js.
+
+Consulta una vista previa de las capacidades de Stripe Elements en el [sitio de demostración de Stripe](https://checkout.stripe.dev/elements). Para ver todos los detalles de implementación, consulta la [guía del Developer Hub](https://docs.recurly.com/recurly-subscriptions/docs/third-party-checkout#/).
+
+***
+
+## Métodos de pago compatibles
+
+<table>
+  <colgroup>
+    <col width="177" />
+    <col width="498" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Categoría</th>
+      <th>Métodos de pago</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tarjetas y billeteras digitales</td>
+      <td>Tarjetas, Link by Stripe, Apple Pay, Google Pay, Cash App Pay</td>
+    </tr>
+    <tr>
+      <td>Débito directo</td>
+      <td>ACH, SEPA, BACS, iDEAL, BECS. ACH requiere <a href="https://stripe.com/financial-connections" target="_blank">Financial Connections</a> para cumplir con NACHA.</td>
+    </tr>
+    <tr>
+      <td>APM</td>
+      <td>Klarna Recurring (Pay Now, Pay Later, BNPL), Revolut (solo Reino Unido/UE)</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
